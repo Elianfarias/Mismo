@@ -10,6 +10,7 @@ namespace Mismo.Gameplay.Combat
         [SerializeField] private bool resetOnEnable = true;
         private float current;
 
+        public float LastDamageApplied { get; private set; }
         public float Maximum => maximum;
         public float Current => current;
         public float Normalized => maximum > 0f ? current / maximum : 0f;
@@ -18,7 +19,12 @@ namespace Mismo.Gameplay.Combat
         public event Action<DamageInfo> Damaged;
         public event Action<DamageInfo> Died;
 
-        private void Awake() => current = maximum;
+        private void Awake()
+        {
+            current = maximum;
+            if (GetComponent<Mismo.Gameplay.Player.Presentation.ActorCombatVisuals>() == null)
+                gameObject.AddComponent<Mismo.Gameplay.Player.Presentation.ActorCombatVisuals>();
+        }
         private void OnEnable()
         {
             if (resetOnEnable) Revive();
@@ -30,6 +36,7 @@ namespace Mismo.Gameplay.Combat
             if (IsDead || damage.Amount <= 0f) return false;
             float previous = current;
             current = Mathf.Max(0f, current - damage.Amount);
+            LastDamageApplied = previous - current;
             Changed?.Invoke(current, maximum);
             Damaged?.Invoke(damage);
             if (current <= 0f) Died?.Invoke(damage);

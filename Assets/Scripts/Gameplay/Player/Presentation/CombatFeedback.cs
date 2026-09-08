@@ -1,5 +1,6 @@
 using Mismo.Gameplay.Combat;
 using Mismo.Gameplay.Player.Dash;
+using Mismo.Gameplay.Player.Movement;
 using UnityEngine;
 
 namespace Mismo.Gameplay.Player.Presentation
@@ -18,6 +19,8 @@ namespace Mismo.Gameplay.Player.Presentation
         [SerializeField] private Color cooldownColor = new Color(0.75f, 0.35f, 1f, 0.9f);
 
         private Health health;
+        private PlayerMotor motor;
+        private Vector3 Facing => motor!=null?motor.Facing:transform.forward;
         private BeltDash belt;
         private BasicSwordCombo swordCombo;
         private SwordParry swordParry;
@@ -36,6 +39,7 @@ namespace Mismo.Gameplay.Player.Presentation
         private void Awake()
         {
             health = GetComponent<Health>();
+            motor = GetComponent<PlayerMotor>();
             belt = GetComponent<BeltDash>();
             swordCombo = GetComponentInChildren<BasicSwordCombo>();
             swordParry = GetComponentInChildren<SwordParry>();
@@ -91,7 +95,7 @@ namespace Mismo.Gameplay.Player.Presentation
         {
             // Feedback corto por etapa para distinguir la cadena aun sin animación final.
             float frequency = 320f + step * 70f;
-            Emit(transform.position + transform.forward * 0.55f + Vector3.up, transform.forward,
+            Emit(transform.position + Facing * 0.55f + Vector3.up, Facing,
                 comboColor, 8 + step * 3, 1.4f + step * 0.2f, 0.08f);
             PlayTone(frequency, 0.06f, 0.28f);
         }
@@ -104,7 +108,8 @@ namespace Mismo.Gameplay.Player.Presentation
 
         private void OnLungeStarted()
         {
-            Emit(transform.position + Vector3.up, Vector3.forward, spinColor, 12, 2f, 0.11f);
+            Vector3 direction=swordLunge!=null?swordLunge.Direction:Facing;
+            Emit(transform.position + direction*.55f + Vector3.up, direction, spinColor, 12, 2f, 0.11f);
             PlayTone(560f, 0.08f, 0.42f);
         }
 
@@ -150,6 +155,7 @@ namespace Mismo.Gameplay.Player.Presentation
         private void CreatePresentationObjects()
         {
             audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.outputAudioMixerGroup = AudioRuntime.SfxGroup;
             audioSource.playOnAwake = false;
             audioSource.spatialBlend = 0f;
 

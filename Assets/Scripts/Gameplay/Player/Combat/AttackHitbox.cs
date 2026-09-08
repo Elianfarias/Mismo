@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Mismo.Gameplay.Player.Movement;
 
 namespace Mismo.Gameplay.Combat
 {
@@ -21,6 +22,7 @@ namespace Mismo.Gameplay.Combat
 
     /// <summary>Activa un collider únicamente durante la ventana del ataque y registra cada objetivo una vez.</summary>
     [RequireComponent(typeof(Collider), typeof(DamageDealer))]
+    [DefaultExecutionOrder(150)]
     public sealed class AttackHitbox : MonoBehaviour
     {
         [SerializeField] private AttackWindow[] windows = { new AttackWindow() };
@@ -30,11 +32,15 @@ namespace Mismo.Gameplay.Combat
         private int currentIndex = -1;
         private float elapsed;
         private bool windowOpen;
+        private PlayerMotor motor;
+        private Vector3 facingOffset;
+        private Quaternion facingRotation;
 
         public bool IsAttacking => currentIndex >= 0;
         public bool IsWindowOpen => windowOpen;
         public int CurrentAttackIndex => currentIndex;
         public int WindowCount => windows != null ? windows.Length : 0;
+        public AttackWindow GetWindow(int index) => windows != null && index >= 0 && index < windows.Length ? windows[index] : null;
         public string CurrentAttackId => IsAttacking ? windows[currentIndex].Id : string.Empty;
 
         private void Awake()
@@ -43,10 +49,21 @@ namespace Mismo.Gameplay.Combat
             damageDealer = GetComponent<DamageDealer>();
             hitbox.isTrigger = true;
             hitbox.enabled = false;
+            motor=GetComponentInParent<PlayerMotor>();
+            if(motor!=null)
+            {
+                facingOffset=motor.transform.InverseTransformPoint(transform.position);
+                facingRotation=Quaternion.Inverse(motor.transform.rotation)*transform.rotation;
+            }
         }
 
         private void Update()
         {
+            if(motor!=null)
+            {
+                Quaternion facing=Quaternion.LookRotation(motor.Facing,Vector3.up);
+                transform.SetPositionAndRotation(motor.transform.position+facing*Vector3.Scale(facingOffset,motor.transform.lossyScale),facing*facingRotation);
+            }
             if (!IsAttacking) return;
             elapsed += Time.deltaTime;
             AttackWindow attack = windows[currentIndex];
@@ -112,7 +129,10 @@ namespace Mismo.Gameplay.Combat
         {
             if (hitbox == null || damageDealer == null) return;
             Bounds bounds = hitbox.bounds;
-            Collider[] overlaps = Physics.OverlapBox(bounds.center, bounds.extents, Quaternion.identity,
+            var box=hitbox as BoxCollider;
+            Vector3 scale=transform.lossyScale;
+            Vector3 extents=box!=null?Vector3.Scale(box.size*.5f,new Vector3(Mathf.Abs(scale.x),Mathf.Abs(scale.y),Mathf.Abs(scale.z))):bounds.extents;
+            Collider[] overlaps = Physics.OverlapBox(box!=null?transform.TransformPoint(box.center):bounds.center, extents, box!=null?transform.rotation:Quaternion.identity,
                 ~0, QueryTriggerInteraction.Ignore);
             foreach (Collider other in overlaps) ApplyHit(other);
         }
@@ -120,11 +140,12 @@ namespace Mismo.Gameplay.Combat
         private void ApplyHit(Collider other)
         {
             if (!windowOpen || other == null || other.transform.root == transform.root) return;
+            if(other.GetComponentInParent<IDamageReceiver>()==null)return;
             int targetId = other.transform.root.GetInstanceID();
             if (!hitTargets.Add(targetId)) return;
             Vector3 point = other.ClosestPoint(transform.position);
             Vector3 direction = other.transform.position - transform.position;
-            if (!damageDealer.ApplyTo(other.gameObject, point, direction)) hitTargets.Remove(targetId);
+            damageDealer.ApplyTo(other.gameObject, point, direction);
         }
     }
 }

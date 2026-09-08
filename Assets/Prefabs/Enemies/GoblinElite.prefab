@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8610866522323675476
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 250228414113978294, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 250228414113978294, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 250228414113978294, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 250228414113978294, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 250228414113978294, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 250228414113978294, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 250228414113978294, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 250228414113978294, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 250228414113978294, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 250228414113978294, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2759051942343419815, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+      propertyPath: m_Name
+      value: GoblinElite
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801795254639211169, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+      propertyPath: m_Text
+      value: ELITE GOBLIN
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2759051942343419815, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8908450612316464622}
+    - targetCorrespondingSourceObject: {fileID: 2759051942343419815, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8212827761638885826}
+  m_SourcePrefab: {fileID: 100100000, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+--- !u!1 &5851845409795526387 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2759051942343419815, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+  m_PrefabInstance: {fileID: 8610866522323675476}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8908450612316464622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5851845409795526387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2655476acd09e34439ed29f5ec0253ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Mismo.Gameplay.Enemies::Mismo.Gameplay.Enemies.GoblinVisualStyle
+  labelPrefix: ELITE
+  tint: {r: 0.74, g: 0.32, b: 1, a: 1}
+  tintStrength: 0.78
+--- !u!114 &8212827761638885826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5851845409795526387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5c6ed1abe3ec74783bf78b15aa82f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Mismo.Gameplay.Enemies::Mismo.Gameplay.Enemies.GoblinEliteVisual
+  scaleMultiplier: 1.28
+  eliteTint: {r: 0.74, g: 0.32, b: 1, a: 1}
+  auraColor: {r: 0.88, g: 0.28, b: 1, a: 1}
+  tintStrength: 0.78
+  auraRadius: 0.92
+  auraPulseSpeed: 2.8
+  hitFeedbackDuration: 0.3

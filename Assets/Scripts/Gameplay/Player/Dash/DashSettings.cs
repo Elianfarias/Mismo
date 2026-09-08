@@ -11,6 +11,8 @@ namespace Mismo.Gameplay.Player.Dash
         [SerializeField, Min(0f)] private float distance = 5f;
         [SerializeField, Min(0.01f)] private float duration = 0.22f;
         [SerializeField, Min(0f)] private float cooldown = 0.8f;
+        [SerializeField, Min(0f)] private float invulnerabilityDuration = 0.12f;
+        public float InvulnerabilityDuration => Mathf.Clamp(invulnerabilityDuration, 0f, Duration);
 
         /// <summary>
         /// Gets the total distance travelled by the dash in metres.

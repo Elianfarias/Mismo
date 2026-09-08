@@ -1,0 +1,116 @@
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
+
+namespace Mismo.Menu
+{
+    public sealed class MainMenuView : MonoBehaviour
+    {
+        [SerializeField] string gameplayScene="VoxelRegion_7319";
+        [SerializeField] GameObject home, options;
+        [SerializeField] Button begin, openOptions, back, quit;
+        [SerializeField] Text status;
+        [SerializeField] Slider music, sfx, ui;
+        public Slider Music => music;
+        public Slider Sfx => sfx;
+        public Slider UI => ui;
+        public bool OptionsVisible => options.activeSelf;
+        bool loading;
+        void Awake()
+        {
+            Time.timeScale=1; Cursor.lockState=CursorLockMode.None;Cursor.visible=true;
+            begin.onClick.AddListener(Begin);
+            openOptions.onClick.AddListener(()=>ShowOptions(true));
+            back.onClick.AddListener(()=>ShowOptions(false));
+            quit.onClick.AddListener(Application.Quit);
+            ShowOptions(false);
+        }
+        void Start() => ShowOptions(false);
+        void Update()
+        {
+            if(!loading && OptionsVisible && Keyboard.current!=null && Keyboard.current.escapeKey.wasPressedThisFrame)ShowOptions(false);
+        }
+        public void ShowOptions(bool show)
+        {
+            if(loading)return;
+            home.SetActive(!show);options.SetActive(show);
+            if(EventSystem.current!=null)EventSystem.current.SetSelectedGameObject(show?music.gameObject:begin.gameObject);
+            if(!show)PlayerPrefs.Save();
+        }
+        public void Begin()
+        {
+            if(loading)return;
+            if(!Application.CanStreamedLevelBeLoaded(gameplayScene)){status.text="No se encontró la región de juego.";return;}
+            loading=true;begin.interactable=false;openOptions.interactable=false;quit.interactable=false;
+            status.text="Preparando tu aventura…";PlayerPrefs.Save();
+            SceneManager.LoadSceneAsync(gameplayScene);
+        }
+        // Built into the scene by the editor tool; all controls remain editable in the hierarchy.
+        public void CreateLayout()
+        {
+            var canvas=gameObject.AddComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;
+            var scaler=gameObject.AddComponent<CanvasScaler>();scaler.uiScaleMode=CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.referenceResolution=new Vector2(1600,900);scaler.matchWidthOrHeight=.5f;
+            gameObject.AddComponent<GraphicRaycaster>();
+            var shade=Box("Backdrop",transform,new Vector2(0,0),new Vector2(1600,900),new Color(.035f,.055f,.07f,.42f));
+            var rect=shade.rectTransform;rect.anchorMin=Vector2.zero;rect.anchorMax=Vector2.one;rect.offsetMin=rect.offsetMax=Vector2.zero;
+            var panel=Box("Menu panel",transform,new Vector2(85,115),new Vector2(540,670),new Color(.035f,.055f,.07f,.94f));
+            Box("Gold edge",panel.transform,Vector2.zero,new Vector2(4,670),new Color(.86f,.72f,.43f));
+            Label(panel.transform,"EXPLORACIÓN · COMBATE · AVENTURA",new Vector2(42,44),new Vector2(450,30),16,new Color(.86f,.72f,.43f));
+            Label(panel.transform,"MISMO",new Vector2(38,85),new Vector2(460,90),72,Color.white);
+            Label(panel.transform,"Un mundo por descubrir.",new Vector2(42,181),new Vector2(450,35),23,new Color(.7f,.77f,.78f));
+            home=Box("Inicio",panel.transform,new Vector2(42,258),new Vector2(450,345),Color.clear).gameObject;
+            begin=ButtonAt(home.transform,"Comenzar",0,true);
+            openOptions=ButtonAt(home.transform,"Opciones",85,false);
+            quit=ButtonAt(home.transform,"Salir",170,false);
+            status=Label(home.transform,"VERSIÓN DE PRUEBA",new Vector2(0,279),new Vector2(450,40),15,new Color(.66f,.73f,.73f));
+            options=Box("Opciones de sonido",panel.transform,new Vector2(42,245),new Vector2(450,395),Color.clear).gameObject;
+            music=SliderAt(options.transform,"Música",0);
+            sfx=SliderAt(options.transform,"Efectos",92);
+            ui=SliderAt(options.transform,"Interfaz",184);
+            back=ButtonAt(options.transform,"Volver",286,false);
+            var volume=options.AddComponent<VolumeSettings>();volume.Configure(AudioRuntime.Mixer,music,sfx,ui);
+            options.SetActive(false);
+            Label(transform,"DOS ARMAS. TU ESTILO.",new Vector2(1040,745),new Vector2(470,45),27,Color.white);
+            Label(transform,"Explorá la región y encontrá tu próximo desafío.",new Vector2(900,798),new Vector2(610,35),18,new Color(.8f,.85f,.8f));
+        }
+        static Image Box(string name,Transform parent,Vector2 position,Vector2 size,Color color)
+        {
+            var go=new GameObject(name,typeof(RectTransform),typeof(Image));go.transform.SetParent(parent,false);
+            var rect=go.GetComponent<RectTransform>();rect.anchorMin=rect.anchorMax=new Vector2(0,1);rect.pivot=new Vector2(0,1);
+            rect.anchoredPosition=new Vector2(position.x,-position.y);rect.sizeDelta=size;
+            var image=go.GetComponent<Image>();image.color=color;image.raycastTarget=false;return image;
+        }
+        static Text Label(Transform parent,string text,Vector2 position,Vector2 size,int fontSize,Color color)
+        {
+            var go=new GameObject(text,typeof(RectTransform),typeof(Text));go.transform.SetParent(parent,false);
+            var rect=go.GetComponent<RectTransform>();rect.anchorMin=rect.anchorMax=new Vector2(0,1);rect.pivot=new Vector2(0,1);rect.anchoredPosition=new Vector2(position.x,-position.y);rect.sizeDelta=size;
+            var label=go.GetComponent<Text>();label.text=text;label.font=Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");label.fontSize=fontSize;label.color=color;label.raycastTarget=false;
+            label.verticalOverflow=VerticalWrapMode.Overflow;return label;
+        }
+        static Button ButtonAt(Transform parent,string title,float y,bool primary)
+        {
+            var image=Box(title,parent,new Vector2(0,y),new Vector2(450,66),primary?new Color(.83f,.7f,.43f):new Color(.12f,.17f,.19f));image.raycastTarget=true;
+            var button=image.gameObject.AddComponent<Button>();button.targetGraphic=image;
+            var colors=button.colors;colors.highlightedColor=new Color(1,.91f,.72f);colors.selectedColor=colors.highlightedColor;colors.pressedColor=new Color(.7f,.73f,.7f);button.colors=colors;
+            var text=Label(image.transform,title,new Vector2(24,17),new Vector2(400,36),25,primary?new Color(.07f,.09f,.1f):Color.white);
+            return button;
+        }
+        static Slider SliderAt(Transform parent,string title,float y)
+        {
+            Label(parent,title,new Vector2(0,y),new Vector2(310,30),22,Color.white);
+            var value=Label(parent,"75 %",new Vector2(355,y),new Vector2(95,30),20,new Color(.86f,.72f,.43f));
+            var track=Box(title+" slider",parent,new Vector2(0,y+42),new Vector2(450,22),new Color(.17f,.23f,.25f));track.raycastTarget=true;
+            var fill=Box("Fill",track.transform,Vector2.zero,new Vector2(450,22),new Color(.76f,.65f,.41f));
+            fill.rectTransform.sizeDelta=Vector2.zero;
+            var handle=Box("Handle",track.transform,Vector2.zero,new Vector2(18,32),new Color(1,.91f,.7f));handle.raycastTarget=true;
+            handle.rectTransform.pivot=new Vector2(.5f,.5f);handle.rectTransform.sizeDelta=new Vector2(18,10);
+            var slider=track.gameObject.AddComponent<Slider>();slider.minValue=0;slider.maxValue=1;slider.value=.75f;slider.fillRect=fill.rectTransform;slider.handleRect=handle.rectTransform;slider.targetGraphic=handle;
+            var percent=track.gameObject.AddComponent<VolumePercentLabel>();percent.Configure(slider,value);
+            return slider;
+        }
+    }
+}

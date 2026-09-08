@@ -3,6 +3,7 @@
     "rootNamespace": "Mismo.Gameplay.Player.Editor",
     "references": [
         "Mismo.Gameplay.Player",
+        "Mismo.Gameplay.Enemies",
         "Unity.InputSystem"
     ],
     "includePlatforms": [

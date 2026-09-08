@@ -1,0 +1,8 @@
+{
+  "name": "Mismo.Menu",
+  "references": [
+    "Mismo.Audio",
+    "Unity.ugui",
+    "Unity.InputSystem"
+  ]
+}

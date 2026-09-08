@@ -2,7 +2,8 @@
     "name": "Mismo.Gameplay.Player",
     "rootNamespace": "Mismo.Gameplay.Player",
     "references": [
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "Mismo.Audio"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

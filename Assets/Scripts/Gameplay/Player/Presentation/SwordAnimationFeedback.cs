@@ -23,6 +23,14 @@ namespace Mismo.Gameplay.Player.Presentation
 
         [Header("Sword visual")]
         [SerializeField] private Transform swordVisual;
+        [SerializeField] private Transform rigHand;
+        [SerializeField] private bool useAuthoredAnimations;
+        public void UseAuthoredAnimations() => useAuthoredAnimations = true;
+        public void ConfigureRig(Transform hand)
+        {
+            rigHand = hand;
+            swordVisual = hand;
+        }
         [SerializeField, Min(0.01f)] private float slashDuration = 0.38f;
         [SerializeField, Min(0.01f)] private float heavySlashDuration = 0.52f;
         [SerializeField, Min(0.01f)] private float spinDuration = 0.55f;
@@ -40,31 +48,76 @@ namespace Mismo.Gameplay.Player.Presentation
         private float duration;
         private int priority;
         private int comboStep;
+        private AttackHitbox hitbox;
+        private TrailRenderer trail;
+        private Material trailMaterial;
+        private SkinnedMeshRenderer bladeRenderer;
+        private Mesh bladeSnapshot;
+        private int bladeTipIndex=-1;
+        private readonly System.Collections.Generic.List<Vector3> bladeVertices=new System.Collections.Generic.List<Vector3>();
+        public Transform SwordVisual => swordVisual;
+        public bool ImpactVisible => trail != null && trail.emitting;
 
         private void Awake()
         {
             motor = GetComponent<PlayerMotor>();
-            Transform weaponAnchor = motor != null ? motor.Visual : FindChild(transform, "Visual");
             if (swordVisual == null) swordVisual = FindChild(transform, "BasicSword");
-            if (swordVisual == null) swordVisual = FindChild(transform, "Blade");
-
-            // PlayerMotor rota Visual, no el root físico. Reparentar aquí corrige escenas
-            // creadas por la herramienta anterior sin perder la pose local del arma.
-            if (swordVisual != null && weaponAnchor != null && swordVisual != weaponAnchor &&
-                !swordVisual.IsChildOf(weaponAnchor))
-                swordVisual.SetParent(weaponAnchor, false);
-
-            // Si el arma visual aún no fue adjuntada, no animar el cuerpo completo.
-            // El componente queda listo y se resolverá al instanciar el prefab del arma.
-            if (swordVisual != null)
+            // Only animate the weapon root, never an arbitrary body mesh.
+            if (swordVisual != null && rigHand == null)
             {
-                basePosition = swordVisual.localPosition;
-                baseRotation = swordVisual.localRotation;
+                // The imported hand has a scale of 100. Keep the weapon outside the rig;
+                // poses below are in world metres, oriented by the motor's facing.
+                swordVisual.SetParent(transform, true);
+                Vector3 parentScale = transform.lossyScale;
+                swordVisual.localScale = new Vector3(1f / parentScale.x, 1f / parentScale.y, 1f / parentScale.z);
+                basePosition = new Vector3(.43f, .93f, .05f);
+                baseRotation = Quaternion.Euler(-58f, 12f, -10f);
+                SetPose(basePosition, baseRotation);
+            }
+            if (rigHand != null)
+            {
+                basePosition = new Vector3(.43f, .93f, .05f);
+                baseRotation = Quaternion.Euler(-58f, 12f, -10f);
             }
             combo = GetComponentInChildren<BasicSwordCombo>();
             parry = GetComponentInChildren<SwordParry>();
             spin = GetComponentInChildren<SwordSpinAttack>();
             lunge = GetComponentInChildren<SwordLunge>();
+            hitbox = GetComponentInChildren<AttackHitbox>();
+            if(swordVisual != null)
+            {
+                var tip=new GameObject("Sword trail");tip.layer=2;tip.transform.SetParent(swordVisual,false);tip.transform.localPosition=Vector3.forward*(rigHand != null ? .0096f : .96f);
+                trail=tip.AddComponent<TrailRenderer>();trail.time=.10f;trail.minVertexDistance=.015f;
+                trail.startWidth=.28f;trail.endWidth=0;trail.numCapVertices=3;
+                trailMaterial=new Material(Shader.Find("Sprites/Default"));trail.sharedMaterial=trailMaterial;
+                trail.startColor=new Color(1,.88f,.50f,.8f);trail.endColor=new Color(1,.7f,.2f,0);trail.emitting=false;
+            }
+        }
+
+        private void FollowBladeTip()
+        {
+            if(rigHand==null)return;
+            if(bladeRenderer==null)
+            {
+                foreach(var candidate in GetComponentsInChildren<SkinnedMeshRenderer>())
+                    if(candidate.name=="Sword_E_RightHand") {bladeRenderer=candidate;break;}
+                if(bladeRenderer==null)return;
+                bladeSnapshot=new Mesh();
+            }
+            // Follow the evaluated blade, including imported skinning and scale corrections.
+            bladeRenderer.BakeMesh(bladeSnapshot);
+            bladeSnapshot.GetVertices(bladeVertices);
+            if(bladeTipIndex<0)
+            {
+                float farthest=-1;
+                for(int i=0;i<bladeVertices.Count;i++)
+                {
+                    float distance=(bladeRenderer.transform.TransformPoint(bladeVertices[i])-rigHand.position).sqrMagnitude;
+                    if(distance<=farthest)continue;
+                    farthest=distance;bladeTipIndex=i;
+                }
+            }
+            if(bladeTipIndex>=0)trail.transform.position=bladeRenderer.transform.TransformPoint(bladeVertices[bladeTipIndex]);
         }
 
         private void OnEnable()
@@ -116,12 +169,26 @@ namespace Mismo.Gameplay.Player.Presentation
             ResetPose();
         }
 
-        private void Update()
+        private void LateUpdate()
         {
-            if (motion == Motion.None || swordVisual == null) return;
+            if (swordVisual == null) return;
+            var equipment = GetComponent<Equipment.EquipmentLoadout>();
+            if (equipment != null && equipment.ActiveDefinition != null && equipment.ActiveDefinition.isBow)
+            { if (trail != null) { trail.emitting = false; trail.Clear(); } return; }
+            if(trail!=null)FollowBladeTip();
+            if (useAuthoredAnimations)
+            {
+                if(trail != null) trail.emitting = (hitbox != null && hitbox.IsWindowOpen) || (spin != null && spin.IsActive) || (lunge != null && lunge.IsActive);
+                var cast = equipment != null && equipment.Runner != null ? equipment.Runner.Current : null;
+                if (trail != null && cast != null && cast.Began && !cast.Ended &&
+                    (cast.Definition.pose == Equipment.AbilityPose.Lunge || cast.Definition.pose == Equipment.AbilityPose.Spin)) trail.emitting = true;
+                return;
+            }
+            if (motion == Motion.None) { SetPose(basePosition, baseRotation); return; }
             elapsed += Time.deltaTime;
             float normalized = duration > 0f ? Mathf.Clamp01(elapsed / duration) : 1f;
             ApplyPose(normalized);
+            if(trail != null) trail.emitting = (hitbox != null && hitbox.IsWindowOpen) || (spin != null && spin.IsActive) || (lunge != null && lunge.IsActive);
             if (elapsed >= duration) ResetPose();
         }
 
@@ -155,6 +222,20 @@ namespace Mismo.Gameplay.Player.Presentation
 
         private void ApplyPose(float normalized)
         {
+            if(motion == Motion.Slash || motion == Motion.HeavySlash)
+            {
+                var window=hitbox != null ? hitbox.GetWindow(comboStep) : null;
+                float start=window != null ? window.ActiveStart : .06f;
+                float active=window != null ? window.ActiveDuration : .14f;
+                float t=combo != null ? combo.CurrentStepElapsed : elapsed;
+                float sweep=Mathf.Clamp01((t-start)/active);
+                float direction=comboStep==1 ? -1f : 1f;
+                Vector3 pose=comboStep>=2 ? Vector3.Lerp(new Vector3(.1f,1.65f,.1f),new Vector3(.1f,.7f,.65f),sweep) : new Vector3(Mathf.Lerp(-.38f*direction,.38f*direction,sweep),1.02f,.25f);
+                Quaternion aim=comboStep>=2 ? Quaternion.Euler(Mathf.Lerp(-100,35,sweep),0,0) : Quaternion.Euler(-8,Mathf.Lerp(-75*direction,75*direction,sweep),-12*direction);
+                float blend=t<start ? Mathf.Clamp01(t/Mathf.Max(.01f,start)) : 1-Mathf.Clamp01((t-start-active)/.18f);
+                SetPose(Vector3.Lerp(basePosition,pose,blend), Quaternion.Slerp(baseRotation,aim,blend));
+                return;
+            }
             float smooth = Mathf.SmoothStep(0f, 1f, normalized);
             Vector3 offset = Vector3.zero;
             Quaternion rotation = Quaternion.identity;
@@ -188,21 +269,39 @@ namespace Mismo.Gameplay.Player.Presentation
                     break;
             }
 
-            swordVisual.localPosition = basePosition + offset;
-            swordVisual.localRotation = baseRotation * rotation;
+            SetPose(basePosition + offset, rotation);
         }
 
         private void ResetPose()
         {
+            if(trail != null) {trail.emitting=false;trail.Clear();}
             motion = Motion.None;
             elapsed = 0f;
             duration = 0f;
             priority = 0;
             if (swordVisual != null)
             {
-                swordVisual.localPosition = basePosition;
-                swordVisual.localRotation = baseRotation;
+                SetPose(basePosition, baseRotation);
             }
+        }
+
+        private void SetPose(Vector3 position, Quaternion rotation)
+        {
+            if (useAuthoredAnimations) return;
+            Vector3 facing = Vector3.ProjectOnPlane(motor != null ? motor.Facing : transform.forward, Vector3.up);
+            Quaternion frame = Quaternion.LookRotation(facing.sqrMagnitude > .001f ? facing : Vector3.forward, Vector3.up);
+            if (rigHand != null)
+            {
+                // Animator supplies the base pose each frame; attacks offset the hand so
+                // the skinned sword and arm remain connected instead of detaching the mesh.
+                if (motion == Motion.None) return;
+                Transform shoulder = rigHand.parent != null ? rigHand.parent.parent : null;
+                if (shoulder == null) shoulder = rigHand;
+                Quaternion offset = frame * rotation * Quaternion.Inverse(baseRotation) * Quaternion.Inverse(frame);
+                shoulder.rotation = offset * shoulder.rotation;
+                return;
+            }
+            swordVisual.SetPositionAndRotation(transform.position + frame * position, frame * rotation);
         }
 
         private static Transform FindChild(Transform root, string childName)
@@ -212,5 +311,6 @@ namespace Mismo.Gameplay.Player.Presentation
                 if (child.name == childName) return child;
             return null;
         }
+        private void OnDestroy(){if(trailMaterial != null)Destroy(trailMaterial);if(bladeSnapshot!=null)Destroy(bladeSnapshot);}
     }
 }

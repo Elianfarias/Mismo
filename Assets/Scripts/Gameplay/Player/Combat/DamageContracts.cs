@@ -6,22 +6,50 @@ namespace Mismo.Gameplay.Combat
     public readonly struct DamageInfo
     {
         public readonly float Amount;
+        public readonly float PostureDamage;
+        public readonly long AttackId;
+        public readonly bool Ranged, Area, Parryable;
+        public readonly Vector3 Origin;
         public readonly GameObject Source;
         public readonly Vector3 HitPoint;
         public readonly Vector3 Direction;
 
-        public DamageInfo(float amount, GameObject source, Vector3 hitPoint, Vector3 direction)
+        public DamageInfo(float amount, GameObject source, Vector3 hitPoint, Vector3 direction, long attackId = 0, float postureDamage = -1, bool ranged = false, bool area = false, Vector3? origin = null, bool parryable = true)
         {
             Amount = Mathf.Max(0f, amount);
+            PostureDamage = postureDamage < 0 ? amount * .65f : postureDamage;
+            AttackId = attackId; Ranged = ranged; Area = area; Parryable = parryable;
+            Origin = origin ?? (source != null ? source.transform.position : hitPoint);
             Source = source;
             HitPoint = hitPoint;
             Direction = direction.sqrMagnitude > 0.0001f ? direction.normalized : Vector3.zero;
         }
     }
 
+    public enum HitOutcome { Ignored, Hit, Invulnerable, Parry, PerfectParry, Dodge, PerfectDodge }
+    public readonly struct HitResult
+    {
+        public readonly HitOutcome Outcome;
+        public readonly float HealthDamage, PostureDamage;
+        public readonly bool BackHit;
+        public HitResult(HitOutcome outcome, float health = 0, float posture = 0, bool back = false)
+        { Outcome=outcome; HealthDamage=health; PostureDamage=posture; BackHit=back; }
+    }
+    public static class AttackIdentity
+    {
+        static long next;
+        public static long Next() => ++next;
+    }
+
     /// <summary>Contrato mínimo que cualquier receptor de daño debe exponer.</summary>
     public interface IDamageReceiver
     {
         bool ReceiveDamage(DamageInfo damage);
+    }
+
+    /// <summary>Reacción opcional de la fuente cuando su ataque es rechazado.</summary>
+    public interface IParryResponder
+    {
+        void OnAttackParried(DamageInfo damage);
     }
 }

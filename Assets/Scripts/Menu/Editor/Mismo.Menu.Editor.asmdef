@@ -1,0 +1,12 @@
+{
+  "name": "Mismo.Menu.Editor",
+  "references": [
+    "Mismo.Menu",
+    "Mismo.Audio",
+    "Unity.ugui",
+    "Unity.InputSystem"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ]
+}

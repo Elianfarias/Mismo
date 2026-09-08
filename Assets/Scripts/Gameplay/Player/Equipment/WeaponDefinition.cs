@@ -9,6 +9,14 @@ namespace Mismo.Gameplay.Player.Equipment
         [SerializeField] private string id = "sword.basic";
         [SerializeField] private string displayName = "Espada básica";
         [SerializeField, Min(0.01f)] private float basicAttackCooldown = 0.45f;
+        public AbilityDefinition[] abilities = new AbilityDefinition[4];
+        public GameObject visualPrefab;
+        public bool isBow;
+        public Vector3 handRotation;
+        public Vector3 backRotation = new Vector3(0, 0, 35);
+        public Vector3 handOffset;
+        public Vector3 backOffset = new Vector3(0, 1.2f, -.25f);
+        public AbilityDefinition GetAbility(AbilitySlot slot) => abilities != null && (int)slot < abilities.Length ? abilities[(int)slot] : null;
 
         public string Id => id;
         public string DisplayName => displayName;

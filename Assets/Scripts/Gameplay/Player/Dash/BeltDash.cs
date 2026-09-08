@@ -17,6 +17,7 @@ namespace Mismo.Gameplay.Player.Dash
         public event System.Action CooldownReady;
         public bool IsActive { get; private set; }
         public float CooldownRemaining => cooldowns.Remaining(CooldownId);
+        public float CooldownDuration => behaviour != null ? behaviour.Cooldown : 0f;
 
         /// <summary>Asigna el comportamiento del cinturón sin exponer su implementación al controlador.</summary>
         public void Configure(DashBehaviour configuration) => behaviour = configuration;
@@ -30,6 +31,7 @@ namespace Mismo.Gameplay.Player.Dash
         }
 
         /// <summary>Inicia un dash disponible si el comportamiento del cinturón permite activarlo.</summary>
+        public bool CanStart(bool grounded) => behaviour != null && !IsActive && cooldowns.IsReady(CooldownId) && behaviour.CanStart(grounded);
         public bool TryStart(Vector3 requestedDirection, bool grounded)
         {
             if (behaviour == null || IsActive || !cooldowns.IsReady(CooldownId) || !behaviour.CanStart(grounded)) return false;
@@ -39,6 +41,8 @@ namespace Mismo.Gameplay.Player.Dash
             if (!cooldowns.TryStart(CooldownId, behaviour.Cooldown)) return false;
             CooldownStarted?.Invoke(behaviour.Cooldown);
             IsActive = true;
+            GetComponent<Mismo.Gameplay.Combat.Invulnerability>()?.StartWindow(behaviour.InvulnerabilityDuration);
+            GetComponent<Mismo.Gameplay.Combat.DefenseWindow>()?.OpenDodge(behaviour.InvulnerabilityDuration);
             return true;
         }
 
@@ -53,6 +57,6 @@ namespace Mismo.Gameplay.Player.Dash
         }
 
         /// <summary>Interrumpe el desplazamiento al encontrar un obstáculo, conservando el cooldown.</summary>
-        public void Cancel() => IsActive = false;
+        public void Cancel() { IsActive = false; GetComponent<Mismo.Gameplay.Combat.DefenseWindow>()?.CloseDodge(); }
     }
 }

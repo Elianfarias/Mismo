@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff2838d2beb4832a964afc578d960ef, type: 3}
+  m_Name: StartingWeapons
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.WeaponSetDefinition
+  primary: {fileID: 11400000, guid: eef430b445c2b1b4183683d0b73234ca, type: 2}
+  secondary: {fileID: 11400000, guid: 835c07f02b4157f4ca9e69fe3d5490ad, type: 2}

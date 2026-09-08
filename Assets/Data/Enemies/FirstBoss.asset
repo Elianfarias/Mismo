@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6180094bd49d1594f8a5c51096f9263d, type: 3}
+  m_Name: FirstBoss
+  m_EditorClassIdentifier: Mismo.Gameplay.Enemies::Mismo.Gameplay.Enemies.BossSettings
+  health: 300
+  detectionRange: 12
+  loseRange: 18
+  leashRange: 22
+  memoryDuration: 3
+  speed: 3.2
+  positioningSpeed: 1.6
+  decisionPause: 0.45
+  aggressionHealthThreshold: 0.5
+  aggressiveDecisionPause: 0.25
+  sameHeightTolerance: 1.2
+  attackDecisionInterval: 0.2
+  staggerDamageThreshold: 18
+  staggerDuration: 0.45
+  staggerResistance: 2
+  parryStaggerDuration: 1.25
+  frontSlash:
+    id: 0
+    label: TAJO
+    minRange: 0
+    maxRange: 2
+    windup: 0.5
+    active: 0.15
+    recovery: 0.5
+    cooldown: 1.5
+    damage: 12
+    travel: 0
+    halfExtents: {x: 1, y: 0.7, z: 0.9}
+    forwardOffset: 1
+  overheadSmash:
+    id: 1
+    label: GOLPE
+    minRange: 0
+    maxRange: 2.5
+    windup: 0.5
+    active: 0.18
+    recovery: 0.5
+    cooldown: 3
+    damage: 18
+    travel: 0
+    halfExtents: {x: 0.55, y: 0.7, z: 1.15}
+    forwardOffset: 1.2
+  straightCharge:
+    id: 2
+    label: CARGA
+    minRange: 3
+    maxRange: 6
+    windup: 0.5
+    active: 0.45
+    recovery: 0.5
+    cooldown: 6
+    damage: 16
+    travel: 4
+    halfExtents: {x: 0.55, y: 0.7, z: 0.65}
+    forwardOffset: 0.7
+  patterns:
+  - id: 0
+    attacks: 00000000
+    normalWeight: 35
+    aggressiveWeight: 25
+    finalPause: 0.6
+    chainSignal: 
+  - id: 1
+    attacks: 01000000
+    normalWeight: 25
+    aggressiveWeight: 20
+    finalPause: 0.6
+    chainSignal: 
+  - id: 2
+    attacks: 0000000001000000
+    normalWeight: 40
+    aggressiveWeight: 55
+    finalPause: 0.6
+    chainSignal: CADENA
+  - id: 3
+    attacks: 02000000
+    normalWeight: 100
+    aggressiveWeight: 100
+    finalPause: 0.6
+    chainSignal: 

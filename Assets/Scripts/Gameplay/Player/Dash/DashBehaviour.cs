@@ -7,6 +7,7 @@ namespace Mismo.Gameplay.Player.Dash
     {
         public abstract float Duration { get; }
         public abstract float Cooldown { get; }
+        public virtual float InvulnerabilityDuration => 0f;
 
         /// <summary>Decide si el estado del suelo permite activar este comportamiento.</summary>
         public abstract bool CanStart(bool grounded);

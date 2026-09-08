@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: b506c8195ee04582bbb3ecb09bca7c2e, type: 3}
+  m_Name: CombatRules
+  frontalDamage: 0.85
+  backDamage: 1.2
+  backPosture: 1.5
+  openingPosture: 1.4
+  distanceBonus: 0.075
+  optimalDistance: 18
+  perfectParryWindow: 0.09
+  perfectDodgeWindow: 0.085
+  perfectParryPosture: 35
+  parryPosture: 12
+  perfectFocus: 20
+  backFocus: 8
+  openingFocus: 6
+  closeRangeMultiplier: 0.8
+  closeRange: 2
+  effectiveRange: 10

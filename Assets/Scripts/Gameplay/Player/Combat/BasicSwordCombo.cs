@@ -50,6 +50,7 @@ namespace Mismo.Gameplay.Combat
         private float phaseElapsed;
         private bool queuedNext;
 
+        public bool CanBranch => (phase == Phase.Active && currentStep < StepCount-1 && CurrentStepNormalized >= .65f) || phase == Phase.Transition;
         public bool IsActive => phase == Phase.Active || phase == Phase.Transition;
         public bool IsRecovering => phase == Phase.Recovery;
         public bool CanQueue => phase == Phase.Active && CurrentStep != null &&

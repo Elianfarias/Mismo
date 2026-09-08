@@ -47,6 +47,12 @@ namespace Mismo.Gameplay.Combat
             return true;
         }
 
+        // Shared ability runner owns costs, cooldown and recovery for configured kits.
+        public void OpenWindow(float seconds)
+        { windowRemaining = Mathf.Max(.01f, seconds); recoveryRemaining = 0; WindowStarted?.Invoke(windowRemaining); }
+        public void Cancel()
+        { bool wasOpen = IsWindowOpen; windowRemaining = recoveryRemaining = 0; if (wasOpen) WindowClosed?.Invoke(); }
+
         /// <summary>Avanza ventana, recuperación y cooldown.</summary>
         public void Tick(float deltaTime)
         {
@@ -89,8 +95,13 @@ namespace Mismo.Gameplay.Combat
             if (cooldownRemaining > 0f) CooldownStarted?.Invoke(cooldownRemaining);
             else CooldownReady?.Invoke();
             Parried?.Invoke(damage);
+            damage.Source.GetComponentInParent<IParryResponder>()?.OnAttackParried(damage);
             return true;
         }
+
+        public void ResolveFeedback(DamageInfo damage)
+        { windowRemaining=0; recoveryRemaining=RecoveryDuration; WindowClosed?.Invoke(); Parried?.Invoke(damage); }
+        private float RecoveryDuration => Mathf.Max(0,recoveryDuration);
 
         private bool IsValidAttack(DamageInfo damage)
         {
@@ -100,7 +111,8 @@ namespace Mismo.Gameplay.Combat
             if (maxIncomingAngle >= 180f) return true;
 
             Vector3 toAttacker = damage.Source.transform.position - transform.position;
-            Vector3 facing = Vector3.ProjectOnPlane(transform.forward, Vector3.up);
+            var motor = GetComponentInParent<Mismo.Gameplay.Player.Movement.PlayerMotor>();
+            Vector3 facing = Vector3.ProjectOnPlane(motor != null ? motor.Facing : transform.forward, Vector3.up);
             Vector3 horizontalAttacker = Vector3.ProjectOnPlane(toAttacker, Vector3.up);
             if (facing.sqrMagnitude <= 0.0001f || horizontalAttacker.sqrMagnitude <= 0.0001f) return true;
             return Vector3.Angle(facing, horizontalAttacker) <= maxIncomingAngle;

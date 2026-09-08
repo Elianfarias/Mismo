@@ -9,6 +9,7 @@ namespace Mismo.Gameplay.Player.Movement
         private float recoveryDelay;
         private bool exhausted;
         public float Current { get; private set; }
+        public float Maximum => settings != null ? settings.Maximum : 0f;
         public float Normalized => settings == null ? 0f : Current / settings.Maximum;
 
         /// <summary>Asigna la configuración al construir el personaje.</summary>

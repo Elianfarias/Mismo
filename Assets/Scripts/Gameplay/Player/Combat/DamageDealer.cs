@@ -12,15 +12,16 @@ namespace Mismo.Gameplay.Combat
         private readonly HashSet<int> hitObjects = new HashSet<int>();
 
         public float Amount => amount;
+        private long attackId;
 
-        public void Configure(float damageAmount) => amount = Mathf.Max(0f, damageAmount);
+        public void Configure(float damageAmount) { amount = Mathf.Max(0f, damageAmount); attackId=AttackIdentity.Next(); }
 
         public bool ApplyTo(GameObject target, Vector3 hitPoint, Vector3 direction)
         {
             if (target == null || target == gameObject) return false;
             IDamageReceiver receiver = target.GetComponentInParent<IDamageReceiver>();
             if (receiver == null) return false;
-            return receiver.ReceiveDamage(new DamageInfo(amount, gameObject, hitPoint, direction));
+            return receiver.ReceiveDamage(new DamageInfo(amount, gameObject, hitPoint, direction, attackId == 0 ? (attackId=AttackIdentity.Next()) : attackId));
         }
 
         private void OnTriggerEnter(Collider other)

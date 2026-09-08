@@ -22,6 +22,7 @@ namespace Mismo.Gameplay.Player.Movement
         public float Speed => body != null ? Vector3.ProjectOnPlane(body.velocity, Vector3.up).magnitude : 0f;
         public Vector3 Facing => visual != null ? visual.forward : transform.forward;
         public Transform Visual => visual;
+        public float VerticalSpeed => verticalVelocity;
         public CollisionFlags LastCollisionFlags { get; private set; }
         public bool LastMovementWasControlled { get; private set; }
         public event System.Action Jumped;
@@ -36,6 +37,12 @@ namespace Mismo.Gameplay.Player.Movement
 
         /// <summary>Obtiene el componente físico local.</summary>
         private void Awake() => body = GetComponent<CharacterController>();
+        public void ClearControlledMovement() => pendingControlledMovement = null;
+        public void Face(Vector3 direction)
+        {
+            direction = Vector3.ProjectOnPlane(direction, Vector3.up);
+            if (visual != null && direction.sqrMagnitude > .001f) visual.rotation = Quaternion.LookRotation(direction);
+        }
 
         /// <summary>
         /// Solicita un desplazamiento especial para el siguiente tick. Si varias habilidades
@@ -67,7 +74,6 @@ namespace Mismo.Gameplay.Player.Movement
             Vector3 specialDisplacement = specialMovement ? controlledMovement.Value.Displacement : Vector3.zero;
             bool allowJump = !specialMovement || !controlledMovement.Value.BlocksJump;
             bool grounded = IsGrounded;
-            if (hasGroundState && grounded && !wasGrounded) Landed?.Invoke();
             coyoteRemaining = grounded ? settings.CoyoteTime : Mathf.Max(0f, coyoteRemaining - dt);
             jumpBufferRemaining = jumpPressed ? Mathf.Max(dt, settings.JumpBufferTime) : Mathf.Max(0f, jumpBufferRemaining - dt);
             if (grounded)
@@ -105,7 +111,9 @@ namespace Mismo.Gameplay.Player.Movement
             CollisionFlags flags = body.Move(horizontalStep + Vector3.up * verticalVelocity * dt);
             if ((flags & CollisionFlags.Above) != 0 && verticalVelocity > 0f) verticalVelocity = 0f;
             if ((flags & CollisionFlags.Below) != 0 && verticalVelocity < 0f) verticalVelocity = settings.GroundedVerticalSpeed;
-            wasGrounded = IsGrounded;
+            bool groundedAfterMove = IsGrounded;
+            if (hasGroundState && groundedAfterMove && !wasGrounded) Landed?.Invoke();
+            wasGrounded = groundedAfterMove;
             hasGroundState = true;
             LastCollisionFlags = flags;
             return flags;

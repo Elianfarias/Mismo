@@ -9,6 +9,8 @@ namespace Mismo.Gameplay.Player.Presentation
     public sealed class MovementFeedback : MonoBehaviour
     {
         [Header("Provisional feedback")]
+        [SerializeField] private bool animateVisualScale = true;
+        public void UseAuthoredAnimations() => animateVisualScale = false;
         [SerializeField, Range(0f, 1f)] private float masterVolume = 0.7f;
         [SerializeField] private Color sprintColor = new Color(0.65f, 0.9f, 1f, 0.65f);
         [SerializeField] private Color dashColor = new Color(1f, 0.62f, 0.15f, 0.9f);
@@ -88,7 +90,7 @@ namespace Mismo.Gameplay.Player.Presentation
             else if (dashing) targetScale = Vector3.Scale(restScale, new Vector3(0.9f, 0.9f, 1.18f));
             else if (!motor.IsGrounded) targetScale = Vector3.Scale(restScale, new Vector3(0.94f, 1.08f, 0.94f));
             else if (sprinting) targetScale = Vector3.Scale(restScale, new Vector3(0.97f, 1.02f, 1.08f));
-            visual.localScale = Vector3.Lerp(visual.localScale, targetScale, Time.deltaTime * 15f);
+            if(animateVisualScale) visual.localScale = Vector3.Lerp(visual.localScale, targetScale, Time.deltaTime * 15f);
         }
 
         private void OnJumped()
@@ -110,6 +112,7 @@ namespace Mismo.Gameplay.Player.Presentation
         private void CreatePresentationObjects()
         {
             audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.outputAudioMixerGroup = AudioRuntime.SfxGroup;
             audioSource.playOnAwake = false;
             audioSource.spatialBlend = 0f;
             GameObject particleObject = new GameObject("Movement Feedback Particles");

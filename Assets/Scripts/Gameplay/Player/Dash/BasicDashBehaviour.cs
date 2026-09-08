@@ -9,6 +9,7 @@ namespace Mismo.Gameplay.Player.Dash
         [SerializeField] private DashSettings settings;
         public override float Duration => settings != null ? Mathf.Max(0.01f, settings.Duration) : 0.22f;
         public override float Cooldown => settings != null ? settings.Cooldown : 0.8f;
+        public override float InvulnerabilityDuration => settings != null ? settings.InvulnerabilityDuration : 0.12f;
 
         /// <summary>Asigna los parámetros del cinturón.</summary>
         public void Configure(DashSettings configuration) => settings = configuration;

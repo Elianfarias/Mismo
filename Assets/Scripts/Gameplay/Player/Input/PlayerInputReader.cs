@@ -29,6 +29,7 @@ namespace Mismo.Gameplay.Player.Input
         private InputAction _parryAction;
         private InputAction _spinAttackAction;
         private InputAction _lungeAction;
+        private InputAction _swapWeaponAction;
 
         /// <summary>
         /// Gets the current two-dimensional movement input.
@@ -94,6 +95,7 @@ namespace Mismo.Gameplay.Player.Input
             _parryAction = playerMap.FindAction(ParryActionName, true);
             _spinAttackAction = playerMap.FindAction(SpinAttackActionName, true);
             _lungeAction = playerMap.FindAction(LungeActionName, true);
+            _swapWeaponAction = playerMap.FindAction("SwapWeapon", false);
         }
 
         /// <summary>
@@ -135,5 +137,6 @@ namespace Mismo.Gameplay.Player.Input
         {
             return _lungeAction?.WasPressedThisFrame() ?? false;
         }
+        public bool WasSwapWeaponPressedThisFrame() => _swapWeaponAction?.WasPressedThisFrame() ?? false;
     }
 }
