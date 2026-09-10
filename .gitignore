@@ -60,3 +60,7 @@ Thumbs.db
 /ProjectSettings/
 /*.docx
 /.vsconfig
+
+# Source/build archives are kept out of version control.
+*.zip
+*.rar
