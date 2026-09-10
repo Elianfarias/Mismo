@@ -19,6 +19,8 @@ namespace Mismo.Gameplay.Enemies
         private MaterialPropertyBlock tint;
         private float flash;
         [SerializeField] private bool authoredAnimation;
+        [SerializeField] private EnemyGroundSupport groundSupport=new EnemyGroundSupport();
+        private Transform animatedModel;
         public void UseAuthoredAnimation() => authoredAnimation = true;
 
         public void Configure(Transform body, Transform sword, Transform fill, Transform board, TextMesh text)
@@ -40,6 +42,7 @@ namespace Mismo.Gameplay.Enemies
         private void Awake()
         {
             boss = GetComponent<BossController>();
+            animatedModel=GetComponentInChildren<Animator>()?.transform;
             health = GetComponent<Health>();
             tint = new MaterialPropertyBlock();
             skin = visual != null ? visual.GetComponentsInChildren<Renderer>() : GetComponentsInChildren<Renderer>();
@@ -100,6 +103,7 @@ namespace Mismo.Gameplay.Enemies
             {
                 visual.localPosition = authoredAnimation ? (currentState == BossState.Dead ? Vector3.up*.45f : Vector3.zero) : Vector3.up * bob;
                 visual.localRotation = authoredAnimation ? Quaternion.Euler(0,0,currentState == BossState.Dead ? 90 : 0) : Quaternion.Euler(lean, 0f, currentState == BossState.Dead ? 85f : 0f);
+                if(authoredAnimation&&currentState!=BossState.Dead&&animatedModel!=null)groundSupport.Apply(transform,visual,animatedModel.lossyScale.y);
             }
             if (!authoredAnimation && weaponPivot != null) weaponPivot.localRotation = Quaternion.Euler(weaponAngle, 0f, -15f);
 

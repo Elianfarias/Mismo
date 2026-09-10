@@ -16,31 +16,41 @@ namespace Mismo.Gameplay.Player.Presentation
         private PlayerMotor motor;
         private PlayerController controller;
         private Health health;
-        private BasicSwordCombo combo;
-        private SwordParry parry;
-        private SwordLunge lunge;
-        private SwordSpinAttack spin;
+        private LegacyCombatAnimationAdapter legacy;
         private Equipment.AbilityRunner abilityRunner;
         private bool moving;
+        private bool running;
+        private float smoothedPlaybackRate = 1f;
+        private float locomotionSpeed;
+        private bool hasLocomotionBlend;
+        private RuntimeAnimatorController baseController;
+        private RuntimeAnimatorController appliedController;
+        private WeaponAnimationSet appliedSet;
+        private AvatarMask appliedMask;
+        private WeaponActionPlayback playback;
+        private Equipment.EquipmentLoadout loadout;
         private float jumpedAt = -10f;
         private float landedAt = -10f;
         private float lastGroundedAt = -10f;
         private const float GroundGrace = .12f;
         public CharacterMotion Motion { get; private set; }
         public Animator Animator => animator;
+        public AnimationClip ActionClip {get;private set;}
+        public float LandingAge => Time.time - landedAt;
         public void Configure(Animator target) => animator = target;
         private void Awake()
         {
             if (GetComponent<PlayerLocomotionLean>() == null) gameObject.AddComponent<PlayerLocomotionLean>();
             motor = GetComponent<PlayerMotor>(); controller = GetComponent<PlayerController>(); health = GetComponent<Health>();
-            combo = GetComponentInChildren<BasicSwordCombo>(); parry = GetComponentInChildren<SwordParry>();
-            lunge = GetComponentInChildren<SwordLunge>(); spin = GetComponentInChildren<SwordSpinAttack>();
+            legacy = new LegacyCombatAnimationAdapter(gameObject);
             if (animator == null) animator = GetComponentInChildren<Animator>();
             abilityRunner = GetComponent<Equipment.AbilityRunner>();
             if (animator != null) animator.applyRootMotion = false;
+            if (animator != null) baseController = animator.runtimeAnimatorController;
+            loadout = GetComponent<Equipment.EquipmentLoadout>();
         }
         private void OnEnable() { if(motor != null) { motor.Jumped += OnJump; motor.Landed += OnLand; } }
-        private void OnDisable() { if(motor != null) { motor.Jumped -= OnJump; motor.Landed -= OnLand; } }
+        private void OnDisable() { if(motor != null) { motor.Jumped -= OnJump; motor.Landed -= OnLand; } playback?.Dispose();playback=null;ActionClip=null; }
         private void OnJump() => jumpedAt = Time.time;
         private void OnLand()
         {
@@ -49,23 +59,33 @@ namespace Mismo.Gameplay.Player.Presentation
         }
         private void Update()
         {
+            var profile = loadout != null && loadout.ActiveDefinition != null ? loadout.ActiveDefinition.poseProfile : null;
+            var family = loadout != null && loadout.ActiveDefinition != null ? loadout.ActiveDefinition.family : null;
+            var animationSet=family!=null?family.animations:null;
+            var actionMask=animationSet!=null?animationSet.actionMask:null;
+            var desiredController=profile!=null && profile.animations!=null ? profile.animations
+                : animationSet!=null && animationSet.locomotion!=null ? animationSet.locomotion : baseController;
+            if (animator != null && (appliedController!=desiredController || appliedSet!=animationSet || appliedMask!=actionMask || animationSet!=null && playback==null))
+            {
+                playback?.Dispose();playback=null;
+                appliedController=desiredController;appliedSet=animationSet;appliedMask=actionMask;
+                animator.runtimeAnimatorController=desiredController;
+                hasLocomotionBlend=false;
+                foreach(var parameter in animator.parameters)
+                    if(parameter.name=="LocomotionSpeed" && parameter.type==AnimatorControllerParameterType.Float) hasLocomotionBlend=true;
+                if(animationSet!=null && desiredController!=null)playback=new WeaponActionPlayback(animator,desiredController,actionMask);
+            }
             if (abilityRunner == null) abilityRunner = GetComponent<Equipment.AbilityRunner>();
             if (animator == null || animator.runtimeAnimatorController == null || motor == null) return;
             float speed = motor.Speed;
             moving = speed > (moving ? .08f : .15f);
+            // Follow actual movement, not the sprint button; hysteresis avoids threshold flicker.
+            running = moving && speed > referenceWalkSpeed * (running ? 1.08f : 1.18f);
             if (motor.IsGrounded) lastGroundedAt = Time.time;
             bool airborne = !motor.IsGrounded &&
                 (motor.VerticalSpeed > 0f || Time.time - lastGroundedAt > GroundGrace);
             float actionTime = 0f;
             if (health != null && health.Current <= 0f) Motion = CharacterMotion.Idle;
-            else if (parry != null && parry.IsWindowOpen) { Motion=CharacterMotion.Parry; actionTime=1f-parry.WindowNormalized; }
-            else if (spin != null && spin.IsActive) { Motion=CharacterMotion.Spin; actionTime=1f-spin.ActiveRemaining/spin.Duration; }
-            else if (lunge != null && lunge.IsActive) { Motion=CharacterMotion.Lunge; actionTime=lunge.ActiveNormalized; }
-            else if (combo != null && combo.IsActive)
-            {
-                Motion=(CharacterMotion)((int)CharacterMotion.Attack1+Mathf.Clamp(combo.CurrentStepIndex,0,2));
-                actionTime=combo.CurrentStepNormalized;
-            }
             else if (motor.LastMovementWasControlled) Motion=CharacterMotion.Dash;
             else if (airborne)
             {
@@ -73,23 +93,38 @@ namespace Mismo.Gameplay.Player.Presentation
                 actionTime=Mathf.Clamp01((Time.time-jumpedAt)/.30f);
             }
             else if (!moving && Time.time-landedAt<.18f) Motion=CharacterMotion.Land;
-            else if (moving) Motion=(controller != null && controller.IsSprinting) || speed>referenceWalkSpeed*1.18f ? CharacterMotion.Run : CharacterMotion.Walk;
+            else if (moving) Motion=running ? CharacterMotion.Run : CharacterMotion.Walk;
             else Motion=CharacterMotion.Idle;
-            if (abilityRunner != null && abilityRunner.IsBusy && !abilityRunner.Current.Definition.usesSwordCombo)
+            ActionClip=null;float clipTime=0,blend=.06f;AvatarMask resolvedMask=actionMask;
+            if((health==null || !health.IsDead) && animationSet!=null && abilityRunner!=null && abilityRunner.TryGetAnimationFrame(out var actionFrame))
             {
-                switch (abilityRunner.Current.Definition.pose)
-                {
-                    case Equipment.AbilityPose.Lunge: Motion = CharacterMotion.Lunge; break;
-                    case Equipment.AbilityPose.Spin: Motion = CharacterMotion.Spin; break;
-                    case Equipment.AbilityPose.Parry: Motion = CharacterMotion.Parry; break;
-                }
-                actionTime = abilityRunner.Normalized;
+                var binding=animationSet.Find(actionFrame.Ability);
+                if(binding!=null && binding.TrySample(actionFrame,out var actionClip,out clipTime))
+                {ActionClip=actionClip;blend=binding.blendSeconds;resolvedMask=binding.ResolveMask(actionMask);}
             }
+            if(ActionClip==null && (health==null || !health.IsDead))
+            {var motion=Motion;legacy.Resolve(abilityRunner,ref motion,ref actionTime);Motion=motion;}
             float reference=Motion==CharacterMotion.Run?referenceRunSpeed:referenceWalkSpeed;
-            animator.SetFloat("PlaybackRate",Mathf.Clamp(speed/reference,.75f,1.4f),.10f,Time.deltaTime);
+            float blendTarget=speed<=referenceWalkSpeed ? speed/referenceWalkSpeed : 1f+(speed-referenceWalkSpeed)/Mathf.Max(.1f,referenceRunSpeed-referenceWalkSpeed);
+            locomotionSpeed=Mathf.Lerp(locomotionSpeed,Mathf.Clamp(blendTarget,0f,2f),1f-Mathf.Exp(-Time.deltaTime/.08f));
+            if(hasLocomotionBlend) reference=Mathf.Lerp(referenceWalkSpeed,referenceRunSpeed,Mathf.Clamp01(locomotionSpeed-1f));
+            float playbackRate=moving ? Mathf.Clamp(speed/reference,.2f,1.4f) : 1f;
+            // Idle/walk blending already expresses low speed; avoid slowing that cycle twice.
+            if(hasLocomotionBlend && locomotionSpeed<1f) playbackRate=1f;
+            smoothedPlaybackRate = Mathf.Lerp(smoothedPlaybackRate, playbackRate, 1f-Mathf.Exp(-Time.deltaTime/.10f));
+            int stateMotion=hasLocomotionBlend && (int)Motion<=(int)CharacterMotion.Run ? (int)CharacterMotion.Idle : (int)Motion;
+            if(playback!=null)
+            {
+                playback.SetParameters(stateMotion,Mathf.Clamp01(actionTime),smoothedPlaybackRate);
+                if(hasLocomotionBlend) playback.SetLocomotionSpeed(locomotionSpeed);
+                playback.SetAction(ActionClip,clipTime,blend,resolvedMask);playback.Tick(Time.deltaTime);
+                return;
+            }
+            animator.SetFloat("PlaybackRate",smoothedPlaybackRate);
+            if(hasLocomotionBlend) animator.SetFloat("LocomotionSpeed",locomotionSpeed);
             // Combat pose time follows the existing hitbox clock; animation never changes damage timing.
             animator.SetFloat("ActionTime",Mathf.Clamp01(actionTime));
-            animator.SetInteger("Motion",(int)Motion);
+            animator.SetInteger("Motion",stateMotion);
         }
     }
 }

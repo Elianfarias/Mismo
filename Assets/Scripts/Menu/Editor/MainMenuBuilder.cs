@@ -115,8 +115,10 @@ namespace Mismo.Menu.Editor
         static void Finish(bool ok,string message){SessionState.SetBool(Pending,false);EditorApplication.update-=Tick;Debug.Log("MENU_CHECKS_"+(ok?"OK ":"FAILED ")+message);EditorApplication.Exit(ok?0:1);}
         public static void BuildWindows()
         {
-            Directory.CreateDirectory("Builds/Playtest");
-            var report=BuildPipeline.BuildPlayer(new BuildPlayerOptions {scenes=new[]{ScenePath,"Assets/Scenes/VoxelRegion_7319.unity"},locationPathName="Builds/Playtest/Mismo.exe",target=BuildTarget.StandaloneWindows64,options=BuildOptions.None});
+            string output=Environment.GetEnvironmentVariable("MISMO_WINDOWS_OUTPUT");
+            if(string.IsNullOrEmpty(output))output="Builds/Playtest";
+            Directory.CreateDirectory(output);
+            var report=BuildPipeline.BuildPlayer(new BuildPlayerOptions {scenes=new[]{ScenePath,"Assets/Scenes/VoxelRegion_7319.unity"},locationPathName=Path.Combine(output,"Mismo.exe"),target=BuildTarget.StandaloneWindows64,options=BuildOptions.None});
             if(report.summary.result!=UnityEditor.Build.Reporting.BuildResult.Succeeded)throw new Exception("Build failed: "+report.summary.result);
             Debug.Log("MENU_BUILD_OK "+report.summary.totalSize);
         }

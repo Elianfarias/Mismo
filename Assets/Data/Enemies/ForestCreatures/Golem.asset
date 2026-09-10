@@ -1,0 +1,211 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1181254437d7479da935684cab56aced, type: 3}
+  m_Name: Golem
+  m_EditorClassIdentifier: Mismo.Gameplay.Enemies::Mismo.Gameplay.Enemies.CreatureSettings
+  health: 700
+  detectionRange: 25
+  loseRange: 38
+  leashRange: 38
+  memoryDuration: 3
+  speed: 2.4
+  positioningSpeed: 1.2
+  decisionPause: 0.35
+  chargeCooldown: 5
+  staggerDamageThreshold: 15
+  staggerDuration: 0.45
+  staggerResistance: 0.75
+  parryStaggerDuration: 1.25
+  slash:
+    label: Golpe
+    range: 1.9
+    windup: 0.65
+    active: 0.18
+    recovery: 0.85
+    damage: 12
+    travel: 0
+    halfExtents: {x: 0.65, y: 0.65, z: 0.8}
+    forwardOffset: 0.9
+    animation:
+      clip: {fileID: 0}
+      compatibleClip: {fileID: 0}
+      compatibleSource: {fileID: 0}
+      mask: {fileID: 0}
+      activeStartsAt: 0.32
+      recoveryStartsAt: 0.59
+      blendSeconds: 0.06
+    enabled: 1
+    minimumRange: 0
+    cooldown: 3
+    weight: 1
+    kind: 0
+    hitHeight: 0.85
+    damageStartsAt: 0
+    preparationClip: {fileID: 0}
+    recoveryClip: {fileID: 0}
+    preparationDuration: 0
+    preparationEndNormalized: 1
+    loopActiveAnimation: 0
+    projectileVisual: {fileID: 0}
+    projectileSocket: Rock_Carry
+    grabAt: 0.833333
+    projectileSpeed: 12
+    projectileRange: 30
+    projectileRadius: 0.6
+  charge:
+    label: Carga
+    range: 5
+    windup: 1
+    active: 0.4
+    recovery: 1.2
+    damage: 20
+    travel: 3.4
+    halfExtents: {x: 0.5, y: 0.65, z: 0.65}
+    forwardOffset: 0.7
+    animation:
+      clip: {fileID: 0}
+      compatibleClip: {fileID: 0}
+      compatibleSource: {fileID: 0}
+      mask: {fileID: 0}
+      activeStartsAt: 0.32
+      recoveryStartsAt: 0.59
+      blendSeconds: 0.06
+    enabled: 1
+    minimumRange: 0
+    cooldown: 3
+    weight: 1
+    kind: 0
+    hitHeight: 0.85
+    damageStartsAt: 0
+    preparationClip: {fileID: 0}
+    recoveryClip: {fileID: 0}
+    preparationDuration: 0
+    preparationEndNormalized: 1
+    loopActiveAnimation: 0
+    projectileVisual: {fileID: 0}
+    projectileSocket: Rock_Carry
+    grabAt: 0.833333
+    projectileSpeed: 12
+    projectileRange: 30
+    projectileRadius: 0.6
+  displayName: "G\xD3LEM DEL BOSQUE"
+  isBoss: 1
+  posture: 230
+  sightHeight: 3.2
+  allowedHeightDifference: 3
+  preferredRange: 4.4
+  attacks:
+  - label: Ground_Slam
+    range: 6
+    windup: 1
+    active: 0.1
+    recovery: 3.5000005
+    damage: 38
+    travel: 0
+    halfExtents: {x: 2.7, y: 1.4, z: 2.7}
+    forwardOffset: 3.2
+    animation:
+      clip: {fileID: 4060078451268006563, guid: b28e1c14cb87c0c439204b55a003dcfb, type: 3}
+      compatibleClip: {fileID: 0}
+      compatibleSource: {fileID: 0}
+      mask: {fileID: 0}
+      activeStartsAt: 0.43478256
+      recoveryStartsAt: 0.47826084
+      blendSeconds: 0.025
+    enabled: 1
+    minimumRange: 0
+    cooldown: 4
+    weight: 1
+    kind: 0
+    hitHeight: 0.9
+    damageStartsAt: 0
+    preparationClip: {fileID: 0}
+    recoveryClip: {fileID: -2394736312942811201, guid: b28e1c14cb87c0c439204b55a003dcfb, type: 3}
+    preparationDuration: 0
+    preparationEndNormalized: 1
+    loopActiveAnimation: 0
+    projectileVisual: {fileID: 0}
+    projectileSocket: Rock_Carry
+    grabAt: 0.833333
+    projectileSpeed: 12
+    projectileRange: 30
+    projectileRadius: 0.6
+  - label: Sweep_Attack
+    range: 6.2
+    windup: 0.8
+    active: 0.13333333
+    recovery: 3.5333335
+    damage: 30
+    travel: 0
+    halfExtents: {x: 4, y: 1.5, z: 2.5}
+    forwardOffset: 2.4
+    animation:
+      clip: {fileID: -3163902639967822639, guid: b28e1c14cb87c0c439204b55a003dcfb, type: 3}
+      compatibleClip: {fileID: 0}
+      compatibleSource: {fileID: 0}
+      mask: {fileID: 0}
+      activeStartsAt: 0.36923075
+      recoveryStartsAt: 0.4307692
+      blendSeconds: 0.025
+    enabled: 1
+    minimumRange: 0
+    cooldown: 3
+    weight: 1
+    kind: 0
+    hitHeight: 1.1
+    damageStartsAt: 0
+    preparationClip: {fileID: 0}
+    recoveryClip: {fileID: -2394736312942811201, guid: b28e1c14cb87c0c439204b55a003dcfb, type: 3}
+    preparationDuration: 0
+    preparationEndNormalized: 1
+    loopActiveAnimation: 0
+    projectileVisual: {fileID: 0}
+    projectileSocket: Rock_Carry
+    grabAt: 0.833333
+    projectileSpeed: 12
+    projectileRange: 30
+    projectileRadius: 0.6
+  - label: Throw_Rock
+    range: 28
+    windup: 2.7666667
+    active: 0.06
+    recovery: 3.2733335
+    damage: 34
+    travel: 0
+    halfExtents: {x: 0.65, y: 0.65, z: 0.8}
+    forwardOffset: 0.9
+    animation:
+      clip: {fileID: 2279225940974079231, guid: b28e1c14cb87c0c439204b55a003dcfb, type: 3}
+      compatibleClip: {fileID: 0}
+      compatibleSource: {fileID: 0}
+      mask: {fileID: 0}
+      activeStartsAt: 0.48333332
+      recoveryStartsAt: 0.5133333
+      blendSeconds: 0.025
+    enabled: 1
+    minimumRange: 8
+    cooldown: 8
+    weight: 1
+    kind: 1
+    hitHeight: 0.85
+    damageStartsAt: 0
+    preparationClip: {fileID: -3706246608974762309, guid: b28e1c14cb87c0c439204b55a003dcfb, type: 3}
+    recoveryClip: {fileID: -2394736312942811201, guid: b28e1c14cb87c0c439204b55a003dcfb, type: 3}
+    preparationDuration: 1.8000001
+    preparationEndNormalized: 1
+    loopActiveAnimation: 0
+    projectileVisual: {fileID: 3359364880817921586, guid: 4f9b7514d10666c40938d89ebb012b5f, type: 3}
+    projectileSocket: Rock_Carry
+    grabAt: 0.8333333
+    projectileSpeed: 14
+    projectileRange: 40
+    projectileRadius: 0.8

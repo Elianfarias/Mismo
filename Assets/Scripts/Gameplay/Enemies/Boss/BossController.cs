@@ -73,7 +73,7 @@ namespace Mismo.Gameplay.Enemies
         public BossPatternDefinition CurrentPattern => pattern;
         public int CurrentPatternAttackIndex => patternAttackIndex;
         public bool IsAggressive => health != null && health.Normalized <= Mathf.Clamp01(settings != null ? settings.aggressionHealthThreshold : 0.5f);
-        public float StateProgress => stateTimer > 0f && attack != null ? Mathf.Clamp01(1f - stateTimer / StateDurationForPresentation()) : 0f;
+        public float StateProgress => attack != null ? Mathf.Clamp01(1f - stateTimer / StateDurationForPresentation()) : 0f;
         public float CurrentTimer => Mathf.Max(0f, stateTimer);
 
         public event Action<BossState> StateChanged;
@@ -98,6 +98,7 @@ namespace Mismo.Gameplay.Enemies
 
         private void Awake()
         {
+            if(GetComponent<EnemyProgressionReward>()==null)gameObject.AddComponent<EnemyProgressionReward>();
             agent = GetComponent<NavMeshAgent>();
             health = GetComponent<Health>();
             combat=GetComponent<CombatState>()??gameObject.AddComponent<CombatState>();
@@ -129,7 +130,7 @@ namespace Mismo.Gameplay.Enemies
 
             started = true;
             home = transform.position;
-            health.ConfigureMaximum(settings.health);
+            health.ConfigureMaximum(settings.health*(GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>()?.HealthMultiplier??1));
             ResetLife();
         }
 
@@ -431,7 +432,7 @@ namespace Mismo.Gameplay.Enemies
                 return;
             }
             hitTargets.Clear();
-            weapon.Configure(attack.Damage);
+            weapon.Configure(attack.Damage*(GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>()?.DamageMultiplier??1));
             Enter(BossState.Attack, attack.Active);
             ApplyHits();
         }

@@ -21,6 +21,7 @@ namespace Mismo.Gameplay.Player.Presentation
         void Update() => entries.RemoveAll(e => Time.time - e.born > 1f);
         void OnGUI()
         {
+            if (Equipment.Inventory.InventoryPanel.AnyOpen) return;
             var camera = UnityEngine.Camera.main; if (camera == null) return;
             if (style == null) style = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold };
             foreach (var entry in entries)

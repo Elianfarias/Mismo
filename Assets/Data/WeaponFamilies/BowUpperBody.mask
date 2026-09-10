@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BowUpperBody
+  m_Mask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 0
+  - m_Path: Armature_Humanoid
+    m_Weight: 0
+  - m_Path: Armature_Humanoid/Root
+    m_Weight: 0
+  - m_Path: Armature_Humanoid/Root/Hips
+    m_Weight: 0
+  - m_Path: Armature_Humanoid/Root/Hips/Spine
+    m_Weight: 1
+  - m_Path: Armature_Humanoid/Root/Hips/Spine/Chest
+    m_Weight: 1
+  - m_Path: Armature_Humanoid/Root/Hips/Spine/Chest/Clavicle.L
+    m_Weight: 1
+  - m_Path: Armature_Humanoid/Root/Hips/Spine/Chest/Clavicle.L/UpperArm.L
+    m_Weight: 1
+  - m_Path: Armature_Humanoid/Root/Hips/Spine/Chest/Clavicle.L/UpperArm.L/LowerArm.L
+    m_Weight: 1
+  - m_Path: Armature_Humanoid/Root/Hips/Spine/Chest/Clavicle.L/UpperArm.L/LowerArm.L/Hand.L
+    m_Weight: 1
+  - m_Path: Armature_Humanoid/Root/Hips/Spine/Chest/Clavicle.R
+    m_Weight: 1
+  - m_Path: Armature_Humanoid/Root/Hips/Spine/Chest/Clavicle.R/UpperArm.R
+    m_Weight: 1
+  - m_Path: Armature_Humanoid/Root/Hips/Spine/Chest/Clavicle.R/UpperArm.R/LowerArm.R
+    m_Weight: 1
+  - m_Path: Armature_Humanoid/Root/Hips/Spine/Chest/Clavicle.R/UpperArm.R/LowerArm.R/Hand.R
+    m_Weight: 1
+  - m_Path: Armature_Humanoid/Root/Hips/Spine/Chest/Neck
+    m_Weight: 1
+  - m_Path: Armature_Humanoid/Root/Hips/Spine/Chest/Neck/Head
+    m_Weight: 1
+  - m_Path: Armature_Humanoid/Root/Hips/UpperLeg.L
+    m_Weight: 0
+  - m_Path: Armature_Humanoid/Root/Hips/UpperLeg.L/LowerLeg.L
+    m_Weight: 0
+  - m_Path: Armature_Humanoid/Root/Hips/UpperLeg.L/LowerLeg.L/Foot.L
+    m_Weight: 0
+  - m_Path: Armature_Humanoid/Root/Hips/UpperLeg.L/LowerLeg.L/Foot.L/Toes.L
+    m_Weight: 0
+  - m_Path: Armature_Humanoid/Root/Hips/UpperLeg.R
+    m_Weight: 0
+  - m_Path: Armature_Humanoid/Root/Hips/UpperLeg.R/LowerLeg.R
+    m_Weight: 0
+  - m_Path: Armature_Humanoid/Root/Hips/UpperLeg.R/LowerLeg.R/Foot.R
+    m_Weight: 0
+  - m_Path: Armature_Humanoid/Root/Hips/UpperLeg.R/LowerLeg.R/Foot.R/Toes.R
+    m_Weight: 0
+  - m_Path: Belt back
+    m_Weight: 0
+  - m_Path: Belt front
+    m_Weight: 0
+  - m_Path: Boot cuff L
+    m_Weight: 0
+  - m_Path: Boot cuff R
+    m_Weight: 0
+  - m_Path: Boot strap L
+    m_Weight: 0
+  - m_Path: Boot strap R
+    m_Weight: 0
+  - m_Path: Bracer band L
+    m_Weight: 0
+  - m_Path: Bracer band L.001
+    m_Weight: 0
+  - m_Path: Bracer band R
+    m_Weight: 0
+  - m_Path: Bracer band R.001
+    m_Weight: 0
+  - m_Path: Bracer L
+    m_Weight: 0
+  - m_Path: Bracer R
+    m_Weight: 0
+  - m_Path: Buckle
+    m_Weight: 0
+  - m_Path: Buckle center
+    m_Weight: 0
+  - m_Path: Chest clasp
+    m_Weight: 0
+  - m_Path: Chest tabard
+    m_Weight: 0
+  - m_Path: Eye violet
+    m_Weight: 0
+  - m_Path: Eye violet.001
+    m_Weight: 0
+  - m_Path: Face shadow
+    m_Weight: 0
+  - m_Path: Hood back
+    m_Weight: 0
+  - m_Path: Hood crown
+    m_Weight: 0
+  - m_Path: Hood side
+    m_Weight: 0
+  - m_Path: Hood side.001
+    m_Weight: 0
+  - m_Path: Hood upper step
+    m_Weight: 0
+  - m_Path: Pouch flap
+    m_Weight: 0
+  - m_Path: Scarf hanging end
+    m_Weight: 0
+  - m_Path: Scarf lower
+    m_Weight: 0
+  - m_Path: Scarf upper
+    m_Weight: 0
+  - m_Path: Shoulder edge L
+    m_Weight: 0
+  - m_Path: Shoulder edge R
+    m_Weight: 0
+  - m_Path: Shoulder plate L
+    m_Weight: 0
+  - m_Path: Shoulder plate R
+    m_Weight: 0
+  - m_Path: Tabard trim
+    m_Weight: 0
+  - m_Path: Tabard trim.001
+    m_Weight: 0
+  - m_Path: Utility pouch
+    m_Weight: 0
+  - m_Path: Voxel_Base_GameReady
+    m_Weight: 0

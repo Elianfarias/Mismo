@@ -46,6 +46,10 @@ namespace Mismo.Gameplay.Combat
                 if(perfect){state.Reward(rules.perfectFocus,"PARRY PERFECTO");CombatTimeFeedback.PerfectDefense();}
                 else state.Reward(0,"PARRY");
                 swordParry?.ResolveFeedback(damage);
+                var defendingPlayer=GetComponent<Mismo.Gameplay.Player.Equipment.Inventory.PlayerInventory>();
+                var defendingWeapon=GetComponent<Mismo.Gameplay.Player.Equipment.EquipmentLoadout>()?.ActiveDefinition;
+                if(defendingPlayer!=null&&defendingWeapon!=null)
+                    damage.Source?.GetComponentInParent<ICombatContribution>()?.RecordDefense(defendingPlayer,defendingWeapon.MasteryId);
                 damage.Source?.GetComponentInParent<IParryResponder>()?.OnAttackParried(damage);
                 return Publish(damage,new HitResult(outcome));
             }
@@ -67,8 +71,11 @@ namespace Mismo.Gameplay.Combat
             }
             if(damage.Ranged&&!damage.Area)multiplier*=rules.RangedMultiplier(Vector3.Distance(damage.Origin,damage.HitPoint));
             float amount=damage.Amount*multiplier;
+            var inventory=GetComponent<Mismo.Gameplay.Player.Equipment.Inventory.PlayerInventory>();
+            if(inventory!=null&&inventory.IsReady)amount*=inventory.IncomingDamageMultiplier;
             health.ApplyDamage(new DamageInfo(amount,damage.Source,damage.HitPoint,damage.Direction,damage.AttackId));
             float posture=state.DamagePosture(damage.PostureDamage*(back?rules.backPosture:1)*(opening?rules.openingPosture:1));
+            if(health.LastDamageApplied>0 && damage.FocusGainOnHit>0)attacker?.Reward(damage.FocusGainOnHit,"IMPACTO");
             if(attacker!=null&&(back||opening))attacker.Reward(back?rules.backFocus:rules.openingFocus,back?"ESPALDA":"APERTURA");
             GetComponent<Mismo.Gameplay.Player.Equipment.AbilityRunner>()?.Interrupt();
             if(invulnerability!=null)invulnerability.StartWindow(invulnerabilityAfterHit);

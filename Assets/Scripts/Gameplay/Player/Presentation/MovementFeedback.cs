@@ -102,7 +102,9 @@ namespace Mismo.Gameplay.Player.Presentation
 
         private void OnLanded()
         {
-            Emit(landingColor, 12, 0.9f, 0.25f);
+            var contextual=GetComponent<WorldSurfaceFeedback>();
+            if(contextual!=null)contextual.Emit(transform.position+Vector3.up*.1f,ResolveGroundColor(),.9f,8);
+            else Emit(landingColor, 12, 0.9f, 0.25f);
             PlayTone(105f, 0.14f, 0.55f);
             Squash(0.12f);
         }
@@ -120,16 +122,8 @@ namespace Mismo.Gameplay.Player.Presentation
             particleObject.transform.localPosition = new Vector3(0f, 0.1f, 0f);
             movementParticles = particleObject.AddComponent<ParticleSystem>();
             ParticleSystemRenderer particleRenderer = particleObject.GetComponent<ParticleSystemRenderer>();
-            Shader particleShader = Shader.Find("Universal Render Pipeline/Particles/Unlit");
-            if (particleShader == null) particleShader = Shader.Find("Particles/Standard Unlit");
-            if (particleShader == null) particleShader = Shader.Find("Legacy Shaders/Particles/Alpha Blended");
-            if (particleShader != null)
-            {
-                particleMaterial = new Material(particleShader) { name = "Movement Feedback Material (Runtime)" };
-                if (particleMaterial.HasProperty("_BaseColor")) particleMaterial.SetColor("_BaseColor", Color.white);
-                if (particleMaterial.HasProperty("_Color")) particleMaterial.SetColor("_Color", Color.white);
-                particleRenderer.sharedMaterial = particleMaterial;
-            }
+            particleMaterial = RuntimeParticleMaterial.Create("Movement Feedback Material (Runtime)", Color.white);
+            particleRenderer.sharedMaterial = particleMaterial;
             var main = movementParticles.main;
             main.playOnAwake = false;
             main.loop = false;

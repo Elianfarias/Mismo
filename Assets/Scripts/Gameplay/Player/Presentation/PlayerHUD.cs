@@ -56,6 +56,7 @@ namespace Mismo.Gameplay.Player.Presentation
         {Fill(new Rect(x,y,width,12),new Color(.11f,.14f,.17f));Fill(new Rect(x,y,width*Mathf.Clamp01(value),12),color);}
         private void OnGUI()
         {
+            if (Equipment.Inventory.InventoryPanel.AnyOpen) return;
             if(health==null)return;
             Matrix4x4 old=GUI.matrix;float scale=Scale;GUI.matrix=Matrix4x4.Scale(Vector3.one*scale);
             float width=Screen.width/scale,height=Screen.height/scale;
@@ -73,6 +74,8 @@ namespace Mismo.Gameplay.Player.Presentation
             }
             if(Time.unscaledTime<rewardUntil)Label(new Rect(width/2-230,height/2+65,460,35),reward,23,Gold,TextAnchor.MiddleCenter);
             float left=(width-528)/2;
+            var climbing=GetComponent<TreeClimbing>();
+            if(climbing!=null&&climbing.IsClimbing)Label(new Rect(left,height-190,528,28),"TREPAR · W/S subir/bajar · Soltá ESPACIO para soltar",15,Gold,TextAnchor.MiddleCenter);
             var equipment=GetComponent<Equipment.EquipmentLoadout>();
             if(equipment!=null && equipment.ActiveDefinition!=null)
             {
@@ -91,14 +94,17 @@ namespace Mismo.Gameplay.Player.Presentation
                 }
                 if(equipment.ActiveDefinition.isBow) Label(new Rect(width*Equipment.WeaponAim.Viewport.x-12,height*(1-Equipment.WeaponAim.Viewport.y)-12,24,24),"+",22,Gold,TextAnchor.MiddleCenter);
             }
-            Ability(left+432,height-115,"C","DASH",Status(dash!=null?dash.CooldownRemaining:0,dash!=null&&dash.IsActive),dash!=null&&dash.CooldownDuration>0?dash.CooldownRemaining/dash.CooldownDuration:0,true);
+            Ability(left+432,height-115,"C",dash!=null?dash.DisplayName.ToUpperInvariant():"ESPECIAL",Status(dash!=null?dash.CooldownRemaining:0,dash!=null&&dash.IsActive),dash!=null&&dash.CooldownDuration>0?dash.CooldownRemaining/dash.CooldownDuration:0,true);
             float mx=width-228;
             Fill(new Rect(mx-5,24,209,236),Panel);
             if(map!=null)GUI.DrawTexture(new Rect(mx,29,199,199),map);
             Matrix4x4 mapMatrix=GUI.matrix;
             var motor=GetComponent<PlayerMotor>();Vector3 facing=motor!=null?motor.Facing:transform.forward;
-            GUIUtility.RotateAroundPivot(Mathf.Atan2(facing.x,facing.z * .824f)*Mathf.Rad2Deg,new Vector2(mx+99.5f,128.5f));
-            Label(new Rect(mx+84.5f,112,30,30),"▲",24,Gold,TextAnchor.MiddleCenter);GUI.matrix=mapMatrix;
+            // Compose in HUD coordinates before the screen scale. RotateAroundPivot
+            // mixes its pivot with the existing GUI matrix at non-reference resolutions.
+            float heading=Mathf.Atan2(facing.x,facing.z * .824f)*Mathf.Rad2Deg;
+            GUI.matrix=mapMatrix*Matrix4x4.TRS(new Vector3(mx+99.5f,128.5f,0),Quaternion.Euler(0,0,heading),Vector3.one);
+            Label(new Rect(-15,-15,30,30),"▲",24,Gold,TextAnchor.MiddleCenter);GUI.matrix=mapMatrix;
             Label(new Rect(mx+79,29,40,22),"N",15,Color.white,TextAnchor.MiddleCenter);
             Label(new Rect(mx,231,199,22),"ALREDEDORES · 90 m",12,Muted,TextAnchor.MiddleCenter);
             if(health.IsDead)

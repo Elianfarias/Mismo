@@ -35,7 +35,7 @@ namespace Mismo.Gameplay.Player.Editor
             var rain = Ability("BowArea", "LLUVIA", .35f, .02f, .25f, 7, 20, AbilityPose.Bow,
                 new GroundAreaAction { radius = 2.5f, duration = 3, interval = .6f, damage = 5, fallingVisual = arrow });
             rain.targetsGround = true; rain.range = 18;
-            shot.chargeable=true;shot.maximumCharge=1.2f;
+            shot.chargeable=true;shot.maximumCharge=1.2f;shot.focusCost=0;shot.focusGainOnHit=5;
             power.focusCost=20;power.preparation=.65f;
             retreat.preparation=.45f;rain.preparation=.7f;
             foreach(var ranged in new[]{shot,power,retreat,rain})
@@ -99,3 +99,4 @@ namespace Mismo.Gameplay.Player.Editor
         { try { Apply(); EditorApplication.Exit(0); } catch (Exception e) { Debug.LogException(e); EditorApplication.Exit(1); } }
     }
 }
+

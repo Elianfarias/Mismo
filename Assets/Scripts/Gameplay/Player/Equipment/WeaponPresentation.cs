@@ -10,31 +10,53 @@ namespace Mismo.Gameplay.Player.Equipment
         private EquipmentLoadout loadout;
         private PlayerMotor motor;
         private Transform hand, leftHand;
+        private Transform torso;
+        private Vector3 torsoRestRootPosition;
+        private Quaternion torsoRestRootRotation;
         private GameObject activeVisual, backVisual;
         private Renderer[] embeddedSword;
-        public Transform ActiveHandAnchor => loadout != null && loadout.ActiveDefinition != null && loadout.ActiveDefinition.isBow ? leftHand : hand;
+        private Animator animator;
+        private Renderer[] rigRenderers;
+        private bool[] initialVisibility;
+        public Transform ActiveHandAnchor => loadout != null && loadout.ActiveDefinition != null && loadout.ActiveDefinition.poseProfile != null
+            ? loadout.ActiveDefinition.poseProfile.equipped.Resolve(transform, animator)
+            : loadout != null && loadout.ActiveDefinition != null && loadout.ActiveDefinition.isBow ? leftHand : hand;
         public Transform ActiveVisual => activeVisual != null ? activeVisual.transform : null;
+        public Transform HolsteredVisual => backVisual != null ? backVisual.transform : null;
         private void Start()
         {
             loadout = GetComponent<EquipmentLoadout>(); motor = GetComponent<PlayerMotor>();
             // Scenes may retain an invisible previous avatar with identically named bones.
             // Resolve only inside the rig actually driven by the character animator.
             var driver = GetComponent<Presentation.PlayerAnimationDriver>();
+            animator = driver != null ? driver.Animator : GetComponentInChildren<Animator>();
             Transform rig = driver != null && driver.Animator != null ? driver.Animator.transform : motor.Visual;
             if (rig == null) rig = transform;
             var bones = rig.GetComponentsInChildren<Transform>(true);
+            rigRenderers=rig.GetComponentsInChildren<Renderer>(true);
+            initialVisibility=rigRenderers.Select(r=>r.enabled).ToArray();
             hand = bones.FirstOrDefault(t => t.name == "Hand.R"); leftHand = bones.FirstOrDefault(t => t.name == "Hand.L");
+            // Resolve the actual Chest bone (detail meshes can also be named Chest).
+            torso = bones.FirstOrDefault(t => t.name == "Chest" && hand != null && hand.IsChildOf(t))
+                ?? bones.FirstOrDefault(t => t.name == "Chest");
+            if(torso != null && animator != null)
+            {
+                torsoRestRootPosition=animator.transform.InverseTransformPoint(torso.position);
+                torsoRestRootRotation=Quaternion.Inverse(animator.transform.rotation)*torso.rotation;
+            }
             embeddedSword = rig.GetComponentsInChildren<Renderer>(true).Where(r => r.name == "Sword_E_RightHand" || r.name == "BasicSword").ToArray();
             loadout.Changed += Rebuild; Rebuild();
         }
         private void Rebuild()
         {
+            for(int i=0;i<rigRenderers.Length;i++)if(rigRenderers[i]!=null)rigRenderers[i].enabled=initialVisibility[i];
             if (activeVisual != null) { activeVisual.SetActive(false); Destroy(activeVisual); }
             if (backVisual != null) { backVisual.SetActive(false); Destroy(backVisual); }
             var weapon = loadout.ActiveDefinition;
             bool hasEmbedded = embeddedSword.Any(r => r is SkinnedMeshRenderer);
-            foreach (var renderer in embeddedSword) renderer.enabled = weapon != null && !weapon.isBow && (renderer is SkinnedMeshRenderer || !hasEmbedded);
-            if (weapon != null && weapon.visualPrefab != null && (weapon.isBow || !hasEmbedded)) activeVisual = Instantiate(weapon.visualPrefab, transform);
+            foreach (var renderer in embeddedSword) renderer.enabled = weapon != null && weapon.poseProfile == null && !weapon.isBow && (renderer is SkinnedMeshRenderer || !hasEmbedded);
+            if(weapon!=null && weapon.poseProfile!=null)weapon.poseProfile.HideEmbeddedVisuals(animator);
+            if (weapon != null && weapon.visualPrefab != null && (weapon.poseProfile != null || weapon.isBow || !hasEmbedded)) activeVisual = Instantiate(weapon.visualPrefab, transform);
             if (loadout.SecondaryDefinition != null && loadout.SecondaryDefinition.visualPrefab != null) backVisual = Instantiate(loadout.SecondaryDefinition.visualPrefab, transform);
         }
         private void LateUpdate()
@@ -42,7 +64,7 @@ namespace Mismo.Gameplay.Player.Equipment
             if (loadout == null) return;
             var weapon = loadout.ActiveDefinition;
             Quaternion facing = Quaternion.LookRotation(motor.Facing);
-            if (weapon != null && weapon.isBow)
+            if (weapon != null && weapon.poseProfile == null && weapon.isBow)
             {
                 var cast = loadout.Runner.Current;
                 float draw = cast != null && cast.Definition.pose == AbilityPose.Bow
@@ -52,15 +74,59 @@ namespace Mismo.Gameplay.Player.Equipment
             }
             if (activeVisual != null)
             {
+                if (weapon.poseProfile != null) ApplyProfile(activeVisual, weapon.poseProfile.equipped);
+                else
+                {
                 var anchor = weapon.isBow ? leftHand : hand;
                 Vector3 position = anchor != null ? anchor.position : transform.position + facing * new Vector3(.4f, 1, .1f);
                 activeVisual.transform.SetPositionAndRotation(position + facing * weapon.handOffset, facing * Quaternion.Euler(weapon.handRotation));
+                }
             }
             if (backVisual != null)
             {
                 var secondary = loadout.SecondaryDefinition;
-                backVisual.transform.SetPositionAndRotation(transform.position + facing * secondary.backOffset, facing * Quaternion.Euler(secondary.backRotation));
+                if (secondary.poseProfile != null) ApplyHolsteredProfile(backVisual, secondary.poseProfile.holstered);
+                else
+                {
+                    // Use the driven visual root, not the physics root. PlayerLocomotionLean
+                    // applies the authored body tilt there; a weapon on the back follows it.
+                    ApplyTorsoFollow(backVisual.transform, secondary.backOffset, Quaternion.Euler(secondary.backRotation), facing);
+                }
             }
+        }
+        private void ApplyHolsteredProfile(GameObject visual, WeaponAttachmentPose pose)
+        {
+            var anchor=pose.Resolve(transform,animator);
+            visual.SetActive(anchor!=null);
+            if(anchor==null)return;
+            pose.Apply(visual.transform,anchor,animator);
+            if(pose.anchor==WeaponAnchor.Character)
+                ApplyTorsoFollow(visual.transform,pose.offset,Quaternion.Euler(pose.rotation),
+                    motor!=null && motor.Visual!=null?motor.Visual.rotation:motor!=null?Quaternion.LookRotation(motor.Facing):transform.rotation);
+        }
+        private void ApplyTorsoFollow(Transform visual, Vector3 offset, Quaternion rotation, Quaternion fallbackBasis)
+        {
+            if(torso==null || animator==null || motor==null)
+            {
+                Quaternion basisFallback=motor!=null && motor.Visual!=null?motor.Visual.rotation:fallbackBasis;
+                Vector3 originFallback=motor!=null && motor.Visual!=null?motor.Visual.position:transform.position;
+                visual.SetPositionAndRotation(originFallback+basisFallback*offset,basisFallback*rotation);
+                return;
+            }
+            Quaternion rootRotation=animator.transform.rotation;
+            Quaternion currentRootTorsoRotation=Quaternion.Inverse(rootRotation)*torso.rotation;
+            Quaternion torsoDelta=currentRootTorsoRotation*Quaternion.Inverse(torsoRestRootRotation);
+            Vector3 currentRootTorsoPosition=animator.transform.InverseTransformPoint(torso.position);
+            Vector3 localPosition=currentRootTorsoPosition+torsoDelta*(offset-torsoRestRootPosition);
+            Quaternion basis=motor.Visual!=null?motor.Visual.rotation:rootRotation;
+            Vector3 origin=motor.Visual!=null?motor.Visual.position:transform.position;
+            visual.SetPositionAndRotation(origin+basis*localPosition,basis*torsoDelta*rotation);
+        }
+        private void ApplyProfile(GameObject visual, WeaponAttachmentPose pose)
+        {
+            var anchor = pose.Resolve(transform, animator);
+            visual.SetActive(anchor != null);
+            if (anchor != null) pose.Apply(visual.transform, anchor, animator);
         }
         private static void AimArm(Transform wrist, Vector3 target, Vector3 pole)
         {

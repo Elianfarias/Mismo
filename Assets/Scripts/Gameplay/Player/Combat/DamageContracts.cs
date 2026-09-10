@@ -6,6 +6,7 @@ namespace Mismo.Gameplay.Combat
     public readonly struct DamageInfo
     {
         public readonly float Amount;
+        public readonly float FocusGainOnHit;
         public readonly float PostureDamage;
         public readonly long AttackId;
         public readonly bool Ranged, Area, Parryable;
@@ -13,10 +14,13 @@ namespace Mismo.Gameplay.Combat
         public readonly GameObject Source;
         public readonly Vector3 HitPoint;
         public readonly Vector3 Direction;
+        public readonly string WeaponFamilyId;
 
-        public DamageInfo(float amount, GameObject source, Vector3 hitPoint, Vector3 direction, long attackId = 0, float postureDamage = -1, bool ranged = false, bool area = false, Vector3? origin = null, bool parryable = true)
+        public DamageInfo(float amount, GameObject source, Vector3 hitPoint, Vector3 direction, long attackId = 0, float postureDamage = -1, bool ranged = false, bool area = false, Vector3? origin = null, bool parryable = true, string weaponFamilyId = null, float focusGainOnHit = 0)
         {
             Amount = Mathf.Max(0f, amount);
+            FocusGainOnHit = Mathf.Max(0f, focusGainOnHit);
+            WeaponFamilyId=weaponFamilyId;
             PostureDamage = postureDamage < 0 ? amount * .65f : postureDamage;
             AttackId = attackId; Ranged = ranged; Area = area; Parryable = parryable;
             Origin = origin ?? (source != null ? source.transform.position : hitPoint);
@@ -51,5 +55,9 @@ namespace Mismo.Gameplay.Combat
     public interface IParryResponder
     {
         void OnAttackParried(DamageInfo damage);
+    }
+    public interface ICombatContribution
+    {
+        void RecordDefense(Mismo.Gameplay.Player.Equipment.Inventory.PlayerInventory player,string family);
     }
 }

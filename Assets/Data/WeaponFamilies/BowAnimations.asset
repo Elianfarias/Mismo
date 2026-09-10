@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54613e04779c9fb4d8602489d1afca4e, type: 3}
+  m_Name: BowAnimations
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Presentation.WeaponAnimationSet
+  locomotion: {fileID: 22100000, guid: 006b0ddc09a61d24f895f653a409f30a, type: 2}
+  actions:
+  - ability: {fileID: 11400000, guid: 3213b09346e37e646b890fd686326b4c, type: 2}
+    clip: {fileID: 7400000, guid: 83240e68874ab474588070969fcaa9d7, type: 2}
+    comboClips: []
+    activeStartsAt: 0.35
+    recoveryStartsAt: 0.7
+    blendSeconds: 0.06
+  - ability: {fileID: 11400000, guid: 836e0b8ee1233e84d8824149cfabfc61, type: 2}
+    clip: {fileID: 7400000, guid: 83240e68874ab474588070969fcaa9d7, type: 2}
+    comboClips: []
+    activeStartsAt: 0.35
+    recoveryStartsAt: 0.7
+    blendSeconds: 0.06
+  - ability: {fileID: 11400000, guid: f897c3e3e29be294bac01266c17aebad, type: 2}
+    clip: {fileID: 7400000, guid: 4ca9ca8a7b709f5468ac66ca044ad548, type: 2}
+    comboClips: []
+    activeStartsAt: 0.35
+    recoveryStartsAt: 0.7
+    blendSeconds: 0.06
+  - ability: {fileID: 11400000, guid: 1937ac5ccc63f954f8d731a2d584f377, type: 2}
+    clip: {fileID: 7400000, guid: 4ca9ca8a7b709f5468ac66ca044ad548, type: 2}
+    comboClips: []
+    activeStartsAt: 0.35
+    recoveryStartsAt: 0.7
+    blendSeconds: 0.06
+  actionMask: {fileID: 31900000, guid: 4939aed8e9f01c448ad4ed1ea7b7f933, type: 2}

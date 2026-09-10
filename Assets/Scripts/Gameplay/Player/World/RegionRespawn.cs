@@ -18,6 +18,7 @@ namespace Mismo.Gameplay.Player.World
         {
             if (pending) return;
             pending = true;
+            WorldSession.Respawn();
             StartCoroutine(Reload());
         }
         private IEnumerator Reload()

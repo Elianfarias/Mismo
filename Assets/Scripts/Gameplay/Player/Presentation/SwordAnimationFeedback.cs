@@ -8,7 +8,7 @@ namespace Mismo.Gameplay.Player.Presentation
     /// Animación procedural temporal del arma. Lee eventos de las habilidades de espada y
     /// aplica poses aditivas al visual, dejando libre el Animator definitivo.
     /// </summary>
-    [DisallowMultipleComponent]
+    [DisallowMultipleComponent, DefaultExecutionOrder(300)]
     public sealed class SwordAnimationFeedback : MonoBehaviour
     {
         private enum Motion
@@ -173,10 +173,28 @@ namespace Mismo.Gameplay.Player.Presentation
         {
             if (swordVisual == null) return;
             var equipment = GetComponent<Equipment.EquipmentLoadout>();
+            if (equipment != null && equipment.ActiveDefinition != null && equipment.ActiveDefinition.poseProfile != null)
+            {
+                // Authored profiles own the attachment and body pose; legacy procedural
+                // offsets and the embedded sword mesh must not drive this weapon.
+                var profile = equipment.ActiveDefinition.poseProfile;
+                var presentation = GetComponent<Equipment.WeaponPresentation>();
+                if (trail != null)
+                {
+                    var visual = presentation != null ? presentation.ActiveVisual : null;
+                    if (visual != null) trail.transform.position = visual.TransformPoint(profile.trailTip);
+                    var cast = equipment.Runner != null ? equipment.Runner.Current : null;
+                    trail.emitting = profile.meleeTrail && visual != null &&
+                        ((hitbox != null && hitbox.IsWindowOpen) || (spin != null && spin.IsActive) || (lunge != null && lunge.IsActive) ||
+                        (cast != null && cast.Began && !cast.Ended && (cast.Definition.pose == Equipment.AbilityPose.Lunge || cast.Definition.pose == Equipment.AbilityPose.Spin)));
+                    if (!profile.meleeTrail) trail.Clear();
+                }
+                return;
+            }
             if (equipment != null && equipment.ActiveDefinition != null && equipment.ActiveDefinition.isBow)
             { if (trail != null) { trail.emitting = false; trail.Clear(); } return; }
             if(trail!=null)FollowBladeTip();
-            if (useAuthoredAnimations)
+            if (useAuthoredAnimations || (equipment != null && equipment.ActiveDefinition != null && equipment.ActiveDefinition.family != null))
             {
                 if(trail != null) trail.emitting = (hitbox != null && hitbox.IsWindowOpen) || (spin != null && spin.IsActive) || (lunge != null && lunge.IsActive);
                 var cast = equipment != null && equipment.Runner != null ? equipment.Runner.Current : null;

@@ -14,25 +14,52 @@ namespace Mismo.Gameplay.Player
         private PlayerMotor motor;
         private Stamina stamina;
         private EquipmentLoadout loadout;
+        private Equipment.Inventory.InventoryPanel inventoryPanel;
+        private TreeClimbing climbing;
         public bool IsSprinting { get; private set; }
         public void Configure(Transform basis) => cameraBasis = basis;
         private void Awake()
         {
             input = GetComponent<PlayerInputReader>(); motor = GetComponent<PlayerMotor>(); stamina = GetComponent<Stamina>();
             loadout = GetComponent<EquipmentLoadout>(); loadout.Initialize();
+            climbing=GetComponent<TreeClimbing>()??gameObject.AddComponent<TreeClimbing>();
             if (GetComponent<Presentation.MovementFeedback>() == null) gameObject.AddComponent<Presentation.MovementFeedback>();
             if (GetComponent<Mismo.Gameplay.Combat.Health>() != null && GetComponent<Presentation.PlayerHUD>() == null) gameObject.AddComponent<Presentation.PlayerHUD>();
+        }
+        private void Start()
+        {
+            // Arena tools remain isolated from the single-player profile.
+            if (GetComponent<World.RegionRespawn>() == null) return;
+            var inventory = GetComponent<Equipment.Inventory.PlayerInventory>() ?? gameObject.AddComponent<Equipment.Inventory.PlayerInventory>();
+            inventory.Initialize(Resources.Load<Equipment.Inventory.ItemCatalog>("ItemCatalog"));
+            inventoryPanel = GetComponent<Equipment.Inventory.InventoryPanel>() ?? gameObject.AddComponent<Equipment.Inventory.InventoryPanel>();
         }
         private void Update()
         {
             float dt = Time.deltaTime;
             var runner = loadout.Runner; var belt = loadout.Belt;
+            if (inventoryPanel == null) inventoryPanel = GetComponent<Equipment.Inventory.InventoryPanel>();
+            if (Presentation.WorldMapPanel.BlocksGameplay || inventoryPanel != null && inventoryPanel.BlocksGameplay)
+            {
+                climbing.Release();belt?.Cancel();
+                runner.SetHeld(false); runner.Tick(dt); belt?.TickCooldown(dt);
+                IsSprinting = stamina.Tick(false, dt);
+                motor.Tick(Vector3.zero, false, false, false, dt);
+                return;
+            }
             if (cameraBasis == null && UnityEngine.Camera.main != null) cameraBasis = UnityEngine.Camera.main.transform;
             if (cameraBasis == null || !input.isActiveAndEnabled) { runner.Tick(dt); return; }
             Vector2 move = Vector2.ClampMagnitude(input.Move, 1);
             Vector3 forward = Vector3.ProjectOnPlane(cameraBasis.forward, Vector3.up).normalized;
             Vector3 direction = forward * move.y + Vector3.Cross(Vector3.up, forward) * move.x;
             belt?.TickCooldown(dt);
+            var playerHealth=GetComponent<Mismo.Gameplay.Combat.Health>();
+            if((playerHealth==null||!playerHealth.IsDead)&&!runner.IsBusy&&(belt==null||!belt.IsActive)&&climbing.Step(motor,stamina,direction,move.y,input.JumpHeld,dt))
+            {
+                runner.SetHeld(false);runner.Tick(dt);IsSprinting=false;stamina.Tick(false,dt);
+                motor.Tick(Vector3.zero,false,false,false,dt);return;
+            }
+            if(climbing.IsClimbing)climbing.Release();
             if (input.WasSwapWeaponPressedThisFrame()) loadout.TrySwap();
             if (input.WasDashPressedThisFrame()) runner.TryDash(direction.sqrMagnitude > 0 ? direction : motor.Facing);
             if (input.WasAttackPressedThisFrame()) Request(AbilitySlot.Basic, direction);
@@ -43,8 +70,8 @@ namespace Mismo.Gameplay.Player
             if (runner.Current != null && !runner.Current.Began && runner.Current.Definition.aimFromCamera && !runner.Current.Definition.targetsGround) RefreshAim(runner.Current);
             bool weaponMovement = runner.IsMoving;
             runner.Tick(dt);
-            bool special = belt != null && belt.IsActive;
-            if (special) { Vector3 displacement = belt.Step(dt); motor.RequestControlledDisplacement(displacement, displacement, 0); }
+            bool special = belt != null && belt.ControlsMovement;
+            if (belt!=null&&belt.IsActive) { Vector3 displacement = belt.Step(dt); if(special)motor.RequestControlledDisplacement(displacement, displacement, 0); }
             IsSprinting = stamina.Tick(input.SprintHeld && move.sqrMagnitude > .01f && motor.Speed > .05f && motor.IsGrounded && !special && !runner.IsBusy, dt);
             var collisions = motor.Tick(direction * runner.Mobility, IsSprinting, input.WasJumpPressedThisFrame(), input.JumpHeld, dt);
             if ((collisions & CollisionFlags.Sides) != 0) { if (special) belt.Cancel(); if (weaponMovement || runner.IsMoving) runner.Cancel(); }

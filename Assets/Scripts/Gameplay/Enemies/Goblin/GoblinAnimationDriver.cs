@@ -12,16 +12,18 @@ namespace Mismo.Gameplay.Enemies
         private NavMeshAgent agent;
         private Health health;
         private float hitAt=-10;
+        private readonly EnemyActionPlayback playback = new EnemyActionPlayback();
+        public AnimationClip ActionClip => playback.ActionClip;
         public Animator Animator => animator;
         public void Configure(Animator value) => animator=value;
-        private void Awake(){goblin=GetComponent<GoblinController>();agent=GetComponent<NavMeshAgent>();health=GetComponent<Health>();}
+        private void Awake(){goblin=GetComponent<GoblinController>();agent=GetComponent<NavMeshAgent>();health=GetComponent<Health>();if(animator==null)animator=GetComponentInChildren<Animator>();}
         private void OnEnable(){if(health!=null)health.Damaged+=OnHit;}
-        private void OnDisable(){if(health!=null)health.Damaged-=OnHit;}
+        private void OnDisable(){if(health!=null)health.Damaged-=OnHit;playback.Dispose();}
         private void OnHit(DamageInfo _) => hitAt=Time.time;
         private void Update()
         {
-            if(animator==null||goblin==null)return;
-            int motion=0;float time=0;float speed=agent!=null&&agent.enabled?agent.velocity.magnitude:0;
+            if(animator==null||goblin==null){playback.Dispose();return;}
+            int motion=0;float time=0;float speed=agent!=null&&agent.enabled&&agent.isOnNavMesh?agent.velocity.magnitude:0;
             switch(goblin.State)
             {
                 // One authored attack is mapped to the existing AI clocks, preserving damage timing.
@@ -35,8 +37,11 @@ namespace Mismo.Gameplay.Enemies
                     else if(speed>.1f)motion=speed>2.1f?2:1;
                     break;
             }
-            animator.SetInteger("Motion",motion);animator.SetFloat("ActionTime",Mathf.Clamp01(time));
-            animator.SetFloat("PlaybackRate",Mathf.Clamp(speed/(motion==2?3.2f:1.6f),.7f,1.5f));
+            bool attacking=goblin.State==GoblinState.Telegraph||goblin.State==GoblinState.Attack||goblin.State==GoblinState.Recovery;
+            var phase=goblin.State==GoblinState.Telegraph?EnemyAttackPhase.Preparation
+                :goblin.State==GoblinState.Attack?EnemyAttackPhase.Active:EnemyAttackPhase.Recovery;
+            playback.Tick(animator,attacking?goblin.CurrentAttack?.animation:null,phase,
+                goblin.StateProgress,motion,time,speed,Time.deltaTime);
         }
     }
 }

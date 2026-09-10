@@ -46,3 +46,17 @@ Thumbs.db
 
 # ==== Others (if usas plugins externos) ====
 # /Plugins/Editor/SomePlugin/GeneratedFiles/
+
+# Local isolated Unity validation projects
+/.validation/
+
+# Source, notes, and generated work kept outside the Unity project.
+# The repository publishes only the Assets/ tree.
+/.gdd-work/
+/ArtSource/
+/Docs/
+/Tools/
+/Packages/
+/ProjectSettings/
+/*.docx
+/.vsconfig

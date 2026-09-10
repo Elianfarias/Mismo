@@ -163,16 +163,8 @@ namespace Mismo.Gameplay.Player.Presentation
             particleObject.transform.SetParent(transform, false);
             combatParticles = particleObject.AddComponent<ParticleSystem>();
             ParticleSystemRenderer renderer = particleObject.GetComponent<ParticleSystemRenderer>();
-            Shader shader = Shader.Find("Universal Render Pipeline/Particles/Unlit");
-            if (shader == null) shader = Shader.Find("Particles/Standard Unlit");
-            if (shader == null) shader = Shader.Find("Legacy Shaders/Particles/Alpha Blended");
-            if (shader != null)
-            {
-                particleMaterial = new Material(shader) { name = "Combat Feedback Material (Runtime)" };
-                if (particleMaterial.HasProperty("_BaseColor")) particleMaterial.SetColor("_BaseColor", Color.white);
-                if (particleMaterial.HasProperty("_Color")) particleMaterial.SetColor("_Color", Color.white);
-                renderer.sharedMaterial = particleMaterial;
-            }
+            particleMaterial = RuntimeParticleMaterial.Create("Combat Feedback Material (Runtime)", Color.white);
+            renderer.sharedMaterial = particleMaterial;
             var main = combatParticles.main;
             main.playOnAwake = false;
             main.loop = false;

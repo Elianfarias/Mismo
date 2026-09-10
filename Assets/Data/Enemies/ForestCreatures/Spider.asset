@@ -1,0 +1,211 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1181254437d7479da935684cab56aced, type: 3}
+  m_Name: Spider
+  m_EditorClassIdentifier: Mismo.Gameplay.Enemies::Mismo.Gameplay.Enemies.CreatureSettings
+  health: 65
+  detectionRange: 12
+  loseRange: 18
+  leashRange: 22
+  memoryDuration: 3
+  speed: 4.5
+  positioningSpeed: 2.6
+  decisionPause: 0.4
+  chargeCooldown: 5
+  staggerDamageThreshold: 15
+  staggerDuration: 0.45
+  staggerResistance: 0.75
+  parryStaggerDuration: 1.25
+  slash:
+    label: Golpe
+    range: 1.9
+    windup: 0.65
+    active: 0.18
+    recovery: 0.85
+    damage: 12
+    travel: 0
+    halfExtents: {x: 0.65, y: 0.65, z: 0.8}
+    forwardOffset: 0.9
+    animation:
+      clip: {fileID: 0}
+      compatibleClip: {fileID: 0}
+      compatibleSource: {fileID: 0}
+      mask: {fileID: 0}
+      activeStartsAt: 0.32
+      recoveryStartsAt: 0.59
+      blendSeconds: 0.06
+    enabled: 1
+    minimumRange: 0
+    cooldown: 3
+    weight: 1
+    kind: 0
+    hitHeight: 0.85
+    damageStartsAt: 0
+    preparationClip: {fileID: 0}
+    recoveryClip: {fileID: 0}
+    preparationDuration: 0
+    preparationEndNormalized: 1
+    loopActiveAnimation: 0
+    projectileVisual: {fileID: 0}
+    projectileSocket: Rock_Carry
+    grabAt: 0.833333
+    projectileSpeed: 12
+    projectileRange: 30
+    projectileRadius: 0.6
+  charge:
+    label: Carga
+    range: 5
+    windup: 1
+    active: 0.4
+    recovery: 1.2
+    damage: 20
+    travel: 3.4
+    halfExtents: {x: 0.5, y: 0.65, z: 0.65}
+    forwardOffset: 0.7
+    animation:
+      clip: {fileID: 0}
+      compatibleClip: {fileID: 0}
+      compatibleSource: {fileID: 0}
+      mask: {fileID: 0}
+      activeStartsAt: 0.32
+      recoveryStartsAt: 0.59
+      blendSeconds: 0.06
+    enabled: 1
+    minimumRange: 0
+    cooldown: 3
+    weight: 1
+    kind: 0
+    hitHeight: 0.85
+    damageStartsAt: 0
+    preparationClip: {fileID: 0}
+    recoveryClip: {fileID: 0}
+    preparationDuration: 0
+    preparationEndNormalized: 1
+    loopActiveAnimation: 0
+    projectileVisual: {fileID: 0}
+    projectileSocket: Rock_Carry
+    grabAt: 0.833333
+    projectileSpeed: 12
+    projectileRange: 30
+    projectileRadius: 0.6
+  displayName: "ARA\xD1A DEL BOSQUE"
+  isBoss: 0
+  posture: 50
+  sightHeight: 0.9
+  allowedHeightDifference: 1.2
+  preferredRange: 1.8
+  attacks:
+  - label: Attack_Bite
+    range: 2.2
+    windup: 0.43333334
+    active: 0.13
+    recovery: 0.43666667
+    damage: 11
+    travel: 0
+    halfExtents: {x: 0.8, y: 0.55, z: 1}
+    forwardOffset: 1.1
+    animation:
+      clip: {fileID: -2080255520724580793, guid: 65dba043440db23459206c76969231e5, type: 3}
+      compatibleClip: {fileID: 0}
+      compatibleSource: {fileID: 0}
+      mask: {fileID: 0}
+      activeStartsAt: 0.43333334
+      recoveryStartsAt: 0.56333333
+      blendSeconds: 0.025
+    enabled: 1
+    minimumRange: 0
+    cooldown: 0.8
+    weight: 1
+    kind: 0
+    hitHeight: 0.5
+    damageStartsAt: 0
+    preparationClip: {fileID: 0}
+    recoveryClip: {fileID: 0}
+    preparationDuration: 0
+    preparationEndNormalized: 1
+    loopActiveAnimation: 0
+    projectileVisual: {fileID: 0}
+    projectileSocket: Rock_Carry
+    grabAt: 0.833333
+    projectileSpeed: 12
+    projectileRange: 30
+    projectileRadius: 0.6
+  - label: Jump
+    range: 7
+    windup: 0.33333334
+    active: 0.7
+    recovery: 0.36666676
+    damage: 18
+    travel: 4.5
+    halfExtents: {x: 1, y: 0.7, z: 1.2}
+    forwardOffset: 0.9
+    animation:
+      clip: {fileID: -4337111577487656491, guid: 65dba043440db23459206c76969231e5, type: 3}
+      compatibleClip: {fileID: 0}
+      compatibleSource: {fileID: 0}
+      mask: {fileID: 0}
+      activeStartsAt: 0.23809522
+      recoveryStartsAt: 0.73809516
+      blendSeconds: 0.025
+    enabled: 1
+    minimumRange: 3
+    cooldown: 4
+    weight: 1
+    kind: 0
+    hitHeight: 0.55
+    damageStartsAt: 0.98
+    preparationClip: {fileID: 0}
+    recoveryClip: {fileID: 0}
+    preparationDuration: 0
+    preparationEndNormalized: 1
+    loopActiveAnimation: 0
+    projectileVisual: {fileID: 0}
+    projectileSocket: Rock_Carry
+    grabAt: 0.833333
+    projectileSpeed: 12
+    projectileRange: 30
+    projectileRadius: 0.6
+  - label: Spit_Web
+    range: 10
+    windup: 0.43333334
+    active: 0.05
+    recovery: 0.7166667
+    damage: 0
+    travel: 0
+    halfExtents: {x: 0.65, y: 0.65, z: 0.8}
+    forwardOffset: 0.9
+    animation:
+      clip: {fileID: 1118542850848935819, guid: 65dba043440db23459206c76969231e5, type: 3}
+      compatibleClip: {fileID: 0}
+      compatibleSource: {fileID: 0}
+      mask: {fileID: 0}
+      activeStartsAt: 0.3611111
+      recoveryStartsAt: 0.40277776
+      blendSeconds: 0.025
+    enabled: 0
+    minimumRange: 0
+    cooldown: 6
+    weight: 1
+    kind: 1
+    hitHeight: 0.85
+    damageStartsAt: 0
+    preparationClip: {fileID: 0}
+    recoveryClip: {fileID: 0}
+    preparationDuration: 0
+    preparationEndNormalized: 1
+    loopActiveAnimation: 0
+    projectileVisual: {fileID: 0}
+    projectileSocket: Web_Origin
+    grabAt: 0.833333
+    projectileSpeed: 12
+    projectileRange: 30
+    projectileRadius: 0.6

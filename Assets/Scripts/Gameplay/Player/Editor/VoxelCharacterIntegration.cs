@@ -13,7 +13,7 @@ namespace Mismo.Gameplay.Player.Editor
 {
     public static class VoxelCharacterIntegration
     {
-        public const string ModelPath = "Assets/Art/FBX/Voxel_Adventurer_Animated.fbx";
+        public const string ModelPath = "Assets/Art/FBX/Characters/Voxel_Adventurer_Animated.fbx";
         public const string ControllerPath = "Assets/Art/Animations/VoxelLocomotion.controller";
         public const string PrefabPath = "Assets/Prefabs/Player/PlayerVoxelSwordE.prefab";
         [MenuItem("Mismo/Character/Integrate Sword E And Locomotion")]
@@ -49,9 +49,10 @@ namespace Mismo.Gameplay.Player.Editor
             foreach(CharacterMotion motion in Enum.GetValues(typeof(CharacterMotion)))
             {
                 string name=motion.ToString();
-                var clip=all.First(c=>c.name.Split('|').Last()==name);
+                var clip=AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/Art/Animations/Quaternius/Retargeted/Quaternius_"+name+".anim") ?? all.First(c=>c.name.Split('|').Last()==name);
                 var state=sm.AddState(name,new Vector3(260+((int)motion%4)*210,80+((int)motion/4)*100,0));state.motion=clip;
                 state.writeDefaultValues=true;
+                if(motion==CharacterMotion.Land && clip.name.StartsWith("Quaternius_"))state.speed=clip.length/.18f;
                 if(motion==CharacterMotion.Idle)sm.defaultState=state;
                 if(motion==CharacterMotion.Walk||motion==CharacterMotion.Run) {state.speedParameter="PlaybackRate";state.speedParameterActive=true;}
                 if(motion==CharacterMotion.Jump || motion==CharacterMotion.Attack1 || motion==CharacterMotion.Attack2 || motion==CharacterMotion.Attack3 || motion==CharacterMotion.Parry || motion==CharacterMotion.Lunge || motion==CharacterMotion.Spin)
@@ -60,6 +61,16 @@ namespace Mismo.Gameplay.Player.Editor
                 t.duration=(int)motion>=(int)CharacterMotion.Attack1?.035f:.09f;
                 t.canTransitionToSelf=false;t.AddCondition(AnimatorConditionMode.Equals,(int)motion,"Motion");
             }
+            controller.AddParameter("LocomotionSpeed",AnimatorControllerParameterType.Float);
+            var locomotion=new BlendTree {name="Continuous Locomotion",blendType=BlendTreeType.Simple1D,blendParameter="LocomotionSpeed",useAutomaticThresholds=false};
+            AssetDatabase.AddObjectToAsset(locomotion,controller);
+            for(int i=0;i<3;i++)
+            {
+                string motionName=((CharacterMotion)i).ToString();
+                locomotion.AddChild(AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/Art/Animations/Quaternius/Retargeted/Quaternius_"+motionName+".anim") ?? all.First(c=>c.name.Split('|').Last()==motionName),i);
+            }
+            var idle=sm.states.First(s=>s.state.name=="Idle").state;
+            idle.motion=locomotion;idle.speedParameter="PlaybackRate";idle.speedParameterActive=true;
             EditorUtility.SetDirty(controller); AssetDatabase.SaveAssets();
             var prefab = PrefabUtility.LoadPrefabContents("Assets/Prefabs/Player/Player.prefab");
             try { Configure(prefab,controller); PrefabUtility.SaveAsPrefabAsset(prefab,PrefabPath); }

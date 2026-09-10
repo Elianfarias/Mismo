@@ -18,6 +18,8 @@ namespace Mismo.Gameplay.Enemies
         private MaterialPropertyBlock tint;
         private float flash;
         [SerializeField] private bool authoredAnimation;
+        [SerializeField] private EnemyGroundSupport groundSupport=new EnemyGroundSupport();
+        private Transform animatedModel;
         public void UseAuthoredAnimation() => authoredAnimation=true;
 
         public void Configure(Transform body, Transform sword, Transform fill, Transform board, TextMesh text)
@@ -33,6 +35,7 @@ namespace Mismo.Gameplay.Enemies
         private void Awake()
         {
             goblin = GetComponent<GoblinController>(); health = GetComponent<Health>();
+            animatedModel=GetComponentInChildren<Animator>()?.transform;
             style = GetComponent<GoblinVisualStyle>();
             tint = new MaterialPropertyBlock();
             skin = visual != null ? visual.GetComponentsInChildren<Renderer>() : GetComponentsInChildren<Renderer>();
@@ -67,6 +70,7 @@ namespace Mismo.Gameplay.Enemies
             {
                 visual.localPosition=state==GoblinState.Dead?Vector3.up*.24f:Vector3.zero;
                 visual.localRotation=state==GoblinState.Dead?Quaternion.Euler(0,0,90):Quaternion.identity;
+                //if(state!=GoblinState.Dead&&animatedModel!=null)groundSupport.Apply(transform,visual,animatedModel.lossyScale.y);
             }
             
             if (healthFill != null) healthFill.localScale = new Vector3(health.Normalized, 1f, 1f);

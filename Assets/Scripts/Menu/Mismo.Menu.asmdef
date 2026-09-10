@@ -2,6 +2,7 @@
   "name": "Mismo.Menu",
   "references": [
     "Mismo.Audio",
+    "Mismo.Gameplay.Player",
     "Unity.ugui",
     "Unity.InputSystem"
   ]

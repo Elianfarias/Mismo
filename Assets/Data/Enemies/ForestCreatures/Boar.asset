@@ -1,0 +1,176 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1181254437d7479da935684cab56aced, type: 3}
+  m_Name: Boar
+  m_EditorClassIdentifier: Mismo.Gameplay.Enemies::Mismo.Gameplay.Enemies.CreatureSettings
+  health: 100
+  detectionRange: 12
+  loseRange: 18
+  leashRange: 22
+  memoryDuration: 3
+  speed: 4.2
+  positioningSpeed: 1.8
+  decisionPause: 0.45
+  chargeCooldown: 5
+  staggerDamageThreshold: 15
+  staggerDuration: 0.45
+  staggerResistance: 0.75
+  parryStaggerDuration: 1.25
+  slash:
+    label: Golpe
+    range: 1.9
+    windup: 0.65
+    active: 0.18
+    recovery: 0.85
+    damage: 12
+    travel: 0
+    halfExtents: {x: 0.65, y: 0.65, z: 0.8}
+    forwardOffset: 0.9
+    animation:
+      clip: {fileID: 0}
+      compatibleClip: {fileID: 0}
+      compatibleSource: {fileID: 0}
+      mask: {fileID: 0}
+      activeStartsAt: 0.32
+      recoveryStartsAt: 0.59
+      blendSeconds: 0.06
+    enabled: 1
+    minimumRange: 0
+    cooldown: 3
+    weight: 1
+    kind: 0
+    hitHeight: 0.85
+    damageStartsAt: 0
+    preparationClip: {fileID: 0}
+    recoveryClip: {fileID: 0}
+    preparationDuration: 0
+    preparationEndNormalized: 1
+    loopActiveAnimation: 0
+    projectileVisual: {fileID: 0}
+    projectileSocket: Rock_Carry
+    grabAt: 0.833333
+    projectileSpeed: 12
+    projectileRange: 30
+    projectileRadius: 0.6
+  charge:
+    label: Carga
+    range: 5
+    windup: 1
+    active: 0.4
+    recovery: 1.2
+    damage: 20
+    travel: 3.4
+    halfExtents: {x: 0.5, y: 0.65, z: 0.65}
+    forwardOffset: 0.7
+    animation:
+      clip: {fileID: 0}
+      compatibleClip: {fileID: 0}
+      compatibleSource: {fileID: 0}
+      mask: {fileID: 0}
+      activeStartsAt: 0.32
+      recoveryStartsAt: 0.59
+      blendSeconds: 0.06
+    enabled: 1
+    minimumRange: 0
+    cooldown: 3
+    weight: 1
+    kind: 0
+    hitHeight: 0.85
+    damageStartsAt: 0
+    preparationClip: {fileID: 0}
+    recoveryClip: {fileID: 0}
+    preparationDuration: 0
+    preparationEndNormalized: 1
+    loopActiveAnimation: 0
+    projectileVisual: {fileID: 0}
+    projectileSocket: Rock_Carry
+    grabAt: 0.833333
+    projectileSpeed: 12
+    projectileRange: 30
+    projectileRadius: 0.6
+  displayName: "JABAL\xCD"
+  isBoss: 0
+  posture: 90
+  sightHeight: 0.9
+  allowedHeightDifference: 1.2
+  preferredRange: 1.8
+  attacks:
+  - label: Attack
+    range: 2.2
+    windup: 0.4
+    active: 0.16
+    recovery: 0.64000005
+    damage: 14
+    travel: 0
+    halfExtents: {x: 0.65, y: 0.65, z: 1}
+    forwardOffset: 1.1
+    animation:
+      clip: {fileID: 5245998875730980439, guid: 86d79e2e91c44744e962976068ba44a7, type: 3}
+      compatibleClip: {fileID: 0}
+      compatibleSource: {fileID: 0}
+      mask: {fileID: 0}
+      activeStartsAt: 0.3333333
+      recoveryStartsAt: 0.46666664
+      blendSeconds: 0.025
+    enabled: 1
+    minimumRange: 0
+    cooldown: 1
+    weight: 1
+    kind: 0
+    hitHeight: 0.65
+    damageStartsAt: 0
+    preparationClip: {fileID: 0}
+    recoveryClip: {fileID: 0}
+    preparationDuration: 0
+    preparationEndNormalized: 1
+    loopActiveAnimation: 0
+    projectileVisual: {fileID: 0}
+    projectileSocket: Rock_Carry
+    grabAt: 0.833333
+    projectileSpeed: 12
+    projectileRange: 30
+    projectileRadius: 0.6
+  - label: Charge
+    range: 9
+    windup: 0.65
+    active: 0.7
+    recovery: 1.1
+    damage: 24
+    travel: 6
+    halfExtents: {x: 0.7, y: 0.65, z: 1.1}
+    forwardOffset: 1.1
+    animation:
+      clip: {fileID: -402153449965480477, guid: 86d79e2e91c44744e962976068ba44a7, type: 3}
+      compatibleClip: {fileID: 0}
+      compatibleSource: {fileID: 0}
+      mask: {fileID: 0}
+      activeStartsAt: 0.97499996
+      recoveryStartsAt: 2.0249999
+      blendSeconds: 0.025
+    enabled: 1
+    minimumRange: 3
+    cooldown: 5
+    weight: 1
+    kind: 0
+    hitHeight: 0.65
+    damageStartsAt: 0
+    preparationClip: {fileID: 5245998875730980439, guid: 86d79e2e91c44744e962976068ba44a7, type: 3}
+    recoveryClip: {fileID: 0}
+    preparationDuration: 0.65
+    preparationEndNormalized: 0.3
+    loopActiveAnimation: 1
+    projectileVisual: {fileID: 0}
+    projectileSocket: Rock_Carry
+    grabAt: 0.833333
+    projectileSpeed: 12
+    projectileRange: 30
+    projectileRadius: 0.6

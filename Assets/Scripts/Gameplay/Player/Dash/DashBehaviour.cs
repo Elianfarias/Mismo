@@ -3,16 +3,15 @@ using UnityEngine;
 namespace Mismo.Gameplay.Player.Dash
 {
     /// <summary>Contrato sin estado por jugador para la movilidad concedida por un cinturón.</summary>
-    public abstract class DashBehaviour : ScriptableObject
+    public abstract class DashBehaviour : SpecialAbilityDefinition
     {
-        public abstract float Duration { get; }
-        public abstract float Cooldown { get; }
-        public virtual float InvulnerabilityDuration => 0f;
+        public override string DisplayName => "Dash";
+        public override bool ControlsMovement => true;
 
         /// <summary>Decide si el estado del suelo permite activar este comportamiento.</summary>
-        public abstract bool CanStart(bool grounded);
+        public abstract override bool CanStart(bool grounded);
 
         /// <summary>Calcula el desplazamiento durante un intervalo de la ejecución.</summary>
-        public abstract Vector3 EvaluateDisplacement(Vector3 direction, float elapsed, float dt);
+        public abstract override Vector3 EvaluateDisplacement(Vector3 direction, float elapsed, float dt);
     }
 }

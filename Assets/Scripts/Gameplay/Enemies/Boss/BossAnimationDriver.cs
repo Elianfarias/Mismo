@@ -13,11 +13,14 @@ namespace Mismo.Gameplay.Enemies
         private Health health;
         private float hitAt = -10f;
         private float staggerAt = -10f;
+        private readonly EnemyActionPlayback playback = new EnemyActionPlayback();
+        public AnimationClip ActionClip => playback.ActionClip;
         public Animator Animator => animator;
         public void Configure(Animator value) => animator = value;
         private void Awake()
         {
             boss=GetComponent<BossController>();agent=GetComponent<NavMeshAgent>();health=GetComponent<Health>();
+            if(animator==null)animator=GetComponentInChildren<Animator>();
         }
         private void OnEnable()
         {
@@ -28,12 +31,13 @@ namespace Mismo.Gameplay.Enemies
         {
             if(health!=null)health.Damaged-=OnHit;
             if(boss!=null)boss.StateChanged-=OnState;
+            playback.Dispose();
         }
         private void OnHit(DamageInfo _) => hitAt=Time.time;
         private void OnState(BossState state){if(state==BossState.Stagger)staggerAt=Time.time;}
         private void Update()
         {
-            if(animator==null||boss==null)return;
+            if(animator==null||boss==null){playback.Dispose();return;}
             float speed=agent!=null&&agent.enabled&&agent.isOnNavMesh?agent.velocity.magnitude:0f;
             float time=0;int motion=0;
             switch(boss.State)
@@ -48,8 +52,11 @@ namespace Mismo.Gameplay.Enemies
                     else if(speed>.1f)motion=speed>2.1f?2:1;
                     break;
             }
-            animator.SetInteger("Motion",motion);animator.SetFloat("ActionTime",Mathf.Clamp01(time));
-            animator.SetFloat("PlaybackRate",Mathf.Clamp(speed/(motion==2?3.2f:1.6f),.7f,1.5f));
+            bool attacking=boss.State==BossState.Telegraph||boss.State==BossState.Attack||boss.State==BossState.Recovery;
+            var phase=boss.State==BossState.Telegraph?EnemyAttackPhase.Preparation
+                :boss.State==BossState.Attack?EnemyAttackPhase.Active:EnemyAttackPhase.Recovery;
+            playback.Tick(animator,attacking?boss.CurrentAttack?.animation:null,phase,
+                boss.StateProgress,motion,time,speed,Time.deltaTime);
         }
     }
 }

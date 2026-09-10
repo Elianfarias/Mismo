@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5f9c002219044a58c3db2e687ed64dd, type: 3}
+  m_Name: ExplorationWorldSettings
+  m_EditorClassIdentifier:
+  streamingEnabled: 1
+  preserveAuthoredCenter: 1
+  seed: 7319
+  authoredSize: 256
+  relief: 14
+  stepHeight: 0.25
+  loadRadius: 3
+  treeDensity: 0.65
+  treeScale: {x: 0.8, y: 1.35}
+  transitionWidth: 160
+  regionSize: 384
+  siteSpacing: 128
+  villageRegionCells: 8
+  villageRegionChance: 0.65
+  macroScale: 260
+  detailScale: 32
+  mountainChance: 0.22
+  mountainSpacing: 512
+  mountainRadius: 110
+  mountainHeight: 42
+  biomes:
+  - kind: 0
+    baseHeight: 6
+    heightVariation: 8
+    terrainRoughness: 0.3
+    trees: 0.08
+  - kind: 1
+    baseHeight: 8
+    heightVariation: 12
+    terrainRoughness: 0.6
+    trees: 0.7
+  - kind: 2
+    baseHeight: 12
+    heightVariation: 24
+    terrainRoughness: 0.9
+    trees: 0.18
+  content: {fileID: 11400000, guid: 97a0247d62674696bdc8ce8dcff8a4ee, type: 2}
+  encounterChance: 0.42
+  regionalLevelIncrement: 15
+  healthPerLevel: 0.025
+  damagePerLevel: 0.015
