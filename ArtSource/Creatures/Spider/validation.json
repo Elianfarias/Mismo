@@ -1,0 +1,198 @@
+{
+  "Standard": {
+    "bones": 33,
+    "vertices": 6420,
+    "actions": {
+      "Spider_Rig|Spider_Rig|Attack_Bite": {
+        "frames": [
+          1.0,
+          31.0
+        ],
+        "bone_motion": 0.10122474919028943
+      },
+      "Spider_Rig|Spider_Rig|Idle": {
+        "frames": [
+          1.0,
+          61.0
+        ],
+        "bone_motion": 0.00600004194272226
+      },
+      "Spider_Rig|Spider_Rig|Jump": {
+        "frames": [
+          1.0,
+          43.0
+        ],
+        "bone_motion": 0.38391830304216656
+      },
+      "Spider_Rig|Spider_Rig|Run": {
+        "frames": [
+          1.0,
+          25.0
+        ],
+        "bone_motion": 0.22222233201488253
+      },
+      "Spider_Rig|Spider_Rig|Spit_Web": {
+        "frames": [
+          1.0,
+          37.0
+        ],
+        "bone_motion": 0.053619212430917045
+      },
+      "Spider_Rig|Spider_Rig|Walk": {
+        "frames": [
+          1.0,
+          37.0
+        ],
+        "bone_motion": 0.12096810359678983
+      }
+    },
+    "materials": 1
+  },
+  "Forest_Moss": {
+    "bones": 33,
+    "vertices": 6420,
+    "actions": {
+      "Spider_Rig|Spider_Rig|Attack_Bite": {
+        "frames": [
+          1.0,
+          31.0
+        ],
+        "bone_motion": 0.10122474919028943
+      },
+      "Spider_Rig|Spider_Rig|Idle": {
+        "frames": [
+          1.0,
+          61.0
+        ],
+        "bone_motion": 0.00600004194272226
+      },
+      "Spider_Rig|Spider_Rig|Jump": {
+        "frames": [
+          1.0,
+          43.0
+        ],
+        "bone_motion": 0.38391830304216656
+      },
+      "Spider_Rig|Spider_Rig|Run": {
+        "frames": [
+          1.0,
+          25.0
+        ],
+        "bone_motion": 0.22222233201488253
+      },
+      "Spider_Rig|Spider_Rig|Spit_Web": {
+        "frames": [
+          1.0,
+          37.0
+        ],
+        "bone_motion": 0.053619212430917045
+      },
+      "Spider_Rig|Spider_Rig|Walk": {
+        "frames": [
+          1.0,
+          37.0
+        ],
+        "bone_motion": 0.12096810359678983
+      }
+    },
+    "materials": 1
+  },
+  "Dark_Cave": {
+    "bones": 33,
+    "vertices": 6420,
+    "actions": {
+      "Spider_Rig|Spider_Rig|Attack_Bite": {
+        "frames": [
+          1.0,
+          31.0
+        ],
+        "bone_motion": 0.10122474919028943
+      },
+      "Spider_Rig|Spider_Rig|Idle": {
+        "frames": [
+          1.0,
+          61.0
+        ],
+        "bone_motion": 0.00600004194272226
+      },
+      "Spider_Rig|Spider_Rig|Jump": {
+        "frames": [
+          1.0,
+          43.0
+        ],
+        "bone_motion": 0.38391830304216656
+      },
+      "Spider_Rig|Spider_Rig|Run": {
+        "frames": [
+          1.0,
+          25.0
+        ],
+        "bone_motion": 0.22222233201488253
+      },
+      "Spider_Rig|Spider_Rig|Spit_Web": {
+        "frames": [
+          1.0,
+          37.0
+        ],
+        "bone_motion": 0.053619212430917045
+      },
+      "Spider_Rig|Spider_Rig|Walk": {
+        "frames": [
+          1.0,
+          37.0
+        ],
+        "bone_motion": 0.12096810359678983
+      }
+    },
+    "materials": 1
+  },
+  "Albino": {
+    "bones": 33,
+    "vertices": 6420,
+    "actions": {
+      "Spider_Rig|Spider_Rig|Attack_Bite": {
+        "frames": [
+          1.0,
+          31.0
+        ],
+        "bone_motion": 0.10122474919028943
+      },
+      "Spider_Rig|Spider_Rig|Idle": {
+        "frames": [
+          1.0,
+          61.0
+        ],
+        "bone_motion": 0.00600004194272226
+      },
+      "Spider_Rig|Spider_Rig|Jump": {
+        "frames": [
+          1.0,
+          43.0
+        ],
+        "bone_motion": 0.38391830304216656
+      },
+      "Spider_Rig|Spider_Rig|Run": {
+        "frames": [
+          1.0,
+          25.0
+        ],
+        "bone_motion": 0.22222233201488253
+      },
+      "Spider_Rig|Spider_Rig|Spit_Web": {
+        "frames": [
+          1.0,
+          37.0
+        ],
+        "bone_motion": 0.053619212430917045
+      },
+      "Spider_Rig|Spider_Rig|Walk": {
+        "frames": [
+          1.0,
+          37.0
+        ],
+        "bone_motion": 0.12096810359678983
+      }
+    },
+    "materials": 1
+  }
+}

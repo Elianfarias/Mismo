@@ -1,0 +1,13 @@
+VOXEL_SEED_OK 7319
+VOXEL_SEED_OK 17
+VOXEL_SEED_OK 942
+VOXEL_REGION_BUILD_OK scene=Assets/Scenes/VoxelRegion_7319.unity seed=7319 generationSeconds=10,42
+REGION PASS navigation and references
+VOXEL PASS physical walking through encounters and secret approach
+REGION PASS reward full health and single consumption
+REGION PASS boss victory
+REGION PASS respawn resets attempt
+INITIAL_REGION_CHECKS_OK navigation, reward, victory, respawn
+VOXEL_REGION_BUILD_OK scene=Assets/Scenes/VoxelRegion_17.unity seed=17 generationSeconds=13,40
+VOXEL_REGION_BUILD_OK scene=Assets/Scenes/VoxelRegion_942.unity seed=942 generationSeconds=11,34
+VOXEL_WINDOWS_BUILD_OK bytes=277958796

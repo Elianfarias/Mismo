@@ -1,0 +1,1 @@
+PASS: frontal projectiles, no reward on cast/miss/parry, duplicate suppression, configurable gain, four basics fund power shot, cap 100, unchanged basic damage.

@@ -1,0 +1,1 @@
+PASS: scene opens without missing prefabs; 23 village footprints across 3 seeds clear terrain; town rendered with actual procedural terrain and cubemap sky.

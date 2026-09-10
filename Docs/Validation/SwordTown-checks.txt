@@ -1,0 +1,6 @@
+Sword scale and idle/impact bounds: PASS
+Legacy Status hidden for goblins, elite and boss: PASS
+HUD minimap, trail and cancel: PASS
+Navigation, reward, victory, respawn: PASS
+Town materials assigned on 10 models: PASS
+Offscreen renders visually inspected: sword-rest.png, sword-impact.png, town-materials.png

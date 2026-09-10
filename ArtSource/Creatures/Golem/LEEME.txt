@@ -1,0 +1,68 @@
+GÓLEM ESTILIZADO V3 — CONJUNTO COMPLETO
+
+Reemplaza al gólem original y a la revisión parcial V2.
+Conserva exactamente el barrido aprobado en V2. Las otras seis animaciones fueron
+rehechas con poses marcadas, pausas y golpes rápidos.
+Modelo: núcleo pequeño sobre pecho cerrado, puños rígidos y una sola paleta.
+Altura aproximada: 4,95 m. Roca independiente: aproximadamente 2 m.
+
+ARCHIVOS
+Forest_Golem_Stylized.blend: modelo, rig y animaciones editables.
+Forest_Golem_Stylized.fbx: una malla, rig y los siete clips.
+Rock_Projectile.fbx: roca grande separada.
+Golem_Palette.png: paleta compartida, también incrustada.
+Golem_Animaciones_V3.gif: previsualización de los siete clips.
+Animation_Events.json: referencias de eventos para implementar el combate.
+validation.json: comparación del barrido y comprobaciones de reimportación.
+
+CLIPS A 30 FPS
+Idle:          frames 1–73; 2,4 s; bucle; gesto breve de cabeza y pausas.
+Walk:          frames 1–49; 1,6 s; bucle; pasos marcados con apoyos sostenidos.
+Pick_Up_Rock:  frames 1–55; 1,8 s; recoge con ambas manos y termina sujetando la roca.
+Throw_Rock:    frames 1–61; 2 s; empieza sujetando la roca, anticipa, lanza y recupera.
+Ground_Slam:   frames 1–70; 2,3 s; levanta ambos puños, pausa y golpe rápido.
+Sweep_Attack:  frames 1–66; 2,167 s; barrido V2 aprobado, sin cambios de poses.
+Recover:       frames 1–70; 2,3 s; recuperación marcada y ventana para castigarlo.
+Solo Idle y Walk son bucles de gameplay. Los GIF repiten todo para facilitar la revisión.
+Root permanece fijo; el desplazamiento del enemigo pertenece al controlador del juego.
+
+BLENDER
+Abrir con Blender 4.2 o posterior.
+Seleccionar Golem_Rig y cambiar el clip desde el Action Editor.
+Ajustar el final de reproducción al rango correspondiente.
+En el Text Editor está Preview_Clip.py: editar CLIP y ejecutarlo para seleccionar
+el clip y activar/ocultar automáticamente la roca de previsualización.
+Las acciones PROP_Pick_Up_Rock y PROP_Throw_Rock pertenecen a la roca y no se
+incluyen como clips adicionales del personaje en el FBX.
+Los controles IK se utilizan para componer los nuevos gestos; el barrido aprobado
+conserva sus poses FK. El FBX lleva el resultado horneado.
+
+UNITY
+Usar rig Generic. No mezclar los clips viejos con esta versión.
+Aplicar transiciones breves que preserven la anticipación y las pausas de impacto.
+Rock_Carry es el anclaje central para la roca sostenida con ambas manos.
+El hueso antiguo Rock_Grip se conserva en la jerarquía pero NO se usa para esta carga.
+Al liberar la roca, separarla del rig y ejecutar la trayectoria desde el juego.
+La trayectoria de la roca mostrada en Blender es una previsualización, no física de Unity.
+Los JSON y marcadores no crean Animation Events automáticamente.
+
+EVENTOS PRINCIPALES
+Pick_Up_Rock: Grab_Rock, frame 26.
+Throw_Rock: Release_Rock, frame 30.
+Ground_Slam: Slam_Impact, frame 31.
+Sweep_Attack: ventana activa de referencia, frames 25–29.
+Recover: ventana vulnerable de referencia, frames 10–50.
+Los tiempos se calculan como (frame - 1) / 30; configurar en el sistema de combate.
+La validación de daño, cooldowns, colisiones y vulnerabilidad no está en el FBX.
+
+MATERIALES
+Usar Golem_Palette.png si el importador no conecta las texturas incrustadas.
+Filtrado Point, sin mipmaps ni compresión que mezcle colores de la paleta.
+Configurar la emisión del núcleo según el pipeline si no se conserva al importar.
+No incluye Animator Controller, IA, física de proyectiles ni efectos de impacto.
+
+VALIDACIÓN
+Comparación de matrices de huesos del barrido frente a la V2 en sus poses clave.
+Reimportación del FBX: siete clips, pesos presentes, Root fijo y cierre de bucles.
+Revisión visual del agarre con ambas manos, lanzamiento y golpe al suelo.
+No se ejecutó dentro de un proyecto Unity.

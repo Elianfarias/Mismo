@@ -1,0 +1,1 @@
+PASS Run loops, steps, upright Spin, combo and jump regression; attacks damage front and spare rear at 0/90/180/270 degrees; particles follow facing; trail anchor follows sword mesh

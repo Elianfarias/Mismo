@@ -1,0 +1,15 @@
+{
+  "Idle": 2.4,
+  "Walk": 0.88,
+  "Run": 0.62,
+  "Jump": 0.3,
+  "Fall": 0.4,
+  "Land": 0.18,
+  "Attack1": 0.38,
+  "Attack2": 0.38,
+  "Attack3": 0.52,
+  "Dash": 0.24,
+  "Parry": 0.16,
+  "Lunge": 0.24,
+  "Spin": 0.55
+}

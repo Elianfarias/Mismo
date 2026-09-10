@@ -1,0 +1,1 @@
+PASS: resource catalog, natural forest selection, generated terrain NavMesh, region discovery retry, actual creature instantiation, positions, no duplicates, defeated persistence.

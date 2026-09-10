@@ -1,0 +1,1 @@
+PASS 26 checks: encryption round trip, fresh IV, tamper detection, backup recovery, preservation of invalid files, item identity, ownership and equipment validation. Executed with dotnet run --project Tools/InventoryCoreChecks/InventoryCoreChecks.csproj.

@@ -1,0 +1,1 @@
+PASS: blend tree, all three clips, playback parameter, continuous speed sweep and jump/fall/land/attack/dash return. Current avatar human=False

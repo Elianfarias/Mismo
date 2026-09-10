@@ -1,0 +1,17 @@
+PASS
+Starts in MainMenu
+Menu controller exists
+Menu loads the actual region
+Region player exists
+Region respawn component included
+Single-player inventory initializes and saves successfully
+Inventory panel included in the player build
+I opens inventory in the executable
+I closes inventory in the executable
+Inspected region materials: 727
+No missing or unsupported materials: 
+Goblin exists in actual region
+Goblin death completes gameplay callbacks
+Goblin emits death cubes
+Death cubes have a supported material and mesh
+No runtime errors during menu, inventory and death checks

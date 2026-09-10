@@ -1,0 +1,34 @@
+{
+  "vertices": 6420,
+  "quads": 6390,
+  "triangles": 12780,
+  "bones_blender": 41,
+  "clips": {
+    "Idle": [
+      60,
+      true
+    ],
+    "Walk": [
+      36,
+      true
+    ],
+    "Run": [
+      24,
+      true
+    ],
+    "Jump": [
+      42,
+      false
+    ],
+    "Attack_Bite": [
+      30,
+      false
+    ],
+    "Spit_Web": [
+      36,
+      false
+    ]
+  },
+  "height_m": 1.04,
+  "leg_count": 8
+}

@@ -1,0 +1,128 @@
+{
+  "Standard": {
+    "bones": 19,
+    "vertices": 4727,
+    "actions": {
+      "Boar_Rig|Boar_Rig|Attack": {
+        "frames": [
+          1.0,
+          37.0
+        ],
+        "bone_motion": 0.12745131530823797
+      },
+      "Boar_Rig|Boar_Rig|Charge": {
+        "frames": [
+          1.0,
+          21.0
+        ],
+        "bone_motion": 0.438377734693847
+      },
+      "Boar_Rig|Boar_Rig|Idle": {
+        "frames": [
+          1.0,
+          61.0
+        ],
+        "bone_motion": 0.051259118609374814
+      },
+      "Boar_Rig|Boar_Rig|Run": {
+        "frames": [
+          1.0,
+          25.0
+        ],
+        "bone_motion": 0.37868120040365516
+      },
+      "Boar_Rig|Boar_Rig|Walk": {
+        "frames": [
+          1.0,
+          37.0
+        ],
+        "bone_motion": 0.19335449672961275
+      }
+    },
+    "materials": 1
+  },
+  "Dark_Fur": {
+    "bones": 19,
+    "vertices": 4727,
+    "actions": {
+      "Boar_Rig|Boar_Rig|Attack": {
+        "frames": [
+          1.0,
+          37.0
+        ],
+        "bone_motion": 0.12745131530823797
+      },
+      "Boar_Rig|Boar_Rig|Charge": {
+        "frames": [
+          1.0,
+          21.0
+        ],
+        "bone_motion": 0.438377734693847
+      },
+      "Boar_Rig|Boar_Rig|Idle": {
+        "frames": [
+          1.0,
+          61.0
+        ],
+        "bone_motion": 0.051259118609374814
+      },
+      "Boar_Rig|Boar_Rig|Run": {
+        "frames": [
+          1.0,
+          25.0
+        ],
+        "bone_motion": 0.37868120040365516
+      },
+      "Boar_Rig|Boar_Rig|Walk": {
+        "frames": [
+          1.0,
+          37.0
+        ],
+        "bone_motion": 0.19335449672961275
+      }
+    },
+    "materials": 1
+  },
+  "Forest_Moss": {
+    "bones": 19,
+    "vertices": 4727,
+    "actions": {
+      "Boar_Rig|Boar_Rig|Attack": {
+        "frames": [
+          1.0,
+          37.0
+        ],
+        "bone_motion": 0.12745131530823797
+      },
+      "Boar_Rig|Boar_Rig|Charge": {
+        "frames": [
+          1.0,
+          21.0
+        ],
+        "bone_motion": 0.438377734693847
+      },
+      "Boar_Rig|Boar_Rig|Idle": {
+        "frames": [
+          1.0,
+          61.0
+        ],
+        "bone_motion": 0.051259118609374814
+      },
+      "Boar_Rig|Boar_Rig|Run": {
+        "frames": [
+          1.0,
+          25.0
+        ],
+        "bone_motion": 0.37868120040365516
+      },
+      "Boar_Rig|Boar_Rig|Walk": {
+        "frames": [
+          1.0,
+          37.0
+        ],
+        "bone_motion": 0.19335449672961275
+      }
+    },
+    "materials": 1
+  }
+}

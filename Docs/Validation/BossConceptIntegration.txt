@@ -1,0 +1,1 @@
+PASS Goblin idle without active attack produces no exception; boss 2x common model; Attack follows current windup/active/recovery; Hit and Dead presentation; root motion off; no runtime errors

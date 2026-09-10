@@ -1,0 +1,28 @@
+{
+  "vertices": 4727,
+  "quads": 4714,
+  "triangles": 9428,
+  "bones": 23,
+  "clips": {
+    "Idle": [
+      60,
+      true
+    ],
+    "Walk": [
+      36,
+      true
+    ],
+    "Run": [
+      24,
+      true
+    ],
+    "Charge": [
+      20,
+      true
+    ],
+    "Attack": [
+      36,
+      false
+    ]
+  }
+}

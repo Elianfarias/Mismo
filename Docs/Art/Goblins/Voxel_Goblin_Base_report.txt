@@ -1,0 +1,7 @@
+Voxel Goblin Base Report
+Mesh objects: 42
+Total mesh faces: 337
+Armature: Armature_Goblin / 17 bones
+Style: flat-shaded voxel/blocky low-poly primitives
+Features: large head, pointed ears, snout, eyes, tusks, compact body, loincloth, belt, pouches, cuffs and boots
+Original humanoid and arcanist files were not modified.

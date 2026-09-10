@@ -1,0 +1,5 @@
+REGION PASS navigation and references
+REGION PASS reward full health and single consumption
+REGION PASS boss victory
+REGION PASS respawn resets attempt
+INITIAL_REGION_CHECKS_OK navigation, reward, victory, respawn

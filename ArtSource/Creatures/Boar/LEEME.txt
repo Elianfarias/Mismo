@@ -1,0 +1,58 @@
+JABALÍ VOXEL — MODELO, RIG Y ANIMACIONES
+
+Reconstrucción estilizada y simplificada de la lámina de referencia. No es una
+reproducción exacta. Las tres variantes comparten geometría, pesos y animaciones.
+
+ARCHIVOS
+Wild_Boar_Rigged.blend: escena editable creada con Blender 4.2.0.
+Boar_Standard.fbx: pelaje marrón.
+Boar_Dark_Fur.fbx: pelaje oscuro.
+Boar_Forest_Moss.fbx: manchas verdes de musgo mediante la paleta.
+*_Palette.png: texturas de paleta; también se incluyen dentro del FBX.
+*_Preview.png: renders del modelo real.
+Animaciones.gif: muestra de los cinco clips; vista de revisión a baja frecuencia.
+build_boar.py: script de construcción reproducible, ejecutable con Python de Blender.
+validation.json: comprobaciones de reimportación de los tres FBX.
+model_stats.json: conteo de geometría y esqueleto.
+
+RIG
+Root, Body, Head, dos orejas, dos segmentos de cola y tres huesos por pata.
+Cuatro controles IK para colocar los pies en el .blend.
+23 huesos en Blender; 19 huesos en FBX, con el resultado de IK horneado.
+Los voxeles tienen pesos rígidos por segmento para conservar las caras planas.
+El personaje mira hacia -Y en Blender; exportación FBX con -Z forward / Y up.
+Unidades de trabajo en metros. El tamaño se puede ajustar al del jugador.
+
+CLIPS — 30 FPS
+Idle:   fotogramas 1–61, 2 segundos, bucle.
+Walk:   fotogramas 1–37, 1,2 segundos, bucle.
+Run:    fotogramas 1–25, 0,8 segundos, bucle.
+Charge: fotogramas 1–21, 0,667 segundos, bucle de embestida.
+Attack: fotogramas 1–37, 1,2 segundos, ataque único con anticipación y recuperación.
+Todos son en el lugar, sin desplazamiento acumulado de Root.
+En los bucles el último fotograma repite la pose inicial.
+
+BLENDER
+La variante Standard aparece visible. Las otras dos mallas están ocultas.
+Para cambiar de variante, ocultar la actual y mostrar la deseada en el Outliner;
+ajustar también la visibilidad de render si se quiere renderizar otra variante.
+Seleccionar Boar_Rig y elegir Idle / Walk / Run / Charge / Attack en el Action Editor.
+Ajustar el final del rango de reproducción según la tabla anterior.
+Las luces, el piso y la cámara pertenecen al estudio de previsualización.
+No forman parte de los FBX.
+
+UNITY
+Importar el FBX y su paleta correspondiente. Usar un rig Generic para este cuadrúpedo.
+Activar el bucle para Idle, Walk, Run y Charge; dejar Attack sin bucle.
+Controlar el desplazamiento desde el controlador del juego (animaciones in-place).
+Si el importador no conecta la textura incrustada, asignar *_Palette.png al color
+base del material utilizado por tu pipeline. Usar filtrado Point, sin compresión
+ni mipmaps para evitar mezcla entre colores de la paleta de una sola fila.
+El archivo no incluye Animator Controller, lógica de combate, colliders ni VFX.
+El ritmo de movimiento debe ajustarse al desplazamiento del personaje para reducir
+el deslizamiento de los pies. No se probó dentro de un proyecto Unity.
+
+VALIDACIÓN REALIZADA
+Reimportación de cada FBX en Blender: una malla, un esqueleto, cinco clips,
+material presente, vértices con pesos y movimiento de huesos en cada clip.
+Revisión visual de las tres variantes y poses de las cinco animaciones.

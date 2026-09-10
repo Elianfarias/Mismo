@@ -1,0 +1,7 @@
+# Portada de itch.io
+
+Archivo: Assets/Art/UI/Branding/Mismo-Itch-Cover-v1.png. Creada con la herramienta integrada de imágenes, usando el logo como referencia. Ilustración promocional, no captura de gameplay.
+
+## Prompt final
+
+Create a finished itch.io COVER IMAGE for the voxel medieval adventure game MISMO, using the attached logo as the identity reference. Output opaque rectangular artwork, aspect ratio exactly 315:250, ideally 1260 x 1000 or 630 x 500. This is a COVER, not a transparent logo. Preserve the exact readable text MISMO and recognizable ivory stone/gold/moss block letter design from the reference. Make the wordmark very large across the central upper half, with generous 7% safe margins, occupying about 85% of the image width. Behind it, a beautifully composed simplified voxel woodland and medieval village landscape: stepped grassy hills, chunky trees, a winding dirt path leading toward a small medieval gate in the lower half. Dark forest teal background directly behind the light wordmark for very strong contrast, warm afternoon light on the landscape. Charming polished indie fantasy game artwork, coherent voxel construction, bold shapes readable at 315x250 thumbnails. No additional text, no tiny captions, no mockup, no border, no transparency, no checkerboard. The central focal point must be the full word MISMO, all letters inside the image. Avoid clutter or characters. Full-bleed landscape background.

@@ -1,0 +1,49 @@
+{
+  "approved_sweep_max_matrix_error": 0.0,
+  "fbx_reimport": "passed",
+  "bones": 29,
+  "clips": {
+    "Golem_Rig|Golem_Rig|Ground_Slam": {
+      "frames": [
+        1,
+        70
+      ]
+    },
+    "Golem_Rig|Golem_Rig|Idle": {
+      "frames": [
+        1,
+        73
+      ]
+    },
+    "Golem_Rig|Golem_Rig|Pick_Up_Rock": {
+      "frames": [
+        1,
+        55
+      ]
+    },
+    "Golem_Rig|Golem_Rig|Recover": {
+      "frames": [
+        1,
+        70
+      ]
+    },
+    "Golem_Rig|Golem_Rig|Sweep_Attack": {
+      "frames": [
+        1,
+        66
+      ]
+    },
+    "Golem_Rig|Golem_Rig|Throw_Rock": {
+      "frames": [
+        1,
+        61
+      ]
+    },
+    "Golem_Rig|Golem_Rig|Walk": {
+      "frames": [
+        1,
+        49
+      ]
+    }
+  }
+}
