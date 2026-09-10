@@ -9,7 +9,8 @@ namespace Mismo.Gameplay.Player.Editor
     public sealed class WeaponPoseWindow : EditorWindow
     {
         [SerializeField] private GameObject characterPrefab;
-        private GameObject character, visual;
+        private GameObject character, visual, secondVisual;
+        private GameObject previewMainPrefab, previewSecondPrefab;
         [SerializeField] private WeaponDefinition weapon;
         private WeaponPoseProfile profile;
         private WeaponPoseStage stage;
@@ -22,10 +23,15 @@ namespace Mismo.Gameplay.Player.Editor
         private AnimationClip clip;
         private float time;
         private bool holstered;
+        private bool editSecond;
         private Vector2 scroll;
         private UnityEditor.Editor profileEditor;
         private UnityEditor.Editor animationEditor;
-        private WeaponAttachmentPose Pose => holstered ? profile.holstered : profile.equipped;
+        private WeaponAttachmentPose Pose => editSecond && weapon.dualWield
+            ? (holstered ? weapon.secondaryHolstered : weapon.secondaryEquipped)
+            : (holstered ? profile.holstered : profile.equipped);
+        private Object PoseOwner => editSecond && weapon.dualWield ? (Object)weapon : profile;
+        private GameObject SelectedVisual => editSecond && weapon.dualWield ? secondVisual : visual;
 
         [MenuItem("Mismo/Armas/Taller de poses")]
         public static void Open() => GetWindow<WeaponPoseWindow>("Taller de armas");
@@ -45,7 +51,7 @@ namespace Mismo.Gameplay.Player.Editor
         private void ClosePreview()
         {
             if (stage != null && StageUtility.GetCurrentStage() == stage) StageUtility.GoToMainStage();
-            stage = null; character = null; visual = null; animator = null;
+            stage = null; character = null; visual = null; secondVisual = null; animator = null;
         }
         private void OnGUI()
         {
@@ -57,6 +63,27 @@ namespace Mismo.Gameplay.Player.Editor
                 weapon = (WeaponDefinition)EditorGUILayout.ObjectField("Arma", weapon, typeof(WeaponDefinition), false);
             }
             if (weapon == null) { EditorGUILayout.EndScrollView(); return; }
+            if (!weapon.dualWield) editSecond = false;
+            var weaponData = new SerializedObject(weapon);
+            weaponData.Update();
+            EditorGUI.BeginChangeCheck();
+            EditorGUILayout.PropertyField(weaponData.FindProperty("id"), new GUIContent("ID"));
+            EditorGUILayout.PropertyField(weaponData.FindProperty("displayName"), new GUIContent("Nombre"));
+            EditorGUILayout.PropertyField(weaponData.FindProperty("visualPrefab"), new GUIContent("Visual principal"));
+            EditorGUILayout.PropertyField(weaponData.FindProperty("isTwoHanded"), new GUIContent("A dos manos"));
+            EditorGUILayout.PropertyField(weaponData.FindProperty("dualWield"), new GUIContent("Armas dobles"));
+            if (weaponData.FindProperty("dualWield").boolValue)
+            {
+                EditorGUILayout.PropertyField(weaponData.FindProperty("secondaryVisualPrefab"), new GUIContent("Segundo visual (opcional)"));
+                EditorGUILayout.HelpBox("Sin segundo prefab se usa otra copia del principal. Ambas piezas cuentan como una sola arma. Cada una tiene su propio anclaje equipado y guardado.", MessageType.Info);
+            }
+            if (EditorGUI.EndChangeCheck())
+            {
+                weaponData.ApplyModifiedProperties();
+                if (!weapon.dualWield) editSecond = false;
+                if (stage != null) CreatePreview();
+            }
+            if (GUILayout.Button("Guardar definición del arma")) AssetDatabase.SaveAssetIfDirty(weapon);
             if(GUILayout.Button("Editar familia y animaciones de combate…"))WeaponFamilyWindow.Open(weapon);
             if(weapon.family!=null)EditorGUILayout.HelpBox("Las animaciones de combate se editan en la familia. Este perfil conserva el agarre y sus variantes de movimiento.",MessageType.Info);
             EditorGUI.BeginChangeCheck();
@@ -86,6 +113,7 @@ namespace Mismo.Gameplay.Player.Editor
             else if (GUILayout.Button("Cerrar vista de ajuste")) ClosePreview();
             EditorGUI.BeginChangeCheck();
             holstered = EditorGUILayout.Toggle("Editar arma guardada", holstered);
+            if (weapon.dualWield) editSecond = GUILayout.Toolbar(editSecond ? 1 : 0, new[] { "Pieza principal", "Segunda pieza" }) == 1;
             clip = (AnimationClip)EditorGUILayout.ObjectField("Clip de previsualización", clip, typeof(AnimationClip), false);
             time = EditorGUILayout.Slider("Tiempo del clip",time,0,clip != null ? clip.length : 1);
             if (EditorGUI.EndChangeCheck()) Refresh();
@@ -98,8 +126,8 @@ namespace Mismo.Gameplay.Player.Editor
                     {
                         string path = AnimationUtility.CalculateTransformPath(bone, animator.transform);
                         menu.AddItem(new GUIContent(path),Pose.bonePath==path,()=> {
-                            Undo.RecordObject(profile,"Cambiar anclaje"); Pose.anchor=WeaponAnchor.BonePath; Pose.bonePath=path;
-                            EditorUtility.SetDirty(profile); Refresh();
+                            Undo.RecordObject(PoseOwner,"Cambiar anclaje"); Pose.anchor=WeaponAnchor.BonePath; Pose.bonePath=path;
+                            EditorUtility.SetDirty(PoseOwner); Refresh();
                         });
                     }
                     menu.ShowAsContext();
@@ -121,6 +149,14 @@ namespace Mismo.Gameplay.Player.Editor
                     menu.ShowAsContext();
                 }
             }
+            EditorGUILayout.LabelField("Pose de la pieza seleccionada", EditorStyles.boldLabel);
+            var poseData = new SerializedObject(PoseOwner);
+            poseData.Update();
+            EditorGUI.BeginChangeCheck();
+            EditorGUILayout.PropertyField(poseData.FindProperty(editSecond && weapon.dualWield
+                ? (holstered ? "secondaryHolstered" : "secondaryEquipped")
+                : (holstered ? "holstered" : "equipped")), true);
+            if (EditorGUI.EndChangeCheck()) { poseData.ApplyModifiedProperties(); Refresh(); }
             UnityEditor.Editor.CreateCachedEditor(profile,null,ref profileEditor);
             EditorGUI.BeginChangeCheck(); profileEditor.OnInspectorGUI(); if(EditorGUI.EndChangeCheck()) Refresh();
             if(profile.animations==null && characterPrefab!=null && GUILayout.Button(weapon.family!=null?"Crear variantes de movimiento del perfil":"Crear conjunto de animaciones para este perfil"))
@@ -161,12 +197,21 @@ namespace Mismo.Gameplay.Player.Editor
             boneRotations=previewBones.Select(t=>t.localRotation).ToArray();
             boneScales=previewBones.Select(t=>t.localScale).ToArray();
             previewRenderers=character.GetComponentsInChildren<Renderer>(true); previewVisibility=previewRenderers.Select(r=>r.enabled).ToArray();
-            visual=stage.Clone(weapon.visualPrefab);
+            if (weapon.visualPrefab != null) visual=stage.Clone(weapon.visualPrefab);
+            if (weapon.SecondaryVisualPrefab != null) secondVisual=stage.Clone(weapon.SecondaryVisualPrefab);
+            previewMainPrefab = weapon.visualPrefab;
+            previewSecondPrefab = weapon.SecondaryVisualPrefab;
             Refresh();
             if(SceneView.lastActiveSceneView!=null)SceneView.lastActiveSceneView.Frame(new Bounds(Vector3.up,Vector3.one*3),false);
         }
         private void Refresh()
         {
+            if (character != null && weapon != null && (previewMainPrefab != weapon.visualPrefab || previewSecondPrefab != weapon.SecondaryVisualPrefab))
+            {
+                CreatePreview();
+                return;
+            }
+            if (weapon != null) profile = weapon.poseProfile;
             if(character==null || visual==null || profile==null)return;
             for(int i=0;i<previewBones.Length;i++)
             {
@@ -175,25 +220,31 @@ namespace Mismo.Gameplay.Player.Editor
             if(clip!=null && animator!=null)clip.SampleAnimation(animator.gameObject,time);
             for(int i=0;i<previewRenderers.Length;i++)if(previewRenderers[i]!=null)previewRenderers[i].enabled=previewVisibility[i];
             profile.HideEmbeddedVisuals(animator);
-            var anchor=Pose.Resolve(character.transform,animator);
-            visual.SetActive(anchor!=null); if(anchor!=null)Pose.Apply(visual.transform,anchor,animator);
+            ApplyPreviewPose(visual, holstered ? profile.holstered : profile.equipped);
+            if (secondVisual != null) ApplyPreviewPose(secondVisual, holstered ? weapon.secondaryHolstered : weapon.secondaryEquipped);
             SceneView.RepaintAll(); Repaint();
+        }
+        private void ApplyPreviewPose(GameObject target, WeaponAttachmentPose pose)
+        {
+            var anchor = pose.Resolve(character.transform, animator);
+            target.SetActive(anchor != null);
+            if (anchor != null) pose.Apply(target.transform, anchor, animator);
         }
         private void DrawHandles(SceneView view)
         {
-            if(stage==null || StageUtility.GetCurrentStage()!=stage || visual==null || profile==null)return;
+            if(stage==null || StageUtility.GetCurrentStage()!=stage || SelectedVisual==null || profile==null)return;
             var anchor=Pose.Resolve(character.transform,animator); if(anchor==null)return;
             Quaternion basis=Pose.Orientation(anchor,animator);
             EditorGUI.BeginChangeCheck();
-            Vector3 position=visual.transform.position; Quaternion rotation=visual.transform.rotation;
+            Vector3 position=SelectedVisual.transform.position; Quaternion rotation=SelectedVisual.transform.rotation;
             if(Tools.current==Tool.Rotate)rotation=Handles.RotationHandle(rotation,position);
             else position=Handles.PositionHandle(position,basis);
             if(EditorGUI.EndChangeCheck())
             {
-                Undo.RecordObject(profile,"Ajustar pose de arma");
+                Undo.RecordObject(PoseOwner,"Ajustar pose de arma");
                 Pose.offset=Quaternion.Inverse(basis)*(position-anchor.position);
                 Pose.rotation=(Quaternion.Inverse(basis)*rotation).eulerAngles;
-                EditorUtility.SetDirty(profile); Refresh();
+                EditorUtility.SetDirty(PoseOwner); Refresh();
             }
         }
     }

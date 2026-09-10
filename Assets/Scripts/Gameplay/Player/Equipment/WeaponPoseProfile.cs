@@ -20,7 +20,13 @@ namespace Mismo.Gameplay.Player.Equipment
             if (animator == null) return null;
             if (anchor == WeaponAnchor.BonePath)
                 return string.IsNullOrEmpty(bonePath) ? null : animator.transform.Find(bonePath);
-            if (!animator.isHuman) return null;
+            if (!animator.isHuman)
+            {
+                string handName = anchor == WeaponAnchor.RightHand ? "Hand.R" : "Hand.L";
+                foreach (var bone in animator.GetComponentsInChildren<Transform>(true))
+                    if (bone.name == handName) return bone;
+                return null;
+            }
             return animator.GetBoneTransform(anchor == WeaponAnchor.RightHand ? HumanBodyBones.RightHand : HumanBodyBones.LeftHand);
         }
 

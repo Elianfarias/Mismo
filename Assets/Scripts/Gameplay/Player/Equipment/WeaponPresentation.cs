@@ -14,6 +14,9 @@ namespace Mismo.Gameplay.Player.Equipment
         private Vector3 torsoRestRootPosition;
         private Quaternion torsoRestRootRotation;
         private GameObject activeVisual, backVisual;
+        private GameObject activeSecondVisual, backSecondVisual;
+        public Transform ActiveSecondVisual => activeSecondVisual != null ? activeSecondVisual.transform : null;
+        public Transform HolsteredSecondVisual => backSecondVisual != null ? backSecondVisual.transform : null;
         private Renderer[] embeddedSword;
         private Animator animator;
         private Renderer[] rigRenderers;
@@ -52,18 +55,26 @@ namespace Mismo.Gameplay.Player.Equipment
             for(int i=0;i<rigRenderers.Length;i++)if(rigRenderers[i]!=null)rigRenderers[i].enabled=initialVisibility[i];
             if (activeVisual != null) { activeVisual.SetActive(false); Destroy(activeVisual); }
             if (backVisual != null) { backVisual.SetActive(false); Destroy(backVisual); }
+            if (activeSecondVisual != null) { activeSecondVisual.SetActive(false); Destroy(activeSecondVisual); }
+            if (backSecondVisual != null) { backSecondVisual.SetActive(false); Destroy(backSecondVisual); }
             var weapon = loadout.ActiveDefinition;
             bool hasEmbedded = embeddedSword.Any(r => r is SkinnedMeshRenderer);
-            foreach (var renderer in embeddedSword) renderer.enabled = weapon != null && weapon.poseProfile == null && !weapon.isBow && (renderer is SkinnedMeshRenderer || !hasEmbedded);
+            foreach (var renderer in embeddedSword) renderer.enabled = weapon != null && !weapon.dualWield && weapon.poseProfile == null && !weapon.isBow && (renderer is SkinnedMeshRenderer || !hasEmbedded);
             if(weapon!=null && weapon.poseProfile!=null)weapon.poseProfile.HideEmbeddedVisuals(animator);
-            if (weapon != null && weapon.visualPrefab != null && (weapon.poseProfile != null || weapon.isBow || !hasEmbedded)) activeVisual = Instantiate(weapon.visualPrefab, transform);
+            if (weapon != null && weapon.visualPrefab != null && (weapon.dualWield || weapon.poseProfile != null || weapon.isBow || !hasEmbedded)) activeVisual = Instantiate(weapon.visualPrefab, transform);
             if (loadout.SecondaryDefinition != null && loadout.SecondaryDefinition.visualPrefab != null) backVisual = Instantiate(loadout.SecondaryDefinition.visualPrefab, transform);
+            if (weapon != null && weapon.SecondaryVisualPrefab != null) activeSecondVisual = Instantiate(weapon.SecondaryVisualPrefab, transform);
+            if (loadout.SecondaryDefinition != null && loadout.SecondaryDefinition.SecondaryVisualPrefab != null)
+                backSecondVisual = Instantiate(loadout.SecondaryDefinition.SecondaryVisualPrefab, transform);
         }
         private void LateUpdate()
         {
             if (loadout == null) return;
             var weapon = loadout.ActiveDefinition;
             Quaternion facing = Quaternion.LookRotation(motor.Facing);
+            if (activeSecondVisual != null && weapon != null) ApplyProfile(activeSecondVisual, weapon.secondaryEquipped);
+            if (backSecondVisual != null && loadout.SecondaryDefinition != null)
+                ApplyHolsteredProfile(backSecondVisual, loadout.SecondaryDefinition.secondaryHolstered);
             if (weapon != null && weapon.poseProfile == null && weapon.isBow)
             {
                 var cast = loadout.Runner.Current;

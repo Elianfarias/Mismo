@@ -14,6 +14,15 @@ namespace Mismo.Gameplay.Player.Equipment
         [Tooltip("Activar sólo para armas con habilidades distintas de su familia.")]
         public bool overrideFamilyAbilities;
         public GameObject visualPrefab;
+        [Tooltip("Una sola pieza sostenida con ambas manos. La postura de manos la define la animación; no activa IK.")]
+        public bool isTwoHanded;
+        [Tooltip("Muestra dos piezas visuales para esta única arma del inventario.")]
+        public bool dualWield;
+        [Tooltip("Segunda pieza. Si está vacío, se reutiliza Visual Prefab.")]
+        public GameObject secondaryVisualPrefab;
+        public WeaponAttachmentPose secondaryEquipped = new WeaponAttachmentPose { anchor = WeaponAnchor.LeftHand };
+        public WeaponAttachmentPose secondaryHolstered = new WeaponAttachmentPose { anchor = WeaponAnchor.Character, offset = new Vector3(-.2f, 1.2f, -.25f) };
+        public GameObject SecondaryVisualPrefab => dualWield ? (secondaryVisualPrefab != null ? secondaryVisualPrefab : visualPrefab) : null;
         public WeaponPoseProfile poseProfile;
         public bool isBow;
         [TextArea] public string inventoryDescription;
