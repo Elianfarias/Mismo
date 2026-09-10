@@ -16,6 +16,9 @@ namespace Mismo.Gameplay.Player.Editor
   const string Pending="Mismo.VoxelAnimationChecksV2";
   public static void Begin()
   {
+   var importer=(ModelImporter)AssetImporter.GetAtPath(VoxelCharacterIntegration.ModelPath);
+   if(importer.animationType!=ModelImporterAnimationType.Generic)
+    throw new Exception("Voxel locomotion uses baked Transform curves and requires a Generic rig; Humanoid freezes and offsets the bones.");
    var clips=AssetDatabase.LoadAllAssetsAtPath(VoxelCharacterIntegration.ModelPath).OfType<AnimationClip>().Where(c=>!c.name.StartsWith("__preview")).ToArray();
    foreach(CharacterMotion state in Enum.GetValues(typeof(CharacterMotion)))
    {
@@ -28,8 +31,15 @@ namespace Mismo.Gameplay.Player.Editor
    if(Mathf.Abs(run.length-37f/60f)>.02f)throw new Exception("Run export frame rate changed its intended duration: "+run.length);
    foreach(var item in controller.layers[0].stateMachine.states)
    {
+    if(item.state.name=="Idle" && item.state.motion is UnityEditor.Animations.BlendTree tree)
+    {
+     if(tree.blendParameter!="LocomotionSpeed" || tree.children.Length!=3 || tree.children.Any(c=>c.motion==null))
+      throw new Exception("Invalid continuous locomotion blend tree");
+     continue;
+    }
+    if(item.state.motion==null && item.state.name=="New State")continue;
     var clip=item.state.motion as AnimationClip;
-    if(clip==null||clip.name.StartsWith("__preview")||clip.name.Split('|').Last()!=item.state.name)
+    if(clip==null||clip.name.StartsWith("__preview")||(clip.name.Split('|').Last()!=item.state.name && clip.name!="Quaternius_"+item.state.name))
      throw new Exception("State is not bound to its runtime clip: "+item.state.name);
    }
    EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);
@@ -116,6 +126,9 @@ namespace Mismo.Gameplay.Player.Editor
    try
    {
     string actual=Enum.GetNames(typeof(CharacterMotion)).FirstOrDefault(n=>animator.GetCurrentAnimatorStateInfo(0).IsName(n))??"Unknown";
+    // Idle now holds the continuous tree; the driver still exposes the semantic gait.
+    if(actual=="Idle" && animator.parameters.Any(p=>p.name=="LocomotionSpeed"))
+     actual=GetComponent<PlayerAnimationDriver>().Motion.ToString();
     observed.Add(actual);
     if(stage==2&&elapsed>.2f&&elapsed-poseSampleAt>=.05f)
     {

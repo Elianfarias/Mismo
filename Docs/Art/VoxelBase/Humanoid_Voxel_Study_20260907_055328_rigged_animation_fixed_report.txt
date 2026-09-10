@@ -1,0 +1,7 @@
+Humanoid Voxel Animation Fixed Report
+Mesh: Voxel_Base_GameReady / 3932 verts / 3930 faces / 7860 tris
+Armature: Armature_Humanoid / 22 bones
+FPS: 30
+Actions: Idle frames 1-61 cyclic; Walk frames 1-31 cyclic in-place
+Fix: arms lowered from T-pose; local X=-1.0 upper arm, local X=0.22 forearm
+Walk: gentle opposite forward/back arm swing, preserved leg cycle, no root translation

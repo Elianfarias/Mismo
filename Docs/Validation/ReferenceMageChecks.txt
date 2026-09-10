@@ -1,0 +1,1 @@
+MAGE_CHECK_OK: 37 mesh IDs and bone arrays preserved; player prefab resolves; 13 clips.

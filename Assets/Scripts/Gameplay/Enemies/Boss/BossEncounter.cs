@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace Mismo.Gameplay.Enemies
 {
-    /// <summary>Coordina la victoria del encuentro y una recompensa local, sin inventario ni guardado.</summary>
+    /// <summary>Coordinates victory and the region's unique inventory reward.</summary>
     [DisallowMultipleComponent]
     public sealed class BossEncounter : MonoBehaviour
     {
@@ -60,6 +60,9 @@ namespace Mismo.Gameplay.Enemies
             completed = true;
             if (lockedPassage != null) lockedPassage.SetActive(false);
             if (rewardIndicator != null) rewardIndicator.SetActive(true);
+            var inventory = FindFirstObjectByType<Mismo.Gameplay.Player.Equipment.Inventory.PlayerInventory>();
+            Mismo.Gameplay.Player.World.WeaponRewardPickup.Spawn(inventory, boss.transform.position,
+                Mismo.Gameplay.Player.Equipment.Inventory.ItemCatalog.BossRewardId);
             onBossDefeated?.Invoke();
             Completed?.Invoke(defeatMessage);
         }

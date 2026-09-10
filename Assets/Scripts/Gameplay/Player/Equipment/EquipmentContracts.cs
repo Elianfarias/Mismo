@@ -16,6 +16,7 @@ namespace Mismo.Gameplay.Player.Equipment
         event System.Action<float> CooldownStarted;
         event System.Action CooldownReady;
         bool IsActive { get; }
+        bool ControlsMovement { get; }
         float CooldownRemaining { get; }
         void TickCooldown(float dt);
         bool TryStart(Vector3 direction, bool grounded);

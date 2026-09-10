@@ -1,0 +1,19 @@
+PASS ASSET INTEGRATION
+Boar_Standard: Boar_Rig|Walk=1,200s, Boar_Rig|Charge=0,667s, Boar_Rig|Run=0,800s, Boar_Rig|Attack=1,200s, Boar_Rig|Idle=2,000s
+Boar_Dark_Fur: Boar_Rig|Walk=1,200s, Boar_Rig|Charge=0,667s, Boar_Rig|Run=0,800s, Boar_Rig|Attack=1,200s, Boar_Rig|Idle=2,000s
+Boar_Forest_Moss: Boar_Rig|Walk=1,200s, Boar_Rig|Charge=0,667s, Boar_Rig|Run=0,800s, Boar_Rig|Attack=1,200s, Boar_Rig|Idle=2,000s
+Spider_Standard: Spider_Rig|Jump=1,400s, Spider_Rig|Attack_Bite=1,000s, Spider_Rig|Run=0,800s, Spider_Rig|Spit_Web=1,200s, Spider_Rig|Idle=2,000s, Spider_Rig|Walk=1,200s
+Spider_Forest_Moss: Spider_Rig|Jump=1,400s, Spider_Rig|Attack_Bite=1,000s, Spider_Rig|Run=0,800s, Spider_Rig|Spit_Web=1,200s, Spider_Rig|Idle=2,000s, Spider_Rig|Walk=1,200s
+Spider_Dark_Cave: Spider_Rig|Jump=1,400s, Spider_Rig|Attack_Bite=1,000s, Spider_Rig|Run=0,800s, Spider_Rig|Spit_Web=1,200s, Spider_Rig|Idle=2,000s, Spider_Rig|Walk=1,200s
+Spider_Albino: Spider_Rig|Jump=1,400s, Spider_Rig|Attack_Bite=1,000s, Spider_Rig|Run=0,800s, Spider_Rig|Spit_Web=1,200s, Spider_Rig|Idle=2,000s, Spider_Rig|Walk=1,200s
+Forest_Golem_Stylized: Golem_Rig|Pick_Up_Rock=1,800s, Golem_Rig|Sweep_Attack=2,167s, Golem_Rig|Recover=2,300s, Golem_Rig|Walk=1,600s, Golem_Rig|Throw_Rock=2,000s, Golem_Rig|Ground_Slam=2,300s, Golem_Rig|Idle=2,400s
+Rock_Projectile: 
+Boar_Standard: height=1,20m; generic rig; palette=Standard_Palette
+Boar_Dark_Fur: height=1,20m; generic rig; palette=Dark_Fur_Palette
+Boar_Forest_Moss: height=1,20m; generic rig; palette=Forest_Moss_Palette
+Spider_Standard: height=1,04m; generic rig; palette=Standard_Palette
+Spider_Forest_Moss: height=1,04m; generic rig; palette=Forest_Moss_Palette
+Spider_Dark_Cave: height=1,04m; generic rig; palette=Dark_Cave_Palette
+Spider_Albino: height=1,04m; generic rig; palette=Albino_Palette
+Forest_Golem_Stylized: height=5,00m; generic rig; palette=Golem_Palette
+8 prefabs, materials, scripts, configurations and Rock_Carry references validated

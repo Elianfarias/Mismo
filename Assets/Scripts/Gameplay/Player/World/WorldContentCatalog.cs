@@ -1,0 +1,88 @@
+using System;
+using UnityEngine;
+
+namespace Mismo.Gameplay.Player.World
+{
+    public enum WorldBiome { Meadow, Forest, Highlands }
+    public enum WorldSiteKind { Clearing, Village, Ruin, BossArena, Secret }
+    public enum WorldAssetKind { House, Blacksmith, Tree, Rock, Ruin, Landmark, Well, Fence, Grass, Bush, Flower, Deadwood, Village }
+    [Serializable] public sealed class TerrainBiome
+    {
+        public WorldBiome kind;
+        public float baseHeight=6,heightVariation=8,terrainRoughness=.3f;
+        [Range(0,1)] public float trees=.2f;
+    }
+    [Serializable] public sealed class WorldAssetEntry
+    {
+        public string id;
+        public WorldAssetKind kind;
+        public WorldBiome[] biomes=Array.Empty<WorldBiome>();
+        public GameObject prefab;
+        [Min(0)] public float weight=1;
+        public Vector2 footprint=new Vector2(6,6);
+        [Range(0,45)] public float maxSlope=15;
+        public float[] rotations={0,90,180,270};
+        public Vector2 scaleRange=new Vector2(.85f,1.15f);
+    }
+    [Serializable] public sealed class WorldEncounterEntry
+    {
+        public string id;
+        public WorldSiteKind site=WorldSiteKind.Clearing;
+        public WorldBiome[] biomes=Array.Empty<WorldBiome>();
+        public GameObject prefab,elitePrefab;
+        [Min(0)] public float weight=1;
+        [Range(1,5)] public int minimumCount=2,maximumCount=3;
+        [Range(0,1)] public float eliteChance=.025f;
+        public bool guaranteedElite;
+        [Min(1)] public int minimumLevel=1;
+        public Vector2 altitude=new Vector2(-100,200);
+        [Min(0)] public float minimumPlayerDistance=18;
+    }
+    [CreateAssetMenu(menuName="Mismo/World/Content catalog")]
+    public sealed class WorldContentCatalog : ScriptableObject
+    {
+        [Header("Village arrival (new worlds)")]
+        [Min(1)] public float villageSizeMultiplier=2;
+        public float villageGroundOffset=-.19670273f;
+        public Vector3 VillageArrivalOffset=>villageSpawnOffset*Mathf.Max(1,villageSizeMultiplier);
+        public Vector3 villageSpawnOffset=new Vector3(0,0,-29);
+        public float villageSpawnYaw=0;
+        [Header("Atmosphere")]
+        public bool fogEnabled=true;
+        public Color fogColor=new Color(.62f,.72f,.73f);
+        [Min(0)] public float fogStart=28;
+        [Min(1)] public float fogEnd=90;
+        [Header("Encounter density (also applies to continued worlds)")]
+        [Range(0,1)] public float clearingChance=.85f;
+        [Range(0,1)] public float roamingChance=.75f;
+        [Min(32)] public int roamingSpacing=64;
+        public void ApplyAtmosphere(int loadRadius)
+        {
+            RenderSettings.fog=fogEnabled;RenderSettings.fogMode=FogMode.Linear;
+            RenderSettings.fogColor=fogColor;
+            RenderSettings.fogEndDistance=Mathf.Min(Mathf.Max(10,fogEnd),Mathf.Max(2,loadRadius)*32-8);
+            RenderSettings.fogStartDistance=Mathf.Clamp(fogStart,0,RenderSettings.fogEndDistance-1);
+        }
+        [Header("Ground vegetation density")]
+        [Range(0,1)] public float grassDensity=.55f,bushDensity=.14f,flowerDensity=.12f,rockDensity=.07f,deadwoodDensity=.035f;
+        public WorldAssetEntry[] assets=Array.Empty<WorldAssetEntry>();
+        public WorldEncounterEntry[] encounters=Array.Empty<WorldEncounterEntry>();
+        public static bool Allows(WorldBiome[] allowed,WorldBiome biome)=>allowed==null||allowed.Length==0||Array.IndexOf(allowed,biome)>=0;
+        public WorldAssetEntry Asset(WorldAssetKind kind,WorldBiome biome,int seed)
+        {
+            double total=0;foreach(var a in assets)if(a!=null&&a.prefab!=null&&a.kind==kind&&Allows(a.biomes,biome))total+=Math.Max(0,a.weight);
+            double roll=new System.Random(seed).NextDouble()*total;
+            foreach(var a in assets)if(a!=null&&a.prefab!=null&&a.kind==kind&&Allows(a.biomes,biome)&&a.weight>0){roll-=a.weight;if(roll<0)return a;}
+            return null;
+        }
+        public WorldEncounterEntry Encounter(WorldSiteKind site,WorldBiome biome,int level,float height,int seed)
+        {
+            double total=0;foreach(var e in encounters)if(Eligible(e,site,biome,level,height))total+=e.weight;
+            double roll=new System.Random(seed).NextDouble()*total;
+            foreach(var e in encounters)if(Eligible(e,site,biome,level,height)){roll-=e.weight;if(roll<0)return e;}
+            return null;
+        }
+        static bool Eligible(WorldEncounterEntry e,WorldSiteKind site,WorldBiome biome,int level,float height)=>
+            e!=null&&e.prefab!=null&&e.weight>0&&e.site==site&&Allows(e.biomes,biome)&&level>=e.minimumLevel&&height>=e.altitude.x&&height<=e.altitude.y;
+    }
+}

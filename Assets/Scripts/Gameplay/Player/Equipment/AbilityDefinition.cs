@@ -25,6 +25,8 @@ namespace Mismo.Gameplay.Player.Equipment
         public bool cancelPreparation;
         public bool cancelRecovery;
         [Min(0)] public float focusCost;
+        [Tooltip("Focus ganado por enemigo al infligir daño. En áreas se aplica por pulso. Fallos y golpes bloqueados no generan Focus.")]
+        [Min(0)] public float focusGainOnHit;
         public AbilityPose pose;
         public bool usesSwordCombo;
         public bool targetsGround;

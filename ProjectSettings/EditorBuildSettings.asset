@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MovementPrototype.unity
-    guid: c84b18d5cfb605647a4263013c01a342
+    path: Assets/Scenes/MainMenu.unity
+    guid: 60c6fda41d8194b488e61bebee8fcd02
+  - enabled: 1
+    path: Assets/Scenes/VoxelRegion_7319.unity
+    guid: 73ac5b363fe7c194b8a8d058515f6f36
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}

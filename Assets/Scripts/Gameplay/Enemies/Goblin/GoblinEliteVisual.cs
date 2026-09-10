@@ -126,13 +126,7 @@ namespace Mismo.Gameplay.Enemies
 
         private static Material CreateMaterial(string materialName, Color color)
         {
-            Shader shader = Shader.Find("Universal Render Pipeline/Particles/Unlit");
-            if (shader == null) shader = Shader.Find("Particles/Standard Unlit");
-            if (shader == null) shader = Shader.Find("Sprites/Default");
-            Material material = new Material(shader) { name = materialName };
-            if (material.HasProperty("_BaseColor")) material.SetColor("_BaseColor", color);
-            if (material.HasProperty("_Color")) material.SetColor("_Color", color);
-            return material;
+            return Mismo.Gameplay.Player.Presentation.RuntimeParticleMaterial.Create(materialName, color);
         }
 
         private static Color WithAlpha(Color color, float alpha)

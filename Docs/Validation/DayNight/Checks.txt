@@ -1,0 +1,1 @@
+PASS: all 5 HDR skies, 96 clock samples, midnight wrap, stopped clock, old-save compatibility, saved-hour round trip, invalid-hour rejection, sky/sun assignment, four rendered phases.

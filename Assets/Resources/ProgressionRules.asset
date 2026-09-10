@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b21aeb1deba4de09785be34af94c414, type: 3}
+  m_Name: ProgressionRules
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.Inventory.ProgressionRules
+  characterMaxLevel: 50
+  masteryMaxLevel: 20
+  characterBaseExperience: 60
+  characterExperienceStep: 30
+  masteryBaseExperience: 40
+  masteryExperienceStep: 20
+  enemyExperience: 25
+  enemyMasteryExperience: 20
+  bossExperience: 200
+  bossMasteryExperience: 120
+  lifePerPoint: 5
+  armorPerPoint: 2
+  attackPerPoint: 0.02
+  masteryDamagePerPoint: 0.025
+  masterySpeedPerPoint: 0.015
+  armorScale: 100
+  maximumAttackSpeed: 1.4
+  dropChance: 0.25
+  tierWeights: [70, 25, 5, 0, 0]
+  damagePerTier: 0.08
+  variantGrowthPerTier: 0.25
+  colossusDamage: 0.1
+  colossusLife: 10
+  colossusSpeed: -0.08
+  duelistSpeed: 0.1
+  duelistArmor: -6
+  guardianArmor: 8
+  guardianDamage: -0.05

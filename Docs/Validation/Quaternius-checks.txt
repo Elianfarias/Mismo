@@ -1,0 +1,3 @@
+PASS: all new curves bind to the character; blend tree uses Quaternius; seven original combat/dash states preserved; 18 poses rendered.
+
+PASS: blend tree, all three clips, playback parameter, continuous speed sweep and jump/fall/land/attack/dash return. Current avatar human=False

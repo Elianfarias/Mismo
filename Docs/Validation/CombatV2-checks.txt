@@ -1,0 +1,50 @@
+COMBAT_V2_CHECK Front damage reduction
+COMBAT_V2_CHECK Same attack resolves once
+COMBAT_V2_CHECK Back damage bonus
+COMBAT_V2_CHECK Back hit generates Focus
+COMBAT_V2_CHECK Area damage has no arbitrary back or range bonus
+COMBAT_V2_CHECK Ranged damage penalizes close range and caps distant bonus
+COMBAT_V2_CHECK Recovery increases Posture damage
+COMBAT_V2_CHECK Precise frontal parry
+COMBAT_V2_CHECK Perfect parry confirms success and slows time
+COMBAT_V2_CHECK Perfect parry rewards Focus
+COMBAT_V2_CHECK No repeated parry reward
+COMBAT_V2_CHECK Late valid parry is not perfect
+COMBAT_V2_CHECK Normal parry has visible confirmation
+COMBAT_V2_CHECK Dashing alone does not earn Focus
+COMBAT_V2_CHECK Threat contact during precise dodge
+COMBAT_V2_CHECK Perfect dodge reward
+COMBAT_V2_CHECK One perfect reward per dodge
+COMBAT_V2_CHECK Hit immunity is not perfect dodge
+COMBAT_V2_CHECK Bow equipped for charge tests
+COMBAT_V2_CHECK Power Shot data requires 20 Focus
+COMBAT_V2_CHECK Power Shot requires earned Focus
+COMBAT_V2_CHECK Basic has perceptible tension and slower cadence
+COMBAT_V2_CHECK Basic damage reduced to 8 before modifiers
+COMBAT_V2_CHECK Held bow basic starts
+COMBAT_V2_CHECK No instant ranged damage
+COMBAT_V2_CHECK Held charge delays release and reduces mobility
+COMBAT_V2_CHECK Releasing creates one arrow
+COMBAT_V2_CHECK Cannot swap during ranged recovery
+COMBAT_V2_CHECK Retreat starts preparation
+COMBAT_V2_CHECK Retreat has no arrow or retreat movement before 0.45 seconds
+COMBAT_V2_CHECK A hit interrupts Retreat before release
+COMBAT_V2_CHECK Interruption does not refund cooldown
+COMBAT_V2_CHECK Earned Focus enables Power Shot
+COMBAT_V2_CHECK Power Shot spends Focus once
+COMBAT_V2_CHECK Swap unlocks after recovery
+COMBAT_V2_CHECK Sword combo starts
+COMBAT_V2_CHECK Buffered parry branches from sword combo
+COMBAT_V2_CHECK Posture Break drives Elite vulnerability
+COMBAT_V2_CHECK Break cannot be extended by repeated Posture hits
+COMBAT_V2_CHECK Posture resets after break
+COMBAT_V2_CHECK Ranged preparation actually starts before AI response
+COMBAT_V2_CHECK Elite answers visible ranged preparation with a telegraphed charge
+COMBAT_V2_CHECK Another charged basic starts after cooldown
+COMBAT_V2_CHECK Maximum charge releases automatically once
+COMBAT_V2_CHECK Return to sword after full charge
+COMBAT_V2_CHECK Sword starts for dash transition
+COMBAT_V2_CHECK Dash cancels sword only in branch window
+COMBAT_V2_CHECK Healing to full does not erase earned Focus
+COMBAT_V2_CHECK Perfect dodge slow motion restores time
+COMBAT_V2_OK 49 checks

@@ -1,0 +1,17 @@
+GOBLIN — VERSIÓN INSPIRADA EN EL CONCEPT
+
+Archivo: Goblin_Concept_Rigged.blend
+Modelo voxel con capucha roja, orejas largas, ojos luminosos, armadura asimétrica y cuchillo oxidado.
+
+Acciones separadas del esqueleto Goblin_Rig (60 fps):
+Idle: reposo, 1–121, bucle.
+Walk: caminar, 1–52, bucle.
+Run: correr, 1–37, bucle.
+Attack: ataque con preparación, corte y recuperación, 1–40.
+Hit: reacción al recibir un golpe, 1–26.
+
+En Blender, seleccionar Goblin_Rig y abrir Dope Sheet > Action Editor. Elegir la acción en el selector y ajustar el final de la línea de tiempo al rango indicado para verla repetir.
+
+Las piezas, materiales y huesos son editables. La colección STUDIO contiene solamente suelo, luces y cámara de presentación. Las piezas del personaje están en GOBLIN | voxel parts.
+
+La base original Voxel_Goblin_Base.blend permanece conservada. Este archivo es una versión nueva; las animaciones se verificaron en Blender. Validation.json contiene la comprobación de pesos, huesos, acciones y cierre de los ciclos.

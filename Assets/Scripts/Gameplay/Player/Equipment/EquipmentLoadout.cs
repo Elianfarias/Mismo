@@ -14,6 +14,12 @@ namespace Mismo.Gameplay.Player.Equipment
         private int activeSlot;
         private float combatUntil;
         private AbilityRunner runner;
+        private Inventory.PlayerInventory inventory;
+        public int ActiveSlot => activeSlot;
+        public WeaponDefinition GetSlot(int slot) => slot >= 0 && slot < 2 ? slots[slot] : null;
+        public bool CanSwap => SecondaryDefinition != null && runner != null && !runner.IsBusy &&
+            (belt == null || !belt.IsActive) && (GetComponent<Mismo.Gameplay.Combat.Health>() == null || !GetComponent<Mismo.Gameplay.Combat.Health>().IsDead);
+        public bool CanChangeEquipment => CanSwap && !InCombat;
         public WeaponDefinition ActiveDefinition => slots[activeSlot];
         public WeaponDefinition SecondaryDefinition => slots[1 - activeSlot];
         public AbilityRunner Runner => runner;
@@ -44,12 +50,16 @@ namespace Mismo.Gameplay.Player.Equipment
         public void MarkCombat() => combatUntil = Time.time + combatGraceSeconds;
         public bool TrySwap()
         {
+            if (inventory == null) inventory = GetComponent<Inventory.PlayerInventory>();
+            if (inventory != null && inventory.IsReady) return inventory.TrySwap();
             var health = GetComponent<Mismo.Gameplay.Combat.Health>();
             if (SecondaryDefinition == null || runner == null || runner.IsBusy || belt != null && belt.IsActive || health != null && health.IsDead) return false;
             activeSlot = 1 - activeSlot; weapon.Configure(ActiveDefinition); Changed?.Invoke(); return true;
         }
         public bool TryEquip(int slot, WeaponDefinition definition)
         {
+            if (inventory == null) inventory = GetComponent<Inventory.PlayerInventory>();
+            if (inventory != null && inventory.IsReady) return inventory.TryEquipDefinition(slot, definition);
             var health = GetComponent<Mismo.Gameplay.Combat.Health>();
             if (slot < 0 || slot > 1 || definition == null || InCombat || runner != null && runner.IsBusy || belt != null && belt.IsActive || health != null && health.IsDead) return false;
             slots[slot] = definition;
@@ -61,6 +71,14 @@ namespace Mismo.Gameplay.Player.Equipment
         {
             weapon = equippedWeapon;
             belt = equippedBelt;
+        }
+
+        internal void ApplyInventoryEquipment(WeaponDefinition first, WeaponDefinition second, int selected)
+        {
+            inventory = GetComponent<Inventory.PlayerInventory>();
+            slots[0] = first; slots[1] = second; activeSlot = selected;
+            weapon.Configure(ActiveDefinition);
+            Changed?.Invoke();
         }
     }
 }

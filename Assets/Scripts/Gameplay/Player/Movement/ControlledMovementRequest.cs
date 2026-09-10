@@ -12,13 +12,15 @@ namespace Mismo.Gameplay.Player.Movement
         public Vector3 Facing { get; }
         public int Priority { get; }
         public bool BlocksJump { get; }
+        public bool SuspendsGravity { get; }
 
-        public ControlledMovementRequest(Vector3 displacement, Vector3 facing, int priority, bool blocksJump)
+        public ControlledMovementRequest(Vector3 displacement, Vector3 facing, int priority, bool blocksJump, bool suspendsGravity=false)
         {
             Displacement = displacement;
             Facing = facing;
             Priority = priority;
             BlocksJump = blocksJump;
+            SuspendsGravity=suspendsGravity;
         }
     }
 }

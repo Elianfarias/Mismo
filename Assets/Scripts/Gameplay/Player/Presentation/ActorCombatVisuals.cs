@@ -38,7 +38,7 @@ namespace Mismo.Gameplay.Player.Presentation
             renderer.renderMode = ParticleSystemRenderMode.Mesh;
             renderer.mesh = cube.GetComponent<MeshFilter>().sharedMesh;
             Destroy(cube);
-            var material = new Material(Shader.Find("Particles/Standard Unlit"));
+            var material = RuntimeParticleMaterial.Create("Death cubes", Color.white);
             renderer.sharedMaterial = material;
             go.AddComponent<DeathMaterialCleanup>().Material = material;
             var sources = GetComponentsInChildren<Renderer>();

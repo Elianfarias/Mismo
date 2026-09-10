@@ -1,0 +1,16 @@
+Village site instantiates exactly one complete village
+Entrance spawn has full 9 metre camera clearance
+Entrance spawn capsule is clear of buildings
+Player spawn lies in navigable village courtyard
+Village has traversable paths between courtyard and exterior: 8
+New-game spawn is not inside a building roof
+M opens map and blocks player controls
+Near zoom is bounded
+Far zoom is bounded
+Map pans independently of player
+Orbit clamps pitch
+Recenter returns to player
+Procedural map relief finishes without loading world chunks
+M closes map
+Escape closes map
+PASS Completed

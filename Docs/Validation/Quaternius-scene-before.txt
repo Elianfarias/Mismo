@@ -1,0 +1,75 @@
+t=1,733377 player=(-50.00, 4.14, -70.00) motion=Fall footTravel=180
+Root world=(-50.00, 4.14, -70.00) local=(0.00, 0.00, 0.00)
+Hips world=(-50.00, 3.94, -70.04) local=(0.00, 0.00, 0.00)
+Foot.L world=(-50.15, 3.49, -70.14) local=(0.00, 0.00, 0.00)
+ground=Terrain_-64_-96 y=4
+t=2,733871 player=(-50.00, 4.04, -70.00) motion=Idle footTravel=180
+Root world=(-50.00, 4.04, -70.00) local=(0.00, 0.00, 0.00)
+Hips world=(-50.00, 3.84, -70.04) local=(0.00, 0.00, 0.00)
+Foot.L world=(-50.15, 3.39, -70.14) local=(0.00, 0.00, 0.00)
+ground=Terrain_-64_-96 y=4
+t=3,734504 player=(-50.00, 4.04, -70.00) motion=Idle footTravel=180
+Root world=(-50.00, 4.04, -70.00) local=(0.00, 0.00, 0.00)
+Hips world=(-50.00, 3.84, -70.04) local=(0.00, 0.00, 0.00)
+Foot.L world=(-50.15, 3.39, -70.14) local=(0.00, 0.00, 0.00)
+ground=Terrain_-64_-96 y=4
+t=4,735251 player=(-50.00, 4.04, -70.00) motion=Idle footTravel=180
+Root world=(-50.00, 4.04, -70.00) local=(0.00, 0.00, 0.00)
+Hips world=(-50.00, 3.84, -70.04) local=(0.00, 0.00, 0.00)
+Foot.L world=(-50.15, 3.39, -70.14) local=(0.00, 0.00, 0.00)
+ground=Terrain_-64_-96 y=4
+t=5,735857 player=(-50.00, 4.04, -70.00) motion=Idle footTravel=180
+Root world=(-50.00, 4.04, -70.00) local=(0.00, 0.00, 0.00)
+Hips world=(-50.00, 3.84, -70.04) local=(0.00, 0.00, 0.00)
+Foot.L world=(-50.15, 3.39, -70.14) local=(0.00, 0.00, 0.00)
+ground=Terrain_-64_-96 y=4
+t=6,736942 player=(-50.00, 4.04, -70.00) motion=Idle footTravel=180
+Root world=(-50.00, 4.04, -70.00) local=(0.00, 0.00, 0.00)
+Hips world=(-50.00, 3.84, -70.04) local=(0.00, 0.00, 0.00)
+Foot.L world=(-50.15, 3.39, -70.14) local=(0.00, 0.00, 0.00)
+ground=Terrain_-64_-96 y=4
+t=7,737657 player=(-50.00, 4.04, -70.00) motion=Idle footTravel=180
+Root world=(-50.00, 4.04, -70.00) local=(0.00, 0.00, 0.00)
+Hips world=(-50.00, 3.84, -70.04) local=(0.00, 0.00, 0.00)
+Foot.L world=(-50.15, 3.39, -70.14) local=(0.00, 0.00, 0.00)
+ground=Terrain_-64_-96 y=4
+t=8,738425 player=(-50.00, 4.04, -70.00) motion=Idle footTravel=180
+Root world=(-50.00, 4.04, -70.00) local=(0.00, 0.00, 0.00)
+Hips world=(-50.00, 3.84, -70.04) local=(0.00, 0.00, 0.00)
+Foot.L world=(-50.15, 3.39, -70.14) local=(0.00, 0.00, 0.00)
+ground=Terrain_-64_-96 y=4
+t=9,73904 player=(-50.00, 4.04, -70.00) motion=Idle footTravel=180
+Root world=(-50.00, 4.04, -70.00) local=(0.00, 0.00, 0.00)
+Hips world=(-50.00, 3.84, -70.04) local=(0.00, 0.00, 0.00)
+Foot.L world=(-50.15, 3.39, -70.14) local=(0.00, 0.00, 0.00)
+ground=Terrain_-64_-96 y=4
+t=10,73913 player=(-50.00, 4.04, -70.00) motion=Idle footTravel=180
+Root world=(-50.00, 4.04, -70.00) local=(0.00, 0.00, 0.00)
+Hips world=(-50.00, 3.84, -70.04) local=(0.00, 0.00, 0.00)
+Foot.L world=(-50.15, 3.39, -70.14) local=(0.00, 0.00, 0.00)
+ground=Terrain_-64_-96 y=4
+t=11,73987 player=(-50.00, 4.04, -70.00) motion=Idle footTravel=180
+Root world=(-50.00, 4.04, -70.00) local=(0.00, 0.00, 0.00)
+Hips world=(-50.00, 3.84, -70.04) local=(0.00, 0.00, 0.00)
+Foot.L world=(-50.15, 3.39, -70.14) local=(0.00, 0.00, 0.00)
+ground=Terrain_-64_-96 y=4
+t=12,74009 player=(-50.00, 4.04, -70.00) motion=Idle footTravel=180
+Root world=(-50.00, 4.04, -70.00) local=(0.00, 0.00, 0.00)
+Hips world=(-50.00, 3.84, -70.04) local=(0.00, 0.00, 0.00)
+Foot.L world=(-50.15, 3.39, -70.14) local=(0.00, 0.00, 0.00)
+ground=Terrain_-64_-96 y=4
+t=13,74088 player=(-50.00, 4.04, -70.00) motion=Idle footTravel=180
+Root world=(-50.00, 4.04, -70.00) local=(0.00, 0.00, 0.00)
+Hips world=(-50.00, 3.84, -70.04) local=(0.00, 0.00, 0.00)
+Foot.L world=(-50.15, 3.39, -70.14) local=(0.00, 0.00, 0.00)
+ground=Terrain_-64_-96 y=4
+t=14,7414 player=(-50.00, 4.04, -70.00) motion=Idle footTravel=180
+Root world=(-50.00, 4.04, -70.00) local=(0.00, 0.00, 0.00)
+Hips world=(-50.00, 3.84, -70.04) local=(0.00, 0.00, 0.00)
+Foot.L world=(-50.15, 3.39, -70.14) local=(0.00, 0.00, 0.00)
+ground=Terrain_-64_-96 y=4
+t=15,74146 player=(-50.00, 4.04, -70.00) motion=Idle footTravel=180
+Root world=(-50.00, 4.04, -70.00) local=(0.00, 0.00, 0.00)
+Hips world=(-50.00, 3.84, -70.04) local=(0.00, 0.00, 0.00)
+Foot.L world=(-50.15, 3.39, -70.14) local=(0.00, 0.00, 0.00)
+ground=Terrain_-64_-96 y=4

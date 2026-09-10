@@ -1,0 +1,17 @@
+MENU_CHECK Menu opens on home screen
+MENU_CHECK Menu is first build scene
+MENU_CHECK Options open
+MENU_CHECK 70 percent remains audible: VolumeMusic
+MENU_CHECK Volume preference saved: VolumeMusic
+MENU_CHECK Zero mutes: VolumeMusic
+MENU_CHECK 70 percent remains audible: VolumeSFX
+MENU_CHECK Volume preference saved: VolumeSFX
+MENU_CHECK Zero mutes: VolumeSFX
+MENU_CHECK 70 percent remains audible: VolumeUI
+MENU_CHECK Volume preference saved: VolumeUI
+MENU_CHECK Zero mutes: VolumeUI
+MENU_CHECK Options reopen
+MENU_CHECK Begin loads gameplay
+MENU_CHECK Audio persists without duplicates
+MENU_CHECK Gameplay effects route through SFX mixer
+MENU_CHECKS_OK Menu, sliders, persistence, gameplay transition

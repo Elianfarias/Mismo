@@ -34,6 +34,7 @@ namespace Mismo.Gameplay.Enemies
         [Min(0f)] public float travel;
         public Vector3 halfExtents = new Vector3(1f, 0.7f, 0.9f);
         [Min(0f)] public float forwardOffset = 1f;
+        public EnemyAttackAnimation animation = new EnemyAttackAnimation();
 
         public float MinRange => Mathf.Max(0f, minRange);
         public float MaxRange => Mathf.Max(MinRange, maxRange);

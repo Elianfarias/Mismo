@@ -1,0 +1,14 @@
+{
+  "objects": 119,
+  "vertices": 41000,
+  "bones": 16,
+  "actions": {
+    "Idle": 2.0,
+    "Walk": 0.85,
+    "Run": 0.6,
+    "Attack": 0.65,
+    "Hit": 0.42
+  },
+  "height_m": 1.85,
+  "original_preserved": true
+}

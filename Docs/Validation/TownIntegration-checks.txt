@@ -1,0 +1,4 @@
+TOWN_INTEGRATION_OK
+TOWN_RUNTIME_OK four houses, textures, clear street and reachable approaches
+INITIAL_REGION_CHECKS_OK navigation, reward, victory, respawn
+Visual inspection: town-integrated.png

@@ -19,24 +19,30 @@ namespace Mismo.Gameplay.Enemies
         }
         private void OnGUI()
         {
+            if (Mismo.Gameplay.Player.Equipment.Inventory.InventoryPanel.AnyOpen) return;
             var hud=PlayerHUD.Active;var camera=Camera.main;
             if(hud==null || camera==null || health==null || health.IsDead)return;
             float distance=Vector3.Distance(hud.transform.position,transform.position);
             if(distance>28)return;
-            Vector3 head=transform.position+Vector3.up*(2.05f*transform.lossyScale.y);
+            float headHeight=goblin?.Settings is CreatureSettings?(GetComponent<CapsuleCollider>()?.height??2)+.2f:2.05f*transform.lossyScale.y;
+            Vector3 head=transform.position+Vector3.up*headHeight;
             Vector3 screen=camera.WorldToScreenPoint(head);
             if(screen.z<=0 || screen.x<0 || screen.x>Screen.width || screen.y<0 || screen.y>Screen.height)return;
             if(Physics.Linecast(camera.transform.position,head,out var hit,~(1<<2),QueryTriggerInteraction.Ignore) && !hit.transform.IsChildOf(transform) && !hit.transform.IsChildOf(hud.transform))return;
             float scale=PlayerHUD.Scale;Matrix4x4 old=GUI.matrix;GUI.matrix=Matrix4x4.Scale(Vector3.one*scale);
-            float width=boss!=null?440:132;
-            float x=boss!=null?(Screen.width/scale-width)/2:screen.x/scale-width/2;
-            float y=boss!=null?26:(Screen.height-screen.y)/scale-40;
+            bool isBoss=boss!=null||goblin?.Settings?.isBoss==true;
+            float width=isBoss?440:180;
+            float x=isBoss?(Screen.width/scale-width)/2:screen.x/scale-width/2;
+            float y=isBoss?26:(Screen.height-screen.y)/scale-40;
             string name=boss!=null?"GUARDIÁN DEL SANTUARIO":elite?"GOBLIN ÉLITE":"GOBLIN";
+            if(goblin?.Settings is CreatureSettings)name=goblin.Settings.displayName;
+            var identity=GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>();
+            if(identity!=null)name=(goblin?.Settings is CreatureSettings?goblin.Settings.displayName:identity.DisplayName)+" · Nv "+identity.Level;
             bool warning=boss!=null?boss.State==BossState.Telegraph:goblin!=null&&goblin.State==GoblinState.Telegraph;
             bool attack=boss!=null?boss.State==BossState.Attack:goblin!=null&&goblin.State==GoblinState.Attack;
             Color accent=boss!=null?new Color(.85f,.35f,.32f):elite?new Color(.72f,.48f,.93f):new Color(.85f,.35f,.32f);
-            PlayerHUD.Fill(new Rect(x-6,y-4,width+12,boss!=null?65:49),PlayerHUD.Panel);
-            hud.Label(new Rect(x,y,width,20),name,boss!=null?16:12,elite?new Color(.84f,.65f,1):PlayerHUD.Gold,TextAnchor.MiddleCenter);
+            PlayerHUD.Fill(new Rect(x-6,y-4,width+12,isBoss?65:49),PlayerHUD.Panel);
+            hud.Label(new Rect(x,y,width,20),name,isBoss?16:12,elite?new Color(.84f,.65f,1):PlayerHUD.Gold,TextAnchor.MiddleCenter);
             PlayerHUD.Fill(new Rect(x,y+25,width,7),new Color(.18f,.20f,.23f));
             PlayerHUD.Fill(new Rect(x,y+25,width*health.Normalized,7),accent);
             var posture=GetComponent<CombatState>();
@@ -46,7 +52,7 @@ namespace Mismo.Gameplay.Enemies
                 PlayerHUD.Fill(new Rect(x,y+35,width*posture.PostureNormalized,5),PlayerHUD.Gold);
                 if(posture.Broken)hud.Label(new Rect(x-20,y+72,width+40,20),"¡POSTURA ROTA!",13,PlayerHUD.Gold,TextAnchor.MiddleCenter);
             }
-            if(boss!=null)hud.Label(new Rect(x,y+43,width,20),health.Current.ToString("0")+" / "+health.Maximum.ToString("0"),12,Color.white,TextAnchor.MiddleCenter);
+            if(isBoss)hud.Label(new Rect(x,y+43,width,20),health.Current.ToString("0")+" / "+health.Maximum.ToString("0"),12,Color.white,TextAnchor.MiddleCenter);
             if(warning||attack)hud.Label(new Rect(x-20,y+52,width+40,20),attack?"¡ATAQUE!":"PREPARANDO ATAQUE",12,attack?new Color(1,.4f,.3f):PlayerHUD.Gold,TextAnchor.MiddleCenter);
             GUI.matrix=old;
         }

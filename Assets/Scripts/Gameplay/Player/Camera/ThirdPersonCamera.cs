@@ -33,7 +33,12 @@ namespace Mismo.Gameplay.Player.Camera
         /// <summary>Inicializa la órbita y captura el cursor.</summary>
         private void Start()
         {
-            if (target != null) pivot = target.position + Vector3.up * height;
+            if (target != null)
+            {
+                pivot = target.position + Vector3.up * height;
+                yaw = target.eulerAngles.y;
+                transform.rotation = Quaternion.Euler(pitch, yaw, 0f);
+            }
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -41,6 +46,8 @@ namespace Mismo.Gameplay.Player.Camera
         /// <summary>Actualiza la orientación antes de calcular el movimiento relativo a cámara.</summary>
         private void Update()
         {
+            if (Presentation.WorldMapPanel.BlocksGameplay) return;
+            if (input != null && input.GetComponent<Equipment.Inventory.InventoryPanel>() is Equipment.Inventory.InventoryPanel panel && panel.BlocksGameplay) return;
             if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
             {
                 Cursor.lockState = CursorLockMode.None;

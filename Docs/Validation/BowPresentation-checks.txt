@@ -1,0 +1,66 @@
+BOW_CHECK Locomotion turns with lean enabled: sword (1.00, 0.00, 0.00) actual=(0.98, -0.21, 0.00) ticks=1020
+BOW_CHECK Locomotion turns with lean enabled: sword (0.00, 0.00, -1.00) actual=(0.00, -0.09, -1.00) ticks=2140
+BOW_CHECK Locomotion turns with lean enabled: sword (-1.00, 0.00, 0.00) actual=(-0.98, -0.21, 0.00) ticks=3309
+BOW_CHECK Locomotion turns with lean enabled: sword (0.00, 0.00, 1.00) actual=(0.00, -0.21, 0.98) ticks=4466
+BOW_CHECK Locomotion turns with lean enabled: bow (1.00, 0.00, 0.00) actual=(0.98, -0.21, 0.00) ticks=5595
+BOW_CHECK Locomotion turns with lean enabled: bow (0.00, 0.00, -1.00) actual=(0.00, -0.21, -0.98) ticks=6790
+BOW_CHECK Locomotion turns with lean enabled: bow (-1.00, 0.00, 0.00) actual=(-0.98, -0.21, 0.00) ticks=7959
+BOW_CHECK Locomotion turns with lean enabled: bow (0.00, 0.00, 1.00) actual=(0.00, -0.21, 0.98) ticks=9050
+BOW_CHECK Bow follows visible animated rig, not legacy avatar
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Grip remains at hand while moving and turning
+BOW_CHECK Rain waits for arrival before applying damage
+BOW_CHECK Rain emits configured volley
+BOW_CHECK Rain arrows travel vertically downward
+BOW_CHECK Arrow tips face down
+BOW_CHECK One volley applies one damage pulse, not damage per visual arrow
+BOW_CHECK Rain remains at its ground target after swapping
+BOW_CHECK Rain arrows and area clean up at completion
+BOW_CHECK Actual left mouse input starts Basic, not E
+BOW_CHECK Basic has no retreat movement
+BOW_CHECK Actual E input starts retreat
+BOW_CHECK Damage display uses actual health lost, including overkill
+BOW_CHECK Successful damage creates floating numbers
+BOW_CHECK Death hides original mesh
+BOW_CHECK Death emits cube particles
+BOW_CHECK Revive restores visible mesh
+BOW_CHECK Bow sight is above character center
+BOW_PRESENTATION_OK Completed

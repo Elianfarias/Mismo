@@ -1,0 +1,4 @@
+Seed 7319: 45 villages / 4225 sites; nearest pair 570m
+Seed 12: 51 villages / 4225 sites; nearest pair 593m
+Seed 654321: 39 villages / 4225 sites; nearest pair 635m
+PASS: 88m town, 10 structural bases touch ground, level full footprint, old-save migration, distant position preserved, 9m camera clearance, entrance-to-plaza navigation.

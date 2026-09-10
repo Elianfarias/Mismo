@@ -13,15 +13,16 @@ namespace Mismo.Gameplay.Combat
 
         public float Amount => amount;
         private long attackId;
+        private string family; private float focusGain;
 
-        public void Configure(float damageAmount) { amount = Mathf.Max(0f, damageAmount); attackId=AttackIdentity.Next(); }
+        public void Configure(float damageAmount,string weaponFamilyId=null,float focusGainOnHit=0) { amount = Mathf.Max(0f, damageAmount); attackId=AttackIdentity.Next();family=weaponFamilyId;focusGain=focusGainOnHit; }
 
         public bool ApplyTo(GameObject target, Vector3 hitPoint, Vector3 direction)
         {
             if (target == null || target == gameObject) return false;
             IDamageReceiver receiver = target.GetComponentInParent<IDamageReceiver>();
             if (receiver == null) return false;
-            return receiver.ReceiveDamage(new DamageInfo(amount, gameObject, hitPoint, direction, attackId == 0 ? (attackId=AttackIdentity.Next()) : attackId));
+            return receiver.ReceiveDamage(new DamageInfo(amount, gameObject, hitPoint, direction, attackId == 0 ? (attackId=AttackIdentity.Next()) : attackId,weaponFamilyId:family,focusGainOnHit:focusGain));
         }
 
         private void OnTriggerEnter(Collider other)
@@ -34,3 +35,4 @@ namespace Mismo.Gameplay.Combat
         private void OnTriggerExit(Collider other) => hitObjects.Remove(other.transform.root.GetInstanceID());
     }
 }
+

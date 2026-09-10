@@ -1,0 +1,1 @@
+PASS detección, persecución, golpe único, carga, esquiva, parry, dash, stagger, muerte y pérdida de objetivo; concept rig, runtime clips, attack synchronization, Hit and Run

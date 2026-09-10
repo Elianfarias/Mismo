@@ -6,12 +6,13 @@ namespace Mismo.Gameplay.Enemies
 {
     /// <summary>NavMesh local del prototipo, construido sólo con su geometría estática.</summary>
     [DefaultExecutionOrder(-300)]
-    public sealed class GoblinNavigation : MonoBehaviour
+    public sealed class GoblinNavigation : MonoBehaviour, Mismo.Gameplay.Player.World.IStaticWorldNavigation
     {
         [SerializeField] private Transform geometry;
         private NavMeshData data;
         private NavMeshDataInstance instance;
         public void Configure(Transform root) => geometry = root;
+        public void StopNavigation()=>enabled=false;
 
         private void OnEnable()
         {

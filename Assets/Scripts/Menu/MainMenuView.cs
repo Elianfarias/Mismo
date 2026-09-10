@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using Mismo.Gameplay.Player.World;
 
 namespace Mismo.Menu
 {
@@ -12,6 +13,7 @@ namespace Mismo.Menu
         [SerializeField] string gameplayScene="VoxelRegion_7319";
         [SerializeField] GameObject home, options;
         [SerializeField] Button begin, openOptions, back, quit;
+        [SerializeField] Button continueGame;
         [SerializeField] Text status;
         [SerializeField] Slider music, sfx, ui;
         public Slider Music => music;
@@ -23,6 +25,16 @@ namespace Mismo.Menu
         {
             Time.timeScale=1; Cursor.lockState=CursorLockMode.None;Cursor.visible=true;
             begin.onClick.AddListener(Begin);
+            // Also upgrade saved menu scenes without rebuilding their art or audio settings.
+            if(continueGame==null)continueGame=ButtonAt(home.transform,"Continuar",0,true);
+            continueGame.onClick.AddListener(Continue);
+            begin.GetComponentInChildren<Text>().text="Nueva partida";
+            begin.GetComponent<RectTransform>().anchoredPosition=new Vector2(0,-75);
+            openOptions.GetComponent<RectTransform>().anchoredPosition=new Vector2(0,-150);
+            quit.GetComponent<RectTransform>().anchoredPosition=new Vector2(0,-225);
+            status.rectTransform.anchoredPosition=new Vector2(0,-305);
+            continueGame.interactable=WorldSession.CanContinue();
+            if(WorldSession.LastError!=null)status.text=WorldSession.LastError;
             openOptions.onClick.AddListener(()=>ShowOptions(true));
             back.onClick.AddListener(()=>ShowOptions(false));
             quit.onClick.AddListener(Application.Quit);
@@ -37,14 +49,27 @@ namespace Mismo.Menu
         {
             if(loading)return;
             home.SetActive(!show);options.SetActive(show);
-            if(EventSystem.current!=null)EventSystem.current.SetSelectedGameObject(show?music.gameObject:begin.gameObject);
+            if(EventSystem.current!=null)EventSystem.current.SetSelectedGameObject(show?music.gameObject:continueGame!=null&&continueGame.interactable?continueGame.gameObject:begin.gameObject);
             if(!show)PlayerPrefs.Save();
         }
         public void Begin()
         {
             if(loading)return;
             if(!Application.CanStreamedLevelBeLoaded(gameplayScene)){status.text="No se encontró la región de juego.";return;}
+            if(!WorldSession.NewGame()){status.text=WorldSession.LastError??"No se pudo crear la partida.";return;}
+            LoadGame();
+        }
+        public void Continue()
+        {
+            if(loading)return;
+            if(!Application.CanStreamedLevelBeLoaded(gameplayScene)){status.text="No se encontró la región de juego.";return;}
+            if(!WorldSession.Continue()){status.text=WorldSession.LastError??"No hay una partida guardada.";return;}
+            LoadGame();
+        }
+        void LoadGame()
+        {
             loading=true;begin.interactable=false;openOptions.interactable=false;quit.interactable=false;
+            continueGame.interactable=false;
             status.text="Preparando tu aventura…";PlayerPrefs.Save();
             SceneManager.LoadSceneAsync(gameplayScene);
         }
@@ -63,9 +88,10 @@ namespace Mismo.Menu
             Label(panel.transform,"MISMO",new Vector2(38,85),new Vector2(460,90),72,Color.white);
             Label(panel.transform,"Un mundo por descubrir.",new Vector2(42,181),new Vector2(450,35),23,new Color(.7f,.77f,.78f));
             home=Box("Inicio",panel.transform,new Vector2(42,258),new Vector2(450,345),Color.clear).gameObject;
-            begin=ButtonAt(home.transform,"Comenzar",0,true);
-            openOptions=ButtonAt(home.transform,"Opciones",85,false);
-            quit=ButtonAt(home.transform,"Salir",170,false);
+            continueGame=ButtonAt(home.transform,"Continuar",0,true);
+            begin=ButtonAt(home.transform,"Nueva partida",75,false);
+            openOptions=ButtonAt(home.transform,"Opciones",150,false);
+            quit=ButtonAt(home.transform,"Salir",225,false);
             status=Label(home.transform,"VERSIÓN DE PRUEBA",new Vector2(0,279),new Vector2(450,40),15,new Color(.66f,.73f,.73f));
             options=Box("Opciones de sonido",panel.transform,new Vector2(42,245),new Vector2(450,395),Color.clear).gameObject;
             music=SliderAt(options.transform,"Música",0);

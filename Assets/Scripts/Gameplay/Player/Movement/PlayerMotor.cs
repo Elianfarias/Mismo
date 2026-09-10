@@ -97,6 +97,7 @@ namespace Mismo.Gameplay.Player.Movement
             }
             float gravity = settings.Gravity * (!jumpHeld && verticalVelocity > 0f ? 2f : 1f);
             verticalVelocity = Mathf.Max(verticalVelocity + gravity * dt, -50f);
+            if(specialMovement&&controlledMovement.Value.SuspendsGravity)verticalVelocity=0;
             if (grounded) airborneSpeed = sprint ? settings.SprintSpeed : settings.WalkSpeed;
             float speed = grounded ? (sprint ? settings.SprintSpeed : settings.WalkSpeed) : Mathf.Max(settings.WalkSpeed, airborneSpeed);
             Vector3 target = direction * speed;

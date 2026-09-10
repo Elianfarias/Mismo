@@ -1,0 +1,76 @@
+ARAÑA DEL BOSQUE VOXEL — MODELO, RIG Y ANIMACIONES
+
+Reconstrucción estilizada y simplificada de la lámina de referencia.
+Cuatro variantes con la misma geometría, esqueleto, pesos y seis animaciones.
+Ocho patas articuladas. Altura aproximada: 1 metro en reposo.
+
+CONTENIDO
+Forest_Spider_Rigged.blend: escena editable creada con Blender 4.2.0.
+Spider_Standard.fbx: caparazón oscuro y marcas rojas.
+Spider_Forest_Moss.fbx: marcas y ojos verde musgo.
+Spider_Dark_Cave.fbx: caparazón oscuro, marcas violetas y ojos claros.
+Spider_Albino.fbx: caparazón marfil, marcas rosadas y ojos rojos.
+*_Palette.png: texturas de paleta también incrustadas en los FBX.
+*_Preview.png: renders de las cuatro variantes.
+Arana_Animaciones.gif: muestra de las seis animaciones del modelo real.
+build_spider.py: generador reproducible mediante el Python de Blender.
+model_stats.json: conteos y dimensiones.
+validation.json: comprobaciones de reimportación de los cuatro FBX.
+
+RIG
+41 huesos en Blender: 33 exportados y ocho controles IK de las patas.
+Root / Body / Abdomen / Head.
+Upper, Lower, Foot e IK para cada pata L1–L4 y R1–R4, de adelante hacia atrás.
+Fang_L y Fang_R controlan los colmillos; Palp_L y Palp_R, los pedipalpos.
+Web_Origin es el punto de salida en la boca para un proyectil o efecto del juego.
+Los controles IK se hornean al exportar: el FBX no necesita las restricciones.
+Pesos rígidos por segmento para mantener el aspecto voxel al animar.
+Un material por variante, UV de paleta y superficies planas.
+
+CLIPS — 30 FPS
+Idle:        frames 1–61, 2 s, bucle.
+Walk:        frames 1–37, 1,2 s, bucle.
+Run:         frames 1–25, 0,8 s, bucle.
+Jump:        frames 1–43, 1,4 s, una vez.
+Attack_Bite: frames 1–31, 1 s, una vez.
+Spit_Web:    frames 1–37, 1,2 s, una vez.
+
+Walk y Run alternan grupos de cuatro patas. Los bucles repiten la pose inicial
+en el último frame. Root permanece fijo en todos los clips, sin avance acumulado.
+Jump incluye una elevación visual de aproximadamente 0,29 m del cuerpo y de los
+controles de las patas, con anticipación, recogida de patas y aterrizaje.
+Si tu controlador ya aplica la trayectoria completa de salto, coordiná ese movimiento
+con esta elevación visual para evitar sumar dos veces la altura deseada.
+
+Spit_Web incluye el gesto del cuerpo, cabeza y colmillos. No incluye proyectil,
+telaraña animada, partículas, veneno ni lógica de ataque.
+En el .blend hay marcadores de referencia:
+- Attack_Bite: Bite_Impact, frame 14 (~0,43 s desde el inicio).
+- Spit_Web: Emit_Web, frame 14 (~0,43 s desde el inicio).
+- Jump: Takeoff, frame 11; Land, frame 32.
+Son referencias de edición; no se crean automáticamente eventos de Unity al importar.
+
+BLENDER
+Standard está visible por defecto. Las otras tres mallas están ocultas.
+Mostrar la variante deseada desde el Outliner y ocultar la anterior; para renderizar,
+ajustar también su visibilidad de render.
+Seleccionar Spider_Rig y elegir el clip desde el Action Editor.
+Ajustar el final del rango de reproducción según la tabla.
+Luces, cámara y piso son solo del estudio y no se incluyen en los FBX.
+Abrir con Blender 4.2 o posterior.
+
+UNITY
+Usar rig Generic y activar bucle solo para Idle, Walk y Run.
+El avance del personaje se controla desde el código del juego.
+Ajustar la velocidad del controlador al ciclo para reducir deslizamiento de patas.
+La exportación usa -Z forward / Y up; el modelo se construyó mirando hacia -Y en Blender.
+Si el importador no conecta la textura incrustada, asignar la paleta correspondiente
+al color base de un material compatible con tu pipeline.
+Para conservar colores sólidos: filtrado Point, sin compresión y sin mipmaps.
+El paquete no incluye Animator Controller, colisiones, IA ni lógica de combate.
+
+VALIDACIÓN
+Reimportación de cada FBX en Blender: una malla, un esqueleto, seis clips,
+vértices con pesos y movimiento de huesos en cada animación.
+Revisión visual de variantes, salto, locomoción y gestos de ataque.
+No se ejecutó dentro de un proyecto Unity.

@@ -35,6 +35,8 @@ namespace Mismo.Gameplay.Combat
         private PlayerMotor motor;
         private Vector3 facingOffset;
         private Quaternion facingRotation;
+        private float attackSpeed=1,damageMultiplier=1;
+        private string family; private float focusGain;
 
         public bool IsAttacking => currentIndex >= 0;
         public bool IsWindowOpen => windowOpen;
@@ -65,7 +67,7 @@ namespace Mismo.Gameplay.Combat
                 transform.SetPositionAndRotation(motor.transform.position+facing*Vector3.Scale(facingOffset,motor.transform.lossyScale),facing*facingRotation);
             }
             if (!IsAttacking) return;
-            elapsed += Time.deltaTime;
+            elapsed += Time.deltaTime*attackSpeed;
             AttackWindow attack = windows[currentIndex];
             if (attack == null)
             {
@@ -89,6 +91,11 @@ namespace Mismo.Gameplay.Combat
         {
             if (IsAttacking || windows == null || attackIndex < 0 || attackIndex >= windows.Length || windows[attackIndex] == null) return false;
             currentIndex = attackIndex;
+            var inventory=GetComponentInParent<Mismo.Gameplay.Player.Equipment.Inventory.PlayerInventory>();
+            var weapon=GetComponentInParent<Mismo.Gameplay.Player.Equipment.EquipmentLoadout>()?.ActiveDefinition;
+            attackSpeed=inventory!=null?inventory.AttackSpeed(weapon):1;
+            damageMultiplier=inventory!=null?inventory.DamageMultiplier(weapon):1;
+            family=weapon!=null?weapon.MasteryId:null; focusGain=GetComponentInParent<Mismo.Gameplay.Player.Equipment.AbilityRunner>()?.Current?.Definition.focusGainOnHit ?? weapon?.GetAbility(Mismo.Gameplay.Player.Equipment.AbilitySlot.Basic)?.focusGainOnHit ?? 0;
             elapsed = 0f;
             hitTargets.Clear();
             windowOpen = false;
@@ -108,7 +115,7 @@ namespace Mismo.Gameplay.Combat
             windowOpen = open;
             if (open)
             {
-                damageDealer.Configure(attack.Damage);
+                damageDealer.Configure(attack.Damage*damageMultiplier,family,focusGain);
                 hitTargets.Clear();
             }
             else hitTargets.Clear();
@@ -140,8 +147,9 @@ namespace Mismo.Gameplay.Combat
         private void ApplyHit(Collider other)
         {
             if (!windowOpen || other == null || other.transform.root == transform.root) return;
-            if(other.GetComponentInParent<IDamageReceiver>()==null)return;
-            int targetId = other.transform.root.GetInstanceID();
+            if(!(other.GetComponentInParent<IDamageReceiver>() is Component receiver))return;
+            // Multiple streamed enemies share a chunk/world root; deduplicate per actor.
+            int targetId = receiver.GetInstanceID();
             if (!hitTargets.Add(targetId)) return;
             Vector3 point = other.ClosestPoint(transform.position);
             Vector3 direction = other.transform.position - transform.position;
@@ -149,3 +157,4 @@ namespace Mismo.Gameplay.Combat
         }
     }
 }
+

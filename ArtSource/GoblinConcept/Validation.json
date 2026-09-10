@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "mesh_parts": 119,
+  "bones": 16,
+  "actions": {
+    "Idle": {
+      "frames": [
+        1,
+        121
+      ],
+      "seconds": 2.0,
+      "pose_changes": true
+    },
+    "Walk": {
+      "frames": [
+        1,
+        52
+      ],
+      "seconds": 0.85,
+      "pose_changes": true
+    },
+    "Run": {
+      "frames": [
+        1,
+        37
+      ],
+      "seconds": 0.6,
+      "pose_changes": true
+    },
+    "Attack": {
+      "frames": [
+        1,
+        40
+      ],
+      "seconds": 0.65,
+      "pose_changes": true
+    },
+    "Hit": {
+      "frames": [
+        1,
+        26
+      ],
+      "seconds": 0.4166666666666667,
+      "pose_changes": true
+    }
+  },
+  "rigid_weights": true,
+  "loop_seams_match": true
+}

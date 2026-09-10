@@ -18,6 +18,28 @@ namespace Mismo.Gameplay.Player.Equipment
         public float Mobility=>Current!=null&&!Current.Began?Current.Definition.preparationMobility:1;
         public float Normalized=>Current==null?0:Mathf.Clamp01(Current.Elapsed/(Current.Definition.Duration+(Current.Definition.chargeable?Current.Definition.maximumCharge:0)));
         public event System.Action<AbilityDefinition> Started;
+        // Read-only presentation snapshot. Gameplay remains the owner of all clocks.
+        public bool TryGetAnimationFrame(out Presentation.CombatAnimationFrame frame)
+        {
+            frame=default;
+            var cast=Current;if(cast==null)return false;
+            var definition=cast.Definition;
+            if(definition.usesSwordCombo)
+            {
+                if(combo==null || !combo.IsActive)return false;
+                frame=new Presentation.CombatAnimationFrame(definition,Presentation.CombatAnimationPhase.Combo,combo.CurrentStepNormalized,combo.CurrentStepIndex,cast.AttackId);
+            }
+            else
+            {
+                float start=cast.ReleasedAt>=0?cast.ReleasedAt:Mathf.Max(0,definition.preparation);
+                var phase=!cast.Began?Presentation.CombatAnimationPhase.Preparation:!cast.Ended?Presentation.CombatAnimationPhase.Active:Presentation.CombatAnimationPhase.Recovery;
+                float progress=!cast.Began?cast.Elapsed/Mathf.Max(.001f,definition.preparation)
+                    :!cast.Ended?(cast.Elapsed-start)/Mathf.Max(.01f,definition.active)
+                    :(cast.Elapsed-start-Mathf.Max(.01f,definition.active))/Mathf.Max(.001f,definition.recovery);
+                frame=new Presentation.CombatAnimationFrame(definition,phase,progress,-1,cast.AttackId);
+            }
+            return true;
+        }
         public void Initialize(EquipmentLoadout equipment)
         {
             loadout=equipment;Motor=GetComponent<PlayerMotor>();stamina=GetComponent<Stamina>();health=GetComponent<Health>();
@@ -37,7 +59,7 @@ namespace Mismo.Gameplay.Player.Equipment
         public bool TryUse(AbilitySlot slot,Vector3 direction,Vector3 groundPoint,Vector3? aimPoint=null,bool held=false)
         {
             var weapon=loadout.ActiveDefinition;var definition=weapon!=null?weapon.GetAbility(slot):null;
-            if(definition==null||health!=null&&health.IsDead||loadout.Belt!=null&&loadout.Belt.IsActive)return false;
+            if(definition==null||health!=null&&health.IsDead||loadout.Belt!=null&&loadout.Belt.ControlsMovement)return false;
             if(Remaining(definition)>0&&!(Current!=null&&definition.usesSwordCombo&&Current.Definition==definition))return false;
             if(stamina!=null&&stamina.Current<definition.staminaCost||state.Focus<definition.focusCost)return false;
             if(Current!=null)
@@ -52,7 +74,7 @@ namespace Mismo.Gameplay.Player.Equipment
             if(definition.usesSwordCombo&&(combo==null||!combo.RequestAttack()))return false;
             stamina?.TrySpend(definition.staminaCost);state.Spend(definition.focusCost);
             Current=new AbilityExecution(this,weapon,definition,direction.sqrMagnitude>.001f?direction.normalized:Motor.Facing,groundPoint){AimPoint=aimPoint,Held=held};
-            readyAt[definition]=Time.time+definition.cooldown;loadout.MarkCombat();Started?.Invoke(definition);return true;
+            readyAt[definition]=Time.time+definition.cooldown/(slot==AbilitySlot.Basic?Current.AttackSpeed:1);loadout.MarkCombat();Started?.Invoke(definition);return true;
         }
         public bool TryDash(Vector3 direction)
         {
@@ -75,7 +97,7 @@ namespace Mismo.Gameplay.Player.Equipment
         void Advance(float dt)
         {
             if(Current==null||dt<=0)return;
-            var c=Current;var d=c.Definition;c.Elapsed+=dt;
+            var c=Current;var d=c.Definition;dt*=c.AttackSpeed;c.Elapsed+=dt;
             if(d.usesSwordCombo){combo.Tick(dt);if(!combo.IsActive&&!combo.IsRecovering)Current=null;return;}
             float start=Mathf.Max(0,d.preparation);
             if(d.chargeable)

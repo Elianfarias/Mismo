@@ -28,10 +28,17 @@ namespace Mismo.Gameplay.Enemies
         private float provokedLoseRange, provokedLeashRange;
         private int orbitSign = 1;
         private readonly HashSet<int> hitTargets = new HashSet<int>();
+        readonly Dictionary<GoblinAttack,float> attackReady=new Dictionary<GoblinAttack,float>();
+        float clock;
+        bool projectileReleased;
+        Vector3 aimPoint;
         public GoblinState State { get; private set; }
         public GoblinSettings Settings => settings;
         public GoblinAttack CurrentAttack => attack;
         public Transform Target => target;
+        public float AttackElapsed=>attack==null?0:State==GoblinState.Telegraph?attack.windup*StateProgress:
+            State==GoblinState.Attack?attack.windup+attack.active*StateProgress:State==GoblinState.Recovery?attack.windup+attack.active+attack.recovery*StateProgress:0;
+        public Vector3 AttackDirection=>attackDirection;
         public float StateProgress => duration > 0f ? Mathf.Clamp01(1f - timer / duration) : 0f;
         public event Action<GoblinState> StateChanged;
 
@@ -48,6 +55,7 @@ namespace Mismo.Gameplay.Enemies
 
         private void Awake()
         {
+            if(GetComponent<EnemyProgressionReward>()==null)gameObject.AddComponent<EnemyProgressionReward>();
             agent = GetComponent<NavMeshAgent>();
             health = GetComponent<Health>();
             combat=GetComponent<CombatState>()??gameObject.AddComponent<CombatState>();
@@ -68,8 +76,9 @@ namespace Mismo.Gameplay.Enemies
             if (settings == null || weapon == null)
             { Debug.LogError("Goblin necesita Settings y DamageDealer.", this); enabled = false; return; }
             started = true;
+            combat.ConfigurePosture(settings.posture);
             home = transform.position;
-            health.ConfigureMaximum(settings.health);
+            health.ConfigureMaximum(settings.health*(GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>()?.HealthMultiplier??1));
             health.Revive();
             ResetLife();
         }
@@ -86,6 +95,7 @@ namespace Mismo.Gameplay.Enemies
             var body = GetComponent<CapsuleCollider>();
             if (body != null) body.enabled = true;
             decision = 0f;
+            attackReady.Clear();clock=0;
             chargeCooldown = staggerResistance = lostTime = repath = 0f;
             attack = null;
             SetTarget(null);
@@ -118,6 +128,7 @@ namespace Mismo.Gameplay.Enemies
         public void Tick(float dt)
         {
             if (!started || !enabled || dt <= 0f || State == GoblinState.Dead) return;
+            clock+=dt;
             if (health.IsDead) { Enter(GoblinState.Dead); return; }
             if (target != null && State != GoblinState.Idle && State != GoblinState.Return)
                 target.GetComponentInParent<Mismo.Gameplay.Player.Equipment.EquipmentLoadout>()?.MarkCombat();
@@ -164,8 +175,9 @@ namespace Mismo.Gameplay.Enemies
                 timer -= dt;
                 if (timer <= 0f)
                 {
-                    hitTargets.Clear(); weapon.Configure(attack.damage);
+                    hitTargets.Clear(); weapon.Configure(attack.damage*(GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>()?.DamageMultiplier??1));
                     Enter(GoblinState.Attack, attack.active);
+                    if(attack.kind==CreatureAttackKind.Projectile)ReleaseProjectile();
                     ApplyHits();
                 }
                 return;
@@ -178,6 +190,8 @@ namespace Mismo.Gameplay.Enemies
                 ApplyHits();
                 if (State != GoblinState.Attack) return;
                 timer -= dt;
+                ApplyHits();
+                if(State!=GoblinState.Attack)return;
                 if (timer <= 0f) Enter(GoblinState.Recovery, attack.recovery);
                 return;
             }
@@ -191,24 +205,28 @@ namespace Mismo.Gameplay.Enemies
             Vector3 offset = Vector3.ProjectOnPlane(target.position - transform.position, Vector3.up);
             float distance = offset.magnitude;
             Face(offset, dt);
-            bool sameHeight = Mathf.Abs(target.position.y - transform.position.y) < 1.2f;
+            bool sameHeight = Mathf.Abs(target.position.y - transform.position.y) < settings.allowedHeightDifference;
             if (sight && sameHeight && decision <= 0f)
             {
                 var casting=target.GetComponent<Mismo.Gameplay.Player.Equipment.AbilityRunner>();
                 pressure=casting!=null&&casting.IsBusy&&!casting.Current.Began&&casting.Current.Definition.aimFromCamera;
                 GoblinAttack chosen = pressure&&distance>=2.5f&&distance<=settings.charge.range&&chargeCooldown<=0 ? settings.charge : distance <= settings.slash.range ? settings.slash :
                     (distance >= 2.5f && distance <= settings.charge.range && chargeCooldown <= 0f ? settings.charge : null);
+                if(settings.attacks!=null&&settings.attacks.Length>0)chosen=SelectAttack(distance);
                 if (chosen != null)
                 {
                     attack = chosen;
+                    projectileReleased=false;attackReady[chosen]=clock+Mathf.Max(0,chosen.cooldown)+chosen.windup+chosen.active+chosen.recovery;
                     attackDirection = offset.sqrMagnitude > 0.001f ? offset.normalized : transform.forward;
+                    aimPoint=target.position+Vector3.up*.8f;
                     transform.rotation = Quaternion.LookRotation(attackDirection);
                     if (chosen == settings.charge) chargeCooldown = settings.chargeCooldown;
                     Enter(GoblinState.Telegraph, attack.windup);
                     return;
                 }
             }
-            if (!sight || distance > settings.slash.range + (pressure ? -.2f : .3f))
+            float preferred=settings.attacks!=null&&settings.attacks.Length>0?settings.preferredRange:settings.slash.range;
+            if (!sight || distance > preferred + (pressure ? -.2f : .3f))
             {
                 if (State != GoblinState.Chase) Enter(GoblinState.Chase);
                 MoveTo(sight ? target.position : lastSeen, settings.speed);
@@ -217,10 +235,36 @@ namespace Mismo.Gameplay.Enemies
             {
                 if (State != GoblinState.Position) Enter(GoblinState.Position);
                 Vector3 radial = offset.sqrMagnitude > 0.001f ? -offset.normalized : -transform.forward;
-                Vector3 position = target.position + radial * (settings.slash.range - 0.15f) +
+                Vector3 position = target.position + radial * (preferred - 0.15f) +
                     Vector3.Cross(Vector3.up, radial) * (0.65f * orbitSign);
                 MoveTo(position, settings.positioningSpeed);
             }
+        }
+
+        GoblinAttack SelectAttack(float distance)
+        {
+            float total=0;foreach(var action in settings.attacks)
+                if(Eligible(action,distance))total+=action.weight;
+            float roll=UnityEngine.Random.value*total;
+            foreach(var action in settings.attacks)if(Eligible(action,distance)){roll-=action.weight;if(roll<0)return action;}
+            return null;
+        }
+        bool Eligible(GoblinAttack action,float distance)=>action!=null&&action.enabled&&action.weight>0&&distance>=action.minimumRange&&distance<=action.range&&
+            (!attackReady.TryGetValue(action,out float ready)||clock>=ready)&&
+            (action.kind!=CreatureAttackKind.Projectile||action.projectileVisual!=null);
+        void ReleaseProjectile()
+        {
+            if(projectileReleased||attack==null||attack.projectileVisual==null||target==null)return;
+            projectileReleased=true;
+            var presentation=GetComponent<CreatureAnimationDriver>();
+            presentation?.PrepareRelease(attack);
+            Vector3 origin=presentation!=null?presentation.ReleaseOrigin:transform.position+Vector3.up*settings.sightHeight+attackDirection*2;
+            presentation?.ReleaseProp();
+            // Aim is locked during anticipation, including vertical aim; no homing after release.
+            Vector3 direction=(aimPoint-origin).normalized;
+            var projectile=Mismo.Gameplay.Player.Equipment.ProjectileInstance.Spawn(gameObject,origin,direction,
+                attack.damage*(GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>()?.DamageMultiplier??1),attack.projectileSpeed,attack.projectileRange,attack.projectileRadius,attack.projectileVisual);
+            projectile.name=settings.displayName+" projectile";
         }
 
         private void Face(Vector3 direction, float dt)
@@ -241,7 +285,7 @@ namespace Mismo.Gameplay.Enemies
 
         private bool HasSight(Transform other)
         {
-            Vector3 start = transform.position + Vector3.up * 0.9f;
+            Vector3 start = transform.position + Vector3.up * settings.sightHeight;
             Vector3 end = other.position + Vector3.up * 0.9f;
             foreach (RaycastHit hit in Physics.RaycastAll(start, (end - start).normalized, Vector3.Distance(start, end), ~0, QueryTriggerInteraction.Ignore))
             {
@@ -261,8 +305,8 @@ namespace Mismo.Gameplay.Enemies
                 Vector3 from = transform.position;
                 if (NavMesh.Raycast(from, from + delta, out NavMeshHit edge, agent.areaMask)) break;
                 bool blocked = false;
-                foreach (RaycastHit hit in Physics.CapsuleCastAll(from + Vector3.up * 0.4f, from + Vector3.up * 1.1f,
-                    0.32f, delta.normalized, delta.magnitude + 0.02f, ~0, QueryTriggerInteraction.Ignore))
+                foreach (RaycastHit hit in Physics.CapsuleCastAll(from + Vector3.up * (agent.radius+.1f), from + Vector3.up * Mathf.Max(agent.radius+.1f,agent.height-agent.radius),
+                    agent.radius*.9f, delta.normalized, delta.magnitude + 0.02f, ~0, QueryTriggerInteraction.Ignore))
                     if (!hit.transform.IsChildOf(transform)) { blocked = true; break; }
                 if (blocked) break;
                 agent.Move(delta);
@@ -273,7 +317,8 @@ namespace Mismo.Gameplay.Enemies
         private void ApplyHits()
         {
             if (State != GoblinState.Attack || target == null) return;
-            Vector3 center = transform.position + Vector3.up * 0.85f + attackDirection * attack.forwardOffset;
+            if(attack.kind==CreatureAttackKind.Projectile||StateProgress<attack.damageStartsAt)return;
+            Vector3 center = transform.position + Vector3.up * attack.hitHeight + attackDirection * attack.forwardOffset;
             foreach (Collider other in Physics.OverlapBox(center, attack.halfExtents, transform.rotation, ~0, QueryTriggerInteraction.Ignore))
             {
                 if (State != GoblinState.Attack) break;

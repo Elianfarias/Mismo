@@ -1,0 +1,32 @@
+WEAPON_CHECK Sword and requested bow are equipped
+WEAPON_CHECK Bow uses shared projectile action
+WEAPON_CHECK Sword basic starts
+WEAPON_CHECK Swap rejected while attack active
+WEAPON_CHECK Swap rejected through combo recovery
+WEAPON_CHECK Swap accepted after recovery
+WEAPON_CHECK Bow power starts
+WEAPON_CHECK Exactly one arrow released across windup
+WEAPON_CHECK Bow recovery blocks swap
+WEAPON_CHECK Swept arrow hits target at speed
+WEAPON_CHECK Can alternate twice when idle
+WEAPON_CHECK Cooldown survives inactive weapon and prevents reuse
+WEAPON_CHECK Thin wall stops arrow before target
+WEAPON_CHECK Ground area starts
+WEAPON_CHECK Area spawns at fixed ground point
+WEAPON_CHECK Swap allowed after area release
+WEAPON_CHECK Area stays in world after movement and swap
+WEAPON_CHECK Area damages local floor only
+WEAPON_CHECK Replacing equipped weapon blocked in combat
+WEAPON_CHECK Reusable parry starts
+WEAPON_CHECK Parry window opened
+WEAPON_CHECK Parry intercepts actual incoming damage
+WEAPON_CHECK Cancellation closes defensive window
+WEAPON_CHECK Sword lunge uses shared movement
+WEAPON_CHECK Lunge moves through character motor: (0.00, 0.00, -6.00) -> (0.00, 0.04, -5.20) flags=Below controlled=True
+WEAPON_CHECK Cancel leaves no pending lunge movement
+WEAPON_CHECK Shared definitions do not share player cooldown state
+WEAPON_CHECK Bow reactivated
+WEAPON_CHECK Basic arrow prepares
+WEAPON_CHECK Death cancels cast and blocks swap
+WEAPON_CHECK Death before release creates no arrow
+WEAPON_CHECKS_OK 31 checks passed
