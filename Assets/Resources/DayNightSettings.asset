@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DayNightSettings
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.DayNightSettings
   running: 1
-  cycleMinutes: 5
+  cycleMinutes: 30
   startingHour: 9
   skyRotation: 0
   sunAzimuth: 135
