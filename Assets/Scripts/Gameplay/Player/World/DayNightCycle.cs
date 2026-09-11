@@ -18,7 +18,7 @@ namespace Mismo.Gameplay.Player.World
             settings=value;if(settings==null)return;Current=this;
             hour=WorldSession.Current!=null&&WorldSession.Current.hasTimeOfDay?WorldSession.Current.timeOfDay:settings.startingHour;
             sun=RenderSettings.sun;
-            if(sun==null)sun=Object.FindObjectsByType<Light>(FindObjectsSortMode.None).FirstOrDefault(l=>l.type==LightType.Directional&&l.gameObject.scene==gameObject.scene);
+            if(sun==null)sun=Object.FindObjectsByType<Light>().FirstOrDefault(l=>l.type==LightType.Directional&&l.gameObject.scene==gameObject.scene);
             if(sun==null){var go=new GameObject("Sun");go.transform.SetParent(transform,false);sun=go.AddComponent<Light>();sun.type=LightType.Directional;sun.shadows=LightShadows.Soft;}
             var moonObject=new GameObject("Moon light");moonObject.transform.SetParent(transform,false);moon=moonObject.AddComponent<Light>();moon.type=LightType.Directional;moon.shadows=LightShadows.Soft;
             sky=new Material(Shader.Find("Mismo/Blended Skybox")){name="Day-night sky (runtime)"};RenderSettings.skybox=sky;RenderSettings.sun=sun;

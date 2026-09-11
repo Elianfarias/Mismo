@@ -44,7 +44,7 @@ namespace Mismo.Gameplay.Player.Editor
             if (EditorApplication.timeSinceStartup > deadline) { Finish(false, "Timeout de validación Elite"); return; }
             if (elite == null)
             {
-                elite = Object.FindFirstObjectByType<GoblinController>();
+                elite = Object.FindAnyObjectByType<GoblinController>();
                 visual = elite != null ? elite.GetComponent<GoblinEliteVisual>() : null;
                 style = elite != null ? elite.GetComponent<GoblinVisualStyle>() : null;
                 health = elite != null ? elite.GetComponent<Health>() : null;

@@ -26,7 +26,7 @@ namespace Mismo.Gameplay.Combat
     public sealed class AttackHitbox : MonoBehaviour
     {
         [SerializeField] private AttackWindow[] windows = { new AttackWindow() };
-        private readonly HashSet<int> hitTargets = new HashSet<int>();
+        private readonly HashSet<EntityId> hitTargets = new HashSet<EntityId>();
         private Collider hitbox;
         private DamageDealer damageDealer;
         private int currentIndex = -1;
@@ -149,7 +149,7 @@ namespace Mismo.Gameplay.Combat
             if (!windowOpen || other == null || other.transform.root == transform.root) return;
             if(!(other.GetComponentInParent<IDamageReceiver>() is Component receiver))return;
             // Multiple streamed enemies share a chunk/world root; deduplicate per actor.
-            int targetId = receiver.GetInstanceID();
+            EntityId targetId = receiver.GetEntityId();
             if (!hitTargets.Add(targetId)) return;
             Vector3 point = other.ClosestPoint(transform.position);
             Vector3 direction = other.transform.position - transform.position;

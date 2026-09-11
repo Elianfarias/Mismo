@@ -98,11 +98,11 @@ namespace Mismo.Gameplay.Player.Editor
                     wall.AddComponent<BoxCollider>().size=new Vector3(spec.z,120,spec.w);
                 }
                 rootRegion.AddComponent<GoblinNavigation>().Configure(geometry);
-                var player=Object.FindFirstObjectByType<PlayerController>();
+                var player=Object.FindAnyObjectByType<PlayerController>();
                 player.transform.position=At(field,-50,-70)+Vector3.up*.15f;
                 if(player.GetComponent<RegionRespawn>()==null)player.gameObject.AddComponent<RegionRespawn>();
                 Group("Village Spawn",rootRegion.transform).position=player.transform.position;
-                var sun=Object.FindFirstObjectByType<Light>();
+                var sun=Object.FindAnyObjectByType<Light>();
                 if(sun!=null){sun.transform.rotation=Quaternion.Euler(48,-35,0);sun.color=new Color(1,.94f,.80f);sun.intensity=1.15f;sun.shadows=LightShadows.Soft;}
                 RenderSettings.ambientMode=UnityEngine.Rendering.AmbientMode.Trilight;
                 RenderSettings.ambientSkyColor=new Color(.57f,.69f,.83f);

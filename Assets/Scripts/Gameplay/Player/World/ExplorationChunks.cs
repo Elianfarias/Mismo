@@ -37,7 +37,7 @@ namespace Mismo.Gameplay.Player.World
             var region=scene.GetRootGameObjects().FirstOrDefault(g=>g.name.StartsWith("Voxel Region"));
             if(region==null||region.GetComponent<ExplorationChunks>()!=null)return;
             if(!region.name.Contains("seed "+settings.seed+" "))return;
-            var player=Object.FindFirstObjectByType<PlayerController>();
+            var player=Object.FindAnyObjectByType<PlayerController>();
             if(player==null)return;
             region.AddComponent<ExplorationChunks>().Initialize(WorldSession.Settings(settings),player.transform);
         }

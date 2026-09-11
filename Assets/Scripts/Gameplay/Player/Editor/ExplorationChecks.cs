@@ -69,9 +69,9 @@ namespace Mismo.Gameplay.Player.Editor
             {
                 if(stage==0)
                 {
-                    stream=Object.FindFirstObjectByType<ExplorationChunks>();player=Object.FindFirstObjectByType<PlayerController>();
+                    stream=Object.FindAnyObjectByType<ExplorationChunks>();player=Object.FindAnyObjectByType<PlayerController>();
                     Check(stream!=null&&stream.LoadedCount>0,"Scene bootstraps streaming during Play");player.enabled=false;
-                    Check(Object.FindObjectsByType<ClimbableTree>(FindObjectsSortMode.None).Length>0,"Existing and generated trees support climbing");
+                    Check(Object.FindObjectsByType<ClimbableTree>().Length>0,"Existing and generated trees support climbing");
                     player.GetComponent<PlayerMotor>().ResetPosition(new Vector3(160,55,0));stage++;began=EditorApplication.timeSinceStartup;return;
                 }
                 if(stage==1)

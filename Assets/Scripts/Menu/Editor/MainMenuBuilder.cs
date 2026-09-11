@@ -78,7 +78,7 @@ namespace Mismo.Menu.Editor
         }
         static IEnumerator Check()
         {
-            var menu=Object.FindFirstObjectByType<MainMenuView>();
+            var menu=Object.FindAnyObjectByType<MainMenuView>();
             Require(menu!=null&&!menu.OptionsVisible,"Menu opens on home screen");
             Require(EditorBuildSettings.scenes[0].path==ScenePath,"Menu is first build scene");
             Capture(menu,"main-menu.png");menu.ShowOptions(true);yield return null;yield return null;
@@ -100,8 +100,8 @@ namespace Mismo.Menu.Editor
             float end=Time.time+25;while(SceneManager.GetActiveScene().name!="VoxelRegion_7319"&&Time.time<end)yield return null;
             yield return null;
             Require(SceneManager.GetActiveScene().name=="VoxelRegion_7319","Begin loads gameplay");
-            Require(Object.FindObjectsByType<AudioRuntime>(FindObjectsSortMode.None).Length==1,"Audio persists without duplicates");
-            Require(Object.FindObjectsByType<AudioSource>(FindObjectsSortMode.None).Any(s=>s.outputAudioMixerGroup==AudioRuntime.SfxGroup),"Gameplay effects route through SFX mixer");
+            Require(Object.FindObjectsByType<AudioRuntime>().Length==1,"Audio persists without duplicates");
+            Require(Object.FindObjectsByType<AudioSource>().Any(s=>s.outputAudioMixerGroup==AudioRuntime.SfxGroup),"Gameplay effects route through SFX mixer");
         }
         static void Capture(MainMenuView menu,string file)
         {

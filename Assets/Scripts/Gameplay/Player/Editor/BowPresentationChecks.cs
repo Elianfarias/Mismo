@@ -53,7 +53,7 @@ namespace Mismo.Gameplay.Player.Editor
         static string PathOf(Transform t) => t.parent != null ? PathOf(t.parent) + "/" + t.name : t.name;
         static IEnumerator Run()
         {
-            var player = Object.FindFirstObjectByType<PlayerController>(); player.enabled = false;
+            var player = Object.FindAnyObjectByType<PlayerController>(); player.enabled = false;
             var loadout = player.GetComponent<EquipmentLoadout>(); var motor = player.GetComponent<PlayerMotor>();
             var animator = player.GetComponent<PlayerAnimationDriver>().Animator;
             Debug.Log("BOW_RIG animated=" + PathOf(animator.transform) + " motor=" + PathOf(motor.Visual));
@@ -102,7 +102,7 @@ namespace Mismo.Gameplay.Player.Editor
             var area = AreaInstance.Spawn(player.gameObject, ground, 2.5f, 3, .6f, 7, visual);
             area.Step(.01f);
             Require(targetHealth.Current == targetHealth.Maximum, "Rain waits for arrival before applying damage");
-            var arrows = Object.FindObjectsByType<FallingArrowVisual>(FindObjectsSortMode.None);
+            var arrows = Object.FindObjectsByType<FallingArrowVisual>();
             Require(arrows.Length == 9, "Rain emits configured volley");
             var arrow = arrows[0]; Vector3 initial = arrow.transform.position;
             arrow.Step(.1f);
@@ -117,7 +117,7 @@ namespace Mismo.Gameplay.Player.Editor
             Require(area != null && Vector3.Distance(area.transform.position, ground) < .001f, "Rain remains at its ground target after swapping");
             float end = Time.time + 5;
             while (Time.time < end) yield return null;
-            Require(Object.FindObjectsByType<FallingArrowVisual>(FindObjectsSortMode.None).Length == 0 && area == null, "Rain arrows and area clean up at completion");
+            Require(Object.FindObjectsByType<FallingArrowVisual>().Length == 0 && area == null, "Rain arrows and area clean up at completion");
             if (!loadout.ActiveDefinition.isBow) loadout.TrySwap();
             Application.runInBackground = true;
             UnityEngine.InputSystem.InputSystem.settings.backgroundBehavior = UnityEngine.InputSystem.InputSettings.BackgroundBehavior.IgnoreFocus;

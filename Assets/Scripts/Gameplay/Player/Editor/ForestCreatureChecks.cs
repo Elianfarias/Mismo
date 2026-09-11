@@ -38,7 +38,7 @@ namespace Mismo.Gameplay.Player.Editor
         static void Check(bool ok,string message){if(!ok)throw new Exception(message);count++;Debug.Log("FOREST_CHECK "+message);}
         static IEnumerator Run()
         {
-            var enemies=Object.FindObjectsByType<GoblinController>(FindObjectsSortMode.None);Check(enemies.Length==8,"Eight variants in test scene");
+            var enemies=Object.FindObjectsByType<GoblinController>();Check(enemies.Length==8,"Eight variants in test scene");
             var catalog=Resources.Load<World.WorldContentCatalog>("WorldContentCatalog");
             var forestIds=new System.Collections.Generic.HashSet<string>();bool outsideForest=false,bossInOrdinary=false;
             for(int i=0;i<1000;i++)
@@ -52,7 +52,7 @@ namespace Mismo.Gameplay.Player.Editor
             var golemEntry=catalog.encounters.Single(e=>e.id=="forest.Forest_Golem_Stylized");
             Check(golemEntry.site==World.WorldSiteKind.BossArena&&golemEntry.maximumCount==1,"Golem encounter reserves one boss slot");
             foreach(var enemy in enemies)enemy.enabled=false;
-            var player=Object.FindFirstObjectByType<PlayerController>();player.enabled=false;player.GetComponent<EquipmentLoadout>().Runner.Cancel();
+            var player=Object.FindAnyObjectByType<PlayerController>();player.enabled=false;player.GetComponent<EquipmentLoadout>().Runner.Cancel();
             var life=player.GetComponent<Health>();life.ConfigureMaximum(10000);life.Revive();var motor=player.GetComponent<PlayerMotor>();
             foreach(var enemy in enemies)
             {
@@ -78,7 +78,7 @@ namespace Mismo.Gameplay.Player.Editor
                     {
                         if(enemy.State==GoblinState.Telegraph)windupSafe&=life.Current==healthBefore;
                         observedHeld|=enemy.GetComponentsInChildren<Transform>().Any(t=>t.name=="Held rock");
-                        var active=Object.FindFirstObjectByType<ProjectileInstance>();if(active!=null&&active!=projectile){projectile=active;releases++;}
+                        var active=Object.FindAnyObjectByType<ProjectileInstance>();if(active!=null&&active!=projectile){projectile=active;releases++;}
                         yield return null;
                     }
                     Check(enemy.State==GoblinState.Recovery,attack.label+" enters recovery");
@@ -114,7 +114,7 @@ namespace Mismo.Gameplay.Player.Editor
             interruption.GetComponent<Health>().ApplyDamage(new DamageInfo(100000,player.gameObject,Vector3.zero,Vector3.forward));yield return null;yield return null;
             Check(!interruption.GetComponentsInChildren<Transform>().Any(t=>t.name=="Held rock"),"Death removes carried rock");
             float until=Time.time+3;while(Time.time<until)yield return null;
-            Check(Object.FindObjectsByType<ProjectileInstance>(FindObjectsSortMode.None).Length==0,"Interrupted throw never releases a late projectile");
+            Check(Object.FindObjectsByType<ProjectileInstance>().Length==0,"Interrupted throw never releases a late projectile");
             Object.Destroy(interruption);Object.Destroy(isolated);
             var group=new GameObject("Shared world root");var owner=new GameObject("Projectile owner");owner.transform.SetParent(group.transform);owner.AddComponent<Health>();
             var wall=GameObject.CreatePrimitive(PrimitiveType.Cube);wall.transform.SetParent(group.transform);wall.transform.position=new Vector3(0,3,2);wall.transform.localScale=new Vector3(4,4,.5f);Physics.SyncTransforms();

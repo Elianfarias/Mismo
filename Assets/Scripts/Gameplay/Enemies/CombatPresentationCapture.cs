@@ -1,4 +1,4 @@
-#if DEVELOPMENT_BUILD && !UNITY_EDITOR
+#if !UNITY_EDITOR
 using System.Collections;
 using System.IO;
 using System.Linq;
@@ -15,15 +15,15 @@ namespace Mismo.Gameplay.Enemies
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Install()
         {
-            if(System.Environment.GetCommandLineArgs().Contains("-presentation-capture"))
+            if(Debug.isDebugBuild && System.Environment.GetCommandLineArgs().Contains("-presentation-capture"))
                 new GameObject("Development capture").AddComponent<CombatPresentationCapture>();
         }
         private IEnumerator Start()
         {
             Application.runInBackground=true;
             yield return new WaitForSecondsRealtime(2);
-            var player=FindFirstObjectByType<PlayerController>();player.enabled=false;
-            foreach(var goblin in FindObjectsByType<GoblinController>(FindObjectsSortMode.None))goblin.enabled=false;
+            var player=FindAnyObjectByType<PlayerController>();player.enabled=false;
+            foreach(var goblin in FindObjectsByType<GoblinController>())goblin.enabled=false;
             player.GetComponent<PlayerMotor>().ResetPosition(new Vector3(-30,6,-34));
             player.GetComponent<Health>().ApplyDamage(new DamageInfo(25,null,Vector3.zero,Vector3.forward));
             player.GetComponent<Stamina>().TrySpend(35);

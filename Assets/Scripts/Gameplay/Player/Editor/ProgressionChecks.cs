@@ -26,7 +26,7 @@ namespace Mismo.Gameplay.Player.Editor
         }
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         static void Isolate()
-        {if(SessionState.GetBool(Pending,false))foreach(var respawn in Object.FindObjectsByType<World.RegionRespawn>(FindObjectsSortMode.None))Object.DestroyImmediate(respawn);}
+        {if(SessionState.GetBool(Pending,false))foreach(var respawn in Object.FindObjectsByType<World.RegionRespawn>())Object.DestroyImmediate(respawn);}
         [InitializeOnLoadMethod]
         static void Resume(){if(!SessionState.GetBool(Pending,false))return;deadline=EditorApplication.timeSinceStartup+150;EditorApplication.update+=Step;}
         static void Step()
@@ -53,9 +53,9 @@ namespace Mismo.Gameplay.Player.Editor
         }
         static IEnumerator Run()
         {
-            foreach(var g in Object.FindObjectsByType<GoblinController>(FindObjectsSortMode.None))g.enabled=false;
-            foreach(var b in Object.FindObjectsByType<BossController>(FindObjectsSortMode.None))b.enabled=false;
-            var player=Object.FindFirstObjectByType<PlayerController>();player.enabled=false;
+            foreach(var g in Object.FindObjectsByType<GoblinController>())g.enabled=false;
+            foreach(var b in Object.FindObjectsByType<BossController>())b.enabled=false;
+            var player=Object.FindAnyObjectByType<PlayerController>();player.enabled=false;
             var loadout=player.GetComponent<EquipmentLoadout>();loadout.Runner.Cancel();loadout.Belt?.Cancel();
             var health=player.GetComponent<Health>();health.Revive();
             float until=Time.time+7;while(loadout.InCombat&&Time.time<until)yield return null;

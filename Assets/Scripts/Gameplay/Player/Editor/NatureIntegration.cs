@@ -151,7 +151,7 @@ namespace Mismo.Gameplay.Player.Editor
                 RenderSettings.fog=false;RenderSettings.ambientLight=new Color(.65f,.65f,.65f);
                 var camera=new GameObject("Camera").AddComponent<UnityEngine.Camera>();camera.transform.position=new Vector3(65,65,-65);camera.transform.LookAt(new Vector3(27,1,25));camera.orthographic=true;camera.orthographicSize=43;camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.16f,.2f,.23f);
                 var rt=new RenderTexture(1600,1200,24);camera.targetTexture=rt;camera.Render();RenderTexture.active=rt;var pixels=new Texture2D(1600,1200,TextureFormat.RGB24,false);pixels.ReadPixels(new Rect(0,0,1600,1200),0,0);pixels.Apply();File.WriteAllBytes("Docs/Validation/NatureOverview.png",pixels.EncodeToPNG());
-                foreach(var root in Object.FindObjectsByType<MeshRenderer>(FindObjectsSortMode.None))root.enabled=false;
+                foreach(var root in Object.FindObjectsByType<MeshRenderer>())root.enabled=false;
                 var cover=entries.Where(a=>a.kind==WorldAssetKind.Grass||a.kind==WorldAssetKind.Flower).ToArray();
                 for(int i=0;i<cover.Length;i++){var go=Object.Instantiate(cover[i].prefab);go.transform.position=new Vector3(i%3*2,0,i/3*2);}
                 camera.transform.position=new Vector3(5,4,-7);camera.transform.LookAt(new Vector3(2,.3f,1));camera.orthographicSize=3.4f;camera.Render();RenderTexture.active=rt;pixels.ReadPixels(new Rect(0,0,1600,1200),0,0);pixels.Apply();File.WriteAllBytes("Docs/Validation/NatureGroundCover.png",pixels.EncodeToPNG());

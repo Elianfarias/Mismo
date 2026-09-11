@@ -39,7 +39,7 @@ namespace Mismo.Gameplay.Enemies
         private Health targetHealth;
         private NavMeshAgent agent;
         private readonly CooldownBook cooldowns = new CooldownBook();
-        private readonly HashSet<int> hitTargets = new HashSet<int>();
+        private readonly HashSet<EntityId> hitTargets = new HashSet<EntityId>();
         private readonly List<BossPatternDefinition> candidates = new List<BossPatternDefinition>();
         private readonly List<float> candidateWeights = new List<float>();
 
@@ -321,7 +321,7 @@ namespace Mismo.Gameplay.Enemies
         {
             if (!autoFindTarget || target != null || searchTimer > 0f) return;
             searchTimer = 0.5f;
-            foreach (PlayerController player in FindObjectsByType<PlayerController>(FindObjectsSortMode.None))
+            foreach (PlayerController player in FindObjectsByType<PlayerController>())
             {
                 Health candidate = player.GetComponent<Health>();
                 if ((candidate == null || !candidate.IsDead) &&
@@ -608,7 +608,7 @@ namespace Mismo.Gameplay.Enemies
                 if (state != BossState.Attack) break;
                 DamageReceiver receiver = other.GetComponentInParent<DamageReceiver>();
                 if (receiver == null || receiver.transform.root != target.transform.root || !HasSight(target)) continue;
-                if (!hitTargets.Add(receiver.GetInstanceID())) continue;
+                if (!hitTargets.Add(receiver.GetEntityId())) continue;
                 weapon.ApplyTo(receiver.gameObject, other.ClosestPoint(center), attackDirection);
             }
         }

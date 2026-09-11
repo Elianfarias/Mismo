@@ -47,7 +47,7 @@ namespace Mismo.Gameplay.Player.Editor
             if (!EditorApplication.isPlaying || !Application.isPlaying || Time.frameCount < 2) return;
             if (motor == null)
             {
-                motor = Object.FindFirstObjectByType<PlayerMotor>();
+                motor = Object.FindAnyObjectByType<PlayerMotor>();
                 if (motor == null) { Finish(false, "Falta PlayerMotor"); return; }
                 stamina = motor.GetComponent<Stamina>();
                 dash = motor.GetComponent<BeltDash>();

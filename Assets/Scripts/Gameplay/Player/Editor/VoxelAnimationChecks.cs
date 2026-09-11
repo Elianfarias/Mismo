@@ -59,7 +59,7 @@ namespace Mismo.Gameplay.Player.Editor
   static void StartProbe()
   {
    if(!Application.isBatchMode||!SessionState.GetBool(Pending,false))return;
-   var motor=Object.FindFirstObjectByType<PlayerMotor>();
+   var motor=Object.FindAnyObjectByType<PlayerMotor>();
    foreach(var b in motor.GetComponents<MonoBehaviour>())
     if(b is PlayerController||b is PlayerHUD||b is MovementFeedback||b.GetType().Name=="PlayerInputReader")b.enabled=false;
    motor.gameObject.AddComponent<VoxelMotionProbe>();
