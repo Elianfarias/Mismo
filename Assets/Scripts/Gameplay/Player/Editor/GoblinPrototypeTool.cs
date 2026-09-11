@@ -253,7 +253,7 @@ namespace Mismo.Gameplay.Player.Editor
             var camera = UnityEngine.Camera.main;
             camera.transform.position = new Vector3(2.6f, 2.4f, 0.2f);
             camera.transform.LookAt(new Vector3(0, 0.95f, 4));
-            foreach (GoblinPresentation goblin in Object.FindObjectsByType<GoblinPresentation>(FindObjectsSortMode.None))
+            foreach (GoblinPresentation goblin in Object.FindObjectsByType<GoblinPresentation>())
             {
                 Transform status = goblin.transform.Find("Status");
                 if (status != null) status.rotation = camera.transform.rotation;
@@ -297,7 +297,7 @@ namespace Mismo.Gameplay.Player.Editor
             if (!EditorApplication.isPlaying || !Application.isPlaying || Time.frameCount < 4) return;
             EditorApplication.update -= RenderElitePreviewAfterPlay;
             SessionState.SetBool("Mismo.GoblinElitePreview.Pending", false);
-            GoblinEliteVisual eliteVisual = Object.FindFirstObjectByType<GoblinEliteVisual>();
+            GoblinEliteVisual eliteVisual = Object.FindAnyObjectByType<GoblinEliteVisual>();
             if (eliteVisual != null)
             {
                 GoblinController eliteController = eliteVisual.GetComponent<GoblinController>();

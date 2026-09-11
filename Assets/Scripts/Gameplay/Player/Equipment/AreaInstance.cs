@@ -60,11 +60,11 @@ namespace Mismo.Gameplay.Player.Equipment
         public void Pulse()
         {
             long attackId=AttackIdentity.Next();
-            var visited = new HashSet<int>(); Vector3 origin = transform.position + Vector3.up * .7f;
+            var visited = new HashSet<EntityId>(); Vector3 origin = transform.position + Vector3.up * .7f;
             foreach (var other in Physics.OverlapSphere(origin, radius, ~0, QueryTriggerInteraction.Ignore))
             {
                 var receiver = other.GetComponentInParent<IDamageReceiver>();
-                if (!(receiver is Component target) || owner != null && target.transform.root == owner.transform.root || !visited.Add(target.GetInstanceID())) continue;
+                if (!(receiver is Component target) || owner != null && target.transform.root == owner.transform.root || !visited.Add(target.GetEntityId())) continue;
                 if (Mathf.Abs(target.transform.position.y - transform.position.y) > 1.5f) continue;
                 Vector3 point = other.ClosestPoint(origin);
                 if (Physics.Linecast(origin, point, out var obstruction, ~0, QueryTriggerInteraction.Ignore) && obstruction.collider.GetComponentInParent<IDamageReceiver>() != receiver) continue;

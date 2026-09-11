@@ -23,7 +23,7 @@ namespace Mismo.Gameplay.Player.Editor
         static void IsolateProfile()
         {
             if (!SessionState.GetBool(Pending, false)) return;
-            foreach (var respawn in Object.FindObjectsByType<Mismo.Gameplay.Player.World.RegionRespawn>(FindObjectsSortMode.None))
+            foreach (var respawn in Object.FindObjectsByType<Mismo.Gameplay.Player.World.RegionRespawn>())
                 Object.DestroyImmediate(respawn);
         }
         public static void RunBatch()
@@ -71,9 +71,9 @@ namespace Mismo.Gameplay.Player.Editor
         static IEnumerator Run()
         {
             Application.targetFrameRate = 60; Application.runInBackground = true;
-            foreach (var enemy in Object.FindObjectsByType<GoblinController>(FindObjectsSortMode.None)) enemy.enabled = false;
-            foreach (var boss in Object.FindObjectsByType<BossController>(FindObjectsSortMode.None)) boss.enabled = false;
-            var player = Object.FindFirstObjectByType<PlayerController>(); player.enabled = false;
+            foreach (var enemy in Object.FindObjectsByType<GoblinController>()) enemy.enabled = false;
+            foreach (var boss in Object.FindObjectsByType<BossController>()) boss.enabled = false;
+            var player = Object.FindAnyObjectByType<PlayerController>(); player.enabled = false;
             var loadout = player.GetComponent<EquipmentLoadout>(); loadout.Runner.Cancel();
             loadout.Belt?.Cancel();
             var health = player.GetComponent<Health>(); health.Revive();
@@ -151,22 +151,22 @@ namespace Mismo.Gameplay.Player.Editor
             player.SendMessage("Update");
             Check(loadout.Runner.Current != null && loadout.Runner.Current.Definition == basic && combat.Focus == 0,
                 "Actual left click starts a basic arrow with zero Focus after closing inventory");
-            int arrows = Object.FindObjectsByType<ProjectileInstance>(FindObjectsSortMode.None).Length;
+            int arrows = Object.FindObjectsByType<ProjectileInstance>().Length;
             UnityEngine.InputSystem.InputSystem.QueueStateEvent(mouse, new UnityEngine.InputSystem.LowLevel.MouseState());
             UnityEngine.InputSystem.InputSystem.Update(); player.SendMessage("Update");
             loadout.Runner.Tick(.41f);
-            Check(Object.FindObjectsByType<ProjectileInstance>(FindObjectsSortMode.None).Length == arrows + 1 && combat.Focus == 0,
+            Check(Object.FindObjectsByType<ProjectileInstance>().Length == arrows + 1 && combat.Focus == 0,
                 "Tap releases one projectile after minimum preparation without spending Focus");
             loadout.Runner.Tick(.4f);
             float nextShot = Time.time + basic.cooldown + .1f;
             while (Time.time < nextShot) yield return null;
             combat.ResetCombat();
-            arrows = Object.FindObjectsByType<ProjectileInstance>(FindObjectsSortMode.None).Length;
+            arrows = Object.FindObjectsByType<ProjectileInstance>().Length;
             Check(loadout.Runner.TryUse(AbilitySlot.Basic, Vector3.forward, Vector3.zero, null, true), "Held basic starts with zero Focus");
             loadout.Runner.Tick(.6f);
-            Check(Object.FindObjectsByType<ProjectileInstance>(FindObjectsSortMode.None).Length == arrows, "Held basic waits for release while charging");
+            Check(Object.FindObjectsByType<ProjectileInstance>().Length == arrows, "Held basic waits for release while charging");
             loadout.Runner.SetHeld(false); loadout.Runner.Tick(.01f);
-            Check(Object.FindObjectsByType<ProjectileInstance>(FindObjectsSortMode.None).Length == arrows + 1 && combat.Focus == 0,
+            Check(Object.FindObjectsByType<ProjectileInstance>().Length == arrows + 1 && combat.Focus == 0,
                 "Charged basic releases one arrow without Focus");
             loadout.Runner.Tick(.4f);
             UnityEngine.InputSystem.InputSystem.RemoveDevice(mouse);

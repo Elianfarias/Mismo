@@ -27,7 +27,7 @@ namespace Mismo.Gameplay.Enemies
         private bool started;
         private float provokedLoseRange, provokedLeashRange;
         private int orbitSign = 1;
-        private readonly HashSet<int> hitTargets = new HashSet<int>();
+        private readonly HashSet<EntityId> hitTargets = new HashSet<EntityId>();
         readonly Dictionary<GoblinAttack,float> attackReady=new Dictionary<GoblinAttack,float>();
         float clock;
         bool projectileReleased;
@@ -145,7 +145,7 @@ namespace Mismo.Gameplay.Enemies
             if (target == null && State != GoblinState.Return && search <= 0f)
             {
                 search = 0.5f;
-                foreach (PlayerController player in FindObjectsByType<PlayerController>(FindObjectsSortMode.None))
+                foreach (PlayerController player in FindObjectsByType<PlayerController>())
                 {
                     Health candidate = player.GetComponent<Health>();
                     if ((candidate == null || !candidate.IsDead) && Vector3.Distance(transform.position, player.transform.position) <= settings.detectionRange
@@ -325,7 +325,7 @@ namespace Mismo.Gameplay.Enemies
                 DamageReceiver receiver = other.GetComponentInParent<DamageReceiver>();
                 if (receiver == null || receiver.transform != target || !HasSight(target)) continue;
                 // También se consume el contacto rechazado por parry/iFrames: un intento por ataque.
-                if (!hitTargets.Add(receiver.GetInstanceID())) continue;
+                if (!hitTargets.Add(receiver.GetEntityId())) continue;
                 weapon.ApplyTo(receiver.gameObject, other.ClosestPoint(center), attackDirection);
             }
         }

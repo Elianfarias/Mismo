@@ -25,7 +25,7 @@ namespace Mismo.Gameplay.Player.Editor
         private static void DisableHeadlessHud()
         {
             if(!Application.isBatchMode||!SessionState.GetBool(Pending,false))return;
-            foreach(var hud in Object.FindObjectsByType<Mismo.Gameplay.Player.Presentation.PlayerHUD>(FindObjectsSortMode.None))hud.enabled=false;
+            foreach(var hud in Object.FindObjectsByType<Mismo.Gameplay.Player.Presentation.PlayerHUD>())hud.enabled=false;
         }
 
         public static void RunBatch()
@@ -63,13 +63,13 @@ namespace Mismo.Gameplay.Player.Editor
         {
             Application.targetFrameRate = 60;
             Application.runInBackground = true;
-            player = Object.FindFirstObjectByType<PlayerController>();
+            player = Object.FindAnyObjectByType<PlayerController>();
             Require(player != null, "Jugador de la arena");
             player.enabled = false; // El test controla posición y habilidades sin input de escritorio.
             playerHealth = player.GetComponent<Health>();
             Require(playerHealth != null && player.GetComponent<DamageReceiver>() != null, "Jugador recibe daño");
             // The editable arena can contain a boss; isolate this goblin regression from other AI.
-            foreach(var boss in Object.FindObjectsByType<BossController>(FindObjectsSortMode.None))Object.DestroyImmediate(boss.gameObject);
+            foreach(var boss in Object.FindObjectsByType<BossController>())Object.DestroyImmediate(boss.gameObject);
             foreach (GameObject root in player.gameObject.scene.GetRootGameObjects())
                 foreach (Transform item in root.GetComponentsInChildren<Transform>(true))
                     Require(GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(item.gameObject) == 0, "Sin scripts perdidos: " + item.name);
@@ -219,7 +219,7 @@ namespace Mismo.Gameplay.Player.Editor
 
         private static void Reset(Vector3 playerPosition, Vector3 goblinPosition)
         {
-            foreach (GoblinController existing in Object.FindObjectsByType<GoblinController>(FindObjectsSortMode.None)) Object.DestroyImmediate(existing.gameObject);
+            foreach (GoblinController existing in Object.FindObjectsByType<GoblinController>()) Object.DestroyImmediate(existing.gameObject);
             playerHealth.Revive(); player.GetComponent<Invulnerability>().Cancel();
             player.GetComponentInChildren<SwordParry>()?.Tick(100f);
             PlacePlayer(playerPosition);

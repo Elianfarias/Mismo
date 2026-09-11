@@ -23,7 +23,7 @@ namespace Mismo.Gameplay.Combat
         [SerializeField, Min(0f)] private float hitboxStart = 0.02f;
         [SerializeField, Min(0f)] private float hitboxDuration = 0.18f;
 
-        private readonly HashSet<int> hitTargets = new HashSet<int>();
+        private readonly HashSet<EntityId> hitTargets = new HashSet<EntityId>();
         private DamageDealer damageDealer;
         private Stamina stamina;
         private PlayerMotor motor;
@@ -119,7 +119,7 @@ namespace Mismo.Gameplay.Combat
             foreach (Collider other in overlaps)
             {
                 if (other == null || other.transform.root == transform.root) continue;
-                int targetId = other.transform.root.GetInstanceID();
+                EntityId targetId = other.transform.root.GetEntityId();
                 if (!hitTargets.Add(targetId)) continue;
                 Vector3 point = other.ClosestPoint(origin);
                 if (damageDealer.ApplyTo(other.gameObject, point, direction)) Hit?.Invoke(other.gameObject);

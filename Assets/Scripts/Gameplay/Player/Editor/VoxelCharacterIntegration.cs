@@ -76,7 +76,7 @@ namespace Mismo.Gameplay.Player.Editor
             try { Configure(prefab,controller); PrefabUtility.SaveAsPrefabAsset(prefab,PrefabPath); }
             finally { PrefabUtility.UnloadPrefabContents(prefab); }
             var scene=EditorSceneManager.OpenScene("Assets/Scenes/VoxelRegion_7319.unity");
-            foreach(var player in Object.FindObjectsByType<PlayerController>(FindObjectsSortMode.None)) Configure(player.gameObject,controller);
+            foreach(var player in Object.FindObjectsByType<PlayerController>()) Configure(player.gameObject,controller);
             EditorSceneManager.SaveScene(scene);
             AssetDatabase.SaveAssets();
             Debug.Log("VOXEL_INTEGRATION_OK");

@@ -110,9 +110,10 @@ namespace Mismo.Gameplay.Player.Editor
             }
             return controller;
         }
-        [Serializable] sealed class EventFile {public int fps;public EventClips clips;}
-        [Serializable] sealed class EventClips {public EventMarker[] Pick_Up_Rock,Throw_Rock,Ground_Slam,Sweep_Attack,Recover;}
-        [Serializable] sealed class EventMarker {public string @event;public int frame;public float time_seconds;}
+        // JsonUtility populates these fields from the animation event file.
+        [Serializable] sealed class EventFile {public int fps=0;public EventClips clips=null;}
+        [Serializable] sealed class EventClips {public EventMarker[] Pick_Up_Rock=null,Throw_Rock=null,Ground_Slam=null,Sweep_Attack=null,Recover=null;}
+        [Serializable] sealed class EventMarker {public string @event=null;public int frame=0;public float time_seconds=0;}
         static float EventTime(EventMarker[] markers,string name)
         {var marker=markers.Single(e=>e.@event==name);if(Mathf.Abs(marker.time_seconds-(marker.frame-1)/30f)>.001f)throw new Exception("Invalid event time "+name);return marker.time_seconds;}
         static GoblinAttack Action(string species,string clip,float range,float damage,float impact,float active,float cooldown)

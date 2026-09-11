@@ -30,7 +30,7 @@ namespace Mismo.Gameplay.Enemies
 
         private void Awake()
         {
-            if (boss == null) boss = FindFirstObjectByType<BossController>();
+            if (boss == null) boss = FindAnyObjectByType<BossController>();
             if (lockedPassage == null) lockedPassage = GameObject.Find("Boss Passage Gate");
             if (rewardIndicator == null) rewardIndicator = GameObject.Find("Boss Reward Indicator");
             if (lockedPassage == null) lockedPassage = CreateFallbackGate();
@@ -60,7 +60,7 @@ namespace Mismo.Gameplay.Enemies
             completed = true;
             if (lockedPassage != null) lockedPassage.SetActive(false);
             if (rewardIndicator != null) rewardIndicator.SetActive(true);
-            var inventory = FindFirstObjectByType<Mismo.Gameplay.Player.Equipment.Inventory.PlayerInventory>();
+            var inventory = FindAnyObjectByType<Mismo.Gameplay.Player.Equipment.Inventory.PlayerInventory>();
             Mismo.Gameplay.Player.World.WeaponRewardPickup.Spawn(inventory, boss.transform.position,
                 Mismo.Gameplay.Player.Equipment.Inventory.ItemCatalog.BossRewardId);
             onBossDefeated?.Invoke();

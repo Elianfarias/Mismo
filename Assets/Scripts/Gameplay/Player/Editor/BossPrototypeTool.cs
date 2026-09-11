@@ -146,7 +146,7 @@ namespace Mismo.Gameplay.Player.Editor
             Scene scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
             Vector3 bossPosition = new Vector3(0f, 0f, 4f);
             Quaternion bossRotation = Quaternion.identity;
-            BossController oldBoss = Object.FindFirstObjectByType<BossController>();
+            BossController oldBoss = Object.FindAnyObjectByType<BossController>();
             if (oldBoss != null)
             {
                 bossPosition = oldBoss.transform.position;
@@ -154,7 +154,7 @@ namespace Mismo.Gameplay.Player.Editor
                 Object.DestroyImmediate(oldBoss.gameObject);
             }
             bool positionCaptured = oldBoss != null;
-            foreach (GoblinController goblin in Object.FindObjectsByType<GoblinController>(FindObjectsSortMode.None))
+            foreach (GoblinController goblin in Object.FindObjectsByType<GoblinController>())
             {
                 if (!positionCaptured)
                 {
@@ -167,18 +167,18 @@ namespace Mismo.Gameplay.Player.Editor
             GameObject bossInstance = (GameObject)PrefabUtility.InstantiatePrefab(bossPrefab, scene);
             bossInstance.transform.SetPositionAndRotation(bossPosition, bossRotation);
 
-            foreach (BossArenaHUD oldHud in Object.FindObjectsByType<BossArenaHUD>(FindObjectsSortMode.None))
+            foreach (BossArenaHUD oldHud in Object.FindObjectsByType<BossArenaHUD>())
                 Object.DestroyImmediate(oldHud.gameObject);
-            foreach (GoblinArenaHUD oldHud in Object.FindObjectsByType<GoblinArenaHUD>(FindObjectsSortMode.None))
+            foreach (GoblinArenaHUD oldHud in Object.FindObjectsByType<GoblinArenaHUD>())
                 Object.DestroyImmediate(oldHud.gameObject);
 
-            BossController boss = Object.FindFirstObjectByType<BossController>();
+            BossController boss = Object.FindAnyObjectByType<BossController>();
             GameObject gate = GameObject.Find("Boss Passage Gate");
             if (gate == null) gate = CreateGate();
             GameObject reward = GameObject.Find("Boss Reward Indicator");
             if (reward == null) reward = CreateRewardIndicator();
 
-            BossEncounter encounter = Object.FindFirstObjectByType<BossEncounter>();
+            BossEncounter encounter = Object.FindAnyObjectByType<BossEncounter>();
             if (encounter == null)
             {
                 GameObject encounterObject = new GameObject("Boss Encounter");

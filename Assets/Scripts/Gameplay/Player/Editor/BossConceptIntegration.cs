@@ -74,7 +74,7 @@ namespace Mismo.Gameplay.Player.Editor
         {
             // Controllers are deliberately paused; presentation must also work without an active attack.
             for(int i=0;i<45;i++)yield return null;
-            var boss=Object.FindFirstObjectByType<BossController>();var goblin=Object.FindFirstObjectByType<GoblinController>();
+            var boss=Object.FindAnyObjectByType<BossController>();var goblin=Object.FindAnyObjectByType<GoblinController>();
             var driver=boss.GetComponent<BossAnimationDriver>();var animator=driver.Animator;
             if(goblin.CurrentAttack!=null||Mathf.Abs(animator.transform.localScale.x-1.6f)>.001f){BossConceptIntegration.Finish(false,"Initial state or boss size");yield break;}
             var enter=typeof(BossController).GetMethod("Enter",BindingFlags.Instance|BindingFlags.NonPublic);

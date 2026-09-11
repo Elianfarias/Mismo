@@ -84,7 +84,7 @@ namespace Mismo.Gameplay.Player.Editor
             AssetDatabase.SaveAssets();
             // Verify the existing world resolves the updated prefab instances without rebuilding it.
             EditorSceneManager.OpenScene("Assets/Scenes/VoxelRegion_7319.unity");
-            var enemies=Object.FindObjectsByType<GoblinController>(FindObjectsSortMode.None);
+            var enemies=Object.FindObjectsByType<GoblinController>();
             if(enemies.Length==0)throw new Exception("No goblins in gameplay scene");
             foreach(var enemy in enemies)
                 if(enemy.GetComponent<GoblinAnimationDriver>()==null)throw new Exception("Scene goblin does not inherit updated prefab: "+enemy.name);
