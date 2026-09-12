@@ -66,14 +66,14 @@ namespace Mismo.Gameplay.Player.Presentation
             yield return new WaitForEndOfFrame();
             CaptureCamera("01-menu.png");
             yield return new WaitForSecondsRealtime(.4f);
-            var menu = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).FirstOrDefault(item => item.GetType().FullName == "Mismo.Menu.MainMenuView");
+            var menu = FindObjectsByType<MonoBehaviour>().FirstOrDefault(item => item.GetType().FullName == "Mismo.Menu.MainMenuView");
             Check(menu != null, "Menu controller exists");
             menu.SendMessage("Begin");
             float until = Time.realtimeSinceStartup + 30;
             while (SceneManager.GetActiveScene().name != "VoxelRegion_7319" && Time.realtimeSinceStartup < until) yield return null;
             yield return null; yield return null;
             Check(SceneManager.GetActiveScene().name == "VoxelRegion_7319", "Menu loads the actual region");
-            var player = FindFirstObjectByType<PlayerController>();
+            var player = FindAnyObjectByType<PlayerController>();
             Check(player != null, "Region player exists");
             var inventory = player.GetComponent<PlayerInventory>();
             var panel = player.GetComponent<InventoryPanel>();
@@ -101,7 +101,7 @@ namespace Mismo.Gameplay.Player.Presentation
             Check(!panel.IsOpen, "I closes inventory in the executable");
             int inspected = 0;
             var invalidMaterials = new List<string>();
-            foreach (var renderer in FindObjectsByType<Renderer>(FindObjectsSortMode.None))
+            foreach (var renderer in FindObjectsByType<Renderer>())
             {
                 if (!renderer.enabled || !renderer.gameObject.activeInHierarchy) continue;
                 foreach (var material in renderer.sharedMaterials)
@@ -117,7 +117,7 @@ namespace Mismo.Gameplay.Player.Presentation
             var camera = UnityEngine.Camera.main;
             yield return new WaitForEndOfFrame();
             CaptureCamera("03-region.png");
-            var goblin = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).FirstOrDefault(item => item.GetType().Name == "GoblinController");
+            var goblin = FindObjectsByType<MonoBehaviour>().FirstOrDefault(item => item.GetType().Name == "GoblinController");
             Check(goblin != null, "Goblin exists in actual region");
             var cameraController = camera.GetComponent<Camera.ThirdPersonCamera>();
             if (cameraController != null) cameraController.enabled = false;

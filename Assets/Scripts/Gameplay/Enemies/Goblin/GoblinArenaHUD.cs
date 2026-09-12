@@ -10,9 +10,9 @@ namespace Mismo.Gameplay.Enemies
         private GoblinController goblin;
         private void Start()
         {
-            var controller = FindFirstObjectByType<PlayerController>();
+            var controller = FindAnyObjectByType<PlayerController>();
             player = controller != null ? controller.GetComponent<Health>() : null;
-            goblin = FindFirstObjectByType<GoblinController>();
+            goblin = FindAnyObjectByType<GoblinController>();
         }
         private void OnGUI()
         {

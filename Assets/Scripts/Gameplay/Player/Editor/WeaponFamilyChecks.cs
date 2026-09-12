@@ -26,7 +26,7 @@ namespace Mismo.Gameplay.Player.Editor
         private static void Isolate()
         {
             if(!SessionState.GetBool(Pending,false))return;
-            foreach(var respawn in Object.FindObjectsByType<World.RegionRespawn>(FindObjectsSortMode.None))Object.DestroyImmediate(respawn);
+            foreach(var respawn in Object.FindObjectsByType<World.RegionRespawn>())Object.DestroyImmediate(respawn);
         }
         [InitializeOnLoadMethod]
         private static void Resume()
@@ -50,8 +50,8 @@ namespace Mismo.Gameplay.Player.Editor
         private static void Check(bool ok,string message){if(!ok)throw new Exception(message);count++;Debug.Log("FAMILY_CHECK "+message);}
         private static IEnumerator Run()
         {
-            var player=Object.FindFirstObjectByType<PlayerController>();Check(player!=null,"Player fixture exists");player.enabled=false;
-            foreach(var goblin in Object.FindObjectsByType<Enemies.GoblinController>(FindObjectsSortMode.None))goblin.enabled=false;
+            var player=Object.FindAnyObjectByType<PlayerController>();Check(player!=null,"Player fixture exists");player.enabled=false;
+            foreach(var goblin in Object.FindObjectsByType<Enemies.GoblinController>())goblin.enabled=false;
             var equipment=player.GetComponent<EquipmentLoadout>();equipment.Runner.Cancel();equipment.Belt?.Cancel();player.GetComponent<Health>().Revive();
             float until=Time.time+7;while(equipment.InCombat && Time.time<until)yield return null;
             var catalog=Resources.Load<ItemCatalog>("ItemCatalog");

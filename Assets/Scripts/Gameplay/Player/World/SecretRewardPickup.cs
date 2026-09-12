@@ -13,7 +13,7 @@ namespace Mismo.Gameplay.Player.World
         private void Start()
         {
             if(worldId==null)return;
-            var inventory=FindFirstObjectByType<Equipment.Inventory.PlayerInventory>();
+            var inventory=FindAnyObjectByType<Equipment.Inventory.PlayerInventory>();
             if(inventory!=null&&inventory.IsWorldEnemyDefeated(worldId)){Consumed=true;gameObject.SetActive(false);}
         }
 

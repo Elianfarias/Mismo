@@ -26,14 +26,14 @@ namespace Mismo.Gameplay.Player.Editor
         }
         static void Finish(bool ok,string message){SessionState.SetBool(Pending,false);EditorApplication.update-=Tick;Debug.Log("COMBAT_V2_"+(ok?"OK ":"FAILED ")+message);EditorApplication.Exit(ok?0:1);}
         static void Check(bool ok,string message){if(!ok)throw new Exception(message);count++;Debug.Log("COMBAT_V2_CHECK "+message);}
-        static int Arrows()=>Object.FindObjectsByType<ProjectileInstance>(FindObjectsSortMode.None).Length;
+        static int Arrows()=>Object.FindObjectsByType<ProjectileInstance>().Length;
         static IEnumerator Run()
         {
-            var player=Object.FindFirstObjectByType<PlayerController>();player.enabled=false;
+            var player=Object.FindAnyObjectByType<PlayerController>();player.enabled=false;
             var runner=player.GetComponent<AbilityRunner>();var loadout=player.GetComponent<EquipmentLoadout>();var motor=player.GetComponent<PlayerMotor>();
             var playerState=player.GetComponent<CombatState>();var receiver=player.GetComponent<DamageReceiver>();var defense=player.GetComponent<DefenseWindow>();
             string feedback=null;playerState.Rewarded+=value=>feedback=value;
-            var enemy=Object.FindFirstObjectByType<GoblinController>();enemy.enabled=false;
+            var enemy=Object.FindAnyObjectByType<GoblinController>();enemy.enabled=false;
             var dummy=GameObject.CreatePrimitive(PrimitiveType.Capsule);dummy.transform.position=new Vector3(50,1,50);
             var health=dummy.AddComponent<Health>();health.ConfigureMaximum(1000);health.Revive();var target=dummy.AddComponent<DamageReceiver>();var state=dummy.GetComponent<CombatState>();state.ConfigurePosture(100);
             var front=new DamageInfo(20,player.gameObject,dummy.transform.position,Vector3.back,AttackIdentity.Next());

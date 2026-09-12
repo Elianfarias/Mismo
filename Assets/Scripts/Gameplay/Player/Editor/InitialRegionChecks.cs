@@ -85,7 +85,7 @@ namespace Mismo.Gameplay.Player.Editor
 
         private static IEnumerator Checks()
         {
-            var player=Object.FindFirstObjectByType<PlayerController>();
+            var player=Object.FindAnyObjectByType<PlayerController>();
             Require(player!=null,"Player exists");
             player.enabled=false;
             Vector3 spawn=player.transform.position;
@@ -100,7 +100,7 @@ namespace Mismo.Gameplay.Player.Editor
                 Require(hud!=null && hud.Minimap!=null && hud.Minimap.IsCreated(),"HUD minimap allocated");
                 Require(sword!=null && sword.SwordVisual!=null,"Sword resolved");
                 Require(Vector3.Distance(sword.SwordVisual.lossyScale,Vector3.one)<.01f,"Sword world scale is one, independent of imported hand");
-                foreach(var plate in Object.FindObjectsByType<EnemyNameplate>(FindObjectsSortMode.None))
+                foreach(var plate in Object.FindObjectsByType<EnemyNameplate>())
                 {
                     var status=plate.transform.Find("Status");
                     Require(status!=null && !status.gameObject.activeInHierarchy,"Legacy enemy status hidden: "+plate.name);
@@ -108,7 +108,7 @@ namespace Mismo.Gameplay.Player.Editor
                 foreach(var renderer in sword.SwordVisual.GetComponentsInChildren<MeshRenderer>())
                     Require(renderer.bounds.min.y>player.transform.position.y+.1f && renderer.bounds.size.magnitude<1.5f,"Sword idle bounds above feet and normal size");
                 player.GetComponent<Mismo.Gameplay.Player.Movement.PlayerMotor>().ResetPosition(new Vector3(-30,6,-34));
-                var nearGoblin=Object.FindObjectsByType<GoblinController>(FindObjectsSortMode.None);
+                var nearGoblin=Object.FindObjectsByType<GoblinController>();
                 foreach(var enemy in nearGoblin)enemy.enabled=false;
                 player.GetComponent<Health>().ApplyDamage(new DamageInfo(25,null,Vector3.zero,Vector3.forward));
                 player.GetComponent<Mismo.Gameplay.Player.Movement.Stamina>().TrySpend(35);
@@ -137,7 +137,7 @@ namespace Mismo.Gameplay.Player.Editor
             foreach(var root in player.gameObject.scene.GetRootGameObjects())
                 foreach(var item in root.GetComponentsInChildren<Transform>(true))
                     Require(GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(item.gameObject)==0,"Missing script "+item.name);
-            var goblins=Object.FindObjectsByType<GoblinController>(FindObjectsSortMode.None);
+            var goblins=Object.FindObjectsByType<GoblinController>();
             Require(goblins.Length==5,"Five goblins including elite");
             foreach(var goblin in goblins)
             {
@@ -147,7 +147,7 @@ namespace Mismo.Gameplay.Player.Editor
                 goblin.enabled=false;
                 foreach(var collider in goblin.GetComponentsInChildren<Collider>())collider.enabled=false;
             }
-            var boss=Object.FindFirstObjectByType<BossController>();
+            var boss=Object.FindAnyObjectByType<BossController>();
             Require(boss.GetComponent<NavMeshAgent>().isOnNavMesh,"Boss on mesh");
             boss.enabled=false;
             foreach(var collider in boss.GetComponentsInChildren<Collider>())collider.enabled=false;
@@ -222,7 +222,7 @@ namespace Mismo.Gameplay.Player.Editor
                 Debug.Log("VOXEL PASS physical walking through encounters and secret approach");
                 Require(Physics.Raycast(new Vector3(40,13,91),Vector3.forward,out var gateHit,5) && gateHit.collider.name=="Boss Passage Gate","Gate physically blocks shrine");
             }
-            var pickup=Object.FindFirstObjectByType<SecretRewardPickup>();
+            var pickup=Object.FindAnyObjectByType<SecretRewardPickup>();
             var health=player.GetComponent<Health>();
             var cc=player.GetComponent<CharacterController>();
             cc.enabled=false; player.transform.position=pickup.transform.position; cc.enabled=true;
@@ -234,7 +234,7 @@ namespace Mismo.Gameplay.Player.Editor
             Require(pickup.Consumed,"Trigger consumes reward");
             Require(Mathf.Approximately(health.Current,health.Maximum-60+health.Maximum*.4f),"Exactly one heal");
             Debug.Log("REGION PASS reward full health and single consumption");
-            var encounter=Object.FindFirstObjectByType<BossEncounter>();
+            var encounter=Object.FindAnyObjectByType<BossEncounter>();
             var gate=GameObject.Find("Boss Passage Gate");
             Require(gate.activeSelf,"Gate initially closed");
             // Re-enable to retain the boss death subscription.
@@ -256,8 +256,8 @@ namespace Mismo.Gameplay.Player.Editor
             Require(replacement!=null && !ReferenceEquals(replacement,oldPlayer),"Scene reloaded");
             Require(replacement.enabled && replacement.GetComponent<Health>().Normalized==1,"Player restored");
             Require(Vector3.Distance(replacement.transform.position,spawn)<2,"Village spawn");
-            Require(!Object.FindFirstObjectByType<BossEncounter>().IsCompleted,"Boss reset");
-            Require(Object.FindFirstObjectByType<SecretRewardPickup>()!=null,"Reward reset");
+            Require(!Object.FindAnyObjectByType<BossEncounter>().IsCompleted,"Boss reset");
+            Require(Object.FindAnyObjectByType<SecretRewardPickup>()!=null,"Reward reset");
             Debug.Log("REGION PASS respawn resets attempt");
         }
         private static void Require(bool condition,string message) { if(!condition) throw new Exception(message); }

@@ -105,7 +105,7 @@ namespace Mismo.Gameplay.Player.Editor
             Label("PASO DEL GUARDIAN",new Vector3(0,7,132),bossArea);
             Label("FIN DE LA REGION",new Vector3(0,4,171),bossArea);
             region.AddComponent<GoblinNavigation>().Configure(geometry);
-            var player = Object.FindFirstObjectByType<PlayerController>();
+            var player = Object.FindAnyObjectByType<PlayerController>();
             player.transform.position = new Vector3(0,.1f,0);
             player.gameObject.AddComponent<RegionRespawn>();
             var scenes = EditorBuildSettings.scenes.ToList();

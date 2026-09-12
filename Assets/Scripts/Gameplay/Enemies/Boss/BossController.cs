@@ -321,7 +321,7 @@ namespace Mismo.Gameplay.Enemies
         {
             if (!autoFindTarget || target != null || searchTimer > 0f) return;
             searchTimer = 0.5f;
-            foreach (PlayerController player in FindObjectsByType<PlayerController>(FindObjectsSortMode.None))
+            foreach (PlayerController player in FindObjectsByType<PlayerController>())
             {
                 Health candidate = player.GetComponent<Health>();
                 if ((candidate == null || !candidate.IsDead) &&

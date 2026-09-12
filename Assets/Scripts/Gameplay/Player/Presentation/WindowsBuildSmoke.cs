@@ -27,13 +27,13 @@ namespace Mismo.Gameplay.Player.Presentation
             yield return null;
             if(SceneManager.GetActiveScene().name!="MainMenu"){Finish(false,"Missing menu");yield break;}
             yield return new WaitForEndOfFrame();CaptureFrame("Menu.png");
-            var menu=FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).FirstOrDefault(x=>x.GetType().FullName=="Mismo.Menu.MainMenuView");
+            var menu=FindObjectsByType<MonoBehaviour>().FirstOrDefault(x=>x.GetType().FullName=="Mismo.Menu.MainMenuView");
             if(menu==null){Finish(false,"Missing menu controller");yield break;}menu.SendMessage("Begin");
             while(SceneManager.GetActiveScene().name!="VoxelRegion_7319")yield return null;
             for(int i=0;i<120;i++)yield return null;
-            var town=FindObjectsByType<Transform>(FindObjectsSortMode.None).FirstOrDefault(t=>t.name.StartsWith("Village ")&&t.GetComponentInParent<ExplorationChunks>()!=null);
+            var town=FindObjectsByType<Transform>().FirstOrDefault(t=>t.name.StartsWith("Village ")&&t.GetComponentInParent<ExplorationChunks>()!=null);
             if(town==null||town.localScale.x<1.99f){Finish(false,"Missing enlarged town");yield break;}
-            var player=FindFirstObjectByType<PlayerController>();
+            var player=FindAnyObjectByType<PlayerController>();
             if(player==null||WorldSession.Current==null||!player.GetComponent<PlayerInventory>().IsReady){Finish(false,"World or inventory did not initialize");yield break;}
             if(!File.Exists(Path.Combine(output,"active-world.mismo"))){Finish(false,"World not saved to isolated storage");yield break;}
             yield return new WaitForEndOfFrame();CaptureFrame("World.png");yield return null;yield return null;
@@ -42,7 +42,7 @@ namespace Mismo.Gameplay.Player.Presentation
         void CaptureFrame(string file)
         {
             var camera=UnityEngine.Camera.main;if(camera==null)return;
-            var canvases=FindObjectsByType<Canvas>(FindObjectsSortMode.None).Where(c=>c.renderMode==RenderMode.ScreenSpaceOverlay).ToArray();
+            var canvases=FindObjectsByType<Canvas>().Where(c=>c.renderMode==RenderMode.ScreenSpaceOverlay).ToArray();
             foreach(var canvas in canvases){canvas.renderMode=RenderMode.ScreenSpaceCamera;canvas.worldCamera=camera;canvas.planeDistance=1;}
             var rt=new RenderTexture(1280,800,24);camera.targetTexture=rt;Canvas.ForceUpdateCanvases();camera.Render();RenderTexture.active=rt;
             var image=new Texture2D(1280,800,TextureFormat.RGB24,false);image.ReadPixels(new Rect(0,0,1280,800),0,0);image.Apply();File.WriteAllBytes(Path.Combine(output,file),image.EncodeToPNG());

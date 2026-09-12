@@ -15,7 +15,7 @@ namespace Mismo.Gameplay.Player.Editor
         [MenuItem("Mismo/Character/Capture Animation Diagnostics")]
         static void Capture()
         {
-            var driver=Object.FindFirstObjectByType<PlayerAnimationDriver>();
+            var driver=Object.FindAnyObjectByType<PlayerAnimationDriver>();
             if(driver==null || driver.Animator==null)return;
             var a=driver.Animator;
             var text=new StringBuilder();

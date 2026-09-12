@@ -59,7 +59,7 @@ namespace Mismo.Gameplay.Player.Editor
         }
         static IEnumerator Run()
         {
-            var player = Object.FindFirstObjectByType<PlayerController>(); player.enabled = false;
+            var player = Object.FindAnyObjectByType<PlayerController>(); player.enabled = false;
             var loadout = player.GetComponent<EquipmentLoadout>(); loadout.Initialize(); var runner = loadout.Runner;
             var motor = player.GetComponent<PlayerMotor>(); var health = player.GetComponent<Health>();
             var sword = loadout.ActiveDefinition; var bow = loadout.SecondaryDefinition;
@@ -77,9 +77,9 @@ namespace Mismo.Gameplay.Player.Editor
             player.GetComponent<CombatState>().Reward(20,"TEST");
             Require(runner.TryUse(AbilitySlot.Q, Vector3.forward, Vector3.zero), "Bow power starts");
             runner.Tick(.7f);
-            Require(Object.FindObjectsByType<ProjectileInstance>(FindObjectsSortMode.None).Length == 1, "Exactly one arrow released across windup");
+            Require(Object.FindObjectsByType<ProjectileInstance>().Length == 1, "Exactly one arrow released across windup");
             Require(!loadout.TrySwap(), "Bow recovery blocks swap");
-            foreach (var arrow in Object.FindObjectsByType<ProjectileInstance>(FindObjectsSortMode.None)) arrow.Step(.25f);
+            foreach (var arrow in Object.FindObjectsByType<ProjectileInstance>()) arrow.Step(.25f);
             Require(target.Current < target.Maximum, "Swept arrow hits target at speed");
             runner.Tick(.3f); float before = runner.Remaining(bow.GetAbility(AbilitySlot.Q));
             Require(loadout.TrySwap() && loadout.TrySwap(), "Can alternate twice when idle");
@@ -92,7 +92,7 @@ namespace Mismo.Gameplay.Player.Editor
             Vector3 point = new Vector3(5, 0, 5);
             Require(runner.TryUse(AbilitySlot.R, Vector3.forward, point), "Ground area starts");
             runner.Tick(1);
-            var area = Object.FindFirstObjectByType<AreaInstance>(); Require(area != null, "Area spawns at fixed ground point");
+            var area = Object.FindAnyObjectByType<AreaInstance>(); Require(area != null, "Area spawns at fixed ground point");
             Require(loadout.TrySwap(), "Swap allowed after area release");
             motor.ResetPosition(new Vector3(-4, 0, 0));
             Require(Vector3.Distance(area.transform.position, point) < .001f, "Area stays in world after movement and swap");
@@ -125,10 +125,10 @@ namespace Mismo.Gameplay.Player.Editor
             Object.Destroy(second);
             Require(loadout.TrySwap(), "Bow reactivated");
             Require(runner.TryUse(AbilitySlot.Basic, Vector3.forward, Vector3.zero), "Basic arrow prepares");
-            int arrowsBefore = Object.FindObjectsByType<ProjectileInstance>(FindObjectsSortMode.None).Length;
+            int arrowsBefore = Object.FindObjectsByType<ProjectileInstance>().Length;
             health.ApplyDamage(new DamageInfo(1000, null, player.transform.position, Vector3.forward)); runner.Tick(1);
             Require(!runner.IsBusy && !loadout.TrySwap(), "Death cancels cast and blocks swap");
-            Require(Object.FindObjectsByType<ProjectileInstance>(FindObjectsSortMode.None).Length == arrowsBefore, "Death before release creates no arrow");
+            Require(Object.FindObjectsByType<ProjectileInstance>().Length == arrowsBefore, "Death before release creates no arrow");
         }
         static void Capture(Transform player, string name)
         {

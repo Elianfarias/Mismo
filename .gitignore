@@ -50,14 +50,13 @@ Thumbs.db
 # Local isolated Unity validation projects
 /.validation/
 
-# Source, notes, and generated work kept outside the Unity project.
-# The repository publishes only the Assets/ tree.
+# Unity project configuration and package manifests must remain versioned.
+# Keep Assets/, Packages/, and ProjectSettings/ out of the ignore rules.
+# Local source material, notes, and validation tools.
 /.gdd-work/
 /ArtSource/
 /Docs/
 /Tools/
-/Packages/
-/ProjectSettings/
 /*.docx
 /.vsconfig
 

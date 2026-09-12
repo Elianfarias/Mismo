@@ -50,7 +50,7 @@ namespace Mismo.Gameplay.Player.Editor
         {
             UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/VoxelRegion_7319.unity");
             Physics.SyncTransforms();
-            foreach(var enemy in UnityEngine.Object.FindObjectsByType<GoblinController>(FindObjectsSortMode.None).Take(12))
+            foreach(var enemy in UnityEngine.Object.FindObjectsByType<GoblinController>().Take(12))
             {
                 if(!UnityEngine.AI.NavMesh.SamplePosition(enemy.transform.position,out var nav,3,UnityEngine.AI.NavMesh.AllAreas))continue;
                 var hits=Physics.RaycastAll(nav.position+Vector3.up,Vector3.down,3,~0,QueryTriggerInteraction.Ignore)

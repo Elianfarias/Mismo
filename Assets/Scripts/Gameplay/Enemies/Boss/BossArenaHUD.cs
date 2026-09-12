@@ -10,8 +10,8 @@ namespace Mismo.Gameplay.Enemies
 
         private void Start()
         {
-            boss = FindFirstObjectByType<BossController>();
-            encounter = FindFirstObjectByType<BossEncounter>();
+            boss = FindAnyObjectByType<BossController>();
+            encounter = FindAnyObjectByType<BossEncounter>();
         }
 
         private void OnGUI()

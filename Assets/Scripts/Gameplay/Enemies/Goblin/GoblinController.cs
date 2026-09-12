@@ -145,7 +145,7 @@ namespace Mismo.Gameplay.Enemies
             if (target == null && State != GoblinState.Return && search <= 0f)
             {
                 search = 0.5f;
-                foreach (PlayerController player in FindObjectsByType<PlayerController>(FindObjectsSortMode.None))
+                foreach (PlayerController player in FindObjectsByType<PlayerController>())
                 {
                     Health candidate = player.GetComponent<Health>();
                     if ((candidate == null || !candidate.IsDead) && Vector3.Distance(transform.position, player.transform.position) <= settings.detectionRange

@@ -24,7 +24,7 @@ namespace Mismo.Gameplay.Player.Equipment
             area.fallingVisual = fallingVisual; area.arrowsPerVolley = Mathf.Clamp(arrowsPerVolley, 1, 40);
             area.fallHeight = Mathf.Max(.5f, fallHeight); area.fallSpeed = Mathf.Max(.1f, fallSpeed);
             var line = go.AddComponent<LineRenderer>(); line.useWorldSpace = false; line.loop = true; line.positionCount = 48; line.widthMultiplier = .055f;
-            area.material = new Material(Shader.Find("Sprites/Default")); line.sharedMaterial = area.material;
+            area.material = Mismo.Gameplay.Player.Presentation.RuntimeParticleMaterial.Create("Ground arrow area", Color.white); line.sharedMaterial = area.material;
             line.startColor = line.endColor = new Color(1, .7f, .2f, .85f);
             for (int i = 0; i < 48; i++) { float a = i * Mathf.PI * 2 / 48; line.SetPosition(i, new Vector3(Mathf.Cos(a) * radius, .06f, Mathf.Sin(a) * radius)); }
             return area;

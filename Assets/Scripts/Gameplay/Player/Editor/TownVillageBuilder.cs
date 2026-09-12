@@ -66,7 +66,7 @@ namespace Mismo.Gameplay.Player.Editor
         public static void UpdateCurrent()
         {
             if(EditorApplication.isPlayingOrWillChangePlaymode)return;
-            var village=Object.FindObjectsByType<Transform>(FindObjectsSortMode.None).FirstOrDefault(t=>t.name=="Village" && t.parent!=null && t.parent.name=="AuthoredGeometry");
+            var village=Object.FindObjectsByType<Transform>().FirstOrDefault(t=>t.name=="Village" && t.parent!=null && t.parent.name=="AuthoredGeometry");
             if(village==null)throw new InvalidOperationException("Abrí una región voxel antes de actualizar el pueblo.");
             var region=village.parent.parent.parent;
             string[] parts=region.name.Split(' ');

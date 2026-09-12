@@ -20,7 +20,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ce744cb14261acd4a92c927ed4ad58ab, type: 2}
   - {fileID: 11400000, guid: e7555c6d155e93448b2c9f2f131ceec1, type: 2}
   - {fileID: 11400000, guid: c21a4fd366079564f9927dda16544232, type: 2}
+  family: {fileID: 11400000, guid: d75a568fa95abb44595d508a05bccc66, type: 2}
+  overrideFamilyAbilities: 0
   visualPrefab: {fileID: 959409833555118617, guid: 258e7211b4df96f42970cc83ef563973, type: 3}
+  isTwoHanded: 0
+  dualWield: 0
+  secondaryVisualPrefab: {fileID: 0}
+  secondaryEquipped:
+    anchor: 2
+    bonePath: 
+    offset: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: 1
+  secondaryHolstered:
+    anchor: 0
+    bonePath: 
+    offset: {x: -0.2, y: 1.2, z: -0.25}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: 1
   poseProfile: {fileID: 11400000, guid: c6fe7109cd0509d46956bf5bc3d8fa78, type: 2}
   isBow: 0
   inventoryDescription: 
