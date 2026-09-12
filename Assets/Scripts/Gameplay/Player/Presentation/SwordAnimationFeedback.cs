@@ -89,7 +89,7 @@ namespace Mismo.Gameplay.Player.Presentation
                 var tip=new GameObject("Sword trail");tip.layer=2;tip.transform.SetParent(swordVisual,false);tip.transform.localPosition=Vector3.forward*(rigHand != null ? .0096f : .96f);
                 trail=tip.AddComponent<TrailRenderer>();trail.time=.10f;trail.minVertexDistance=.015f;
                 trail.startWidth=.28f;trail.endWidth=0;trail.numCapVertices=3;
-                trailMaterial=new Material(Shader.Find("Sprites/Default"));trail.sharedMaterial=trailMaterial;
+                trailMaterial=RuntimeParticleMaterial.Create("Sword trail", Color.white);trail.sharedMaterial=trailMaterial;
                 trail.startColor=new Color(1,.88f,.50f,.8f);trail.endColor=new Color(1,.7f,.2f,0);trail.emitting=false;
             }
         }
