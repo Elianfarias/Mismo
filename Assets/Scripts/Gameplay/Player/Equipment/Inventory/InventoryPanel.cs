@@ -4,6 +4,7 @@ using Mismo.Gameplay.Combat;
 using Mismo.Gameplay.Player.Presentation;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using L = Mismo.Gameplay.Player.Localization.GameLanguage;
 
 namespace Mismo.Gameplay.Player.Equipment.Inventory
 {
@@ -24,6 +25,10 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         Vector2Int dragOffset;
         float messageUntil;
         Vector2 scroll;
+        Vector2 skillsScroll;
+        WeaponDefinition skillsWeapon;
+        bool rotatingPreview;
+        readonly Dictionary<Sprite,Texture2D> rotatedIcons=new Dictionary<Sprite,Texture2D>();
         Page page=Page.Inventory;
         GUIStyle label,button,field;
         readonly InventoryPreview preview=new InventoryPreview();
@@ -82,10 +87,12 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(WorldMapPanel.BlocksGameplay)return false;
             if(!IsOpen)
             {
-                if(!inventory.IsReady||!loadout.CanSwap||!Mathf.Approximately(Time.timeScale,1))return false;
+                if(!inventory.IsReady||health==null||health.IsDead||loadout.Runner==null||loadout.Runner.IsBusy||
+                    loadout.Belt!=null&&loadout.Belt.IsActive||!Mathf.Approximately(Time.timeScale,1))return false;
                 previousLock=Cursor.lockState;previousVisible=Cursor.visible;
                 Cursor.lockState=CursorLockMode.None;Cursor.visible=true;IsOpen=true;active=this;
             }
+            if(target==Page.Skills&&page!=Page.Skills){skillsWeapon=loadout.ActiveDefinition;skillsScroll=Vector2.zero;}
             page=target;confirmDiscard=false;previewDirty=true;return true;
         }
         public bool OpenChest()
@@ -98,22 +105,24 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(!IsOpen)return;
             IsOpen=false;closedFrame=Time.frameCount;if(active==this)active=null;
             Cursor.lockState=previousLock;Cursor.visible=previousVisible;confirmDiscard=false;showChest=false;draggedGrid=null;
-            preview.Dispose();searchFocused=false;
+            preview.Dispose();searchFocused=false;rotatingPreview=false;
         }
         void OnDisable()=>Close();
-        void OnDestroy(){if(inventory!=null)inventory.Changed-=OnChanged;preview.Dispose();}
+        void OnDestroy(){if(inventory!=null)inventory.Changed-=OnChanged;preview.Dispose();foreach(var icon in rotatedIcons.Values)Destroy(icon);rotatedIcons.Clear();}
         void Text(Rect rect,string value,int size=18,Color? color=null)
-        {label.fontSize=size;label.normal.textColor=color??Color.white;GUI.Label(rect,value??"",label);}
+        {label.fontSize=size;label.normal.textColor=color??Color.white;GUI.Label(rect,L.Text(value),label);}
         bool Button(Rect rect,string value)
         {
             var old=GUI.backgroundColor;if(old==Color.white)GUI.backgroundColor=new Color(.13f,.16f,.18f);
-            bool pressed=GUI.Button(rect,value,button);GUI.backgroundColor=old;
+            bool pressed=GUI.Button(rect,L.Text(value),button);GUI.backgroundColor=old;
             if(pressed){GUI.FocusControl(null);searchFocused=false;}return pressed;
         }
         bool Tab(Rect rect,string value,bool chosen)
         {
             var old=GUI.backgroundColor;GUI.backgroundColor=chosen?new Color(.55f,.49f,.35f):new Color(.13f,.16f,.18f);
-            bool clicked=Button(rect,value);GUI.backgroundColor=old;return clicked;
+            int size=button.fontSize;
+            if(rect.width<110)button.fontSize=13;
+            bool clicked=Button(rect,value);button.fontSize=size;GUI.backgroundColor=old;return clicked;
         }
         void Line(float x,float y,float width)=>PlayerHUD.Fill(new Rect(x,y,width,1),new Color(.55f,.56f,.53f,.4f));
         void OnGUI()
@@ -135,7 +144,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             GUI.depth=-40;
             if(!IsOpen)
             {
-                Text(new Rect(28,756,650,32),"[B] MENÚ   [I] MOCHILA   "+inventory.UsedSlots(false)+" / "+inventory.BackpackCapacity,17,Accent);
+                Text(new Rect(28,756,650,32),L.Format("[B] MENÚ   [I] MOCHILA   {0} / {1}",inventory.UsedSlots(false),inventory.BackpackCapacity),17,Accent);
                 if(Time.unscaledTime<messageUntil){PlayerHUD.Fill(new Rect(265,25,750,65),PlayerHUD.Panel);Text(new Rect(285,37,710,48),message,18,Accent);}
             }
             else
@@ -152,8 +161,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 else if(page==Page.Skills)DrawSkills();
                 else DrawInventory();
                 Line(38,710,1202);
-                Text(new Rect(40,726,1180,30),"MOCHILA  "+inventory.UsedSlots(false)+" / "+inventory.BackpackCapacity+" celdas"+
-                    (inventory.AtChest?"     COFRE  "+inventory.UsedSlots(true)+" / "+inventory.ChestCapacity:"")+"     ·     NIVEL "+inventory.Level,19,Accent);
+                Text(new Rect(40,726,1180,30),L.Format("MOCHILA  {0} / {1} celdas",inventory.UsedSlots(false),inventory.BackpackCapacity)+
+                    (inventory.AtChest?L.Format("     COFRE  {0} / {1}",inventory.UsedSlots(true),inventory.ChestCapacity):"")+L.Format("     ·     NIVEL {0}",inventory.Level),19,Accent);
                 Text(new Rect(40,764,1190,30),inventory.Notice,16,inventory.HasSaveProblem?new Color(1,.55f,.3f):Muted);
                 GUI.enabled=previousEnabled;
                 if(confirmDiscard)DrawDiscardConfirmation();
@@ -162,6 +171,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         }
         void DrawMenu()
         {
+            if(Button(new Rect(40,105,300,38),L.LanguageLabel))L.Next();
             Text(new Rect(405,135,500,38),"PREPARÁ TU PRÓXIMA SALIDA",21,Muted);
             if(Button(new Rect(450,225,380,80),"PERSONAJE  [C]"))OpenPage(Page.Character);
             if(Button(new Rect(745,365,360,80),"INVENTARIO  [I]"))OpenPage(Page.Inventory);
@@ -195,7 +205,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             var material=item.material?inventory.Material(item.id):null;
             string name=item.material?(material!=null?material.displayName:item.id):inventory.Definition(item.id).DisplayName;
-            return name.IndexOf(query,StringComparison.OrdinalIgnoreCase)>=0&&
+            return L.Text(name).IndexOf(query,StringComparison.OrdinalIgnoreCase)>=0&&
                 (filter==0||filter==1&&!item.material||filter==2&&item.material&&(material==null||material.category==InventoryItemCategory.Material)||
                 filter==3&&material!=null&&material.category==InventoryItemCategory.Consumable||filter==4&&inventory.Favorite(item.id,item.material));
         }
@@ -258,6 +268,26 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             }
             GUI.EndScrollView();
         }
+        Texture2D RotatedIcon(Sprite sprite)
+        {
+            if(rotatedIcons.TryGetValue(sprite,out var cached))return cached;
+            var source=sprite.texture;var crop=sprite.textureRect;
+            int width=Mathf.RoundToInt(crop.width),height=Mathf.RoundToInt(crop.height);
+            var target=RenderTexture.GetTemporary(source.width,source.height,0,RenderTextureFormat.ARGB32);
+            var previous=RenderTexture.active;
+            Texture2D readable=null;
+            try
+            {
+                Graphics.Blit(source,target);RenderTexture.active=target;
+                readable=new Texture2D(width,height,TextureFormat.RGBA32,false);
+                readable.ReadPixels(crop,0,0);readable.Apply();
+                var pixels=readable.GetPixels32();var rotated=new Color32[pixels.Length];
+                for(int y=0;y<height;y++)for(int x=0;x<width;x++)rotated[x*height+height-1-y]=pixels[y*width+x];
+                cached=new Texture2D(height,width,TextureFormat.RGBA32,false){name=sprite.name+" rotated",wrapMode=TextureWrapMode.Clamp};
+                cached.SetPixels32(rotated);cached.Apply();rotatedIcons.Add(sprite,cached);return cached;
+            }
+            finally{RenderTexture.active=previous;RenderTexture.ReleaseTemporary(target);if(readable!=null)Destroy(readable);}
+        }
         void DrawGridItem(GridItem item,Rect rect,bool rotated,float alpha)
         {
             bool chosen=item.key==selectedGrid&&item.id==selected;
@@ -268,14 +298,15 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             var icon=item.material?inventory.Material(item.id)?.icon:inventory.Definition(item.id).inventoryIcon;
             if(icon!=null)
             {
-                var imageRect=new Rect(rect.x+7,rect.y+7,rect.width-14,rect.height-14);
-                var matrix=GUI.matrix;
-                if(rotated){GUIUtility.RotateAroundPivot(90,imageRect.center);imageRect=new Rect(imageRect.center.x-imageRect.height/2,imageRect.center.y-imageRect.width/2,imageRect.height,imageRect.width);}
-                float aspect=icon.rect.width/icon.rect.height;
-                float width=Mathf.Min(imageRect.width,imageRect.height*aspect),height=width/aspect;
-                var uv=icon.textureRect;uv=new Rect(uv.x/icon.texture.width,uv.y/icon.texture.height,uv.width/icon.texture.width,uv.height/icon.texture.height);
-                GUI.DrawTextureWithTexCoords(new Rect(imageRect.center.x-width/2,imageRect.center.y-height/2,width,height),icon.texture,uv);
-                GUI.matrix=matrix;
+                var imageRect=new Rect(rect.x+7,rect.y+7,Mathf.Max(1,rect.width-14),Mathf.Max(1,rect.height-14));
+                if(rotated)GUI.DrawTexture(imageRect,RotatedIcon(icon),ScaleMode.ScaleToFit);
+                else
+                {
+                    float aspect=icon.rect.width/icon.rect.height;
+                    float width=Mathf.Min(imageRect.width,imageRect.height*aspect),height=width/aspect;
+                    var uv=icon.textureRect;uv=new Rect(uv.x/icon.texture.width,uv.y/icon.texture.height,uv.width/icon.texture.width,uv.height/icon.texture.height);
+                    GUI.DrawTextureWithTexCoords(new Rect(imageRect.center.x-width/2,imageRect.center.y-height/2,width,height),icon.texture,uv);
+                }
             }
             else Text(new Rect(rect.x+5,rect.y+8,rect.width-10,rect.height-10),item.material?(inventory.Material(item.id)?.displayName??item.id):inventory.Definition(item.id).DisplayName,13,Muted);
             if(item.material)Text(new Rect(rect.x+4,rect.yMax-23,rect.width-7,22),"×"+item.quantity,16,Color.white);
@@ -287,12 +318,25 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(inventory.Favorite(item.id,item.material))Text(new Rect(rect.xMax-22,rect.y+3,20,22),"★",16,Accent);
             GUI.color=old;
         }
+        void DrawPreview(Rect rect)
+        {
+            if(!preview.HasModel)return;
+            GUI.DrawTexture(rect,preview.Texture,ScaleMode.ScaleToFit);
+            Text(new Rect(rect.x,rect.yMax-22,rect.width,22),"Arrastrá para rotar",14,Muted);
+            var e=Event.current;
+            if(e.type==EventType.MouseDown&&e.button==0&&rect.Contains(e.mousePosition)&&!confirmDiscard)
+            {rotatingPreview=true;e.Use();}
+            if(rotatingPreview&&e.type==EventType.MouseDrag)
+            {preview.Rotate(e.delta);e.Use();}
+            if(e.rawType==EventType.MouseUp)rotatingPreview=false;
+            if(e.type==EventType.MouseDown&&!rect.Contains(e.mousePosition))rotatingPreview=false;
+        }
         void DrawCharacterPreview()
         {
             Text(new Rect(620,120,470,36),"TU PERSONAJE",25,Accent);
-            if(preview.HasModel)GUI.DrawTexture(new Rect(650,162,520,340),preview.Texture,ScaleMode.ScaleToFit);
-            Text(new Rect(620,520,570,30),"Vida "+health.Current.ToString("0")+" / "+health.Maximum.ToString("0")+"     Armadura "+inventory.Armor.ToString("0"),20);
-            for(int i=0;i<2;i++)Text(new Rect(620,560+i*38,590,35),"Ranura "+(i+1)+" · "+inventory.ItemName(inventory.EquippedId(i)),17,Muted);
+            DrawPreview(new Rect(650,162,520,340));
+            Text(new Rect(620,520,570,30),L.Format("Vida {0:0} / {1:0}     Armadura {2:0}",health.Current,health.Maximum,inventory.Armor),20);
+            for(int i=0;i<2;i++)Text(new Rect(620,560+i*38,590,35),L.Format("Ranura {0} · {1}",i+1,L.Text(inventory.ItemName(inventory.EquippedId(i)))),17,Muted);
             Text(new Rect(620,646,570,30),"Seleccioná un objeto para inspeccionarlo.",17,Accent);
         }
         void DrawItem()
@@ -302,7 +346,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(material==null&&weapon==null){selected=null;previewDirty=true;return;}
             if(Button(new Rect(620,113,168,32),"← Personaje")){selected=null;previewDirty=true;return;}
             if(Button(new Rect(1010,113,203,32),inventory.Favorite(selected,selectedMaterial)?"★ Favorito":"☆ Favorito"))inventory.ToggleFavorite(selected,selectedMaterial);
-            if(preview.HasModel)GUI.DrawTexture(new Rect(735,151,370,220),preview.Texture,ScaleMode.ScaleToFit);
+            if(preview.HasModel)DrawPreview(new Rect(735,151,370,220));
             else if(material?.icon!=null)GUI.DrawTexture(new Rect(850,185,128,128),material.icon.texture,ScaleMode.ScaleToFit);
             else Text(new Rect(820,210,370,70),selectedMaterial?"MATERIAL":"ARMA",32,Accent);
             Text(new Rect(620,377,586,43),material!=null?material.displayName:weapon.DisplayName,28,Accent);
@@ -311,7 +355,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(material!=null)
             {
                 int count=showChest?inventory.StoredMaterialCount(selected):inventory.MaterialCount(selected);
-                Text(new Rect(620,492,570,30),"Total: "+count+" · Pila: "+Mathf.Max(1,material.stackSize)+" · Tamaño: "+material.gridWidth+"×"+material.gridHeight,19);
+                Text(new Rect(620,492,570,30),L.Format("Total: {0} · Pila: {1} · Tamaño: {2}×{3}",count,Mathf.Max(1,material.stackSize),material.gridWidth,material.gridHeight),19);
                 if(Button(new Rect(620,534,44,34),"−"))amount=Mathf.Max(1,amount-1);
                 Text(new Rect(680,538,95,28),amount.ToString(),20);
                 if(Button(new Rect(770,534,44,34),"+"))amount=Mathf.Min(count,amount+1);
@@ -322,13 +366,13 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             {
                 var item=inventory.Item(selected);var target=inventory.Item(inventory.EquippedId(compareSlot));
                 var bonuses=inventory.Rules.Bonuses(item);var current=inventory.Rules.Bonuses(target);
-                Text(new Rect(620,482,585,29),"T"+item.tier+" · "+PlayerInventory.VariantName(item.variant)+" · "+weapon.gridWidth+"×"+weapon.gridHeight,19);
-                Text(new Rect(620,514,580,45),"Bonos vs. ranura "+(compareSlot+1)+": daño "+Signed((bonuses.damage-current.damage)*100)+" pp · vel. "+Signed((bonuses.speed-current.speed)*100)+" pp\nVida "+Signed(bonuses.life-current.life)+" · Armadura "+Signed(bonuses.armor-current.armor),16,Muted);
-                if(Button(new Rect(620,568,180,32),"Comparar ranura "+(compareSlot+1)))compareSlot=1-compareSlot;
+                Text(new Rect(620,482,585,29),"T"+item.tier+" · "+L.Text(PlayerInventory.VariantName(item.variant))+" · "+weapon.gridWidth+"×"+weapon.gridHeight,19);
+                Text(new Rect(620,514,580,45),L.Format("Bonos vs. ranura {0}: daño {1} pp · vel. {2} pp\nVida {3} · Armadura {4}",compareSlot+1,Signed((bonuses.damage-current.damage)*100),Signed((bonuses.speed-current.speed)*100),Signed(bonuses.life-current.life),Signed(bonuses.armor-current.armor)),16,Muted);
+                if(Button(new Rect(620,568,180,32),L.Format("Comparar ranura {0}",compareSlot+1)))compareSlot=1-compareSlot;
                 bool old=GUI.enabled;GUI.enabled=inventory.CanManage&&!showChest&&inventory.EquippedId(compareSlot)!=selected;
-                if(Button(new Rect(814,568,190,32),"Equipar en "+(compareSlot+1)))inventory.TryEquip(compareSlot,selected);
+                if(Button(new Rect(814,568,190,32),L.Format("Equipar en {0}",compareSlot+1)))inventory.TryEquip(compareSlot,selected);
                 GUI.enabled=old;
-                if(Button(new Rect(1018,568,190,32),"Ver habilidades"))OpenPage(Page.Skills);
+                if(Button(new Rect(1018,568,190,32),"Ver habilidades")){OpenPage(Page.Skills);skillsWeapon=weapon;}
             }
             bool was=GUI.enabled;GUI.enabled=inventory.CanManage&&inventory.AtChest&&(!inventory.IsEquipped(selected)||selectedMaterial);
             if(Button(new Rect(620,628,275,36),showChest?"Retirar del cofre":"Guardar en cofre"))
@@ -342,7 +386,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             PlayerHUD.Fill(new Rect(0,0,1280,800),new Color(0,0,0,.85f));
             PlayerHUD.Fill(new Rect(375,270,530,240),new Color(.065f,.07f,.075f));
             Text(new Rect(402,291,475,44),"¿Descartar definitivamente?",25,Accent);
-            Text(new Rect(402,345,475,68),"Se eliminarán "+(selectedMaterial?amount:1)+" unidad(es). Esta acción no se puede deshacer.",19);
+            Text(new Rect(402,345,475,68),L.Format("Se eliminarán {0} unidad(es). Esta acción no se puede deshacer.",selectedMaterial?amount:1),19);
             if(Button(new Rect(400,445,225,40),"Cancelar"))confirmDiscard=false;
             if(Button(new Rect(655,445,225,40),"Descartar"))
             {if(inventory.Discard(selected,selectedMaterial,amount)){selected=null;previewDirty=true;}confirmDiscard=false;}
@@ -350,56 +394,77 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         }
         void DrawSkills()
         {
-            var weapon=inventory.Definition(selected)??loadout.ActiveDefinition;
+            for(int slot=0;slot<2;slot++)
+            {
+                var equipped=loadout.GetSlot(slot);
+                if(equipped==null)continue;
+                if(Tab(new Rect(70+slot*570,105,550,38),L.Format("Ranura {0} · {1}",slot+1,equipped.DisplayName),skillsWeapon==equipped))
+                {skillsWeapon=equipped;skillsScroll=Vector2.zero;}
+            }
+            var weapon=skillsWeapon??loadout.ActiveDefinition;
             if(weapon==null)return;
-            Text(new Rect(70,115,1120,45),weapon.DisplayName+" · Habilidades del arma",28,Accent);
+            Text(new Rect(70,153,1120,40),L.Format("{0} · Habilidades del arma",weapon.DisplayName),25,Accent);
             string[] keys={"CLICK","Q","E","R"};
+            float contentHeight=0;
             for(int i=0;i<4;i++)
             {
                 var ability=weapon.GetAbility((AbilitySlot)i);if(ability==null)continue;
-                PlayerHUD.Fill(new Rect(70,190+i*105,1140,88),new Color(.06f,.07f,.08f,.8f));
-                Text(new Rect(90,215+i*105,135,36),keys[i],25,Accent);
-                Text(new Rect(240,207+i*105,720,44),ability.displayName,25);
-                Text(new Rect(240,247+i*105,840,29),"Recuperación: "+ability.cooldown.ToString("0.##")+" s",17,Muted);
+                label.fontSize=17;
+                contentHeight+=Mathf.Max(108,70+label.CalcHeight(new GUIContent(ability.Description),870))+12;
             }
-            Text(new Rect(70,650,1100,35),"Las habilidades pertenecen al arma equipada. Elegí otra en el inventario para inspeccionar su kit.",18,Muted);
+            skillsScroll=GUI.BeginScrollView(new Rect(70,205,1140,445),skillsScroll,new Rect(0,0,1118,contentHeight));
+            float row=0;
+            for(int i=0;i<4;i++)
+            {
+                var ability=weapon.GetAbility((AbilitySlot)i);if(ability==null)continue;
+                label.fontSize=17;
+                float descriptionHeight=label.CalcHeight(new GUIContent(ability.Description),870);
+                float height=Mathf.Max(108,70+descriptionHeight);
+                PlayerHUD.Fill(new Rect(0,row,1118,height),new Color(.06f,.07f,.08f,.8f));
+                Text(new Rect(20,row+16,130,36),keys[i],25,Accent);
+                Text(new Rect(170,row+10,660,35),ability.DisplayName,24);
+                Text(new Rect(840,row+14,260,30),L.Format("Recuperación: {0:0.##} s",ability.cooldown),16,Muted);
+                Text(new Rect(170,row+51,870,Mathf.Max(35,descriptionHeight)),ability.Description,17,Muted);
+                row+=height+12;
+            }
+            GUI.EndScrollView();
+            Text(new Rect(70,662,1100,32),"Seleccioná una ranura para consultar sus habilidades.",17,Muted);
         }
-        static string Signed(float value)=>value.ToString("+0.#;-0.#;0");
+        static string Signed(float value)=>value.ToString("+0.#;-0.#;0",L.Culture);
         void DrawProgression(float x,float y)
         {
             var p=inventory.Progression;var rules=inventory.Rules;
-            Text(new Rect(x+30,y+133,500,38),"PERSONAJE · NIVEL "+p.level,25,PlayerHUD.Gold);
+            Text(new Rect(x+30,y+133,500,38),L.Format("PERSONAJE · NIVEL {0}",p.level),25,PlayerHUD.Gold);
             Text(new Rect(x+30,y+180,500,30),p.level>=rules.characterMaxLevel?"Nivel máximo":
-                "Experiencia "+p.experience+" / "+rules.Needed(p.level),19);
-            Text(new Rect(x+30,y+217,500,34),"Puntos disponibles: "+p.Available,20);
+                L.Format("Experiencia {0} / {1}",p.experience,rules.Needed(p.level)),19);
+            Text(new Rect(x+30,y+217,500,34),L.Format("Puntos disponibles: {0}",p.Available),20);
             string[] names={"Vida máxima", "Ataque", "Armadura"};
             int[] points={p.lifePoints,p.attackPoints,p.armorPoints};
-            string[] increases={"+"+rules.lifePerPoint+" vida", "+"+(rules.attackPerPoint*100).ToString("0.#")+"% daño", "+"+rules.armorPerPoint+" armadura"};
+            string[] increases={L.Format("+{0} vida",rules.lifePerPoint),L.Format("+{0:0.#}% daño",rules.attackPerPoint*100),L.Format("+{0} armadura",rules.armorPerPoint)};
             for(int i=0;i<3;i++)
             {
                 float row=y+274+i*75;
-                Text(new Rect(x+30,row,310,29),names[i]+" · "+points[i]+" puntos",19);
-                Text(new Rect(x+30,row+29,300,27),increases[i]+" por punto",16,PlayerHUD.Muted);
+                Text(new Rect(x+30,row,310,29),L.Format("{0} · {1} puntos",L.Text(names[i]),points[i]),19);
+                Text(new Rect(x+30,row+29,300,27),L.Format("{0} por punto",increases[i]),16,PlayerHUD.Muted);
                 bool old=GUI.enabled;GUI.enabled=loadout.CanChangeEquipment&&p.Available>0;
                 if(Button(new Rect(x+351,row,150,46),"Mejorar +"))inventory.TrySpend((CharacterAttribute)i);
                 GUI.enabled=old;
             }
-            Text(new Rect(x+30,y+514,500,60),"Vida máxima: "+health.Maximum.ToString("0.#")+
-                " · Armadura: "+inventory.Armor.ToString("0.#")+"\nLos bonos de ambas armas están activos.",17,PlayerHUD.Muted);
+            Text(new Rect(x+30,y+514,500,60),L.Format("Vida máxima: {0:0.#} · Armadura: {1:0.#}\nLos bonos de ambas armas están activos.",health.Maximum,inventory.Armor),17,PlayerHUD.Muted);
             float right=x+580;
             Text(new Rect(right,y+133,500,38),"MAESTRÍA DE ARMA",25,PlayerHUD.Gold);
             var weapon=inventory.Definition(selected)??loadout.ActiveDefinition;
             if(weapon==null)return;
             var mastery=inventory.Mastery(weapon);
-            Text(new Rect(right,y+180,500,60),weapon.DisplayName+"\nFamilia: "+(weapon.family!=null?weapon.family.DisplayName:weapon.DisplayName),18);
-            Text(new Rect(right,y+249,500,54),"Nivel "+mastery.level+" · Puntos: "+mastery.Available+"\n"+
-                (mastery.level>=rules.masteryMaxLevel?"Maestría máxima":"Experiencia "+mastery.experience+" / "+rules.Needed(mastery.level,true)),19);
+            Text(new Rect(right,y+180,500,60),L.Format("{0}\nFamilia: {1}",weapon.DisplayName,L.Text(weapon.family!=null?weapon.family.DisplayName:weapon.DisplayName)),18);
+            Text(new Rect(right,y+249,500,54),L.Format("Nivel {0} · Puntos: {1}",mastery.level,mastery.Available)+"\n"+
+                (mastery.level>=rules.masteryMaxLevel?L.Text("Maestría máxima"):L.Format("Experiencia {0} / {1}",mastery.experience,rules.Needed(mastery.level,true))),19);
             for(int i=0;i<2;i++)
             {
                 float row=y+326+i*75;
                 float increase=i==0?rules.masteryDamagePerPoint:rules.masterySpeedPerPoint;
-                Text(new Rect(right,row,300,29),(i==0?"Daño · "+mastery.damagePoints:"Velocidad · "+mastery.speedPoints)+" puntos",19);
-                Text(new Rect(right,row+29,300,27),"+"+(increase*100).ToString("0.#")+"% por punto",16,PlayerHUD.Muted);
+                Text(new Rect(right,row,300,29),L.Format("{0} · {1} puntos",L.Text(i==0?"Daño":"Velocidad"),i==0?mastery.damagePoints:mastery.speedPoints),19);
+                Text(new Rect(right,row+29,300,27),L.Format("+{0:0.#}% por punto",increase*100),16,PlayerHUD.Muted);
                 bool old=GUI.enabled;GUI.enabled=loadout.CanChangeEquipment&&mastery.Available>0;
                 if(Button(new Rect(right+334,row,160,46),"Mejorar +"))inventory.TrySpendMastery(weapon,(MasteryAttribute)i);
                 GUI.enabled=old;

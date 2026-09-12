@@ -1,0 +1,536 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Game Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: Game
+  m_TableCollectionNameGuidString: 251a87136e2e3c142b3d5f8a360cca0c
+  m_Entries:
+  - m_Id: 2302988288
+    m_Key: menu.continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2437206016
+    m_Key: menu.new
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400320
+    m_Key: menu.options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400321
+    m_Key: menu.quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400322
+    m_Key: menu.back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400323
+    m_Key: menu.music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400324
+    m_Key: menu.effects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400325
+    m_Key: menu.interface
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400326
+    m_Key: menu.test
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400327
+    m_Key: menu.tagline
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400328
+    m_Key: menu.explore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400329
+    m_Key: menu.loading
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400330
+    m_Key: menu.missing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400331
+    m_Key: ui.traveler
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400332
+    m_Key: ui.inventory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400333
+    m_Key: ui.character
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400334
+    m_Key: ui.skills
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400335
+    m_Key: ui.menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400336
+    m_Key: ui.close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400337
+    m_Key: ui.prepare
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400338
+    m_Key: ui.characterKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400339
+    m_Key: ui.inventoryKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400340
+    m_Key: ui.skillsKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400341
+    m_Key: ui.mapKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400342
+    m_Key: ui.running
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400343
+    m_Key: ui.bag
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400344
+    m_Key: ui.chest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400345
+    m_Key: ui.chestTown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400346
+    m_Key: ui.all
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400347
+    m_Key: ui.weapons
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400348
+    m_Key: ui.materials
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400349
+    m_Key: ui.consumables
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400350
+    m_Key: ui.favorites
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400351
+    m_Key: ui.search
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400352
+    m_Key: ui.organize
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400353
+    m_Key: ui.drag
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400354
+    m_Key: ui.unplaced
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400355
+    m_Key: ui.rotate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400356
+    m_Key: ui.yourCharacter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400357
+    m_Key: ui.inspect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400358
+    m_Key: ui.backCharacter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400359
+    m_Key: ui.favOn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400360
+    m_Key: ui.favOff
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400361
+    m_Key: ui.material
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400362
+    m_Key: ui.weapon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400363
+    m_Key: ui.resourceFallback
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400364
+    m_Key: ui.weaponFallback
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400365
+    m_Key: ui.takeAll
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400366
+    m_Key: ui.seeSkills
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400367
+    m_Key: ui.withdraw
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400368
+    m_Key: ui.deposit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400369
+    m_Key: ui.discardPrompt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400370
+    m_Key: ui.discardTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400371
+    m_Key: ui.cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400372
+    m_Key: ui.discard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400373
+    m_Key: ui.chooseSkills
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400374
+    m_Key: ui.maxLevel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400375
+    m_Key: ui.upgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400376
+    m_Key: ui.mastery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400377
+    m_Key: ui.maxMastery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400378
+    m_Key: ui.masteryHelp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400379
+    m_Key: ui.quick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400380
+    m_Key: ui.capacity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400381
+    m_Key: ui.chestCapacity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400382
+    m_Key: ui.level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400383
+    m_Key: ui.vitals
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400384
+    m_Key: ui.slot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400385
+    m_Key: ui.stack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400386
+    m_Key: ui.compare
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400387
+    m_Key: ui.equip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400388
+    m_Key: ui.discardBody
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400389
+    m_Key: ui.weaponSkills
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400390
+    m_Key: ui.cooldown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400391
+    m_Key: ui.charLevel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400392
+    m_Key: ui.experience
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400393
+    m_Key: ui.points
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400394
+    m_Key: ui.healthStat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400395
+    m_Key: ui.attackStat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400396
+    m_Key: ui.armorStat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400397
+    m_Key: ui.pointStat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400398
+    m_Key: ui.perPoint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400399
+    m_Key: ui.bonuses
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400400
+    m_Key: name.sword
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400401
+    m_Key: name.guardian
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400402
+    m_Key: name.bow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400403
+    m_Key: name.balanced
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400404
+    m_Key: name.damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400405
+    m_Key: name.speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400406
+    m_Key: name.wood
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400407
+    m_Key: name.stone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400408
+    m_Key: name.herb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400409
+    m_Key: name.component
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400410
+    m_Key: notice.grid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400411
+    m_Key: notice.sorted
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400412
+    m_Key: ability.sword.swordcombo.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400413
+    m_Key: ability.sword.swordcombo.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400414
+    m_Key: ability.sword.swordlunge.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400415
+    m_Key: ability.sword.swordlunge.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400416
+    m_Key: ability.sword.swordparry.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400417
+    m_Key: ability.sword.swordparry.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400418
+    m_Key: ability.sword.swordspin.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400419
+    m_Key: ability.sword.swordspin.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400420
+    m_Key: ability.bow.bowshot.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400421
+    m_Key: ability.bow.bowshot.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400422
+    m_Key: ability.bow.bowpower.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400423
+    m_Key: ability.bow.bowpower.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400424
+    m_Key: ability.bow.bowretreat.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400425
+    m_Key: ability.bow.bowretreat.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400426
+    m_Key: ability.bow.bowarea.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400427
+    m_Key: ability.bow.bowarea.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400428
+    m_Key: ui.lifeGain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400429
+    m_Key: ui.damageGain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400430
+    m_Key: ui.armorGain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400431
+    m_Key: ui.percentPoint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400432
+    m_Key: ui.totalStats
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400433
+    m_Key: ui.family
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400434
+    m_Key: ui.masteryLevel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400435
+    m_Key: notice.autosave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400436
+    m_Key: notice.room
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400437
+    m_Key: notice.noShape
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400438
+    m_Key: notice.noChestShape
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400439
+    m_Key: notice.recovered
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400440
+    m_Key: notice.saveFail
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400441
+    m_Key: notice.recoveryFail
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400442
+    m_Key: notice.accessFail
+    m_Metadata:
+      m_Items: []
+  - m_Id: 583771934720
+    m_Key: name.medicinalHerb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1146018385920
+    m_Key: ui.language
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 505594223471099928
+  references:
+    version: 2
+    RefIds:
+    - rid: 505594223471099928
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1789256354136

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: SwordLunge
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: ESTOCADA
+  description: Avanza con una estocada para golpear al enemigo de frente.
+  localizationKey: ability.sword.swordlunge
   preparation: 0.02
   active: 0.24
   recovery: 0.14

@@ -1,0 +1,639 @@
+{
+  "entries": [
+    {
+      "key": "menu.continue",
+      "es": "Continuar",
+      "en": "Continue"
+    },
+    {
+      "key": "menu.new",
+      "es": "Nueva partida",
+      "en": "New game"
+    },
+    {
+      "key": "menu.options",
+      "es": "Opciones",
+      "en": "Options"
+    },
+    {
+      "key": "menu.quit",
+      "es": "Salir",
+      "en": "Quit"
+    },
+    {
+      "key": "menu.back",
+      "es": "Volver",
+      "en": "Back"
+    },
+    {
+      "key": "menu.music",
+      "es": "Música",
+      "en": "Music"
+    },
+    {
+      "key": "menu.effects",
+      "es": "Efectos",
+      "en": "Effects"
+    },
+    {
+      "key": "menu.interface",
+      "es": "Interfaz",
+      "en": "Interface"
+    },
+    {
+      "key": "menu.test",
+      "es": "VERSIÓN DE PRUEBA",
+      "en": "TEST VERSION"
+    },
+    {
+      "key": "menu.tagline",
+      "es": "DOS ARMAS. TU ESTILO.",
+      "en": "TWO WEAPONS. YOUR STYLE."
+    },
+    {
+      "key": "menu.explore",
+      "es": "Explorá la región y encontrá tu próximo desafío.",
+      "en": "Explore the region and find your next challenge."
+    },
+    {
+      "key": "menu.loading",
+      "es": "Preparando tu aventura…",
+      "en": "Preparing your adventure…"
+    },
+    {
+      "key": "menu.missing",
+      "es": "No se encontró la región de juego.",
+      "en": "The game region could not be found."
+    },
+    {
+      "key": "ui.traveler",
+      "es": "VIAJERO",
+      "en": "TRAVELER"
+    },
+    {
+      "key": "ui.inventory",
+      "es": "PERTENENCIAS",
+      "en": "BELONGINGS"
+    },
+    {
+      "key": "ui.character",
+      "es": "PERSONAJE",
+      "en": "CHARACTER"
+    },
+    {
+      "key": "ui.skills",
+      "es": "HABILIDADES",
+      "en": "ABILITIES"
+    },
+    {
+      "key": "ui.menu",
+      "es": "Menú [B]",
+      "en": "Menu [B]"
+    },
+    {
+      "key": "ui.close",
+      "es": "Cerrar [ESC]",
+      "en": "Close [ESC]"
+    },
+    {
+      "key": "ui.prepare",
+      "es": "PREPARÁ TU PRÓXIMA SALIDA",
+      "en": "PREPARE YOUR NEXT TRIP"
+    },
+    {
+      "key": "ui.characterKey",
+      "es": "PERSONAJE  [C]",
+      "en": "CHARACTER  [C]"
+    },
+    {
+      "key": "ui.inventoryKey",
+      "es": "INVENTARIO  [I]",
+      "en": "INVENTORY  [I]"
+    },
+    {
+      "key": "ui.skillsKey",
+      "es": "HABILIDADES  [K]",
+      "en": "ABILITIES  [K]"
+    },
+    {
+      "key": "ui.mapKey",
+      "es": "MAPA  [M]",
+      "en": "MAP  [M]"
+    },
+    {
+      "key": "ui.running",
+      "es": "El mundo continúa mientras consultás el menú.",
+      "en": "The world keeps moving while you browse the menu."
+    },
+    {
+      "key": "ui.bag",
+      "es": "Mochila",
+      "en": "Backpack"
+    },
+    {
+      "key": "ui.chest",
+      "es": "Cofre personal",
+      "en": "Personal chest"
+    },
+    {
+      "key": "ui.chestTown",
+      "es": "Cofre · En el pueblo",
+      "en": "Chest · In town"
+    },
+    {
+      "key": "ui.all",
+      "es": "Todos",
+      "en": "All"
+    },
+    {
+      "key": "ui.weapons",
+      "es": "Armas",
+      "en": "Weapons"
+    },
+    {
+      "key": "ui.materials",
+      "es": "Materiales",
+      "en": "Materials"
+    },
+    {
+      "key": "ui.consumables",
+      "es": "Consumo",
+      "en": "Consumables"
+    },
+    {
+      "key": "ui.favorites",
+      "es": "Favoritos",
+      "en": "Favorites"
+    },
+    {
+      "key": "ui.search",
+      "es": "Buscar objetos…",
+      "en": "Search items…"
+    },
+    {
+      "key": "ui.organize",
+      "es": "Organizar",
+      "en": "Organize"
+    },
+    {
+      "key": "ui.drag",
+      "es": "Arrastrá para mover · R para girar al arrastrar",
+      "en": "Drag to move · R to rotate while dragging"
+    },
+    {
+      "key": "ui.unplaced",
+      "es": "SIN UBICAR · Guardá o descartá para liberar espacio",
+      "en": "UNPLACED · Store or discard to make room"
+    },
+    {
+      "key": "ui.rotate",
+      "es": "Arrastrá para rotar",
+      "en": "Drag to rotate"
+    },
+    {
+      "key": "ui.yourCharacter",
+      "es": "TU PERSONAJE",
+      "en": "YOUR CHARACTER"
+    },
+    {
+      "key": "ui.inspect",
+      "es": "Seleccioná un objeto para inspeccionarlo.",
+      "en": "Select an item to inspect it."
+    },
+    {
+      "key": "ui.backCharacter",
+      "es": "← Personaje",
+      "en": "← Character"
+    },
+    {
+      "key": "ui.favOn",
+      "es": "★ Favorito",
+      "en": "★ Favorite"
+    },
+    {
+      "key": "ui.favOff",
+      "es": "☆ Favorito",
+      "en": "☆ Favorite"
+    },
+    {
+      "key": "ui.material",
+      "es": "MATERIAL",
+      "en": "MATERIAL"
+    },
+    {
+      "key": "ui.weapon",
+      "es": "ARMA",
+      "en": "WEAPON"
+    },
+    {
+      "key": "ui.resourceFallback",
+      "es": "Recurso para preparar tu próxima salida.",
+      "en": "A resource for your next trip."
+    },
+    {
+      "key": "ui.weaponFallback",
+      "es": "Seleccioná una ranura para comparar y equipar.",
+      "en": "Select a slot to compare and equip."
+    },
+    {
+      "key": "ui.takeAll",
+      "es": "Todo",
+      "en": "All"
+    },
+    {
+      "key": "ui.seeSkills",
+      "es": "Ver habilidades",
+      "en": "View abilities"
+    },
+    {
+      "key": "ui.withdraw",
+      "es": "Retirar del cofre",
+      "en": "Withdraw from chest"
+    },
+    {
+      "key": "ui.deposit",
+      "es": "Guardar en cofre",
+      "en": "Store in chest"
+    },
+    {
+      "key": "ui.discardPrompt",
+      "es": "Descartar…",
+      "en": "Discard…"
+    },
+    {
+      "key": "ui.discardTitle",
+      "es": "¿Descartar definitivamente?",
+      "en": "Permanently discard?"
+    },
+    {
+      "key": "ui.cancel",
+      "es": "Cancelar",
+      "en": "Cancel"
+    },
+    {
+      "key": "ui.discard",
+      "es": "Descartar",
+      "en": "Discard"
+    },
+    {
+      "key": "ui.chooseSkills",
+      "es": "Seleccioná una ranura para consultar sus habilidades.",
+      "en": "Select a slot to view its abilities."
+    },
+    {
+      "key": "ui.maxLevel",
+      "es": "Nivel máximo",
+      "en": "Maximum level"
+    },
+    {
+      "key": "ui.upgrade",
+      "es": "Mejorar +",
+      "en": "Upgrade +"
+    },
+    {
+      "key": "ui.mastery",
+      "es": "MAESTRÍA DE ARMA",
+      "en": "WEAPON MASTERY"
+    },
+    {
+      "key": "ui.maxMastery",
+      "es": "Maestría máxima",
+      "en": "Maximum mastery"
+    },
+    {
+      "key": "ui.masteryHelp",
+      "es": "Elegí otra arma en la pestaña Armas para ver su maestría.\nEl progreso se comparte entre ejemplares de la misma familia. El alcance no aumenta.",
+      "en": "Select another weapon to view its mastery.\nProgress is shared by weapons of the same family. Range does not increase."
+    },
+    {
+      "key": "ui.quick",
+      "es": "[B] MENÚ   [I] MOCHILA   {0} / {1}",
+      "en": "[B] MENU   [I] BACKPACK   {0} / {1}"
+    },
+    {
+      "key": "ui.capacity",
+      "es": "MOCHILA  {0} / {1} celdas",
+      "en": "BACKPACK  {0} / {1} cells"
+    },
+    {
+      "key": "ui.chestCapacity",
+      "es": "     COFRE  {0} / {1}",
+      "en": "     CHEST  {0} / {1}"
+    },
+    {
+      "key": "ui.level",
+      "es": "     ·     NIVEL {0}",
+      "en": "     ·     LEVEL {0}"
+    },
+    {
+      "key": "ui.vitals",
+      "es": "Vida {0:0} / {1:0}     Armadura {2:0}",
+      "en": "Health {0:0} / {1:0}     Armor {2:0}"
+    },
+    {
+      "key": "ui.slot",
+      "es": "Ranura {0} · {1}",
+      "en": "Slot {0} · {1}"
+    },
+    {
+      "key": "ui.stack",
+      "es": "Total: {0} · Pila: {1} · Tamaño: {2}×{3}",
+      "en": "Total: {0} · Stack: {1} · Size: {2}×{3}"
+    },
+    {
+      "key": "ui.compare",
+      "es": "Comparar ranura {0}",
+      "en": "Compare slot {0}"
+    },
+    {
+      "key": "ui.equip",
+      "es": "Equipar en {0}",
+      "en": "Equip in {0}"
+    },
+    {
+      "key": "ui.discardBody",
+      "es": "Se eliminarán {0} unidad(es). Esta acción no se puede deshacer.",
+      "en": "{0} unit(s) will be removed. This cannot be undone."
+    },
+    {
+      "key": "ui.weaponSkills",
+      "es": "{0} · Habilidades del arma",
+      "en": "{0} · Weapon abilities"
+    },
+    {
+      "key": "ui.cooldown",
+      "es": "Recuperación: {0:0.##} s",
+      "en": "Cooldown: {0:0.##} s"
+    },
+    {
+      "key": "ui.charLevel",
+      "es": "PERSONAJE · NIVEL {0}",
+      "en": "CHARACTER · LEVEL {0}"
+    },
+    {
+      "key": "ui.experience",
+      "es": "Experiencia {0} / {1}",
+      "en": "Experience {0} / {1}"
+    },
+    {
+      "key": "ui.points",
+      "es": "Puntos disponibles: {0}",
+      "en": "Available points: {0}"
+    },
+    {
+      "key": "ui.healthStat",
+      "es": "Vida máxima",
+      "en": "Maximum health"
+    },
+    {
+      "key": "ui.attackStat",
+      "es": "Ataque",
+      "en": "Attack"
+    },
+    {
+      "key": "ui.armorStat",
+      "es": "Armadura",
+      "en": "Armor"
+    },
+    {
+      "key": "ui.pointStat",
+      "es": "{0} · {1} puntos",
+      "en": "{0} · {1} points"
+    },
+    {
+      "key": "ui.perPoint",
+      "es": "{0} por punto",
+      "en": "{0} per point"
+    },
+    {
+      "key": "ui.bonuses",
+      "es": "Bonos vs. ranura {0}: daño {1} pp · vel. {2} pp\nVida {3} · Armadura {4}",
+      "en": "Bonuses vs. slot {0}: damage {1} pp · speed {2} pp\nHealth {3} · Armor {4}"
+    },
+    {
+      "key": "name.sword",
+      "es": "Espada",
+      "en": "Sword"
+    },
+    {
+      "key": "name.guardian",
+      "es": "Espada del guardián",
+      "en": "Guardian sword"
+    },
+    {
+      "key": "name.bow",
+      "es": "Arco",
+      "en": "Bow"
+    },
+    {
+      "key": "name.balanced",
+      "es": "Equilibrada",
+      "en": "Balanced"
+    },
+    {
+      "key": "name.damage",
+      "es": "Daño",
+      "en": "Damage"
+    },
+    {
+      "key": "name.speed",
+      "es": "Velocidad",
+      "en": "Speed"
+    },
+    {
+      "key": "name.wood",
+      "es": "Madera",
+      "en": "Wood"
+    },
+    {
+      "key": "name.stone",
+      "es": "Piedra",
+      "en": "Stone"
+    },
+    {
+      "key": "name.herb",
+      "es": "Hierba",
+      "en": "Herb"
+    },
+    {
+      "key": "name.component",
+      "es": "Componente de monstruo",
+      "en": "Monster component"
+    },
+    {
+      "key": "notice.grid",
+      "es": "Distribución guardada.",
+      "en": "Layout saved."
+    },
+    {
+      "key": "notice.sorted",
+      "es": "Inventario organizado.",
+      "en": "Inventory organized."
+    },
+    {
+      "key": "ability.sword.swordcombo.name",
+      "es": "COMBO",
+      "en": "COMBO"
+    },
+    {
+      "key": "ability.sword.swordcombo.description",
+      "es": "Encadena ataques de espada contra los enemigos que tengas delante.",
+      "en": "Chain sword attacks against enemies in front of you."
+    },
+    {
+      "key": "ability.sword.swordlunge.name",
+      "es": "ESTOCADA",
+      "en": "LUNGE"
+    },
+    {
+      "key": "ability.sword.swordlunge.description",
+      "es": "Avanza con una estocada para golpear al enemigo de frente.",
+      "en": "Lunge forward to strike an enemy in front of you."
+    },
+    {
+      "key": "ability.sword.swordparry.name",
+      "es": "PARRY",
+      "en": "PARRY"
+    },
+    {
+      "key": "ability.sword.swordparry.description",
+      "es": "Defiende en el momento justo para desviar el ataque enemigo.",
+      "en": "Defend at the right moment to deflect an enemy attack."
+    },
+    {
+      "key": "ability.sword.swordspin.name",
+      "es": "GIRO",
+      "en": "SPIN"
+    },
+    {
+      "key": "ability.sword.swordspin.description",
+      "es": "Gira con la espada y golpea a los enemigos cercanos.",
+      "en": "Spin your sword to strike nearby enemies."
+    },
+    {
+      "key": "ability.bow.bowshot.name",
+      "es": "FLECHA",
+      "en": "ARROW"
+    },
+    {
+      "key": "ability.bow.bowshot.description",
+      "es": "Dispara una flecha hacia donde apuntas.",
+      "en": "Fire an arrow where you aim."
+    },
+    {
+      "key": "ability.bow.bowpower.name",
+      "es": "POTENTE",
+      "en": "POWER SHOT"
+    },
+    {
+      "key": "ability.bow.bowpower.description",
+      "es": "Dispara una flecha potente que causa daño y reduce la postura del enemigo.",
+      "en": "Fire a powerful arrow that deals damage and reduces enemy posture."
+    },
+    {
+      "key": "ability.bow.bowretreat.name",
+      "es": "RETIRADA",
+      "en": "RETREAT"
+    },
+    {
+      "key": "ability.bow.bowretreat.description",
+      "es": "Retrocede mientras disparas una flecha para crear distancia.",
+      "en": "Step back and fire an arrow to create distance."
+    },
+    {
+      "key": "ability.bow.bowarea.name",
+      "es": "LLUVIA",
+      "en": "ARROW RAIN"
+    },
+    {
+      "key": "ability.bow.bowarea.description",
+      "es": "Lanza una lluvia de flechas sobre el área seleccionada.",
+      "en": "Rain arrows over the selected area."
+    },
+    {
+      "key": "ui.lifeGain",
+      "es": "+{0} vida",
+      "en": "+{0} health"
+    },
+    {
+      "key": "ui.damageGain",
+      "es": "+{0:0.#}% daño",
+      "en": "+{0:0.#}% damage"
+    },
+    {
+      "key": "ui.armorGain",
+      "es": "+{0} armadura",
+      "en": "+{0} armor"
+    },
+    {
+      "key": "ui.percentPoint",
+      "es": "+{0:0.#}% por punto",
+      "en": "+{0:0.#}% per point"
+    },
+    {
+      "key": "ui.totalStats",
+      "es": "Vida máxima: {0:0.#} · Armadura: {1:0.#}\nLos bonos de ambas armas están activos.",
+      "en": "Maximum health: {0:0.#} · Armor: {1:0.#}\nBonuses from both weapons are active."
+    },
+    {
+      "key": "ui.family",
+      "es": "{0}\nFamilia: {1}",
+      "en": "{0}\nFamily: {1}"
+    },
+    {
+      "key": "ui.masteryLevel",
+      "es": "Nivel {0} · Puntos: {1}",
+      "en": "Level {0} · Points: {1}"
+    },
+    {
+      "key": "notice.autosave",
+      "es": "Inventario guardado automáticamente.",
+      "en": "Inventory saved automatically."
+    },
+    {
+      "key": "notice.room",
+      "es": "No hay espacio para acomodar todos los objetos.",
+      "en": "There is not enough space for all items."
+    },
+    {
+      "key": "notice.noShape",
+      "es": "No hay un hueco con la forma necesaria. Reorganizá, guardá o descartá objetos.",
+      "en": "No space fits this item. Rearrange, store or discard items."
+    },
+    {
+      "key": "notice.noChestShape",
+      "es": "No hay un hueco con la forma necesaria en el cofre.",
+      "en": "No space in the chest fits this item."
+    },
+    {
+      "key": "notice.recovered",
+      "es": "Se recuperó la copia de respaldo del inventario.",
+      "en": "The inventory backup was recovered."
+    },
+    {
+      "key": "notice.saveFail",
+      "es": "No se pudo guardar el cambio. Volvé a intentarlo; tu equipo anterior sigue intacto.",
+      "en": "The change could not be saved. Try again; your previous equipment is intact."
+    },
+    {
+      "key": "notice.recoveryFail",
+      "es": "No se pudo recuperar el guardado. Tus archivos se conservaron; no se guardarán cambios.",
+      "en": "The save could not be recovered. Your files were preserved; changes will not be saved."
+    },
+    {
+      "key": "notice.accessFail",
+      "es": "No se pudo acceder al guardado. Tus archivos se conservaron; no se guardarán cambios.",
+      "en": "The save could not be accessed. Your files were preserved; changes will not be saved."
+    },
+    {
+      "key": "name.medicinalHerb",
+      "es": "Hierba medicinal",
+      "en": "Medicinal herb"
+    },
+    {
+      "key": "ui.language",
+      "es": "Idioma",
+      "en": "Language"
+    }
+  ]
+}

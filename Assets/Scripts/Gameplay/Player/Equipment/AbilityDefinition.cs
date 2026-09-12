@@ -10,6 +10,11 @@ namespace Mismo.Gameplay.Player.Equipment
     public sealed class AbilityDefinition : ScriptableObject
     {
         public string displayName;
+        [TextArea(2, 5)] public string description;
+        [Tooltip("Clave estable para traducir el nombre y la descripción en una futura tabla de idiomas.")]
+        public string localizationKey;
+        public string DisplayName => string.IsNullOrEmpty(localizationKey)?Localization.GameLanguage.Text(displayName):Localization.GameLanguage.Get(localizationKey+".name",displayName);
+        public string Description => string.IsNullOrEmpty(localizationKey)?Localization.GameLanguage.Text(description):Localization.GameLanguage.Get(localizationKey+".description",description);
         [Min(0)] public float preparation = .1f;
         [Min(.01f)] public float active = .15f;
         [Min(0)] public float recovery = .2f;

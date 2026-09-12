@@ -58,6 +58,14 @@ namespace Mismo.Gameplay.Player.Editor
         static IEnumerator Run()
         {
             Application.runInBackground=true;
+            var previousLanguage=Localization.GameLanguage.Code;
+            Localization.GameLanguage.Set("en",false);
+            Check(Localization.GameLanguage.Text("Mochila")=="Backpack","English table resolves interface text");
+            Check(Localization.GameLanguage.Format("Recuperación: {0:0.##} s",.85f)=="Cooldown: 0.85 s","English formats decimal cooldowns");
+            Check(Localization.GameLanguage.Get("missing.test.key","Respaldo")=="Respaldo","Missing entries retain fallback text");
+            Localization.GameLanguage.Set("es",false);
+            Check(Localization.GameLanguage.Text("Mochila")=="Mochila","Spanish can be restored without restarting");
+            Localization.GameLanguage.Set("en",false);
             var player=Object.FindAnyObjectByType<PlayerController>();player.enabled=false;
             var loadout=player.GetComponent<EquipmentLoadout>();loadout.Runner.Cancel();loadout.Belt?.Cancel();
             var inventory=player.gameObject.AddComponent<PlayerInventory>();
@@ -123,6 +131,25 @@ namespace Mismo.Gameplay.Player.Editor
             for(int i=0;i<15;i++)yield return null;
             ScreenCapture.CaptureScreenshot(Path.Combine(Output,"inventory-weapon.png"));
             for(int i=0;i<15;i++)yield return null;
+            Check(inventory.MoveGrid(moving.key,false,4,4,true),"Horizontal icon fits inside its grid footprint");
+            var bowItem=inventory.GridItems(false).Find(item=>item.id==inventory.EquippedId(1));
+            Check(bowItem!=null&&inventory.MoveGrid(bowItem.key,false,0,3,true),"Bow displays horizontally in its rotated footprint");
+            var preview=(InventoryPreview)typeof(InventoryPanel).GetField("preview",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(panel);
+            var cameraField=typeof(InventoryPreview).GetField("camera",BindingFlags.Instance|BindingFlags.NonPublic);
+            var previewCamera=(UnityEngine.Camera)cameraField.GetValue(preview);
+            var beforeRotation=previewCamera.transform.position;
+            preview.Rotate(new Vector2(100,35));
+            Check(Vector3.Distance(beforeRotation,previewCamera.transform.position)>.1f,"Preview camera orbits selected model");
+            for(int i=0;i<15;i++)yield return null;
+            ScreenCapture.CaptureScreenshot(Path.Combine(Output,"inventory-rotated.png"));
+            for(int i=0;i<15;i++)yield return null;
+            var skillsPage=typeof(InventoryPanel).GetField("page",BindingFlags.Instance|BindingFlags.NonPublic);
+            skillsPage.SetValue(panel,Enum.Parse(skillsPage.FieldType,"Skills"));
+            Field(panel,"skillsWeapon",loadout.GetSlot(1));
+            for(int i=0;i<15;i++)yield return null;
+            ScreenCapture.CaptureScreenshot(Path.Combine(Output,"inventory-skills.png"));
+            for(int i=0;i<15;i++)yield return null;
+            skillsPage.SetValue(panel,Enum.Parse(skillsPage.FieldType,"Inventory"));
             Field(panel,"selected",MaterialCatalog.Wood);Field(panel,"selectedMaterial",true);Field(panel,"previewDirty",true);
             for(int i=0;i<15;i++)yield return null;
             ScreenCapture.CaptureScreenshot(Path.Combine(Output,"inventory-material.png"));
@@ -145,6 +172,7 @@ namespace Mismo.Gameplay.Player.Editor
             Check(repository.Read(_=>true,out var json)==ProfileReadResult.Loaded,"New repository reopens protected save");
             var restored=JsonUtility.FromJson<InventoryProfile>(json);
             Check(restored.chestMaterials.Find(s=>s.id==MaterialCatalog.Wood).quantity==20&&restored.pendingLoot.Count==0,"Chest and consumed loot persist across reload");
+            Localization.GameLanguage.Set(previousLanguage,false);
         }
     }
 }

@@ -42,7 +42,7 @@ namespace Mismo.Gameplay.Player.Equipment
             : abilities != null && (int)slot >= 0 && (int)slot < abilities.Length ? abilities[(int)slot] : null;
 
         public string Id => id;
-        public string DisplayName => displayName;
+        public string DisplayName => Localization.GameLanguage.Text(displayName);
         public string MasteryId => family!=null && !string.IsNullOrEmpty(family.progressionId) ? family.progressionId : Id;
         public float BasicAttackCooldown => Mathf.Max(0.01f, basicAttackCooldown);
 

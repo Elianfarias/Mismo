@@ -9,6 +9,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         GameObject root;
         UnityEngine.Camera camera;
         RenderTexture texture;
+        Vector3 orbitCenter;
+        float orbitDistance, yaw, pitch;
         readonly List<Mesh> baked=new List<Mesh>();
         public Texture Texture=>texture;
         public bool HasModel {get;private set;}
@@ -41,6 +43,9 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             camera.nearClipPlane=.01f;camera.farClipPlane=Mathf.Max(100,bounds.size.magnitude*6);
             camera.transform.position=bounds.center+new Vector3(0,bounds.extents.y*.12f,Mathf.Max(3,bounds.size.magnitude*2));
             camera.transform.LookAt(bounds.center);camera.allowHDR=false;
+            orbitCenter=bounds.center;
+            orbitDistance=Vector3.Distance(camera.transform.position,orbitCenter);
+            yaw=0;pitch=Mathf.Asin((camera.transform.position.y-orbitCenter.y)/orbitDistance)*Mathf.Rad2Deg;
             texture=new RenderTexture(640,480,24);texture.Create();camera.targetTexture=texture;
             camera.aspect=640f/480;
             var lightObject=new GameObject("Inventory preview light");lightObject.transform.SetParent(root.transform,false);
@@ -49,6 +54,13 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             camera.Render();
         }
         public void Render(){if(camera!=null&&HasModel)camera.Render();}
+        public void Rotate(Vector2 delta)
+        {
+            if(camera==null||!HasModel)return;
+            yaw-=delta.x*.5f;pitch=Mathf.Clamp(pitch+delta.y*.4f,-70,70);
+            camera.transform.position=orbitCenter+Quaternion.Euler(-pitch,yaw,0)*Vector3.forward*orbitDistance;
+            camera.transform.LookAt(orbitCenter);
+        }
         static void Release(Object value){if(Application.isPlaying)Object.Destroy(value);else Object.DestroyImmediate(value);}
         public void Dispose()
         {

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: BowPower
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: POTENTE
+  description: Dispara una flecha potente que causa daño y reduce la postura del enemigo.
+  localizationKey: ability.bow.bowpower
   preparation: 0.65
   active: 0.02
   recovery: 0.3

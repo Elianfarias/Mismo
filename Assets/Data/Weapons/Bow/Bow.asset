@@ -35,4 +35,4 @@ MonoBehaviour:
   canRotate: 1
   inventoryIcon: {fileID: 21300000, guid: 33312e40f4dd18f4e89a7a2950448dc7, type: 3}
 
-  inventoryPreviewRotation: {x: 90, y: 0, z: 90}
+  inventoryPreviewRotation: {x: 0, y: 90, z: 90}
