@@ -27,7 +27,7 @@ namespace Mismo.Gameplay.Enemies
         private bool started;
         private float provokedLoseRange, provokedLeashRange;
         private int orbitSign = 1;
-        private readonly HashSet<int> hitTargets = new HashSet<int>();
+        private readonly HashSet<UnityEngine.Object> hitTargets = new HashSet<UnityEngine.Object>();
         readonly Dictionary<GoblinAttack,float> attackReady=new Dictionary<GoblinAttack,float>();
         float clock;
         bool projectileReleased;
@@ -325,7 +325,7 @@ namespace Mismo.Gameplay.Enemies
                 DamageReceiver receiver = other.GetComponentInParent<DamageReceiver>();
                 if (receiver == null || receiver.transform != target || !HasSight(target)) continue;
                 // También se consume el contacto rechazado por parry/iFrames: un intento por ataque.
-                if (!hitTargets.Add(receiver.GetInstanceID())) continue;
+                if (!hitTargets.Add(receiver)) continue;
                 weapon.ApplyTo(receiver.gameObject, other.ClosestPoint(center), attackDirection);
             }
         }

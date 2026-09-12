@@ -28,7 +28,7 @@ namespace Mismo.Gameplay.Player.Equipment
             foreach (var other in Physics.OverlapSphere(origin, radius, ~0, QueryTriggerInteraction.Ignore))
             {
                 var receiver = other.GetComponentInParent<IDamageReceiver>();
-                if (!(receiver is Component target) || target.transform.root == c.Owner.transform.root || !c.HitTargets.Add(target.GetInstanceID())) continue;
+                if (!(receiver is Component target) || target.transform.root == c.Owner.transform.root || !c.HitTargets.Add(target)) continue;
                 Vector3 point = other.ClosestPoint(origin);
                 if (Physics.Linecast(origin, point, out var wall, ~0, QueryTriggerInteraction.Ignore) && wall.transform.root != c.Owner.transform.root && wall.collider.GetComponentInParent<IDamageReceiver>() != receiver) continue;
                 receiver.ReceiveDamage(new DamageInfo(damage*c.DamageMultiplier, c.Owner, other.ClosestPoint(origin), (target.transform.position-c.Owner.transform.position).normalized, c.AttackId, postureDamage, weaponFamilyId:c.WeaponFamilyId,focusGainOnHit:c.Definition.focusGainOnHit));
@@ -73,4 +73,3 @@ namespace Mismo.Gameplay.Player.Equipment
             fallingVisual, arrowsPerVolley, fallHeight, fallSpeed,c.WeaponFamilyId,c.Definition.focusGainOnHit);
     }
 }
-

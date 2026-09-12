@@ -243,7 +243,7 @@ namespace Mismo.Gameplay.Player.Editor
             yield return null;
             Require(encounter.IsCompleted && !gate.activeSelf,"Victory opens gate");
             Debug.Log("REGION PASS boss victory");
-            int oldId=player.GetInstanceID();
+            var oldPlayer=player;
             health.ApplyDamage(new DamageInfo(10000,null,Vector3.zero,Vector3.forward));
             float until=Time.realtimeSinceStartup+6;
             PlayerController replacement=null;
@@ -251,9 +251,9 @@ namespace Mismo.Gameplay.Player.Editor
             {
                 yield return null;
                 replacement=Object.FindFirstObjectByType<PlayerController>();
-                if(replacement!=null && replacement.GetInstanceID()!=oldId) break;
+                if(replacement!=null && !ReferenceEquals(replacement,oldPlayer)) break;
             }
-            Require(replacement!=null && replacement.GetInstanceID()!=oldId,"Scene reloaded");
+            Require(replacement!=null && !ReferenceEquals(replacement,oldPlayer),"Scene reloaded");
             Require(replacement.enabled && replacement.GetComponent<Health>().Normalized==1,"Player restored");
             Require(Vector3.Distance(replacement.transform.position,spawn)<2,"Village spawn");
             Require(!Object.FindFirstObjectByType<BossEncounter>().IsCompleted,"Boss reset");
@@ -269,4 +269,3 @@ namespace Mismo.Gameplay.Player.Editor
         }
     }
 }
-

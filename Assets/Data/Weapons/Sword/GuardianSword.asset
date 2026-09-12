@@ -30,3 +30,7 @@ MonoBehaviour:
   handOffset: {x: 0, y: 0, z: 0}
   backOffset: {x: 0, y: 1.2, z: -0.25}
   family: {fileID: 11400000, guid: d75a568fa95abb44595d508a05bccc66, type: 2}
+  gridWidth: 1
+  gridHeight: 3
+  canRotate: 1
+  inventoryIcon: {fileID: 21300000, guid: 62eb35d6682904046866d4cb8935b2a2, type: 3}

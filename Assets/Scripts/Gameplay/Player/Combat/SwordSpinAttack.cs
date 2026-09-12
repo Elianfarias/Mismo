@@ -21,7 +21,7 @@ namespace Mismo.Gameplay.Combat
         [SerializeField] private Vector3 center = new Vector3(0f, 1f, 0f);
         [SerializeField, Min(0f)] private float damage = 24f;
 
-        private readonly HashSet<int> hitTargets = new HashSet<int>();
+        private readonly HashSet<UnityEngine.Object> hitTargets = new HashSet<UnityEngine.Object>();
         private SphereCollider area;
         private DamageDealer damageDealer;
         private Stamina stamina;
@@ -122,7 +122,7 @@ namespace Mismo.Gameplay.Combat
         private void ApplyHit(Collider other)
         {
             if (!IsActive || other == null || other.transform.root == transform.root) return;
-            int targetId = other.transform.root.GetInstanceID();
+            UnityEngine.Object targetId = other.transform.root;
             if (!hitTargets.Add(targetId)) return;
             Vector3 origin = transform.TransformPoint(center);
             Vector3 point = other.ClosestPoint(origin);

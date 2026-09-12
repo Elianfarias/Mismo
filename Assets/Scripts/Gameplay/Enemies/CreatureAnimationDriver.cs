@@ -8,6 +8,9 @@ namespace Mismo.Gameplay.Enemies
     public sealed class CreatureAnimationDriver : MonoBehaviour
     {
         [SerializeField] Animator animator;
+        [SerializeField] EnemyGroundSupport groundSupport=new EnemyGroundSupport();
+        Transform visual;
+        Vector3 groundedLocalPosition;
         readonly EnemyActionPlayback playback=new EnemyActionPlayback();
         readonly EnemyAttackAnimation sample=new EnemyAttackAnimation{activeStartsAt=0,recoveryStartsAt=1,blendSeconds=.025f};
         GoblinController controller;
@@ -26,7 +29,21 @@ namespace Mismo.Gameplay.Enemies
             action.animation.PlaybackClip.SampleAnimation(animator.gameObject,Mathf.Max(0,action.windup-action.preparationDuration));
             socket=animator.GetComponentsInChildren<Transform>(true).FirstOrDefault(t=>t.name==action.projectileSocket);
         }
-        void Awake(){controller=GetComponent<GoblinController>();agent=GetComponent<NavMeshAgent>();if(animator==null)animator=GetComponentInChildren<Animator>();}
+        void Awake()
+        {
+            controller=GetComponent<GoblinController>();agent=GetComponent<NavMeshAgent>();
+            if(animator==null)animator=GetComponentInChildren<Animator>();
+            visual=transform.Find("Visual");
+            if(visual!=null)groundedLocalPosition=visual.localPosition;
+        }
+        void LateUpdate()
+        {
+            if(visual==null||controller==null||controller.State==GoblinState.Dead)return;
+            // Creature prefabs already align the model's soles with the actor origin.
+            // Restore that authored offset so terrain corrections never accumulate.
+            visual.localPosition=groundedLocalPosition;
+            groundSupport.Apply(transform,visual,1f,visualAlreadyGrounded:true);
+        }
         public void ReleaseProp(){released=true;if(held!=null)Destroy(held);held=null;}
         void OnDisable(){ReleaseProp();playback.Dispose();current=null;}
         void Update()

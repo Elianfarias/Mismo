@@ -17,7 +17,7 @@ MonoBehaviour:
   loseRange: 38
   leashRange: 38
   memoryDuration: 3
-  speed: 2.4
+  speed: 5
   positioningSpeed: 1.2
   decisionPause: 0.35
   chargeCooldown: 5

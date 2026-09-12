@@ -26,6 +26,14 @@ namespace Mismo.Gameplay.Player.Equipment
         public WeaponPoseProfile poseProfile;
         public bool isBow;
         [TextArea] public string inventoryDescription;
+        public bool canDiscard = true;
+        [Range(1,12)] public int gridWidth = 1;
+        [Range(1,12)] public int gridHeight = 3;
+        public bool canRotate = true;
+        public Sprite inventoryIcon;
+        public Vector3 inventoryPreviewRotation;
+        public bool canSell = true;
+        [Min(0)] public int sellValue = 10;
         public Vector3 handRotation;
         public Vector3 backRotation = new Vector3(0, 0, 35);
         public Vector3 handOffset;
