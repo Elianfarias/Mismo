@@ -3,10 +3,12 @@ using UnityEngine;
 
 namespace Mismo.Gameplay.Player.World
 {
+    public enum ResourceNodeKind { Herb, Tree, Stone }
     [CreateAssetMenu(menuName = "Mismo/Crafting/Resource Node", fileName = "ResourceNode")]
     public sealed class ResourceNodeDefinition : ScriptableObject
     {
         public string id;
+        public ResourceNodeKind kind;
         public string displayName;
         public string actionName = "Recolectar";
         [Min(.1f)] public float harvestSeconds = 1;

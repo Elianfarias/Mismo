@@ -67,7 +67,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 writable = result != ProfileReadResult.Invalid;
                 profile = payload != null ? JsonUtility.FromJson<InventoryProfile>(payload) : CreateStartingProfile();
                 if (!profile.IsValid(definitions, rewards)) throw new InvalidDataException("Invalid starting profile.");
-                bool migrated=profile.version<4;
+                bool migrated=profile.version<5;
                 profile.UpgradeToCurrent();NormalizeGrid(profile);
                 if (result == ProfileReadResult.Invalid)
                 { Notice = "No se pudo recuperar el guardado. Tus archivos se conservaron; no se guardarán cambios."; HasSaveProblem = true; }
@@ -91,6 +91,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 Debug.LogWarning("Inventory initialization: " + e.Message, this);
             }
             if(IsReady && GetComponent<InventoryWorldAccess>()==null)gameObject.AddComponent<InventoryWorldAccess>();
+            worldClock=profile.worldPlaySeconds;
+            if(IsReady&&GetComponent<World.RegionRespawn>()!=null&&GetComponent<World.GatheringPlayer>()==null)gameObject.AddComponent<World.GatheringPlayer>();
             Changed?.Invoke();
         }
 
@@ -285,6 +287,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
 
         bool Commit(InventoryProfile next, string notice, bool updateEquipment = true)
         {
+            next.worldPlaySeconds=System.Math.Max(next.worldPlaySeconds,worldClock);
             NormalizeGrid(next);
             if (!writable || !next.IsValid(definitions, rewards)) return false;
             try { repository.Write(JsonUtility.ToJson(next)); }

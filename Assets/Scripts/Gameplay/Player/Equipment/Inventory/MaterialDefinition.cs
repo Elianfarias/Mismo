@@ -17,6 +17,9 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         [Range(1,12)] public int gridHeight = 1;
         public bool canRotate = true;
         public InventoryItemCategory category = InventoryItemCategory.Material;
+        [Header("Consumable healing")]
+        [Min(0)] public float healingAmount;
+        [Min(.1f)] public float healingSeconds=5;
         public bool canDiscard = true;
         public bool canSell = true;
         [Min(0)] public int sellValue = 1;

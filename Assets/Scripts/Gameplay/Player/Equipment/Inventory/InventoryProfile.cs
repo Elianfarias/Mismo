@@ -3,6 +3,12 @@ using System.Collections.Generic;
 
 namespace Mismo.Gameplay.Player.Equipment.Inventory
 {
+    [Serializable] public sealed class HarvestState
+    {
+        public string id;
+        public double readyAt;
+        public HarvestState Copy()=>(HarvestState)MemberwiseClone();
+    }
     [Serializable] public sealed class DiscoveredRegion
     {
         public string id;
@@ -25,7 +31,9 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
     [Serializable]
     public sealed class InventoryProfile
     {
-        public int version = 4;
+        public int version = 5;
+        public double worldPlaySeconds;
+        public List<HarvestState> harvestedNodes=new List<HarvestState>();
         public ProgressionData progression = new ProgressionData();
         public List<OwnedWeapon> weapons = new List<OwnedWeapon>();
         public string[] equipped = new string[2];
@@ -69,6 +77,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             var copy = new InventoryProfile { version = version, activeSlot = activeSlot, progression=progression.Copy(),
                 equipped = (string[])equipped.Clone(), claimedRewards = new List<string>(claimedRewards) };
+            copy.worldPlaySeconds=worldPlaySeconds;
+            if(harvestedNodes!=null)foreach(var node in harvestedNodes)copy.harvestedNodes.Add(node.Copy());
             if(regions!=null)foreach(var region in regions)copy.regions.Add(region.Copy());
             copy.defeatedEnemies=new List<string>(defeatedEnemies??new List<string>());
             if (materials != null) foreach (var stack in materials) copy.materials.Add(stack.Copy());
@@ -102,6 +112,14 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
 
         public bool IsValid(ISet<string> definitions, IDictionary<string, string> rewards)
         {
+            if(double.IsNaN(worldPlaySeconds)||double.IsInfinity(worldPlaySeconds)||worldPlaySeconds<0||worldPlaySeconds>1e12)return false;
+            var nodeIds=new HashSet<string>();
+            if(harvestedNodes!=null)
+            {
+                if(harvestedNodes.Count>20000)return false;
+                foreach(var node in harvestedNodes)if(node==null||string.IsNullOrEmpty(node.id)||node.id.Length>200||!nodeIds.Add(node.id)||
+                    double.IsNaN(node.readyAt)||double.IsInfinity(node.readyAt)||node.readyAt<0||node.readyAt>1e12)return false;
+            }
             var gridKeys=new HashSet<string>();
             if(gridPlacements!=null)
             {
@@ -144,7 +162,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             worldIds.Clear();
             if(defeatedEnemies!=null){if(defeatedEnemies.Count>16384)return false;foreach(var id in defeatedEnemies)
                 if(string.IsNullOrEmpty(id)||id.Length>160||!worldIds.Add(id))return false;}
-            if ((version < 1 || version > 4) || weapons == null || weapons.Count < 2 || weapons.Count > 256 ||
+            if ((version < 1 || version > 5) || weapons == null || weapons.Count < 2 || weapons.Count > 256 ||
                 equipped == null || equipped.Length != 2 || activeSlot < 0 || activeSlot > 1 ||
                 claimedRewards == null || claimedRewards.Count > 256) return false;
             var ids = new HashSet<string>(StringComparer.Ordinal);
@@ -178,6 +196,6 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             foreach(var weapon in weapons) { weapon.tier=1; weapon.variant=WeaponVariant.Balanced; }
             version=2;
         }
-        public void UpgradeToCurrent(){UpgradeFromVersionOne();if(version==2||version==3)version=4;}
+        public void UpgradeToCurrent(){UpgradeFromVersionOne();if(version>=2&&version<5)version=5;if(harvestedNodes==null)harvestedNodes=new List<HarvestState>();}
     }
 }

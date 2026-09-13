@@ -39,7 +39,7 @@ namespace Mismo.Gameplay.Player
             float dt = Time.deltaTime;
             var runner = loadout.Runner; var belt = loadout.Belt;
             if (inventoryPanel == null) inventoryPanel = GetComponent<Equipment.Inventory.InventoryPanel>();
-            if (Presentation.WorldMapPanel.BlocksGameplay || inventoryPanel != null && inventoryPanel.BlocksGameplay)
+            if (Presentation.WorldMapPanel.BlocksGameplay || inventoryPanel != null && inventoryPanel.BlocksGameplay || GetComponent<World.GatheringPlayer>()?.BlocksGameplay==true)
             {
                 climbing.Release();belt?.Cancel();
                 runner.SetHeld(false); runner.Tick(dt); belt?.TickCooldown(dt);

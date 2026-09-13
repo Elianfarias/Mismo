@@ -634,6 +634,106 @@
       "key": "ui.language",
       "es": "Idioma",
       "en": "Language"
+    },
+    {
+      "key": "gather.progress",
+      "es": "Recolectando: {0} · {1:0}%",
+      "en": "Gathering: {0} · {1:0}%"
+    },
+    {
+      "key": "gather.stationPrompt",
+      "es": "[G] Fabricar en el banco",
+      "en": "[G] Craft at the workbench"
+    },
+    {
+      "key": "gather.prompt",
+      "es": "[G] {0} · {1}",
+      "en": "[G] {0} · {1}"
+    },
+    {
+      "key": "gather.action",
+      "es": "Recolectar",
+      "en": "Gather"
+    },
+    {
+      "key": "gather.mine",
+      "es": "Extraer",
+      "en": "Mine"
+    },
+    {
+      "key": "gather.chop",
+      "es": "Talar",
+      "en": "Chop"
+    },
+    {
+      "key": "craft.title",
+      "es": "BANCO DE TRABAJO",
+      "en": "WORKBENCH"
+    },
+    {
+      "key": "craft.target",
+      "es": "Arma a mejorar: {0} · Ranura {1}",
+      "en": "Weapon to upgrade: {0} · Slot {1}"
+    },
+    {
+      "key": "craft.upgrade",
+      "es": "Mejora del arma elegida: T{0} → T{1}",
+      "en": "Selected weapon upgrade: T{0} → T{1}"
+    },
+    {
+      "key": "craft.output",
+      "es": "Produce {0} × {1}",
+      "en": "Produces {0} × {1}"
+    },
+    {
+      "key": "craft.stats",
+      "es": " · Daño {0:+0.#;-0.#;0}% · Vel. {1:+0.#;-0.#;0}% · Vida {2:+0.#;-0.#;0} · Armadura {3:+0.#;-0.#;0}",
+      "en": " · Damage {0:+0.#;-0.#;0}% · Speed {1:+0.#;-0.#;0}% · Health {2:+0.#;-0.#;0} · Armor {3:+0.#;-0.#;0}"
+    },
+    {
+      "key": "craft.create",
+      "es": "Crear",
+      "en": "Craft"
+    },
+    {
+      "key": "craft.improve",
+      "es": "Mejorar",
+      "en": "Upgrade"
+    },
+    {
+      "key": "craft.created",
+      "es": "Creado: {0}",
+      "en": "Crafted: {0}"
+    },
+    {
+      "key": "craft.salve",
+      "es": "Ungüento de hierbas",
+      "en": "Herbal salve"
+    },
+    {
+      "key": "craft.salveDescription",
+      "es": "Recupera vida gradualmente fuera de combate. El daño interrumpe el efecto.",
+      "en": "Gradually restores health outside combat. Damage interrupts the effect."
+    },
+    {
+      "key": "craft.upgradeName",
+      "es": "Mejora inicial del arma",
+      "en": "Initial weapon upgrade"
+    },
+    {
+      "key": "craft.upgradeDescription",
+      "es": "Mejora el ejemplar seleccionado conservando su variante y maestría.",
+      "en": "Upgrade the selected weapon while preserving its variant and mastery."
+    },
+    {
+      "key": "craft.use",
+      "es": "Usar",
+      "en": "Use"
+    },
+    {
+      "key": "craft.healing",
+      "es": "Recuperación iniciada.",
+      "en": "Recovery started."
     }
   ]
 }

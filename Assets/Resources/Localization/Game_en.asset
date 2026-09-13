@@ -536,6 +536,88 @@ MonoBehaviour:
     m_Localized: Language
     m_Metadata:
       m_Items: []
+  - m_Id: 40366376275968
+    m_Localized: "Gathering: {0} \xB7 {1:0}%"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242432
+    m_Localized: '[G] Craft at the workbench'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242433
+    m_Localized: "[G] {0} \xB7 {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242434
+    m_Localized: Gather
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242435
+    m_Localized: Mine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242436
+    m_Localized: Chop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242437
+    m_Localized: WORKBENCH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242438
+    m_Localized: "Weapon to upgrade: {0} \xB7 Slot {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242439
+    m_Localized: "Selected weapon upgrade: T{0} \u2192 T{1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242440
+    m_Localized: "Produces {0} \xD7 {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242441
+    m_Localized: " \xB7 Damage {0:+0.#;-0.#;0}% \xB7 Speed {1:+0.#;-0.#;0}% \xB7
+      Health {2:+0.#;-0.#;0} \xB7 Armor {3:+0.#;-0.#;0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242442
+    m_Localized: Craft
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242443
+    m_Localized: Upgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242444
+    m_Localized: 'Crafted: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242445
+    m_Localized: Herbal salve
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242446
+    m_Localized: Gradually restores health outside combat. Damage interrupts the
+      effect.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242447
+    m_Localized: Initial weapon upgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242448
+    m_Localized: Upgrade the selected weapon while preserving its variant and mastery.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242449
+    m_Localized: Use
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242450
+    m_Localized: Recovery started.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

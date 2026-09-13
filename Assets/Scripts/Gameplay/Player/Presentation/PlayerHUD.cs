@@ -56,7 +56,7 @@ namespace Mismo.Gameplay.Player.Presentation
         {Fill(new Rect(x,y,width,12),new Color(.11f,.14f,.17f));Fill(new Rect(x,y,width*Mathf.Clamp01(value),12),color);}
         private void OnGUI()
         {
-            if (Equipment.Inventory.InventoryPanel.AnyOpen) return;
+            if (Equipment.Inventory.InventoryPanel.AnyOpen || GetComponent<World.GatheringPlayer>()?.BlocksGameplay==true) return;
             if(health==null)return;
             Matrix4x4 old=GUI.matrix;float scale=Scale;GUI.matrix=Matrix4x4.Scale(Vector3.one*scale);
             float width=Screen.width/scale,height=Screen.height/scale;

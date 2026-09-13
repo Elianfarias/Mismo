@@ -84,6 +84,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public bool TryOpen()=>OpenPage(Page.Inventory);
         bool OpenPage(Page target)
         {
+            if(GetComponent<World.GatheringPlayer>()?.Busy==true)return false;
             if(WorldMapPanel.BlocksGameplay)return false;
             if(!IsOpen)
             {
@@ -361,6 +362,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 if(Button(new Rect(770,534,44,34),"+"))amount=Mathf.Min(count,amount+1);
                 if(Button(new Rect(828,534,90,34),"Todo"))amount=count;
                 amount=Mathf.Clamp(amount,1,Mathf.Max(1,count));
+                if(material.healingAmount>0&&Button(new Rect(940,534,268,34),"Usar"))inventory.TryUseConsumable(selected);
             }
             else
             {

@@ -523,6 +523,86 @@ MonoBehaviour:
     m_Key: ui.language
     m_Metadata:
       m_Items: []
+  - m_Id: 40366376275968
+    m_Key: gather.progress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242432
+    m_Key: gather.stationPrompt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242433
+    m_Key: gather.prompt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242434
+    m_Key: gather.action
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242435
+    m_Key: gather.mine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242436
+    m_Key: gather.chop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242437
+    m_Key: craft.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242438
+    m_Key: craft.target
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242439
+    m_Key: craft.upgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242440
+    m_Key: craft.output
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242441
+    m_Key: craft.stats
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242442
+    m_Key: craft.create
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242443
+    m_Key: craft.improve
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242444
+    m_Key: craft.created
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242445
+    m_Key: craft.salve
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242446
+    m_Key: craft.salveDescription
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242447
+    m_Key: craft.upgradeName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242448
+    m_Key: craft.upgradeDescription
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242449
+    m_Key: craft.use
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242450
+    m_Key: craft.healing
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

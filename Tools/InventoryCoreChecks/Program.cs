@@ -179,7 +179,17 @@ static class Program
         var fragmented=new List<GridPlacement>{new GridPlacement{key="a",x=1,y=0},new GridPlacement{key="b",x=3,y=0},new GridPlacement{key="c",x=1,y=1},new GridPlacement{key="d",x=3,y=1}};
         Check(InventoryGrid.Arrange(fragments,fragmented,4,2,false).Count==4,"Enough free area does not bypass fragmented space");
         var migration=profile.Copy();migration.version=3;migration.gridPlacements=null;migration.UpgradeToCurrent();
-        Check(migration.version==4&&migration.IsValid(definitions,rewards),"Version 3 migrates without losing belongings");
+        Check(migration.version==5&&migration.IsValid(definitions,rewards),"Version 3 migrates without losing belongings");
+        var gathering=profile.Copy();gathering.worldPlaySeconds=150;gathering.harvestedNodes.Add(new HarvestState{id="node:seed:chunk:slot",readyAt=450});
+        Check(gathering.IsValid(definitions,rewards),"Gathering clock and depletion state are valid");
+        var gatheringCopy=gathering.Copy();gatheringCopy.harvestedNodes[0].readyAt=900;
+        Check(gathering.harvestedNodes[0].readyAt==450,"Gathering transaction copies node state independently");
+        gatheringCopy.harvestedNodes.Add(gatheringCopy.harvestedNodes[0].Copy());
+        Check(!gatheringCopy.IsValid(definitions,rewards),"Duplicate persistent nodes are rejected");
+        gatheringCopy=gathering.Copy();gatheringCopy.worldPlaySeconds=double.NaN;
+        Check(!gatheringCopy.IsValid(definitions,rewards),"Invalid world clocks are rejected");
+        gatheringCopy=gathering.Copy();gatheringCopy.harvestedNodes[0].readyAt=-1;
+        Check(!gatheringCopy.IsValid(definitions,rewards),"Invalid regeneration deadlines are rejected");
         Console.WriteLine("INVENTORY AND WORLD CORE: "+count+" checks passed.");
     }
 }

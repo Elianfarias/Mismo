@@ -536,6 +536,88 @@ MonoBehaviour:
     m_Localized: Idioma
     m_Metadata:
       m_Items: []
+  - m_Id: 40366376275968
+    m_Localized: "Recolectando: {0} \xB7 {1:0}%"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242432
+    m_Localized: '[G] Fabricar en el banco'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242433
+    m_Localized: "[G] {0} \xB7 {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242434
+    m_Localized: Recolectar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242435
+    m_Localized: Extraer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242436
+    m_Localized: Talar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242437
+    m_Localized: BANCO DE TRABAJO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242438
+    m_Localized: "Arma a mejorar: {0} \xB7 Ranura {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242439
+    m_Localized: "Mejora del arma elegida: T{0} \u2192 T{1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242440
+    m_Localized: "Produce {0} \xD7 {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242441
+    m_Localized: " \xB7 Da\xF1o {0:+0.#;-0.#;0}% \xB7 Vel. {1:+0.#;-0.#;0}% \xB7
+      Vida {2:+0.#;-0.#;0} \xB7 Armadura {3:+0.#;-0.#;0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242442
+    m_Localized: Crear
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242443
+    m_Localized: Mejorar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242444
+    m_Localized: 'Creado: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242445
+    m_Localized: "Ung\xFCento de hierbas"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242446
+    m_Localized: "Recupera vida gradualmente fuera de combate. El da\xF1o interrumpe
+      el efecto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242447
+    m_Localized: Mejora inicial del arma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242448
+    m_Localized: "Mejora el ejemplar seleccionado conservando su variante y maestr\xEDa."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242449
+    m_Localized: Usar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242450
+    m_Localized: "Recuperaci\xF3n iniciada."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

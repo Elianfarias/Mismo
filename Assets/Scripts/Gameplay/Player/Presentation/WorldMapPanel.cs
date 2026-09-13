@@ -39,6 +39,7 @@ namespace Mismo.Gameplay.Player.Presentation
         public void Initialize(ExplorationWorldSettings value){settings=value;terrain=new ExplorationTerrain(value);dirty=true;}
         public bool Open()
         {
+            if(GetComponent<World.GatheringPlayer>()?.Busy==true)return false;
             if(IsOpen)return true;
             if(terrain==null||InventoryPanel.AnyOpen)return false;
             var health=GetComponent<Mismo.Gameplay.Combat.Health>();if(health!=null&&health.IsDead)return false;

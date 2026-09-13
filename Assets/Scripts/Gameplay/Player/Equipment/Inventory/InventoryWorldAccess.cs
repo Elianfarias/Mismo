@@ -50,7 +50,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 foreach(var pair in lootMarkers)if(!ids.Contains(pair.Key)){Destroy(pair.Value);removed.Add(pair.Key);}
                 foreach(var id in removed)lootMarkers.Remove(id);
             }
-            if(InventoryPanel.AnyOpen||Presentation.WorldMapPanel.BlocksGameplay||Keyboard.current==null||!Keyboard.current.fKey.wasPressedThisFrame)return;
+            if(GetComponent<GatheringPlayer>()?.Busy==true||InventoryPanel.AnyOpen||Presentation.WorldMapPanel.BlocksGameplay||Keyboard.current==null||!Keyboard.current.fKey.wasPressedThisFrame)return;
             if(AtChest){GetComponent<InventoryPanel>()?.OpenChest();return;}
             foreach(var loot in inventory.PendingLoot)
                 if(Vector3.Distance(transform.position,new Vector3(loot.x,loot.y,loot.z))<=3){inventory.CollectPending(loot.id);break;}

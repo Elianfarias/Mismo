@@ -21,7 +21,11 @@ namespace Mismo.Gameplay.Enemies
         Dictionary<string,int> mastery;
         OwnedWeapon drop;
         float retryAt;
-        void Awake(){health=GetComponent<Health>();receiver=GetComponent<DamageReceiver>();}
+        void Awake()
+        {
+            health=GetComponent<Health>();receiver=GetComponent<DamageReceiver>();
+            if(materialLoot==null&&GetComponent<GoblinController>()!=null)materialLoot=Resources.Load<Mismo.Gameplay.Player.World.GatheringSettings>("GatheringSettings")?.monsterLoot;
+        }
         void OnEnable(){if(receiver!=null)receiver.Resolved+=OnResolved;}
         void OnDisable(){if(receiver!=null)receiver.Resolved-=OnResolved;}
         public void RecordDefense(PlayerInventory player,string family)
