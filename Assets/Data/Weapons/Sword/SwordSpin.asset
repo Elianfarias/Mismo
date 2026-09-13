@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: SwordSpin
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: GIRO
+  description: Gira con la espada y golpea a los enemigos cercanos.
+  localizationKey: ability.sword.swordspin
   preparation: 0.04
   active: 0.55
   recovery: 0.18

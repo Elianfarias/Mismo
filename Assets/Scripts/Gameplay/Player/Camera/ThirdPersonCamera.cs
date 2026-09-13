@@ -47,6 +47,7 @@ namespace Mismo.Gameplay.Player.Camera
         private void Update()
         {
             if (Presentation.WorldMapPanel.BlocksGameplay) return;
+            if(input!=null&&input.GetComponent<World.GatheringPlayer>()?.BlocksGameplay==true)return;
             if (input != null && input.GetComponent<Equipment.Inventory.InventoryPanel>() is Equipment.Inventory.InventoryPanel panel && panel.BlocksGameplay) return;
             if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
             {

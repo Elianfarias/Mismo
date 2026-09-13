@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Mismo.Gameplay.Player.Equipment.Inventory
 {
     [DisallowMultipleComponent]
-    public sealed class PlayerInventory : MonoBehaviour
+    public sealed partial class PlayerInventory : MonoBehaviour
     {
         internal static IProfileRepository BuildCheckRepository;
         InventoryProfile profile;
@@ -15,6 +15,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         EquipmentLoadout loadout;
         readonly HashSet<string> definitions = new HashSet<string>(StringComparer.Ordinal);
         readonly Dictionary<string, string> rewards = new Dictionary<string, string>(StringComparer.Ordinal);
+        readonly Dictionary<string, MaterialDefinition> materialDefinitions = new Dictionary<string, MaterialDefinition>(StringComparer.Ordinal);
+        public IEnumerable<MaterialDefinition> Materials => materialDefinitions.Values;
         bool writable;
         float baseMaximum;
         public ProgressionRules Rules => ProgressionRules.Current;
@@ -30,6 +32,14 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public event Action Changed;
         public string SavePath => World.WorldSession.ProfilePath;
         public WeaponDefinition BossReward => catalog != null ? catalog.bossReward : null;
+        public int MaterialCount(string id) => profile?.MaterialCount(id) ?? 0;
+
+        public bool TryGrantMaterial(string id, int quantity)
+        {
+            if (!IsReady || !materialDefinitions.ContainsKey(id)) return false;
+            var next = profile.Copy();
+            return next.TryAddMaterial(id, quantity) && Fits(next, false) && Commit(next, "+" + quantity + " " + materialDefinitions[id].displayName, false);
+        }
 
         public void Initialize(ItemCatalog items, IProfileRepository storage = null)
         {
@@ -44,6 +54,12 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 if (definition == null || string.IsNullOrEmpty(definition.Id) || !definitions.Add(definition.Id))
                 { Notice = "El catálogo de armas contiene datos inválidos."; HasSaveProblem = true; return; }
             if (catalog.bossReward != null) rewards.Add(ItemCatalog.BossRewardId, catalog.bossReward.Id);
+            foreach (var material in Resources.LoadAll<MaterialDefinition>("Materials"))
+            {
+                if (!MaterialCatalog.ValidId(material.id) || string.IsNullOrWhiteSpace(material.displayName) || materialDefinitions.ContainsKey(material.id))
+                { Notice = "El catálogo de materiales contiene datos inválidos o IDs duplicados."; HasSaveProblem = true; return; }
+                materialDefinitions.Add(material.id, material);
+            }
             repository = storage ?? BuildCheckRepository ?? new ProtectedProfileRepository(SavePath);
             try
             {
@@ -51,8 +67,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 writable = result != ProfileReadResult.Invalid;
                 profile = payload != null ? JsonUtility.FromJson<InventoryProfile>(payload) : CreateStartingProfile();
                 if (!profile.IsValid(definitions, rewards)) throw new InvalidDataException("Invalid starting profile.");
-                bool migrated=profile.version==1;
-                profile.UpgradeFromVersionOne();
+                bool migrated=profile.version<5;
+                profile.UpgradeToCurrent();NormalizeGrid(profile);
                 if (result == ProfileReadResult.Invalid)
                 { Notice = "No se pudo recuperar el guardado. Tus archivos se conservaron; no se guardarán cambios."; HasSaveProblem = true; }
                 else if (result == ProfileReadResult.Recovered)
@@ -68,12 +84,15 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             {
                 writable = false;
                 if(profile==null||!profile.IsValid(definitions,rewards))profile=CreateStartingProfile();
-                profile.UpgradeFromVersionOne();
+                profile.UpgradeToCurrent();NormalizeGrid(profile);
                 ApplyEquipment();ApplyStats();
                 Notice = "No se pudo acceder al guardado. Tus archivos se conservaron; no se guardarán cambios.";
                 HasSaveProblem = true;
                 Debug.LogWarning("Inventory initialization: " + e.Message, this);
             }
+            if(IsReady && GetComponent<InventoryWorldAccess>()==null)gameObject.AddComponent<InventoryWorldAccess>();
+            worldClock=profile.worldPlaySeconds;
+            if(IsReady&&GetComponent<World.RegionRespawn>()!=null&&GetComponent<World.GatheringPlayer>()==null)gameObject.AddComponent<World.GatheringPlayer>();
             Changed?.Invoke();
         }
 
@@ -94,7 +113,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             {
                 var loaded=JsonUtility.FromJson<InventoryProfile>(json);
                 if(loaded?.IsValid(definitions,rewards)!=true)return false;
-                if(loaded.version==2)foreach(var mastery in loaded.progression.masteries)if(!HasFamily(mastery.familyId))return false;
+                if(loaded.version>=2)foreach(var mastery in loaded.progression.masteries)if(!HasFamily(mastery.familyId))return false;
                 return true;
             }
             catch (ArgumentException) { return false; }
@@ -107,7 +126,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             var item = profile?.Find(instanceId);
             return item != null ? catalog.Find(item.definitionId) : null;
         }
-        public bool HasClaimed(string rewardId) => profile != null && profile.claimedRewards.Contains(rewardId);
+        public bool HasClaimed(string rewardId) => profile != null && (profile.claimedRewards.Contains(rewardId)||profile.pendingLoot?.Exists(l=>l.rewardId==rewardId)==true);
         public bool IsWorldEnemyDefeated(string id)=>profile?.defeatedEnemies?.Contains(id)==true;
         public int RegionMinimum(string id)=>profile?.regions?.Find(r=>r.id==id)?.minimumLevel??0;
         public int RegionLevel(string id)=>Mathf.Max(Level,RegionMinimum(id));
@@ -183,7 +202,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             return Commit(next,"Maestría guardada.",false);
         }
         // A kill's experience and rolled item are committed together. Failed writes apply neither.
-        public bool TryGrantVictory(int experience,IDictionary<string,int> mastery,OwnedWeapon drop,string worldEnemyId=null)
+        public bool TryGrantVictory(int experience,IDictionary<string,int> mastery,OwnedWeapon drop,string worldEnemyId=null, IDictionary<string,int> materialLoot=null, Vector3? lootPosition=null)
         {
             if(!IsReady||experience<0||experience>1000000)return false;
             if(worldEnemyId!=null&&IsWorldEnemyDefeated(worldEnemyId))return true;
@@ -192,11 +211,27 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(drop!=null && (drop.definitionId==null||!definitions.Contains(drop.definitionId)))return false;
             var next=profile.Copy();int previous=next.progression.level;
             if(worldEnemyId!=null){next.EnsureWorldData();next.defeatedEnemies.Add(worldEnemyId);}
+            var pending=new PendingInventoryLoot{id=Guid.NewGuid().ToString("N")};
+            var position=lootPosition??transform.position;pending.x=position.x;pending.y=position.y;pending.z=position.z;
+            if(materialLoot!=null)foreach(var entry in materialLoot)
+            {
+                if(!materialDefinitions.ContainsKey(entry.Key)||entry.Value<=0)return false;
+                var candidate=next.Copy();
+                if(candidate.TryAddMaterial(entry.Key,entry.Value)&&HasGridRoom(candidate,false))next=candidate;
+                else pending.materials.Add(new MaterialStack{id=entry.Key,quantity=entry.Value});
+            }
             Rules.Grant(next.progression,experience,mastery);
-            bool added=drop!=null&&next.weapons.Count<256;
-            if(added)next.weapons.Add(drop.Copy());
-            string notice="+"+experience+" EXP"+(next.progression.level>previous?" · Nivel "+next.progression.level+" · [I] Elegí atributos":"")+
-                (added?" · Arma T"+drop.tier+" obtenida":"")+(drop!=null&&!added?" · Inventario lleno":"");
+            bool added=false;
+            if(drop!=null)
+            {
+                var candidate=next.Copy();candidate.weapons.Add(drop.Copy());
+                added=next.weapons.Count<256&&HasGridRoom(candidate,false);
+                if(added)next=candidate;else pending.weapon=drop.Copy();
+            }
+            bool waiting=pending.weapon!=null||pending.materials.Count>0;
+            if(waiting)next.pendingLoot.Add(pending);
+            string notice="+"+experience+" EXP"+(next.progression.level>previous?" · Nivel "+next.progression.level:"")+
+                (added?" · Arma T"+drop.tier+" obtenida":"")+(waiting?" · Mochila llena: botín guardado en el suelo.":"");
             return Commit(next,notice,false);
         }
         bool HasFamily(string id)
@@ -221,7 +256,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public bool TryEquipDefinition(int slot, WeaponDefinition definition)
         {
             if (!IsReady || definition == null) return false;
-            var item = profile.weapons.Find(value => value.definitionId == definition.Id);
+            var item = profile.weapons.Find(value => value.definitionId == definition.Id && !value.inChest);
             return item != null && TryEquip(slot, item.instanceId);
         }
 
@@ -234,17 +269,26 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
 
         public bool TryClaimReward(string rewardId)
         {
-            if (!IsReady || !rewards.TryGetValue(rewardId, out var definition)) return false;
+            if (!IsReady || HasClaimed(rewardId) || !rewards.TryGetValue(rewardId, out var definition)) return false;
             var health = GetComponent<Mismo.Gameplay.Combat.Health>();
             if (health == null || health.IsDead) return false;
             var next = profile.Copy();
             if(!next.TryClaim(rewardId,definition))return false;
             var reward=next.weapons[next.weapons.Count-1];reward.tier=2;reward.variant=WeaponVariant.Guardian;
+            if(!HasGridRoom(next,false))
+            {
+                next.weapons.Remove(reward);next.claimedRewards.Remove(rewardId);
+                next.pendingLoot.Add(new PendingInventoryLoot{id=Guid.NewGuid().ToString("N"),rewardId=rewardId,weapon=reward,
+                    x=transform.position.x,y=transform.position.y,z=transform.position.z});
+                return Commit(next,"Mochila llena: la recompensa única quedó guardada como botín en el suelo.",false);
+            }
             return Commit(next, "Obtuviste " + catalog.Find(definition).DisplayName + " T2 Guardián. [I] Inventario", false);
         }
 
         bool Commit(InventoryProfile next, string notice, bool updateEquipment = true)
         {
+            next.worldPlaySeconds=System.Math.Max(next.worldPlaySeconds,worldClock);
+            NormalizeGrid(next);
             if (!writable || !next.IsValid(definitions, rewards)) return false;
             try { repository.Write(JsonUtility.ToJson(next)); }
             catch (Exception e) when (e is IOException || e is UnauthorizedAccessException || e is System.Security.Cryptography.CryptographicException)

@@ -14,7 +14,7 @@ namespace Mismo.Gameplay.Enemies
         [SerializeField, Min(0)] float soleClearance=.0325f;
         readonly RaycastHit[] hits=new RaycastHit[32];
 
-        public bool Apply(Transform actor,Transform visual,float modelScale)
+        public bool Apply(Transform actor,Transform visual,float modelScale, bool visualAlreadyGrounded=false)
         {
             Vector3 origin=actor.position+Vector3.up*probeDistance;
             int count=Physics.RaycastNonAlloc(origin,Vector3.down,hits,probeDistance*2,~0,QueryTriggerInteraction.Ignore);
@@ -27,7 +27,8 @@ namespace Mismo.Gameplay.Enemies
             }
             if(float.IsPositiveInfinity(distance))return false;
             float ground=origin.y-distance;
-            visual.position+=Vector3.up*(ground-actor.position.y-soleClearance*Mathf.Abs(modelScale));
+            float clearance=visualAlreadyGrounded?0f:soleClearance*Mathf.Abs(modelScale);
+            visual.position+=Vector3.up*(ground-actor.position.y-clearance);
             return true;
         }
     }

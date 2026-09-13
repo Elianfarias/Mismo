@@ -1,0 +1,623 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Game_en
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 251a87136e2e3c142b3d5f8a360cca0c, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 2302988288
+    m_Localized: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2437206016
+    m_Localized: New game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400320
+    m_Localized: Options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400321
+    m_Localized: Quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400322
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400323
+    m_Localized: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400324
+    m_Localized: Effects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400325
+    m_Localized: Interface
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400326
+    m_Localized: TEST VERSION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400327
+    m_Localized: TWO WEAPONS. YOUR STYLE.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400328
+    m_Localized: Explore the region and find your next challenge.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400329
+    m_Localized: "Preparing your adventure\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400330
+    m_Localized: The game region could not be found.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400331
+    m_Localized: TRAVELER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400332
+    m_Localized: BELONGINGS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400333
+    m_Localized: CHARACTER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400334
+    m_Localized: ABILITIES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400335
+    m_Localized: 'Menu [B]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400336
+    m_Localized: 'Close [ESC]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400337
+    m_Localized: PREPARE YOUR NEXT TRIP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400338
+    m_Localized: 'CHARACTER  [C]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400339
+    m_Localized: 'INVENTORY  [I]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400340
+    m_Localized: 'ABILITIES  [K]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400341
+    m_Localized: 'MAP  [M]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400342
+    m_Localized: The world keeps moving while you browse the menu.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400343
+    m_Localized: Backpack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400344
+    m_Localized: Personal chest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400345
+    m_Localized: "Chest \xB7 In town"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400346
+    m_Localized: All
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400347
+    m_Localized: Weapons
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400348
+    m_Localized: Materials
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400349
+    m_Localized: Consumables
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400350
+    m_Localized: Favorites
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400351
+    m_Localized: "Search items\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400352
+    m_Localized: Organize
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400353
+    m_Localized: "Drag to move \xB7 R to rotate while dragging"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400354
+    m_Localized: "UNPLACED \xB7 Store or discard to make room"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400355
+    m_Localized: Drag to rotate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400356
+    m_Localized: YOUR CHARACTER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400357
+    m_Localized: Select an item to inspect it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400358
+    m_Localized: "\u2190 Character"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400359
+    m_Localized: "\u2605 Favorite"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400360
+    m_Localized: "\u2606 Favorite"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400361
+    m_Localized: MATERIAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400362
+    m_Localized: WEAPON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400363
+    m_Localized: A resource for your next trip.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400364
+    m_Localized: Select a slot to compare and equip.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400365
+    m_Localized: All
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400366
+    m_Localized: View abilities
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400367
+    m_Localized: Withdraw from chest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400368
+    m_Localized: Store in chest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400369
+    m_Localized: "Discard\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400370
+    m_Localized: Permanently discard?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400371
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400372
+    m_Localized: Discard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400373
+    m_Localized: Select a slot to view its abilities.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400374
+    m_Localized: Maximum level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400375
+    m_Localized: Upgrade +
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400376
+    m_Localized: WEAPON MASTERY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400377
+    m_Localized: Maximum mastery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400378
+    m_Localized: 'Select another weapon to view its mastery.
+
+      Progress is shared
+      by weapons of the same family. Range does not increase.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400379
+    m_Localized: '[B] MENU   [I] BACKPACK   {0} / {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400380
+    m_Localized: BACKPACK  {0} / {1} cells
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400381
+    m_Localized: '     CHEST  {0} / {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400382
+    m_Localized: "     \xB7     LEVEL {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400383
+    m_Localized: Health {0:0} / {1:0}     Armor {2:0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400384
+    m_Localized: "Slot {0} \xB7 {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400385
+    m_Localized: "Total: {0} \xB7 Stack: {1} \xB7 Size: {2}\xD7{3}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400386
+    m_Localized: Compare slot {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400387
+    m_Localized: Equip in {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400388
+    m_Localized: '{0} unit(s) will be removed. This cannot be undone.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400389
+    m_Localized: "{0} \xB7 Weapon abilities"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400390
+    m_Localized: 'Cooldown: {0:0.##} s'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400391
+    m_Localized: "CHARACTER \xB7 LEVEL {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400392
+    m_Localized: Experience {0} / {1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400393
+    m_Localized: 'Available points: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400394
+    m_Localized: Maximum health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400395
+    m_Localized: Attack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400396
+    m_Localized: Armor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400397
+    m_Localized: "{0} \xB7 {1} points"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400398
+    m_Localized: '{0} per point'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400399
+    m_Localized: "Bonuses vs. slot {0}: damage {1} pp \xB7 speed {2} pp\nHealth {3}
+      \xB7 Armor {4}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400400
+    m_Localized: Sword
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400401
+    m_Localized: Guardian sword
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400402
+    m_Localized: Bow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400403
+    m_Localized: Balanced
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400404
+    m_Localized: Damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400405
+    m_Localized: Speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400406
+    m_Localized: Wood
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400407
+    m_Localized: Stone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400408
+    m_Localized: Herb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400409
+    m_Localized: Monster component
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400410
+    m_Localized: Layout saved.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400411
+    m_Localized: Inventory organized.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400412
+    m_Localized: COMBO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400413
+    m_Localized: Chain sword attacks against enemies in front of you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400414
+    m_Localized: LUNGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400415
+    m_Localized: Lunge forward to strike an enemy in front of you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400416
+    m_Localized: PARRY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400417
+    m_Localized: Defend at the right moment to deflect an enemy attack.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400418
+    m_Localized: SPIN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400419
+    m_Localized: Spin your sword to strike nearby enemies.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400420
+    m_Localized: ARROW
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400421
+    m_Localized: Fire an arrow where you aim.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400422
+    m_Localized: POWER SHOT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400423
+    m_Localized: Fire a powerful arrow that deals damage and reduces enemy posture.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400424
+    m_Localized: RETREAT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400425
+    m_Localized: Step back and fire an arrow to create distance.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400426
+    m_Localized: ARROW RAIN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400427
+    m_Localized: Rain arrows over the selected area.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400428
+    m_Localized: +{0} health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400429
+    m_Localized: +{0:0.#}% damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400430
+    m_Localized: +{0} armor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400431
+    m_Localized: +{0:0.#}% per point
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400432
+    m_Localized: "Maximum health: {0:0.#} \xB7 Armor: {1:0.#}\nBonuses from both
+      weapons are active."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400433
+    m_Localized: '{0}
+
+      Family: {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400434
+    m_Localized: "Level {0} \xB7 Points: {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400435
+    m_Localized: Inventory saved automatically.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400436
+    m_Localized: There is not enough space for all items.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400437
+    m_Localized: No space fits this item. Rearrange, store or discard items.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400438
+    m_Localized: No space in the chest fits this item.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400439
+    m_Localized: The inventory backup was recovered.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400440
+    m_Localized: The change could not be saved. Try again; your previous equipment
+      is intact.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400441
+    m_Localized: The save could not be recovered. Your files were preserved; changes
+      will not be saved.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400442
+    m_Localized: The save could not be accessed. Your files were preserved; changes
+      will not be saved.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 583771934720
+    m_Localized: Medicinal herb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1146018385920
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366376275968
+    m_Localized: "Gathering: {0} \xB7 {1:0}%"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242432
+    m_Localized: '[G] Craft at the workbench'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242433
+    m_Localized: "[G] {0} \xB7 {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242434
+    m_Localized: Gather
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242435
+    m_Localized: Mine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242436
+    m_Localized: Chop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242437
+    m_Localized: WORKBENCH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242438
+    m_Localized: "Weapon to upgrade: {0} \xB7 Slot {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242439
+    m_Localized: "Selected weapon upgrade: T{0} \u2192 T{1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242440
+    m_Localized: "Produces {0} \xD7 {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242441
+    m_Localized: " \xB7 Damage {0:+0.#;-0.#;0}% \xB7 Speed {1:+0.#;-0.#;0}% \xB7
+      Health {2:+0.#;-0.#;0} \xB7 Armor {3:+0.#;-0.#;0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242442
+    m_Localized: Craft
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242443
+    m_Localized: Upgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242444
+    m_Localized: 'Crafted: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242445
+    m_Localized: Herbal salve
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242446
+    m_Localized: Gradually restores health outside combat. Damage interrupts the
+      effect.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242447
+    m_Localized: Initial weapon upgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242448
+    m_Localized: Upgrade the selected weapon while preserving its variant and mastery.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242449
+    m_Localized: Use
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242450
+    m_Localized: Recovery started.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

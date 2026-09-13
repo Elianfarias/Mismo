@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: BowRetreat
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: RETIRADA
+  description: Retrocede mientras disparas una flecha para crear distancia.
+  localizationKey: ability.bow.bowretreat
   preparation: 0.45
   active: 0.25
   recovery: 0.3

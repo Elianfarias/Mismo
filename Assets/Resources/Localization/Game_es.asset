@@ -1,0 +1,623 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Game_es
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: 251a87136e2e3c142b3d5f8a360cca0c, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 2302988288
+    m_Localized: Continuar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2437206016
+    m_Localized: Nueva partida
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400320
+    m_Localized: Opciones
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400321
+    m_Localized: Salir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400322
+    m_Localized: Volver
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400323
+    m_Localized: "M\xFAsica"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400324
+    m_Localized: Efectos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400325
+    m_Localized: Interfaz
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400326
+    m_Localized: "VERSI\xD3N DE PRUEBA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400327
+    m_Localized: DOS ARMAS. TU ESTILO.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400328
+    m_Localized: "Explor\xE1 la regi\xF3n y encontr\xE1 tu pr\xF3ximo desaf\xEDo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400329
+    m_Localized: "Preparando tu aventura\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400330
+    m_Localized: "No se encontr\xF3 la regi\xF3n de juego."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400331
+    m_Localized: VIAJERO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400332
+    m_Localized: PERTENENCIAS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400333
+    m_Localized: PERSONAJE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400334
+    m_Localized: HABILIDADES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400335
+    m_Localized: "Men\xFA [B]"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400336
+    m_Localized: 'Cerrar [ESC]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400337
+    m_Localized: "PREPAR\xC1 TU PR\xD3XIMA SALIDA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400338
+    m_Localized: 'PERSONAJE  [C]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400339
+    m_Localized: 'INVENTARIO  [I]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400340
+    m_Localized: 'HABILIDADES  [K]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400341
+    m_Localized: 'MAPA  [M]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400342
+    m_Localized: "El mundo contin\xFAa mientras consult\xE1s el men\xFA."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400343
+    m_Localized: Mochila
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400344
+    m_Localized: Cofre personal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400345
+    m_Localized: "Cofre \xB7 En el pueblo"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400346
+    m_Localized: Todos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400347
+    m_Localized: Armas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400348
+    m_Localized: Materiales
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400349
+    m_Localized: Consumo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400350
+    m_Localized: Favoritos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400351
+    m_Localized: "Buscar objetos\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400352
+    m_Localized: Organizar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400353
+    m_Localized: "Arrastr\xE1 para mover \xB7 R para girar al arrastrar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400354
+    m_Localized: "SIN UBICAR \xB7 Guard\xE1 o descart\xE1 para liberar espacio"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400355
+    m_Localized: "Arrastr\xE1 para rotar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400356
+    m_Localized: TU PERSONAJE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400357
+    m_Localized: "Seleccion\xE1 un objeto para inspeccionarlo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400358
+    m_Localized: "\u2190 Personaje"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400359
+    m_Localized: "\u2605 Favorito"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400360
+    m_Localized: "\u2606 Favorito"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400361
+    m_Localized: MATERIAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400362
+    m_Localized: ARMA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400363
+    m_Localized: "Recurso para preparar tu pr\xF3xima salida."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400364
+    m_Localized: "Seleccion\xE1 una ranura para comparar y equipar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400365
+    m_Localized: Todo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400366
+    m_Localized: Ver habilidades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400367
+    m_Localized: Retirar del cofre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400368
+    m_Localized: Guardar en cofre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400369
+    m_Localized: "Descartar\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400370
+    m_Localized: "\xBFDescartar definitivamente?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400371
+    m_Localized: Cancelar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400372
+    m_Localized: Descartar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400373
+    m_Localized: "Seleccion\xE1 una ranura para consultar sus habilidades."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400374
+    m_Localized: "Nivel m\xE1ximo"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400375
+    m_Localized: Mejorar +
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400376
+    m_Localized: "MAESTR\xCDA DE ARMA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400377
+    m_Localized: "Maestr\xEDa m\xE1xima"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400378
+    m_Localized: "Eleg\xED otra arma en la pesta\xF1a Armas para ver su maestr\xEDa.\nEl
+      progreso se comparte entre ejemplares de la misma familia. El alcance no aumenta."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400379
+    m_Localized: "[B] MEN\xDA   [I] MOCHILA   {0} / {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400380
+    m_Localized: MOCHILA  {0} / {1} celdas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400381
+    m_Localized: '     COFRE  {0} / {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400382
+    m_Localized: "     \xB7     NIVEL {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400383
+    m_Localized: Vida {0:0} / {1:0}     Armadura {2:0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400384
+    m_Localized: "Ranura {0} \xB7 {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400385
+    m_Localized: "Total: {0} \xB7 Pila: {1} \xB7 Tama\xF1o: {2}\xD7{3}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400386
+    m_Localized: Comparar ranura {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400387
+    m_Localized: Equipar en {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400388
+    m_Localized: "Se eliminar\xE1n {0} unidad(es). Esta acci\xF3n no se puede deshacer."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400389
+    m_Localized: "{0} \xB7 Habilidades del arma"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400390
+    m_Localized: "Recuperaci\xF3n: {0:0.##} s"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400391
+    m_Localized: "PERSONAJE \xB7 NIVEL {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400392
+    m_Localized: Experiencia {0} / {1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400393
+    m_Localized: 'Puntos disponibles: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400394
+    m_Localized: "Vida m\xE1xima"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400395
+    m_Localized: Ataque
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400396
+    m_Localized: Armadura
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400397
+    m_Localized: "{0} \xB7 {1} puntos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400398
+    m_Localized: '{0} por punto'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400399
+    m_Localized: "Bonos vs. ranura {0}: da\xF1o {1} pp \xB7 vel. {2} pp\nVida {3}
+      \xB7 Armadura {4}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400400
+    m_Localized: Espada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400401
+    m_Localized: "Espada del guardi\xE1n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400402
+    m_Localized: Arco
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400403
+    m_Localized: Equilibrada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400404
+    m_Localized: "Da\xF1o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400405
+    m_Localized: Velocidad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400406
+    m_Localized: Madera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400407
+    m_Localized: Piedra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400408
+    m_Localized: Hierba
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400409
+    m_Localized: Componente de monstruo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400410
+    m_Localized: "Distribuci\xF3n guardada."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400411
+    m_Localized: Inventario organizado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400412
+    m_Localized: COMBO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400413
+    m_Localized: Encadena ataques de espada contra los enemigos que tengas delante.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400414
+    m_Localized: ESTOCADA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400415
+    m_Localized: Avanza con una estocada para golpear al enemigo de frente.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400416
+    m_Localized: PARRY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400417
+    m_Localized: Defiende en el momento justo para desviar el ataque enemigo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400418
+    m_Localized: GIRO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400419
+    m_Localized: Gira con la espada y golpea a los enemigos cercanos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400420
+    m_Localized: FLECHA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400421
+    m_Localized: Dispara una flecha hacia donde apuntas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400422
+    m_Localized: POTENTE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400423
+    m_Localized: "Dispara una flecha potente que causa da\xF1o y reduce la postura
+      del enemigo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400424
+    m_Localized: RETIRADA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400425
+    m_Localized: Retrocede mientras disparas una flecha para crear distancia.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400426
+    m_Localized: LLUVIA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400427
+    m_Localized: "Lanza una lluvia de flechas sobre el \xE1rea seleccionada."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400428
+    m_Localized: +{0} vida
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400429
+    m_Localized: "+{0:0.#}% da\xF1o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400430
+    m_Localized: +{0} armadura
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400431
+    m_Localized: +{0:0.#}% por punto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400432
+    m_Localized: "Vida m\xE1xima: {0:0.#} \xB7 Armadura: {1:0.#}\nLos bonos de ambas
+      armas est\xE1n activos."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400433
+    m_Localized: '{0}
+
+      Familia: {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400434
+    m_Localized: "Nivel {0} \xB7 Puntos: {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400435
+    m_Localized: "Inventario guardado autom\xE1ticamente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400436
+    m_Localized: No hay espacio para acomodar todos los objetos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400437
+    m_Localized: "No hay un hueco con la forma necesaria. Reorganiz\xE1, guard\xE1
+      o descart\xE1 objetos."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400438
+    m_Localized: No hay un hueco con la forma necesaria en el cofre.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400439
+    m_Localized: "Se recuper\xF3 la copia de respaldo del inventario."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400440
+    m_Localized: "No se pudo guardar el cambio. Volv\xE9 a intentarlo; tu equipo
+      anterior sigue intacto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400441
+    m_Localized: "No se pudo recuperar el guardado. Tus archivos se conservaron;
+      no se guardar\xE1n cambios."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2441400442
+    m_Localized: "No se pudo acceder al guardado. Tus archivos se conservaron; no
+      se guardar\xE1n cambios."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 583771934720
+    m_Localized: Hierba medicinal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1146018385920
+    m_Localized: Idioma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366376275968
+    m_Localized: "Recolectando: {0} \xB7 {1:0}%"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242432
+    m_Localized: '[G] Fabricar en el banco'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242433
+    m_Localized: "[G] {0} \xB7 {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242434
+    m_Localized: Recolectar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242435
+    m_Localized: Extraer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242436
+    m_Localized: Talar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242437
+    m_Localized: BANCO DE TRABAJO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242438
+    m_Localized: "Arma a mejorar: {0} \xB7 Ranura {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242439
+    m_Localized: "Mejora del arma elegida: T{0} \u2192 T{1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242440
+    m_Localized: "Produce {0} \xD7 {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242441
+    m_Localized: " \xB7 Da\xF1o {0:+0.#;-0.#;0}% \xB7 Vel. {1:+0.#;-0.#;0}% \xB7
+      Vida {2:+0.#;-0.#;0} \xB7 Armadura {3:+0.#;-0.#;0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242442
+    m_Localized: Crear
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242443
+    m_Localized: Mejorar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242444
+    m_Localized: 'Creado: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242445
+    m_Localized: "Ung\xFCento de hierbas"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242446
+    m_Localized: "Recupera vida gradualmente fuera de combate. El da\xF1o interrumpe
+      el efecto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242447
+    m_Localized: Mejora inicial del arma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242448
+    m_Localized: "Mejora el ejemplar seleccionado conservando su variante y maestr\xEDa."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242449
+    m_Localized: Usar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40366548242450
+    m_Localized: "Recuperaci\xF3n iniciada."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

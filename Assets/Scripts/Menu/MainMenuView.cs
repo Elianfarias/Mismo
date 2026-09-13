@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using Mismo.Gameplay.Player.World;
+using L = Mismo.Gameplay.Player.Localization.GameLanguage;
 
 namespace Mismo.Menu
 {
@@ -21,6 +22,18 @@ namespace Mismo.Menu
         public Slider UI => ui;
         public bool OptionsVisible => options.activeSelf;
         bool loading;
+        readonly System.Collections.Generic.Dictionary<Text,string> originalLabels=new System.Collections.Generic.Dictionary<Text,string>();
+        void OnDestroy(){L.Changed-=RefreshLanguage;}
+        void RefreshLanguage(){foreach(var pair in originalLabels)if(pair.Key!=null)pair.Key.text=L.Text(pair.Value);}
+        void OnGUI()
+        {
+            if(loading)return;
+            var old=GUI.matrix;
+            float scale=Mathf.Min(Screen.width/1600f,Screen.height/900f);
+            GUI.matrix=Matrix4x4.Scale(Vector3.one*scale);
+            if(GUI.Button(new Rect(1280,24,270,46),L.LanguageLabel))L.Next();
+            GUI.matrix=old;
+        }
         void Awake()
         {
             Time.timeScale=1; Cursor.lockState=CursorLockMode.None;Cursor.visible=true;
@@ -40,7 +53,12 @@ namespace Mismo.Menu
             quit.onClick.AddListener(Application.Quit);
             ShowOptions(false);
         }
-        void Start() => ShowOptions(false);
+        void Start()
+        {
+            foreach(var text in GetComponentsInChildren<Text>(true))if(text!=status&&!text.text.Contains("%"))originalLabels[text]=text.text;
+            L.Changed+=RefreshLanguage;RefreshLanguage();ShowOptions(false);
+            if(status!=null)status.text=L.Text(status.text);
+        }
         void Update()
         {
             if(!loading && OptionsVisible && Keyboard.current!=null && Keyboard.current.escapeKey.wasPressedThisFrame)ShowOptions(false);
@@ -55,14 +73,14 @@ namespace Mismo.Menu
         public void Begin()
         {
             if(loading)return;
-            if(!Application.CanStreamedLevelBeLoaded(gameplayScene)){status.text="No se encontró la región de juego.";return;}
+            if(!Application.CanStreamedLevelBeLoaded(gameplayScene)){status.text=L.Text("No se encontró la región de juego.");return;}
             if(!WorldSession.NewGame()){status.text=WorldSession.LastError??"No se pudo crear la partida.";return;}
             LoadGame();
         }
         public void Continue()
         {
             if(loading)return;
-            if(!Application.CanStreamedLevelBeLoaded(gameplayScene)){status.text="No se encontró la región de juego.";return;}
+            if(!Application.CanStreamedLevelBeLoaded(gameplayScene)){status.text=L.Text("No se encontró la región de juego.");return;}
             if(!WorldSession.Continue()){status.text=WorldSession.LastError??"No hay una partida guardada.";return;}
             LoadGame();
         }
@@ -70,7 +88,7 @@ namespace Mismo.Menu
         {
             loading=true;begin.interactable=false;openOptions.interactable=false;quit.interactable=false;
             continueGame.interactable=false;
-            status.text="Preparando tu aventura…";PlayerPrefs.Save();
+            status.text=L.Text("Preparando tu aventura…");PlayerPrefs.Save();
             SceneManager.LoadSceneAsync(gameplayScene);
         }
         // Built into the scene by the editor tool; all controls remain editable in the hierarchy.

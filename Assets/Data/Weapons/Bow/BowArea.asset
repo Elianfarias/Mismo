@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: BowArea
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: LLUVIA
+  description: Lanza una lluvia de flechas sobre el área seleccionada.
+  localizationKey: ability.bow.bowarea
   preparation: 0.7
   active: 0.02
   recovery: 0.25

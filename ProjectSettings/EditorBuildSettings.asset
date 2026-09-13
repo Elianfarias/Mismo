@@ -12,5 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/VoxelRegion_7319.unity
     guid: 73ac5b363fe7c194b8a8d058515f6f36
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: bf32e908004087a4daa83bb87606e57f, type: 2}
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+    com.unity.localization.settings: {fileID: 11400000, guid: d4ae4057a14dc6745a62c1fc2ee12d3d, type: 2}

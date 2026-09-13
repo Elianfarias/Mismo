@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03bbd7adb3144e9fb629c747d67942c9, type: 3}
+  m_Name: WoodNode
+  m_EditorClassIdentifier: 
+  id: node-Wood
+  kind: 1
+  displayName: Madera
+  actionName: Recolectar
+  harvestSeconds: 1
+  interactionRange: 2.5
+  regenerationSeconds: 600
+  restoreClearance: 8
+  availablePrefab: {fileID: 4638947028835871282, guid: 62885f9208aa5ff4480efb61fc7dd740, type: 3}
+  depletedPrefab: {fileID: 8217608504254049432, guid: 95cefbcbe198dcf418f1078cc8eb016b, type: 3}
+  toolPrefab: {fileID: 2802402216324252177, guid: 6a84c25ba5fdcaa4894bcc19dd35516b, type: 3}
+  harvestSound: {fileID: 8300000, guid: d8964c04ed93a814d902238de28609c9, type: 3}
+  completionSound: {fileID: 8300000, guid: 6d9c832d86c45ef40b352bb28be12433, type: 3}
+  rewards: {fileID: 11400000, guid: 99652d64f55a4e6fa0d3e34546a1e6b5, type: 2}

@@ -200,7 +200,7 @@ namespace Mismo.Gameplay.Player.World
                 tree.AddComponent<MeshFilter>().sharedMesh=trees[random.Next(trees.Length)];tree.AddComponent<MeshRenderer>().sharedMaterial=material;
                 var trunk=tree.AddComponent<BoxCollider>();trunk.center=new Vector3(0,3,0);trunk.size=new Vector3(.9f,6,.9f);tree.AddComponent<ClimbableTree>();
             }
-            content.Decorate(id,root.transform,material);chunks.Add(id,root);return root;
+            content.Decorate(id,root.transform,material);GatheringDistribution.Decorate(Settings,field,id,root.transform);chunks.Add(id,root);return root;
         }
         public static Mesh BuildTerrain(VoxelRegionHeightfield field,Vector2Int id)
         {

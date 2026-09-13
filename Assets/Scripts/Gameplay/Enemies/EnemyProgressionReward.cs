@@ -10,6 +10,8 @@ namespace Mismo.Gameplay.Enemies
     [DisallowMultipleComponent]
     public sealed class EnemyProgressionReward : MonoBehaviour, ICombatContribution
     {
+        public MaterialLootTable materialLoot;
+        Dictionary<string,int> rolledMaterials;
         Health health;
         DamageReceiver receiver;
         PlayerInventory participant;
@@ -19,7 +21,11 @@ namespace Mismo.Gameplay.Enemies
         Dictionary<string,int> mastery;
         OwnedWeapon drop;
         float retryAt;
-        void Awake(){health=GetComponent<Health>();receiver=GetComponent<DamageReceiver>();}
+        void Awake()
+        {
+            health=GetComponent<Health>();receiver=GetComponent<DamageReceiver>();
+            if(materialLoot==null&&GetComponent<GoblinController>()!=null)materialLoot=Resources.Load<Mismo.Gameplay.Player.World.GatheringSettings>("GatheringSettings")?.monsterLoot;
+        }
         void OnEnable(){if(receiver!=null)receiver.Resolved+=OnResolved;}
         void OnDisable(){if(receiver!=null)receiver.Resolved-=OnResolved;}
         public void RecordDefense(PlayerInventory player,string family)
@@ -48,6 +54,7 @@ namespace Mismo.Gameplay.Enemies
             mastery=new Dictionary<string,int>();
             foreach(var pair in contributions)mastery[pair.Key]=Mathf.FloorToInt(masteryPool*pair.Value/Mathf.Max(1,total));
             drop=!boss&&Random.value<rules.dropChance?player.RollDrop():null;
+            rolledMaterials=materialLoot!=null?materialLoot.Roll():null;
             pending=true;
             var identity=GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>();if(identity!=null)identity.PendingReward=true;
             TryCommit();
@@ -61,7 +68,7 @@ namespace Mismo.Gameplay.Enemies
         {
             retryAt=Time.unscaledTime+2;
             string worldId=GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>()?.Id;
-            if(participant!=null&&participant.TryGrantVictory(experience,mastery,drop,worldId))
+            if(participant!=null&&participant.TryGrantVictory(experience,mastery,drop,worldId,rolledMaterials,transform.position))
             {claimed=true;pending=false;var identity=GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>();if(identity!=null)identity.PendingReward=false;}
         }
     }

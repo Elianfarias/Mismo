@@ -1,6 +1,8 @@
 # Inventario single-player
 
-El inventario conserva armas propias, dos ranuras y la progresión entre intentos y sesiones. Se activa en los jugadores con `RegionRespawn`; las arenas de prueba permanecen independientes del perfil. La ampliación de niveles, maestría y tiers se describe en [Progression.md](Progression.md). No incluye materiales, pociones, comercio ni conexión con PvP.
+La interfaz y las reglas de capacidad/cofre se actualizaron: ver [InventoryExperience.md](InventoryExperience.md). El perfil actual es v4; la descripción de v2 debajo corresponde a la entrega anterior.
+
+El inventario conserva armas propias, dos ranuras y la progresión entre intentos y sesiones. Se activa en los jugadores con `RegionRespawn`; las arenas de prueba permanecen independientes del perfil. La ampliación de niveles, maestría y tiers se describe en [Progression.md](Progression.md). Incluye materiales configurables y persistentes; ver [GatheringAndCrafting.md](GatheringAndCrafting.md). Todavía no incluye pociones, comercio ni conexión con PvP.
 
 ## Uso
 
@@ -46,4 +48,3 @@ El perfil no es una fuente de estadísticas autorizadas para PvP. La futura inst
 `Mismo.Gameplay.Player.Editor.InventoryChecks.RunBatch` ejecuta las pruebas de integración en una copia aislada de Unity: pickup físico, equipamiento, duplicados, combate, fallo de escritura, cursor, muerte, recarga y recuperación. No usa el perfil personal. Produce `Docs/Validation/Inventory-checks.txt` y una captura de la pantalla.
 
 Validación del 8 de septiembre de 2026: 26 comprobaciones del núcleo y 40 de integración aprobadas en Unity 6000.3.11f1. Se verificó visualmente la captura del panel y se comprobó que no atraviesan los controles de movimiento, ataque y alternancia. Los reportes están en `Docs/Validation/Inventory-core-checks.txt` y `Docs/Validation/Inventory-checks.txt`.
-

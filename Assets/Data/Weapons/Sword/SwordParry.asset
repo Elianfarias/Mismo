@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: SwordParry
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: PARRY
+  description: Defiende en el momento justo para desviar el ataque enemigo.
+  localizationKey: ability.sword.swordparry
   preparation: 0
   active: 0.5
   recovery: 0.12

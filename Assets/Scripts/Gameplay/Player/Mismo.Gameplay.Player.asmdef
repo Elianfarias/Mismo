@@ -2,6 +2,7 @@
     "name": "Mismo.Gameplay.Player",
     "rootNamespace": "Mismo.Gameplay.Player",
     "references": [
+        "Unity.Localization",
         "Unity.InputSystem",
         "Mismo.Audio"
     ],

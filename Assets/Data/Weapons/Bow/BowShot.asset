@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: BowShot
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: FLECHA
+  description: Dispara una flecha hacia donde apuntas.
+  localizationKey: ability.bow.bowshot
   preparation: 0.4
   active: 0.02
   recovery: 0.35

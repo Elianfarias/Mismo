@@ -39,7 +39,7 @@ namespace Mismo.Gameplay.Enemies
         private Health targetHealth;
         private NavMeshAgent agent;
         private readonly CooldownBook cooldowns = new CooldownBook();
-        private readonly HashSet<EntityId> hitTargets = new HashSet<EntityId>();
+        private readonly HashSet<UnityEngine.Object> hitTargets = new HashSet<UnityEngine.Object>();
         private readonly List<BossPatternDefinition> candidates = new List<BossPatternDefinition>();
         private readonly List<float> candidateWeights = new List<float>();
 
@@ -608,7 +608,7 @@ namespace Mismo.Gameplay.Enemies
                 if (state != BossState.Attack) break;
                 DamageReceiver receiver = other.GetComponentInParent<DamageReceiver>();
                 if (receiver == null || receiver.transform.root != target.transform.root || !HasSight(target)) continue;
-                if (!hitTargets.Add(receiver.GetEntityId())) continue;
+                if (!hitTargets.Add(receiver)) continue;
                 weapon.ApplyTo(receiver.gameObject, other.ClosestPoint(center), attackDirection);
             }
         }

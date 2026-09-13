@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ecf568a93c0b048a5901614fb4fef7, type: 3}
+  m_Name: GatheringSettings
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.GatheringSettings
+  herb: {fileID: 11400000, guid: a38d9b07b08945e2a699804dcd5a5379, type: 2}
+  tree: {fileID: 11400000, guid: 69d22ffa01ac421897525b87954ab08b, type: 2}
+  stone: {fileID: 11400000, guid: d6a04fb01f58441ebe26a0470997b50e, type: 2}
+  recipes:
+  - {fileID: 11400000, guid: 6975da9bb1c68f544865d337984a4ef0, type: 2}
+  - {fileID: 11400000, guid: c507ee0cdeaf28744b11f36204130897, type: 2}
+  workbenchPrefab: {fileID: 324489609638104938, guid: dbc5f6574fb2cc14391f20a28923b281, type: 3}
+  monsterLoot: {fileID: 11400000, guid: 582c0776621b425fbe268b43e8dbb274, type: 2}
+  generationVersion: 1
+  groupsPerChunk: 2
+  groupChance: 0.45
+  minimumSeparation: 5
+  starterRadius: 12

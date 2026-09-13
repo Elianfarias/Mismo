@@ -70,7 +70,7 @@ namespace Mismo.Gameplay.Enemies
             {
                 visual.localPosition=state==GoblinState.Dead?Vector3.up*.24f:Vector3.zero;
                 visual.localRotation=state==GoblinState.Dead?Quaternion.Euler(0,0,90):Quaternion.identity;
-                //if(state!=GoblinState.Dead&&animatedModel!=null)groundSupport.Apply(transform,visual,animatedModel.lossyScale.y);
+                if (state != GoblinState.Dead && animatedModel != null) groundSupport.Apply(transform, visual, animatedModel.lossyScale.y);
             }
             
             if (healthFill != null) healthFill.localScale = new Vector3(health.Normalized, 1f, 1f);

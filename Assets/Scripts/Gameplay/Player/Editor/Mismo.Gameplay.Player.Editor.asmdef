@@ -2,6 +2,8 @@
     "name": "Mismo.Gameplay.Player.Editor",
     "rootNamespace": "Mismo.Gameplay.Player.Editor",
     "references": [
+        "Unity.Localization",
+        "Unity.Localization.Editor",
         "Mismo.Gameplay.Player",
         "Mismo.Gameplay.Enemies",
         "Unity.InputSystem"
