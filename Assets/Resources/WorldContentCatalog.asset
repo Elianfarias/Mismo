@@ -59,6 +59,7 @@ MonoBehaviour:
     kind: 10
     biomes: 
     prefab: {fileID: 5382165887253409859, guid: 7ff6a3620eeda3046b2253872f1c75cf, type: 3}
+    gatheringNode: {fileID: 11400000, guid: a38d9b07b08945e2a699804dcd5a5379, type: 2}
     weight: 1
     footprint: {x: 0.36111107, y: 0.3611112}
     maxSlope: 28

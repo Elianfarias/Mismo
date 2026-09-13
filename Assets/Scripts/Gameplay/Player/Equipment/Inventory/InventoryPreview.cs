@@ -13,6 +13,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         float orbitDistance, yaw, pitch;
         readonly List<Mesh> baked=new List<Mesh>();
         public Texture Texture=>texture;
+        public void Zoom(float factor){if(camera!=null)camera.orthographicSize*=Mathf.Clamp(factor,.2f,2);}
         public bool HasModel {get;private set;}
         public void Show(GameObject source,Vector3 rotation=default)
         {

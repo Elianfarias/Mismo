@@ -13,6 +13,7 @@ namespace Mismo.Gameplay.Player.World
         public const int ChunkSize=32;
         public ExplorationWorldSettings Settings { get; private set; }
         public int LoadedCount=>chunks.Count;
+        public void RefreshResourceNavigation()=>dirty=true;
         readonly Dictionary<Vector2Int,GameObject> chunks=new Dictionary<Vector2Int,GameObject>();
         readonly Dictionary<Vector2Int,GameObject> authoredEncounters=new Dictionary<Vector2Int,GameObject>();
         Transform player,geometry;
@@ -74,10 +75,14 @@ namespace Mismo.Gameplay.Player.World
                 {
                     var p=old.position;int seed=ExplorationTerrain.Hash(settings.seed,(int)p.x,(int)p.z,300);
                     var asset=settings.content.Asset(WorldAssetKind.Tree,field.Biome(p.x,p.z),seed);if(asset==null)continue;
-                    var replacement=Object.Instantiate(asset.prefab,p,old.rotation,forest);
+                    var replacement=GatheringDistribution.PlaceAsset(asset,"gather-authored-tree-v1:"+settings.seed+":"+old.GetSiblingIndex(),p,old.rotation,forest);
                     replacement.transform.localScale*=Mathf.Lerp(Mathf.Max(.1f,asset.scaleRange.x),Mathf.Max(.1f,asset.scaleRange.y),(float)new System.Random(seed).NextDouble());
                     old.gameObject.SetActive(false);
                 }
+            var authoredTrees=forest!=null?forest.Cast<Transform>().ToArray():new Transform[0];
+            foreach(var existing in authoredTrees)
+                if(existing.gameObject.activeSelf&&existing.GetComponent<GatheringNode>()==null)
+                    GatheringDistribution.WrapTree(existing.gameObject,"gather-authored-tree-v1:"+settings.seed+":"+System.Array.IndexOf(authoredTrees,existing));
             var horizon=transform.Find("Distant landscape");if(horizon!=null)horizon.gameObject.SetActive(false);
             if(settings.preserveAuthoredCenter&&settings.content!=null)
             {
@@ -193,12 +198,13 @@ namespace Mismo.Gameplay.Player.World
                 float y=field.Height(Mathf.Floor(px)+.5f,Mathf.Floor(pz)+.5f);
                 if(Mathf.Abs(y-field.Height(px+2,pz+2))>1)continue;
                 var asset=Settings.content!=null?Settings.content.Asset(WorldAssetKind.Tree,field.Biome(px,pz),ExplorationTerrain.Hash(Settings.seed,(int)px,(int)pz,300)):null;
-                if(asset!=null){var instance=Object.Instantiate(asset.prefab,new Vector3(px,y,pz),Quaternion.Euler(0,random.Next(4)*90,0),root.transform);instance.transform.localScale*=Mathf.Lerp(Mathf.Max(.1f,asset.scaleRange.x),Mathf.Max(.1f,asset.scaleRange.y),(float)random.NextDouble());continue;}
+                if(asset!=null){var instance=GatheringDistribution.PlaceAsset(asset,"gather-tree-v1:"+Settings.seed+":"+id.x+":"+id.y+":"+x+":"+z,new Vector3(px,y,pz),Quaternion.Euler(0,random.Next(4)*90,0),root.transform);instance.transform.localScale*=Mathf.Lerp(Mathf.Max(.1f,asset.scaleRange.x),Mathf.Max(.1f,asset.scaleRange.y),(float)random.NextDouble());continue;}
                 if(trees.Length==0)continue;
                 var tree=new GameObject("Oak");tree.transform.SetParent(root.transform,false);tree.transform.position=new Vector3(px,y,pz);
                 tree.transform.localScale=Vector3.one*Mathf.Lerp(Settings.treeScale.x,Settings.treeScale.y,(float)random.NextDouble());
                 tree.AddComponent<MeshFilter>().sharedMesh=trees[random.Next(trees.Length)];tree.AddComponent<MeshRenderer>().sharedMaterial=material;
                 var trunk=tree.AddComponent<BoxCollider>();trunk.center=new Vector3(0,3,0);trunk.size=new Vector3(.9f,6,.9f);tree.AddComponent<ClimbableTree>();
+                GatheringDistribution.WrapTree(tree,"gather-tree-v1:"+Settings.seed+":"+id.x+":"+id.y+":"+x+":"+z);
             }
             content.Decorate(id,root.transform,material);GatheringDistribution.Decorate(Settings,field,id,root.transform);chunks.Add(id,root);return root;
         }

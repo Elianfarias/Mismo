@@ -32,6 +32,7 @@ namespace Mismo.Gameplay.Player.World
         void Update()
         {
             if(!inventory.IsReady)return;
+            if(CompanionPlayer.IsRiding(gameObject)){Cancel();Close();return;}
             if(station!=null)
             {
                 if(!station.InRange(transform.position)||health.IsDead||loadout.InCombat||Keyboard.current?.escapeKey.wasPressedThisFrame==true)Close();
@@ -42,7 +43,7 @@ namespace Mismo.Gameplay.Player.World
                 if(!harvesting.isActiveAndEnabled||!harvesting.Available||!harvesting.InRange(transform)||Vector3.Distance(transform.position,startPosition)>.3f||Interrupted())
                 {Cancel();return;}
                 progress+=Time.deltaTime;
-                if(progress>=nextHit){nextHit=progress+.55f;if(harvesting.definition.harvestSound!=null)AudioSource.PlayClipAtPoint(harvesting.definition.harvestSound,harvesting.transform.position,.5f);}
+                if(progress>=nextHit){nextHit=progress+.55f;ResourceChips.Emit(harvesting.gameObject,transform.position);if(harvesting.definition.harvestSound!=null)AudioSource.PlayClipAtPoint(harvesting.definition.harvestSound,harvesting.transform.position,.5f);}
                 if(tool!=null)tool.transform.localRotation=Quaternion.Euler(Mathf.Sin(progress*12)*40,0,0);
                 if(progress>=harvesting.definition.harvestSeconds){harvesting.Complete(inventory);Cancel();}
                 return;
@@ -59,6 +60,7 @@ namespace Mismo.Gameplay.Player.World
             {station=nearby;oldLock=Cursor.lockState;oldVisible=Cursor.visible;Cursor.lockState=CursorLockMode.None;Cursor.visible=true;return;}
             if(target==null||Interrupted())return;
             harvesting=target;startPosition=transform.position;progress=0;nextHit=.55f;
+            ResourceChips.Emit(harvesting.gameObject,transform.position);
             if(target.definition.toolPrefab!=null){tool=Instantiate(target.definition.toolPrefab,transform);tool.transform.localPosition=new Vector3(.45f,1,.6f);}
             if(target.definition.harvestSound!=null)AudioSource.PlayClipAtPoint(target.definition.harvestSound,target.transform.position);
         }

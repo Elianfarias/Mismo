@@ -618,6 +618,104 @@ MonoBehaviour:
     m_Localized: "Recuperaci\xF3n iniciada."
     m_Metadata:
       m_Items: []
+  - m_Id: 65665642057728
+    m_Localized: BESTIARIO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389376
+    m_Localized: "Todav\xEDa no descubriste ninguna criatura. Explor\xE1 el mundo
+      para completar el bestiario."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389377
+    m_Localized: 'Derrotados: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389378
+    m_Localized: 'Reconocimiento al vencer: {0:0.#}%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389379
+    m_Localized: No domesticable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389380
+    m_Localized: Apta como montura
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389381
+    m_Localized: Sin montura
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389382
+    m_Localized: Al vencerla, puede reconocerte como su amo y convertirse en tu montura.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389383
+    m_Localized: "\u2190 Anterior"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389384
+    m_Localized: "Siguiente \u2192"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389385
+    m_Localized: Nueva especie descubierta.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389386
+    m_Localized: "Jabal\xED"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389387
+    m_Localized: "Ara\xF1a"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389388
+    m_Localized: Goblin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389389
+    m_Localized: "G\xF3lem"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389390
+    m_Localized: "Guardi\xE1n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389391
+    m_Localized: "Habitante del bosque. Puede reconocerte como su amo despu\xE9s
+      de vencerlo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583680
+    m_Localized: Una criatura descubierta durante tus viajes.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583681
+    m_Localized: La criatura te reconoce como su amo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583682
+    m_Localized: "Tu compa\xF1ero espera."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583683
+    m_Localized: "Tu compa\xF1ero te sigue."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583684
+    m_Localized: "[V] Montar \xB7 [H] Seguir / esperar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583685
+    m_Localized: '[V] Desmontar'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583686
+    m_Localized: No hay espacio para desmontar.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

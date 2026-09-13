@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Hierba medicinal
   description: 
   icon: {fileID: 21300000, guid: 69e65d50180cdf949a4b095ccbd2169f, type: 3}
-  pickupPrefab: {fileID: 9049243197409395517, guid: 667eb96e081d7b946a6f93f86726e989, type: 3}
+  pickupPrefab: {fileID: 5382165887253409859, guid: 7ff6a3620eeda3046b2253872f1c75cf, type: 3}
   stackSize: 20
   category: 0
   canDiscard: 1

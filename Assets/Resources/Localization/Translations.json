@@ -734,6 +734,126 @@
       "key": "craft.healing",
       "es": "Recuperación iniciada.",
       "en": "Recovery started."
+    },
+    {
+      "key": "bestiary.title",
+      "es": "BESTIARIO",
+      "en": "BESTIARY"
+    },
+    {
+      "key": "bestiary.empty",
+      "es": "Todavía no descubriste ninguna criatura. Explorá el mundo para completar el bestiario.",
+      "en": "You have not discovered any creatures yet. Explore the world to fill your bestiary."
+    },
+    {
+      "key": "bestiary.defeated",
+      "es": "Derrotados: {0}",
+      "en": "Defeated: {0}"
+    },
+    {
+      "key": "bestiary.chance",
+      "es": "Reconocimiento al vencer: {0:0.#}%",
+      "en": "Recognition on victory: {0:0.#}%"
+    },
+    {
+      "key": "bestiary.not_tame",
+      "es": "No domesticable",
+      "en": "Cannot be tamed"
+    },
+    {
+      "key": "bestiary.mount",
+      "es": "Apta como montura",
+      "en": "Can be ridden"
+    },
+    {
+      "key": "bestiary.no_mount",
+      "es": "Sin montura",
+      "en": "Cannot be ridden"
+    },
+    {
+      "key": "bestiary.recognize",
+      "es": "Al vencerla, puede reconocerte como su amo y convertirse en tu montura.",
+      "en": "After you defeat it, it may recognize you as its master and become your mount."
+    },
+    {
+      "key": "bestiary.previous",
+      "es": "← Anterior",
+      "en": "← Previous"
+    },
+    {
+      "key": "bestiary.next",
+      "es": "Siguiente →",
+      "en": "Next →"
+    },
+    {
+      "key": "bestiary.discovered",
+      "es": "Nueva especie descubierta.",
+      "en": "New species discovered."
+    },
+    {
+      "key": "bestiary.boar",
+      "es": "Jabalí",
+      "en": "Boar"
+    },
+    {
+      "key": "bestiary.spider",
+      "es": "Araña",
+      "en": "Spider"
+    },
+    {
+      "key": "bestiary.goblin",
+      "es": "Goblin",
+      "en": "Goblin"
+    },
+    {
+      "key": "bestiary.golem",
+      "es": "Gólem",
+      "en": "Golem"
+    },
+    {
+      "key": "bestiary.guardian",
+      "es": "Guardián",
+      "en": "Guardian"
+    },
+    {
+      "key": "bestiary.boar.description",
+      "es": "Habitante del bosque. Puede reconocerte como su amo después de vencerlo.",
+      "en": "A forest dweller. It may recognize you as its master after you defeat it."
+    },
+    {
+      "key": "bestiary.generic.description",
+      "es": "Una criatura descubierta durante tus viajes.",
+      "en": "A creature discovered during your travels."
+    },
+    {
+      "key": "companion.recognized",
+      "es": "La criatura te reconoce como su amo.",
+      "en": "The creature recognizes you as its master."
+    },
+    {
+      "key": "companion.wait",
+      "es": "Tu compañero espera.",
+      "en": "Your companion is waiting."
+    },
+    {
+      "key": "companion.follow",
+      "es": "Tu compañero te sigue.",
+      "en": "Your companion is following you."
+    },
+    {
+      "key": "companion.mount",
+      "es": "[V] Montar · [H] Seguir / esperar",
+      "en": "[V] Mount · [H] Follow / wait"
+    },
+    {
+      "key": "companion.dismount",
+      "es": "[V] Desmontar",
+      "en": "[V] Dismount"
+    },
+    {
+      "key": "companion.blocked",
+      "es": "No hay espacio para desmontar.",
+      "en": "There is no room to dismount."
     }
   ]
 }

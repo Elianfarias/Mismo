@@ -56,6 +56,12 @@ namespace Mismo.Gameplay.Player.Editor
             var gathering=player.gameObject.AddComponent<GatheringPlayer>();var health=player.GetComponent<Health>();
             var settings=Resources.Load<GatheringSettings>("GatheringSettings");
             Check(inventory.IsReady&&settings.recipes.Length==2,"Surface assets and recipes load");
+            if(settings.minerals!=null&&settings.minerals.Length>0)
+            {
+                Check(settings.minerals.Length==30&&settings.Mineral(int.MinValue)!=null,"Mineral variants load and accept negative world seeds");
+                var rose=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/World/Nature/flower_rose.prefab");
+                Check(settings.herb.availablePrefab==rose&&inventory.Material(MaterialCatalog.Herb).pickupPrefab==rose,"Harvestable rose and inventory ingredient share the existing model");
+            }
             var herb=Object.Instantiate(settings.herb);herb.harvestSeconds=.1f;herb.regenerationSeconds=30;
             var node=GatheringDistribution.Place(herb,"test:herb",new Vector3(0,0,1.5f),null);
             yield return null;yield return null;
@@ -111,6 +117,24 @@ namespace Mismo.Gameplay.Player.Editor
             Check(gathering.BlocksGameplay,"Workbench opens through G and blocks gameplay controls");
             for(int i=0;i<10;i++)yield return null;ScreenCapture.CaptureScreenshot(Path.Combine(Output,"crafting.png"));for(int i=0;i<10;i++)yield return null;
             InputSystem.RemoveDevice(keyboard);
+            var worldCatalog=Resources.Load<WorldContentCatalog>("WorldContentCatalog");
+            foreach(var kind in new[]{WorldAssetKind.Tree,WorldAssetKind.Rock,WorldAssetKind.Deadwood,WorldAssetKind.Bush,WorldAssetKind.Flower,WorldAssetKind.Grass})
+            {
+                var entry=Array.Find(worldCatalog.assets,e=>e.kind==kind&&e.prefab!=null);
+                Check(entry!=null,"World catalog supplies "+kind);
+                var placed=GatheringDistribution.PlaceAsset(entry,"test:catalog:"+kind,new Vector3(0,0,1.5f),Quaternion.identity,null);
+                yield return null;yield return null;
+                var resource=placed.GetComponent<GatheringNode>();
+                if(kind==WorldAssetKind.Grass)Check(resource==null,"Grass remains decorative");
+                else
+                {
+                    Check(resource!=null&&resource.Available&&placed.GetComponentInChildren<MeshFilter>().sharedMesh==entry.prefab.GetComponentInChildren<MeshFilter>().sharedMesh,"Catalog model preserved for "+kind);
+                    Check(resource.Complete(inventory)&&!resource.Available,"Catalog resource harvests once: "+kind);
+                    yield return null;yield return null;
+                    Check(placed.GetComponentsInChildren<Renderer>().Length==0,"Harvested catalog visual disappears: "+kind);
+                }
+                Object.Destroy(placed);yield return null;yield return null;
+            }
         }
     }
 }

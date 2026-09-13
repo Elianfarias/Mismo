@@ -153,6 +153,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 5021651908274513921}
   - component: {fileID: 99711626316248207}
   m_Layer: 0
   m_Name: Deadwood_7
@@ -177,3 +178,21 @@ Transform:
   - {fileID: 6075933602722951522}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5021651908274513921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8930517422570024622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9800f82a95691d48bd025f40bd5aefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.ResourceImpactPalette
+  colors:
+  - {r: 0.28235295, g: 0.1882353, b: 0.09411765, a: 1}
+  - {r: 0.3764706, g: 0.1882353, b: 0.09411765, a: 1}
+  fragmentsPerHit: 7
+  fragmentSize: {x: 0.035, y: 0.085}
+  fragmentLifetime: 0.65

@@ -190,6 +190,12 @@ static class Program
         Check(!gatheringCopy.IsValid(definitions,rewards),"Invalid world clocks are rejected");
         gatheringCopy=gathering.Copy();gatheringCopy.harvestedNodes[0].readyAt=-1;
         Check(!gatheringCopy.IsValid(definitions,rewards),"Invalid regeneration deadlines are rejected");
+        var bestiary=gathering.Copy();bestiary.seenSpecies.Add("boar");bestiary.speciesDefeats.Add(new MaterialStack{id="boar",quantity=2});bestiary.companionSpeciesId="boar";bestiary.companionPrefabName="Boar_Standard";
+        Check(bestiary.IsValid(definitions,rewards),"Bestiary and companion data validate");
+        var bestiaryCopy=bestiary.Copy();bestiaryCopy.seenSpecies.Add("spider");bestiaryCopy.speciesDefeats[0].quantity=3;
+        Check(bestiary.seenSpecies.Count==1&&bestiary.speciesDefeats[0].quantity==2,"Bestiary copies do not mutate saved discovery or kills");
+        bestiaryCopy=bestiary.Copy();bestiaryCopy.seenSpecies.Add("boar");Check(!bestiaryCopy.IsValid(definitions,rewards),"Duplicate discoveries rejected");
+        bestiaryCopy=bestiary.Copy();bestiaryCopy.speciesDefeats[0].quantity=-1;Check(!bestiaryCopy.IsValid(definitions,rewards),"Invalid defeat count rejected");
         Console.WriteLine("INVENTORY AND WORLD CORE: "+count+" checks passed.");
     }
 }

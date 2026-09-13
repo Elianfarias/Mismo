@@ -93,6 +93,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(IsReady && GetComponent<InventoryWorldAccess>()==null)gameObject.AddComponent<InventoryWorldAccess>();
             worldClock=profile.worldPlaySeconds;
             if(IsReady&&GetComponent<World.RegionRespawn>()!=null&&GetComponent<World.GatheringPlayer>()==null)gameObject.AddComponent<World.GatheringPlayer>();
+            if(IsReady&&GetComponent<World.RegionRespawn>()!=null&&GetComponent<World.CompanionPlayer>()==null)gameObject.AddComponent<World.CompanionPlayer>();
             Changed?.Invoke();
         }
 
@@ -202,7 +203,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             return Commit(next,"Maestría guardada.",false);
         }
         // A kill's experience and rolled item are committed together. Failed writes apply neither.
-        public bool TryGrantVictory(int experience,IDictionary<string,int> mastery,OwnedWeapon drop,string worldEnemyId=null, IDictionary<string,int> materialLoot=null, Vector3? lootPosition=null)
+        public bool TryGrantVictory(int experience,IDictionary<string,int> mastery,OwnedWeapon drop,string worldEnemyId=null, IDictionary<string,int> materialLoot=null, Vector3? lootPosition=null,string speciesId=null,bool recognized=false,string creaturePrefab=null)
         {
             if(!IsReady||experience<0||experience>1000000)return false;
             if(worldEnemyId!=null&&IsWorldEnemyDefeated(worldEnemyId))return true;
@@ -210,7 +211,20 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 if(pair.Value<0||pair.Value>1000000||!HasFamily(pair.Key))return false;
             if(drop!=null && (drop.definitionId==null||!definitions.Contains(drop.definitionId)))return false;
             var next=profile.Copy();int previous=next.progression.level;
+            if(!string.IsNullOrEmpty(speciesId))
+            {
+                if(!MaterialCatalog.ValidId(speciesId))return false;
+                var species=next.speciesDefeats.Find(s=>s.id==speciesId);
+                if(species==null)next.speciesDefeats.Add(new MaterialStack{id=speciesId,quantity=1});
+                else if(species.quantity<int.MaxValue)species.quantity++;
+            }
             if(worldEnemyId!=null){next.EnsureWorldData();next.defeatedEnemies.Add(worldEnemyId);}
+            if(recognized&&string.IsNullOrEmpty(next.companionSpeciesId))
+            {
+                var species=World.CreatureSpecies.Find(speciesId);
+                if(species!=null&&species.domesticable&&species.mountable&&species.prefabs!=null&&Array.Exists(species.prefabs,p=>p!=null&&p.name==creaturePrefab))
+                {next.companionSpeciesId=speciesId;next.companionPrefabName=creaturePrefab;next.companionIndividualId=worldEnemyId;next.companionWaiting=false;}
+            }
             var pending=new PendingInventoryLoot{id=Guid.NewGuid().ToString("N")};
             var position=lootPosition??transform.position;pending.x=position.x;pending.y=position.y;pending.z=position.z;
             if(materialLoot!=null)foreach(var entry in materialLoot)
@@ -232,6 +246,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(waiting)next.pendingLoot.Add(pending);
             string notice="+"+experience+" EXP"+(next.progression.level>previous?" · Nivel "+next.progression.level:"")+
                 (added?" · Arma T"+drop.tier+" obtenida":"")+(waiting?" · Mochila llena: botín guardado en el suelo.":"");
+            if(next.companionSpeciesId!=profile.companionSpeciesId)notice+=" · "+Localization.GameLanguage.Text("La criatura te reconoce como su amo.");
             return Commit(next,notice,false);
         }
         bool HasFamily(string id)

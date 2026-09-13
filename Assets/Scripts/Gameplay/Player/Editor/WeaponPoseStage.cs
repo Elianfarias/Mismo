@@ -7,6 +7,7 @@ namespace Mismo.Gameplay.Player.Editor
     // Isolated stage: sampling clips never changes the gameplay scene or its prefab.
     public sealed class WeaponPoseStage : PreviewSceneStage
     {
+        public string Header="Taller de armas";
         protected override bool OnOpenStage()
         {
             if(!base.OnOpenStage())return false;
@@ -16,7 +17,7 @@ namespace Mismo.Gameplay.Player.Editor
             lighting.transform.rotation=Quaternion.Euler(45,-30,0);
             return true;
         }
-        protected override GUIContent CreateHeaderContent() => new GUIContent("Taller de armas");
+        protected override GUIContent CreateHeaderContent() => new GUIContent(Header);
         public GameObject Clone(GameObject prefab)
         {
             var clone=Object.Instantiate(prefab);

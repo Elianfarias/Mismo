@@ -104,7 +104,7 @@ namespace Mismo.Gameplay.Player.World
                     float yaw=(float)rng.NextDouble()*360;
                     float scale=Mathf.Lerp(Mathf.Max(.1f,asset.scaleRange.x),Mathf.Max(.1f,asset.scaleRange.y),(float)rng.NextDouble());
                     if(kinds[k]==WorldAssetKind.Deadwood&&!TrySupport(terrain,new Vector2(px,pz),asset.footprint*scale,yaw,out y))continue;
-                    var go=Object.Instantiate(asset.prefab,new Vector3(px,y+.01f,pz),Quaternion.Euler(0,yaw,0),root);
+                    var go=GatheringDistribution.PlaceAsset(asset,"gather-detail-v1:"+settings.seed+":"+chunk.x+":"+chunk.y+":"+k+":"+x+":"+z,new Vector3(px,y+.01f,pz),Quaternion.Euler(0,yaw,0),root);
                     go.transform.localScale*=scale;
                 }
             }

@@ -618,6 +618,105 @@ MonoBehaviour:
     m_Localized: Recovery started.
     m_Metadata:
       m_Items: []
+  - m_Id: 65665642057728
+    m_Localized: BESTIARY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389376
+    m_Localized: You have not discovered any creatures yet. Explore the world to
+      fill your bestiary.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389377
+    m_Localized: 'Defeated: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389378
+    m_Localized: 'Recognition on victory: {0:0.#}%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389379
+    m_Localized: Cannot be tamed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389380
+    m_Localized: Can be ridden
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389381
+    m_Localized: Cannot be ridden
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389382
+    m_Localized: After you defeat it, it may recognize you as its master and become
+      your mount.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389383
+    m_Localized: "\u2190 Previous"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389384
+    m_Localized: "Next \u2192"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389385
+    m_Localized: New species discovered.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389386
+    m_Localized: Boar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389387
+    m_Localized: Spider
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389388
+    m_Localized: Goblin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389389
+    m_Localized: Golem
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389390
+    m_Localized: Guardian
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389391
+    m_Localized: A forest dweller. It may recognize you as its master after you defeat
+      it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583680
+    m_Localized: A creature discovered during your travels.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583681
+    m_Localized: The creature recognizes you as its master.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583682
+    m_Localized: Your companion is waiting.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583683
+    m_Localized: Your companion is following you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583684
+    m_Localized: "[V] Mount \xB7 [H] Follow / wait"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583685
+    m_Localized: '[V] Dismount'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583686
+    m_Localized: There is no room to dismount.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

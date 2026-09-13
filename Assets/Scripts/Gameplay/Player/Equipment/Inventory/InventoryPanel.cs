@@ -11,7 +11,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
     [DefaultExecutionOrder(-100)]
     public sealed class InventoryPanel : MonoBehaviour
     {
-        enum Page { Menu, Inventory, Character, Skills }
+        enum Page { Menu, Inventory, Character, Skills, Bestiary }
+        readonly BestiaryView bestiary=new BestiaryView();
 
         PlayerInventory inventory;
         EquipmentLoadout loadout;
@@ -75,6 +76,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             {
                 previewDirty=false;
                 GameObject source=gameObject;
+                if(page==Page.Bestiary)source=null;
                 if(page==Page.Inventory&&selected!=null)source=selectedMaterial?inventory.Material(selected)?.pickupPrefab:inventory.Definition(selected)?.visualPrefab;
                 Vector3 rotation=page==Page.Inventory&&selected!=null?(selectedMaterial?inventory.Material(selected)?.inventoryPreviewRotation??Vector3.zero:inventory.Definition(selected)?.inventoryPreviewRotation??Vector3.zero):Vector3.zero;
                 preview.Show(source,rotation);
@@ -84,6 +86,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public bool TryOpen()=>OpenPage(Page.Inventory);
         bool OpenPage(Page target)
         {
+            if(target==Page.Bestiary)bestiary.Reset();
             if(GetComponent<World.GatheringPlayer>()?.Busy==true)return false;
             if(WorldMapPanel.BlocksGameplay)return false;
             if(!IsOpen)
@@ -152,7 +155,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             {
 
                 bool previousEnabled=GUI.enabled;GUI.enabled=previousEnabled&&!confirmDiscard;
-                Text(new Rect(38,25,740,44),page==Page.Menu?"VIAJERO":page==Page.Inventory?"PERTENENCIAS":page==Page.Character?"PERSONAJE":"HABILIDADES",32,Accent);
+                Text(new Rect(38,25,740,44),page==Page.Menu?"VIAJERO":page==Page.Inventory?"PERTENENCIAS":page==Page.Character?"PERSONAJE":page==Page.Bestiary?"BESTIARIO":"HABILIDADES",32,Accent);
                 if(Button(new Rect(940,27,120,35),"Menú [B]"))OpenPage(Page.Menu);
                 if(Button(new Rect(1075,27,165,35),"Cerrar [ESC]"))Close();
                 Line(38,82,1202);
@@ -160,6 +163,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 if(page==Page.Menu)DrawMenu();
                 else if(page==Page.Character)DrawProgression(40,0);
                 else if(page==Page.Skills)DrawSkills();
+                else if(page==Page.Bestiary)bestiary.Draw(inventory,preview);
                 else DrawInventory();
                 Line(38,710,1202);
                 Text(new Rect(40,726,1180,30),L.Format("MOCHILA  {0} / {1} celdas",inventory.UsedSlots(false),inventory.BackpackCapacity)+
@@ -181,7 +185,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             {
                 var map=GetComponent<WorldMapPanel>();if(map!=null){Close();map.Open();}
             }
-            Text(new Rect(450,640,500,32),"El mundo continúa mientras consultás el menú.",17,Muted);
+            if(Button(new Rect(450,602,380,38),"BESTIARIO"))OpenPage(Page.Bestiary);
+            Text(new Rect(450,650,500,32),"El mundo continúa mientras consultás el menú.",17,Muted);
         }
         void DrawInventory()
         {

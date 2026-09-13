@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Piedra
   description: 
   icon: {fileID: 21300000, guid: ab191747fc9d5304684a42ea8a3745ce, type: 3}
-  pickupPrefab: {fileID: 1235394755899011019, guid: 56d3e6ba86a67b445a56c45ec18e06c3, type: 3}
+  pickupPrefab: {fileID: 8479108702764624946, guid: 076a1170d255bb845927db542c3de756, type: 3}
   stackSize: 20
   category: 0
   canDiscard: 1

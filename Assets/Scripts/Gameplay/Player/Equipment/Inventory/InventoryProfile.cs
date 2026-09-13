@@ -34,6 +34,11 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public int version = 5;
         public double worldPlaySeconds;
         public List<HarvestState> harvestedNodes=new List<HarvestState>();
+        public List<MaterialStack> speciesDefeats=new List<MaterialStack>();
+        public List<string> seenSpecies=new List<string>();
+        public string companionSpeciesId;
+        public string companionPrefabName,companionIndividualId;
+        public bool companionWaiting;
         public ProgressionData progression = new ProgressionData();
         public List<OwnedWeapon> weapons = new List<OwnedWeapon>();
         public string[] equipped = new string[2];
@@ -78,6 +83,10 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             var copy = new InventoryProfile { version = version, activeSlot = activeSlot, progression=progression.Copy(),
                 equipped = (string[])equipped.Clone(), claimedRewards = new List<string>(claimedRewards) };
             copy.worldPlaySeconds=worldPlaySeconds;
+            if(speciesDefeats!=null)foreach(var species in speciesDefeats)copy.speciesDefeats.Add(species.Copy());
+            copy.seenSpecies=new List<string>(seenSpecies??new List<string>());
+            copy.companionSpeciesId=companionSpeciesId;copy.companionWaiting=companionWaiting;
+            copy.companionPrefabName=companionPrefabName;copy.companionIndividualId=companionIndividualId;
             if(harvestedNodes!=null)foreach(var node in harvestedNodes)copy.harvestedNodes.Add(node.Copy());
             if(regions!=null)foreach(var region in regions)copy.regions.Add(region.Copy());
             copy.defeatedEnemies=new List<string>(defeatedEnemies??new List<string>());
@@ -112,6 +121,9 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
 
         public bool IsValid(ISet<string> definitions, IDictionary<string, string> rewards)
         {
+            if(!ValidStacks(speciesDefeats)||!string.IsNullOrEmpty(companionSpeciesId)&&!MaterialCatalog.ValidId(companionSpeciesId))return false;
+            if(seenSpecies!=null){var seen=new HashSet<string>();if(seenSpecies.Count>4096)return false;foreach(var id in seenSpecies)if(!MaterialCatalog.ValidId(id)||!seen.Add(id))return false;}
+            if(companionPrefabName!=null&&companionPrefabName.Length>160||companionIndividualId!=null&&companionIndividualId.Length>160)return false;
             if(double.IsNaN(worldPlaySeconds)||double.IsInfinity(worldPlaySeconds)||worldPlaySeconds<0||worldPlaySeconds>1e12)return false;
             var nodeIds=new HashSet<string>();
             if(harvestedNodes!=null)

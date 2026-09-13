@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3227dbec81332e4e9f6d44421210109, type: 3}
+  m_Name: boar
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.RiderPose
+  position: {x: 0, y: 0.30000013, z: 0}
+  rotation: {x: 0, y: 0, z: 0}
+  scale: 1
+  seatedAnimation: {fileID: 0}
+  sampleTime: 0
+  bones:
+  - path: Armature_Humanoid/Root/Hips/UpperLeg.L
+    rotation: {x: 58.951084, y: 224.17714, z: 248.28125}
+  - path: Armature_Humanoid/Root/Hips/UpperLeg.L/LowerLeg.L
+    rotation: {x: 79.453705, y: 301.34842, z: 282.43103}
+  - path: Armature_Humanoid/Root/Hips/Spine/Chest/Clavicle.L/UpperArm.L
+    rotation: {x: 328.80252, y: 342.41785, z: 49.369602}
+  - path: Armature_Humanoid/Root/Hips/Spine/Chest/Clavicle.L/UpperArm.L/LowerArm.L
+    rotation: {x: 307.8255, y: 113.11338, z: 348.0941}
+  - path: Armature_Humanoid/Root/Hips/UpperLeg.R
+    rotation: {x: 63.169144, y: 139.58687, z: 115.01527}
+  - path: Armature_Humanoid/Root/Hips/UpperLeg.R/LowerLeg.R
+    rotation: {x: 81.64885, y: 59.890152, z: 74.259796}
+  - path: Armature_Humanoid/Root/Hips/Spine/Chest/Clavicle.R/UpperArm.R
+    rotation: {x: 317.63416, y: 3.8334348, z: 318.9273}
+  - path: Armature_Humanoid/Root/Hips/Spine/Chest/Clavicle.R/UpperArm.R/LowerArm.R
+    rotation: {x: 329.86783, y: 341.6657, z: 313.9335}

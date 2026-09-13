@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8380de1d70f4f274c9508a8ce9cd640d, type: 3}
+  m_Name: BestiaryBook
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.BestiaryBook
+  title: Bestiario
+  pages:
+  - {fileID: 11400000, guid: c73b6500128d3274ca3f2b1349b6d808, type: 2}
+  - {fileID: 11400000, guid: 03d9011e7c01644458bc64a389ffd9fa, type: 2}
+  - {fileID: 11400000, guid: caf2cd8101a88b2418469037db44e083, type: 2}
+  - {fileID: 11400000, guid: e974e3aafc466584a9022394c8d80087, type: 2}
+  - {fileID: 11400000, guid: 4ca0c6aadb4619b47a0ef173387a68d6, type: 2}
+  paper: {r: 0.88, g: 0.82, b: 0.65, a: 1}
+  ink: {r: 0.16, g: 0.12, b: 0.075, a: 1}

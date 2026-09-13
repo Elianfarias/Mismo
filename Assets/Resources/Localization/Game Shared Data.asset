@@ -603,6 +603,102 @@ MonoBehaviour:
     m_Key: craft.healing
     m_Metadata:
       m_Items: []
+  - m_Id: 65665642057728
+    m_Key: bestiary.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389376
+    m_Key: bestiary.empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389377
+    m_Key: bestiary.defeated
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389378
+    m_Key: bestiary.chance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389379
+    m_Key: bestiary.not_tame
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389380
+    m_Key: bestiary.mount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389381
+    m_Key: bestiary.no_mount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389382
+    m_Key: bestiary.recognize
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389383
+    m_Key: bestiary.previous
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389384
+    m_Key: bestiary.next
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389385
+    m_Key: bestiary.discovered
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389386
+    m_Key: bestiary.boar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389387
+    m_Key: bestiary.spider
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389388
+    m_Key: bestiary.goblin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389389
+    m_Key: bestiary.golem
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389390
+    m_Key: bestiary.guardian
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389391
+    m_Key: bestiary.boar.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583680
+    m_Key: bestiary.generic.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583681
+    m_Key: companion.recognized
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583682
+    m_Key: companion.wait
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583683
+    m_Key: companion.follow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583684
+    m_Key: companion.mount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583685
+    m_Key: companion.dismount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583686
+    m_Key: companion.blocked
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

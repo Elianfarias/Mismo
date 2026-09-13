@@ -41,3 +41,33 @@ Pendiente de aceptación en mundo real: recorrido completo en varias semillas, d
 - 28 comprobaciones en Play Mode de Unity 6000.3.11, en copia aislada: interacción G, agotamiento único, persistencia, pausa, regeneración, cancelación por daño, mochila llena, recetas, curación y errores de guardado con reintento.
 - Compilación de Player, Enemies y Player.Editor contra Unity 6000.6 sin errores.
 - Captura del banco revisada en `output/gathering/crafting.png`. La prueba aislada usa una escena plana; no sustituye la aceptación del mundo procedural ni una revisión visual con URP en la partida principal.
+
+## Minerales del FBX y rosa recolectable
+
+- Se separaron los 30 modelos de `Assets/Art/FBX/Minerals/SimplePolygon_Minerals.fbx` en prefabs de `Assets/Art/Gathering/Minerals`. Conservan sus mallas y UV del FBX original, con material de paleta para URP, pivote al suelo y ancho máximo de 1,35 m.
+- Cada modelo tiene su ResourceNodeDefinition y su propia tabla `*-Loot.asset` en `Assets/Resources/Gathering/Minerals`. Inicialmente todos entregan Piedra (MAT-03), compatible con REC-02. Los colores no asignan por sí mismos nuevos minerales o rarezas: cambiar la tabla para entregar otro asset de material cuando se definan esos recursos.
+- `GatheringSettings.minerals` contiene las variantes usadas en la distribución procedural. Se eligen a partir de la semilla y el chunk, sin alterar la identidad persistente de los nodos existentes. La mena inicial también usa un modelo importado.
+- `flower_rose` reemplaza la planta provisional de HerbNode y el modelo/icono de Hierba medicinal (MAT-01). Las rosas que ya distribuía WorldContentCatalog ahora son recolectables, sin duplicar la decoración en ese punto. Al recolectarlas desaparecen y vuelven después del tiempo configurado. MAT-01 sigue siendo el ingrediente del ungüento, conservando las partidas y recetas actuales.
+- El campo opcional `gatheringNode` de WorldAssetEntry permite convertir otras decoraciones del catálogo en recursos. El prefab visual debe estar asignado en la definición del nodo.
+- El importador **Mismo → Crafting → Import mineral models and rose** configura los modelos y la conexión con la rosa. Al repetirlo conserva las tablas de botín y parámetros de los nodos existentes; vuelve a asignar sus visuales, la lista de variantes y los iconos de hierba/piedra.
+
+Verificado: 30 prefabs independientes apoyados en el suelo, tablas con recompensa, conexión de la rosa y captura visual; 30 comprobaciones de interacción/guardado/crafting en Play Mode aislado. Player, Enemies y Player.Editor compilan contra Unity 6000.6. La captura `output/gathering/minerals.png` muestra los modelos en una escena de prueba; la densidad por semilla sigue pendiente de balance en partida.
+
+## Recursos en el paisaje existente
+
+Los árboles del catálogo, tanto en los chunks como en el bosque central, ahora se generan como recursos conservando el prefab, la rotación y la escala del paisaje. El árbol inicial también usa Tree_0 del catálogo en lugar del modelo provisional. El camino alternativo de árboles generados a partir de mallas conserva su geometría al convertirlos en nodos.
+
+La decoración distribuida tiene estas recompensas predeterminadas:
+
+- Árboles y madera caída: tabla de WoodNode.
+- Piedras: tabla de StoneNode.
+- Flores y arbustos: tabla de HerbNode.
+- Pasto: decoración.
+
+El campo gatheringNode de cada entrada de WorldContentCatalog permite asignar una definición con otra recompensa, duración o regeneración. Para estas entradas se conserva el prefab del catálogo como aspecto disponible. Los minerales especiales siguen usando sus nodos y tablas independientes. El peso de cada entrada del catálogo permite reducir la frecuencia de un árbol raro.
+
+Los recursos del paisaje tienen identidad persistente por semilla y ubicación lógica. Al agotarlos se retiran su visual y colisión; los árboles tienen la caída visual y después desaparecen. Al regenerar se restaura el mismo modelo. Se solicita actualizar la navegación cuando cambian los obstáculos. Los componentes del prefab (incluida la escalada) se conservan mientras está disponible.
+
+Para ver la nueva generación en una partida que estaba ejecutándose, salir de Play y volver a entrar. No hace falta borrar el guardado. Pendiente: balancear cantidades/tiempos con la nueva abundancia de fuentes.
+
+Validación de esta integración: 52 comprobaciones en Play Mode aislado, incluyendo modelos reales de árbol, piedra, madera caída, arbusto, flor y pasto; compilación de Player, Enemies y Player.Editor contra Unity 6000.6 sin errores.

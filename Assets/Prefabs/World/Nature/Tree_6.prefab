@@ -98,6 +98,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 5472821550759599573}
   - component: {fileID: 3982817880277076650}
   - component: {fileID: 6636862946895183529}
   - component: {fileID: 6737739225570863904}
@@ -271,3 +272,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3065112384564296624, guid: 7a41c6f292f162e449395dba9e52208d, type: 3}
+--- !u!114 &5472821550759599573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3566406124003343310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9800f82a95691d48bd025f40bd5aefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.ResourceImpactPalette
+  colors:
+  - {r: 0, g: 0.7529412, b: 0.09411765, a: 1}
+  - {r: 0.28235295, g: 0.1882353, b: 0.09411765, a: 1}
+  - {r: 0.3764706, g: 0.1882353, b: 0.09411765, a: 1}
+  - {r: 0, g: 0.5647059, b: 0, a: 1}
+  fragmentsPerHit: 7
+  fragmentSize: {x: 0.035, y: 0.085}
+  fragmentLifetime: 0.65

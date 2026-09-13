@@ -17,10 +17,14 @@ namespace Mismo.Gameplay.Enemies
         PlayerInventory participant;
         readonly Dictionary<string,float> contributions=new Dictionary<string,float>();
         bool pending,claimed;
+        bool recognized;
+        Mismo.Gameplay.Player.World.CreatureSpecies species;
         int experience;
         Dictionary<string,int> mastery;
         OwnedWeapon drop;
         float retryAt;
+        float observeAt;
+        PlayerInventory observer;
         void Awake()
         {
             health=GetComponent<Health>();receiver=GetComponent<DamageReceiver>();
@@ -47,6 +51,7 @@ namespace Mismo.Gameplay.Enemies
                 contributions[damage.WeaponFamilyId]=old+result.HealthDamage;
             }
             if(!health.IsDead)return;
+            Observe();
             var rules=player.Rules;bool boss=GetComponent<BossController>()!=null||GetComponent<GoblinController>()?.Settings?.isBoss==true;
             experience=boss?rules.bossExperience:rules.enemyExperience;
             int masteryPool=boss?rules.bossMasteryExperience:rules.enemyMasteryExperience;
@@ -55,20 +60,32 @@ namespace Mismo.Gameplay.Enemies
             foreach(var pair in contributions)mastery[pair.Key]=Mathf.FloorToInt(masteryPool*pair.Value/Mathf.Max(1,total));
             drop=!boss&&Random.value<rules.dropChance?player.RollDrop():null;
             rolledMaterials=materialLoot!=null?materialLoot.Roll():null;
+            species=Mismo.Gameplay.Player.World.CreatureSpecies.For(gameObject);
+            recognized=species!=null&&species.domesticable&&species.mountable&&string.IsNullOrEmpty(player.CompanionSpeciesId)&&Random.value<species.recognitionChance;
             pending=true;
             var identity=GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>();if(identity!=null)identity.PendingReward=true;
             TryCommit();
         }
         void Update()
         {
+            if(Time.unscaledTime>=observeAt){observeAt=Time.unscaledTime+.75f;Observe();}
             if(claimed&&health!=null&&!health.IsDead){claimed=false;participant=null;contributions.Clear();}
             if(pending&&Time.unscaledTime>=retryAt)TryCommit();
+        }
+        void Observe()
+        {
+            if(health==null)return;
+            if(species==null)species=Mismo.Gameplay.Player.World.CreatureSpecies.For(gameObject);
+            if(species==null)return;if(observer==null)observer=FindFirstObjectByType<PlayerInventory>();
+            if(observer==null||!observer.IsReady||observer.HasSeenSpecies(species.id))return;
+            if(!Mismo.Gameplay.Player.World.CreatureSpecies.Visible(transform,observer.transform))return;
+            observer.DiscoverSpecies(species.id);
         }
         void TryCommit()
         {
             retryAt=Time.unscaledTime+2;
             string worldId=GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>()?.Id;
-            if(participant!=null&&participant.TryGrantVictory(experience,mastery,drop,worldId,rolledMaterials,transform.position))
+            if(participant!=null&&participant.TryGrantVictory(experience,mastery,drop,worldId,rolledMaterials,transform.position,species?.id,recognized,gameObject.name.Replace("(Clone)","").Trim()))
             {claimed=true;pending=false;var identity=GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>();if(identity!=null)identity.PendingReward=false;}
         }
     }

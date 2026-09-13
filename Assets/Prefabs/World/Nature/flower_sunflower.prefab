@@ -98,6 +98,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 3309313623341698615}
   - component: {fileID: 345968265224845248}
   m_Layer: 0
   m_Name: flower_sunflower
@@ -122,3 +123,26 @@ Transform:
   - {fileID: 893069163515724055}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3309313623341698615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7603047166896856893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9800f82a95691d48bd025f40bd5aefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.ResourceImpactPalette
+  colors:
+  - {r: 0, g: 0.47058824, b: 0, a: 1}
+  - {r: 0, g: 0.65882355, b: 0, a: 1}
+  - {r: 0.84705883, g: 0.65882355, b: 0.09411765, a: 1}
+  - {r: 0, g: 0.5647059, b: 0, a: 1}
+  - {r: 0.84705883, g: 0.5647059, b: 0.47058824, a: 1}
+  - {r: 0.1882353, g: 0, b: 0, a: 1}
+  - {r: 0.09411765, g: 0, b: 0, a: 1}
+  fragmentsPerHit: 7
+  fragmentSize: {x: 0.035, y: 0.085}
+  fragmentLifetime: 0.65
