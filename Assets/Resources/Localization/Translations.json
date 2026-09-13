@@ -102,8 +102,8 @@
     },
     {
       "key": "ui.characterKey",
-      "es": "PERSONAJE  [C]",
-      "en": "CHARACTER  [C]"
+      "es": "PERSONAJE  [P]",
+      "en": "CHARACTER  [P]"
     },
     {
       "key": "ui.inventoryKey",
@@ -854,6 +854,216 @@
       "key": "companion.blocked",
       "es": "No hay espacio para desmontar.",
       "en": "There is no room to dismount."
+    },
+    {
+      "key": "crafting.expansion.0",
+      "es": "Preparación",
+      "en": "Preparation"
+    },
+    {
+      "key": "crafting.expansion.1",
+      "es": "Mejoras",
+      "en": "Upgrades"
+    },
+    {
+      "key": "crafting.expansion.2",
+      "es": "Equipo básico",
+      "en": "Basic equipment"
+    },
+    {
+      "key": "crafting.expansion.3",
+      "es": "Hierro",
+      "en": "Iron"
+    },
+    {
+      "key": "crafting.expansion.4",
+      "es": "Cristal arcano",
+      "en": "Arcane crystal"
+    },
+    {
+      "key": "crafting.expansion.5",
+      "es": "Mena de hierro",
+      "en": "Iron ore"
+    },
+    {
+      "key": "crafting.expansion.6",
+      "es": "Mena de cristal arcano",
+      "en": "Arcane crystal deposit"
+    },
+    {
+      "key": "crafting.expansion.7",
+      "es": "Metal para fabricar armas y mejorar su tier.",
+      "en": "Metal for crafting weapons and upgrading their tier."
+    },
+    {
+      "key": "crafting.expansion.8",
+      "es": "Cristal poco frecuente para mejoras avanzadas y pociones.",
+      "en": "Uncommon crystal for advanced upgrades and potions."
+    },
+    {
+      "key": "crafting.expansion.9",
+      "es": "Poción de curación",
+      "en": "Healing potion"
+    },
+    {
+      "key": "crafting.expansion.10",
+      "es": "Recupera 35 de vida al instante, incluso en combate. 20 s entre pociones.",
+      "en": "Instantly restores 35 health, even in combat. 20 s between potions."
+    },
+    {
+      "key": "crafting.expansion.11",
+      "es": "Piedra de afilar",
+      "en": "Whetstone"
+    },
+    {
+      "key": "crafting.expansion.12",
+      "es": "Prepara el arma activa fuera de combate: +15 % de daño durante 180 s. No se acumula.",
+      "en": "Prepare the active weapon out of combat: +15% damage for 180 s. Does not stack."
+    },
+    {
+      "key": "crafting.expansion.13",
+      "es": "Mejora de hierro",
+      "en": "Iron upgrade"
+    },
+    {
+      "key": "crafting.expansion.14",
+      "es": "Mejora el arma elegida de T2 a T3 conservando su identidad y variante.",
+      "en": "Upgrade the selected weapon from T2 to T3, keeping its identity and variant."
+    },
+    {
+      "key": "crafting.expansion.15",
+      "es": "Mejora arcana",
+      "en": "Arcane upgrade"
+    },
+    {
+      "key": "crafting.expansion.16",
+      "es": "Mejora el arma elegida de T3 a T4 conservando su identidad y variante.",
+      "en": "Upgrade the selected weapon from T3 to T4, keeping its identity and variant."
+    },
+    {
+      "key": "crafting.expansion.17",
+      "es": "Espada básica",
+      "en": "Basic sword"
+    },
+    {
+      "key": "crafting.expansion.18",
+      "es": "Crea una espada T1 equilibrada para comenzar otro estilo de combate.",
+      "en": "Craft a balanced T1 sword to try another combat style."
+    },
+    {
+      "key": "crafting.expansion.19",
+      "es": "Arco básico",
+      "en": "Basic bow"
+    },
+    {
+      "key": "crafting.expansion.20",
+      "es": "Crea un arco T1 equilibrado para combatir a distancia.",
+      "en": "Craft a balanced T1 bow for ranged combat."
+    },
+    {
+      "key": "crafting.expansion.21",
+      "es": "No disponible.",
+      "en": "Unavailable."
+    },
+    {
+      "key": "crafting.expansion.22",
+      "es": "Solo fuera de combate.",
+      "en": "Out of combat only."
+    },
+    {
+      "key": "crafting.expansion.23",
+      "es": "Terminá la acción actual.",
+      "en": "Finish your current action."
+    },
+    {
+      "key": "crafting.expansion.24",
+      "es": "Afilado activo: {0:0} s",
+      "en": "Whetstone active: {0:0} s"
+    },
+    {
+      "key": "crafting.expansion.25",
+      "es": "Equipá un arma.",
+      "en": "Equip a weapon."
+    },
+    {
+      "key": "crafting.expansion.26",
+      "es": "Vida completa.",
+      "en": "Full health."
+    },
+    {
+      "key": "crafting.expansion.27",
+      "es": "Ya hay una recuperación activa.",
+      "en": "Recovery is already active."
+    },
+    {
+      "key": "crafting.expansion.28",
+      "es": "Próximo uso en {0:0} s",
+      "en": "Next use in {0:0} s"
+    },
+    {
+      "key": "crafting.expansion.29",
+      "es": "Usado: {0}",
+      "en": "Used: {0}"
+    },
+    {
+      "key": "crafting.expansion.30",
+      "es": "Arma activa: {0}",
+      "en": "Active weapon: {0}"
+    },
+    {
+      "key": "mount.collection.0",
+      "es": "MONTURAS",
+      "en": "MOUNTS"
+    },
+    {
+      "key": "mount.collection.1",
+      "es": "Montura invocada.",
+      "en": "Mount summoned."
+    },
+    {
+      "key": "mount.collection.2",
+      "es": "Montura guardada. Podés invocarla nuevamente.",
+      "en": "Mount stored. You can summon it again."
+    },
+    {
+      "key": "mount.collection.3",
+      "es": "Todavía no tenés monturas. Algunas criaturas pueden reconocerte al vencerlas.",
+      "en": "You have no mounts yet. Some creatures may recognize you after defeat."
+    },
+    {
+      "key": "mount.collection.4",
+      "es": "Tus monturas permanecen en la colección aunque mueras o las guardes.",
+      "en": "Your mounts stay in your collection even after death or dismissal."
+    },
+    {
+      "key": "mount.collection.5",
+      "es": "Acompañante activo",
+      "en": "Active companion"
+    },
+    {
+      "key": "mount.collection.6",
+      "es": "Guardada en tu colección",
+      "en": "Stored in your collection"
+    },
+    {
+      "key": "mount.collection.7",
+      "es": "Invocar a mi lado",
+      "en": "Recall to my side"
+    },
+    {
+      "key": "mount.collection.8",
+      "es": "Invocar montura",
+      "en": "Summon mount"
+    },
+    {
+      "key": "mount.collection.9",
+      "es": "Guardar acompañante",
+      "en": "Dismiss companion"
+    },
+    {
+      "key": "mount.collection.10",
+      "es": "Desmontá y salí de combate para cambiar de acompañante.",
+      "en": "Dismount and leave combat to change companions."
     }
   ]
 }

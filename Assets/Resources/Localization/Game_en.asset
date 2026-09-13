@@ -99,7 +99,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2441400338
-    m_Localized: 'CHARACTER  [C]'
+    m_Localized: 'CHARACTER  [P]'
     m_Metadata:
       m_Items: []
   - m_Id: 2441400339
@@ -715,6 +715,177 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 65665696583686
     m_Localized: There is no room to dismount.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374785531904
+    m_Localized: Preparation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474944
+    m_Localized: Upgrades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474945
+    m_Localized: Basic equipment
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474946
+    m_Localized: Iron
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474947
+    m_Localized: Arcane crystal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474948
+    m_Localized: Iron ore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474949
+    m_Localized: Arcane crystal deposit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474950
+    m_Localized: Metal for crafting weapons and upgrading their tier.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474951
+    m_Localized: Uncommon crystal for advanced upgrades and potions.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474952
+    m_Localized: Healing potion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474953
+    m_Localized: Instantly restores 35 health, even in combat. 20 s between potions.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474954
+    m_Localized: Whetstone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474955
+    m_Localized: 'Prepare the active weapon out of combat: +15% damage for 180 s.
+      Does not stack.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474956
+    m_Localized: Iron upgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474957
+    m_Localized: Upgrade the selected weapon from T2 to T3, keeping its identity
+      and variant.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474958
+    m_Localized: Arcane upgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474959
+    m_Localized: Upgrade the selected weapon from T3 to T4, keeping its identity
+      and variant.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474960
+    m_Localized: Basic sword
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474961
+    m_Localized: Craft a balanced T1 sword to try another combat style.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474962
+    m_Localized: Basic bow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474963
+    m_Localized: Craft a balanced T1 bow for ranged combat.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474964
+    m_Localized: Unavailable.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474965
+    m_Localized: Out of combat only.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474966
+    m_Localized: Finish your current action.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474967
+    m_Localized: 'Whetstone active: {0:0} s'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374831669248
+    m_Localized: Equip a weapon.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374831669249
+    m_Localized: Full health.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374831669250
+    m_Localized: Recovery is already active.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374831669251
+    m_Localized: Next use in {0:0} s
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374831669252
+    m_Localized: 'Used: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374831669253
+    m_Localized: 'Active weapon: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398685753344
+    m_Localized: MOUNTS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473600
+    m_Localized: Mount summoned.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473601
+    m_Localized: Mount stored. You can summon it again.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473602
+    m_Localized: You have no mounts yet. Some creatures may recognize you after defeat.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473603
+    m_Localized: Your mounts stay in your collection even after death or dismissal.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473604
+    m_Localized: Active companion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473605
+    m_Localized: Stored in your collection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473606
+    m_Localized: Recall to my side
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473607
+    m_Localized: Summon mount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473608
+    m_Localized: Dismiss companion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473609
+    m_Localized: Dismount and leave combat to change companions.
     m_Metadata:
       m_Items: []
   references:

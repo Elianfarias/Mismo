@@ -1,5 +1,7 @@
 # Recolección y crafting de superficie
 
+Actualización de recetas: ver `Assets/Resources/Recipes/README.md`. La expansión incorpora hierro, cristal arcano, poción de combate, piedra de afilar, mejoras T2–T4 y fabricación de espada/arco. Los apartados históricos de este archivo que describen todas las menas como piedra corresponden a la importación inicial; las tablas vigentes distinguen los nuevos materiales.
+
 ## Probar
 
 Entrar a una partida de exploración. Cerca del punto de llegada se coloca un banco y una fuente inicial de hierbas, madera y piedra cuando el terreno tiene soporte y espacio libre. Acercarse y presionar **G** para recolectar o abrir el banco. **ESC** cierra el banco. **F** conserva las interacciones de cofre y botín.

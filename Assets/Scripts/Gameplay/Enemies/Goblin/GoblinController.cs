@@ -278,7 +278,7 @@ namespace Mismo.Gameplay.Enemies
             if (!CanNavigate || repath > 0f) return;
             repath = 0.2f;
             if (!NavMesh.SamplePosition(position, out NavMeshHit hit, 1.5f, agent.areaMask)) { Stop(); return; }
-            agent.speed = speed;
+            agent.speed = speed * (GetComponent<Mismo.Gameplay.Combat.CombatAilment>()?.SpeedMultiplier ?? 1);
             agent.isStopped = false;
             agent.SetDestination(hit.position);
         }
@@ -309,7 +309,7 @@ namespace Mismo.Gameplay.Enemies
                     agent.radius*.9f, delta.normalized, delta.magnitude + 0.02f, ~0, QueryTriggerInteraction.Ignore))
                     if (!hit.transform.IsChildOf(transform)) { blocked = true; break; }
                 if (blocked) break;
-                agent.Move(delta);
+                agent.Move(delta * (GetComponent<Mismo.Gameplay.Combat.CombatAilment>()?.SpeedMultiplier ?? 1));
                 ApplyHits();
             }
         }

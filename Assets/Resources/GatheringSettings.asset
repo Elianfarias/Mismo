@@ -15,17 +15,6 @@ MonoBehaviour:
   herb: {fileID: 11400000, guid: a38d9b07b08945e2a699804dcd5a5379, type: 2}
   tree: {fileID: 11400000, guid: 69d22ffa01ac421897525b87954ab08b, type: 2}
   stone: {fileID: 11400000, guid: d6a04fb01f58441ebe26a0470997b50e, type: 2}
-  recipes:
-  - {fileID: 11400000, guid: 6975da9bb1c68f544865d337984a4ef0, type: 2}
-  - {fileID: 11400000, guid: c507ee0cdeaf28744b11f36204130897, type: 2}
-  workbenchPrefab: {fileID: 324489609638104938, guid: dbc5f6574fb2cc14391f20a28923b281, type: 3}
-  monsterLoot: {fileID: 11400000, guid: 582c0776621b425fbe268b43e8dbb274, type: 2}
-  generationVersion: 1
-  groupsPerChunk: 2
-  groupChance: 0.45
-  minimumSeparation: 5
-  starterRadius: 12
-
   minerals:
   - {fileID: 11400000, guid: 356263e288276b64aa09201deeb7e506, type: 2}
   - {fileID: 11400000, guid: e30ef211e43c891418b9b0b792d5329f, type: 2}
@@ -57,3 +46,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 54b7505bdb9ec2846861c9a24a5bb8a3, type: 2}
   - {fileID: 11400000, guid: aca5aa93bd23c6540b826a8056b507eb, type: 2}
   - {fileID: 11400000, guid: 8ecb55a4caabbd145be825f1f50fe591, type: 2}
+  recipes:
+  - {fileID: 11400000, guid: 43c29dbe51f85c0fa392555748f03b70, type: 2}
+  - {fileID: 11400000, guid: 6975da9bb1c68f544865d337984a4ef0, type: 2}
+  - {fileID: 11400000, guid: c507ee0cdeaf28744b11f36204130897, type: 2}
+  - {fileID: 11400000, guid: c3ef55e18173d3d48bbf5caf333ae93b, type: 2}
+  - {fileID: 11400000, guid: b89240d491efa39428abe5b73a17c119, type: 2}
+  - {fileID: 11400000, guid: 4b02559098f3c7746862e08b612046fa, type: 2}
+  - {fileID: 11400000, guid: d04746c370d80c9408754d0482dd1cdd, type: 2}
+  - {fileID: 11400000, guid: 9886347e904f5a14294f2ef9ea04ab70, type: 2}
+  - {fileID: 11400000, guid: 3c1c838cab2f94f4b87b03c1b60d1b25, type: 2}
+  workbenchPrefab: {fileID: 324489609638104938, guid: dbc5f6574fb2cc14391f20a28923b281, type: 3}
+  monsterLoot: {fileID: 11400000, guid: 582c0776621b425fbe268b43e8dbb274, type: 2}
+  generationVersion: 1
+  groupsPerChunk: 2
+  groupChance: 0.45
+  minimumSeparation: 5
+  starterRadius: 12

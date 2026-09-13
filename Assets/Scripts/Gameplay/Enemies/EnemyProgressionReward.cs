@@ -61,7 +61,7 @@ namespace Mismo.Gameplay.Enemies
             drop=!boss&&Random.value<rules.dropChance?player.RollDrop():null;
             rolledMaterials=materialLoot!=null?materialLoot.Roll():null;
             species=Mismo.Gameplay.Player.World.CreatureSpecies.For(gameObject);
-            recognized=species!=null&&species.domesticable&&species.mountable&&string.IsNullOrEmpty(player.CompanionSpeciesId)&&Random.value<species.recognitionChance;
+            recognized=species!=null&&species.domesticable&&species.mountable&&!player.OwnsMount(species.id,gameObject.name.Replace("(Clone)","").Trim())&&Random.value<species.recognitionChance;
             pending=true;
             var identity=GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>();if(identity!=null)identity.PendingReward=true;
             TryCommit();

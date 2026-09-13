@@ -30,7 +30,7 @@ namespace Mismo.Gameplay.Combat
         }
     }
 
-    public enum HitOutcome { Ignored, Hit, Invulnerable, Parry, PerfectParry, Dodge, PerfectDodge }
+    public enum HitOutcome { Ignored, Hit, Invulnerable, Parry, PerfectParry, Dodge, PerfectDodge, Block }
     public readonly struct HitResult
     {
         public readonly HitOutcome Outcome;

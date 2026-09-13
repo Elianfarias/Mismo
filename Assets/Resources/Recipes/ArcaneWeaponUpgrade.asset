@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9439048e7e7f314bab7a5c3c43ddee2, type: 3}
+  m_Name: ArcaneWeaponUpgrade
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.CraftingRecipe
+  id: REC-06
+  displayName: Mejora arcana
+  description: Mejora el arma elegida de T3 a T4 conservando su identidad y variante.
+  ingredients:
+  - material: {fileID: 11400000, guid: 35b7d89200d184e469a4bcabd6415c67, type: 2}
+    quantity: 4
+  - material: {fileID: 11400000, guid: 50b271ce6280fb849957ee980def5432, type: 2}
+    quantity: 4
+  - material: {fileID: 11400000, guid: d2ed2701affd4c62a19a1db2dbad1702, type: 2}
+    quantity: 3
+  result: {fileID: 0}
+  weaponResult: {fileID: 0}
+  category: 0
+  quantity: 1
+  upgradeWeapon: 1
+  fromTier: 3
+  toTier: 4

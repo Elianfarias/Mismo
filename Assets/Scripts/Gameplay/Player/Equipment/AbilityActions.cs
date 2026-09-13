@@ -8,6 +8,23 @@ namespace Mismo.Gameplay.Player.Equipment
     public sealed class MoveCasterAction : AbilityAction
     {
         public float distance = 3;
+        public bool crossEnemies;
+        public override void Begin(AbilityExecution c)
+        {
+            if(!crossEnemies)return;
+            var body=c.Owner.GetComponent<CharacterController>();if(body==null)return;
+            foreach(var hit in Physics.SphereCastAll(c.Owner.transform.position+Vector3.up,.5f,c.Direction,distance,~0,QueryTriggerInteraction.Ignore))
+            {
+                if(hit.collider.GetComponentInParent<IDamageReceiver>()==null||hit.collider.transform.IsChildOf(c.Owner.transform)||Physics.GetIgnoreCollision(body,hit.collider))continue;
+                Physics.IgnoreCollision(body,hit.collider,true);c.IgnoredColliders.Add(hit.collider);
+            }
+        }
+        public override void End(AbilityExecution c)
+        {
+            var body=c.Owner.GetComponent<CharacterController>();
+            if(body!=null)foreach(var other in c.IgnoredColliders)if(other!=null)Physics.IgnoreCollision(body,other,false);
+            c.IgnoredColliders.Clear();
+        }
         public override void Tick(AbilityExecution c, float dt)
         {
             Vector3 direction = Vector3.ProjectOnPlane(c.Direction, Vector3.up).normalized;
@@ -54,7 +71,8 @@ namespace Mismo.Gameplay.Player.Equipment
         public override void Begin(AbilityExecution c)
         {
             Vector3 origin = WeaponAim.Muzzle(c.Owner);
-            ProjectileInstance.Spawn(c.Owner, origin, c.AimPoint.HasValue ? (c.AimPoint.Value - origin).normalized : c.Direction, damage * c.DamageMultiplier * (c.Definition.chargeable ? c.Definition.chargeDamageMultiplier.Evaluate(c.Charge) : 1), speed, c.Definition.range, radius, visual, c.AttackId, (postureDamage < 0 ? damage*.8f : postureDamage) * (c.Definition.chargeable ? c.Definition.chargePostureMultiplier.Evaluate(c.Charge) : 1), c.WeaponFamilyId,c.Definition.focusGainOnHit);
+            var projectile=ProjectileInstance.Spawn(c.Owner, origin, c.AimPoint.HasValue ? (c.AimPoint.Value - origin).normalized : c.Direction, damage * c.DamageMultiplier * (c.Definition.chargeable ? c.Definition.chargeDamageMultiplier.Evaluate(c.Charge) : 1), speed, c.Definition.range, radius, visual, c.AttackId, (postureDamage < 0 ? damage*.8f : postureDamage) * (c.Definition.chargeable ? c.Definition.chargePostureMultiplier.Evaluate(c.Charge) : 1), c.WeaponFamilyId,c.Definition.focusGainOnHit);
+            if(c.Definition==c.Weapon.GetAbility(AbilitySlot.Basic))projectile.BasicEffects=c.Owner.GetComponent<WeaponSkillEffects>();
         }
     }
 

@@ -68,7 +68,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 profile = payload != null ? JsonUtility.FromJson<InventoryProfile>(payload) : CreateStartingProfile();
                 if (!profile.IsValid(definitions, rewards)) throw new InvalidDataException("Invalid starting profile.");
                 bool migrated=profile.version<5;
-                profile.UpgradeToCurrent();NormalizeGrid(profile);
+                profile.UpgradeToCurrent();profile.UpgradeMountCollection();NormalizeGrid(profile);
                 if (result == ProfileReadResult.Invalid)
                 { Notice = "No se pudo recuperar el guardado. Tus archivos se conservaron; no se guardarán cambios."; HasSaveProblem = true; }
                 else if (result == ProfileReadResult.Recovered)
@@ -84,7 +84,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             {
                 writable = false;
                 if(profile==null||!profile.IsValid(definitions,rewards))profile=CreateStartingProfile();
-                profile.UpgradeToCurrent();NormalizeGrid(profile);
+                profile.UpgradeToCurrent();profile.UpgradeMountCollection();NormalizeGrid(profile);
                 ApplyEquipment();ApplyStats();
                 Notice = "No se pudo acceder al guardado. Tus archivos se conservaron; no se guardarán cambios.";
                 HasSaveProblem = true;
@@ -114,7 +114,25 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             {
                 var loaded=JsonUtility.FromJson<InventoryProfile>(json);
                 if(loaded?.IsValid(definitions,rewards)!=true)return false;
-                if(loaded.version>=2)foreach(var mastery in loaded.progression.masteries)if(!HasFamily(mastery.familyId))return false;
+                for(int i=0;i<2;i++)
+                {
+                    var main=catalog.Find(loaded.Find(loaded.equipped[i]).definitionId);
+                    if(main.isShield)return false;
+                    var off=loaded.Find(loaded.Offhand(i));
+                    if(off!=null&&!Compatible(main,catalog.Find(off.definitionId)))return false;
+                }
+                if(loaded.version>=2)foreach(var mastery in loaded.progression.masteries)
+                {
+                    if(!HasFamily(mastery.familyId))return false;
+                    if(mastery.equippedAbilities==null||mastery.equippedAbilities.Length==0)continue;
+                    var family=FindFamily(mastery.familyId);
+                    if(family==null)return false;
+                    foreach(var id in mastery.equippedAbilities)
+                    {
+                        int skill=family.FindSkill(id);
+                        if(skill<0||mastery.level<family.UnlockLevel(skill))return false;
+                    }
+                }
                 return true;
             }
             catch (ArgumentException) { return false; }
@@ -152,6 +170,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         OwnedWeapon EquippedItem(WeaponDefinition weapon)
         {
             if(profile==null||weapon==null)return null;
+            if(weapon==loadout.GetSlot(0))return profile.Find(profile.equipped[0]);
+            if(weapon==loadout.GetSlot(1))return profile.Find(profile.equipped[1]);
             var active=profile.Find(profile.equipped[profile.activeSlot]);
             if(active.definitionId==weapon.Id)return active;
             var secondary=profile.Find(profile.equipped[1-profile.activeSlot]);
@@ -162,13 +182,13 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(!IsReady)return 1;
             var mastery=Mastery(weapon);
             return Mathf.Max(.1f,1+profile.progression.attackPoints*Rules.attackPerPoint+
-                Rules.Bonuses(EquippedItem(weapon)).damage+(mastery?.damagePoints??0)*Rules.masteryDamagePerPoint);
+                HandDamageBonus(weapon)+(mastery?.damagePoints??0)*Rules.masteryDamagePerPoint+WeaponConsumableBonus(weapon))*(weapon!=null&&weapon.dualSwordFamily!=null&&!weapon.dualWield?1.15f:weapon?.styleDamageMultiplier??1);
         }
         public float AttackSpeed(WeaponDefinition weapon)
         {
             if(!IsReady)return 1;
-            return Mathf.Clamp(1+Rules.Bonuses(EquippedItem(weapon)).speed+
-                (Mastery(weapon)?.speedPoints??0)*Rules.masterySpeedPerPoint,.5f,Rules.maximumAttackSpeed);
+            return Mathf.Clamp(1+HandSpeedBonus(weapon)+
+                (Mastery(weapon)?.speedPoints??0)*Rules.masterySpeedPerPoint+(weapon?.styleSpeedBonus??0)+(GetComponent<WeaponSkillEffects>()?.SpeedBonus??0),.5f,Rules.maximumAttackSpeed);
         }
         void ApplyStats()
         {
@@ -176,8 +196,15 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             var first=Rules.Bonuses(profile.Find(profile.equipped[0]));
             var second=Rules.Bonuses(profile.Find(profile.equipped[1]));
             Armor=profile.progression.armorPoints*Rules.armorPerPoint+first.armor+second.armor;
+            float offhandLife=0;
+            var offhandItem=profile.Find(profile.Offhand(profile.activeSlot));
+            if(offhandItem!=null)
+            {
+                var bonus=Rules.Bonuses(offhandItem);Armor+=bonus.armor;offhandLife+=bonus.life;
+                if(catalog.Find(offhandItem.definitionId)?.isShield==true)Armor+=12+2*(offhandItem.tier-1);
+            }
             var health=GetComponent<Mismo.Gameplay.Combat.Health>();
-            float max=Mathf.Max(1,baseMaximum+profile.progression.lifePoints*Rules.lifePerPoint+first.life+second.life);
+            float max=Mathf.Max(1,baseMaximum+profile.progression.lifePoints*Rules.lifePerPoint+first.life+second.life+offhandLife);
             if(health!=null&&!Mathf.Approximately(max,health.Maximum))health.ConfigureMaximum(max);
         }
         public bool TrySpend(CharacterAttribute attribute)
@@ -219,11 +246,19 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 else if(species.quantity<int.MaxValue)species.quantity++;
             }
             if(worldEnemyId!=null){next.EnsureWorldData();next.defeatedEnemies.Add(worldEnemyId);}
-            if(recognized&&string.IsNullOrEmpty(next.companionSpeciesId))
+            bool newMount=false;
+            if(recognized)
             {
                 var species=World.CreatureSpecies.Find(speciesId);
                 if(species!=null&&species.domesticable&&species.mountable&&species.prefabs!=null&&Array.Exists(species.prefabs,p=>p!=null&&p.name==creaturePrefab))
-                {next.companionSpeciesId=speciesId;next.companionPrefabName=creaturePrefab;next.companionIndividualId=worldEnemyId;next.companionWaiting=false;}
+                {
+                    next.UpgradeMountCollection();
+                    if(next.mounts.Count<512&&!next.mounts.Exists(m=>m.speciesId==speciesId&&m.prefabName==creaturePrefab))
+                    {
+                        var owned=new OwnedMount{id=string.IsNullOrEmpty(worldEnemyId)?Guid.NewGuid().ToString("N"):worldEnemyId,speciesId=speciesId,prefabName=creaturePrefab};next.mounts.Add(owned);newMount=true;
+                        if(string.IsNullOrEmpty(next.selectedMountId)){next.selectedMountId=owned.id;next.companionSpeciesId=speciesId;next.companionPrefabName=creaturePrefab;next.companionIndividualId=owned.id;next.companionWaiting=false;next.companionDismissed=false;}
+                    }
+                }
             }
             var pending=new PendingInventoryLoot{id=Guid.NewGuid().ToString("N")};
             var position=lootPosition??transform.position;pending.x=position.x;pending.y=position.y;pending.z=position.z;
@@ -246,11 +281,11 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(waiting)next.pendingLoot.Add(pending);
             string notice="+"+experience+" EXP"+(next.progression.level>previous?" · Nivel "+next.progression.level:"")+
                 (added?" · Arma T"+drop.tier+" obtenida":"")+(waiting?" · Mochila llena: botín guardado en el suelo.":"");
-            if(next.companionSpeciesId!=profile.companionSpeciesId)notice+=" · "+Localization.GameLanguage.Text("La criatura te reconoce como su amo.");
+            if(newMount)notice+=" · "+Localization.GameLanguage.Text("La criatura te reconoce como su amo.");
             return Commit(next,notice,false);
         }
         bool HasFamily(string id)
-        {foreach(var weapon in catalog.weapons)if(weapon.MasteryId==id)return true;return false;}
+        {if(FindFamily(id)!=null)return true;foreach(var weapon in catalog.weapons)if(weapon.MasteryId==id)return true;return false;}
         public OwnedWeapon RollDrop()
         {
             if(!IsReady||catalog.weapons.Length==0)return null;
@@ -263,9 +298,10 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
 
         public bool TryEquip(int slot, string instanceId)
         {
-            if (!IsReady || !loadout.CanChangeEquipment) return false;
+            if (!IsReady || !loadout.CanChangeEquipment || Definition(instanceId)==null || Definition(instanceId).isShield) return false;
             var next = profile.Copy();
-            return next.TryEquip(slot, instanceId) && Commit(next, "Equipamiento guardado.");
+            if(!next.TryEquip(slot,instanceId))return false;
+            NormalizeHands(next);return Commit(next,"Equipamiento guardado.");
         }
 
         public bool TryEquipDefinition(int slot, WeaponDefinition definition)
@@ -320,7 +356,6 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             return true;
         }
 
-        void ApplyEquipment() => loadout.ApplyInventoryEquipment(
-            Definition(profile.equipped[0]), Definition(profile.equipped[1]), profile.activeSlot);
+        void ApplyEquipment() => loadout.ApplyInventoryEquipment(ComposeWeapon(0),ComposeWeapon(1),profile.activeSlot);
     }
 }

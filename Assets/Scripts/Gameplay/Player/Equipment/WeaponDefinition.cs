@@ -11,6 +11,11 @@ namespace Mismo.Gameplay.Player.Equipment
         [SerializeField, Min(0.01f)] private float basicAttackCooldown = 0.45f;
         public AbilityDefinition[] abilities = new AbilityDefinition[4];
         public WeaponFamilyDefinition family;
+        public bool isShield;
+        public WeaponFamilyDefinition dualSwordFamily;
+        public WeaponFamilyDefinition swordShieldFamily;
+        [System.NonSerialized] public float styleDamageMultiplier=1;
+        [System.NonSerialized] public float styleSpeedBonus;
         [Tooltip("Activar sólo para armas con habilidades distintas de su familia.")]
         public bool overrideFamilyAbilities;
         public GameObject visualPrefab;

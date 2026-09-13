@@ -24,6 +24,11 @@ namespace Mismo.Gameplay.Player.Equipment
         public WeaponDefinition SecondaryDefinition => slots[1 - activeSlot];
         public AbilityRunner Runner => runner;
         public bool InCombat => Time.time < combatUntil;
+        public AbilityDefinition GetAbility(AbilitySlot slot)
+        {
+            if(inventory==null)inventory=GetComponent<Inventory.PlayerInventory>();
+            return inventory!=null ? inventory.SelectedAbility(ActiveDefinition,slot) : ActiveDefinition?.GetAbility(slot);
+        }
         public event System.Action Changed;
 
         public IWeapon Weapon => weapon;

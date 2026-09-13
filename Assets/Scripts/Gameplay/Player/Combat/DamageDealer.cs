@@ -22,7 +22,13 @@ namespace Mismo.Gameplay.Combat
             if (target == null || target == gameObject) return false;
             IDamageReceiver receiver = target.GetComponentInParent<IDamageReceiver>();
             if (receiver == null) return false;
-            return receiver.ReceiveDamage(new DamageInfo(amount, gameObject, hitPoint, direction, attackId == 0 ? (attackId=AttackIdentity.Next()) : attackId,weaponFamilyId:family,focusGainOnHit:focusGain));
+            var effects=GetComponentInParent<Mismo.Gameplay.Player.Equipment.WeaponSkillEffects>();
+            bool basic=GetComponent<AttackHitbox>()!=null;
+            if(attackId==0)attackId=AttackIdentity.Next();
+            float multiplier=basic&&effects!=null?effects.BasicMultiplier(attackId,hitPoint,receiver as Component):1;
+            bool hit=receiver.ReceiveDamage(new DamageInfo(amount*multiplier, gameObject, hitPoint, direction,attackId,weaponFamilyId:family,focusGainOnHit:focusGain));
+            if(hit&&basic&&receiver is Component component)effects?.BasicHit(attackId,component);
+            return hit;
         }
 
         private void OnTriggerEnter(Collider other)

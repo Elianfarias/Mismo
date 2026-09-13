@@ -34,3 +34,5 @@ MonoBehaviour:
   gridHeight: 3
   canRotate: 1
   inventoryIcon: {fileID: 21300000, guid: 62eb35d6682904046866d4cb8935b2a2, type: 3}
+  dualSwordFamily: {fileID: 11400000, guid: c477298292785fe0bb39efdefaee4d12, type: 2}
+  swordShieldFamily: {fileID: 11400000, guid: a28917d9ca82556f80ee1e1de28bf0bd, type: 2}

@@ -5,11 +5,19 @@ namespace Mismo.Gameplay.Player.Equipment
 {
     public enum AbilitySlot { Basic, Q, E, R }
     public enum AbilityPose { None, Lunge, Parry, Spin, Bow }
+    public enum WeaponPassive { None, ThirdArrow, SwordTip, Rhythm, Finisher, Coverage, Buckler }
 
     [CreateAssetMenu(menuName = "Mismo/Combat/Ability")]
     public sealed class AbilityDefinition : ScriptableObject
     {
         public string displayName;
+        [Tooltip("ID persistente para guardar la selección; no cambiar después de publicar.")]
+        public string abilityId;
+        [Tooltip("Reutiliza la animación de otra habilidad de esta familia, sin copiar su comportamiento.")]
+        public AbilityDefinition animationSource;
+        public WeaponPassive passive;
+        public bool IsPassive => passive != WeaponPassive.None;
+        public string Id => string.IsNullOrEmpty(abilityId) ? name : abilityId;
         [TextArea(2, 5)] public string description;
         [Tooltip("Clave estable para traducir el nombre y la descripción en una futura tabla de idiomas.")]
         public string localizationKey;
@@ -26,6 +34,7 @@ namespace Mismo.Gameplay.Player.Equipment
         public AnimationCurve chargeDamageMultiplier = AnimationCurve.Linear(0,1,1,1.7f);
         public AnimationCurve chargePostureMultiplier = AnimationCurve.Linear(0,1,1,2);
         [Range(0,1)] public float preparationMobility = 1;
+        [Range(0,1)] public float activeMobility = 1;
         public bool interruptible;
         public bool cancelPreparation;
         public bool cancelRecovery;

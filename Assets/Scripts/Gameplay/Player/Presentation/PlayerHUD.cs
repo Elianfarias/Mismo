@@ -86,11 +86,11 @@ namespace Mismo.Gameplay.Player.Presentation
                 string[] keys={"CLICK","Q","E","R"};
                 for(int i=0;i<4;i++)
                 {
-                    var ability=equipment.ActiveDefinition.GetAbility((Equipment.AbilitySlot)i);
+                    var ability=equipment.GetAbility((Equipment.AbilitySlot)i);
                     if(ability==null)continue;
                     float remaining=equipment.Runner.Remaining(ability);
                     bool active=equipment.Runner.Current!=null&&equipment.Runner.Current.Definition==ability;
-                    Ability(left+i*108,height-115,keys[i],ability.displayName,combat!=null&&combat.Focus<ability.focusCost?"FOCUS "+ability.focusCost.ToString("0"):Status(remaining,active),ability.cooldown>0?remaining/ability.cooldown:0,stamina==null||stamina.Current>=ability.staminaCost);
+                    Ability(left+i*108,height-115,ability.IsPassive?"PASIVA":keys[i],ability.DisplayName,ability.IsPassive?"EQUIPADA":combat!=null&&combat.Focus<ability.focusCost?"FOCUS "+ability.focusCost.ToString("0"):Status(remaining,active),ability.cooldown>0?remaining/ability.cooldown:0,ability.IsPassive||stamina==null||stamina.Current>=ability.staminaCost);
                 }
                 if(equipment.ActiveDefinition.isBow) Label(new Rect(width*Equipment.WeaponAim.Viewport.x-12,height*(1-Equipment.WeaponAim.Viewport.y)-12,24,24),"+",22,Gold,TextAnchor.MiddleCenter);
             }

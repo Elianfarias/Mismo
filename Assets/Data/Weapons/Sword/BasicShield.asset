@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6caf7fcd2b3f4459a35afabcca675b39, type: 3}
+  m_Name: BasicShield
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.WeaponDefinition
+  id: shield.basic
+  displayName: Escudo básico
+  basicAttackCooldown: 0.45
+  abilities:
+  - {fileID: 11400000, guid: e2e0ba6f12d861e4a918f20a0ca3d45b, type: 2}
+  - {fileID: 11400000, guid: ce744cb14261acd4a92c927ed4ad58ab, type: 2}
+  - {fileID: 11400000, guid: e7555c6d155e93448b2c9f2f131ceec1, type: 2}
+  - {fileID: 11400000, guid: c21a4fd366079564f9927dda16544232, type: 2}
+  family: {fileID: 0}
+  overrideFamilyAbilities: 0
+  visualPrefab: {fileID: 100100000, guid: 93f997d715d6f0943842357f7bb5346d, type: 3}
+  isTwoHanded: 0
+  dualWield: 0
+  secondaryVisualPrefab: {fileID: 0}
+  secondaryEquipped:
+    anchor: 2
+    bonePath: 
+    offset: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: 1
+  secondaryHolstered:
+    anchor: 0
+    bonePath: 
+    offset: {x: -0.2, y: 1.2, z: -0.25}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: 1
+  poseProfile: {fileID: 11400000, guid: c6fe7109cd0509d46956bf5bc3d8fa78, type: 2}
+  isBow: 0
+  inventoryDescription: Equipalo en la mano secundaria de una espada para usar el estilo espada y escudo.
+  handRotation: {x: 0, y: 0, z: 0}
+  backRotation: {x: 0, y: 0, z: 35}
+  handOffset: {x: 0, y: 0, z: 0}
+  backOffset: {x: 0, y: 1.2, z: -0.25}
+  gridWidth: 2
+  gridHeight: 2
+  canRotate: 1
+  inventoryIcon: {fileID: 0}
+  isShield: 1

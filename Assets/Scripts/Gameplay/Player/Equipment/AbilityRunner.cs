@@ -15,7 +15,7 @@ namespace Mismo.Gameplay.Player.Equipment
         public SwordParry Parry {get;private set;}
         public bool IsBusy=>Current!=null;
         public bool IsMoving=>Current!=null&&Current.Began&&!Current.Ended&&System.Array.Exists(Current.Definition.actions,a=>a is MoveCasterAction);
-        public float Mobility=>Current!=null&&!Current.Began?Current.Definition.preparationMobility:1;
+        public float Mobility=>Current==null?1:!Current.Began?Current.Definition.preparationMobility:!Current.Ended?Current.Definition.activeMobility:1;
         public float Normalized=>Current==null?0:Mathf.Clamp01(Current.Elapsed/(Current.Definition.Duration+(Current.Definition.chargeable?Current.Definition.maximumCharge:0)));
         public event System.Action<AbilityDefinition> Started;
         // Read-only presentation snapshot. Gameplay remains the owner of all clocks.
@@ -27,6 +27,14 @@ namespace Mismo.Gameplay.Player.Equipment
             if(definition.usesSwordCombo)
             {
                 if(combo==null || !combo.IsActive)return false;
+                var effects=GetComponent<WeaponSkillEffects>();
+                if(effects!=null&&effects.BucklerAnimating)
+                    for(int i=1;i<=3;i++)
+                    {
+                        var passive=loadout.GetAbility((AbilitySlot)i);
+                        if(passive?.passive!=WeaponPassive.Buckler)continue;
+                        frame=new Presentation.CombatAnimationFrame(passive,Presentation.CombatAnimationPhase.Active,effects.BucklerAnimationProgress,-1,cast.AttackId);return true;
+                    }
                 frame=new Presentation.CombatAnimationFrame(definition,Presentation.CombatAnimationPhase.Combo,combo.CurrentStepNormalized,combo.CurrentStepIndex,cast.AttackId);
             }
             else
@@ -45,6 +53,7 @@ namespace Mismo.Gameplay.Player.Equipment
             loadout=equipment;Motor=GetComponent<PlayerMotor>();stamina=GetComponent<Stamina>();health=GetComponent<Health>();
             state=GetComponent<CombatState>()??gameObject.AddComponent<CombatState>();
             combo=GetComponentInChildren<BasicSwordCombo>(true);Parry=GetComponentInChildren<SwordParry>(true);
+            if(GetComponent<WeaponSkillEffects>()==null)gameObject.AddComponent<WeaponSkillEffects>();
         }
         public float Remaining(AbilityDefinition definition)=>definition!=null&&readyAt.TryGetValue(definition,out float time)?Mathf.Max(0,time-Time.time):0;
         public bool CanCancel
@@ -58,8 +67,8 @@ namespace Mismo.Gameplay.Player.Equipment
         }
         public bool TryUse(AbilitySlot slot,Vector3 direction,Vector3 groundPoint,Vector3? aimPoint=null,bool held=false)
         {
-            var weapon=loadout.ActiveDefinition;var definition=weapon!=null?weapon.GetAbility(slot):null;
-            if(definition==null||health!=null&&health.IsDead||loadout.Belt!=null&&loadout.Belt.ControlsMovement)return false;
+            var weapon=loadout.ActiveDefinition;var definition=loadout.GetAbility(slot);
+            if(definition==null||definition.IsPassive||health!=null&&health.IsDead||loadout.Belt!=null&&loadout.Belt.ControlsMovement)return false;
             if(Remaining(definition)>0&&!(Current!=null&&definition.usesSwordCombo&&Current.Definition==definition))return false;
             if(stamina!=null&&stamina.Current<definition.staminaCost||state.Focus<definition.focusCost)return false;
             if(Current!=null)

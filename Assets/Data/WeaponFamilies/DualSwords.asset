@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1f07bb650d4d1f46b500b560d8847c4, type: 3}
+  m_Name: DualSwords
+  progressionId: sword.dual
+  displayName: Dos espadas
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.WeaponFamilyDefinition
+  abilities:
+  - {fileID: 11400000, guid: e2e0ba6f12d861e4a918f20a0ca3d45b, type: 2}
+  - {fileID: 11400000, guid: 6ec79b442905587c94ee2bae4fd5e02b, type: 2}
+  - {fileID: 11400000, guid: 5caa93e883ad5175996e70b7c5a9e904, type: 2}
+  - {fileID: 11400000, guid: 7e33e2b4c64d51e0812207f83c55d152, type: 2}
+  animations: {fileID: 11400000, guid: 53aa45568a7257998fdb5cd2272ea274, type: 2}
+  masteryLevelsPerUnlock: 3
+  repertoire:
+  - {fileID: 11400000, guid: 6ec79b442905587c94ee2bae4fd5e02b, type: 2}
+  - {fileID: 11400000, guid: 5caa93e883ad5175996e70b7c5a9e904, type: 2}
+  - {fileID: 11400000, guid: 7e33e2b4c64d51e0812207f83c55d152, type: 2}
+  - {fileID: 11400000, guid: cb78b7969a9d53e4b85caa3d816a0804, type: 2}
+  - {fileID: 11400000, guid: b1715f0fa47651449e46ffcb80a83246, type: 2}
+  - {fileID: 11400000, guid: d93536427d465c96bf7bc98586037c48, type: 2}

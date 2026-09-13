@@ -72,7 +72,11 @@ namespace Mismo.Gameplay.Player.Equipment
             if (loadout == null) return;
             var weapon = loadout.ActiveDefinition;
             Quaternion facing = Quaternion.LookRotation(motor.Facing);
-            if (activeSecondVisual != null && weapon != null) ApplyProfile(activeSecondVisual, weapon.secondaryEquipped);
+            if (activeSecondVisual != null && weapon != null)
+            {
+                activeSecondVisual.SetActive(GetComponent<WeaponSkillEffects>()?.BucklerAbsent!=true);
+                ApplyProfile(activeSecondVisual, weapon.secondaryEquipped);
+            }
             if (backSecondVisual != null && loadout.SecondaryDefinition != null)
                 ApplyHolsteredProfile(backSecondVisual, loadout.SecondaryDefinition.secondaryHolstered);
             if (weapon != null && weapon.poseProfile == null && weapon.isBow)

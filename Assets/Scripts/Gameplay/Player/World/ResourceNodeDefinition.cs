@@ -9,6 +9,7 @@ namespace Mismo.Gameplay.Player.World
     {
         public string id;
         public ResourceNodeKind kind;
+        [Min(0)] public float distributionWeight=1;
         public string displayName;
         public string actionName = "Recolectar";
         [Min(.1f)] public float harvestSeconds = 1;

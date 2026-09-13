@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: crystal_basalt_green.044-Loot
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.Inventory.MaterialLootTable
   entries:
-  - material: {fileID: 11400000, guid: 2d5a941e97d3421490437c917566ad9a, type: 2}
-    minimum: 2
-    maximum: 2
+  - material: {fileID: 11400000, guid: 50b271ce6280fb849957ee980def5432, type: 2}
+    minimum: 1
+    maximum: 1
     probability: 1

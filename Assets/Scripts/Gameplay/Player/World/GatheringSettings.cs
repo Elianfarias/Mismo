@@ -19,7 +19,11 @@ namespace Mismo.Gameplay.Player.World
         public ResourceNodeDefinition Mineral(int seed)
         {
             if(minerals==null||minerals.Length==0)return stone;
-            return minerals[(int)((uint)seed%(uint)minerals.Length)]??stone;
+            double total=0;foreach(var node in minerals)if(node!=null&&node.distributionWeight>0&& !float.IsInfinity(node.distributionWeight))total+=node.distributionWeight;
+            if(total<=0)return stone;
+            double pick=((uint)seed/4294967296d)*total;
+            foreach(var node in minerals)if(node!=null&&node.distributionWeight>0&&!float.IsInfinity(node.distributionWeight)){pick-=node.distributionWeight;if(pick<0)return node;}
+            return stone;
         }
     }
 }

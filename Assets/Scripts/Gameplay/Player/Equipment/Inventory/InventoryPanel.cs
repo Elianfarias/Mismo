@@ -11,7 +11,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
     [DefaultExecutionOrder(-100)]
     public sealed class InventoryPanel : MonoBehaviour
     {
-        enum Page { Menu, Inventory, Character, Skills, Bestiary }
+        enum Page { Menu, Inventory, Character, Skills, Bestiary, Mounts }
+        int mountIndex;string mountPreviewId;Vector2 mountScroll;
         readonly BestiaryView bestiary=new BestiaryView();
 
         PlayerInventory inventory;
@@ -27,6 +28,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         float messageUntil;
         Vector2 scroll;
         Vector2 skillsScroll;
+        int selectedSkillSlot=1;
         WeaponDefinition skillsWeapon;
         bool rotatingPreview;
         readonly Dictionary<Sprite,Texture2D> rotatedIcons=new Dictionary<Sprite,Texture2D>();
@@ -64,7 +66,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 }
                 else if(!typing&&k.iKey.wasPressedThisFrame){if(IsOpen&&page==Page.Inventory)Close();else OpenPage(Page.Inventory);}
                 else if(!typing&&k.bKey.wasPressedThisFrame){if(IsOpen&&page==Page.Menu)Close();else OpenPage(Page.Menu);}
-                else if(!typing&&k.cKey.wasPressedThisFrame)OpenPage(Page.Character);
+                else if(!typing&&k.pKey.wasPressedThisFrame)OpenPage(Page.Character);
                 else if(!typing&&k.kKey.wasPressedThisFrame)OpenPage(Page.Skills);
             }
             if(IsOpen&&draggedGrid!=null&&k!=null&&k.rKey.wasPressedThisFrame)
@@ -76,7 +78,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             {
                 previewDirty=false;
                 GameObject source=gameObject;
-                if(page==Page.Bestiary)source=null;
+                if(page==Page.Bestiary||page==Page.Mounts){source=null;mountPreviewId=null;}
                 if(page==Page.Inventory&&selected!=null)source=selectedMaterial?inventory.Material(selected)?.pickupPrefab:inventory.Definition(selected)?.visualPrefab;
                 Vector3 rotation=page==Page.Inventory&&selected!=null?(selectedMaterial?inventory.Material(selected)?.inventoryPreviewRotation??Vector3.zero:inventory.Definition(selected)?.inventoryPreviewRotation??Vector3.zero):Vector3.zero;
                 preview.Show(source,rotation);
@@ -155,7 +157,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             {
 
                 bool previousEnabled=GUI.enabled;GUI.enabled=previousEnabled&&!confirmDiscard;
-                Text(new Rect(38,25,740,44),page==Page.Menu?"VIAJERO":page==Page.Inventory?"PERTENENCIAS":page==Page.Character?"PERSONAJE":page==Page.Bestiary?"BESTIARIO":"HABILIDADES",32,Accent);
+                Text(new Rect(38,25,740,44),page==Page.Menu?"VIAJERO":page==Page.Inventory?"PERTENENCIAS":page==Page.Character?"PERSONAJE":page==Page.Bestiary?"BESTIARIO":page==Page.Mounts?"MONTURAS":"HABILIDADES",32,Accent);
                 if(Button(new Rect(940,27,120,35),"Menú [B]"))OpenPage(Page.Menu);
                 if(Button(new Rect(1075,27,165,35),"Cerrar [ESC]"))Close();
                 Line(38,82,1202);
@@ -164,6 +166,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 else if(page==Page.Character)DrawProgression(40,0);
                 else if(page==Page.Skills)DrawSkills();
                 else if(page==Page.Bestiary)bestiary.Draw(inventory,preview);
+                else if(page==Page.Mounts)DrawMounts();
                 else DrawInventory();
                 Line(38,710,1202);
                 Text(new Rect(40,726,1180,30),L.Format("MOCHILA  {0} / {1} celdas",inventory.UsedSlots(false),inventory.BackpackCapacity)+
@@ -178,15 +181,40 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             if(Button(new Rect(40,105,300,38),L.LanguageLabel))L.Next();
             Text(new Rect(405,135,500,38),"PREPARÁ TU PRÓXIMA SALIDA",21,Muted);
-            if(Button(new Rect(450,225,380,80),"PERSONAJE  [C]"))OpenPage(Page.Character);
+            if(Button(new Rect(450,225,380,80),"PERSONAJE  [P]"))OpenPage(Page.Character);
             if(Button(new Rect(745,365,360,80),"INVENTARIO  [I]"))OpenPage(Page.Inventory);
             if(Button(new Rect(175,365,360,80),"HABILIDADES  [K]"))OpenPage(Page.Skills);
             if(Button(new Rect(450,505,380,80),"MAPA  [M]"))
             {
                 var map=GetComponent<WorldMapPanel>();if(map!=null){Close();map.Open();}
             }
-            if(Button(new Rect(450,602,380,38),"BESTIARIO"))OpenPage(Page.Bestiary);
+            if(Button(new Rect(300,602,310,38),"BESTIARIO"))OpenPage(Page.Bestiary);
+            if(Button(new Rect(630,602,310,38),"MONTURAS"))OpenPage(Page.Mounts);
             Text(new Rect(450,650,500,32),"El mundo continúa mientras consultás el menú.",17,Muted);
+        }
+        void DrawMounts()
+        {
+            var mounts=inventory.Mounts;
+            if(mounts.Length==0){Text(new Rect(100,260,1050,110),"Todavía no tenés monturas. Algunas criaturas pueden reconocerte al vencerlas.",25,Muted);return;}
+            mountIndex=Mathf.Clamp(mountIndex,0,mounts.Length-1);
+            mountScroll=GUI.BeginScrollView(new Rect(45,125,490,450),mountScroll,new Rect(0,0,465,mounts.Length*65));
+            for(int i=0;i<mounts.Length;i++)
+            {
+                var sp=World.CreatureSpecies.Find(mounts[i].speciesId);
+                if(Tab(new Rect(0,i*65,450,55),(sp!=null?L.Text(sp.displayName):mounts[i].speciesId)+" · "+(i+1),i==mountIndex))mountIndex=i;
+            }
+            GUI.EndScrollView();
+            var mount=mounts[mountIndex];var species=World.CreatureSpecies.Find(mount.speciesId);
+            if(mountPreviewId!=mount.id){preview.Show(species?.prefabs==null?null:System.Array.Find(species.prefabs,p=>p!=null&&p.name==mount.prefabName),new Vector3(0,150,0));preview.Zoom(species!=null?species.bookZoom:1);mountPreviewId=mount.id;}
+            DrawPreview(new Rect(600,140,540,320));
+            Text(new Rect(590,470,610,65),"Tus monturas permanecen en la colección aunque mueras o las guardes.",20,Muted);
+            bool selectedActive=inventory.SelectedMountId==mount.id&&inventory.CompanionSummoned;
+            Text(new Rect(590,540,600,30),selectedActive?"Acompañante activo":"Guardada en tu colección",20,Accent);
+            bool enabled=GUI.enabled;GUI.enabled=enabled&&inventory.CanCallMount&&species!=null;
+            if(Button(new Rect(590,585,280,42),selectedActive?"Invocar a mi lado":"Invocar montura"))inventory.SummonMount(mount.id);
+            GUI.enabled=enabled&&inventory.CanCallMount&&inventory.CompanionSummoned;
+            if(Button(new Rect(890,585,280,42),"Guardar acompañante"))inventory.DismissMount();GUI.enabled=enabled;
+            if(!inventory.CanCallMount)Text(new Rect(590,640,600,42),"Desmontá y salí de combate para cambiar de acompañante.",17,Muted);
         }
         void DrawInventory()
         {
@@ -342,7 +370,13 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             Text(new Rect(620,120,470,36),"TU PERSONAJE",25,Accent);
             DrawPreview(new Rect(650,162,520,340));
             Text(new Rect(620,520,570,30),L.Format("Vida {0:0} / {1:0}     Armadura {2:0}",health.Current,health.Maximum,inventory.Armor),20);
-            for(int i=0;i<2;i++)Text(new Rect(620,560+i*38,590,35),L.Format("Ranura {0} · {1}",i+1,L.Text(inventory.ItemName(inventory.EquippedId(i)))),17,Muted);
+            for(int i=0;i<2;i++)
+            {
+                Text(new Rect(620,555+i*40,405,37),(i+1)+" · "+loadout.GetSlot(i).DisplayName+" · "+(inventory.OffhandId(i)!=null?"Mano secundaria equipada":"Mano secundaria libre"),15,Muted);
+                bool was=GUI.enabled;GUI.enabled=was&&inventory.CanManage&&inventory.OffhandId(i)!=null;
+                if(Button(new Rect(1035,555+i*40,175,32),"Quitar secundaria"))inventory.TryEquipOffhand(i,null);
+                GUI.enabled=was;
+            }
             Text(new Rect(620,646,570,30),"Seleccioná un objeto para inspeccionarlo.",17,Accent);
         }
         void DrawItem()
@@ -367,7 +401,14 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 if(Button(new Rect(770,534,44,34),"+"))amount=Mathf.Min(count,amount+1);
                 if(Button(new Rect(828,534,90,34),"Todo"))amount=count;
                 amount=Mathf.Clamp(amount,1,Mathf.Max(1,count));
-                if(material.healingAmount>0&&Button(new Rect(940,534,268,34),"Usar"))inventory.TryUseConsumable(selected);
+                if(material.IsConsumable&&!showChest)
+                {
+                    string reason=inventory.ConsumableBlockReason(selected);
+                    bool usable=GUI.enabled;GUI.enabled=usable&&reason==null;
+                    if(Button(new Rect(940,534,268,34),"Usar"))inventory.TryUseConsumable(selected);
+                    GUI.enabled=usable;
+                    Text(new Rect(620,575,580,42),reason??(material.damageBonus>0?L.Format("Arma activa: {0}",inventory.ItemName(inventory.EquippedId(loadout.ActiveSlot))):""),16,Muted);
+                }
             }
             else
             {
@@ -376,10 +417,15 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 Text(new Rect(620,482,585,29),"T"+item.tier+" · "+L.Text(PlayerInventory.VariantName(item.variant))+" · "+weapon.gridWidth+"×"+weapon.gridHeight,19);
                 Text(new Rect(620,514,580,45),L.Format("Bonos vs. ranura {0}: daño {1} pp · vel. {2} pp\nVida {3} · Armadura {4}",compareSlot+1,Signed((bonuses.damage-current.damage)*100),Signed((bonuses.speed-current.speed)*100),Signed(bonuses.life-current.life),Signed(bonuses.armor-current.armor)),16,Muted);
                 if(Button(new Rect(620,568,180,32),L.Format("Comparar ranura {0}",compareSlot+1)))compareSlot=1-compareSlot;
-                bool old=GUI.enabled;GUI.enabled=inventory.CanManage&&!showChest&&inventory.EquippedId(compareSlot)!=selected;
+                bool old=GUI.enabled;GUI.enabled=inventory.CanManage&&!showChest&&!weapon.isShield&&inventory.EquippedId(compareSlot)!=selected;
                 if(Button(new Rect(814,568,190,32),L.Format("Equipar en {0}",compareSlot+1)))inventory.TryEquip(compareSlot,selected);
                 GUI.enabled=old;
                 if(Button(new Rect(1018,568,190,32),"Ver habilidades")){OpenPage(Page.Skills);skillsWeapon=weapon;}
+                GUI.enabled=old&&inventory.CanManage&&!showChest&&inventory.CanUseOffhand(compareSlot,selected)&&inventory.OffhandId(compareSlot)!=selected;
+                if(Button(new Rect(620,603,285,23),"Mano secundaria del conjunto "+(compareSlot+1)))inventory.TryEquipOffhand(compareSlot,selected);
+                GUI.enabled=old&&inventory.CanManage&&inventory.OffhandId(compareSlot)!=null;
+                if(Button(new Rect(920,603,285,23),"Dejar mano secundaria libre"))inventory.TryEquipOffhand(compareSlot,null);
+                GUI.enabled=old;
             }
             bool was=GUI.enabled;GUI.enabled=inventory.CanManage&&inventory.AtChest&&(!inventory.IsEquipped(selected)||selectedMaterial);
             if(Button(new Rect(620,628,275,36),showChest?"Retirar del cofre":"Guardar en cofre"))
@@ -408,34 +454,55 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 if(Tab(new Rect(70+slot*570,105,550,38),L.Format("Ranura {0} · {1}",slot+1,equipped.DisplayName),skillsWeapon==equipped))
                 {skillsWeapon=equipped;skillsScroll=Vector2.zero;}
             }
+            if(skillsWeapon!=loadout.GetSlot(0)&&skillsWeapon!=loadout.GetSlot(1))skillsWeapon=null;
             var weapon=skillsWeapon??loadout.ActiveDefinition;
             if(weapon==null)return;
-            Text(new Rect(70,153,1120,40),L.Format("{0} · Habilidades del arma",weapon.DisplayName),25,Accent);
-            string[] keys={"CLICK","Q","E","R"};
-            float contentHeight=0;
-            for(int i=0;i<4;i++)
+            var family=weapon.family;
+            int level=inventory.Mastery(weapon)?.level??1;
+            Text(new Rect(70,153,1120,40),weapon.DisplayName+" · Maestría "+level,25,Accent);
+            var basic=inventory.SelectedAbility(weapon,AbilitySlot.Basic);
+            Text(new Rect(70,193,1120,30),"CLICK · "+(basic?.DisplayName??"Básico")+" · Siempre disponible",17,Muted);
+            string[] keys={"Q","E","R"};
+            for(int i=0;i<3;i++)
             {
-                var ability=weapon.GetAbility((AbilitySlot)i);if(ability==null)continue;
-                label.fontSize=17;
-                contentHeight+=Mathf.Max(108,70+label.CalcHeight(new GUIContent(ability.Description),870))+12;
+                var equipped=inventory.SelectedAbility(weapon,(AbilitySlot)(i+1));
+                if(Tab(new Rect(70+i*380,230,365,46),keys[i]+" · "+(equipped?.DisplayName??"—")+(equipped?.IsPassive==true?" (P)":""),selectedSkillSlot==i+1))selectedSkillSlot=i+1;
             }
-            skillsScroll=GUI.BeginScrollView(new Rect(70,205,1140,445),skillsScroll,new Rect(0,0,1118,contentHeight));
-            float row=0;
-            for(int i=0;i<4;i++)
+            int count=family!=null&&!weapon.overrideFamilyAbilities?family.SkillCount:3;
+            float contentHeight=0;
+            for(int i=0;i<count;i++)
             {
-                var ability=weapon.GetAbility((AbilitySlot)i);if(ability==null)continue;
+                var ability=family!=null&&!weapon.overrideFamilyAbilities?family.Skill(i):weapon.GetAbility((AbilitySlot)(i+1));
+                if(ability==null)continue;
                 label.fontSize=17;
-                float descriptionHeight=label.CalcHeight(new GUIContent(ability.Description),870);
-                float height=Mathf.Max(108,70+descriptionHeight);
+                contentHeight+=Mathf.Max(120,77+label.CalcHeight(new GUIContent(ability.Description),740))+12;
+            }
+            skillsScroll=GUI.BeginScrollView(new Rect(70,292,1140,352),skillsScroll,new Rect(0,0,1118,contentHeight));
+            float row=0;
+            for(int i=0;i<count;i++)
+            {
+                var ability=family!=null&&!weapon.overrideFamilyAbilities?family.Skill(i):weapon.GetAbility((AbilitySlot)(i+1));
+                if(ability==null)continue;
+                int unlock=family?.UnlockLevel(i)??1;
+                bool unlocked=level>=unlock;
+                string equippedKey="";
+                for(int j=1;j<=3;j++)if(inventory.SelectedAbility(weapon,(AbilitySlot)j)==ability)equippedKey=keys[j-1];
+                label.fontSize=17;
+                float descriptionHeight=label.CalcHeight(new GUIContent(ability.Description),740);
+                float height=Mathf.Max(120,77+descriptionHeight);
                 PlayerHUD.Fill(new Rect(0,row,1118,height),new Color(.06f,.07f,.08f,.8f));
-                Text(new Rect(20,row+16,130,36),keys[i],25,Accent);
-                Text(new Rect(170,row+10,660,35),ability.DisplayName,24);
-                Text(new Rect(840,row+14,260,30),L.Format("Recuperación: {0:0.##} s",ability.cooldown),16,Muted);
-                Text(new Rect(170,row+51,870,Mathf.Max(35,descriptionHeight)),ability.Description,17,Muted);
+                Text(new Rect(20,row+10,740,32),ability.DisplayName+(equippedKey!=""?" · "+equippedKey:""),22,unlocked?Accent:Muted);
+                Text(new Rect(20,row+42,740,25),ability.IsPassive?"PASIVA · No requiere pulsar una tecla":L.Format("ACTIVA · Recuperación: {0:0.##} s",ability.cooldown),15,Muted);
+                Text(new Rect(20,row+73,740,Mathf.Max(35,descriptionHeight)),ability.Description,17,Muted);
+                bool was=GUI.enabled;
+                GUI.enabled=was&&unlocked&&loadout.CanChangeEquipment&&family!=null&&!weapon.overrideFamilyAbilities&&equippedKey!=keys[selectedSkillSlot-1];
+                if(Button(new Rect(805,row+25,285,43),!unlocked?"Maestría "+unlock:equippedKey==keys[selectedSkillSlot-1]?"Equipada":equippedKey!=""?"Intercambiar con "+keys[selectedSkillSlot-1]:"Equipar en "+keys[selectedSkillSlot-1]))
+                    inventory.TrySelectAbility(weapon,(AbilitySlot)selectedSkillSlot,i);
+                GUI.enabled=was;
                 row+=height+12;
             }
             GUI.EndScrollView();
-            Text(new Rect(70,662,1100,32),"Seleccioná una ranura para consultar sus habilidades.",17,Muted);
+            Text(new Rect(70,651,1120,50),loadout.InCombat?"Salí de combate para cambiar habilidades.":"Elegí Q, E o R y luego una habilidad. Activas y pasivas comparten los 3 espacios.\nNuevas habilidades en maestría 3, 6 y 9. La selección se guarda por familia.",16,Muted);
         }
         static string Signed(float value)=>value.ToString("+0.#;-0.#;0",L.Culture);
         void DrawProgression(float x,float y)

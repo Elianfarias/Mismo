@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 namespace Mismo.Gameplay.Player.Equipment.Inventory
 {
+    [Serializable] public sealed class OwnedMount
+    {
+        public string id,speciesId,prefabName;
+        public OwnedMount Copy()=>(OwnedMount)MemberwiseClone();
+    }
     [Serializable] public sealed class HarvestState
     {
         public string id;
@@ -33,15 +38,41 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
     {
         public int version = 5;
         public double worldPlaySeconds;
+        public double potionReadyAt, weaponBuffUntil;
+        public string buffedWeaponId;
+        public float weaponBuffDamage;
         public List<HarvestState> harvestedNodes=new List<HarvestState>();
         public List<MaterialStack> speciesDefeats=new List<MaterialStack>();
         public List<string> seenSpecies=new List<string>();
+        public List<OwnedMount> mounts=new List<OwnedMount>();
+        public string selectedMountId;
+        public bool companionDismissed;
+        public void UpgradeMountCollection()
+        {
+            if(mounts==null)mounts=new List<OwnedMount>();
+            if(mounts.Count==0&&!string.IsNullOrEmpty(companionSpeciesId)&&!string.IsNullOrEmpty(companionPrefabName))
+            {
+                var id=string.IsNullOrEmpty(companionIndividualId)?"legacy:"+companionSpeciesId:companionIndividualId;
+                mounts.Add(new OwnedMount{id=id,speciesId=companionSpeciesId,prefabName=companionPrefabName});selectedMountId=id;
+            }
+        }
         public string companionSpeciesId;
         public string companionPrefabName,companionIndividualId;
         public bool companionWaiting;
         public ProgressionData progression = new ProgressionData();
         public List<OwnedWeapon> weapons = new List<OwnedWeapon>();
         public string[] equipped = new string[2];
+        public string[] offhands;
+        public string Offhand(int slot)=>offhands!=null&&slot>=0&&slot<offhands.Length?!string.IsNullOrEmpty(offhands[slot])?offhands[slot]:null:null;
+        public bool IsEquipped(string id)=>!string.IsNullOrEmpty(id)&&(equipped[0]==id||equipped[1]==id||Offhand(0)==id||Offhand(1)==id);
+        public bool TryEquipOffhand(int slot,string id)
+        {
+            if(slot<0||slot>1||Offhand(slot)==id)return false;
+            if(id!=null&&(Find(id)==null||Find(id).inChest||equipped[0]==id||equipped[1]==id))return false;
+            if(offhands==null||offhands.Length==0)offhands=new string[2];
+            if(id!=null&&offhands[1-slot]==id)offhands[1-slot]=null;
+            offhands[slot]=id;return true;
+        }
         public int activeSlot;
         public List<string> claimedRewards = new List<string>();
         public List<DiscoveredRegion> regions = new List<DiscoveredRegion>();
@@ -82,9 +113,14 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             var copy = new InventoryProfile { version = version, activeSlot = activeSlot, progression=progression.Copy(),
                 equipped = (string[])equipped.Clone(), claimedRewards = new List<string>(claimedRewards) };
+            copy.offhands=offhands==null?null:(string[])offhands.Clone();
             copy.worldPlaySeconds=worldPlaySeconds;
+            copy.potionReadyAt=potionReadyAt;copy.weaponBuffUntil=weaponBuffUntil;
+            copy.buffedWeaponId=buffedWeaponId;copy.weaponBuffDamage=weaponBuffDamage;
             if(speciesDefeats!=null)foreach(var species in speciesDefeats)copy.speciesDefeats.Add(species.Copy());
             copy.seenSpecies=new List<string>(seenSpecies??new List<string>());
+            copy.selectedMountId=selectedMountId;copy.companionDismissed=companionDismissed;
+            if(mounts!=null)foreach(var mount in mounts)copy.mounts.Add(mount.Copy());
             copy.companionSpeciesId=companionSpeciesId;copy.companionWaiting=companionWaiting;
             copy.companionPrefabName=companionPrefabName;copy.companionIndividualId=companionIndividualId;
             if(harvestedNodes!=null)foreach(var node in harvestedNodes)copy.harvestedNodes.Add(node.Copy());
@@ -107,6 +143,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             int other = 1 - slot;
             if (equipped[other] == id) equipped[other] = equipped[slot];
             equipped[slot] = id;
+            if(offhands!=null)for(int i=0;i<offhands.Length;i++)if(offhands[i]==id)offhands[i]=null;
             return true;
         }
 
@@ -121,6 +158,13 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
 
         public bool IsValid(ISet<string> definitions, IDictionary<string, string> rewards)
         {
+            if(double.IsNaN(potionReadyAt)||double.IsInfinity(potionReadyAt)||potionReadyAt<0||potionReadyAt>1e12||
+                double.IsNaN(weaponBuffUntil)||double.IsInfinity(weaponBuffUntil)||weaponBuffUntil<0||weaponBuffUntil>1e12||
+                float.IsNaN(weaponBuffDamage)||weaponBuffDamage<0||weaponBuffDamage>1||buffedWeaponId!=null&&buffedWeaponId.Length>160)return false;
+            var mountIds=new HashSet<string>();
+            if(mounts!=null){if(mounts.Count>512)return false;foreach(var m in mounts)
+                if(m==null||string.IsNullOrEmpty(m.id)||m.id.Length>200||!mountIds.Add(m.id)||!MaterialCatalog.ValidId(m.speciesId)||string.IsNullOrEmpty(m.prefabName)||m.prefabName.Length>160)return false;}
+            if(!string.IsNullOrEmpty(selectedMountId)&&!mountIds.Contains(selectedMountId))return false;
             if(!ValidStacks(speciesDefeats)||!string.IsNullOrEmpty(companionSpeciesId)&&!MaterialCatalog.ValidId(companionSpeciesId))return false;
             if(seenSpecies!=null){var seen=new HashSet<string>();if(seenSpecies.Count>4096)return false;foreach(var id in seenSpecies)if(!MaterialCatalog.ValidId(id)||!seen.Add(id))return false;}
             if(companionPrefabName!=null&&companionPrefabName.Length>160||companionIndividualId!=null&&companionIndividualId.Length>160)return false;
@@ -185,6 +229,12 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if (version>=2 && (progression==null || !progression.IsValid())) return false;
             if (equipped[0] == equipped[1] || !ids.Contains(equipped[0]) || !ids.Contains(equipped[1])) return false;
             if(Find(equipped[0]).inChest||Find(equipped[1]).inChest||ids.Overlaps(pendingWeaponIds))return false;
+            if(offhands!=null&&offhands.Length>0)
+            {
+                if(offhands.Length!=2)return false;
+                var used=new HashSet<string>(equipped,StringComparer.Ordinal);
+                foreach(var id in offhands)if(!string.IsNullOrEmpty(id)&&(!ids.Contains(id)||Find(id).inChest||!used.Add(id)))return false;
+            }
             var claimed = new HashSet<string>(StringComparer.Ordinal);
             foreach (var reward in claimedRewards)
                 if (reward == null || !claimed.Add(reward) || !rewards.TryGetValue(reward, out var definition) ||

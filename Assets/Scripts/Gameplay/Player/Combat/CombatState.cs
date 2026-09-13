@@ -23,6 +23,11 @@ namespace Mismo.Gameplay.Combat
         void LifeChanged(float value,float max){if(value<=0){wasDead=true;Focus=0;}else if(wasDead){wasDead=false;ResetCombat();}}
         public void ConfigurePosture(float maximum){UsesPosture=true;maximumPosture=maximum;ResetCombat();}
         public void ResetCombat(){Posture=maximumPosture;Focus=0;sinceHit=brokenRemaining=0;Recovering=false;}
+        public void Stagger(float duration)
+        {
+            if(health!=null&&health.IsDead)return;
+            brokenRemaining=Mathf.Max(brokenRemaining,duration);PostureBroken?.Invoke(duration);
+        }
         public float DamagePosture(float amount)
         {
             if(!UsesPosture||Broken||amount<=0||health!=null&&health.IsDead)return 0;

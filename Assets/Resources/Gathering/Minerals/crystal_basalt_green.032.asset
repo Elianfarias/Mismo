@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: node-mineral-crystal_basalt_green.032
   kind: 2
-  displayName: Piedra
+  distributionWeight: 1
+  displayName: Mena de hierro
   actionName: Recolectar
-  harvestSeconds: 1
+  harvestSeconds: 2
   interactionRange: 2.5
   regenerationSeconds: 900
   restoreClearance: 8
