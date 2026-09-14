@@ -125,7 +125,7 @@ namespace Mismo.Gameplay.Player.Editor
                 var placed=GatheringDistribution.PlaceAsset(entry,"test:catalog:"+kind,new Vector3(0,0,1.5f),Quaternion.identity,null);
                 yield return null;yield return null;
                 var resource=placed.GetComponent<GatheringNode>();
-                if(kind==WorldAssetKind.Grass)Check(resource==null,"Grass remains decorative");
+                if(entry.decorativeOnly||kind==WorldAssetKind.Grass)Check(resource==null,"Catalog decoration cannot be harvested: "+kind);
                 else
                 {
                     Check(resource!=null&&resource.Available&&placed.GetComponentInChildren<MeshFilter>().sharedMesh==entry.prefab.GetComponentInChildren<MeshFilter>().sharedMesh,"Catalog model preserved for "+kind);

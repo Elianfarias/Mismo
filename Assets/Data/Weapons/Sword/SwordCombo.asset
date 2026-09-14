@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: SwordCombo
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: COMBO
+  abilityId: 
+  animationSource: {fileID: 0}
+  passive: 0
   description: Encadena ataques de espada contra los enemigos que tengas delante.
   localizationKey: ability.sword.swordcombo
   preparation: 0
@@ -71,15 +74,17 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   preparationMobility: 1
+  activeMobility: 1
   interruptible: 0
   cancelPreparation: 0
   cancelRecovery: 0
   focusCost: 0
+  focusGainOnHit: 5
   pose: 0
   usesSwordCombo: 1
   targetsGround: 0
   aimFromCamera: 0
-  range: 22
+  range: 25
   actions: []
   references:
     version: 2

@@ -13,6 +13,7 @@ namespace Mismo.Gameplay.Player.World
         }
         public static GameObject PlaceAsset(WorldAssetEntry asset,string id,Vector3 point,Quaternion rotation,Transform parent)
         {
+            if(asset.decorativeOnly)return Object.Instantiate(asset.prefab,point,rotation,parent);
             var settings=Resources.Load<GatheringSettings>("GatheringSettings");
             var definition=asset.gatheringNode;
             if(definition==null&&settings!=null)

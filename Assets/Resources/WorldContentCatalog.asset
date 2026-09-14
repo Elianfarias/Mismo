@@ -31,6 +31,7 @@ MonoBehaviour:
   assets:
   - id: nature.bush_0
     kind: 9
+    decorativeOnly: 1
     biomes: 
     prefab: {fileID: 4687258967416778124, guid: ac8e91b284928344e8ee9abad5e2d17c, type: 3}
     weight: 1
@@ -44,6 +45,7 @@ MonoBehaviour:
     scaleRange: {x: 0.85, y: 1.15}
   - id: nature.bush_1
     kind: 9
+    decorativeOnly: 1
     biomes: 
     prefab: {fileID: 6774401615322452905, guid: 215b22fc1eba1ce479bc1793ecef4dd4, type: 3}
     weight: 1

@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: SwordSpin
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: GIRO
+  abilityId: 
+  animationSource: {fileID: 0}
+  passive: 0
   description: Gira con la espada y golpea a los enemigos cercanos.
   localizationKey: ability.sword.swordspin
   preparation: 0.04
@@ -20,11 +23,68 @@ MonoBehaviour:
   recovery: 0.18
   cooldown: 1.1
   staminaCost: 20
+  chargeable: 0
+  maximumCharge: 0.9
+  chargeDamageMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0.70000005
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1.7
+      inSlope: 0.70000005
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  chargePostureMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 2
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  preparationMobility: 1
+  activeMobility: 1
+  interruptible: 0
+  cancelPreparation: 0
+  cancelRecovery: 0
+  focusCost: 0
+  focusGainOnHit: 0
   pose: 3
   usesSwordCombo: 0
   targetsGround: 0
   aimFromCamera: 0
-  range: 22
+  range: 25
   actions:
   - rid: 505594107081785348
   references:
@@ -34,5 +94,6 @@ MonoBehaviour:
       type: {class: MeleeAction, ns: Mismo.Gameplay.Player.Equipment, asm: Mismo.Gameplay.Player}
       data:
         damage: 24
+        postureDamage: -1
         radius: 1.6
         forward: 0

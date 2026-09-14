@@ -73,3 +73,6 @@ Los recursos del paisaje tienen identidad persistente por semilla y ubicación l
 Para ver la nueva generación en una partida que estaba ejecutándose, salir de Play y volver a entrar. No hace falta borrar el guardado. Pendiente: balancear cantidades/tiempos con la nueva abundancia de fuentes.
 
 Validación de esta integración: 52 comprobaciones en Play Mode aislado, incluyendo modelos reales de árbol, piedra, madera caída, arbusto, flor y pasto; compilación de Player, Enemies y Player.Editor contra Unity 6000.6 sin errores.
+
+### Decoracion por asset
+En Assets/Resources/WorldContentCatalog.asset, desplegar Assets y la entrada deseada. Decorative Only activado evita la recoleccion y tiene prioridad sobre Gathering Node y la categoria. Desactivado conserva la asignacion automatica por categoria; Gathering Node permite elegir un recurso especifico. nature.bush_0 y nature.bush_1 son decorativos; flower_rose sigue siendo recolectable. Salir de Play y volver a entrar para regenerar las instancias con la configuracion nueva.

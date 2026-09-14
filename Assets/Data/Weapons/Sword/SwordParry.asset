@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: SwordParry
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: PARRY
+  abilityId: 
+  animationSource: {fileID: 0}
+  passive: 0
   description: Defiende en el momento justo para desviar el ataque enemigo.
   localizationKey: ability.sword.swordparry
   preparation: 0
@@ -71,15 +74,17 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   preparationMobility: 1
+  activeMobility: 1
   interruptible: 0
   cancelPreparation: 0
   cancelRecovery: 0
   focusCost: 0
+  focusGainOnHit: 0
   pose: 2
   usesSwordCombo: 0
   targetsGround: 0
   aimFromCamera: 0
-  range: 22
+  range: 25
   actions:
   - rid: 505594107081785344
   references:
