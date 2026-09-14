@@ -18,6 +18,8 @@ namespace Mismo.Gameplay.Player.World
         public WorldAssetKind kind;
         public WorldBiome[] biomes=Array.Empty<WorldBiome>();
         public GameObject prefab;
+        [Tooltip("Solo decoracion: no permite recolectar este asset, incluso si su categoria o Gathering Node define un recurso.")]
+        public bool decorativeOnly;
         [Tooltip("Optional harvestable replacement for this decoration.")]
         public ResourceNodeDefinition gatheringNode;
         [Min(0)] public float weight=1;

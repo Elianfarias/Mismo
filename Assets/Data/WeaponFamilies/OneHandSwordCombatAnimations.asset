@@ -17,31 +17,43 @@ MonoBehaviour:
   actions:
   - ability: {fileID: 11400000, guid: e2e0ba6f12d861e4a918f20a0ca3d45b, type: 2}
     clip: {fileID: 0}
+    maskMode: 0
+    customMask: {fileID: 0}
     comboClips:
     - {fileID: 7400000, guid: ab639f259ca50ee4f81c470efb6468a8, type: 2}
     - {fileID: 7400000, guid: d95c2953551c5914b9d4cd530f718be6, type: 2}
     - {fileID: 7400000, guid: 69bae23fd6f86d048a11029673c305e7, type: 2}
+    activeStartsAt: 0.35
+    recoveryStartsAt: 0.7
     blendSeconds: 0.06
   - ability: {fileID: 11400000, guid: ce744cb14261acd4a92c927ed4ad58ab, type: 2}
     clip: {fileID: 7400000, guid: 93274d37420cceb42b616d59e9be694e, type: 2}
+    maskMode: 0
+    customMask: {fileID: 0}
     comboClips: []
     activeStartsAt: 0.25
     recoveryStartsAt: 0.8
     blendSeconds: 0.06
   - ability: {fileID: 11400000, guid: e7555c6d155e93448b2c9f2f131ceec1, type: 2}
-    clip: {fileID: 7400000, guid: e57a7ec656ce026489eaad3c38438506, type: 2}
+    clip: {fileID: 7400000, guid: 08a329660afcbce4c893a8589b15cdc2, type: 2}
+    maskMode: 0
+    customMask: {fileID: 0}
     comboClips: []
     activeStartsAt: 0.25
     recoveryStartsAt: 0.8
     blendSeconds: 0.06
   - ability: {fileID: 11400000, guid: 99a87b5a63da526f9201ed93faf31c23, type: 2}
     clip: {fileID: 7400000, guid: cff5bea7f09da3146b13795f4d99e9d5, type: 2}
+    maskMode: 0
+    customMask: {fileID: 0}
     comboClips: []
     activeStartsAt: 0.25
     recoveryStartsAt: 0.8
     blendSeconds: 0.06
   - ability: {fileID: 11400000, guid: 70e5207d373d5e6098e1ab54e04da3be, type: 2}
     clip: {fileID: 7400000, guid: 3ffd19fcb33451446b6b6967d4a3f5e4, type: 2}
+    maskMode: 0
+    customMask: {fileID: 0}
     comboClips: []
     activeStartsAt: 0.25
     recoveryStartsAt: 0.8

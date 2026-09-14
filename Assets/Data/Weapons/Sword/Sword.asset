@@ -27,7 +27,7 @@ MonoBehaviour:
   overrideFamilyAbilities: 0
   visualPrefab: {fileID: 959409833555118617, guid: 258e7211b4df96f42970cc83ef563973, type: 3}
   isTwoHanded: 0
-  dualWield: 1
+  dualWield: 0
   secondaryVisualPrefab: {fileID: 959409833555118617, guid: 258e7211b4df96f42970cc83ef563973, type: 3}
   secondaryEquipped:
     anchor: 2
