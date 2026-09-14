@@ -20,6 +20,12 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         [Header("Consumable healing")]
         [Min(0)] public float healingAmount;
         [Min(.1f)] public float healingSeconds=5;
+        public bool usableInCombat;
+        public bool instantHealing;
+        [Min(0)] public float useCooldownSeconds;
+        [Range(0,1)] public float damageBonus;
+        [Min(1)] public float damageBonusSeconds=180;
+        public bool IsConsumable=>healingAmount>0||damageBonus>0;
         public bool canDiscard = true;
         public bool canSell = true;
         [Min(0)] public int sellValue = 1;

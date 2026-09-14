@@ -16,7 +16,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         { get { if(profile?.pendingLoot!=null)foreach(var loot in profile.pendingLoot)yield return loot.Copy(); } }
         public bool CanManage=>IsReady&&loadout.CanChangeEquipment;
         public bool AtChest=>GetComponent<InventoryWorldAccess>()?.AtChest==true;
-        public bool IsEquipped(string id)=>IsReady&&(profile.equipped[0]==id||profile.equipped[1]==id);
+        public bool IsEquipped(string id)=>IsReady&&profile.IsEquipped(id);
         public bool Favorite(string id,bool material)=>material?profile?.favoriteMaterials?.Contains(id)==true:profile?.Find(id)?.favorite==true;
         bool Fits(InventoryProfile next,bool chest)
         {

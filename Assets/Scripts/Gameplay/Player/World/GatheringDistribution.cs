@@ -3,6 +3,28 @@ namespace Mismo.Gameplay.Player.World
 {
     public static class GatheringDistribution
     {
+        public static void WrapTree(GameObject tree,string id)
+        {
+            var settings=Resources.Load<GatheringSettings>("GatheringSettings");if(settings==null||settings.tree==null)return;
+            var node=Place(settings.tree,id,tree.transform.position,tree.transform.parent);
+            node.transform.rotation=tree.transform.rotation;
+            tree.transform.SetParent(node.transform,true);tree.transform.localPosition=Vector3.zero;tree.transform.localRotation=Quaternion.identity;
+            tree.SetActive(false);node.UseWorldPrefab(tree);
+        }
+        public static GameObject PlaceAsset(WorldAssetEntry asset,string id,Vector3 point,Quaternion rotation,Transform parent)
+        {
+            var settings=Resources.Load<GatheringSettings>("GatheringSettings");
+            var definition=asset.gatheringNode;
+            if(definition==null&&settings!=null)
+            {
+                if(asset.kind==WorldAssetKind.Tree||asset.kind==WorldAssetKind.Deadwood)definition=settings.tree;
+                else if(asset.kind==WorldAssetKind.Rock)definition=settings.stone;
+                else if(asset.kind==WorldAssetKind.Flower||asset.kind==WorldAssetKind.Bush)definition=settings.herb;
+            }
+            if(definition==null)return Object.Instantiate(asset.prefab,point,rotation,parent);
+            var node=Place(definition,id,point,parent);node.UseWorldPrefab(asset.prefab);node.transform.rotation=rotation;
+            return node.gameObject;
+        }
         public static GatheringNode Place(ResourceNodeDefinition definition,string id,Vector3 point,Transform parent)
         {
             if(definition==null)return null;
@@ -31,6 +53,7 @@ namespace Mismo.Gameplay.Player.World
                 var definition=biome==WorldBiome.Forest?settings.tree:biome==WorldBiome.Highlands?settings.stone:settings.herb;
                 // Deterministic minority resources keep each biome useful without uniform coverage.
                 if(rng.NextDouble()<.25)definition=slot%2==0?settings.stone:settings.herb;
+                if(definition==settings.stone)definition=settings.Mineral(ExplorationTerrain.Hash(world.seed,chunk.x,chunk.y,930+slot));
                 Place(definition,"gather-v"+settings.generationVersion+":"+world.seed+":"+chunk.x+":"+chunk.y+":"+slot,point,root);placed.Add(point);
             }
         }

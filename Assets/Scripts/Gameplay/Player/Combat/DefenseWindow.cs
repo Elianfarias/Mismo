@@ -4,7 +4,9 @@ namespace Mismo.Gameplay.Combat
     [DisallowMultipleComponent]
     public sealed class DefenseWindow : MonoBehaviour
     {
-        float parry,dodge,parryAge,dodgeAge;
+        float parry,dodge,parryAge,dodgeAge,guard;
+        public void OpenGuard(float duration)=>guard=duration;
+        public void CloseGuard()=>guard=0;
         bool dodgeRewarded;
         public bool HasParry => parry > 0;
         public void OpenParry(float duration){parry=duration;parryAge=0;}
@@ -13,6 +15,11 @@ namespace Mismo.Gameplay.Combat
         public void CloseDodge()=>dodge=0;
         public HitOutcome Resolve(DamageInfo damage)
         {
+            if(guard>0&&!damage.Area)
+            {
+                var motor=GetComponent<Mismo.Gameplay.Player.Movement.PlayerMotor>();
+                if(Vector3.Dot(motor!=null?motor.Facing:transform.forward,-damage.Direction)>.1f)return HitOutcome.Block;
+            }
             if(parry>0 && damage.Parryable && !damage.Area)
             {
                 var motor=GetComponent<Mismo.Gameplay.Player.Movement.PlayerMotor>();
@@ -29,6 +36,6 @@ namespace Mismo.Gameplay.Combat
             return HitOutcome.Ignored;
         }
         void Update()=>Tick(Time.deltaTime);
-        public void Tick(float dt){parry=Mathf.Max(0,parry-dt);dodge=Mathf.Max(0,dodge-dt);parryAge+=dt;dodgeAge+=dt;}
+        public void Tick(float dt){guard=Mathf.Max(0,guard-dt);parry=Mathf.Max(0,parry-dt);dodge=Mathf.Max(0,dodge-dt);parryAge+=dt;dodgeAge+=dt;}
     }
 }

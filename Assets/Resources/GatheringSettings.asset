@@ -15,9 +15,47 @@ MonoBehaviour:
   herb: {fileID: 11400000, guid: a38d9b07b08945e2a699804dcd5a5379, type: 2}
   tree: {fileID: 11400000, guid: 69d22ffa01ac421897525b87954ab08b, type: 2}
   stone: {fileID: 11400000, guid: d6a04fb01f58441ebe26a0470997b50e, type: 2}
+  minerals:
+  - {fileID: 11400000, guid: 356263e288276b64aa09201deeb7e506, type: 2}
+  - {fileID: 11400000, guid: e30ef211e43c891418b9b0b792d5329f, type: 2}
+  - {fileID: 11400000, guid: 82c9b409e811e4b46b85e5b98ded436f, type: 2}
+  - {fileID: 11400000, guid: 56e512d22715a2b46a6c616d5fb5045d, type: 2}
+  - {fileID: 11400000, guid: c2d54521b2811cc4aa4dc025a24cd680, type: 2}
+  - {fileID: 11400000, guid: 3f81e17947551ac4691eb2fe1eadb7d0, type: 2}
+  - {fileID: 11400000, guid: f7dc7b36936d25845bc7ede76e8d7fc7, type: 2}
+  - {fileID: 11400000, guid: c4b24785fbae31f4681da711fbd0d1eb, type: 2}
+  - {fileID: 11400000, guid: 52e8284c34f9d4442a972b8eff880632, type: 2}
+  - {fileID: 11400000, guid: a029c4936e1fb694cbd47df88903b3e4, type: 2}
+  - {fileID: 11400000, guid: d2e18755d9b34774882808e2905192f3, type: 2}
+  - {fileID: 11400000, guid: 3492c0ba4eca5994cb7f42a76f98b8be, type: 2}
+  - {fileID: 11400000, guid: 780647ba24e8b984183537219bd98790, type: 2}
+  - {fileID: 11400000, guid: 25173ba5efc7346449aab0555311d99d, type: 2}
+  - {fileID: 11400000, guid: 92d5b6d4476546741b3ac5a1670be968, type: 2}
+  - {fileID: 11400000, guid: fc6e353dc54d4704ea6c44ba38abd509, type: 2}
+  - {fileID: 11400000, guid: 4541bd86cabaaa44795bba665e5aa49c, type: 2}
+  - {fileID: 11400000, guid: 8978faf66991322478848d3878815fc5, type: 2}
+  - {fileID: 11400000, guid: f3436344dcce71c4ea90086986d7df72, type: 2}
+  - {fileID: 11400000, guid: 8c0dc90c92bf9e740b99b6f01de2613f, type: 2}
+  - {fileID: 11400000, guid: 52249825e1f6b23469c22b183e3f1530, type: 2}
+  - {fileID: 11400000, guid: ca040c612effcde40a6ac0b63324df69, type: 2}
+  - {fileID: 11400000, guid: 3fd13fab5dffc714d80ede44620dd097, type: 2}
+  - {fileID: 11400000, guid: c2ebd308624936a4589c57e411eb0342, type: 2}
+  - {fileID: 11400000, guid: b6aab2511165398469fb69d01944831f, type: 2}
+  - {fileID: 11400000, guid: e590db9961eca3c439dccbd13ec4a2e0, type: 2}
+  - {fileID: 11400000, guid: 6126dd7414d2cef40902029a381607c2, type: 2}
+  - {fileID: 11400000, guid: 54b7505bdb9ec2846861c9a24a5bb8a3, type: 2}
+  - {fileID: 11400000, guid: aca5aa93bd23c6540b826a8056b507eb, type: 2}
+  - {fileID: 11400000, guid: 8ecb55a4caabbd145be825f1f50fe591, type: 2}
   recipes:
+  - {fileID: 11400000, guid: 43c29dbe51f85c0fa392555748f03b70, type: 2}
   - {fileID: 11400000, guid: 6975da9bb1c68f544865d337984a4ef0, type: 2}
   - {fileID: 11400000, guid: c507ee0cdeaf28744b11f36204130897, type: 2}
+  - {fileID: 11400000, guid: c3ef55e18173d3d48bbf5caf333ae93b, type: 2}
+  - {fileID: 11400000, guid: b89240d491efa39428abe5b73a17c119, type: 2}
+  - {fileID: 11400000, guid: 4b02559098f3c7746862e08b612046fa, type: 2}
+  - {fileID: 11400000, guid: d04746c370d80c9408754d0482dd1cdd, type: 2}
+  - {fileID: 11400000, guid: 9886347e904f5a14294f2ef9ea04ab70, type: 2}
+  - {fileID: 11400000, guid: 3c1c838cab2f94f4b87b03c1b60d1b25, type: 2}
   workbenchPrefab: {fileID: 324489609638104938, guid: dbc5f6574fb2cc14391f20a28923b281, type: 3}
   monsterLoot: {fileID: 11400000, guid: 582c0776621b425fbe268b43e8dbb274, type: 2}
   generationVersion: 1

@@ -12,6 +12,18 @@ namespace Mismo.Gameplay.Player.Equipment
         private long attackId;
         private Vector3 origin;
         private string family; private float focusGain;
+        public Action<Component,Vector3> OnImpact;
+        public WeaponSkillEffects BasicEffects;
+        void Impact(Collider collider,Vector3 point)
+        {
+            var receiver=collider.GetComponentInParent<IDamageReceiver>();
+            var target=receiver as Component;
+            float multiplier=BasicEffects!=null?BasicEffects.BasicMultiplier(attackId,point,target):1;
+            bool hit=receiver!=null&&receiver.ReceiveDamage(new DamageInfo(damage*multiplier,owner,point,direction,attackId,posture,true,false,origin,weaponFamilyId:family,focusGainOnHit:focusGain));
+            if(hit&&target!=null)BasicEffects?.BasicHit(attackId,target);
+            OnImpact?.Invoke(hit?target:null,point);
+            Destroy(gameObject);enabled=false;
+        }
         public static ProjectileInstance Spawn(GameObject owner, Vector3 origin, Vector3 direction, float damage, float speed, float range, float radius, GameObject visual, long id = 0, float postureDamage = -1,string weaponFamilyId=null, float focusGainOnHit=0)
         {
             var go = new GameObject("Arrow"); go.transform.SetPositionAndRotation(origin, Quaternion.LookRotation(direction));
@@ -30,8 +42,7 @@ namespace Mismo.Gameplay.Player.Equipment
             foreach (var overlap in Physics.OverlapSphere(transform.position, radius, ~0, QueryTriggerInteraction.Ignore))
             {
                 if (BelongsToOwner(overlap)) continue;
-                overlap.GetComponentInParent<IDamageReceiver>()?.ReceiveDamage(new DamageInfo(damage, owner, overlap.ClosestPoint(transform.position), direction, attackId, posture, true, false, origin,weaponFamilyId:family,focusGainOnHit:focusGain));
-                Destroy(gameObject); enabled = false; return;
+                Impact(overlap,overlap.ClosestPoint(transform.position));return;
             }
             float travel = Mathf.Min(remaining, speed * dt);
             var hits = Physics.SphereCastAll(transform.position, radius, direction, travel, ~0, QueryTriggerInteraction.Ignore);
@@ -39,11 +50,10 @@ namespace Mismo.Gameplay.Player.Equipment
             foreach (var hit in hits)
             {
                 if (BelongsToOwner(hit.collider)) continue;
-                hit.collider.GetComponentInParent<IDamageReceiver>()?.ReceiveDamage(new DamageInfo(damage, owner, hit.point, direction, attackId, posture, true, false, origin,weaponFamilyId:family,focusGainOnHit:focusGain));
-                Destroy(gameObject); enabled = false; return;
+                Impact(hit.collider,hit.point);return;
             }
             transform.position += direction * travel; remaining -= travel;
-            if (remaining <= 0) { enabled = false; Destroy(gameObject); }
+            if (remaining <= 0) { OnImpact?.Invoke(null,transform.position); enabled = false; Destroy(gameObject); }
         }
         bool BelongsToOwner(Collider other)
         {

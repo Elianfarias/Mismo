@@ -99,7 +99,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2441400338
-    m_Localized: 'PERSONAJE  [C]'
+    m_Localized: 'PERSONAJE  [P]'
     m_Metadata:
       m_Items: []
   - m_Id: 2441400339
@@ -616,6 +616,276 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 40366548242450
     m_Localized: "Recuperaci\xF3n iniciada."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665642057728
+    m_Localized: BESTIARIO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389376
+    m_Localized: "Todav\xEDa no descubriste ninguna criatura. Explor\xE1 el mundo
+      para completar el bestiario."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389377
+    m_Localized: 'Derrotados: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389378
+    m_Localized: 'Reconocimiento al vencer: {0:0.#}%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389379
+    m_Localized: No domesticable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389380
+    m_Localized: Apta como montura
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389381
+    m_Localized: Sin montura
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389382
+    m_Localized: Al vencerla, puede reconocerte como su amo y convertirse en tu montura.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389383
+    m_Localized: "\u2190 Anterior"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389384
+    m_Localized: "Siguiente \u2192"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389385
+    m_Localized: Nueva especie descubierta.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389386
+    m_Localized: "Jabal\xED"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389387
+    m_Localized: "Ara\xF1a"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389388
+    m_Localized: Goblin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389389
+    m_Localized: "G\xF3lem"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389390
+    m_Localized: "Guardi\xE1n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389391
+    m_Localized: "Habitante del bosque. Puede reconocerte como su amo despu\xE9s
+      de vencerlo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583680
+    m_Localized: Una criatura descubierta durante tus viajes.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583681
+    m_Localized: La criatura te reconoce como su amo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583682
+    m_Localized: "Tu compa\xF1ero espera."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583683
+    m_Localized: "Tu compa\xF1ero te sigue."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583684
+    m_Localized: "[V] Montar \xB7 [H] Seguir / esperar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583685
+    m_Localized: '[V] Desmontar'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583686
+    m_Localized: No hay espacio para desmontar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374785531904
+    m_Localized: "Preparaci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474944
+    m_Localized: Mejoras
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474945
+    m_Localized: "Equipo b\xE1sico"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474946
+    m_Localized: Hierro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474947
+    m_Localized: Cristal arcano
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474948
+    m_Localized: Mena de hierro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474949
+    m_Localized: Mena de cristal arcano
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474950
+    m_Localized: Metal para fabricar armas y mejorar su tier.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474951
+    m_Localized: Cristal poco frecuente para mejoras avanzadas y pociones.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474952
+    m_Localized: "Poci\xF3n de curaci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474953
+    m_Localized: Recupera 35 de vida al instante, incluso en combate. 20 s entre
+      pociones.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474954
+    m_Localized: Piedra de afilar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474955
+    m_Localized: "Prepara el arma activa fuera de combate: +15 % de da\xF1o durante
+      180 s. No se acumula."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474956
+    m_Localized: Mejora de hierro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474957
+    m_Localized: Mejora el arma elegida de T2 a T3 conservando su identidad y variante.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474958
+    m_Localized: Mejora arcana
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474959
+    m_Localized: Mejora el arma elegida de T3 a T4 conservando su identidad y variante.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474960
+    m_Localized: "Espada b\xE1sica"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474961
+    m_Localized: Crea una espada T1 equilibrada para comenzar otro estilo de combate.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474962
+    m_Localized: "Arco b\xE1sico"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474963
+    m_Localized: Crea un arco T1 equilibrado para combatir a distancia.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474964
+    m_Localized: No disponible.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474965
+    m_Localized: Solo fuera de combate.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474966
+    m_Localized: "Termin\xE1 la acci\xF3n actual."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474967
+    m_Localized: 'Afilado activo: {0:0} s'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374831669248
+    m_Localized: "Equip\xE1 un arma."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374831669249
+    m_Localized: Vida completa.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374831669250
+    m_Localized: "Ya hay una recuperaci\xF3n activa."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374831669251
+    m_Localized: "Pr\xF3ximo uso en {0:0} s"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374831669252
+    m_Localized: 'Usado: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374831669253
+    m_Localized: 'Arma activa: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398685753344
+    m_Localized: MONTURAS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473600
+    m_Localized: Montura invocada.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473601
+    m_Localized: "Montura guardada. Pod\xE9s invocarla nuevamente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473602
+    m_Localized: "Todav\xEDa no ten\xE9s monturas. Algunas criaturas pueden reconocerte
+      al vencerlas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473603
+    m_Localized: "Tus monturas permanecen en la colecci\xF3n aunque mueras o las
+      guardes."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473604
+    m_Localized: "Acompa\xF1ante activo"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473605
+    m_Localized: "Guardada en tu colecci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473606
+    m_Localized: Invocar a mi lado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473607
+    m_Localized: Invocar montura
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473608
+    m_Localized: "Guardar acompa\xF1ante"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473609
+    m_Localized: "Desmont\xE1 y sal\xED de combate para cambiar de acompa\xF1ante."
     m_Metadata:
       m_Items: []
   references:

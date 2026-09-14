@@ -32,6 +32,7 @@ namespace Mismo.Gameplay.Combat
         private int currentIndex = -1;
         private float elapsed;
         private bool windowOpen;
+        private bool rangedBasic;
         private PlayerMotor motor;
         private Vector3 facingOffset;
         private Quaternion facingRotation;
@@ -76,7 +77,7 @@ namespace Mismo.Gameplay.Combat
                 return;
             }
             float end = attack.ActiveStart + attack.ActiveDuration;
-            bool shouldBeOpen = elapsed >= attack.ActiveStart && elapsed < end;
+            bool shouldBeOpen = !rangedBasic && elapsed >= attack.ActiveStart && elapsed < end;
             if (shouldBeOpen != windowOpen) SetWindowOpen(shouldBeOpen, attack);
             if (windowOpen) CheckOverlaps();
             if (elapsed >= end)
@@ -91,6 +92,7 @@ namespace Mismo.Gameplay.Combat
         {
             if (IsAttacking || windows == null || attackIndex < 0 || attackIndex >= windows.Length || windows[attackIndex] == null) return false;
             currentIndex = attackIndex;
+            rangedBasic=false;
             var inventory=GetComponentInParent<Mismo.Gameplay.Player.Equipment.Inventory.PlayerInventory>();
             var weapon=GetComponentInParent<Mismo.Gameplay.Player.Equipment.EquipmentLoadout>()?.ActiveDefinition;
             attackSpeed=inventory!=null?inventory.AttackSpeed(weapon):1;
@@ -112,6 +114,8 @@ namespace Mismo.Gameplay.Combat
 
         private void SetWindowOpen(bool open, AttackWindow attack)
         {
+            if(open&&GetComponentInParent<Mismo.Gameplay.Player.Equipment.WeaponSkillEffects>()?.TryThrowBuckler(motor!=null?motor.Facing:transform.forward)==true)
+            {rangedBasic=true;windowOpen=false;hitbox.enabled=false;return;}
             windowOpen = open;
             if (open)
             {

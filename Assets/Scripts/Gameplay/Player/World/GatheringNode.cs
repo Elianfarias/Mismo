@@ -9,11 +9,14 @@ namespace Mismo.Gameplay.Player.World
         public ResourceNodeDefinition definition;
         public string persistentId;
         GameObject visual;
+        GameObject worldPrefab;
+        bool usesWorldPrefab;
         bool depleted,initialized;
         PlayerInventory inventory;
         Dictionary<string,int> loot;
         public bool Available=>initialized&&!depleted;
         public void Configure(ResourceNodeDefinition data,string id){definition=data;persistentId=id;}
+        public void UseWorldPrefab(GameObject prefab){worldPrefab=prefab;usesWorldPrefab=true;}
         void OnEnable()=>Loaded.Add(this);
         void OnDisable()=>Loaded.Remove(this);
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]static void Reset()=>Loaded.Clear();
@@ -28,9 +31,12 @@ namespace Mismo.Gameplay.Player.World
         }
         void Show()
         {
-            if(visual!=null)Destroy(visual);
-            var prefab=depleted?definition.depletedPrefab:definition.availablePrefab;
-            if(prefab!=null){visual=Instantiate(prefab,transform);visual.transform.localPosition=Vector3.zero;}
+            bool changedObstacle=visual!=null&&visual.GetComponentInChildren<Collider>()!=null;
+            if(visual!=null){visual.SetActive(false);Destroy(visual);}
+            var prefab=usesWorldPrefab?(depleted?null:worldPrefab):(depleted?definition.depletedPrefab:definition.availablePrefab);
+            if(prefab!=null){visual=Instantiate(prefab,transform);visual.transform.localPosition=Vector3.zero;visual.SetActive(true);}
+            if(changedObstacle||visual!=null&&visual.GetComponentInChildren<Collider>()!=null)
+                FindFirstObjectByType<ExplorationChunks>()?.RefreshResourceNavigation();
         }
         public bool InRange(Transform player)
         {

@@ -603,6 +603,270 @@ MonoBehaviour:
     m_Key: craft.healing
     m_Metadata:
       m_Items: []
+  - m_Id: 65665642057728
+    m_Key: bestiary.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389376
+    m_Key: bestiary.empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389377
+    m_Key: bestiary.defeated
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389378
+    m_Key: bestiary.chance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389379
+    m_Key: bestiary.not_tame
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389380
+    m_Key: bestiary.mount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389381
+    m_Key: bestiary.no_mount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389382
+    m_Key: bestiary.recognize
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389383
+    m_Key: bestiary.previous
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389384
+    m_Key: bestiary.next
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389385
+    m_Key: bestiary.discovered
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389386
+    m_Key: bestiary.boar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389387
+    m_Key: bestiary.spider
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389388
+    m_Key: bestiary.goblin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389389
+    m_Key: bestiary.golem
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389390
+    m_Key: bestiary.guardian
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665692389391
+    m_Key: bestiary.boar.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583680
+    m_Key: bestiary.generic.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583681
+    m_Key: companion.recognized
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583682
+    m_Key: companion.wait
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583683
+    m_Key: companion.follow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583684
+    m_Key: companion.mount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583685
+    m_Key: companion.dismount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65665696583686
+    m_Key: companion.blocked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374785531904
+    m_Key: crafting.expansion.0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474944
+    m_Key: crafting.expansion.1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474945
+    m_Key: crafting.expansion.2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474946
+    m_Key: crafting.expansion.3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474947
+    m_Key: crafting.expansion.4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474948
+    m_Key: crafting.expansion.5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474949
+    m_Key: crafting.expansion.6
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474950
+    m_Key: crafting.expansion.7
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474951
+    m_Key: crafting.expansion.8
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474952
+    m_Key: crafting.expansion.9
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474953
+    m_Key: crafting.expansion.10
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474954
+    m_Key: crafting.expansion.11
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474955
+    m_Key: crafting.expansion.12
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474956
+    m_Key: crafting.expansion.13
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474957
+    m_Key: crafting.expansion.14
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474958
+    m_Key: crafting.expansion.15
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474959
+    m_Key: crafting.expansion.16
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474960
+    m_Key: crafting.expansion.17
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474961
+    m_Key: crafting.expansion.18
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474962
+    m_Key: crafting.expansion.19
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474963
+    m_Key: crafting.expansion.20
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474964
+    m_Key: crafting.expansion.21
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474965
+    m_Key: crafting.expansion.22
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474966
+    m_Key: crafting.expansion.23
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374827474967
+    m_Key: crafting.expansion.24
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374831669248
+    m_Key: crafting.expansion.25
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374831669249
+    m_Key: crafting.expansion.26
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374831669250
+    m_Key: crafting.expansion.27
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374831669251
+    m_Key: crafting.expansion.28
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374831669252
+    m_Key: crafting.expansion.29
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199374831669253
+    m_Key: crafting.expansion.30
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398685753344
+    m_Key: mount.collection.0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473600
+    m_Key: mount.collection.1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473601
+    m_Key: mount.collection.2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473602
+    m_Key: mount.collection.3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473603
+    m_Key: mount.collection.4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473604
+    m_Key: mount.collection.5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473605
+    m_Key: mount.collection.6
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473606
+    m_Key: mount.collection.7
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473607
+    m_Key: mount.collection.8
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473608
+    m_Key: mount.collection.9
+    m_Metadata:
+      m_Items: []
+  - m_Id: 240398744473609
+    m_Key: mount.collection.10
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

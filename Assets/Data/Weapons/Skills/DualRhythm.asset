@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbaed6838d1a4d369404166107b9bbf5, type: 3}
+  m_Name: DualRhythm
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
+  displayName: "Ritmo"
+  description: "Los básicos acertados aumentan tu velocidad un 4 %, hasta 5 acumulaciones. Se pierden tras 2 s sin conectar."
+  abilityId: DualRhythm
+  passive: 3
+  preparation: 0.1
+  active: 0.2
+  recovery: 0.2
+  cooldown: 0
+  pose: 0
+  targetsGround: 0
+  aimFromCamera: 0
+  range: 8
+  actions: []
+  references:
+    version: 2
+    RefIds: []

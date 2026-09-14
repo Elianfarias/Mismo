@@ -1,0 +1,7 @@
+Universal Animation Library 2 Standard — Quaternius
+License: CC0 1.0 Universal / Public Domain Dedication
+https://creativecommons.org/publicdomain/zero/1.0/
+Author: https://quaternius.com/packs/universalanimationlibrary2.html
+Source mirror: https://github.com/Barbatos6669/elderforge/tree/main/assets/animations/universal_animation_library_2
+Downloaded 2026-09-13. Only the free Standard GLB was used.
+Adapted to the Mismo character; dual-arm and shield-arm variants created from these animations.

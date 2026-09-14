@@ -211,6 +211,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 7576304981573457804}
   - component: {fileID: 6021062210924088542}
   - component: {fileID: 2329468049321004524}
   - component: {fileID: 6963557619447703668}
@@ -271,3 +272,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed80789a1aed40fbbc9090b7196f98ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.ClimbableTree
+--- !u!114 &7576304981573457804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798770403600369926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9800f82a95691d48bd025f40bd5aefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.ResourceImpactPalette
+  colors:
+  - {r: 0.5647059, g: 0.3764706, b: 0.28235295, a: 1}
+  - {r: 0, g: 0.7529412, b: 0.09411765, a: 1}
+  - {r: 0, g: 0.5647059, b: 0, a: 1}
+  fragmentsPerHit: 7
+  fragmentSize: {x: 0.035, y: 0.085}
+  fragmentLifetime: 0.65

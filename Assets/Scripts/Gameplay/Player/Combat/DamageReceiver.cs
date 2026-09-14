@@ -39,6 +39,7 @@ namespace Mismo.Gameplay.Combat
             var rules=CombatRules.Current;
             var attacker=damage.Source!=null?damage.Source.GetComponentInParent<CombatState>():null;
             var outcome=defense.Resolve(damage);
+            if(outcome==HitOutcome.Block){state.Reward(0,"BLOQUEO");return Publish(damage,new HitResult(outcome));}
             if(outcome==HitOutcome.Parry||outcome==HitOutcome.PerfectParry)
             {
                 bool perfect=outcome==HitOutcome.PerfectParry;
@@ -73,13 +74,17 @@ namespace Mismo.Gameplay.Combat
             float amount=damage.Amount*multiplier;
             var inventory=GetComponent<Mismo.Gameplay.Player.Equipment.Inventory.PlayerInventory>();
             if(inventory!=null&&inventory.IsReady)amount*=inventory.IncomingDamageMultiplier;
+            var skillEffects=GetComponent<Mismo.Gameplay.Player.Equipment.WeaponSkillEffects>();
+            if(skillEffects!=null)amount=skillEffects.Absorb(amount,damage.Direction);
+            float previousHealth=health.Current;
             health.ApplyDamage(new DamageInfo(amount,damage.Source,damage.HitPoint,damage.Direction,damage.AttackId));
+            float healthDamage=previousHealth-health.Current;
             float posture=state.DamagePosture(damage.PostureDamage*(back?rules.backPosture:1)*(opening?rules.openingPosture:1));
-            if(health.LastDamageApplied>0 && damage.FocusGainOnHit>0)attacker?.Reward(damage.FocusGainOnHit,"IMPACTO");
+            if(healthDamage>0 && damage.FocusGainOnHit>0)attacker?.Reward(damage.FocusGainOnHit,"IMPACTO");
             if(attacker!=null&&(back||opening))attacker.Reward(back?rules.backFocus:rules.openingFocus,back?"ESPALDA":"APERTURA");
             GetComponent<Mismo.Gameplay.Player.Equipment.AbilityRunner>()?.Interrupt();
             if(invulnerability!=null)invulnerability.StartWindow(invulnerabilityAfterHit);
-            return Publish(damage,new HitResult(HitOutcome.Hit,health.LastDamageApplied,posture,back));
+            return Publish(damage,new HitResult(HitOutcome.Hit,healthDamage,posture,back));
         }
         HitResult Publish(DamageInfo damage,HitResult result){LastResult=result;Resolved?.Invoke(damage,result);return result;}
     }

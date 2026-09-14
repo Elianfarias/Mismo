@@ -18,6 +18,8 @@ namespace Mismo.Gameplay.Player.World
         public WorldAssetKind kind;
         public WorldBiome[] biomes=Array.Empty<WorldBiome>();
         public GameObject prefab;
+        [Tooltip("Optional harvestable replacement for this decoration.")]
+        public ResourceNodeDefinition gatheringNode;
         [Min(0)] public float weight=1;
         public Vector2 footprint=new Vector2(6,6);
         [Range(0,45)] public float maxSlope=15;

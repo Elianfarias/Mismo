@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d61b0a25d06a14e8b2acce561128f5, type: 3}
+  m_Name: golem
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.CreatureSpecies
+  id: golem
+  displayName: "G\xF3lem"
+  description: Una criatura descubierta durante tus viajes.
+  prefabs:
+  - {fileID: 5910821963392241888, guid: 9608a88dc9cc9d34c94fc4357b3228da, type: 3}
+  domesticable: 0
+  mountable: 0
+  recognitionChance: 0.1
+  riderPose: {fileID: 0}
+  ridingSpeed: 8
+  followingSpeed: 5.5
+  turnSpeed: 180

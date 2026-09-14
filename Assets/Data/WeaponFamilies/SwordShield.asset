@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1f07bb650d4d1f46b500b560d8847c4, type: 3}
+  m_Name: SwordShield
+  progressionId: sword.shield
+  displayName: Espada y escudo
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.WeaponFamilyDefinition
+  abilities:
+  - {fileID: 11400000, guid: e2e0ba6f12d861e4a918f20a0ca3d45b, type: 2}
+  - {fileID: 11400000, guid: 3e7d28402a6151c5aeb3793959c3a8d0, type: 2}
+  - {fileID: 11400000, guid: dc5f52a2f0695e659da5875153f1546e, type: 2}
+  - {fileID: 11400000, guid: a241716c998f5d85bff9356aabf865b3, type: 2}
+  animations: {fileID: 11400000, guid: 1fc290e283755bb2a3b6e629b80c6f4a, type: 2}
+  masteryLevelsPerUnlock: 3
+  repertoire:
+  - {fileID: 11400000, guid: 3e7d28402a6151c5aeb3793959c3a8d0, type: 2}
+  - {fileID: 11400000, guid: dc5f52a2f0695e659da5875153f1546e, type: 2}
+  - {fileID: 11400000, guid: a241716c998f5d85bff9356aabf865b3, type: 2}
+  - {fileID: 11400000, guid: c666b3dc36a75b9fbe7411074057b071, type: 2}
+  - {fileID: 11400000, guid: b2e30ea5aab85b51a36aab492e8360c2, type: 2}
+  - {fileID: 11400000, guid: 5e7a562bb91f57068b736487b2a819a7, type: 2}

@@ -20,8 +20,8 @@ MonoBehaviour:
   interactionRange: 2.5
   regenerationSeconds: 900
   restoreClearance: 8
-  availablePrefab: {fileID: 4792058449511232070, guid: 5fcd6bca00326b84797f47dd6cc7213e, type: 3}
-  depletedPrefab: {fileID: 7721503916894257592, guid: 6deb308d4277b0c43b62ca2533f7adb9, type: 3}
+  availablePrefab: {fileID: 8479108702764624946, guid: 076a1170d255bb845927db542c3de756, type: 3}
+  depletedPrefab: {fileID: 406855579409189848, guid: 455dec393f9d13741a27f33df9e7357a, type: 3}
   toolPrefab: {fileID: 1140483725738298627, guid: a3395171d8c9ebe4ea2bb7fc35345bd5, type: 3}
   harvestSound: {fileID: 8300000, guid: 88c40b0eb798416438223d8cea6b5aa3, type: 3}
   completionSound: {fileID: 8300000, guid: 6d9c832d86c45ef40b352bb28be12433, type: 3}

@@ -8,6 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 5614965363787044910}
   - component: {fileID: 7772540311906275125}
   m_Layer: 0
   m_Name: MedievalHouse
@@ -177,3 +178,20 @@ Transform:
   - {fileID: 7670587609558344747}
   m_Father: {fileID: 7772540311906275125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5614965363787044910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814357796240465628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9800f82a95691d48bd025f40bd5aefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.ResourceImpactPalette
+  colors:
+  - {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  fragmentsPerHit: 7
+  fragmentSize: {x: 0.035, y: 0.085}
+  fragmentLifetime: 0.65

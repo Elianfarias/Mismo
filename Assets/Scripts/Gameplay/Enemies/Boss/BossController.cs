@@ -559,7 +559,7 @@ namespace Mismo.Gameplay.Enemies
             if (!CanNavigate || repathTimer > 0f) return;
             repathTimer = Mathf.Max(0.05f, settings.attackDecisionInterval);
             if (!NavMesh.SamplePosition(position, out NavMeshHit hit, 1.5f, agent.areaMask)) { Stop(); return; }
-            agent.speed = speed;
+            agent.speed = speed * (GetComponent<Mismo.Gameplay.Combat.CombatAilment>()?.SpeedMultiplier ?? 1);
             agent.isStopped = false;
             agent.SetDestination(hit.position);
         }
@@ -594,7 +594,7 @@ namespace Mismo.Gameplay.Enemies
                     if (!hit.transform.IsChildOf(transform)) { blocked = true; break; }
                 }
                 if (blocked) break;
-                agent.Move(delta);
+                agent.Move(delta * (GetComponent<Mismo.Gameplay.Combat.CombatAilment>()?.SpeedMultiplier ?? 1));
                 ApplyHits();
             }
         }

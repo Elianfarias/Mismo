@@ -8,6 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 8335145150556989266}
   - component: {fileID: 9183384879410581242}
   m_Layer: 0
   m_Name: Deadwood_2
@@ -177,3 +178,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 8761871024327659104, guid: 23e23c14ef5a2224cacaf9b531913983, type: 3}
+--- !u!114 &8335145150556989266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4121206536558519261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9800f82a95691d48bd025f40bd5aefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.ResourceImpactPalette
+  colors:
+  - {r: 0.5647059, g: 0.3764706, b: 0.28235295, a: 1}
+  fragmentsPerHit: 7
+  fragmentSize: {x: 0.035, y: 0.085}
+  fragmentLifetime: 0.65

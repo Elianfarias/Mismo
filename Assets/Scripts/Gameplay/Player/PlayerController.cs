@@ -89,8 +89,8 @@ namespace Mismo.Gameplay.Player
         }
         private void Request(AbilitySlot slot, Vector3 move)
         {
-            var weapon = loadout.ActiveDefinition; var ability = weapon != null ? weapon.GetAbility(slot) : null;
-            if (ability == null) return;
+            var weapon = loadout.ActiveDefinition; var ability = loadout.GetAbility(slot);
+            if (ability == null || ability.IsPassive) return;
             Vector3 direction = move.sqrMagnitude > .001f ? move.normalized : motor.Facing;
             Vector3 point = transform.position;
             Vector3? aimPoint = null;

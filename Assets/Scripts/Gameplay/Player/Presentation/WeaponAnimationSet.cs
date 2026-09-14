@@ -65,6 +65,8 @@ namespace Mismo.Gameplay.Player.Presentation
         {
             if(ability!=null && actions!=null)foreach(var binding in actions)
                 if(binding!=null && binding.ability==ability)return binding;
+            if(ability!=null && ability.animationSource!=null && actions!=null)foreach(var binding in actions)
+                if(binding!=null && binding.ability==ability.animationSource)return binding;
             return null;
         }
     }

@@ -20,3 +20,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f897c3e3e29be294bac01266c17aebad, type: 2}
   - {fileID: 11400000, guid: 1937ac5ccc63f954f8d731a2d584f377, type: 2}
   animations: {fileID: 11400000, guid: 9a65699ec810642448e5b9e5849c2b40, type: 2}
+  masteryLevelsPerUnlock: 3
+  repertoire:
+  - {fileID: 11400000, guid: 836e0b8ee1233e84d8824149cfabfc61, type: 2}
+  - {fileID: 11400000, guid: f897c3e3e29be294bac01266c17aebad, type: 2}
+  - {fileID: 11400000, guid: 1937ac5ccc63f954f8d731a2d584f377, type: 2}
+  - {fileID: 11400000, guid: 462fb1a421c95a9197f7ee6770aa38a2, type: 2}
+  - {fileID: 11400000, guid: 57dc236e526055479ba4be8ca530eb19, type: 2}
+  - {fileID: 11400000, guid: 0bde875815c55cc4b78d28f7446e9411, type: 2}

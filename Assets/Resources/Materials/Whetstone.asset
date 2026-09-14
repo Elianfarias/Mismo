@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 350fe51e4a504860bfde182962542678, type: 3}
+  m_Name: Whetstone
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.Inventory.MaterialDefinition
+  id: MAT-09
+  displayName: Piedra de afilar
+  description: "Prepara el arma activa fuera de combate: +15 % de da\xF1o durante
+    180 s. No se acumula."
+  icon: {fileID: 21300000, guid: 15ead822964cc6f489ecc64d8ee13a85, type: 3}
+  inventoryPreviewRotation: {x: 0, y: 0, z: 0}
+  pickupPrefab: {fileID: 1507022063016704861, guid: 0059f65e07ca0bb4bb98e6e8042ffdc1, type: 3}
+  stackSize: 5
+  gridWidth: 1
+  gridHeight: 1
+  canRotate: 1
+  category: 1
+  healingAmount: 0
+  healingSeconds: 5
+  usableInCombat: 0
+  instantHealing: 0
+  useCooldownSeconds: 0
+  damageBonus: 0.15
+  damageBonusSeconds: 180
+  canDiscard: 1
+  canSell: 1
+  sellValue: 1

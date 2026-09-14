@@ -15,7 +15,7 @@ namespace Mismo.Gameplay.Player.World
         CraftingStation nearby,station;
         float progress,nextHit;Vector3 startPosition;GameObject tool;
         CursorLockMode oldLock;bool oldVisible;
-        int slot,closedFrame=-1;Vector2 scroll;
+        int category,slot,closedFrame=-1;Vector2 scroll;
         public bool IsHarvesting=>harvesting!=null;
         public bool BlocksGameplay=>station!=null||closedFrame==Time.frameCount;
         public bool Busy=>IsHarvesting||BlocksGameplay;
@@ -32,6 +32,7 @@ namespace Mismo.Gameplay.Player.World
         void Update()
         {
             if(!inventory.IsReady)return;
+            if(CompanionPlayer.IsRiding(gameObject)){Cancel();Close();return;}
             if(station!=null)
             {
                 if(!station.InRange(transform.position)||health.IsDead||loadout.InCombat||Keyboard.current?.escapeKey.wasPressedThisFrame==true)Close();
@@ -42,7 +43,7 @@ namespace Mismo.Gameplay.Player.World
                 if(!harvesting.isActiveAndEnabled||!harvesting.Available||!harvesting.InRange(transform)||Vector3.Distance(transform.position,startPosition)>.3f||Interrupted())
                 {Cancel();return;}
                 progress+=Time.deltaTime;
-                if(progress>=nextHit){nextHit=progress+.55f;if(harvesting.definition.harvestSound!=null)AudioSource.PlayClipAtPoint(harvesting.definition.harvestSound,harvesting.transform.position,.5f);}
+                if(progress>=nextHit){nextHit=progress+.55f;ResourceChips.Emit(harvesting.gameObject,transform.position);if(harvesting.definition.harvestSound!=null)AudioSource.PlayClipAtPoint(harvesting.definition.harvestSound,harvesting.transform.position,.5f);}
                 if(tool!=null)tool.transform.localRotation=Quaternion.Euler(Mathf.Sin(progress*12)*40,0,0);
                 if(progress>=harvesting.definition.harvestSeconds){harvesting.Complete(inventory);Cancel();}
                 return;
@@ -59,6 +60,7 @@ namespace Mismo.Gameplay.Player.World
             {station=nearby;oldLock=Cursor.lockState;oldVisible=Cursor.visible;Cursor.lockState=CursorLockMode.None;Cursor.visible=true;return;}
             if(target==null||Interrupted())return;
             harvesting=target;startPosition=transform.position;progress=0;nextHit=.55f;
+            ResourceChips.Emit(harvesting.gameObject,transform.position);
             if(target.definition.toolPrefab!=null){tool=Instantiate(target.definition.toolPrefab,transform);tool.transform.localPosition=new Vector3(.45f,1,.6f);}
             if(target.definition.harvestSound!=null)AudioSource.PlayClipAtPoint(target.definition.harvestSound,target.transform.position);
         }
@@ -87,16 +89,22 @@ namespace Mismo.Gameplay.Player.World
             label.normal.textColor=Color.white;label.fontSize=18;
             if(GUI.Button(new Rect(780,42,160,36),L.Text("Cerrar [ESC]"),button)){Close();GUI.matrix=old;GUI.backgroundColor=previousBackground;return;}
             if(GUI.Button(new Rect(50,92,890,40),L.Format("Arma a mejorar: {0} · Ranura {1}",inventory.ItemName(inventory.EquippedId(slot)),slot+1),button))slot=1-slot;
-            scroll=GUI.BeginScrollView(new Rect(50,145,900,455),scroll,new Rect(0,0,875,(station.recipes?.Length??0)*200));
+            string[] tabs={"Preparación","Mejoras","Equipo básico"};
+            for(int tab=0;tab<tabs.Length;tab++)
+            {GUI.backgroundColor=tab==category?Presentation.PlayerHUD.Gold:new Color(.14f,.18f,.20f);
+                if(GUI.Button(new Rect(50+tab*300,145,290,35),L.Text(tabs[tab]),button)){category=tab;scroll=Vector2.zero;}}
+            GUI.backgroundColor=new Color(.14f,.18f,.20f);
+            int visible=0;if(station.recipes!=null)foreach(var r in station.recipes)if(r!=null&&(int)r.Category==category)visible++;
+            scroll=GUI.BeginScrollView(new Rect(50,190,900,410),scroll,new Rect(0,0,875,visible*200));int row=0;
             if(station.recipes!=null)for(int i=0;i<station.recipes.Length;i++)
             {
-                var recipe=station.recipes[i];if(recipe==null)continue;float y=i*200;
+                var recipe=station.recipes[i];if(recipe==null||(int)recipe.Category!=category)continue;float y=row++*200;
                 Presentation.PlayerHUD.Fill(new Rect(0,y,865,188),new Color(.055f,.073f,.08f,.95f));
                 GUI.Label(new Rect(15,y+8,630,28),L.Text(recipe.displayName),label);
                 GUI.Label(new Rect(15,y+38,825,46),L.Text(recipe.description),label);
                 string cost="";foreach(var item in recipe.ingredients)if(item?.material!=null)cost+=(cost.Length>0?" · ":"")+L.Text(item.material.displayName)+" "+inventory.MaterialCount(item.material.id)+"/"+item.quantity;
                 GUI.Label(new Rect(15,y+86,825,40),cost,label);
-                string effect=recipe.upgradeWeapon?L.Format("Mejora del arma elegida: T{0} → T{1}",recipe.fromTier,recipe.toTier):L.Format("Produce {0} × {1}",recipe.quantity,L.Text(recipe.result?.displayName));
+                string effect=recipe.upgradeWeapon?L.Format("Mejora del arma elegida: T{0} → T{1}",recipe.fromTier,recipe.toTier):L.Format("Produce {0} × {1}",recipe.quantity,L.Text(recipe.weaponResult!=null?recipe.weaponResult.DisplayName:recipe.result?.displayName));
                 if(recipe.upgradeWeapon)
                 {
                     var current=inventory.Item(inventory.EquippedId(slot));

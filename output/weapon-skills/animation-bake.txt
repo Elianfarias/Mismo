@@ -1,0 +1,1 @@
+PASS 20 clips retargeted at 60 fps; finite curves; horizontal root motion constrained; previews captured.

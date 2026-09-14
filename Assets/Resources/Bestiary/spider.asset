@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d61b0a25d06a14e8b2acce561128f5, type: 3}
+  m_Name: spider
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.CreatureSpecies
+  id: spider
+  displayName: "Ara\xF1a"
+  description: Una criatura descubierta durante tus viajes.
+  prefabs:
+  - {fileID: 4621593228312570532, guid: 1d54a32d0326d1a40a7aaebfa06def68, type: 3}
+  - {fileID: 8718558843661333136, guid: df032e69fb37afc4a9f8f66b42e2a16a, type: 3}
+  - {fileID: 4906390869677408606, guid: 8e2503599fc92984ba27f47121e7c991, type: 3}
+  - {fileID: 8440093396559079988, guid: 1be7918643492c847ac2ba9cc2a78e9d, type: 3}
+  domesticable: 0
+  mountable: 0
+  recognitionChance: 0.1
+  riderPose: {fileID: 0}
+  ridingSpeed: 8
+  followingSpeed: 5.5
+  turnSpeed: 180

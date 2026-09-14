@@ -20,7 +20,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         }
         void OnApplicationPause(bool paused){if(paused)SaveClock();}
         void OnApplicationQuit()=>SaveClock();
-        void OnDestroy()=>SaveClock();
+        void OnDestroy(){SaveClock();ReleaseComposedWeapons();}
         void SaveClock()
         {
             if(!IsReady||!writable||WorldPlaySeconds-profile.worldPlaySeconds<.1)return;
@@ -55,39 +55,71 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             }
             return true;
         }
-        public bool CanCraft(CraftingRecipe recipe,string weaponId)
+        bool CraftCandidate(CraftingRecipe recipe,string weaponId,out InventoryProfile next)
         {
+            next=null;
             if(!CanManage||!RecipeCost(recipe,out var cost))return false;
-            foreach(var ingredient in cost)if(MaterialCount(ingredient.Key)<ingredient.Value)return false;
+            next=profile.Copy();if(!next.TrySpendMaterials(cost))return false;
             if(recipe.upgradeWeapon)
             {
-                var item=profile.Find(weaponId);
-                return item!=null&&!item.inChest&&item.tier==recipe.fromTier&&recipe.toTier>recipe.fromTier&&recipe.toTier<=5;
+                var item=next.Find(weaponId);
+                if(item==null||item.inChest||item.tier!=recipe.fromTier||recipe.toTier<=recipe.fromTier||recipe.toTier>5)return false;
+                item.tier=recipe.toTier;
             }
-            if(recipe.result==null||!materialDefinitions.ContainsKey(recipe.result.id)||recipe.quantity<=0)return false;
-            var candidate=profile.Copy();
-            return candidate.TrySpendMaterials(cost)&&candidate.TryAddMaterial(recipe.result.id,recipe.quantity)&&HasGridRoom(candidate,false);
+            else if(recipe.weaponResult!=null)
+            {
+                if(!definitions.Contains(recipe.weaponResult.Id)||next.weapons.Count>=256||recipe.quantity!=1)return false;
+                next.weapons.Add(new OwnedWeapon{instanceId=Guid.NewGuid().ToString("N"),definitionId=recipe.weaponResult.Id,tier=1});
+            }
+            else if(recipe.result==null||!materialDefinitions.ContainsKey(recipe.result.id)||recipe.quantity<=0||!next.TryAddMaterial(recipe.result.id,recipe.quantity))return false;
+            return HasGridRoom(next,false);
         }
+        public bool CanCraft(CraftingRecipe recipe,string weaponId)=>CraftCandidate(recipe,weaponId,out _);
         public bool TryCraft(CraftingRecipe recipe,string weaponId,CraftingStation station)
         {
-            if(station==null||station.recipes==null||Array.IndexOf(station.recipes,recipe)<0||!station.InRange(transform.position)||GetComponent<GatheringPlayer>()?.IsHarvesting==true||!CanCraft(recipe,weaponId))return false;
-            var next=profile.Copy();RecipeCost(recipe,out var cost);
-            if(!next.TrySpendMaterials(cost))return false;
-            if(recipe.upgradeWeapon)next.Find(weaponId).tier=recipe.toTier;
-            else if(!next.TryAddMaterial(recipe.result.id,recipe.quantity)||!Fits(next,false))return false;
+            if(station==null||station.recipes==null||Array.IndexOf(station.recipes,recipe)<0||!station.InRange(transform.position)||GetComponent<GatheringPlayer>()?.IsHarvesting==true||!CraftCandidate(recipe,weaponId,out var next))return false;
             return Commit(next,L.Format("Creado: {0}",L.Text(recipe.displayName)),recipe.upgradeWeapon);
+        }
+        public float PotionCooldownRemaining=>IsReady?(float)Math.Max(0,profile.potionReadyAt-WorldPlaySeconds):0;
+        public float WeaponBuffRemaining=>IsReady?(float)Math.Max(0,profile.weaponBuffUntil-WorldPlaySeconds):0;
+        public float WeaponConsumableBonus(WeaponDefinition weapon)=>WeaponBuffRemaining>0&&EquippedItem(weapon)?.instanceId==profile.buffedWeaponId?profile.weaponBuffDamage:0;
+        public string ConsumableBlockReason(string id)
+        {
+            var material=Material(id);var health=GetComponent<Health>();
+            if(!IsReady||material==null||!material.IsConsumable||MaterialCount(id)<1||health==null||health.IsDead)return L.Text("No disponible.");
+            if(!material.usableInCombat&&!CanManage)return L.Text("Solo fuera de combate.");
+            if(GetComponent<GatheringPlayer>()?.IsHarvesting==true||loadout.Runner.IsBusy||loadout.Belt!=null&&loadout.Belt.IsActive)return L.Text("Terminá la acción actual.");
+            if(material.damageBonus>0)
+            {
+                if(WeaponBuffRemaining>0)return L.Format("Afilado activo: {0:0} s",WeaponBuffRemaining);
+                if(profile.Find(profile.equipped[profile.activeSlot])==null)return L.Text("Equipá un arma.");
+            }
+            if(material.healingAmount>0)
+            {
+                if(health.Current>=health.Maximum)return L.Text("Vida completa.");
+                if(!material.instantHealing&&GetComponent<ConsumableHealing>()?.Active==true)return L.Text("Ya hay una recuperación activa.");
+            }
+            if(material.useCooldownSeconds>0&&PotionCooldownRemaining>0)return L.Format("Próximo uso en {0:0} s",PotionCooldownRemaining);
+            return null;
         }
         public bool TryUseConsumable(string id)
         {
+            string reason=ConsumableBlockReason(id);
+            if(reason!=null){Notice=reason;Changed?.Invoke();return false;}
             var material=Material(id);var health=GetComponent<Health>();
-            var healing=GetComponent<ConsumableHealing>();
-            if(!CanManage||material==null||material.healingAmount<=0||health==null||health.IsDead||health.Current>=health.Maximum||
-                healing!=null&&healing.Active||GetComponent<GatheringPlayer>()?.IsHarvesting==true)return false;
-            var next=profile.Copy();if(!next.TrySpendMaterials(new Dictionary<string,int>{{id,1}})||!Commit(next,L.Text("Recuperación iniciada."),false))return false;
-            if(healing==null)healing=gameObject.AddComponent<ConsumableHealing>();
-            healing.Begin(material.healingAmount,material.healingSeconds);return true;
+            var next=profile.Copy();if(!next.TrySpendMaterials(new Dictionary<string,int>{{id,1}}))return false;
+            if(material.useCooldownSeconds>0)next.potionReadyAt=WorldPlaySeconds+material.useCooldownSeconds;
+            if(material.damageBonus>0){next.weaponBuffUntil=WorldPlaySeconds+Mathf.Max(1,material.damageBonusSeconds);next.weaponBuffDamage=material.damageBonus;next.buffedWeaponId=next.equipped[next.activeSlot];}
+            if(!Commit(next,L.Format("Usado: {0}",L.Text(material.displayName)),false))return false;
+            if(material.healingAmount>0)
+            {
+                if(material.instantHealing)health.Heal(material.healingAmount);
+                else {var healing=GetComponent<ConsumableHealing>()??gameObject.AddComponent<ConsumableHealing>();healing.Begin(material.healingAmount,material.healingSeconds);}
+            }
+            return true;
         }
     }
+
     public sealed class ConsumableHealing:MonoBehaviour
     {
         Health health;float remaining,rate;
