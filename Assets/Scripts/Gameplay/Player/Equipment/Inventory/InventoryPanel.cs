@@ -121,6 +121,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             var old=GUI.backgroundColor;if(old==Color.white)GUI.backgroundColor=new Color(.13f,.16f,.18f);
             bool pressed=GUI.Button(rect,L.Text(value),button);GUI.backgroundColor=old;
+            FantasyUI.Frame(rect,GUI.enabled?(rect.Contains(Event.current.mousePosition)?PlayerHUD.Gold:Accent):Muted*.55f);
             if(pressed){GUI.FocusControl(null);searchFocused=false;}return pressed;
         }
         bool Tab(Rect rect,string value,bool chosen)
@@ -141,6 +142,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 button.normal.background=Texture2D.whiteTexture;button.normal.textColor=Color.white;
                 button.hover.background=Texture2D.whiteTexture;button.hover.textColor=Accent;
                 button.active.background=Texture2D.whiteTexture;button.active.textColor=Color.white;
+                FantasyUI.StyleButton(button);
                 field=new GUIStyle(GUI.skin.textField){fontSize=20,padding=new RectOffset(12,12,7,7)};
             }
             var matrix=GUI.matrix;int depth=GUI.depth;
@@ -155,7 +157,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             }
             else
             {
-
+                FantasyUI.Panel(new Rect(16,10,1248,788));
                 bool previousEnabled=GUI.enabled;GUI.enabled=previousEnabled&&!confirmDiscard;
                 Text(new Rect(38,25,740,44),page==Page.Menu?"VIAJERO":page==Page.Inventory?"PERTENENCIAS":page==Page.Character?"PERSONAJE":page==Page.Bestiary?"BESTIARIO":page==Page.Mounts?"MONTURAS":"HABILIDADES",32,Accent);
                 if(Button(new Rect(940,27,120,35),"Menú [B]"))OpenPage(Page.Menu);
@@ -329,6 +331,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             PlayerHUD.Fill(rect,chosen?new Color(.42f,.37f,.23f,.96f):new Color(.16f,.21f,.23f,.96f));
             var inset=new Rect(rect.x+2,rect.y+2,rect.width-4,rect.height-4);
             PlayerHUD.Fill(inset,new Color(.07f,.10f,.115f,.94f));
+            FantasyUI.Frame(rect,chosen?PlayerHUD.Gold:new Color(.40f,.44f,.43f));
             var icon=item.material?inventory.Material(item.id)?.icon:inventory.Definition(item.id).inventoryIcon;
             if(icon!=null)
             {
@@ -437,7 +440,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         void DrawDiscardConfirmation()
         {
             PlayerHUD.Fill(new Rect(0,0,1280,800),new Color(0,0,0,.85f));
-            PlayerHUD.Fill(new Rect(375,270,530,240),new Color(.065f,.07f,.075f));
+            FantasyUI.Panel(new Rect(375,270,530,240));
             Text(new Rect(402,291,475,44),"¿Descartar definitivamente?",25,Accent);
             Text(new Rect(402,345,475,68),L.Format("Se eliminarán {0} unidad(es). Esta acción no se puede deshacer.",selectedMaterial?amount:1),19);
             if(Button(new Rect(400,445,225,40),"Cancelar"))confirmDiscard=false;

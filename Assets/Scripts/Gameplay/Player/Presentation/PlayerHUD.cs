@@ -5,6 +5,52 @@ using UnityEngine;
 
 namespace Mismo.Gameplay.Player.Presentation
 {
+    /// <summary>Shared Kenney Fantasy UI Borders theme for runtime IMGUI screens.</summary>
+    public static class FantasyUI
+    {
+        static Texture2D frame, panel;
+        static GUIStyle border, buttons;
+        public static Texture2D PanelTexture => Load(ref panel,"Panel");
+        public static Texture2D FrameTexture => Load(ref frame,"Frame");
+        static Texture2D Load(ref Texture2D texture,string name)
+        {
+            if(texture==null)texture=Resources.Load<Texture2D>("UI/FantasyBorders/"+name);
+            if(texture!=null){texture.filterMode=FilterMode.Point;texture.wrapMode=TextureWrapMode.Clamp;}
+            return texture;
+        }
+        public static void Frame(Rect rect,Color color)
+        {
+            if(Event.current.type!=EventType.Repaint||FrameTexture==null)return;
+            if(border==null)border=new GUIStyle {border=new RectOffset(12,12,12,12)};
+            border.normal.background=FrameTexture;
+            var old=GUI.color;var background=GUI.backgroundColor;GUI.color=color;GUI.backgroundColor=Color.white;
+            border.Draw(rect,GUIContent.none,false,false,false,false);GUI.color=old;GUI.backgroundColor=background;
+        }
+        public static void Panel(Rect rect)
+        {
+            PlayerHUD.Fill(rect,PlayerHUD.Panel);
+            Frame(rect,new Color(.57f,.53f,.39f));
+        }
+        public static bool Button(Rect rect,string title)
+        {
+            if(buttons==null)buttons=new GUIStyle(GUI.skin.button){fontSize=16,alignment=TextAnchor.MiddleCenter};
+            StyleButton(buttons);
+            var old=GUI.backgroundColor;GUI.backgroundColor=new Color(.10f,.14f,.17f);
+            bool clicked=GUI.Button(rect,title,buttons);GUI.backgroundColor=old;
+            Frame(rect,rect.Contains(Event.current.mousePosition)?PlayerHUD.Gold:new Color(.64f,.59f,.44f));
+            return clicked;
+        }
+        public static void StyleButton(GUIStyle style)
+        {
+            style.border=new RectOffset(12,12,12,12);
+            style.normal.background=PanelTexture;
+            style.hover.background=PanelTexture;style.active.background=PanelTexture;
+            style.focused.background=PanelTexture;
+            style.normal.textColor=Color.white;style.hover.textColor=PlayerHUD.Gold;
+            style.focused.textColor=PlayerHUD.Gold;style.active.textColor=Color.white;
+        }
+    }
+
     /// <summary>Read-only HUD and local north-up minimap updated at 5 Hz.</summary>
     [DisallowMultipleComponent]
     public sealed class PlayerHUD : MonoBehaviour
@@ -60,7 +106,7 @@ namespace Mismo.Gameplay.Player.Presentation
             if(health==null)return;
             Matrix4x4 old=GUI.matrix;float scale=Scale;GUI.matrix=Matrix4x4.Scale(Vector3.one*scale);
             float width=Screen.width/scale,height=Screen.height/scale;
-            Fill(new Rect(24,24,300,132),Panel);Fill(new Rect(24,24,3,132),Gold);
+            FantasyUI.Panel(new Rect(24,24,300,132));
             Label(new Rect(43,34,260,22),"EXPLORADOR",16,Gold);
             Label(new Rect(43,63,260,20),"VIDA    "+Mathf.CeilToInt(health.Current)+" / "+health.Maximum.ToString("0"),14,Color.white);
             Bar(43,88,262,health.Normalized,new Color(.83f,.26f,.30f));
@@ -68,7 +114,7 @@ namespace Mismo.Gameplay.Player.Presentation
             Bar(43,131,262,stamina!=null?stamina.Normalized:0,new Color(.29f,.73f,.52f));
             if(combat!=null)
             {
-                Fill(new Rect(24,162,300,57),Panel);
+                FantasyUI.Panel(new Rect(24,162,300,57));
                 Label(new Rect(43,165,262,20),"FOCUS    "+combat.Focus.ToString("0")+" / 100",13,Gold);
                 Bar(43,193,262,combat.Focus/100,Gold);
             }
@@ -119,6 +165,7 @@ namespace Mismo.Gameplay.Player.Presentation
             Fill(new Rect(x,y,96,2),status=="ACTIVO"?Color.white:Gold);
             Label(new Rect(x+10,y+7,76,22),key,18,Gold);Label(new Rect(x+10,y+34,80,19),name,12,Color.white);
             Label(new Rect(x+10,y+60,82,17),!affordable&&status=="LISTO"?"SIN STAMINA":status,11,affordable?Muted:new Color(1,.4f,.35f));
+            FantasyUI.Frame(new Rect(x,y,96,88),status=="ACTIVO"?Color.white:Gold);
         }
         private void OnDisable(){if(Active==this)Active=null;}
         private void OnDestroy(){if(combat!=null)combat.Rewarded-=OnReward;if(mapCamera!=null)Destroy(mapCamera.gameObject);if(map!=null){map.Release();Destroy(map);}}
