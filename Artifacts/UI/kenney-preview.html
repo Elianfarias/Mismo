@@ -1,0 +1,76 @@
+<div id="mismo-kenney-preview" aria-label="Vista previa de la interfaz de Mismo con Kenney">
+  <style>
+    #mismo-kenney-preview {font-family:Arial,sans-serif;color:#eee7d4;--mismo-gold:#e8c26e;--mismo-frame:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwAQMAAABtzGvEAAAABGdBTUEAALGPC/xhBQAAAAZQTFRFAAAA////pdmf3QAAAAF0Uk5TAEDm2GYAAAA3SURBVBjTY+BhAAIDBhh1gIGBGU79+Q8E9jCKASTIAKPsQdQfGIVmypCkUH2E6lvUkEANJRRTAHf2K12696asAAAAAElFTkSuQmCC");}
+    #mismo-kenney-preview * {box-sizing:border-box;}
+    #mismo-kenney-preview .mk-switch {display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+    #mismo-kenney-preview button {font:inherit;color:#eee7d4;background:#1a242b;cursor:pointer;position:relative;border:0;padding:15px 20px;min-height:46px;}
+    #mismo-kenney-preview button:hover,#mismo-kenney-preview button[aria-pressed="true"] {color:var(--mismo-gold);background:#283239;}
+    #mismo-kenney-preview .mk-framed {position:relative;}
+    #mismo-kenney-preview .mk-framed::after {content:"";position:absolute;inset:0;border:12px solid transparent;border-image:var(--mismo-frame) 12 stretch;pointer-events:none;filter:brightness(.8) sepia(.7) saturate(.8);}
+    #mismo-kenney-preview .mk-stage {background:#101820;padding:24px;min-height:460px;}
+    #mismo-kenney-preview .mk-menu {background:#0c1116;padding:34px;max-width:425px;margin:auto;}
+    #mismo-kenney-preview .mk-kicker {font-size:12px;letter-spacing:1px;color:#d5bd87;line-height:1.6;}
+    #mismo-kenney-preview .mk-name {font-size:54px;font-weight:500;margin:16px 0 10px;letter-spacing:2px;}
+    #mismo-kenney-preview .mk-subtitle {font-size:17px;color:#acbfc3;margin:0 0 30px;}
+    #mismo-kenney-preview .mk-actions {display:grid;gap:12px;}
+    #mismo-kenney-preview .mk-actions button {text-align:left;font-size:19px;min-height:56px;}
+    #mismo-kenney-preview .mk-hud {min-height:440px;display:flex;flex-direction:column;justify-content:space-between;gap:64px;}
+    #mismo-kenney-preview [hidden] {display:none!important;}
+    #mismo-kenney-preview .mk-vitals {width:300px;max-width:100%;background:#0c1116;padding:20px;}
+    #mismo-kenney-preview .mk-small {font-size:12px;color:#a7b8bd;margin:15px 0 8px;}
+    #mismo-kenney-preview .mk-track {height:12px;background:#1c242b;}
+    #mismo-kenney-preview .mk-life {width:78%;height:100%;background:#d4424c;}
+    #mismo-kenney-preview .mk-stamina {width:65%;height:100%;background:#4aba85;}
+    #mismo-kenney-preview .mk-skills {display:flex;flex-wrap:wrap;gap:12px;justify-content:center;}
+    #mismo-kenney-preview .mk-skill {width:96px;height:88px;background:#0c1116;padding:10px;}
+    #mismo-kenney-preview .mk-key {color:var(--mismo-gold);font-size:18px;}
+    #mismo-kenney-preview .mk-skill-name {font-size:12px;margin-top:9px;}
+    #mismo-kenney-preview .mk-status {font-size:11px;color:#a7b8bd;margin-top:8px;}
+    #mismo-kenney-preview .mk-note {font-size:12px;color:#a7b8bd;margin-top:20px;line-height:1.5;}
+    @media(max-width:420px) {#mismo-kenney-preview .mk-stage {padding:12px;}#mismo-kenney-preview .mk-menu {padding:26px 22px;}#mismo-kenney-preview .mk-name {font-size:46px;}#mismo-kenney-preview .mk-kicker {letter-spacing:0;}}
+  </style>
+  <div class="mk-switch" aria-label="Pantalla de la vista previa">
+    <button class="mk-framed" data-screen="menu" aria-pressed="true">Menú principal</button>
+    <button class="mk-framed" data-screen="hud" aria-pressed="false">HUD de combate</button>
+  </div>
+  <div class="mk-stage">
+    <section data-view="menu" class="mk-menu mk-framed" aria-label="Menú principal">
+      <div class="mk-kicker">EXPLORACIÓN · COMBATE · AVENTURA</div>
+      <h2 class="mk-name">MISMO</h2>
+      <p class="mk-subtitle">Un mundo por descubrir.</p>
+      <div class="mk-actions">
+        <button class="mk-framed" data-enter>Continuar</button>
+        <button class="mk-framed" data-enter>Nueva partida</button>
+        <button class="mk-framed" data-options>Opciones</button>
+        <button class="mk-framed" data-exit>Salir</button>
+      </div>
+      <div class="mk-note" aria-live="polite">DOS ARMAS. TU ESTILO.</div>
+    </section>
+    <section data-view="hud" class="mk-hud" aria-label="Ejemplo del HUD" hidden>
+      <div class="mk-vitals mk-framed">
+        <div class="mk-kicker">EXPLORADOR</div>
+        <div class="mk-small">VIDA &nbsp; 78 / 100</div><div class="mk-track"><div class="mk-life"></div></div>
+        <div class="mk-small">STAMINA &nbsp; 65 / 100</div><div class="mk-track"><div class="mk-stamina"></div></div>
+      </div>
+      <div class="mk-skills">
+        <div class="mk-skill mk-framed"><div class="mk-key">Q</div><div class="mk-skill-name">ESTOCADA</div><div class="mk-status">LISTO</div></div>
+        <div class="mk-skill mk-framed"><div class="mk-key">E</div><div class="mk-skill-name">PARRY</div><div class="mk-status">LISTO</div></div>
+        <div class="mk-skill mk-framed"><div class="mk-key">R</div><div class="mk-skill-name">GIRO</div><div class="mk-status">LISTO</div></div>
+        <div class="mk-skill mk-framed"><div class="mk-key">C</div><div class="mk-skill-name">ESPECIAL</div><div class="mk-status">LISTO</div></div>
+      </div>
+    </section>
+  </div>
+  <script>
+    (function(){
+      const root=document.getElementById('mismo-kenney-preview');
+      function show(name){
+        root.querySelectorAll('[data-view]').forEach(el=>el.hidden=el.dataset.view!==name);
+        root.querySelectorAll('[data-screen]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.screen===name)));
+      }
+      root.querySelectorAll('[data-screen]').forEach(el=>el.addEventListener('click',()=>show(el.dataset.screen)));
+      root.querySelectorAll('[data-enter]').forEach(el=>el.addEventListener('click',()=>show('hud')));
+      root.querySelector('[data-options]').addEventListener('click',()=>root.querySelector('.mk-note').textContent='Música · Efectos · Interfaz');
+      root.querySelector('[data-exit]').addEventListener('click',()=>root.querySelector('.mk-note').textContent='Vista previa: no se cierra el juego.');
+    })();
+  </script>
+</div>

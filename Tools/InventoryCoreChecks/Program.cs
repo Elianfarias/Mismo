@@ -96,6 +96,16 @@ static class Program
         invalid=profile.Copy();invalid.progression.masteries.Add(new MasteryProgress{familyId="sword"});
         invalid.progression.masteries.Add(new MasteryProgress{familyId="sword"});
         Check(!invalid.IsValid(definitions,rewards),"Duplicate mastery families rejected");
+        var skillMastery=new MasteryProgress{familyId="dual",level=3};
+        var repertoire=new[]{"flurry","spin","wound","cross","rhythm","finisher"};
+        Check(skillMastery.TrySelectAbility(repertoire,1,0)&&skillMastery.equippedAbilities[0]=="spin"&&skillMastery.equippedAbilities[1]=="flurry","Dropping an equipped skill on another slot swaps both skills");
+        Check(skillMastery.TrySelectAbility(repertoire,3,2)&&skillMastery.equippedAbilities[2]=="cross","Dropping an unlocked collection skill replaces its target slot");
+        string beforeSkills=string.Join(",",skillMastery.equippedAbilities);
+        Check(!skillMastery.TrySelectAbility(repertoire,4,0)&&string.Join(",",skillMastery.equippedAbilities)==beforeSkills,"Locked skill drops leave the loadout untouched");
+        Check(!skillMastery.TrySelectAbility(repertoire,1,0)&&string.Join(",",skillMastery.equippedAbilities)==beforeSkills,"Dropping a skill on its own slot is a no-op");
+        Check(!skillMastery.TrySelectAbility(repertoire,0,-1)&&!skillMastery.TrySelectAbility(repertoire,0,3)&&string.Join(",",skillMastery.equippedAbilities)==beforeSkills,"Drops outside the three slots cannot mutate the loadout");
+        var skillCopy=skillMastery.Copy();skillCopy.TrySelectAbility(repertoire,0,2);
+        Check(string.Join(",",skillMastery.equippedAbilities)==beforeSkills,"Skill changes in a transaction copy do not mutate saved selection");
         var old=profile.Copy();old.version=1;old.progression=null;old.weapons[0].tier=0;
         Check(old.IsValid(definitions,rewards),"Version 1 remains readable without new fields");
         var savedId=old.equipped[0];old.UpgradeFromVersionOne();

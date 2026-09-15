@@ -15,7 +15,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public Texture Texture=>texture;
         public void Zoom(float factor){if(camera!=null)camera.orthographicSize*=Mathf.Clamp(factor,.2f,2);}
         public bool HasModel {get;private set;}
-        public void Show(GameObject source,Vector3 rotation=default)
+        public void Show(GameObject source,Vector3 rotation=default,bool portrait=false)
         {
             Dispose();if(source==null)return;
             root=new GameObject("Inventory preview geometry");root.transform.position=new Vector3(0,-20000,0);
@@ -47,8 +47,9 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             orbitCenter=bounds.center;
             orbitDistance=Vector3.Distance(camera.transform.position,orbitCenter);
             yaw=0;pitch=Mathf.Asin((camera.transform.position.y-orbitCenter.y)/orbitDistance)*Mathf.Rad2Deg;
-            texture=new RenderTexture(640,480,24);texture.Create();camera.targetTexture=texture;
-            camera.aspect=640f/480;
+            texture=new RenderTexture(640,portrait?800:480,24);texture.Create();camera.targetTexture=texture;
+            camera.aspect=640f/(portrait?800:480);
+            if(portrait)camera.orthographicSize=Mathf.Max(bounds.extents.y,bounds.extents.x/camera.aspect)*1.18f;
             var lightObject=new GameObject("Inventory preview light");lightObject.transform.SetParent(root.transform,false);
             var light=lightObject.AddComponent<Light>();light.type=LightType.Directional;light.intensity=1.5f;light.cullingMask=1<<30;
             light.transform.rotation=Quaternion.Euler(35,145,0);

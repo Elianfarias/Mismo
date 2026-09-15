@@ -1,0 +1,42 @@
+MISMO — Quiet fantasy interface asset credits
+
+Icons by Lorc and Skoll, from Game-icons.net, licensed under Creative Commons Attribution 3.0 Unported.
+Author: https://lorcblog.blogspot.com/
+Source: https://game-icons.net/
+License: https://creativecommons.org/licenses/by/3.0/
+Downloaded as white PNGs on transparent backgrounds. Displayed with an ivory tint and scaled in game.
+
+Heart icon: Hearts by Skoll, CC BY 3.0 (local resource alias: heart-inside.png).
+https://game-icons.net/1x1/skoll/hearts.html
+
+Other individual source pages (by Lorc, CC BY 3.0):
+https://game-icons.net/1x1/lorc/checked-shield.html
+https://game-icons.net/1x1/lorc/arrow-cluster.html
+https://game-icons.net/1x1/lorc/arrow-flights.html
+https://game-icons.net/1x1/lorc/blade-fall.html
+https://game-icons.net/1x1/lorc/bleeding-wound.html
+https://game-icons.net/1x1/lorc/broadsword.html
+https://game-icons.net/1x1/lorc/crossed-swords.html
+https://game-icons.net/1x1/lorc/dead-eye.html
+https://game-icons.net/1x1/lorc/heart-organ.html
+https://game-icons.net/1x1/lorc/locked-chest.html
+https://game-icons.net/1x1/lorc/plain-dagger.html
+https://game-icons.net/1x1/lorc/poison-bottle.html
+https://game-icons.net/1x1/lorc/shield-reflect.html
+https://game-icons.net/1x1/lorc/sprint.html
+https://game-icons.net/1x1/lorc/sword-clash.html
+https://game-icons.net/1x1/lorc/sword-spin.html
+https://game-icons.net/1x1/lorc/sword-wound.html
+https://game-icons.net/1x1/lorc/target-arrows.html
+https://game-icons.net/1x1/lorc/wingfoot.html
+https://game-icons.net/1x1/lorc/wolf-trap.html
+
+Cinzel — Copyright 2020 The Cinzel Project Authors. SIL Open Font License 1.1.
+https://github.com/google/fonts/tree/main/ofl/cinzel
+Source Sans 3 — Adobe, SIL Open Font License 1.1.
+https://github.com/adobe-fonts/source-sans/tree/release/TTF
+Original font license texts are included in Fonts/.
+Font files are unmodified; Cinzel uses its default regular weight and Source Sans 3 uses the static Regular font.
+
+Kenney Fantasy UI Borders — CC0. Used by the existing inventory and menu theme.
+https://kenney.nl/assets/fantasy-ui-borders

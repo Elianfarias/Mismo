@@ -96,7 +96,7 @@ namespace Mismo.Gameplay.Player.Presentation
         public void Label(Rect rect,string value,int size,Color color,TextAnchor alignment=TextAnchor.MiddleLeft)
         {
             if(text==null)text=new GUIStyle(GUI.skin.label);
-            text.fontSize=size;text.fontStyle=FontStyle.Normal;text.alignment=alignment;text.normal.textColor=color;GUI.Label(rect,value,text);
+            text.font=QuietFantasyUI.Body;text.fontSize=size;text.fontStyle=FontStyle.Normal;text.alignment=alignment;text.normal.textColor=color;GUI.Label(rect,value,text);
         }
         private void Bar(float x,float y,float width,float value,Color color)
         {Fill(new Rect(x,y,width,12),new Color(.11f,.14f,.17f));Fill(new Rect(x,y,width*Mathf.Clamp01(value),12),color);}
@@ -136,7 +136,7 @@ namespace Mismo.Gameplay.Player.Presentation
                     if(ability==null)continue;
                     float remaining=equipment.Runner.Remaining(ability);
                     bool active=equipment.Runner.Current!=null&&equipment.Runner.Current.Definition==ability;
-                    Ability(left+i*108,height-115,ability.IsPassive?"PASIVA":keys[i],ability.DisplayName,ability.IsPassive?"EQUIPADA":combat!=null&&combat.Focus<ability.focusCost?"FOCUS "+ability.focusCost.ToString("0"):Status(remaining,active),ability.cooldown>0?remaining/ability.cooldown:0,ability.IsPassive||stamina==null||stamina.Current>=ability.staminaCost);
+                    Ability(left+i*108,height-115,ability.IsPassive?"PASIVA":keys[i],ability.DisplayName,ability.IsPassive?"EQUIPADA":combat!=null&&combat.Focus<ability.focusCost?"FOCUS "+ability.focusCost.ToString("0"):Status(remaining,active),ability.cooldown>0?remaining/ability.cooldown:0,ability.IsPassive||stamina==null||stamina.Current>=ability.staminaCost,QuietFantasyUI.AbilityIcon(ability));
                 }
                 if(equipment.ActiveDefinition.isBow) Label(new Rect(width*Equipment.WeaponAim.Viewport.x-12,height*(1-Equipment.WeaponAim.Viewport.y)-12,24,24),"+",22,Gold,TextAnchor.MiddleCenter);
             }
@@ -158,14 +158,15 @@ namespace Mismo.Gameplay.Player.Presentation
             GUI.matrix=old;
         }
         private static string Status(float cooldown,bool active)=>active?"ACTIVO":cooldown>.01f?cooldown.ToString("0.0")+" s":"LISTO";
-        private void Ability(float x,float y,string key,string name,string status,float cooldown,bool affordable)
+        private void Ability(float x,float y,string key,string name,string status,float cooldown,bool affordable,string icon="sprint")
         {
-            Fill(new Rect(x,y,96,88),Panel);
+            Fill(new Rect(x,y,96,88),QuietFantasyUI.Surface);
+            QuietFantasyUI.DrawIcon(new Rect(x+28,y+15,43,43),icon,affordable?QuietFantasyUI.Ink:QuietFantasyUI.Muted);
             if(cooldown>0)Fill(new Rect(x,y+88*(1-Mathf.Clamp01(cooldown)),96,88*Mathf.Clamp01(cooldown)),new Color(.17f,.20f,.24f,.85f));
-            Fill(new Rect(x,y,96,2),status=="ACTIVO"?Color.white:Gold);
-            Label(new Rect(x+10,y+7,76,22),key,18,Gold);Label(new Rect(x+10,y+34,80,19),name,12,Color.white);
-            Label(new Rect(x+10,y+60,82,17),!affordable&&status=="LISTO"?"SIN STAMINA":status,11,affordable?Muted:new Color(1,.4f,.35f));
-            FantasyUI.Frame(new Rect(x,y,96,88),status=="ACTIVO"?Color.white:Gold);
+            Label(new Rect(x+6,y+2,84,19),key,13,QuietFantasyUI.Amber);
+            Label(new Rect(x+3,y+58,90,17),name,12,QuietFantasyUI.Ink,TextAnchor.MiddleCenter);
+            Label(new Rect(x+3,y+74,90,14),!affordable&&status=="LISTO"?"SIN STAMINA":status,10,affordable?QuietFantasyUI.Muted:new Color(1,.4f,.35f),TextAnchor.MiddleCenter);
+            QuietFantasyUI.Border(new Rect(x,y,96,88),status=="ACTIVO"?QuietFantasyUI.Amber:QuietFantasyUI.Rule);
         }
         private void OnDisable(){if(Active==this)Active=null;}
         private void OnDestroy(){if(combat!=null)combat.Rewarded-=OnReward;if(mapCamera!=null)Destroy(mapCamera.gameObject);if(map!=null){map.Release();Destroy(map);}}
