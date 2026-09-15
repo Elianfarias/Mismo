@@ -5,6 +5,52 @@ using UnityEngine;
 
 namespace Mismo.Gameplay.Player.Presentation
 {
+    /// <summary>Shared Kenney Fantasy UI Borders theme for runtime IMGUI screens.</summary>
+    public static class FantasyUI
+    {
+        static Texture2D frame, panel;
+        static GUIStyle border, buttons;
+        public static Texture2D PanelTexture => Load(ref panel,"Panel");
+        public static Texture2D FrameTexture => Load(ref frame,"Frame");
+        static Texture2D Load(ref Texture2D texture,string name)
+        {
+            if(texture==null)texture=Resources.Load<Texture2D>("UI/FantasyBorders/"+name);
+            if(texture!=null){texture.filterMode=FilterMode.Point;texture.wrapMode=TextureWrapMode.Clamp;}
+            return texture;
+        }
+        public static void Frame(Rect rect,Color color)
+        {
+            if(Event.current.type!=EventType.Repaint||FrameTexture==null)return;
+            if(border==null)border=new GUIStyle {border=new RectOffset(12,12,12,12)};
+            border.normal.background=FrameTexture;
+            var old=GUI.color;var background=GUI.backgroundColor;GUI.color=color;GUI.backgroundColor=Color.white;
+            border.Draw(rect,GUIContent.none,false,false,false,false);GUI.color=old;GUI.backgroundColor=background;
+        }
+        public static void Panel(Rect rect)
+        {
+            PlayerHUD.Fill(rect,PlayerHUD.Panel);
+            Frame(rect,new Color(.57f,.53f,.39f));
+        }
+        public static bool Button(Rect rect,string title)
+        {
+            if(buttons==null)buttons=new GUIStyle(GUI.skin.button){fontSize=16,alignment=TextAnchor.MiddleCenter};
+            StyleButton(buttons);
+            var old=GUI.backgroundColor;GUI.backgroundColor=new Color(.10f,.14f,.17f);
+            bool clicked=GUI.Button(rect,title,buttons);GUI.backgroundColor=old;
+            Frame(rect,rect.Contains(Event.current.mousePosition)?PlayerHUD.Gold:new Color(.64f,.59f,.44f));
+            return clicked;
+        }
+        public static void StyleButton(GUIStyle style)
+        {
+            style.border=new RectOffset(12,12,12,12);
+            style.normal.background=PanelTexture;
+            style.hover.background=PanelTexture;style.active.background=PanelTexture;
+            style.focused.background=PanelTexture;
+            style.normal.textColor=Color.white;style.hover.textColor=PlayerHUD.Gold;
+            style.focused.textColor=PlayerHUD.Gold;style.active.textColor=Color.white;
+        }
+    }
+
     /// <summary>Read-only HUD and local north-up minimap updated at 5 Hz.</summary>
     [DisallowMultipleComponent]
     public sealed class PlayerHUD : MonoBehaviour
@@ -50,7 +96,7 @@ namespace Mismo.Gameplay.Player.Presentation
         public void Label(Rect rect,string value,int size,Color color,TextAnchor alignment=TextAnchor.MiddleLeft)
         {
             if(text==null)text=new GUIStyle(GUI.skin.label);
-            text.fontSize=size;text.fontStyle=FontStyle.Normal;text.alignment=alignment;text.normal.textColor=color;GUI.Label(rect,value,text);
+            text.font=QuietFantasyUI.Body;text.fontSize=size;text.fontStyle=FontStyle.Normal;text.alignment=alignment;text.normal.textColor=color;GUI.Label(rect,value,text);
         }
         private void Bar(float x,float y,float width,float value,Color color)
         {Fill(new Rect(x,y,width,12),new Color(.11f,.14f,.17f));Fill(new Rect(x,y,width*Mathf.Clamp01(value),12),color);}
@@ -60,7 +106,7 @@ namespace Mismo.Gameplay.Player.Presentation
             if(health==null)return;
             Matrix4x4 old=GUI.matrix;float scale=Scale;GUI.matrix=Matrix4x4.Scale(Vector3.one*scale);
             float width=Screen.width/scale,height=Screen.height/scale;
-            Fill(new Rect(24,24,300,132),Panel);Fill(new Rect(24,24,3,132),Gold);
+            FantasyUI.Panel(new Rect(24,24,300,132));
             Label(new Rect(43,34,260,22),"EXPLORADOR",16,Gold);
             Label(new Rect(43,63,260,20),"VIDA    "+Mathf.CeilToInt(health.Current)+" / "+health.Maximum.ToString("0"),14,Color.white);
             Bar(43,88,262,health.Normalized,new Color(.83f,.26f,.30f));
@@ -68,7 +114,7 @@ namespace Mismo.Gameplay.Player.Presentation
             Bar(43,131,262,stamina!=null?stamina.Normalized:0,new Color(.29f,.73f,.52f));
             if(combat!=null)
             {
-                Fill(new Rect(24,162,300,57),Panel);
+                FantasyUI.Panel(new Rect(24,162,300,57));
                 Label(new Rect(43,165,262,20),"FOCUS    "+combat.Focus.ToString("0")+" / 100",13,Gold);
                 Bar(43,193,262,combat.Focus/100,Gold);
             }
@@ -90,7 +136,7 @@ namespace Mismo.Gameplay.Player.Presentation
                     if(ability==null)continue;
                     float remaining=equipment.Runner.Remaining(ability);
                     bool active=equipment.Runner.Current!=null&&equipment.Runner.Current.Definition==ability;
-                    Ability(left+i*108,height-115,ability.IsPassive?"PASIVA":keys[i],ability.DisplayName,ability.IsPassive?"EQUIPADA":combat!=null&&combat.Focus<ability.focusCost?"FOCUS "+ability.focusCost.ToString("0"):Status(remaining,active),ability.cooldown>0?remaining/ability.cooldown:0,ability.IsPassive||stamina==null||stamina.Current>=ability.staminaCost);
+                    Ability(left+i*108,height-115,ability.IsPassive?"PASIVA":keys[i],ability.DisplayName,ability.IsPassive?"EQUIPADA":combat!=null&&combat.Focus<ability.focusCost?"FOCUS "+ability.focusCost.ToString("0"):Status(remaining,active),ability.cooldown>0?remaining/ability.cooldown:0,ability.IsPassive||stamina==null||stamina.Current>=ability.staminaCost,QuietFantasyUI.AbilityIcon(ability));
                 }
                 if(equipment.ActiveDefinition.isBow) Label(new Rect(width*Equipment.WeaponAim.Viewport.x-12,height*(1-Equipment.WeaponAim.Viewport.y)-12,24,24),"+",22,Gold,TextAnchor.MiddleCenter);
             }
@@ -112,13 +158,15 @@ namespace Mismo.Gameplay.Player.Presentation
             GUI.matrix=old;
         }
         private static string Status(float cooldown,bool active)=>active?"ACTIVO":cooldown>.01f?cooldown.ToString("0.0")+" s":"LISTO";
-        private void Ability(float x,float y,string key,string name,string status,float cooldown,bool affordable)
+        private void Ability(float x,float y,string key,string name,string status,float cooldown,bool affordable,string icon="sprint")
         {
-            Fill(new Rect(x,y,96,88),Panel);
+            Fill(new Rect(x,y,96,88),QuietFantasyUI.Surface);
+            QuietFantasyUI.DrawIcon(new Rect(x+28,y+15,43,43),icon,affordable?QuietFantasyUI.Ink:QuietFantasyUI.Muted);
             if(cooldown>0)Fill(new Rect(x,y+88*(1-Mathf.Clamp01(cooldown)),96,88*Mathf.Clamp01(cooldown)),new Color(.17f,.20f,.24f,.85f));
-            Fill(new Rect(x,y,96,2),status=="ACTIVO"?Color.white:Gold);
-            Label(new Rect(x+10,y+7,76,22),key,18,Gold);Label(new Rect(x+10,y+34,80,19),name,12,Color.white);
-            Label(new Rect(x+10,y+60,82,17),!affordable&&status=="LISTO"?"SIN STAMINA":status,11,affordable?Muted:new Color(1,.4f,.35f));
+            Label(new Rect(x+6,y+2,84,19),key,13,QuietFantasyUI.Amber);
+            Label(new Rect(x+3,y+58,90,17),name,12,QuietFantasyUI.Ink,TextAnchor.MiddleCenter);
+            Label(new Rect(x+3,y+74,90,14),!affordable&&status=="LISTO"?"SIN STAMINA":status,10,affordable?QuietFantasyUI.Muted:new Color(1,.4f,.35f),TextAnchor.MiddleCenter);
+            QuietFantasyUI.Border(new Rect(x,y,96,88),status=="ACTIVO"?QuietFantasyUI.Amber:QuietFantasyUI.Rule);
         }
         private void OnDisable(){if(Active==this)Active=null;}
         private void OnDestroy(){if(combat!=null)combat.Rewarded-=OnReward;if(mapCamera!=null)Destroy(mapCamera.gameObject);if(map!=null){map.Release();Destroy(map);}}

@@ -28,7 +28,7 @@ MonoBehaviour:
   slash:
     label: Golpe
     range: 2
-    windup: 0.31
+    windup: 0.5
     active: 0.18
     recovery: 0.85
     damage: 12

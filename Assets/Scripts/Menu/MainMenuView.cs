@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using Mismo.Gameplay.Player.World;
+using Mismo.Gameplay.Player.Presentation;
 using L = Mismo.Gameplay.Player.Localization.GameLanguage;
 
 namespace Mismo.Menu
@@ -22,8 +23,9 @@ namespace Mismo.Menu
         public Slider UI => ui;
         public bool OptionsVisible => options.activeSelf;
         bool loading;
+        Sprite fantasyFrame;
         readonly System.Collections.Generic.Dictionary<Text,string> originalLabels=new System.Collections.Generic.Dictionary<Text,string>();
-        void OnDestroy(){L.Changed-=RefreshLanguage;}
+        void OnDestroy(){L.Changed-=RefreshLanguage;if(fantasyFrame!=null)Destroy(fantasyFrame);}
         void RefreshLanguage(){foreach(var pair in originalLabels)if(pair.Key!=null)pair.Key.text=L.Text(pair.Value);}
         void OnGUI()
         {
@@ -31,7 +33,7 @@ namespace Mismo.Menu
             var old=GUI.matrix;
             float scale=Mathf.Min(Screen.width/1600f,Screen.height/900f);
             GUI.matrix=Matrix4x4.Scale(Vector3.one*scale);
-            if(GUI.Button(new Rect(1280,24,270,46),L.LanguageLabel))L.Next();
+            if(FantasyUI.Button(new Rect(1280,24,270,46),L.LanguageLabel))L.Next();
             GUI.matrix=old;
         }
         void Awake()
@@ -55,9 +57,34 @@ namespace Mismo.Menu
         }
         void Start()
         {
+            ApplyFantasyStyle();
             foreach(var text in GetComponentsInChildren<Text>(true))if(text!=status&&!text.text.Contains("%"))originalLabels[text]=text.text;
             L.Changed+=RefreshLanguage;RefreshLanguage();ShowOptions(false);
             if(status!=null)status.text=L.Text(status.text);
+        }
+        void ApplyFantasyStyle()
+        {
+            var texture=FantasyUI.FrameTexture;if(texture==null)return;
+            fantasyFrame=Sprite.Create(texture,new Rect(0,0,texture.width,texture.height),new Vector2(.5f,.5f),100,0,SpriteMeshType.FullRect,new Vector4(12,12,12,12));
+            foreach(var control in GetComponentsInChildren<Button>(true))
+            {
+                var image=control.targetGraphic as Image;if(image==null)continue;
+                image.color=new Color(.10f,.14f,.17f);
+                var label=control.GetComponentInChildren<Text>();if(label!=null)label.color=new Color(.94f,.90f,.79f);
+                AddFantasyFrame(control.transform,new Color(.72f,.65f,.46f));
+            }
+            var panel=transform.Find("Menu panel");
+            if(panel!=null)
+            {
+                var edge=panel.Find("Gold edge");if(edge!=null)edge.gameObject.SetActive(false);
+                AddFantasyFrame(panel,new Color(.72f,.65f,.46f));
+            }
+        }
+        void AddFantasyFrame(Transform parent,Color tint)
+        {
+            var go=new GameObject("Fantasy border",typeof(RectTransform),typeof(Image));go.transform.SetParent(parent,false);
+            var image=go.GetComponent<Image>();image.sprite=fantasyFrame;image.type=Image.Type.Sliced;image.fillCenter=false;image.color=tint;image.raycastTarget=false;
+            var rect=image.rectTransform;rect.anchorMin=Vector2.zero;rect.anchorMax=Vector2.one;rect.offsetMin=rect.offsetMax=Vector2.zero;
         }
         void Update()
         {
