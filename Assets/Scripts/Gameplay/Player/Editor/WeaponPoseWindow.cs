@@ -24,6 +24,7 @@ namespace Mismo.Gameplay.Player.Editor
         private float time;
         private bool holstered;
         private bool editSecond;
+        private bool editTrailTip;
         private Vector2 scroll;
         private UnityEditor.Editor profileEditor;
         private UnityEditor.Editor animationEditor;
@@ -158,6 +159,8 @@ namespace Mismo.Gameplay.Player.Editor
                 : (holstered ? "holstered" : "equipped")), true);
             if (EditorGUI.EndChangeCheck()) { poseData.ApplyModifiedProperties(); Refresh(); }
             UnityEditor.Editor.CreateCachedEditor(profile,null,ref profileEditor);
+            editTrailTip=EditorGUILayout.Toggle("Ajustar punta de estela en Scene",editTrailTip);
+            if(editTrailTip)EditorGUILayout.HelpBox("Mové el punto naranja hasta la punta de la hoja. Edita Trail Tip del perfil compartido; no mueve el arma. Desactivá esta opción para volver a ajustar el agarre.",MessageType.Info);
             EditorGUI.BeginChangeCheck(); profileEditor.OnInspectorGUI(); if(EditorGUI.EndChangeCheck()) Refresh();
             if(profile.animations==null && characterPrefab!=null && GUILayout.Button(weapon.family!=null?"Crear variantes de movimiento del perfil":"Crear conjunto de animaciones para este perfil"))
             {
@@ -233,6 +236,23 @@ namespace Mismo.Gameplay.Player.Editor
         private void DrawHandles(SceneView view)
         {
             if(stage==null || StageUtility.GetCurrentStage()!=stage || SelectedVisual==null || profile==null)return;
+            if(editTrailTip && visual!=null)
+            {
+                var root=visual.transform;
+                Vector3 tip=root.TransformPoint(profile.trailTip);
+                Handles.color=new Color(1,.6f,.1f);
+                Handles.DrawLine(root.position,tip);
+                Handles.Label(tip,"Punta de la estela");
+                EditorGUI.BeginChangeCheck();
+                tip=Handles.PositionHandle(tip,root.rotation);
+                if(EditorGUI.EndChangeCheck())
+                {
+                    Undo.RecordObject(profile,"Ajustar punta de estela");
+                    profile.trailTip=root.InverseTransformPoint(tip);
+                    EditorUtility.SetDirty(profile);Repaint();
+                }
+                return;
+            }
             var anchor=Pose.Resolve(character.transform,animator); if(anchor==null)return;
             Quaternion basis=Pose.Orientation(anchor,animator);
             EditorGUI.BeginChangeCheck();

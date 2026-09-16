@@ -12,13 +12,16 @@ namespace Mismo.Gameplay.Enemies
         private NavMeshAgent agent;
         private Health health;
         private float hitAt=-10;
+        private AnimationClip hitClip;
+        private AvatarMask hitMask;
+        private const float HitDuration = .36f;
         private readonly EnemyActionPlayback playback = new EnemyActionPlayback();
         public AnimationClip ActionClip => playback.ActionClip;
         public Animator Animator => animator;
         public void Configure(Animator value) => animator=value;
-        private void Awake(){goblin=GetComponent<GoblinController>();agent=GetComponent<NavMeshAgent>();health=GetComponent<Health>();if(animator==null)animator=GetComponentInChildren<Animator>();}
+        private void Awake(){goblin=GetComponent<GoblinController>();agent=GetComponent<NavMeshAgent>();health=GetComponent<Health>();if(animator==null)animator=GetComponentInChildren<Animator>();hitClip=Resources.Load<AnimationClip>("CombatPresentation/Human_Goblin_CombatDamage01");hitMask=Resources.Load<AvatarMask>("CombatPresentation/GoblinUpperBody");}
         private void OnEnable(){if(health!=null)health.Damaged+=OnHit;}
-        private void OnDisable(){if(health!=null)health.Damaged-=OnHit;playback.Dispose();}
+        private void OnDisable(){if(health!=null)health.Damaged-=OnHit;hitAt=-10;playback.Dispose();}
         private void OnHit(DamageInfo _) => hitAt=Time.time;
         private void Update()
         {
@@ -38,10 +41,12 @@ namespace Mismo.Gameplay.Enemies
                     break;
             }
             bool attacking=goblin.State==GoblinState.Telegraph||goblin.State==GoblinState.Attack||goblin.State==GoblinState.Recovery;
+            bool reacting = health != null && !health.IsDead && Time.time - hitAt < HitDuration;
             var phase=goblin.State==GoblinState.Telegraph?EnemyAttackPhase.Preparation
                 :goblin.State==GoblinState.Attack?EnemyAttackPhase.Active:EnemyAttackPhase.Recovery;
             playback.Tick(animator,attacking?goblin.CurrentAttack?.animation:null,phase,
-                goblin.StateProgress,motion,time,speed,Time.deltaTime);
+                goblin.StateProgress,motion,time,speed,Time.deltaTime,
+                reacting ? hitClip : null, Mathf.Clamp01((Time.time-hitAt)/HitDuration), hitMask);
         }
     }
 }

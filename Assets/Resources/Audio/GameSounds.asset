@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e35d5160da8f4fd6abc3ad350dd78bb7, type: 3}
+  m_Name: GameSounds
+  m_EditorClassIdentifier: Mismo.Audio::GameSoundCatalog
+  walkStepDistance: 2
+  runStepDistance: 2.5
+  explorationMusic: {fileID: 8300000, guid: 5e983f55a53771547a4e65d7d947c020, type: 3}
+  combatMusic: {fileID: 8300000, guid: 871894387cf1c4a45ad1eccbe0c95493, type: 3}
+  menuMusic: {fileID: 8300000, guid: 19451d9d26a5f87439c97d92d06ff681, type: 3}
+  meadowMusic: {fileID: 8300000, guid: 5e983f55a53771547a4e65d7d947c020, type: 3}
+  forestMusic: {fileID: 8300000, guid: 21cd7a0491f1f1f45bd40c34817707ef, type: 3}
+  highlandsMusic: {fileID: 8300000, guid: 74ab778f3c021514f8f17ce54146be4f, type: 3}
+  villageMusic: {fileID: 8300000, guid: 75d1374bbbaa45649b0b79718b37d5ef, type: 3}
+  villageMusicMargin: 25
+  musicZoneDelay: 2
+  entries:
+  - sound: 0
+    clip: {fileID: 8300000, guid: 97ad24644ea218c43a2c4d64fae54697, type: 3}
+    volume: 0.7
+    cooldown: 0.1
+  - sound: 1
+    clip: {fileID: 8300000, guid: 8174c6dc232264948b6f75333aaaa569, type: 3}
+    volume: 0.7
+    cooldown: 0.1
+  - sound: 2
+    clip: {fileID: 8300000, guid: 9174ef8e801fa304180b966d14fd36f0, type: 3}
+    volume: 0.35
+    cooldown: 0.1
+  - sound: 3
+    clip: {fileID: 8300000, guid: 0d6a461360b0133499d2d4220986eb3d, type: 3}
+    volume: 0.7
+    cooldown: 0.1
+  - sound: 4
+    clip: {fileID: 8300000, guid: b7a504c82c159184abe0b0249731ea1b, type: 3}
+    volume: 0.7
+    cooldown: 0.1
+  - sound: 5
+    clip: {fileID: 8300000, guid: fb6893b99c080914891e060977c8f1e8, type: 3}
+    volume: 0.7
+    cooldown: 0.3
+  - sound: 6
+    clip: {fileID: 8300000, guid: 15c13a73f03898c49acc32075739e992, type: 3}
+    volume: 0.7
+    cooldown: 0.3
+  - sound: 7
+    clip: {fileID: 8300000, guid: 2626d7095094ada4b93d60b1775c250a, type: 3}
+    volume: 0.7
+    cooldown: 0.3
+  - sound: 8
+    clip: {fileID: 8300000, guid: a9bbdd8cb415c204b8c9caede4ddf78e, type: 3}
+    volume: 0.7
+    cooldown: 0.3
+  - sound: 9
+    clip: {fileID: 8300000, guid: 488d9d31541088e4b90d19a9b852fd9c, type: 3}
+    volume: 0.7
+    cooldown: 0.3
+  - sound: 10
+    clip: {fileID: 8300000, guid: f3debaf1ec5f37a4f8bd3d68c88837af, type: 3}
+    volume: 0.7
+    cooldown: 0.3
+  - sound: 11
+    clip: {fileID: 8300000, guid: 0052b7571b45aa344ab3ea41cb0df5f1, type: 3}
+    volume: 0.7
+    cooldown: 0.3
+  - sound: 12
+    clip: {fileID: 8300000, guid: ae8813a10480a5741b8fcbb8a72cc4ef, type: 3}
+    volume: 0.7
+    cooldown: 0.3
+  - sound: 13
+    clip: {fileID: 8300000, guid: 2f92cbc31fb136d42858859a5c465b94, type: 3}
+    volume: 0.7
+    cooldown: 0.3
+  - sound: 14
+    clip: {fileID: 8300000, guid: 43503ffac73acf940b5d6c2e21453799, type: 3}
+    volume: 0.7
+    cooldown: 0.3
+  - sound: 15
+    clip: {fileID: 8300000, guid: ab814455aed12324a9eb4d6d9c863490, type: 3}
+    volume: 0.7
+    cooldown: 0.3
+  - sound: 16
+    clip: {fileID: 8300000, guid: 5a7c4408edeb5ae44b2e62b45820be0a, type: 3}
+    volume: 0.7
+    cooldown: 0.3
+  - sound: 17
+    clip: {fileID: 8300000, guid: 29bd300e976c5da41a9562ff573fd53e, type: 3}
+    volume: 0.5
+    cooldown: 0.08
+  - sound: 18
+    clip: {fileID: 8300000, guid: c8f0ba4a9cd858344a33c3c3b090a0a0, type: 3}
+    volume: 0.3
+    cooldown: 0.08
+  - sound: 19
+    clip: {fileID: 8300000, guid: bfe27eaaf8c47194b96d26bb045240fd, type: 3}
+    volume: 0.5
+    cooldown: 0.08
+  - sound: 20
+    clip: {fileID: 8300000, guid: 5e64edd3861c4854a9ac8689bbe04e15, type: 3}
+    volume: 0.7
+    cooldown: 0.08

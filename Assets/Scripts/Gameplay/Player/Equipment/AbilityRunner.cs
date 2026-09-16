@@ -8,6 +8,8 @@ namespace Mismo.Gameplay.Player.Equipment
     public sealed class AbilityRunner : MonoBehaviour
     {
         readonly Dictionary<AbilityDefinition,float> readyAt=new Dictionary<AbilityDefinition,float>();
+        AudioSource preparationAudio;
+        bool preparationAudioPaused;
         BasicSwordCombo combo;Health health;Stamina stamina;CombatState state;EquipmentLoadout loadout;
         AbilitySlot? pending;Vector3 pendingDirection,pendingPoint;Vector3? pendingAim;float pendingUntil;bool pendingDash;
         public AbilityExecution Current {get;private set;}
@@ -83,6 +85,8 @@ namespace Mismo.Gameplay.Player.Equipment
             if(definition.usesSwordCombo&&(combo==null||!combo.RequestAttack()))return false;
             stamina?.TrySpend(definition.staminaCost);state.Spend(definition.focusCost);
             Current=new AbilityExecution(this,weapon,definition,direction.sqrMagnitude>.001f?direction.normalized:Motor.Facing,groundPoint){AimPoint=aimPoint,Held=held};
+            if(definition.usesSwordCombo)PlayExecutionSound(definition,combo.CurrentStepIndex);
+            else StartPreparationSound(definition);
             readyAt[definition]=Time.time+definition.cooldown/(slot==AbilitySlot.Basic?Current.AttackSpeed:1);loadout.MarkCombat();Started?.Invoke(definition);return true;
         }
         public bool TryDash(Vector3 direction)
@@ -107,7 +111,14 @@ namespace Mismo.Gameplay.Player.Equipment
         {
             if(Current==null||dt<=0)return;
             var c=Current;var d=c.Definition;dt*=c.AttackSpeed;c.Elapsed+=dt;
-            if(d.usesSwordCombo){combo.Tick(dt);if(!combo.IsActive&&!combo.IsRecovering)Current=null;return;}
+            if(d.usesSwordCombo)
+            {
+                int previousStep=combo.CurrentStepIndex;
+                combo.Tick(dt);
+                if(combo.IsActive&&combo.CurrentStepIndex!=previousStep)PlayExecutionSound(d,combo.CurrentStepIndex);
+                if(!combo.IsActive&&!combo.IsRecovering)Current=null;
+                return;
+            }
             float start=Mathf.Max(0,d.preparation);
             if(d.chargeable)
             {
@@ -120,11 +131,57 @@ namespace Mismo.Gameplay.Player.Equipment
                 start=c.ReleasedAt;
             }
             float end=start+Mathf.Max(.01f,d.active);
-            if(!c.Began&&c.Elapsed>=start){c.Began=true;foreach(var action in d.actions)action?.Begin(c);}
+            if(!c.Began&&c.Elapsed>=start){c.Began=true;StopPreparationSound();PlayExecutionSound(d);foreach(var action in d.actions)action?.Begin(c);}
             float activeDt=Mathf.Max(0,Mathf.Min(c.Elapsed,end)-Mathf.Max(c.Elapsed-dt,start));
             if(c.Began&&!c.Ended&&activeDt>0)foreach(var action in d.actions)action?.Tick(c,activeDt);
             if(c.Began&&!c.Ended&&c.Elapsed>=end)EndActions(c);
             if(c.Elapsed>=end+d.recovery)Current=null;
+        }
+        static void PlayExecutionSound(AbilityDefinition definition, int comboStep = -1)
+        {
+            var steps = definition.comboStepSfx;
+            if(comboStep>=0&&steps!=null&&comboStep<steps.Length&&steps[comboStep]!=null)
+            {
+                var sound=steps[comboStep];
+                if(sound.volume<=0)return;
+                if(sound.clip!=null)
+                {
+                    AudioEvents.RaisePlayAbilitySFX(sound.clip,sound.volume);
+                    return;
+                }
+            }
+            if(definition.executionSfx!=null&&definition.executionSfxVolume>0)
+                AudioEvents.RaisePlayAbilitySFX(definition.executionSfx,definition.executionSfxVolume);
+        }
+        void StartPreparationSound(AbilityDefinition definition)
+        {
+            StopPreparationSound();
+            if(definition.preparationSfx==null||definition.preparationSfxVolume<=0||
+                (!definition.chargeable&&definition.preparation<=0))return;
+            if(preparationAudio==null)
+            {
+                preparationAudio=gameObject.AddComponent<AudioSource>();
+                preparationAudio.playOnAwake=false;
+                preparationAudio.spatialBlend=0;
+                preparationAudio.outputAudioMixerGroup=AudioRuntime.SfxGroup;
+            }
+            preparationAudio.clip=definition.preparationSfx;
+            preparationAudio.volume=Mathf.Clamp01(definition.preparationSfxVolume);
+            preparationAudio.loop=definition.loopPreparationSfx;
+            preparationAudio.Play();
+        }
+        void StopPreparationSound()
+        {
+            if(preparationAudio!=null){preparationAudio.Stop();preparationAudio.clip=null;}
+            preparationAudioPaused=false;
+        }
+        void Update()
+        {
+            if(preparationAudio==null||preparationAudio.clip==null)return;
+            if(Current==null||Current.Began||health!=null&&health.IsDead){StopPreparationSound();return;}
+            bool paused=Presentation.GameplayPause.IsPaused;
+            if(paused&&!preparationAudioPaused){preparationAudio.Pause();preparationAudioPaused=true;}
+            else if(!paused&&preparationAudioPaused){preparationAudio.UnPause();preparationAudioPaused=false;}
         }
         static void EndActions(AbilityExecution c){c.Ended=true;foreach(var action in c.Definition.actions)action?.End(c);}
         public bool Interrupt()
@@ -134,6 +191,7 @@ namespace Mismo.Gameplay.Player.Equipment
         }
         public void Cancel()
         {
+            StopPreparationSound();
             pending=null;pendingDash=false;
             if(Current==null)return;
             if(Current.Definition.usesSwordCombo)combo?.Cancel();
@@ -141,5 +199,6 @@ namespace Mismo.Gameplay.Player.Equipment
             Parry?.Cancel();GetComponent<DefenseWindow>()?.CloseParry();Motor?.ClearControlledMovement();Current=null;
         }
         void OnDisable()=>Cancel();
+        void OnDestroy(){if(preparationAudio!=null)Destroy(preparationAudio);}
     }
 }

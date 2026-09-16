@@ -36,7 +36,7 @@ namespace Mismo.Gameplay.Player.Presentation
             if(buttons==null)buttons=new GUIStyle(GUI.skin.button){fontSize=16,alignment=TextAnchor.MiddleCenter};
             StyleButton(buttons);
             var old=GUI.backgroundColor;GUI.backgroundColor=new Color(.10f,.14f,.17f);
-            bool clicked=GUI.Button(rect,title,buttons);GUI.backgroundColor=old;
+            bool clicked=GameAudio.Button(rect,title,buttons);GUI.backgroundColor=old;
             Frame(rect,rect.Contains(Event.current.mousePosition)?PlayerHUD.Gold:new Color(.64f,.59f,.44f));
             return clicked;
         }

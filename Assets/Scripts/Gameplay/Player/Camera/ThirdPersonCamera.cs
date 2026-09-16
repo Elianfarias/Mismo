@@ -46,6 +46,7 @@ namespace Mismo.Gameplay.Player.Camera
         /// <summary>Actualiza la orientación antes de calcular el movimiento relativo a cámara.</summary>
         private void Update()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
             if (Presentation.WorldMapPanel.BlocksGameplay) return;
             if(input!=null&&input.GetComponent<World.GatheringPlayer>()?.BlocksGameplay==true)return;
             if (input != null && input.GetComponent<Equipment.Inventory.InventoryPanel>() is Equipment.Inventory.InventoryPanel panel && panel.BlocksGameplay) return;
@@ -70,6 +71,7 @@ namespace Mismo.Gameplay.Player.Camera
         /// <summary>Sigue la posición final del motor y acorta la distancia cuando hay geometría delante.</summary>
         private void LateUpdate()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
             if (target == null) return;
             Vector3 desiredPivot = target.position + Vector3.up * height;
             if (Vector3.Distance(pivot, desiredPivot) > 12f) pivot = desiredPivot;

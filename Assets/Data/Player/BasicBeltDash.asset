@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea1891a334fa3904084e220969ba20c4, type: 3}
   m_Name: BasicBeltDash
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Dash.BasicDashBehaviour
+  activationSfx: {fileID: 8300000, guid: b7306b6a2741fd24ba04ffc3049a1201, type: 3}
+  activationSfxVolume: 1
   settings: {fileID: 11400000, guid: deac4d4262493c74191ea8abd4da79c7, type: 2}

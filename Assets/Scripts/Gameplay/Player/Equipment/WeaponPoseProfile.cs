@@ -61,9 +61,16 @@ namespace Mismo.Gameplay.Player.Equipment
         public WeaponAttachmentPose holstered = new WeaponAttachmentPose { anchor = WeaponAnchor.Character, offset = new Vector3(0,1.2f,-.25f) };
         [Tooltip("Opcional. Mismo contrato de parámetros Motion, ActionTime y PlaybackRate del controlador base.")]
         public AnimatorOverrideController animations;
+        [Header("Estela del arma (VFX)")]
         public bool meleeTrail;
         [Tooltip("Punta de la estela, en coordenadas locales del prefab visual del arma.")]
         public Vector3 trailTip = Vector3.forward;
+        [Min(.01f)] public float trailDuration = .10f;
+        [Min(0f)] public float trailWidth = .28f;
+        public Color trailStartColor = new Color(1,.88f,.50f,.8f);
+        public Color trailEndColor = new Color(1,.7f,.2f,0);
+        [Tooltip("Opcional: material de la estela. Sin asignar usa el material predeterminado.")]
+        public Material trailMaterial;
         public void HideEmbeddedVisuals(Animator animator)
         {
             if(animator==null || hiddenRendererPaths==null)return;

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.WeaponPoseProfile
   hiddenRendererPaths: []
   equipped:
-    anchor: 3
+    anchor: 2
     bonePath: Armature_Humanoid/Root/Hips/Spine/Chest/Clavicle.R/UpperArm.R/LowerArm.R/Hand.R
-    offset: {x: 0.2775097, y: 0.4843445, z: -0.032656502}
-    rotation: {x: 3.5158362, y: 8.944874, z: 318.4488}
+    offset: {x: -0.0052512893, y: 0.27372184, z: -0.032666974}
+    rotation: {x: 306.21973, y: 278.8875, z: 233.35956}
     scale: 1
   holstered:
     anchor: 0
@@ -27,4 +27,9 @@ MonoBehaviour:
     scale: 1
   animations: {fileID: 22100000, guid: 761316247099e594f894e862f12a1ac4, type: 2}
   meleeTrail: 1
-  trailTip: {x: 0, y: 0, z: 1}
+  trailTip: {x: 0, y: 0.55, z: 0}
+  trailDuration: 0.1
+  trailWidth: 0.28
+  trailStartColor: {r: 1, g: 0.88, b: 0.5, a: 0.8}
+  trailEndColor: {r: 1, g: 0.7, b: 0.2, a: 0}
+  trailMaterial: {fileID: 0}

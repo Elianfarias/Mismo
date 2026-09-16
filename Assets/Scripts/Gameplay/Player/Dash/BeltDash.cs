@@ -51,6 +51,8 @@ namespace Mismo.Gameplay.Player.Dash
             CooldownStarted?.Invoke(runningBehaviour.Cooldown);
             IsActive = true;
             execution=new SpecialAbilityExecution(gameObject,direction);runningBehaviour.Begin(execution);
+            if(runningBehaviour.activationSfx!=null&&runningBehaviour.activationSfxVolume>0)
+                AudioEvents.RaisePlayAbilitySFX(runningBehaviour.activationSfx,runningBehaviour.activationSfxVolume);
             GetComponent<Mismo.Gameplay.Combat.Invulnerability>()?.StartWindow(runningBehaviour.InvulnerabilityDuration);
             if(runningBehaviour.InvulnerabilityDuration>0)GetComponent<Mismo.Gameplay.Combat.DefenseWindow>()?.OpenDodge(runningBehaviour.InvulnerabilityDuration);
             return true;

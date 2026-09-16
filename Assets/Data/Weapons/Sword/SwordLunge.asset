@@ -80,6 +80,12 @@ MonoBehaviour:
   cancelRecovery: 0
   focusCost: 0
   focusGainOnHit: 0
+  preparationSfx: {fileID: 0}
+  preparationSfxVolume: 1
+  loopPreparationSfx: 0
+  executionSfx: {fileID: 8300000, guid: e39633a1316149344bf539d298d34863, type: 3}
+  executionSfxVolume: 0.5
+  comboStepSfx: []
   pose: 1
   usesSwordCombo: 0
   targetsGround: 0

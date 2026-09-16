@@ -94,23 +94,19 @@ namespace Mismo.Gameplay.Player.Presentation
         private void OnComboStarted(int step, string id)
         {
             // Feedback corto por etapa para distinguir la cadena aun sin animación final.
-            float frequency = 320f + step * 70f;
             Emit(transform.position + Facing * 0.55f + Vector3.up, Facing,
                 comboColor, 8 + step * 3, 1.4f + step * 0.2f, 0.08f);
-            PlayTone(frequency, 0.06f, 0.28f);
         }
 
         private void OnSpinStarted()
         {
             Emit(transform.position + Vector3.up, Vector3.up, spinColor, 16, 2.4f, 0.13f);
-            PlayTone(430f, 0.1f, 0.48f);
         }
 
         private void OnLungeStarted()
         {
             Vector3 direction=swordLunge!=null?swordLunge.Direction:Facing;
             Emit(transform.position + direction*.55f + Vector3.up, direction, spinColor, 12, 2f, 0.11f);
-            PlayTone(560f, 0.08f, 0.42f);
         }
 
         /// <summary>Emite impacto rojo y un tono grave en el punto recibido.</summary>
@@ -124,32 +120,33 @@ namespace Mismo.Gameplay.Player.Presentation
         public void NotifyBlocked(Vector3 point, Vector3 normal)
         {
             Emit(point, normal, blockedColor, 14, 2.1f, 0.1f);
-            PlayTone(720f, 0.09f, 0.52f);
         }
 
         /// <summary>Emite una señal dorada para un parry confirmado.</summary>
         public void NotifyParried(Vector3 point, Vector3 direction)
         {
             Emit(point, direction, parriedColor, 20, 3.2f, 0.12f);
-            PlayTone(980f, 0.13f, 0.62f);
         }
 
-        /// <summary>Marca visual y sonoramente el inicio de un cooldown.</summary>
+        /// <summary>Marca visualmente el inicio de un cooldown.</summary>
         public void NotifyCooldown(float duration)
         {
             cooldownDuration = Mathf.Max(0f, duration);
             cooldownRemaining = cooldownDuration;
             Emit(transform.position + Vector3.up, Vector3.up, cooldownColor, 9, 1.3f, 0.09f);
-            PlayTone(260f, 0.11f, 0.4f);
         }
 
-        private void OnCooldownStarted(float duration) => NotifyCooldown(duration);
+        private void OnCooldownStarted(float duration)
+        {
+            cooldownDuration = Mathf.Max(0f, duration);
+            cooldownRemaining = cooldownDuration;
+            Emit(transform.position + Vector3.up, Vector3.up, cooldownColor, 9, 1.3f, 0.09f);
+        }
 
         private void OnCooldownReady()
         {
             cooldownRemaining = 0f;
             Emit(transform.position + Vector3.up, Vector3.up, cooldownColor, 5, 0.8f, 0.07f);
-            PlayTone(520f, 0.08f, 0.32f);
         }
 
         private void CreatePresentationObjects()

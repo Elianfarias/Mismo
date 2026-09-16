@@ -38,7 +38,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             if (!IsReady || !materialDefinitions.ContainsKey(id)) return false;
             var next = profile.Copy();
-            return next.TryAddMaterial(id, quantity) && Fits(next, false) && Commit(next, "+" + quantity + " " + materialDefinitions[id].displayName, false);
+            return next.TryAddMaterial(id, quantity) && Fits(next, false) && Commit(next, "+" + quantity + " " + materialDefinitions[id].displayName, false, GameSound.ResourceCollected);
         }
 
         public void Initialize(ItemCatalog items, IProfileRepository storage = null)
@@ -155,7 +155,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(RegionMinimum(id)>0)return true;
             var next=profile.Copy();next.EnsureWorldData();
             next.regions.Add(new DiscoveredRegion{id=id,minimumLevel=Mathf.Clamp(Level+Mathf.Clamp(increment,0,100),1,1100)});
-            return Commit(next,"Nueva región · Nivel mínimo "+next.regions[next.regions.Count-1].minimumLevel,false);
+            return Commit(next,"Nueva región · Nivel mínimo "+next.regions[next.regions.Count-1].minimumLevel,false,GameSound.RegionDiscovered);
         }
         public OwnedWeapon Item(string instanceId) => profile?.Find(instanceId)?.Copy();
         public string ItemName(string id)
@@ -282,7 +282,11 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             string notice="+"+experience+" EXP"+(next.progression.level>previous?" · Nivel "+next.progression.level:"")+
                 (added?" · Arma T"+drop.tier+" obtenida":"")+(waiting?" · Mochila llena: botín guardado en el suelo.":"");
             if(newMount)notice+=" · "+Localization.GameLanguage.Text("La criatura te reconoce como su amo.");
-            return Commit(next,notice,false);
+            if (!Commit(next,notice,false)) return false;
+            if (next.progression.level > previous) GameAudio.Play(GameSound.LevelUp);
+            else if (experience > 0) GameAudio.Play(GameSound.ExperienceGained);
+            if (drop != null) GameAudio.Play(GameSound.WeaponDrop);
+            return true;
         }
         bool HasFamily(string id)
         {if(FindFamily(id)!=null)return true;foreach(var weapon in catalog.weapons)if(weapon.MasteryId==id)return true;return false;}
@@ -301,7 +305,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if (!IsReady || !loadout.CanChangeEquipment || Definition(instanceId)==null || Definition(instanceId).isShield) return false;
             var next = profile.Copy();
             if(!next.TryEquip(slot,instanceId))return false;
-            NormalizeHands(next);return Commit(next,"Equipamiento guardado.");
+            NormalizeHands(next);return Commit(next,"Equipamiento guardado.",true,GameSound.ItemEquipped);
         }
 
         public bool TryEquipDefinition(int slot, WeaponDefinition definition)
@@ -315,7 +319,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             if (!IsReady || !loadout.CanSwap) return false;
             var next = profile.Copy(); next.activeSlot = 1 - next.activeSlot;
-            return Commit(next, "Equipamiento guardado.");
+            return Commit(next, "Equipamiento guardado.",true,GameSound.ItemEquipped);
         }
 
         public bool TryClaimReward(string rewardId)
@@ -331,12 +335,12 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 next.weapons.Remove(reward);next.claimedRewards.Remove(rewardId);
                 next.pendingLoot.Add(new PendingInventoryLoot{id=Guid.NewGuid().ToString("N"),rewardId=rewardId,weapon=reward,
                     x=transform.position.x,y=transform.position.y,z=transform.position.z});
-                return Commit(next,"Mochila llena: la recompensa única quedó guardada como botín en el suelo.",false);
+                return Commit(next,"Mochila llena: la recompensa única quedó guardada como botín en el suelo.",false,GameSound.WeaponDrop);
             }
-            return Commit(next, "Obtuviste " + catalog.Find(definition).DisplayName + " T2 Guardián. [I] Inventario", false);
+            return Commit(next, "Obtuviste " + catalog.Find(definition).DisplayName + " T2 Guardián. [I] Inventario", false,GameSound.WeaponDrop);
         }
 
-        bool Commit(InventoryProfile next, string notice, bool updateEquipment = true)
+        bool Commit(InventoryProfile next, string notice, bool updateEquipment = true, GameSound? sound = null)
         {
             next.worldPlaySeconds=System.Math.Max(next.worldPlaySeconds,worldClock);
             NormalizeGrid(next);
@@ -347,12 +351,14 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 Notice = "No se pudo guardar el cambio. Volvé a intentarlo; tu equipo anterior sigue intacto.";
                 HasSaveProblem = true; Changed?.Invoke();
                 Debug.LogWarning("Inventory save: " + e.Message, this);
+                GameAudio.Play(GameSound.SaveFailed);
                 return false;
             }
             profile = next; Notice = notice; HasSaveProblem = false;
             if (updateEquipment) ApplyEquipment();
             ApplyStats();
             Changed?.Invoke();
+            if (sound.HasValue) GameAudio.Play(sound.Value);
             return true;
         }
 

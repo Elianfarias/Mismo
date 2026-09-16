@@ -13,36 +13,49 @@ MonoBehaviour:
   m_Name: DualSwordsCombatAnimations
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Presentation.WeaponAnimationSet
   locomotion: {fileID: 0}
-  actionMask: {fileID: 0}
+  actionMask: {fileID: 31900000, guid: 8dad448f98cc494499aed1cd356e887a, type: 2}
   actions:
   - ability: {fileID: 11400000, guid: e2e0ba6f12d861e4a918f20a0ca3d45b, type: 2}
     clip: {fileID: 0}
+    maskMode: 0
+    customMask: {fileID: 0}
     comboClips:
-    - {fileID: 7400000, guid: 5efa5d683940fe14e90bf6e2af3a6e0d, type: 2}
-    - {fileID: 7400000, guid: baae382117c98014aa67ba25c5a6e67b, type: 2}
-    - {fileID: 7400000, guid: 0ff1aa7276697c04eb4cb6dcde299e74, type: 2}
-    blendSeconds: 0.06
+    - {fileID: 7400000, guid: 8386fa99223c4ec4ba2493c37bfe3409, type: 2}
+    - {fileID: 7400000, guid: 494350ef58924d90b65b923e6e4f38b5, type: 2}
+    - {fileID: 7400000, guid: 8386fa99223c4ec4ba2493c37bfe3409, type: 2}
+    activeStartsAt: 0.3
+    recoveryStartsAt: 0.65
+    blendSeconds: 0.08
+    torsoUprightDegrees: 12
   - ability: {fileID: 11400000, guid: 6ec79b442905587c94ee2bae4fd5e02b, type: 2}
-    clip: {fileID: 7400000, guid: b596b2e146705954ab53724f97844c36, type: 2}
+    clip: {fileID: 7400000, guid: 09a2815d54a24506a310fda7e84b6b82, type: 2}
+    maskMode: 0
+    customMask: {fileID: 0}
     comboClips: []
-    activeStartsAt: 0.25
-    recoveryStartsAt: 0.8
-    blendSeconds: 0.06
+    activeStartsAt: 0.3
+    recoveryStartsAt: 0.65
+    blendSeconds: 0.08
   - ability: {fileID: 11400000, guid: 5caa93e883ad5175996e70b7c5a9e904, type: 2}
-    clip: {fileID: 7400000, guid: 88e4a76086c017547a2e9b77e596d2f0, type: 2}
+    clip: {fileID: 7400000, guid: 09a2815d54a24506a310fda7e84b6b82, type: 2}
+    maskMode: 0
+    customMask: {fileID: 0}
     comboClips: []
-    activeStartsAt: 0.25
-    recoveryStartsAt: 0.8
-    blendSeconds: 0.06
+    activeStartsAt: 0.3
+    recoveryStartsAt: 0.65
+    blendSeconds: 0.08
   - ability: {fileID: 11400000, guid: 7e33e2b4c64d51e0812207f83c55d152, type: 2}
-    clip: {fileID: 7400000, guid: 69bae23fd6f86d048a11029673c305e7, type: 2}
+    clip: {fileID: 7400000, guid: 8386fa99223c4ec4ba2493c37bfe3409, type: 2}
+    maskMode: 0
+    customMask: {fileID: 0}
     comboClips: []
-    activeStartsAt: 0.25
-    recoveryStartsAt: 0.8
-    blendSeconds: 0.06
+    activeStartsAt: 0.3
+    recoveryStartsAt: 0.65
+    blendSeconds: 0.08
   - ability: {fileID: 11400000, guid: cb78b7969a9d53e4b85caa3d816a0804, type: 2}
-    clip: {fileID: 7400000, guid: 93274d37420cceb42b616d59e9be694e, type: 2}
+    clip: {fileID: 7400000, guid: b60d50dd66c54563b55f4c749b39f905, type: 2}
+    maskMode: 0
+    customMask: {fileID: 0}
     comboClips: []
-    activeStartsAt: 0.25
-    recoveryStartsAt: 0.8
-    blendSeconds: 0.06
+    activeStartsAt: 0.3
+    recoveryStartsAt: 0.65
+    blendSeconds: 0.08

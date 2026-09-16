@@ -30,6 +30,15 @@ namespace Mismo.Gameplay.Player.Presentation
         private WeaponActionPlayback playback;
         private Equipment.EquipmentLoadout loadout;
         private float jumpedAt = -10f;
+        private float hitAt = -10f;
+        private AnimationClip hitClip;
+        private AvatarMask hitMask;
+        private const float HitDuration = .36f;
+        private Transform torsoBone;
+        private Quaternion torsoBeforeCorrection;
+        private bool torsoCorrectionApplied;
+        private float torsoCorrection;
+        private float targetTorsoCorrection;
         private float landedAt = -10f;
         private float lastGroundedAt = -10f;
         private const float GroundGrace = .12f;
@@ -48,9 +57,30 @@ namespace Mismo.Gameplay.Player.Presentation
             if (animator != null) animator.applyRootMotion = false;
             if (animator != null) baseController = animator.runtimeAnimatorController;
             loadout = GetComponent<Equipment.EquipmentLoadout>();
+            hitClip = Resources.Load<AnimationClip>("CombatPresentation/Human_Player_CombatDamage01");
+            hitMask = Resources.Load<AvatarMask>("CombatPresentation/PlayerUpperBody");
         }
-        private void OnEnable() { if(motor != null) { motor.Jumped += OnJump; motor.Landed += OnLand; } }
-        private void OnDisable() { if(motor != null) { motor.Jumped -= OnJump; motor.Landed -= OnLand; } playback?.Dispose();playback=null;ActionClip=null; }
+        private void OnEnable() { if(motor != null) { motor.Jumped += OnJump; motor.Landed += OnLand; } if(health!=null)health.Damaged+=OnHit; }
+        private void OnDisable() { RestoreTorso();torsoCorrection=targetTorsoCorrection=0;if(motor != null) { motor.Jumped -= OnJump; motor.Landed -= OnLand; } if(health!=null)health.Damaged-=OnHit;hitAt=-10f;playback?.Dispose();playback=null;ActionClip=null; }
+        private void RestoreTorso()
+        {
+            if(torsoCorrectionApplied&&torsoBone!=null)torsoBone.localRotation=torsoBeforeCorrection;
+            torsoCorrectionApplied=false;
+        }
+        private void LateUpdate()
+        {
+            if(animator==null||!animator.enabled)return;
+            if(torsoBone==null)
+                foreach(var bone in animator.GetComponentsInChildren<Transform>())
+                    if(bone.name=="Spine"){torsoBone=bone;break;}
+            if(torsoBone==null)return;
+            torsoCorrection=Mathf.Lerp(torsoCorrection,targetTorsoCorrection,1f-Mathf.Exp(-Time.deltaTime/.06f));
+            if(Mathf.Abs(torsoCorrection)<.01f)return;
+            torsoBeforeCorrection=torsoBone.localRotation;
+            torsoBone.rotation=Quaternion.AngleAxis(-torsoCorrection,animator.transform.right)*torsoBone.rotation;
+            torsoCorrectionApplied=true;
+        }
+        private void OnHit(DamageInfo _) { if(health!=null&&!health.IsDead)hitAt=Time.time; }
         private void OnJump() => jumpedAt = Time.time;
         private void OnLand()
         {
@@ -59,6 +89,8 @@ namespace Mismo.Gameplay.Player.Presentation
         }
         private void Update()
         {
+            RestoreTorso();
+            targetTorsoCorrection=0;
             var profile = loadout != null && loadout.ActiveDefinition != null ? loadout.ActiveDefinition.poseProfile : null;
             var family = loadout != null && loadout.ActiveDefinition != null ? loadout.ActiveDefinition.family : null;
             var animationSet=family!=null?family.animations:null;
@@ -100,10 +132,16 @@ namespace Mismo.Gameplay.Player.Presentation
             {
                 var binding=animationSet.Find(actionFrame.Ability);
                 if(binding!=null && binding.TrySample(actionFrame,out var actionClip,out clipTime))
-                {ActionClip=actionClip;blend=binding.blendSeconds;resolvedMask=binding.ResolveMask(actionMask);}
+                {ActionClip=actionClip;blend=binding.blendSeconds;resolvedMask=binding.ResolveMask(actionMask);targetTorsoCorrection=binding.torsoUprightDegrees;}
             }
             if(ActionClip==null && (health==null || !health.IsDead))
             {var motion=Motion;legacy.Resolve(abilityRunner,ref motion,ref actionTime);Motion=motion;}
+            if (hitClip != null && health != null && !health.IsDead && Time.time - hitAt < HitDuration)
+            {
+                ActionClip = hitClip; clipTime = Mathf.Clamp01((Time.time - hitAt) / HitDuration);
+                blend = .045f; resolvedMask = hitMask;
+                targetTorsoCorrection=0;
+            }
             float reference=Motion==CharacterMotion.Run?referenceRunSpeed:referenceWalkSpeed;
             float blendTarget=speed<=referenceWalkSpeed ? speed/referenceWalkSpeed : 1f+(speed-referenceWalkSpeed)/Mathf.Max(.1f,referenceRunSpeed-referenceWalkSpeed);
             locomotionSpeed=Mathf.Lerp(locomotionSpeed,Mathf.Clamp(blendTarget,0f,2f),1f-Mathf.Exp(-Time.deltaTime/.08f));

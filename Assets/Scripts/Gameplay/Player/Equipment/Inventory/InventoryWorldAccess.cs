@@ -28,6 +28,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         }
         void Update()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
             if(inventory==null||!inventory.IsReady)return;
             if(Time.unscaledTime>=nextRefresh)
             {
@@ -83,6 +84,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         }
         void OnGUI()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
             if(inventory==null||!inventory.CanManage||InventoryPanel.AnyOpen||Presentation.WorldMapPanel.AnyOpen)return;
             string prompt=AtChest?"[F] Abrir cofre personal":null;
             if(prompt==null)foreach(var loot in inventory.PendingLoot)

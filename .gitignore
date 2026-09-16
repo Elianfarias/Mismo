@@ -49,6 +49,7 @@ Thumbs.db
 
 # Local isolated Unity validation projects
 /.validation/
+/.human-animation-bake/
 
 # Unity project configuration and package manifests must remain versioned.
 # Keep Assets/, Packages/, and ProjectSettings/ out of the ignore rules.

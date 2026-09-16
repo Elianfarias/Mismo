@@ -45,9 +45,9 @@ namespace Mismo.Gameplay.Player.Presentation
             var health=GetComponent<Mismo.Gameplay.Combat.Health>();if(health!=null&&health.IsDead)return false;
             var equipment=GetComponent<Equipment.EquipmentLoadout>();equipment?.Runner.Cancel();equipment?.Belt?.Cancel();
             previousLock=Cursor.lockState;previousVisible=Cursor.visible;Cursor.lockState=CursorLockMode.None;Cursor.visible=true;
-            active=this;IsOpen=true;Recenter();EnsureView();return true;
+            active=this;IsOpen=true;GameAudio.Play(GameSound.MenuOpen);Recenter();EnsureView();return true;
         }
-        public void Close(){if(!IsOpen)return;IsOpen=false;closedFrame=Time.frameCount;Cursor.lockState=previousLock;Cursor.visible=previousVisible;}
+        public void Close(){if(!IsOpen)return;GameAudio.Play(GameSound.MenuClose);IsOpen=false;closedFrame=Time.frameCount;Cursor.lockState=previousLock;Cursor.visible=previousVisible;}
         public void Recenter(){Center=new Vector2(transform.position.x,transform.position.z);dirty=true;}
         public void SetZoom(float value){Zoom=Mathf.Clamp(value,40,2400);dirty=true;}
         public void Pan(Vector2 delta){Center+=delta;dirty=true;}
@@ -63,6 +63,7 @@ namespace Mismo.Gameplay.Player.Presentation
         }
         void Update()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
             var keyboard=Keyboard.current;
             if(keyboard!=null&&keyboard.mKey.wasPressedThisFrame){if(IsOpen)Close();else Open();}
             else if(IsOpen&&keyboard!=null&&keyboard.escapeKey.wasPressedThisFrame)Close();
@@ -124,6 +125,7 @@ namespace Mismo.Gameplay.Player.Presentation
         }
         void OnGUI()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
             if(!IsOpen)return;
             int depth=GUI.depth;GUI.depth=-100;var old=GUI.color;GUI.color=new Color(.035f,.055f,.08f,.99f);GUI.DrawTexture(new Rect(0,0,Screen.width,Screen.height),Texture2D.whiteTexture);GUI.color=Color.white;
             var title=new GUIStyle(GUI.skin.label){fontSize=25,fontStyle=FontStyle.Bold};GUI.Label(new Rect(26,18,350,42),"MAPA DEL MUNDO",title);

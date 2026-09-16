@@ -57,6 +57,8 @@ namespace Mismo.Menu
         }
         void Start()
         {
+            foreach (var control in GetComponentsInChildren<Selectable>(true))
+                if (control.GetComponent<UISoundFeedback>() == null) control.gameObject.AddComponent<UISoundFeedback>();
             ApplyFantasyStyle();
             foreach(var text in GetComponentsInChildren<Text>(true))if(text!=status&&!text.text.Contains("%"))originalLabels[text]=text.text;
             L.Changed+=RefreshLanguage;RefreshLanguage();ShowOptions(false);
@@ -93,6 +95,7 @@ namespace Mismo.Menu
         public void ShowOptions(bool show)
         {
             if(loading)return;
+            if (options.activeSelf != show) GameAudio.Play(show ? GameSound.MenuOpen : GameSound.MenuClose);
             home.SetActive(!show);options.SetActive(show);
             if(EventSystem.current!=null)EventSystem.current.SetSelectedGameObject(show?music.gameObject:continueGame!=null&&continueGame.interactable?continueGame.gameObject:begin.gameObject);
             if(!show)PlayerPrefs.Save();
@@ -148,21 +151,21 @@ namespace Mismo.Menu
             Label(transform,"DOS ARMAS. TU ESTILO.",new Vector2(1040,745),new Vector2(470,45),27,Color.white);
             Label(transform,"Explorá la región y encontrá tu próximo desafío.",new Vector2(900,798),new Vector2(610,35),18,new Color(.8f,.85f,.8f));
         }
-        static Image Box(string name,Transform parent,Vector2 position,Vector2 size,Color color)
+        internal static Image Box(string name,Transform parent,Vector2 position,Vector2 size,Color color)
         {
             var go=new GameObject(name,typeof(RectTransform),typeof(Image));go.transform.SetParent(parent,false);
             var rect=go.GetComponent<RectTransform>();rect.anchorMin=rect.anchorMax=new Vector2(0,1);rect.pivot=new Vector2(0,1);
             rect.anchoredPosition=new Vector2(position.x,-position.y);rect.sizeDelta=size;
             var image=go.GetComponent<Image>();image.color=color;image.raycastTarget=false;return image;
         }
-        static Text Label(Transform parent,string text,Vector2 position,Vector2 size,int fontSize,Color color)
+        internal static Text Label(Transform parent,string text,Vector2 position,Vector2 size,int fontSize,Color color)
         {
             var go=new GameObject(text,typeof(RectTransform),typeof(Text));go.transform.SetParent(parent,false);
             var rect=go.GetComponent<RectTransform>();rect.anchorMin=rect.anchorMax=new Vector2(0,1);rect.pivot=new Vector2(0,1);rect.anchoredPosition=new Vector2(position.x,-position.y);rect.sizeDelta=size;
             var label=go.GetComponent<Text>();label.text=text;label.font=Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");label.fontSize=fontSize;label.color=color;label.raycastTarget=false;
             label.verticalOverflow=VerticalWrapMode.Overflow;return label;
         }
-        static Button ButtonAt(Transform parent,string title,float y,bool primary)
+        internal static Button ButtonAt(Transform parent,string title,float y,bool primary)
         {
             var image=Box(title,parent,new Vector2(0,y),new Vector2(450,66),primary?new Color(.83f,.7f,.43f):new Color(.12f,.17f,.19f));image.raycastTarget=true;
             var button=image.gameObject.AddComponent<Button>();button.targetGraphic=image;
@@ -170,7 +173,7 @@ namespace Mismo.Menu
             var text=Label(image.transform,title,new Vector2(24,17),new Vector2(400,36),25,primary?new Color(.07f,.09f,.1f):Color.white);
             return button;
         }
-        static Slider SliderAt(Transform parent,string title,float y)
+        internal static Slider SliderAt(Transform parent,string title,float y)
         {
             Label(parent,title,new Vector2(0,y),new Vector2(310,30),22,Color.white);
             var value=Label(parent,"75 %",new Vector2(355,y),new Vector2(95,30),20,new Color(.86f,.72f,.43f));

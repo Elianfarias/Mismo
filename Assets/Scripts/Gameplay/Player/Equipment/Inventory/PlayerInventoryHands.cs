@@ -18,7 +18,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             if(!CanManage||slot<0||slot>1||id!=null&&!CanUseOffhand(slot,id))return false;
             var next=profile.Copy();
-            return next.TryEquipOffhand(slot,id)&&Commit(next,id==null?"Mano secundaria libre.":"Combinación y habilidades actualizadas.");
+            return next.TryEquipOffhand(slot,id)&&Commit(next,id==null?"Mano secundaria libre.":"Combinación y habilidades actualizadas.",true,GameSound.ItemEquipped);
         }
         void NormalizeHands(InventoryProfile data)
         {

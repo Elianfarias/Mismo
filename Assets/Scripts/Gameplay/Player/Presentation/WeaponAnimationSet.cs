@@ -34,6 +34,8 @@ namespace Mismo.Gameplay.Player.Presentation
         [Range(0,1)] public float activeStartsAt=.35f;
         [Range(0,1)] public float recoveryStartsAt=.7f;
         [Min(0)] public float blendSeconds=.06f;
+        [Tooltip("Positivo endereza el torso durante esta habilidad; 0 conserva el clip original. No modifica las piernas.")]
+        [Range(-30,30)] public float torsoUprightDegrees;
         public bool TrySample(CombatAnimationFrame frame,out AnimationClip selected,out float normalized)
         {
             selected=clip; normalized=0;

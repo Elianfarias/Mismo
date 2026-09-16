@@ -47,6 +47,22 @@ namespace Mismo.Gameplay.Player.World
             return y;
         }
         public float VillageHalfExtent=>26*Mathf.Max(1,settings.content!=null?settings.content.villageSizeMultiplier:2);
+        public bool NearVillage(float x, float z, float margin)
+        {
+            float extent = VillageHalfExtent + Mathf.Clamp(margin, 0, 128);
+            if (settings.preserveAuthoredCenter && Mathf.Max(Mathf.Abs(x + 50), Mathf.Abs(z + 70)) <= extent) return true;
+            int spacing = Mathf.Max(64, settings.siteSpacing);
+            int cx = Mathf.FloorToInt(x / spacing), cz = Mathf.FloorToInt(z / spacing);
+            int radius = Mathf.CeilToInt((extent + 12) / spacing) + 1;
+            for (int dz = -radius; dz <= radius; dz++)
+                for (int dx = -radius; dx <= radius; dx++)
+                {
+                    var site = Site(new Vector2Int(cx + dx, cz + dz));
+                    if (site.kind == WorldSiteKind.Village && IsExterior(site.position.x, site.position.z) &&
+                        Mathf.Max(Mathf.Abs(x - site.position.x), Mathf.Abs(z - site.position.z)) <= extent) return true;
+                }
+            return false;
+        }
         // One candidate in the interior of each large region keeps settlements rare
         // and separated, independent of chunk loading order. Origin remains a safe start.
         bool IsVillageCell(Vector2Int cell)

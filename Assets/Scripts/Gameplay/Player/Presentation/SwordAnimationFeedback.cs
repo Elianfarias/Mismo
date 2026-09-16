@@ -51,6 +51,7 @@ namespace Mismo.Gameplay.Player.Presentation
         private AttackHitbox hitbox;
         private TrailRenderer trail;
         private Material trailMaterial;
+        private Transform lastTrailVisual;
         private SkinnedMeshRenderer bladeRenderer;
         private Mesh bladeSnapshot;
         private int bladeTipIndex=-1;
@@ -182,12 +183,17 @@ namespace Mismo.Gameplay.Player.Presentation
                 if (trail != null)
                 {
                     var visual = presentation != null ? presentation.ActiveVisual : null;
+                    if(lastTrailVisual!=visual){trail.Clear();lastTrailVisual=visual;}
+                    trail.time=Mathf.Max(.01f,profile.trailDuration);
+                    trail.startWidth=Mathf.Max(0,profile.trailWidth);trail.endWidth=0;
+                    trail.startColor=profile.trailStartColor;trail.endColor=profile.trailEndColor;
+                    trail.sharedMaterial=profile.trailMaterial!=null?profile.trailMaterial:trailMaterial;
                     if (visual != null) trail.transform.position = visual.TransformPoint(profile.trailTip);
                     var cast = equipment.Runner != null ? equipment.Runner.Current : null;
                     trail.emitting = profile.meleeTrail && visual != null &&
                         ((hitbox != null && hitbox.IsWindowOpen) || (spin != null && spin.IsActive) || (lunge != null && lunge.IsActive) ||
                         (cast != null && cast.Began && !cast.Ended && (cast.Definition.pose == Equipment.AbilityPose.Lunge || cast.Definition.pose == Equipment.AbilityPose.Spin)));
-                    if (!profile.meleeTrail) trail.Clear();
+                    if (!profile.meleeTrail || visual==null) trail.Clear();
                 }
                 return;
             }

@@ -1,0 +1,18 @@
+PASS
+Human_Player_Attack1H01_L length=1,1 bones=21 horizontal drift=0
+Human_Player_Attack1H01_R length=1,1 bones=21 horizontal drift=0
+Human_Goblin_Attack1H01_R length=1,1 bones=15 horizontal drift=5,960464E-08
+Human_Player_Attack2H01 length=1,6 bones=21 horizontal drift=0
+Human_Player_AttackPolearm01 length=1,366667 bones=21 horizontal drift=0
+Human_Player_AttackShield01 length=0,9 bones=21 horizontal drift=0
+Human_Player_CombatDamage01 length=1 bones=21 horizontal drift=0
+Human_Goblin_CombatDamage01 length=1 bones=15 horizontal drift=5,960464E-08
+Human_Player_CombatIdle01 length=1,333333 bones=21 horizontal drift=0
+Human_Player_CombatIdle1H01 length=1,333333 bones=21 horizontal drift=0
+Human_Goblin_CombatIdle1H01 length=1,333333 bones=15 horizontal drift=5,960464E-08
+Human_Player_CombatIdle2H01 length=1,333333 bones=21 horizontal drift=0
+Human_Player_CombatIdlePolearm01 length=1,333333 bones=21 horizontal drift=0
+Human_Player_Death01 length=0,7333333 bones=21 horizontal drift=0
+Human_Player_WeaponHold2H01 length=0,3333333 bones=21 horizontal drift=0
+Human_Player_DualSequence composed from imported left/right attacks
+Human_Player_DualCross composed from imported left/right attacks

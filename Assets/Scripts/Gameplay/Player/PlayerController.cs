@@ -22,6 +22,7 @@ namespace Mismo.Gameplay.Player
         {
             input = GetComponent<PlayerInputReader>(); motor = GetComponent<PlayerMotor>(); stamina = GetComponent<Stamina>();
             loadout = GetComponent<EquipmentLoadout>(); loadout.Initialize();
+            if (GetComponent<Presentation.PlayerMusic>() == null) gameObject.AddComponent<Presentation.PlayerMusic>();
             climbing=GetComponent<TreeClimbing>()??gameObject.AddComponent<TreeClimbing>();
             if (GetComponent<Presentation.MovementFeedback>() == null) gameObject.AddComponent<Presentation.MovementFeedback>();
             if (GetComponent<Mismo.Gameplay.Combat.Health>() != null && GetComponent<Presentation.PlayerHUD>() == null) gameObject.AddComponent<Presentation.PlayerHUD>();
@@ -36,6 +37,7 @@ namespace Mismo.Gameplay.Player
         }
         private void Update()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
             float dt = Time.deltaTime;
             var runner = loadout.Runner; var belt = loadout.Belt;
             if (inventoryPanel == null) inventoryPanel = GetComponent<Equipment.Inventory.InventoryPanel>();

@@ -1,0 +1,1 @@
+Assets\Scripts\Gameplay\Enemies\EnemyProgressionReward.cs(79,64): warning CS0618: 'Object.FindFirstObjectByType<T>()' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'

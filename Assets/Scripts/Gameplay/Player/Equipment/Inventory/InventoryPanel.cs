@@ -51,6 +51,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         void OnChanged(){message=inventory.Notice;messageUntil=Time.unscaledTime+5;previewDirty=true;}
         void Update()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
             if(IsOpen&&(health==null||health.IsDead)){Close();return;}
             if(showChest&&!inventory.AtChest){showChest=false;selected=null;confirmDiscard=false;previewDirty=true;}
             var k=Keyboard.current;
@@ -100,7 +101,9 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                     loadout.Belt!=null&&loadout.Belt.IsActive||!Mathf.Approximately(Time.timeScale,1))return false;
                 previousLock=Cursor.lockState;previousVisible=Cursor.visible;
                 Cursor.lockState=CursorLockMode.None;Cursor.visible=true;IsOpen=true;active=this;
+                GameAudio.Play(GameSound.MenuOpen);
             }
+            else if (page != target) GameAudio.Play(GameSound.TabChanged);
             if(target==Page.Skills&&page!=Page.Skills){skillsWeapon=loadout.ActiveDefinition;skillsScroll=Vector2.zero;}
             CancelSkillDrag();
             page=target;confirmDiscard=false;previewDirty=true;searchFocused=false;return true;
@@ -113,6 +116,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public void Close()
         {
             if(!IsOpen)return;
+            GameAudio.Play(GameSound.MenuClose);
             IsOpen=false;closedFrame=Time.frameCount;if(active==this)active=null;
             Cursor.lockState=previousLock;Cursor.visible=previousVisible;confirmDiscard=false;showChest=false;draggedGrid=null;
             CancelSkillDrag();preview.Dispose();searchFocused=false;rotatingPreview=false;
@@ -124,7 +128,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         bool Button(Rect rect,string value)
         {
             var old=GUI.backgroundColor;if(old==Color.white)GUI.backgroundColor=new Color(.13f,.16f,.18f);
-            bool pressed=GUI.Button(rect,L.Text(value),button);GUI.backgroundColor=old;
+            bool pressed=GameAudio.Button(rect,L.Text(value),button);GUI.backgroundColor=old;
             FantasyUI.Frame(rect,GUI.enabled?(rect.Contains(Event.current.mousePosition)?PlayerHUD.Gold:Accent):Muted*.55f);
             if(pressed){GUI.FocusControl(null);searchFocused=false;}return pressed;
         }
@@ -138,6 +142,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         void Line(float x,float y,float width)=>PlayerHUD.Fill(new Rect(x,y,width,1),new Color(.55f,.56f,.53f,.4f));
         void OnGUI()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
             if(inventory==null||health==null||health.IsDead)return;
             if(label==null)
             {

@@ -27,6 +27,7 @@ namespace Mismo.Gameplay.Combat
 
         void Update()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.IsPaused) return;
             if (!active) return;
             // Respect a time-scale change made by another system.
             if (!Mathf.Approximately(Time.timeScale, appliedScale)) { Restore(); return; }
