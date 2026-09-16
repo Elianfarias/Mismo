@@ -8,7 +8,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public bool DiscoverSpecies(string id)
         {
             if(!IsReady||!MaterialCatalog.ValidId(id))return false;if(HasSeenSpecies(id))return true;
-            var next=profile.Copy();next.seenSpecies.Add(id);return Commit(next,Localization.GameLanguage.Text("Nueva especie descubierta."),false);
+            var next=profile.Copy();next.seenSpecies.Add(id);return Commit(next,Localization.GameLanguage.Text("Nueva especie descubierta."),false,GameSound.SpeciesDiscovered);
         }
         public string CompanionSpeciesId=>profile?.companionSpeciesId;
         public string CompanionPrefabName=>profile?.companionPrefabName;

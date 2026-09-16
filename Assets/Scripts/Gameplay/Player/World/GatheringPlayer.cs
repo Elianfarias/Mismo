@@ -25,12 +25,13 @@ namespace Mismo.Gameplay.Player.World
         void OnDisable(){Cancel();Close();}
         void OnDestroy(){if(health!=null)health.Damaged-=Damaged;}
         public void Cancel(){harvesting=null;progress=0;if(tool!=null)Destroy(tool);tool=null;}
-        void Close(){if(station==null)return;station=null;closedFrame=Time.frameCount;Cursor.lockState=oldLock;Cursor.visible=oldVisible;}
+        void Close(){if(station==null)return;GameAudio.Play(GameSound.MenuClose);station=null;closedFrame=Time.frameCount;Cursor.lockState=oldLock;Cursor.visible=oldVisible;}
         bool Interrupted()=>health.IsDead||input==null||input.Move.sqrMagnitude>.04f||input.WasAttackPressedThisFrame()||input.WasDashPressedThisFrame()||
             input.WasJumpPressedThisFrame()||input.WasLungePressedThisFrame()||input.WasParryPressedThisFrame()||input.WasSpinAttackPressedThisFrame()||
             loadout.Runner.IsBusy||loadout.Belt!=null&&loadout.Belt.IsActive||InventoryPanel.AnyOpen||Presentation.WorldMapPanel.AnyOpen;
         void Update()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
             if(!inventory.IsReady)return;
             if(CompanionPlayer.IsRiding(gameObject)){Cancel();Close();return;}
             if(station!=null)
@@ -57,7 +58,7 @@ namespace Mismo.Gameplay.Player.World
             // G is independent from F (chest/loot) and Q/E/R (combat skills).
             if(Keyboard.current?.gKey.wasPressedThisFrame!=true)return;
             if(nearby!=null&&inventory.CanManage)
-            {station=nearby;oldLock=Cursor.lockState;oldVisible=Cursor.visible;Cursor.lockState=CursorLockMode.None;Cursor.visible=true;return;}
+            {station=nearby;GameAudio.Play(GameSound.MenuOpen);oldLock=Cursor.lockState;oldVisible=Cursor.visible;Cursor.lockState=CursorLockMode.None;Cursor.visible=true;return;}
             if(target==null||Interrupted())return;
             harvesting=target;startPosition=transform.position;progress=0;nextHit=.55f;
             ResourceChips.Emit(harvesting.gameObject,transform.position);
@@ -66,6 +67,7 @@ namespace Mismo.Gameplay.Player.World
         }
         void OnGUI()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
             if(inventory==null||health==null||health.IsDead)return;
             if(station!=null){int depth=GUI.depth;GUI.depth=-45;DrawStation();GUI.depth=depth;return;}
             if(InventoryPanel.AnyOpen||Presentation.WorldMapPanel.AnyOpen)return;
@@ -87,12 +89,12 @@ namespace Mismo.Gameplay.Player.World
             label.normal.textColor=Presentation.PlayerHUD.Gold;label.fontSize=26;
             GUI.Label(new Rect(50,42,700,40),L.Text("BANCO DE TRABAJO"),label);
             label.normal.textColor=Color.white;label.fontSize=18;
-            if(GUI.Button(new Rect(780,42,160,36),L.Text("Cerrar [ESC]"),button)){Close();GUI.matrix=old;GUI.backgroundColor=previousBackground;return;}
-            if(GUI.Button(new Rect(50,92,890,40),L.Format("Arma a mejorar: {0} · Ranura {1}",inventory.ItemName(inventory.EquippedId(slot)),slot+1),button))slot=1-slot;
+            if(GameAudio.Button(new Rect(780,42,160,36),L.Text("Cerrar [ESC]"),button)){Close();GUI.matrix=old;GUI.backgroundColor=previousBackground;return;}
+            if(GameAudio.Button(new Rect(50,92,890,40),L.Format("Arma a mejorar: {0} · Ranura {1}",inventory.ItemName(inventory.EquippedId(slot)),slot+1),button))slot=1-slot;
             string[] tabs={"Preparación","Mejoras","Equipo básico"};
             for(int tab=0;tab<tabs.Length;tab++)
             {GUI.backgroundColor=tab==category?Presentation.PlayerHUD.Gold:new Color(.14f,.18f,.20f);
-                if(GUI.Button(new Rect(50+tab*300,145,290,35),L.Text(tabs[tab]),button)){category=tab;scroll=Vector2.zero;}}
+                if(GameAudio.Button(new Rect(50+tab*300,145,290,35),L.Text(tabs[tab]),button)){category=tab;scroll=Vector2.zero;}}
             GUI.backgroundColor=new Color(.14f,.18f,.20f);
             int visible=0;if(station.recipes!=null)foreach(var r in station.recipes)if(r!=null&&(int)r.Category==category)visible++;
             scroll=GUI.BeginScrollView(new Rect(50,190,900,410),scroll,new Rect(0,0,875,visible*200));int row=0;
@@ -117,7 +119,7 @@ namespace Mismo.Gameplay.Player.World
                 }
                 label.fontSize=16;GUI.Label(new Rect(15,y+131,630,48),effect,label);label.fontSize=18;
                 bool enabled=GUI.enabled;GUI.enabled=inventory.CanCraft(recipe,inventory.EquippedId(slot));
-                if(GUI.Button(new Rect(665,y+132,185,40),L.Text(recipe.upgradeWeapon?"Mejorar":"Crear"),button))inventory.TryCraft(recipe,inventory.EquippedId(slot),station);
+                if(GameAudio.Button(new Rect(665,y+132,185,40),L.Text(recipe.upgradeWeapon?"Mejorar":"Crear"),button))inventory.TryCraft(recipe,inventory.EquippedId(slot),station);
                 GUI.enabled=enabled;
             }
             GUI.EndScrollView();GUI.Label(new Rect(50,620,890,55),L.Text(inventory.Notice),label);GUI.matrix=old;GUI.backgroundColor=previousBackground;

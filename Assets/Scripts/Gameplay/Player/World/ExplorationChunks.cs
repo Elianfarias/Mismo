@@ -48,6 +48,8 @@ namespace Mismo.Gameplay.Player.World
         public void Initialize(ExplorationWorldSettings settings,Transform target)
         {
             Settings=settings;player=target;field=new ExplorationTerrain(settings);
+            var music = target.GetComponent<Presentation.PlayerMusic>() ?? target.gameObject.AddComponent<Presentation.PlayerMusic>();
+            music.InitializeWorld(field);
             var map=target.GetComponent<Presentation.WorldMapPanel>();if(map==null)map=target.gameObject.AddComponent<Presentation.WorldMapPanel>();map.Initialize(settings);
             content=new ExplorationContent(settings,field);inventory=target.GetComponent<Equipment.Inventory.PlayerInventory>();
             // sceneLoaded runs before PlayerController.Start initializes the inventory.

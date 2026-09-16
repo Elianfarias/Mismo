@@ -40,7 +40,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             next.harvestedNodes.RemoveAll(n=>n.id==nodeId||n.readyAt<=WorldPlaySeconds);
             next.harvestedNodes.Add(new HarvestState{id=nodeId,readyAt=WorldPlaySeconds+Math.Max(0,node.regenerationSeconds)});
             var items=new List<string>();foreach(var entry in loot)items.Add("+"+entry.Value+" "+L.Text(Material(entry.Key).displayName));
-            return Commit(next,string.Join(" · ",items),false);
+            return Commit(next,string.Join(" · ",items),false,GameSound.ResourceCollected);
         }
         bool RecipeCost(CraftingRecipe recipe,out Dictionary<string,int> cost)
         {
@@ -77,8 +77,11 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public bool CanCraft(CraftingRecipe recipe,string weaponId)=>CraftCandidate(recipe,weaponId,out _);
         public bool TryCraft(CraftingRecipe recipe,string weaponId,CraftingStation station)
         {
-            if(station==null||station.recipes==null||Array.IndexOf(station.recipes,recipe)<0||!station.InRange(transform.position)||GetComponent<GatheringPlayer>()?.IsHarvesting==true||!CraftCandidate(recipe,weaponId,out var next))return false;
-            return Commit(next,L.Format("Creado: {0}",L.Text(recipe.displayName)),recipe.upgradeWeapon);
+            if(station==null||station.recipes==null||Array.IndexOf(station.recipes,recipe)<0||!station.InRange(transform.position)||GetComponent<GatheringPlayer>()?.IsHarvesting==true||!CraftCandidate(recipe,weaponId,out var next))
+            { GameAudio.Play(GameSound.CraftFailed); return false; }
+            bool saved = Commit(next,L.Format("Creado: {0}",L.Text(recipe.displayName)),recipe.upgradeWeapon,GameSound.CraftSuccess);
+            if (!saved) GameAudio.Play(GameSound.CraftFailed);
+            return saved;
         }
         public float PotionCooldownRemaining=>IsReady?(float)Math.Max(0,profile.potionReadyAt-WorldPlaySeconds):0;
         public float WeaponBuffRemaining=>IsReady?(float)Math.Max(0,profile.weaponBuffUntil-WorldPlaySeconds):0;
@@ -110,7 +113,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             var next=profile.Copy();if(!next.TrySpendMaterials(new Dictionary<string,int>{{id,1}}))return false;
             if(material.useCooldownSeconds>0)next.potionReadyAt=WorldPlaySeconds+material.useCooldownSeconds;
             if(material.damageBonus>0){next.weaponBuffUntil=WorldPlaySeconds+Mathf.Max(1,material.damageBonusSeconds);next.weaponBuffDamage=material.damageBonus;next.buffedWeaponId=next.equipped[next.activeSlot];}
-            if(!Commit(next,L.Format("Usado: {0}",L.Text(material.displayName)),false))return false;
+            if(!Commit(next,L.Format("Usado: {0}",L.Text(material.displayName)),false,GameSound.ConsumableUsed))return false;
             if(material.healingAmount>0)
             {
                 if(material.instantHealing)health.Heal(material.healingAmount);

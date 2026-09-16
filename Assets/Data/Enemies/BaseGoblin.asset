@@ -36,9 +36,9 @@ MonoBehaviour:
     halfExtents: {x: 0.65, y: 0.65, z: 0.8}
     forwardOffset: 0.9
     animation:
-      clip: {fileID: 7400000, guid: 3ee4ef1fa60c02249a780e6897153a53, type: 2}
-      compatibleClip: {fileID: 7400000, guid: 0df7019ee9c74364692e5ef2839cc7ca, type: 2}
-      compatibleSource: {fileID: 7400000, guid: 3ee4ef1fa60c02249a780e6897153a53, type: 2}
+      clip: {fileID: 7400000, guid: feb29d260c08404fa806bf900215bfb9, type: 2}
+      compatibleClip: {fileID: 0}
+      compatibleSource: {fileID: 0}
       mask: {fileID: 0}
       activeStartsAt: 0.32
       recoveryStartsAt: 0.59
@@ -72,9 +72,9 @@ MonoBehaviour:
     halfExtents: {x: 0.5, y: 0.65, z: 0.65}
     forwardOffset: 0.7
     animation:
-      clip: {fileID: 7400000, guid: dd234b55ca31533468e4969cd3a7c8cf, type: 2}
-      compatibleClip: {fileID: 7400000, guid: 9ef43a92a832ddd459c9bab0ab54f451, type: 2}
-      compatibleSource: {fileID: 7400000, guid: dd234b55ca31533468e4969cd3a7c8cf, type: 2}
+      clip: {fileID: 7400000, guid: feb29d260c08404fa806bf900215bfb9, type: 2}
+      compatibleClip: {fileID: 0}
+      compatibleSource: {fileID: 0}
       mask: {fileID: 0}
       activeStartsAt: 0.32
       recoveryStartsAt: 0.59

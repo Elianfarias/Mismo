@@ -1,0 +1,5 @@
+{
+  "name": "Mismo.Audio.Editor",
+  "references": ["Mismo.Audio"],
+  "includePlatforms": ["Editor"]
+}

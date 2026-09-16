@@ -7,10 +7,12 @@ public static class AudioEvents
     public static event Action OnStopMusic;
     // ── SFX ──────────────────────────────────────────────────
     public static event Action<AudioClip> OnPlaySFX;
+    public static event Action<AudioClip, float> OnPlayAbilitySFX;
     public static event Action<AudioClip> OnPlayLoopedSFX;
     public static event Action OnStopLoopedSFX;
     // ── UI ───────────────────────────────────────────────────
     public static event Action<AudioClip> OnPlayUI;
+    public static event Action<AudioClip, float> OnPlayCue;
 
     // ── Global ───────────────────────────────────────────────
     public static event Action OnStopAll;
@@ -19,8 +21,10 @@ public static class AudioEvents
     public static void RaisePlayMusic(AudioClip clip) => OnPlayMusic?.Invoke(clip);
     public static void RaiseStopMusic() => OnStopMusic?.Invoke();
     public static void RaisePlaySFX(AudioClip clip) => OnPlaySFX?.Invoke(clip);
+    public static void RaisePlayAbilitySFX(AudioClip clip, float volume) => OnPlayAbilitySFX?.Invoke(clip, Mathf.Clamp01(volume));
     public static void RaisePlayLoopedSFX(AudioClip clip) => OnPlayLoopedSFX?.Invoke(clip);
     public static void RaiseStopLoopedSFX() => OnStopLoopedSFX?.Invoke();
     public static void RaisePlayUI(AudioClip clip) => OnPlayUI?.Invoke(clip);
+    public static void RaisePlayCue(AudioClip clip, float volume) => OnPlayCue?.Invoke(clip, volume);
     public static void RaiseStopAll() => OnStopAll?.Invoke();
 }

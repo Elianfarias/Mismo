@@ -29,7 +29,7 @@ namespace Mismo.Gameplay.Player.Presentation
             bool hover=rect.Contains(Event.current.mousePosition);
             if(selected||hover)PlayerHUD.Fill(rect,new Color(.7f,.62f,.39f,GUI.enabled?.10f:.035f));
             action.normal.textColor=selected?Amber:Ink;
-            bool result=GUI.Button(rect,L.Text(text),action);
+            bool result=GameAudio.Button(rect,L.Text(text),action);
             if(selected||hover)PlayerHUD.Fill(new Rect(rect.x,rect.yMax-2,rect.width,selected?2:1),GUI.enabled?Amber:Muted);
             return result;
         }

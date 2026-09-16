@@ -12,7 +12,8 @@ namespace Mismo.Gameplay.Enemies
         public AnimationClip ActionClip { get; private set; }
 
         public void Tick(Animator animator, EnemyAttackAnimation binding, EnemyAttackPhase phase,
-            float progress, int legacyMotion, float legacyTime, float speed, float deltaTime)
+            float progress, int legacyMotion, float legacyTime, float speed, float deltaTime,
+            AnimationClip reaction = null, float reactionProgress = 0, AvatarMask reactionMask = null)
         {
             if (animator == null || animator.runtimeAnimatorController == null)
             { Dispose(); return; }
@@ -20,7 +21,7 @@ namespace Mismo.Gameplay.Enemies
             {
                 Dispose(); target = animator; controller = animator.runtimeAnimatorController;
             }
-            ActionClip = binding != null ? binding.PlaybackClip : null;
+            ActionClip = reaction != null ? reaction : binding != null ? binding.PlaybackClip : null;
             // Lazily create a graph only when the enemy actually uses an authored action.
             if (ActionClip != null && playback == null)
             {
@@ -33,8 +34,9 @@ namespace Mismo.Gameplay.Enemies
             {
                 playback.SetParameters(motion, Mathf.Clamp01(legacyTime), rate);
                 // Interruptions immediately release the attack layer, including stagger and death.
-                playback.SetAction(ActionClip, ActionClip != null ? binding.Sample(phase, progress) : 0f,
-                    ActionClip != null ? binding.blendSeconds : 0f, binding != null ? binding.mask : null);
+                playback.SetAction(ActionClip, reaction != null ? reactionProgress : ActionClip != null ? binding.Sample(phase, progress) : 0f,
+                    reaction != null ? .045f : ActionClip != null ? binding.blendSeconds : 0f,
+                    reaction != null ? reactionMask : binding != null ? binding.mask : null);
                 playback.Tick(deltaTime);
             }
             else

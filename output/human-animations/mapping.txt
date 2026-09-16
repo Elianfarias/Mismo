@@ -1,0 +1,23 @@
+OneHandSword: SwordCombo -> Attack1H01_R / Attack1H01_R / Attack1H01_R
+OneHandSword: SwordLunge -> AttackPolearm01
+OneHandSword: SwordParry -> CombatIdle1H01
+OneHandSword: SideStep -> CombatIdle1H01
+OneHandSword: GuardBreaker -> Attack2H01
+OneHandSword: TwoTimes -> CombatIdle1H01
+OneHandSword: SwordCombo -> Attack1H01_R / Attack1H01_R / Attack1H01_R
+OneHandSword: SwordLunge -> AttackPolearm01
+OneHandSword: SwordParry -> CombatIdle1H01
+OneHandSword: SwordSpin -> Attack1H01_R
+OneHandSword: SideStep -> CombatIdle1H01
+OneHandSword: GuardBreaker -> Attack2H01
+OneHandSword: TwoTimes -> CombatIdle1H01
+DualSwords: SwordCombo -> Attack1H01_R / Attack1H01_L / Attack1H01_R
+DualSwords: DualFlurry -> DualSequence
+DualSwords: DualWhirlwind -> DualSequence
+DualSwords: OpenWound -> Attack1H01_R
+DualSwords: DualCross -> DualCross
+SwordShield: SwordCombo -> Attack1H01_R / Attack1H01_R / Attack1H01_R
+SwordShield: ShieldBash -> AttackShield01
+SwordShield: ShieldCharge -> AttackShield01
+SwordShield: FirmGuard -> CombatIdle1H01
+SwordShield: LowSweep -> Attack1H01_R

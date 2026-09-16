@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: BowShot
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: FLECHA
+  abilityId: 
+  animationSource: {fileID: 0}
+  passive: 0
   description: Dispara una flecha hacia donde apuntas.
   localizationKey: ability.bow.bowshot
   preparation: 0.4
@@ -71,11 +74,18 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   preparationMobility: 0.4
+  activeMobility: 1
   interruptible: 1
   cancelPreparation: 1
   cancelRecovery: 0
   focusCost: 0
   focusGainOnHit: 5
+  preparationSfx: {fileID: 8300000, guid: 9f490ef3eb2b32a48bcda2dc9e1c0909, type: 3}
+  preparationSfxVolume: 0.5
+  loopPreparationSfx: 0
+  executionSfx: {fileID: 8300000, guid: d9428a10b26a3794eb9a60e7e565a09a, type: 3}
+  executionSfxVolume: 0.5
+  comboStepSfx: []
   pose: 4
   usesSwordCombo: 0
   targetsGround: 0

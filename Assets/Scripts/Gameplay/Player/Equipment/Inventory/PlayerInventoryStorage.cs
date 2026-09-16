@@ -78,7 +78,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 if(!next.TryAddMaterial(stack.id,stack.quantity))return false;
             next.pendingLoot.Remove(loot);
             if(!string.IsNullOrEmpty(loot.rewardId))next.claimedRewards.Add(loot.rewardId);
-            return Fits(next,false)&&Commit(next,"Botín recogido.",false);
+            return Fits(next,false)&&Commit(next,"Botín recogido.",false,GameSound.LootCollected);
         }
     }
 }

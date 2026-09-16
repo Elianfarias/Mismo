@@ -26,9 +26,9 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             GUI.Label(new Rect(670,455,435,55),L.Text(species.mountable?"Apta como montura":"Sin montura"),label);
             GUI.Label(new Rect(670,520,435,100),species.domesticable?L.Text("Al vencerla, puede reconocerte como su amo y convertirse en tu montura."):"",label);
             var button=new GUIStyle(GUI.skin.button){fontSize=20};
-            if(GUI.Button(new Rect(125,655,200,38),L.Text("← Anterior"),button)){page=(page+pages.Length-1)%pages.Length;last=-1;}
+            if(GameAudio.Button(new Rect(125,655,200,38),L.Text("← Anterior"),button)){page=(page+pages.Length-1)%pages.Length;last=-1;}
             label.normal.textColor=book.paper;GUI.Label(new Rect(550,655,200,38),(page+1)+" / "+pages.Length,label);
-            if(GUI.Button(new Rect(945,655,200,38),L.Text("Siguiente →"),button)){page=(page+1)%pages.Length;last=-1;}
+            if(GameAudio.Button(new Rect(945,655,200,38),L.Text("Siguiente →"),button)){page=(page+1)%pages.Length;last=-1;}
         }
     }
 }

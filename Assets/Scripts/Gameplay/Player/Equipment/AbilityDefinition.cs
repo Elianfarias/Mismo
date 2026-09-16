@@ -41,6 +41,18 @@ namespace Mismo.Gameplay.Player.Equipment
         [Min(0)] public float focusCost;
         [Tooltip("Focus ganado por enemigo al infligir daño. En áreas se aplica por pulso. Fallos y golpes bloqueados no generan Focus.")]
         [Min(0)] public float focusGainOnHit;
+        [Header("Sonido de la habilidad")]
+        [Tooltip("Opcional: sonido al comenzar a preparar o tensar la habilidad. Se detiene al ejecutar o cancelar. No se usa en combos sin preparación.")]
+        public AudioClip preparationSfx;
+        [Range(0f, 1f)] public float preparationSfxVolume = 1f;
+        [Tooltip("Repetir mientras se prepara o mantiene la carga. Desactivado reproduce el clip una sola vez.")]
+        public bool loopPreparationSfx;
+        [Tooltip("SFX al ejecutar la fase activa. En ataques cargados suena al soltar; en combos, una vez por golpe. Vacío = sin sonido.")]
+        public AudioClip executionSfx;
+        [Range(0f, 1f)] public float executionSfxVolume = 1f;
+        [Tooltip("Un sonido por golpe del combo, en orden: Element 0 = primero, Element 1 = segundo, etc. Un elemento sin clip usa Execution Sfx. Volumen 0 silencia ese golpe.")]
+        public ComboStepSound[] comboStepSfx = Array.Empty<ComboStepSound>();
+        [Header("Presentación y acciones")]
         public AbilityPose pose;
         public bool usesSwordCombo;
         public bool targetsGround;
@@ -48,6 +60,13 @@ namespace Mismo.Gameplay.Player.Equipment
         [Min(1)] public float range = 22;
         [SerializeReference] public AbilityAction[] actions = Array.Empty<AbilityAction>();
         public float Duration => Mathf.Max(0, preparation) + Mathf.Max(.01f, active) + Mathf.Max(0, recovery);
+    }
+
+    [Serializable]
+    public sealed class ComboStepSound
+    {
+        public AudioClip clip;
+        [Range(0f, 1f)] public float volume = 1f;
     }
 
     // These objects contain configuration only. Per-cast state belongs to AbilityExecution.

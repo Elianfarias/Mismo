@@ -27,7 +27,7 @@ namespace Mismo.Gameplay.Enemies
     /// </summary>
     [RequireComponent(typeof(NavMeshAgent), typeof(Health), typeof(DamageReceiver))]
     [DisallowMultipleComponent]
-    public sealed class BossController : MonoBehaviour, IParryResponder
+    public sealed class BossController : MonoBehaviour, IParryResponder, Mismo.Gameplay.Player.Presentation.IBossMusicThreat
     {
         [SerializeField] private BossSettings settings;
         [SerializeField] private DamageDealer weapon;
@@ -66,6 +66,11 @@ namespace Mismo.Gameplay.Enemies
         private bool wasAggressive;
 
         public BossState State => state;
+        public bool IsFightingPlayer(Transform player) => started && isActiveAndEnabled &&
+            settings != null && health != null && !health.IsDead &&
+            state != BossState.Idle && state != BossState.Return && state != BossState.Dead &&
+            target != null && (target == player || target.IsChildOf(player)) &&
+            lostTime < settings.memoryDuration && IsValidTarget();
         public BossSettings Settings => settings;
         public Health Health => health;
         public Transform Target => target;
@@ -109,6 +114,7 @@ namespace Mismo.Gameplay.Enemies
 
         private void OnEnable()
         {
+            Mismo.Gameplay.Player.Presentation.PlayerMusic.RegisterBoss(this);
             if (health == null) health = GetComponent<Health>();
             if (health != null)
             {
@@ -136,6 +142,7 @@ namespace Mismo.Gameplay.Enemies
 
         private void OnDisable()
         {
+            Mismo.Gameplay.Player.Presentation.PlayerMusic.UnregisterBoss(this);
             if (health != null)
             {
                 combat.PostureBroken -= StartStagger;

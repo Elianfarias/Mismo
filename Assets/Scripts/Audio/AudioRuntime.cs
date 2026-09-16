@@ -23,7 +23,7 @@ public sealed class AudioRuntime : MonoBehaviour
     AudioSource Source(string group, bool loop)
     {
         var source=gameObject.AddComponent<AudioSource>();source.playOnAwake=false;source.loop=loop;
-        source.outputAudioMixerGroup=Mixer.FindMatchingGroups(group).FirstOrDefault(g=>g.name==group);
+        source.outputAudioMixerGroup=Mixer != null ? Mixer.FindMatchingGroups(group).FirstOrDefault(g=>g.name==group) : null;
         return source;
     }
     void Start()=>VolumeSettings.ApplySaved(Mixer);

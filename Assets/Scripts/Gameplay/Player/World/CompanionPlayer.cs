@@ -33,6 +33,7 @@ namespace Mismo.Gameplay.Player.World
         }
         void Update()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
             if(inventory==null||!inventory.IsReady||GetComponent<Health>().IsDead)return;
             if(!inventory.CompanionSummoned||companion!=null&&loadedMountId!=inventory.SelectedMountId){Recall();if(!inventory.CompanionSummoned)return;}
             if(companion==null){if(!loading&&!string.IsNullOrEmpty(inventory.CompanionSpeciesId)&&Time.unscaledTime>=retryAt){retryAt=Time.unscaledTime+2;StartCoroutine(Spawn());}return;}
@@ -152,6 +153,7 @@ namespace Mismo.Gameplay.Player.World
         }
         void OnGUI()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
             if(companion==null||InventoryPanel.AnyOpen||Presentation.WorldMapPanel.AnyOpen)return;
             if(Riding||Vector3.Distance(transform.position,companion.transform.position)<4)
                 GUI.Box(new Rect(Screen.width/2-230,Screen.height-250,460,40),notice??L.Text(Riding?"[V] Desmontar":"[V] Montar · [H] Seguir / esperar"));
