@@ -1,0 +1,10 @@
+Attack1H01_R t=0 full torso=(0.16, 0.95, 0.28) pitch=22,65349 corrected=10,65348 feet unchanged PASS
+Attack1H01_R t=0,25 full torso=(-0.03, 0.96, 0.28) pitch=7,154044 corrected=-4,845942 feet unchanged PASS
+Attack1H01_R t=0,5 full torso=(-0.21, 0.88, 0.44) pitch=12,20175 corrected=0,2017627 feet unchanged PASS
+Attack1H01_R t=0,75 full torso=(0.02, 0.92, 0.38) pitch=21,29493 corrected=9,294902 feet unchanged PASS
+Attack1H01_R t=1 full torso=(0.16, 0.95, 0.28) pitch=22,65349 corrected=10,65348 feet unchanged PASS
+Attack1H01_L t=0 full torso=(0.16, 0.95, 0.28) pitch=22,65349 corrected=10,65348 feet unchanged PASS
+Attack1H01_L t=0,25 full torso=(0.03, 0.96, 0.28) pitch=6,706158 corrected=-5,293828 feet unchanged PASS
+Attack1H01_L t=0,5 full torso=(0.19, 0.87, 0.44) pitch=20,25056 corrected=8,250557 feet unchanged PASS
+Attack1H01_L t=0,75 full torso=(0.16, 0.92, 0.34) pitch=22,26809 corrected=10,2681 feet unchanged PASS
+Attack1H01_L t=1 full torso=(0.16, 0.95, 0.28) pitch=22,65349 corrected=10,65348 feet unchanged PASS
