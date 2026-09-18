@@ -1,26 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using Mismo.Gameplay.Player.World;
+using Mismo.Gameplay.Player.Movement;
 using Mismo.Gameplay.Player.Equipment.Inventory;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Mismo.Gameplay.Player.Presentation
 {
-    [DefaultExecutionOrder(-120)]
-    public sealed class WorldMapPanel : MonoBehaviour
+    [DefaultExecutionOrder(100)]
+    public sealed partial class WorldMapPanel : MonoBehaviour
     {
         static WorldMapPanel active;
-        public static bool AnyOpen=>active!=null&&active.IsOpen;
-        public static bool BlocksGameplay=>active!=null&&(active.IsOpen||active.closedFrame==Time.frameCount);
-        public bool IsOpen{get;private set;}
-        public bool Ready=>mesh!=null&&builder==null;
-        public RenderTexture Preview=>texture;
-        public float Zoom{get;private set;}=180;
-        public Vector2 Center{get;private set;}
-        public float Yaw{get;private set;}=35;
-        public float Pitch{get;private set;}=60;
-        const float MapDepth=-12000;
+        public static bool AnyOpen => active != null && active.IsOpen;
+        public static bool BlocksGameplay => active != null && (active.IsOpen || active.miniInteractive || active.closedFrame == Time.frameCount);
+        public bool IsOpen { get; private set; }
+        public bool Ready => mesh != null && builder == null;
+        public RenderTexture Preview => texture;
+        public float Zoom { get; private set; } = 220;
+        public Vector2 Center { get; private set; }
+        public float Yaw { get; private set; } = 35;
+        public float Pitch { get; private set; } = 38;
+        const float MapDepth = -12000;
+        const float ReliefScale = 1f;
         ExplorationWorldSettings settings;
         ExplorationTerrain terrain;
         UnityEngine.Camera mapCamera;
@@ -29,131 +31,258 @@ namespace Mismo.Gameplay.Player.Presentation
         Material material;
         RenderTexture texture;
         Coroutine builder;
-        readonly List<WorldSite> sites=new List<WorldSite>();
-        bool dirty=true;
-        float nextBuild;
-        int closedFrame=-1;
+        readonly List<WorldSite> sites = new List<WorldSite>();
+        bool dirty = true;
+        float nextBuild, miniZoom = 120, renderedYaw, renderedPitch = 38;
+        float configuredMiniDistance = -1;
+        Vector2 miniOrbitOffset;
+        Vector2 builtCenter,miniCenter;
+        float builtZoom;
+        float openMapExtent=220;
+        float miniMapExtent=120;
+        bool builtOpen;
+        int builtDiscoveryRevision = -1;
+        MapExploration displayedExploration;
+        Rect builtFootprint;
+        bool followPlayer=true;
+        MapExploration exploration;
+        float nextDiscoverySave;
+        float nextDiscoveryUpdate;
+        string discoveryWorldId;
+        Texture2D portrait;
+        float nextPortrait;
+
+        int closedFrame = -1;
         CursorLockMode previousLock;
         bool previousVisible;
-        Rect View=>new Rect(24,88,Mathf.Max(100,Screen.width-48),Mathf.Max(100,Screen.height-148));
-        public void Initialize(ExplorationWorldSettings value){settings=value;terrain=new ExplorationTerrain(value);dirty=true;}
+        const string MiniWidthPreference="Mismo.Map.MinimapWidth";
+        float miniWidth=330;
+        Rect View => new Rect(0,0,Screen.width,Screen.height);
+        public Rect MiniRect
+        {
+            get
+            {
+                float scale=PlayerHUD.Scale;
+                float width=Mathf.Min(miniWidth*scale,Screen.width-40*scale,(Screen.height-84*scale)*330f/280f);
+                return new Rect(Screen.width-20*scale-width,42*scale,width,width*280f/330f);
+            }
+        }
+        float ViewZoom => IsOpen ? Zoom : miniZoom;
+        // Zooming in moves the camera closer without cutting away the existing map sheet.
+        float TerrainExtent => IsOpen ? openMapExtent : miniMapExtent;
+        Vector2 ViewCenter => IsOpen ? Center : followPlayer ? new Vector2(transform.position.x,transform.position.z) : miniCenter;
+        float ViewAspect => IsOpen ? (float)Screen.width/Screen.height : MiniRect.width/MiniRect.height;
+        public void Initialize(ExplorationWorldSettings value)
+        {
+            RestartBuild();mapSamples.Clear();settings=value; terrain=new ExplorationTerrain(value); dirty=true; active=this;
+            discoveryWorldId=WorldSession.Current?.id;
+            exploration=new MapExploration(WorldSession.Current?.mapDiscovery);
+            exploration.Reveal(transform.position,144);
+            miniWidth=Mathf.Clamp(PlayerPrefs.GetFloat(MiniWidthPreference,330),220,900);
+            LoadPins(); ApplyMinimapSettings(); EnsureView();
+        }
         public bool Open()
         {
-            if(GetComponent<World.GatheringPlayer>()?.Busy==true)return false;
+            if(GetComponent<GatheringPlayer>()?.Busy==true || terrain==null || InventoryPanel.AnyOpen || GameplayPause.BlocksInput) return false;
             if(IsOpen)return true;
-            if(terrain==null||InventoryPanel.AnyOpen)return false;
             var health=GetComponent<Mismo.Gameplay.Combat.Health>();if(health!=null&&health.IsDead)return false;
             var equipment=GetComponent<Equipment.EquipmentLoadout>();equipment?.Runner.Cancel();equipment?.Belt?.Cancel();
-            previousLock=Cursor.lockState;previousVisible=Cursor.visible;Cursor.lockState=CursorLockMode.None;Cursor.visible=true;
-            active=this;IsOpen=true;GameAudio.Play(GameSound.MenuOpen);Recenter();EnsureView();return true;
+            if(miniInteractive)ReleaseMini(); previousLock=Cursor.lockState; previousVisible=Cursor.visible;
+            Cursor.lockState=CursorLockMode.None;Cursor.visible=true;
+            active=this;IsOpen=true;Yaw=renderedYaw;Pitch=renderedPitch;Center=new Vector2(transform.position.x,transform.position.z);RestartBuild();GameAudio.Play(GameSound.MenuOpen);return true;
         }
-        public void Close(){if(!IsOpen)return;GameAudio.Play(GameSound.MenuClose);IsOpen=false;closedFrame=Time.frameCount;Cursor.lockState=previousLock;Cursor.visible=previousVisible;}
-        public void Recenter(){Center=new Vector2(transform.position.x,transform.position.z);dirty=true;}
-        public void SetZoom(float value){Zoom=Mathf.Clamp(value,40,2400);dirty=true;}
-        public void Pan(Vector2 delta){Center+=delta;dirty=true;}
-        public void Orbit(Vector2 delta){Yaw=Mathf.Repeat(Yaw+delta.x,360);Pitch=Mathf.Clamp(Pitch+delta.y,35,89);dirty=true;}
+        void RestartBuild(){if(builder!=null){StopCoroutine(builder);builder=null;}dirty=true;}
+        public void Close()
+        {
+            if(!IsOpen)return;
+            IsOpen=false;closedFrame=Time.frameCount;draft=null;selectedVillage=null;dragging=false;RestartBuild();
+            Cursor.lockState=previousLock;Cursor.visible=previousVisible;GameAudio.Play(GameSound.MenuClose);
+        }
+        public void Recenter()
+        {
+            var position=new Vector2(transform.position.x,transform.position.z);
+            if(IsOpen)Center=position;
+            else{miniCenter=position;followPlayer=true;miniOrbitOffset=Vector2.zero;}
+            dirty=true;
+        }
+        public void SetZoom(float value)
+        {
+            Zoom=Mathf.Clamp(value,40,8192);
+            if(Zoom>openMapExtent){openMapExtent=Zoom;dirty=true;}
+        }
+        void SetMiniZoom(float value)
+        {
+            miniZoom=Mathf.Clamp(value,20,2048);
+            if(miniZoom>miniMapExtent){miniMapExtent=miniZoom;if(!IsOpen)dirty=true;}
+        }
+        public void Pan(Vector2 delta){var c=ViewCenter+delta;c=new Vector2(Mathf.Clamp(c.x,-900000,900000),Mathf.Clamp(c.y,-900000,900000));if(IsOpen)Center=c;else{miniCenter=c;followPlayer=false;}}
+        public void Orbit(Vector2 delta){Yaw=Mathf.Repeat(Yaw+delta.x,360);Pitch=Mathf.Clamp(Pitch+delta.y,20,89);}
+        void OrbitMini(Vector2 delta)
+        {
+            miniOrbitOffset.x=Mathf.DeltaAngle(0,miniOrbitOffset.x+delta.x);
+            var main=UnityEngine.Camera.main;
+            float basePitch=main!=null?Mathf.Lerp(22,89,Mathf.InverseLerp(-10,70,Mathf.DeltaAngle(0,main.transform.eulerAngles.x))):38;
+            miniOrbitOffset.y=Mathf.Clamp(basePitch+miniOrbitOffset.y+delta.y,20,89)-basePitch;
+        }
         void EnsureView()
         {
             if(mapCamera!=null)return;
-            var cameraObject=new GameObject("World map camera");mapCamera=cameraObject.AddComponent<UnityEngine.Camera>();mapCamera.enabled=false;
-            mapCamera.orthographic=true;mapCamera.nearClipPlane=.1f;mapCamera.farClipPlane=16000;mapCamera.cullingMask=1<<31;mapCamera.clearFlags=CameraClearFlags.SolidColor;mapCamera.backgroundColor=new Color(.055f,.09f,.12f);mapCamera.allowHDR=false;
-            texture=new RenderTexture(1280,960,16){name="Interactive world map"};texture.Create();mapCamera.targetTexture=texture;
-            surface=new GameObject("World map relief");surface.layer=31;surface.transform.position=Vector3.up*MapDepth;surface.AddComponent<MeshFilter>();
+            mapCamera=new GameObject("Cartographic camera").AddComponent<UnityEngine.Camera>();mapCamera.enabled=false;
+            mapCamera.orthographic=true;mapCamera.nearClipPlane=.1f;mapCamera.farClipPlane=16000;mapCamera.cullingMask=1<<31;
+            mapCamera.clearFlags=CameraClearFlags.SolidColor;mapCamera.backgroundColor=Color.clear;mapCamera.allowHDR=false;
+            ResizeMapTexture();
+            surface=new GameObject("Cartographic relief");surface.layer=31;surface.transform.position=Vector3.up*MapDepth;surface.transform.localScale=new Vector3(1,ReliefScale,1);surface.AddComponent<MeshFilter>();
             material=new Material(Shader.Find("Mismo/World Map"));surface.AddComponent<MeshRenderer>().sharedMaterial=material;
         }
         void Update()
         {
-            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
+            ApplyMinimapSettings();
+            if(terrain==null)return; UpdateMiniInteraction(); if(GameplayPause.BlocksInput)return;
+            if(Time.unscaledTime>=nextDiscoveryUpdate){exploration.Reveal(transform.position,144);nextDiscoveryUpdate=Time.unscaledTime+.2f;}
+            if(Time.unscaledTime>=nextDiscoverySave){SaveDiscovery();nextDiscoverySave=Time.unscaledTime+5;}
             var keyboard=Keyboard.current;
-            if(keyboard!=null&&keyboard.mKey.wasPressedThisFrame){if(IsOpen)Close();else Open();}
-            else if(IsOpen&&keyboard!=null&&keyboard.escapeKey.wasPressedThisFrame)Close();
-            if(!IsOpen)return;
-            var health=GetComponent<Mismo.Gameplay.Combat.Health>();if(health!=null&&health.IsDead){Close();return;}
-            var mouse=Mouse.current;
-            if(mouse!=null)
+            if(keyboard!=null&&keyboard.mKey.wasPressedThisFrame&&draft==null){if(IsOpen)Close();else Open();}
+            else if(IsOpen&&keyboard!=null&&keyboard.escapeKey.wasPressedThisFrame){if(draft!=null)draft=null;else if(selectedVillage.HasValue)selectedVillage=null;else Close();}
+            if(IsOpen)
             {
-                var p=mouse.position.ReadValue();p.y=Screen.height-p.y;
-                if(View.Contains(p))
-                {
-                    float scroll=mouse.scroll.ReadValue().y;if(Mathf.Abs(scroll)>.01f)SetZoom(Zoom*Mathf.Exp(-scroll*.0015f));
-                    Vector2 delta=mouse.delta.ReadValue();
-                    if(mouse.rightButton.isPressed)Orbit(new Vector2(delta.x*.25f,-delta.y*.2f));
-                    else if(mouse.leftButton.isPressed||mouse.middleButton.isPressed)
-                    {
-                        var right=Quaternion.Euler(0,Yaw,0)*Vector3.right;var forward=Quaternion.Euler(0,Yaw,0)*Vector3.forward;
-                        var move=(-right*delta.x-forward*delta.y/Mathf.Sin(Pitch*Mathf.Deg2Rad))*(Zoom*2/View.height);
-                        Pan(new Vector2(move.x,move.z));
-                    }
-                }
+                var health=GetComponent<Mismo.Gameplay.Combat.Health>();if(health!=null&&health.IsDead){Close();return;}
+                if(keyboard!=null&&keyboard.homeKey.wasPressedThisFrame&&draft==null)Recenter();
             }
-            if(keyboard!=null)
-            {
-                if(keyboard.homeKey.wasPressedThisFrame)Recenter();
-                var direction=new Vector2((keyboard.dKey.isPressed?1:0)-(keyboard.aKey.isPressed?1:0),(keyboard.wKey.isPressed?1:0)-(keyboard.sKey.isPressed?1:0));
-                if(direction.sqrMagnitude>0){var move=Quaternion.Euler(0,Yaw,0)*new Vector3(direction.x,0,direction.y)*Zoom*Time.unscaledDeltaTime;Pan(new Vector2(move.x,move.z));}
-            }
-            if(dirty&&builder==null&&Time.unscaledTime>=nextBuild){dirty=false;builder=StartCoroutine(Build());nextBuild=Time.unscaledTime+.15f;}
+            if(builder==null&&(dirty||NeedsBuild())&&Time.unscaledTime>=nextBuild)
+            {dirty=false;builder=StartCoroutine(Build());nextBuild=Time.unscaledTime+.25f;}
         }
-        IEnumerator Build()
+        bool NeedsBuild()
         {
-            const int resolution=64;
-            var center=Center;float extent=Zoom*Mathf.Max(1,View.width/View.height)*1.7f;float step=extent*2/resolution;
-            var heights=new float[resolution+1,resolution+1];
-            for(int z=0;z<=resolution;z++)
-            {for(int x=0;x<=resolution;x++)heights[x,z]=terrain.Height(center.x-extent+x*step,center.y-extent+z*step);if(z%8==0)yield return null;}
-            var geometry=new VoxelRegionGeometry();
-            for(int z=0;z<resolution;z++)for(int x=0;x<resolution;x++)
+            if(mesh==null||builtOpen!=IsOpen||!Mathf.Approximately(builtZoom,TerrainExtent))return true;
+            if(builtDiscoveryRevision!=exploration.Revision)
             {
-                float px=center.x-extent+x*step,pz=center.y-extent+z*step,y=heights[x,z];
-                Color color=terrain.Top(px,pz,y);
-                geometry.Quad(new Vector3(px,y,pz),new Vector3(px,y,pz+step),new Vector3(px+step,y,pz+step),new Vector3(px+step,y,pz),color);
-                float other=heights[x+1,z];geometry.Quad(new Vector3(px+step,other,pz),new Vector3(px+step,y,pz),new Vector3(px+step,y,pz+step),new Vector3(px+step,other,pz+step),color*.72f);
-                other=heights[x,z+1];geometry.Quad(new Vector3(px,other,pz+step),new Vector3(px,y,pz+step),new Vector3(px+step,y,pz+step),new Vector3(px+step,other,pz+step),color*.8f);
+                if(exploration.HasNewDiscovery(displayedExploration,builtFootprint))return true;
+                builtDiscoveryRevision=exploration.Revision;
             }
-            var previous=mesh;mesh=geometry.Mesh("Map relief");surface.GetComponent<MeshFilter>().sharedMesh=mesh;if(previous!=null)Destroy(previous);
-            sites.Clear();int spacing=Mathf.Max(64,settings.siteSpacing);int radius=Mathf.Min(40,Mathf.CeilToInt(extent/spacing)+1);
-            var cell=new Vector2Int(Mathf.FloorToInt(center.x/spacing),Mathf.FloorToInt(center.y/spacing));
-            for(int z=-radius;z<=radius;z++)for(int x=-radius;x<=radius;x++){var site=terrain.Site(cell+new Vector2Int(x,z));if(site.kind!=WorldSiteKind.Clearing&&terrain.IsExterior(site.position.x,site.position.z))sites.Add(site);}
-            if(settings.preserveAuthoredCenter)sites.Add(new WorldSite{kind=WorldSiteKind.Village,position=VoxelRegionHeightfield.Sites[0]});
-            builder=null;
+            float margin=Mathf.Max(32,TerrainExtent*.5f);
+            return Mathf.Max(Mathf.Abs(ViewCenter.x-builtCenter.x),Mathf.Abs(ViewCenter.y-builtCenter.y))>margin*.5f;
+        }
+        void ResizeMapTexture()
+        {
+            int width=IsOpen?1536:512,height=IsOpen?1024:512;
+            if(texture!=null&&texture.width==width&&texture.height==height)return;
+            mapCamera.targetTexture=null;
+            if(texture!=null){texture.Release();Destroy(texture);}
+            texture=new RenderTexture(width,height,24,RenderTextureFormat.ARGB32){name="World cartography",filterMode=FilterMode.Bilinear};
+            texture.Create();mapCamera.targetTexture=texture;
         }
         void LateUpdate()
         {
-            if(!IsOpen||mapCamera==null||SystemInfo.graphicsDeviceType==UnityEngine.Rendering.GraphicsDeviceType.Null)return;
-            var rotation=Quaternion.Euler(Pitch,Yaw,0);var target=new Vector3(Center.x,MapDepth,Center.y);
-            mapCamera.transform.SetPositionAndRotation(target-rotation*Vector3.forward*6500,rotation);mapCamera.orthographicSize=Zoom;mapCamera.aspect=View.width/View.height;mapCamera.Render();
-        }
-        void OnGUI()
-        {
-            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
-            if(!IsOpen)return;
-            int depth=GUI.depth;GUI.depth=-100;var old=GUI.color;GUI.color=new Color(.035f,.055f,.08f,.99f);GUI.DrawTexture(new Rect(0,0,Screen.width,Screen.height),Texture2D.whiteTexture);GUI.color=Color.white;
-            var title=new GUIStyle(GUI.skin.label){fontSize=25,fontStyle=FontStyle.Bold};GUI.Label(new Rect(26,18,350,42),"MAPA DEL MUNDO",title);
-            if(GUI.Button(new Rect(Screen.width-132,20,108,38),"Cerrar [M]"))Close();
-            if(GUI.Button(new Rect(Screen.width-264,20,122,38),"Mi posición"))Recenter();
-            if(GUI.Button(new Rect(Screen.width-365,20,90,38),"Norte ↑")){Yaw=0;Pitch=75;dirty=true;}
-            if(GUI.Button(new Rect(Screen.width-453,20,34,38),"−"))SetZoom(Zoom*1.3f);
-            if(GUI.Button(new Rect(Screen.width-411,20,34,38),"+"))SetZoom(Zoom/1.3f);
-            if(texture!=null)GUI.DrawTexture(View,texture,ScaleMode.StretchToFill);
-            if(mesh==null)GUI.Label(new Rect(View.x+20,View.y+20,280,30),"Dibujando el relieve…");
-            foreach(var site in sites)
+            if(mapCamera==null||mesh==null||GameplayPause.BlocksInput||SystemInfo.graphicsDeviceType==UnityEngine.Rendering.GraphicsDeviceType.Null)return;
+            // Camera tracking is independent of the slower terrain generation.
+            ResizeMapTexture();
+            var main=UnityEngine.Camera.main;
+            if(!IsOpen&&main!=null)
             {
-                if(Zoom>700&&site.kind!=WorldSiteKind.Village)continue;
-                string label=site.kind==WorldSiteKind.Village?"◆ Pueblo":site.kind==WorldSiteKind.BossArena?"▲ Arena":site.kind==WorldSiteKind.Ruin?"▪ Ruinas":"✦ Santuario";
-                Marker(site.position,label,site.kind==WorldSiteKind.Village?new Color(1,.82f,.35f):new Color(.85f,.85f,.9f));
+                renderedYaw=Mathf.Repeat(main.transform.eulerAngles.y+miniOrbitOffset.x,360);
+                float cameraPitch=Mathf.DeltaAngle(0,main.transform.eulerAngles.x);
+                // Preserve a readable oblique view at eye level, reach overhead when looking down.
+                renderedPitch=Mathf.Clamp(Mathf.Lerp(22,89,Mathf.InverseLerp(-10,70,cameraPitch))+miniOrbitOffset.y,20,89);
             }
-            Marker(transform.position,"▲ Vos",Color.white);
-            GUI.Label(new Rect(26,Screen.height-48,Screen.width-52,42),"Rueda: zoom  ·  Arrastrar: mover  ·  Botón derecho: girar/inclinar  ·  WASD: desplazar  ·  Inicio: centrar\n"+Mathf.RoundToInt(Zoom*2)+" m de alto  |  Centro: "+Mathf.RoundToInt(Center.x)+", "+Mathf.RoundToInt(Center.y));
-            GUI.color=old;GUI.depth=depth;
+            else if(IsOpen){renderedYaw=Yaw;renderedPitch=Pitch;}
+            var rotation=Quaternion.Euler(renderedPitch,renderedYaw,0);
+            var c=ViewCenter;var heightCenter=dragging&&dragButton==1?builtCenter:c;
+            float height=displayedExploration.Contains(heightCenter.x,heightCenter.y)?terrain.Height(heightCenter.x,heightCenter.y):8;
+            // The land has world-space edges: panning moves the sheet itself, not a fixed mask.
+            material.SetVector("_MapClipRect",new Vector4(builtFootprint.xMin,builtFootprint.yMin,builtFootprint.xMax,builtFootprint.yMax));
+            var target=new Vector3(c.x,MapDepth+height*ReliefScale,c.y);
+            var bounds=mesh.bounds;
+            float radius=bounds.extents.magnitude+Vector3.Distance(bounds.center,new Vector3(c.x,height,c.y));
+            float cameraDistance=Mathf.Max(128,radius+64);
+            mapCamera.farClipPlane=cameraDistance+radius+64;
+            mapCamera.transform.SetPositionAndRotation(target-rotation*Vector3.forward*cameraDistance,rotation);
+            // Preserve terrain pixels per metre when resizing the minimap container.
+            // Expanding its rectangle adds space instead of stretching the existing sheet.
+            float viewportScale=IsOpen?1f:MiniRect.height/(280f*PlayerHUD.Scale);
+            mapCamera.orthographicSize=ViewZoom*1.6f*viewportScale;
+            mapCamera.aspect=ViewAspect;mapCamera.Render();
+            if(portrait==null&&Time.unscaledTime>=nextPortrait){nextPortrait=Time.unscaledTime+3;CapturePortrait();}
         }
-        void Marker(Vector3 position,string text,Color color)
+        void ApplyMinimapSettings()
         {
-            if(mapCamera==null)return;position.y=terrain.Height(position.x,position.z)+MapDepth+2;
-            var uv=mapCamera.WorldToViewportPoint(position);if(uv.z<0||uv.x<0||uv.x>1||uv.y<0||uv.y>1)return;
-            var rect=new Rect(View.x+uv.x*View.width-35,View.y+(1-uv.y)*View.height-12,110,25);
-            var style=new GUIStyle(GUI.skin.label){fontSize=14,fontStyle=FontStyle.Bold};style.normal.textColor=Color.black;GUI.Label(new Rect(rect.x+1,rect.y+1,rect.width,rect.height),text,style);style.normal.textColor=color;GUI.Label(rect,text,style);
+            if(catalog==null)return;
+            float distance=Mathf.Clamp(catalog.minimapDistance,20,512);
+            if(Mathf.Approximately(distance,configuredMiniDistance))return;
+            bool firstConfiguration=configuredMiniDistance<0;
+            configuredMiniDistance=distance;
+            if(firstConfiguration)miniMapExtent=distance;
+            SetMiniZoom(distance);
         }
-        void OnDisable(){Close();if(builder!=null){StopCoroutine(builder);builder=null;dirty=true;}}
-        void OnDestroy(){if(active==this)active=null;if(mapCamera!=null)Destroy(mapCamera.gameObject);if(surface!=null)Destroy(surface);if(mesh!=null)Destroy(mesh);if(material!=null)Destroy(material);if(texture!=null){texture.Release();Destroy(texture);}}
+        void SaveDiscovery()
+        {
+            if(exploration==null||!exploration.Changed||WorldSession.Current==null||WorldSession.Current.id!=discoveryWorldId)return;
+            if(WorldSession.SaveMapDiscovery(exploration.Snapshot()))exploration.MarkSaved();
+            else error=WorldSession.LastError;
+        }
+        void OnApplicationQuit()=>SaveDiscovery();
+        void OnApplicationFocus(bool focused){if(!focused){FinishMiniResize();dragging=false;}}
+        void OnApplicationPause(bool paused){if(paused)SaveDiscovery();}
+        bool VisibleOnMap(Vector3 p)=>displayedExploration!=null&&builtFootprint.Contains(new Vector2(p.x,p.z))&&displayedExploration.Contains(p.x,p.z);
+        void CapturePortrait()
+        {
+            var preview=new InventoryPreview();
+            try
+            {
+                var visual=GetComponent<PlayerMotor>()?.Visual;
+                preview.Show(visual!=null?visual.gameObject:gameObject,default,true,r=>
+                {
+                    string name=r.name.ToLowerInvariant();
+                    return name.Contains("head")||name.Contains("hood")||name.Contains("face")||name.Contains("eye")||name.Contains("hair")||name.Contains("hat")||name.Contains("scarf");
+                },true);
+                if(!preview.HasModel)return;
+                var previous=RenderTexture.active;
+                try
+                {
+                    RenderTexture.active=preview.Texture as RenderTexture;
+                    portrait=new Texture2D(preview.Texture.width,preview.Texture.height,TextureFormat.RGBA32,false){name="Player map portrait"};
+                    portrait.ReadPixels(new Rect(0,0,portrait.width,portrait.height),0,0);portrait.Apply();
+                }
+                finally{RenderTexture.active=previous;}
+            }
+            finally{preview.Dispose();}
+        }
+        Vector2 Project(Vector3 position,Rect rect)
+        {
+            position.y=terrain.Height(position.x,position.z)*ReliefScale+MapDepth+3;var uv=mapCamera.WorldToViewportPoint(position);
+            return new Vector2(rect.x+uv.x*rect.width,rect.y+(1-uv.y)*rect.height);
+        }
+        bool Pick(Vector2 screen,Rect rect,out Vector3 position)
+        {
+            var ray=mapCamera.ViewportPointToRay(new Vector3((screen.x-rect.x)/rect.width,1-(screen.y-rect.y)/rect.height,0));
+            // March from above the terrain and bisect the first surface crossing (works on slopes).
+            float high=mesh!=null?mesh.bounds.max.y*ReliefScale+16:256;
+            float low=mesh!=null?mesh.bounds.min.y*ReliefScale-16:-128;
+            float start=(MapDepth+high-ray.origin.y)/ray.direction.y;
+            float end=(MapDepth+low-ray.origin.y)/ray.direction.y;
+            float previous=Mathf.Max(0,start);
+            for(int i=1;i<=256;i++)
+            {
+                float t=Mathf.Lerp(Mathf.Max(0,start),end,i/256f);var p=ray.GetPoint(t);
+                if(p.y<=MapDepth+terrain.Height(p.x,p.z)*ReliefScale)
+                {
+                    float lo=previous,hi=t;for(int j=0;j<14;j++){float mid=(lo+hi)*.5f;var q=ray.GetPoint(mid);if(q.y>MapDepth+terrain.Height(q.x,q.z)*ReliefScale)lo=mid;else hi=mid;}
+                    position=ray.GetPoint((lo+hi)*.5f);position.y=terrain.Height(position.x,position.z);return VisibleOnMap(position);
+                }
+                previous=t;
+            }
+            position=default;return false;
+        }
+        void OnDisable(){SaveDiscovery();Close();ReleaseMini();if(builder!=null){StopCoroutine(builder);builder=null;}dirty=true;}
+        void OnDestroy(){if(portrait!=null)Destroy(portrait);if(active==this)active=null;if(ownedCatalog&&catalog!=null)Destroy(catalog);if(mapCamera!=null)Destroy(mapCamera.gameObject);if(surface!=null)Destroy(surface);if(mesh!=null)Destroy(mesh);if(material!=null)Destroy(material);if(texture!=null){texture.Release();Destroy(texture);}}
     }
 }
+
+
+
+
+
+
+
+
+
+

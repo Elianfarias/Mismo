@@ -124,6 +124,17 @@ namespace Mismo.Gameplay.Player.World
             if(DayNightCycle.Current!=null){next.hasTimeOfDay=true;next.timeOfDay=DayNightCycle.Current.hour;}
             return Commit(next);
         }
+        public static bool SaveMapPins(System.Collections.Generic.List<Mismo.Gameplay.Player.Presentation.MapPin> pins)
+        {
+            if(Current==null)return false;
+            var next=Current.Copy();next.mapPins=new System.Collections.Generic.List<Mismo.Gameplay.Player.Presentation.MapPin>(pins);
+            return Commit(next);
+        }
+        public static bool SaveMapDiscovery(System.Collections.Generic.List<MapDiscoveryBlock> blocks)
+        {
+            if(Current==null)return false;
+            var next=Current.Copy();next.mapDiscovery=blocks;return Commit(next);
+        }
         public static void Respawn()
         {if(Current!=null)Checkpoint(new Vector3(Current.spawnX,Current.spawnY,Current.spawnZ),0);}
         static bool Commit(WorldSaveData next)
@@ -135,3 +146,5 @@ namespace Mismo.Gameplay.Player.World
         }
     }
 }
+
+

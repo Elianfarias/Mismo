@@ -12,16 +12,18 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         Vector3 orbitCenter;
         float orbitDistance, yaw, pitch;
         readonly List<Mesh> baked=new List<Mesh>();
+        readonly List<Material> previewMaterials=new List<Material>();
         public Texture Texture=>texture;
         public void Zoom(float factor){if(camera!=null)camera.orthographicSize*=Mathf.Clamp(factor,.2f,2);}
         public bool HasModel {get;private set;}
-        public void Show(GameObject source,Vector3 rotation=default,bool portrait=false)
+        public void Show(GameObject source,Vector3 rotation=default,bool portrait=false,System.Predicate<Renderer> filter=null,bool mapLighting=false)
         {
             Dispose();if(source==null)return;
             root=new GameObject("Inventory preview geometry");root.transform.position=new Vector3(0,-20000,0);
             var renderers=source.GetComponentsInChildren<Renderer>();
             foreach(var renderer in renderers)
             {
+                if(filter!=null&&!filter(renderer))continue;
                 if(!renderer.enabled||(!renderer.gameObject.activeInHierarchy&&source.scene.IsValid())||renderer is ParticleSystemRenderer||renderer is TrailRenderer||renderer is LineRenderer)continue;
                 Mesh mesh=null;
                 if(renderer is SkinnedMeshRenderer skin){mesh=new Mesh();skin.BakeMesh(mesh,false);mesh.RecalculateBounds();baked.Add(mesh);}
@@ -31,7 +33,23 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 go.transform.localPosition=Quaternion.Inverse(source.transform.rotation)*(renderer.transform.position-source.transform.position);
                 go.transform.localRotation=Quaternion.Inverse(source.transform.rotation)*renderer.transform.rotation;
                 go.transform.localScale=renderer.transform.lossyScale;
-                go.AddComponent<MeshFilter>().sharedMesh=mesh;go.AddComponent<MeshRenderer>().sharedMaterials=renderer.sharedMaterials;
+                go.AddComponent<MeshFilter>().sharedMesh=mesh;
+                var materials=renderer.sharedMaterials;
+                if(mapLighting)
+                {
+                    for(int i=0;i<materials.Length;i++)
+                    {
+                        var sourceMaterial=materials[i];var copy=new Material(Shader.Find("Mismo/Map Portrait"));
+                        if(sourceMaterial!=null)
+                        {
+                            copy.color=sourceMaterial.HasProperty("_BaseColor")?sourceMaterial.GetColor("_BaseColor"):sourceMaterial.HasProperty("_Color")?sourceMaterial.color:Color.white;
+                            if(sourceMaterial.HasProperty("_BaseMap"))copy.mainTexture=sourceMaterial.GetTexture("_BaseMap");
+                            else if(sourceMaterial.HasProperty("_MainTex"))copy.mainTexture=sourceMaterial.mainTexture;
+                        }
+                        materials[i]=copy;previewMaterials.Add(copy);
+                    }
+                }
+                go.AddComponent<MeshRenderer>().sharedMaterials=materials;
             }
             root.transform.rotation=Quaternion.Euler(rotation);
             var copies=root.GetComponentsInChildren<Renderer>();if(copies.Length==0)return;
@@ -70,6 +88,10 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(root!=null)Release(root);root=null;camera=null;
             if(texture!=null){texture.Release();Release(texture);}texture=null;
             foreach(var mesh in baked)Release(mesh);baked.Clear();
+            foreach(var material in previewMaterials)Release(material);previewMaterials.Clear();
         }
     }
 }
+
+
+

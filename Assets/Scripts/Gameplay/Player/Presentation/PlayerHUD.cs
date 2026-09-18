@@ -68,27 +68,16 @@ namespace Mismo.Gameplay.Player.Presentation
         private SwordLunge lunge;
         private SwordParry parry;
         private SwordSpinAttack spin;
-        private UnityEngine.Camera mapCamera;
-        private RenderTexture map;
-        private float nextMap;
+
+
+
         private GUIStyle text;
-        public RenderTexture Minimap => map;
+        public RenderTexture Minimap => GetComponent<WorldMapPanel>()?.Preview;
         private void Start()
         {
             combat=GetComponent<CombatState>();if(combat!=null)combat.Rewarded+=OnReward;
             Active=this;health=GetComponent<Health>();stamina=GetComponent<Stamina>();dash=GetComponent<BeltDash>();
             combo=GetComponentInChildren<BasicSwordCombo>();lunge=GetComponentInChildren<SwordLunge>();parry=GetComponentInChildren<SwordParry>();spin=GetComponentInChildren<SwordSpinAttack>();
-            var go=new GameObject("Local minimap camera");go.transform.SetParent(transform,false);
-            mapCamera=go.AddComponent<UnityEngine.Camera>();mapCamera.enabled=false;mapCamera.orthographic=true;mapCamera.orthographicSize=45;
-            mapCamera.nearClipPlane=.1f;mapCamera.farClipPlane=220;mapCamera.clearFlags=CameraClearFlags.SolidColor;
-            mapCamera.backgroundColor=new Color(.16f,.23f,.18f);mapCamera.cullingMask=~(1<<2);mapCamera.allowHDR=false;mapCamera.allowMSAA=false;
-            map=new RenderTexture(256,256,16){name="Local minimap",filterMode=FilterMode.Bilinear};map.Create();mapCamera.targetTexture=map;
-        }
-        private void LateUpdate()
-        {
-            if(SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null || mapCamera==null || Time.unscaledTime<nextMap)return;
-            nextMap=Time.unscaledTime+.2f;
-            mapCamera.transform.SetPositionAndRotation(transform.position+new Vector3(0,80,-55),Quaternion.LookRotation(new Vector3(0,-80,55)));mapCamera.Render();
         }
         public static float Scale => Mathf.Max(.1f,Mathf.Min(Screen.width/1600f,Screen.height/900f));
         public static void Fill(Rect rect,Color color)
@@ -102,7 +91,7 @@ namespace Mismo.Gameplay.Player.Presentation
         {Fill(new Rect(x,y,width,12),new Color(.11f,.14f,.17f));Fill(new Rect(x,y,width*Mathf.Clamp01(value),12),color);}
         private void OnGUI()
         {
-            if (Equipment.Inventory.InventoryPanel.AnyOpen || GetComponent<World.GatheringPlayer>()?.BlocksGameplay==true) return;
+            if (WorldMapPanel.AnyOpen || Equipment.Inventory.InventoryPanel.AnyOpen || GetComponent<World.GatheringPlayer>()?.BlocksGameplay==true) return;
             if(health==null)return;
             Matrix4x4 old=GUI.matrix;float scale=Scale;GUI.matrix=Matrix4x4.Scale(Vector3.one*scale);
             float width=Screen.width/scale,height=Screen.height/scale;
@@ -141,18 +130,6 @@ namespace Mismo.Gameplay.Player.Presentation
                 if(equipment.ActiveDefinition.isBow) Label(new Rect(width*Equipment.WeaponAim.Viewport.x-12,height*(1-Equipment.WeaponAim.Viewport.y)-12,24,24),"+",22,Gold,TextAnchor.MiddleCenter);
             }
             Ability(left+432,height-115,"C",dash!=null?dash.DisplayName.ToUpperInvariant():"ESPECIAL",Status(dash!=null?dash.CooldownRemaining:0,dash!=null&&dash.IsActive),dash!=null&&dash.CooldownDuration>0?dash.CooldownRemaining/dash.CooldownDuration:0,true);
-            float mx=width-228;
-            Fill(new Rect(mx-5,24,209,236),Panel);
-            if(map!=null)GUI.DrawTexture(new Rect(mx,29,199,199),map);
-            Matrix4x4 mapMatrix=GUI.matrix;
-            var motor=GetComponent<PlayerMotor>();Vector3 facing=motor!=null?motor.Facing:transform.forward;
-            // Compose in HUD coordinates before the screen scale. RotateAroundPivot
-            // mixes its pivot with the existing GUI matrix at non-reference resolutions.
-            float heading=Mathf.Atan2(facing.x,facing.z * .824f)*Mathf.Rad2Deg;
-            GUI.matrix=mapMatrix*Matrix4x4.TRS(new Vector3(mx+99.5f,128.5f,0),Quaternion.Euler(0,0,heading),Vector3.one);
-            Label(new Rect(-15,-15,30,30),"▲",24,Gold,TextAnchor.MiddleCenter);GUI.matrix=mapMatrix;
-            Label(new Rect(mx+79,29,40,22),"N",15,Color.white,TextAnchor.MiddleCenter);
-            Label(new Rect(mx,231,199,22),"ALREDEDORES · 90 m",12,Muted,TextAnchor.MiddleCenter);
             if(health.IsDead)
             {Fill(new Rect(width/2-210,height/2-46,420,92),Panel);Label(new Rect(width/2-200,height/2-36,400,40),"HAS CAÍDO",26,Gold,TextAnchor.MiddleCenter);Label(new Rect(width/2-200,height/2+5,400,30),"Regresando al pueblo…",16,Color.white,TextAnchor.MiddleCenter);}
             GUI.matrix=old;
@@ -169,6 +146,7 @@ namespace Mismo.Gameplay.Player.Presentation
             QuietFantasyUI.Border(new Rect(x,y,96,88),status=="ACTIVO"?QuietFantasyUI.Amber:QuietFantasyUI.Rule);
         }
         private void OnDisable(){if(Active==this)Active=null;}
-        private void OnDestroy(){if(combat!=null)combat.Rewarded-=OnReward;if(mapCamera!=null)Destroy(mapCamera.gameObject);if(map!=null){map.Release();Destroy(map);}}
+        private void OnDestroy(){if(combat!=null)combat.Rewarded-=OnReward;}
     }
 }
+

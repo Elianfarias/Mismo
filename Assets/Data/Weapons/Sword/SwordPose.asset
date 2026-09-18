@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.WeaponPoseProfile
   hiddenRendererPaths: []
   equipped:
-    anchor: 2
+    anchor: 1
     bonePath: Armature_Humanoid/Root/Hips/Spine/Chest/Clavicle.R/UpperArm.R/LowerArm.R/Hand.R
-    offset: {x: -0.0052512893, y: 0.27372184, z: -0.032666974}
-    rotation: {x: 306.21973, y: 278.8875, z: 233.35956}
+    offset: {x: 0.37114498, y: 0.42185566, z: -0.013706647}
+    rotation: {x: 348.26245, y: 186.99294, z: 53.270725}
     scale: 1
   holstered:
     anchor: 0

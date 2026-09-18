@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e9853e2eef5b044699534fbc8a69948, type: 3}
+  m_Name: MapMarkerCatalog
+  m_EditorClassIdentifier: 
+  backgroundOpacity: 0
+  minimapDistance: 20
+  villageIcon: {fileID: 2800000, guid: 02f6bf22c2b7b6b4a944ee8d1b80a6b0, type: 3}
+  types:
+  - id: flag
+    label: Lugar
+    symbol: 0
+    icon: {fileID: 2800000, guid: bc8bd115512a92144bd05caff07fdb07, type: 3}
+    color: {r: 1, g: 0.76, b: 0.25, a: 1}
+    available: 1
+  - id: chest
+    label: Tesoro
+    symbol: 2
+    icon: {fileID: 2800000, guid: 2356afd79c3d94c448d46fc04fb8542a, type: 3}
+    color: {r: 1, g: 0.76, b: 0.25, a: 1}
+    available: 1
+  - id: danger
+    label: Peligro
+    symbol: 3
+    icon: {fileID: 2800000, guid: a8af1ce53c4c7524a86273d7adbdf178, type: 3}
+    color: {r: 1, g: 0.76, b: 0.25, a: 1}
+    available: 1
+  - id: resource
+    label: Recurso
+    symbol: 4
+    icon: {fileID: 2800000, guid: 1f01df31d5c00074e9282c82df94224a, type: 3}
+    color: {r: 1, g: 0.76, b: 0.25, a: 1}
+    available: 1
+  - id: home
+    label: Refugio
+    symbol: 1
+    icon: {fileID: 2800000, guid: 02f6bf22c2b7b6b4a944ee8d1b80a6b0, type: 3}
+    color: {r: 1, g: 0.76, b: 0.25, a: 1}
+    available: 1
+  - id: battle
+    label: Combate
+    symbol: 3
+    icon: {fileID: 2800000, guid: 96c2585e3b2743541ac25c111dd5ef7c, type: 3}
+    color: {r: 1, g: 0.76, b: 0.25, a: 1}
+    available: 1
+  - id: bridge
+    label: Puente
+    symbol: 0
+    icon: {fileID: 2800000, guid: ddd0f5795048148489b901a169e153d4, type: 3}
+    color: {r: 1, g: 0.76, b: 0.25, a: 1}
+    available: 1
+  - id: dungeon
+    label: Mazmorra
+    symbol: 0
+    icon: {fileID: 2800000, guid: c501817a169fa2f44bf105a22606763e, type: 3}
+    color: {r: 1, g: 0.76, b: 0.25, a: 1}
+    available: 1
+  - id: creature
+    label: Criatura
+    symbol: 0
+    icon: {fileID: 2800000, guid: e26fb4a8f6e6e6a4bb176b98feb8ea66, type: 3}
+    color: {r: 1, g: 0.76, b: 0.25, a: 1}
+    available: 1
+  - id: shield
+    label: "Protecci\xF3n"
+    symbol: 0
+    icon: {fileID: 2800000, guid: 2bad8d8a766c2894faf6097f008ea017, type: 3}
+    color: {r: 1, g: 0.76, b: 0.25, a: 1}
+    available: 1
+  - id: tower
+    label: Torre
+    symbol: 0
+    icon: {fileID: 2800000, guid: 7879bb9f49778b743ac629062ff5194d, type: 3}
+    color: {r: 1, g: 0.76, b: 0.25, a: 1}
+    available: 1
