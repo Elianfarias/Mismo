@@ -23,6 +23,10 @@ namespace Mismo.Menu
         public Slider UI => ui;
         public bool OptionsVisible => options.activeSelf;
         bool loading;
+        GameObject credits;
+        Button openCredits;
+        [Header("Créditos de iconos")]
+        [TextArea(2,5)] public string flaticonAttribution="Iconos de Flaticon · www.flaticon.com";
         Sprite fantasyFrame;
         readonly System.Collections.Generic.Dictionary<Text,string> originalLabels=new System.Collections.Generic.Dictionary<Text,string>();
         void OnDestroy(){L.Changed-=RefreshLanguage;if(fantasyFrame!=null)Destroy(fantasyFrame);}
@@ -46,8 +50,11 @@ namespace Mismo.Menu
             begin.GetComponentInChildren<Text>().text="Nueva partida";
             begin.GetComponent<RectTransform>().anchoredPosition=new Vector2(0,-75);
             openOptions.GetComponent<RectTransform>().anchoredPosition=new Vector2(0,-150);
-            quit.GetComponent<RectTransform>().anchoredPosition=new Vector2(0,-225);
-            status.rectTransform.anchoredPosition=new Vector2(0,-305);
+            openCredits=ButtonAt(home.transform,"Créditos",225,false);
+            openCredits.onClick.AddListener(ShowCredits);
+            quit.GetComponent<RectTransform>().anchoredPosition=new Vector2(0,-300);
+            status.rectTransform.anchoredPosition=new Vector2(0,-380);
+            CreateCredits();
             continueGame.interactable=WorldSession.CanContinue();
             if(WorldSession.LastError!=null)status.text=WorldSession.LastError;
             openOptions.onClick.AddListener(()=>ShowOptions(true));
@@ -90,15 +97,32 @@ namespace Mismo.Menu
         }
         void Update()
         {
+            if(!loading&&credits!=null&&credits.activeSelf&&Keyboard.current!=null&&Keyboard.current.escapeKey.wasPressedThisFrame){ShowOptions(false);return;}
             if(!loading && OptionsVisible && Keyboard.current!=null && Keyboard.current.escapeKey.wasPressedThisFrame)ShowOptions(false);
         }
         public void ShowOptions(bool show)
         {
             if(loading)return;
+            if(credits!=null)credits.SetActive(false);
             if (options.activeSelf != show) GameAudio.Play(show ? GameSound.MenuOpen : GameSound.MenuClose);
             home.SetActive(!show);options.SetActive(show);
             if(EventSystem.current!=null)EventSystem.current.SetSelectedGameObject(show?music.gameObject:continueGame!=null&&continueGame.interactable?continueGame.gameObject:begin.gameObject);
             if(!show)PlayerPrefs.Save();
+        }
+        void CreateCredits()
+        {
+            credits=Box("Créditos",home.transform.parent,new Vector2(42,235),new Vector2(450,420),Color.clear).gameObject;
+            Label(credits.transform,"CRÉDITOS",Vector2.zero,new Vector2(450,38),27,Color.white);
+            Label(credits.transform,"Lorc y Skoll · Game-icons.net\nCC BY 3.0 · Escala y tinte adaptados\ncreativecommons.org/licenses/by/3.0\n\nCagliostro · Matthew Desmond · SIL OFL 1.1\n\nFantasy UI Borders · Kenney · CC0\n\n"+flaticonAttribution,new Vector2(0,52),new Vector2(450,275),18,new Color(.85f,.87f,.81f));
+            var returnButton=ButtonAt(credits.transform,"Volver",340,false);
+            returnButton.onClick.AddListener(()=>ShowOptions(false));
+            credits.SetActive(false);
+        }
+        void ShowCredits()
+        {
+            if(loading)return;
+            home.SetActive(false);options.SetActive(false);credits.SetActive(true);GameAudio.Play(GameSound.MenuOpen);
+            if(EventSystem.current!=null)EventSystem.current.SetSelectedGameObject(credits.GetComponentInChildren<Button>().gameObject);
         }
         public void Begin()
         {

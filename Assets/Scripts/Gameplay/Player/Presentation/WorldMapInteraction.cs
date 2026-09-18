@@ -10,6 +10,7 @@ namespace Mismo.Gameplay.Player.Presentation
     public sealed partial class WorldMapPanel
     {
         MapMarkerCatalog catalog;
+        Mismo.Gameplay.Player.Equipment.Inventory.InventoryUIIcons hudTheme;
         bool ownedCatalog,miniInteractive;
         readonly List<MapPin> pins=new List<MapPin>();
         MapPin draft;
@@ -108,7 +109,15 @@ namespace Mismo.Gameplay.Player.Presentation
                 GUI.depth=-150;
 
                 if(texture!=null)GUI.DrawTexture(MiniRect,texture,ScaleMode.StretchToFill);
+
                 DrawMarkers(MiniRect,miniInteractive);
+                if(hudTheme==null)hudTheme=Resources.Load<Mismo.Gameplay.Player.Equipment.Inventory.InventoryUIIcons>("InventoryUIIcons");
+                if(hudTheme?.MinimapFrame!=null)
+                {
+                    float inset=MiniRect.width*.045f;
+                    GUI.DrawTexture(new Rect(MiniRect.x-inset,MiniRect.y-inset,MiniRect.width+inset*2,MiniRect.height+inset*2),hudTheme.MinimapFrame,ScaleMode.StretchToFill);
+                }
+                else QuietFantasyUI.Border(MiniRect,new Color(.58f,.63f,.68f,.9f),2);
                 if(miniInteractive||!followPlayer||miniOrbitOffset.sqrMagnitude>.001f)if(MapIcons.Button(new Rect(MiniRect.xMax-34,MiniRect.yMax-34,32,32),MapSymbol.Center,"Centrar y restablecer orientación"))Recenter();
                 float radians=-renderedYaw*Mathf.Deg2Rad;var north=MiniRect.center+new Vector2(Mathf.Sin(radians),-Mathf.Cos(radians))*(MiniRect.width*.43f);
                 QuietFantasyUI.Text(new Rect(north.x-10,north.y-10,20,20),"N",14,Color.white,false,TextAnchor.MiddleCenter);
@@ -264,7 +273,7 @@ namespace Mismo.Gameplay.Player.Presentation
             if(MapIcons.Button(new Rect(r.xMax-44,r.y+12,32,32),MapSymbol.Close,"Cancelar")){draft=null;return;}
             var options=catalog.types.FindAll(t=>t!=null&&t.available);
             var viewport=new Rect(r.x+12,r.y+56,r.width-24,126);
-            paletteScroll=GUI.BeginScrollView(viewport,paletteScroll,new Rect(0,0,250,Mathf.Max(126,Mathf.CeilToInt(options.Count/5f)*48)));
+            paletteScroll=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.BeginScrollView(viewport,paletteScroll,new Rect(0,0,250,Mathf.Max(126,Mathf.CeilToInt(options.Count/5f)*48)));
             for(int i=0;i<options.Count;i++)
             {
                 var type=options[i];var cell=new Rect(i%5*48,i/5*48,42,42);
