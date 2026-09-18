@@ -37,6 +37,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
     public sealed class InventoryProfile
     {
         public int version = 5;
+        public string[] consumableSlots;
         public double worldPlaySeconds;
         public double potionReadyAt, weaponBuffUntil;
         public string buffedWeaponId;
@@ -114,6 +115,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             var copy = new InventoryProfile { version = version, activeSlot = activeSlot, progression=progression.Copy(),
                 equipped = (string[])equipped.Clone(), claimedRewards = new List<string>(claimedRewards) };
             copy.offhands=offhands==null?null:(string[])offhands.Clone();
+            copy.consumableSlots=consumableSlots==null?null:(string[])consumableSlots.Clone();
             copy.worldPlaySeconds=worldPlaySeconds;
             copy.potionReadyAt=potionReadyAt;copy.weaponBuffUntil=weaponBuffUntil;
             copy.buffedWeaponId=buffedWeaponId;copy.weaponBuffDamage=weaponBuffDamage;
@@ -158,6 +160,13 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
 
         public bool IsValid(ISet<string> definitions, IDictionary<string, string> rewards)
         {
+            if(consumableSlots!=null&&consumableSlots.Length>0)
+            {
+                if(consumableSlots.Length!=4)return false;
+                var assigned=new HashSet<string>();
+                foreach(var id in consumableSlots)
+                    if(!string.IsNullOrEmpty(id)&&(!MaterialCatalog.ValidId(id)||!assigned.Add(id)))return false;
+            }
             if(double.IsNaN(potionReadyAt)||double.IsInfinity(potionReadyAt)||potionReadyAt<0||potionReadyAt>1e12||
                 double.IsNaN(weaponBuffUntil)||double.IsInfinity(weaponBuffUntil)||weaponBuffUntil<0||weaponBuffUntil>1e12||
                 float.IsNaN(weaponBuffDamage)||weaponBuffDamage<0||weaponBuffDamage>1||buffedWeaponId!=null&&buffedWeaponId.Length>160)return false;

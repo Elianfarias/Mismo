@@ -1,0 +1,10 @@
+# Pixel-art inventory frames, v2
+
+Generated with the built-in image generation tool. Original PNG alpha preserved, Point filtering with no mipmaps or compression. Active references are in Assets/Resources/InventoryUIIcons.asset. v1 files remain available.
+
+## Weapon prompt
+Create ONE empty PIXEL ART fantasy RPG weapon equipment slot frame. True transparent PNG alpha exterior. Square canvas containing one tall frame centered, frame occupies 66% width and 94% height. Pixel art designed on a coarse 64x96 pixel grid then enlarged with nearest neighbor: hard blocky pixel edges, NO antialiasing, NO smooth curves, NO fine metallic grain or realistic texture. Dark midnight navy opaque empty center made of 3 flat blue shades, border uses 3 muted antique-gold flat colors and 1 dark outline. Border 2-3 logical pixels thick, simple stepped corners, tiny pixel diamond at top and sides, shallow stepped shield-point bottom. Understated, readable at actual 100x143 game UI size. Single sprite only, flat orthographic, no text, no weapon, no scenery, no glow, no exterior brown or black fill, no checkerboard pattern. Clearly retro pixel art, not vector or polished metal. The exterior must have actual transparent alpha.
+
+## Consumable prompt
+Create ONE empty PIXEL ART fantasy RPG consumable equipment slot frame. True transparent PNG alpha exterior. Square compact frame fills 94% square canvas. Pixel art designed on a coarse 64x64 pixel grid then enlarged nearest neighbor: hard blocky pixel edges, NO antialiasing, NO smooth curves, NO fine metallic grain or realistic texture. Dark midnight navy opaque empty center made of 3 flat blue shades, border uses 3 muted antique-gold flat colors and 1 dark outline. Border 2-3 logical pixels thick, simple stepped corners, tiny pixel diamond at top, bottom and sides. Understated readable at actual 80x80 game UI size. Single empty sprite only, no potion, no text, no numbers, no scenery, no glow, no exterior brown or black fill, no checkerboard pattern. Clearly retro pixel art, not vector or polished metal. The exterior must have actual transparent alpha.
+

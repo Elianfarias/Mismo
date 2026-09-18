@@ -59,7 +59,7 @@ namespace Mismo.Gameplay.Player.World
             if (inventory == null || UnityEngine.Camera.main == null) return;
             var point = UnityEngine.Camera.main.WorldToScreenPoint(transform.position + Vector3.up);
             if (point.z <= 0 || Vector3.Distance(inventory.transform.position, transform.position) > 15f) return;
-            var style = new GUIStyle(GUI.skin.box) { fontSize = 16, alignment = TextAnchor.MiddleCenter };
+            var style = new GUIStyle(GUI.skin.box){font=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.Body, fontSize = 16, alignment = TextAnchor.MiddleCenter };
             GUI.Box(new Rect(point.x - 145, Screen.height - point.y - 25, 290, 54), "ESPADA DEL GUARDIÁN\nAcercate para recoger", style);
         }
         void OnDestroy() { if (material != null) Destroy(material); }

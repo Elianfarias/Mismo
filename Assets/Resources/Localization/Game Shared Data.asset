@@ -867,6 +867,50 @@ MonoBehaviour:
     m_Key: mount.collection.10
     m_Metadata:
       m_Items: []
+  - m_Id: 9900000000100
+    m_Key: inventory.visual.hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000101
+    m_Key: inventory.visual.set
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000102
+    m_Key: inventory.visual.main
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000103
+    m_Key: inventory.visual.off
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000104
+    m_Key: inventory.visual.drop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000105
+    m_Key: inventory.visual.invalid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000106
+    m_Key: inventory.visual.replace
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000107
+    m_Key: inventory.visual.unchanged
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000108
+    m_Key: inventory.visual.quantity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000109
+    m_Key: inventory.visual.compare
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000110
+    m_Key: inventory.visual.chest
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

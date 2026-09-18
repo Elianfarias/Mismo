@@ -5,6 +5,8 @@ namespace Mismo.Gameplay.Player.Dash
     /// <summary>Origin-independent special slot. Definitions never store per-player effect state.</summary>
     public abstract class SpecialAbilityDefinition : ScriptableObject
     {
+        [Header("Inventory presentation")]
+        public Sprite inventoryIcon;
         [Header("Sonido del especial equipado")]
         [Tooltip("Se reproduce una vez al activar este especial. Vacío = sin sonido.")]
         public AudioClip activationSfx;

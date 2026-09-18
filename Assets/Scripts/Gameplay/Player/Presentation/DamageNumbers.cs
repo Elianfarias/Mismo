@@ -23,7 +23,7 @@ namespace Mismo.Gameplay.Player.Presentation
         {
             if (Equipment.Inventory.InventoryPanel.AnyOpen) return;
             var camera = UnityEngine.Camera.main; if (camera == null) return;
-            if (style == null) style = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold };
+            if (style == null) style = new GUIStyle(GUI.skin.label){font=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.Body, alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold };
             foreach (var entry in entries)
             {
                 float age = Time.time - entry.born;

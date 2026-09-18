@@ -53,15 +53,21 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
             if(IsOpen&&(health==null||health.IsDead)){Close();return;}
-            if(showChest&&!inventory.AtChest){showChest=false;selected=null;confirmDiscard=false;previewDirty=true;}
+            if(showChest&&!inventory.AtChest){showChest=false;selected=null;confirmDiscard=false;showItemActions=false;CancelInventoryDrag();previewDirty=true;}
             var k=Keyboard.current;
             bool typing=IsOpen&&searchFocused;
             if(k!=null)
             {
+                if(!IsOpen&&!WorldMapPanel.AnyOpen&&health!=null&&!health.IsDead)
+                {
+                    for(int slot=0;slot<4;slot++)
+                        if(k[(Key)((int)Key.Digit1+slot)].wasPressedThisFrame){inventory.TryUseConsumableSlot(slot);break;}
+                }
                 if(k.escapeKey.wasPressedThisFrame&&IsOpen)
                 {
                     if(skillDragIndex>=0)CancelSkillDrag();
-                    else if(draggedGrid!=null)draggedGrid=null;
+                    else if(draggedGrid!=null)CancelInventoryDrag();
+                    else if(showItemActions)showItemActions=false;
                     else if(confirmDiscard)confirmDiscard=false;
                     else if(selected!=null&&page==Page.Inventory){selected=null;previewDirty=true;}
                     else Close();
@@ -81,11 +87,11 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 previewDirty=false;
                 GameObject source=gameObject;
                 if(page==Page.Bestiary||page==Page.Mounts){source=null;mountPreviewId=null;}
-                if(page==Page.Inventory&&selected!=null)source=selectedMaterial?inventory.Material(selected)?.pickupPrefab:inventory.Definition(selected)?.visualPrefab;
+                // Keep the character visible while inspecting inventory objects.
                 if(page==Page.Weapons)source=CurrentMenuWeapon?.visualPrefab;
-                Vector3 rotation=page==Page.Inventory&&selected!=null?(selectedMaterial?inventory.Material(selected)?.inventoryPreviewRotation??Vector3.zero:inventory.Definition(selected)?.inventoryPreviewRotation??Vector3.zero):Vector3.zero;
+                Vector3 rotation=Vector3.zero;
                 if(page==Page.Weapons)rotation=CurrentMenuWeapon?.inventoryPreviewRotation??Vector3.zero;
-                preview.Show(source,rotation,page==Page.Character||page==Page.Weapons);
+                preview.Show(source,rotation,page==Page.Character||page==Page.Weapons||page==Page.Inventory);
             }
         }
         void LateUpdate(){if(IsOpen)preview.Render();}
@@ -105,7 +111,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             }
             else if (page != target) GameAudio.Play(GameSound.TabChanged);
             if(target==Page.Skills&&page!=Page.Skills){skillsWeapon=loadout.ActiveDefinition;skillsScroll=Vector2.zero;}
-            CancelSkillDrag();
+            CancelSkillDrag();CancelInventoryDrag();showItemActions=false;
             page=target;confirmDiscard=false;previewDirty=true;searchFocused=false;return true;
         }
         public bool OpenChest()
@@ -119,10 +125,10 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             GameAudio.Play(GameSound.MenuClose);
             IsOpen=false;closedFrame=Time.frameCount;if(active==this)active=null;
             Cursor.lockState=previousLock;Cursor.visible=previousVisible;confirmDiscard=false;showChest=false;draggedGrid=null;
-            CancelSkillDrag();preview.Dispose();searchFocused=false;rotatingPreview=false;
+            CancelSkillDrag();CancelInventoryDrag();showItemActions=false;preview.Dispose();searchFocused=false;rotatingPreview=false;
         }
         void OnDisable()=>Close();
-        void OnDestroy(){if(inventory!=null)inventory.Changed-=OnChanged;preview.Dispose();foreach(var icon in rotatedIcons.Values)Destroy(icon);rotatedIcons.Clear();}
+        void OnDestroy(){if(inventory!=null)inventory.Changed-=OnChanged;preview.Dispose();foreach(var icon in rotatedIcons.Values)Destroy(icon);rotatedIcons.Clear();if(inventoryBackdrop!=null)Destroy(inventoryBackdrop);}
         void Text(Rect rect,string value,int size=18,Color? color=null)
         {label.fontSize=size;label.normal.textColor=color??Color.white;GUI.Label(rect,L.Text(value),label);}
         bool Button(Rect rect,string value)
@@ -146,19 +152,24 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(inventory==null||health==null||health.IsDead)return;
             if(label==null)
             {
-                label=new GUIStyle(GUI.skin.label){wordWrap=true,padding=new RectOffset(0,0,0,0)};
+                label=new GUIStyle(GUI.skin.label){font=QuietFantasyUI.Body,wordWrap=true,padding=new RectOffset(0,0,0,0)};
                 button=new GUIStyle(GUI.skin.button){fontSize=16,wordWrap=true,padding=new RectOffset(4,4,5,5)};
                 button.normal.background=Texture2D.whiteTexture;button.normal.textColor=Color.white;
                 button.hover.background=Texture2D.whiteTexture;button.hover.textColor=Accent;
                 button.active.background=Texture2D.whiteTexture;button.active.textColor=Color.white;
                 FantasyUI.StyleButton(button);
-                field=new GUIStyle(GUI.skin.textField){fontSize=20,padding=new RectOffset(12,12,7,7)};
+                field=new GUIStyle(GUI.skin.textField){font=QuietFantasyUI.Body,fontSize=20,padding=new RectOffset(12,12,7,7)};
             }
             var matrix=GUI.matrix;int depth=GUI.depth;
             if(IsOpen){GUI.depth=-40;PlayerHUD.Fill(new Rect(0,0,Screen.width,Screen.height),IsQuietPage?new Color(.035f,.043f,.038f,.91f):new Color(.015f,.022f,.03f,.86f));}
-            float scale=Mathf.Min(Screen.width/1280f,Screen.height/800f);
-            GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-1280*scale)/2,(Screen.height-800*scale)/2,0),Quaternion.identity,Vector3.one*scale);
+            const float canvasWidth=1280f;
+            float scale=Mathf.Min(Screen.width/canvasWidth,Screen.height/800f);
+            GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-canvasWidth*scale)/2,(Screen.height-800*scale)/2,0),Quaternion.identity,Vector3.one*scale);
             GUI.depth=-40;
+            if(IsOpen&&page==Page.Inventory)
+            {
+                DrawVisualInventory();GUI.matrix=matrix;GUI.depth=depth;return;
+            }
             if(IsOpen&&IsQuietPage)
             {
                 DrawQuietInterface();GUI.matrix=matrix;GUI.depth=depth;return;
@@ -182,7 +193,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
 
                 else if(page==Page.Bestiary)bestiary.Draw(inventory,preview);
                 else if(page==Page.Mounts)DrawMounts();
-                else DrawInventory();
+                else DrawVisualInventory();
                 Line(38,710,1202);
                 Text(new Rect(40,726,1180,30),L.Format("MOCHILA  {0} / {1} celdas",inventory.UsedSlots(false),inventory.BackpackCapacity)+
                     (inventory.AtChest?L.Format("     COFRE  {0} / {1}",inventory.UsedSlots(true),inventory.ChestCapacity):"")+L.Format("     ·     NIVEL {0}",inventory.Level),19,Accent);
@@ -231,25 +242,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(Button(new Rect(890,585,280,42),"Guardar acompañante"))inventory.DismissMount();GUI.enabled=enabled;
             if(!inventory.CanCallMount)Text(new Rect(590,640,600,42),"Desmontá y salí de combate para cambiar de acompañante.",17,Muted);
         }
-        void DrawInventory()
-        {
-            if(Tab(new Rect(40,99,240,36),"Mochila",!showChest)){showChest=false;selected=null;draggedGrid=null;previewDirty=true;}
-            bool enabled=GUI.enabled;GUI.enabled=inventory.AtChest;
-            if(Tab(new Rect(290,99,240,36),inventory.AtChest?"Cofre personal":"Cofre · En el pueblo",showChest)){showChest=true;selected=null;draggedGrid=null;previewDirty=true;}
-            GUI.enabled=enabled;
-            string[] categories={"Todos","Armas","Materiales","Consumo","Favoritos"};
-            for(int i=0;i<categories.Length;i++)if(Tab(new Rect(40+i*103,149,99,36),categories[i],filter==i)){filter=i;scroll=Vector2.zero;selected=null;previewDirty=true;}
-            GUI.SetNextControlName("InventorySearch");query=GUI.TextField(new Rect(40,199,312,38),query,80,field);
-            searchFocused=GUI.GetNameOfFocusedControl()=="InventorySearch";
-            if(query.Length==0&&Event.current.type==EventType.Repaint)Text(new Rect(54,207,260,27),"Buscar objetos…",19,Muted);
-            bool canOrganize=GUI.enabled;GUI.enabled=inventory.CanManage&&(!showChest||inventory.AtChest);
-            if(Button(new Rect(364,199,190,38),"Organizar")){inventory.OrganizeGrid(showChest);draggedGrid=null;}
-            GUI.enabled=canOrganize;
-            Text(new Rect(42,250,515,34),"Arrastrá para mover · R para girar al arrastrar",16,Muted);
-            DrawGrid();
-            PlayerHUD.Fill(new Rect(592,100,648,585),new Color(.02f,.03f,.035f,.65f));
-            if(selected==null)DrawCharacterPreview();else DrawItem();
-        }
+
         bool Matches(GridItem item)
         {
             var material=item.material?inventory.Material(item.id):null;
@@ -258,17 +251,18 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 (filter==0||filter==1&&!item.material||filter==2&&item.material&&(material==null||material.category==InventoryItemCategory.Material)||
                 filter==3&&material!=null&&material.category==InventoryItemCategory.Consumable||filter==4&&inventory.Favorite(item.id,item.material));
         }
-        void DrawGrid()
+        void DrawGrid(Rect viewport)
         {
             int columns=inventory.GridColumns(showChest),rows=inventory.GridRows(showChest);
-            float cell=496f/columns;
+            float cell=(viewport.width-24)/columns;
+            bool pointerInGrid=viewport.Contains(Event.current.mousePosition);
             var items=inventory.GridItems(showChest);var positions=inventory.GridPositions(showChest);
             var unplaced=items.FindAll(i=>!positions.Exists(p=>p.key==i.key));
-            scroll=GUI.BeginScrollView(new Rect(40,291,520,396),scroll,new Rect(0,0,498,Mathf.Max(390,rows*cell+unplaced.Count*49+(unplaced.Count>0?38:0))));
+            scroll=GUI.BeginScrollView(viewport,scroll,new Rect(0,0,viewport.width-22,Mathf.Max(viewport.height-6,rows*cell+unplaced.Count*49+(unplaced.Count>0?38:0))));
             for(int y=0;y<rows;y++)for(int x=0;x<columns;x++)
             {
-                PlayerHUD.Fill(new Rect(x*cell,y*cell,cell-2,cell-2),new Color(.08f,.105f,.115f,.95f));
-                PlayerHUD.Fill(new Rect(x*cell+2,y*cell+2,cell-6,cell-6),new Color(.045f,.063f,.073f,.95f));
+                PlayerHUD.Fill(new Rect(x*cell,y*cell,cell-2,cell-2),OliveTheme?new Color(.43f,.41f,.28f,.65f):new Color(.36f,.39f,.44f,.55f));
+                PlayerHUD.Fill(new Rect(x*cell+2,y*cell+2,cell-6,cell-6),OliveTheme?new Color(.20f,.24f,.16f,.94f):new Color(.09f,.13f,.19f,.94f));
             }
             foreach(var p in positions)
             {
@@ -276,13 +270,14 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 var rect=new Rect(p.x*cell+1,p.y*cell+1,(p.rotated?item.height:item.width)*cell-3,(p.rotated?item.width:item.height)*cell-3);
                 DrawGridItem(item,rect,p.rotated,Matches(item)?1:.22f);
                 var e=Event.current;
-                if(e.type==EventType.MouseDown&&e.button==0&&rect.Contains(e.mousePosition)&&!confirmDiscard)
+                if(e.type==EventType.MouseDown&&e.button==0&&rect.Contains(e.mousePosition)&&GUI.enabled&&!confirmDiscard)
                 {
-                    selected=item.id;selectedMaterial=item.material;selectedGrid=item.key;amount=1;previewDirty=true;
+                    selected=item.id;selectedMaterial=item.material;selectedGrid=item.key;amount=1;
                     GUI.FocusControl(null);searchFocused=false;
                     if(inventory.CanManage&&(!showChest||inventory.AtChest))
                     {
-                        draggedGrid=item.key;dragRotated=p.rotated;dragStart=e.mousePosition;
+                        draggedGrid=item.key;dragRotated=p.rotated;dragStart=e.mousePosition;dragFromHand=-1;dragFromConsumable=-1;
+                        inventoryDragOrigin=GUIUtility.GUIToScreenPoint(e.mousePosition);
                         dragOffset=new Vector2Int(Mathf.FloorToInt((e.mousePosition.x-p.x*cell)/cell),Mathf.FloorToInt((e.mousePosition.y-p.y*cell)/cell));
                     }
                     e.Use();
@@ -297,11 +292,11 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                     int x=Mathf.FloorToInt(e.mousePosition.x/cell)-dragOffset.x,y=Mathf.FloorToInt(e.mousePosition.y/cell)-dragOffset.y;
                     bool valid=inventory.CanMoveGrid(item.key,showChest,x,y,dragRotated);
                     var ghost=new Rect(x*cell+1,y*cell+1,(dragRotated?item.height:item.width)*cell-3,(dragRotated?item.width:item.height)*cell-3);
-                    PlayerHUD.Fill(ghost,valid?new Color(.22f,.7f,.45f,.45f):new Color(.9f,.2f,.15f,.45f));
-                    if(e.type==EventType.MouseUp&&e.button==0)
+                    if(pointerInGrid&&dragFromHand<0&&InventoryDragMoved)PlayerHUD.Fill(ghost,valid?new Color(.22f,.7f,.45f,.45f):new Color(.9f,.2f,.15f,.45f));
+                    if(e.type==EventType.MouseUp&&e.button==0&&pointerInGrid&&dragFromHand<0&&dragFromConsumable<0&&GUI.enabled)
                     {
                         if(valid&&(Vector2.Distance(e.mousePosition,dragStart)>3||positions.Find(p=>p.key==item.key)?.rotated!=dragRotated))inventory.MoveGrid(item.key,showChest,x,y,dragRotated);
-                        draggedGrid=null;e.Use();
+                        CancelInventoryDrag();e.Use();
                     }
                 }
             }
@@ -341,10 +336,10 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             bool chosen=item.key==selectedGrid&&item.id==selected;
             var old=GUI.color;GUI.color=new Color(1,1,1,alpha);
-            PlayerHUD.Fill(rect,chosen?new Color(.42f,.37f,.23f,.96f):new Color(.16f,.21f,.23f,.96f));
+            PlayerHUD.Fill(rect,chosen?new Color(.42f,.37f,.23f,.96f):new Color(.22f,.27f,.34f,.96f));
             var inset=new Rect(rect.x+2,rect.y+2,rect.width-4,rect.height-4);
-            PlayerHUD.Fill(inset,new Color(.07f,.10f,.115f,.94f));
-            FantasyUI.Frame(rect,chosen?PlayerHUD.Gold:new Color(.40f,.44f,.43f));
+            PlayerHUD.Fill(inset,OliveTheme?new Color(.24f,.29f,.19f,.96f):new Color(.105f,.15f,.215f,.96f));
+            QuietFantasyUI.Border(rect,chosen?PlayerHUD.Gold:new Color(.48f,.52f,.59f,.55f),chosen?2:1);
             var icon=item.material?inventory.Material(item.id)?.icon:inventory.Definition(item.id).inventoryIcon;
             if(icon!=null)
             {
@@ -363,7 +358,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             else
             {
                 Text(new Rect(rect.x+4,rect.y+3,rect.width-7,22),"T"+inventory.Item(item.id).tier,14,Accent);
-                if(inventory.IsEquipped(item.id))Text(new Rect(rect.x+4,rect.yMax-22,rect.width-7,20),"E",14,Accent);
+                if(inventory.IsEquipped(item.id))Text(new Rect(rect.x+4,rect.yMax-22,rect.width-7,20),EquippedMarker(item.id),14,Accent);
             }
             if(inventory.Favorite(item.id,item.material))Text(new Rect(rect.xMax-22,rect.y+3,20,22),"★",16,Accent);
             GUI.color=old;
@@ -372,84 +367,17 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             if(!preview.HasModel)return;
             GUI.DrawTexture(rect,preview.Texture,ScaleMode.ScaleToFit);
-            Text(new Rect(rect.x,rect.yMax-22,rect.width,22),"Arrastrá para rotar",14,Muted);
+            if(page!=Page.Inventory)Text(new Rect(rect.x,rect.yMax-22,rect.width,22),"Arrastrá para rotar",14,Muted);
             var e=Event.current;
-            if(e.type==EventType.MouseDown&&e.button==0&&rect.Contains(e.mousePosition)&&!confirmDiscard)
+            if(e.type==EventType.MouseDown&&e.button==0&&rect.Contains(e.mousePosition)&&GUI.enabled&&!confirmDiscard)
             {rotatingPreview=true;e.Use();}
             if(rotatingPreview&&e.type==EventType.MouseDrag)
-            {preview.Rotate(e.delta);e.Use();}
+            {preview.Rotate(page==Page.Inventory?new Vector2(-e.delta.x,e.delta.y):e.delta);e.Use();}
             if(e.rawType==EventType.MouseUp)rotatingPreview=false;
             if(e.type==EventType.MouseDown&&!rect.Contains(e.mousePosition))rotatingPreview=false;
         }
-        void DrawCharacterPreview()
-        {
-            Text(new Rect(620,120,470,36),"TU PERSONAJE",25,Accent);
-            DrawPreview(new Rect(650,162,520,340));
-            Text(new Rect(620,520,570,30),L.Format("Vida {0:0} / {1:0}     Armadura {2:0}",health.Current,health.Maximum,inventory.Armor),20);
-            for(int i=0;i<2;i++)
-            {
-                Text(new Rect(620,555+i*40,405,37),(i+1)+" · "+loadout.GetSlot(i).DisplayName+" · "+(inventory.OffhandId(i)!=null?"Mano secundaria equipada":"Mano secundaria libre"),15,Muted);
-                bool was=GUI.enabled;GUI.enabled=was&&inventory.CanManage&&inventory.OffhandId(i)!=null;
-                if(Button(new Rect(1035,555+i*40,175,32),"Quitar secundaria"))inventory.TryEquipOffhand(i,null);
-                GUI.enabled=was;
-            }
-            Text(new Rect(620,646,570,30),"Seleccioná un objeto para inspeccionarlo.",17,Accent);
-        }
-        void DrawItem()
-        {
-            var material=selectedMaterial?inventory.Material(selected):null;
-            var weapon=selectedMaterial?null:inventory.Definition(selected);
-            if(material==null&&weapon==null){selected=null;previewDirty=true;return;}
-            if(Button(new Rect(620,113,168,32),"← Personaje")){selected=null;previewDirty=true;return;}
-            if(Button(new Rect(1010,113,203,32),inventory.Favorite(selected,selectedMaterial)?"★ Favorito":"☆ Favorito"))inventory.ToggleFavorite(selected,selectedMaterial);
-            if(preview.HasModel)DrawPreview(new Rect(735,151,370,220));
-            else if(material?.icon!=null)GUI.DrawTexture(new Rect(850,185,128,128),material.icon.texture,ScaleMode.ScaleToFit);
-            else Text(new Rect(820,210,370,70),selectedMaterial?"MATERIAL":"ARMA",32,Accent);
-            Text(new Rect(620,377,586,43),material!=null?material.displayName:weapon.DisplayName,28,Accent);
-            string description=material!=null?material.description:weapon.inventoryDescription;
-            Text(new Rect(620,425,586,55),string.IsNullOrWhiteSpace(description)?(material!=null?"Recurso para preparar tu próxima salida.":"Seleccioná una ranura para comparar y equipar."):description,17,Muted);
-            if(material!=null)
-            {
-                int count=showChest?inventory.StoredMaterialCount(selected):inventory.MaterialCount(selected);
-                Text(new Rect(620,492,570,30),L.Format("Total: {0} · Pila: {1} · Tamaño: {2}×{3}",count,Mathf.Max(1,material.stackSize),material.gridWidth,material.gridHeight),19);
-                if(Button(new Rect(620,534,44,34),"−"))amount=Mathf.Max(1,amount-1);
-                Text(new Rect(680,538,95,28),amount.ToString(),20);
-                if(Button(new Rect(770,534,44,34),"+"))amount=Mathf.Min(count,amount+1);
-                if(Button(new Rect(828,534,90,34),"Todo"))amount=count;
-                amount=Mathf.Clamp(amount,1,Mathf.Max(1,count));
-                if(material.IsConsumable&&!showChest)
-                {
-                    string reason=inventory.ConsumableBlockReason(selected);
-                    bool usable=GUI.enabled;GUI.enabled=usable&&reason==null;
-                    if(Button(new Rect(940,534,268,34),"Usar"))inventory.TryUseConsumable(selected);
-                    GUI.enabled=usable;
-                    Text(new Rect(620,575,580,42),reason??(material.damageBonus>0?L.Format("Arma activa: {0}",inventory.ItemName(inventory.EquippedId(loadout.ActiveSlot))):""),16,Muted);
-                }
-            }
-            else
-            {
-                var item=inventory.Item(selected);var target=inventory.Item(inventory.EquippedId(compareSlot));
-                var bonuses=inventory.Rules.Bonuses(item);var current=inventory.Rules.Bonuses(target);
-                Text(new Rect(620,482,585,29),"T"+item.tier+" · "+L.Text(PlayerInventory.VariantName(item.variant))+" · "+weapon.gridWidth+"×"+weapon.gridHeight,19);
-                Text(new Rect(620,514,580,45),L.Format("Bonos vs. ranura {0}: daño {1} pp · vel. {2} pp\nVida {3} · Armadura {4}",compareSlot+1,Signed((bonuses.damage-current.damage)*100),Signed((bonuses.speed-current.speed)*100),Signed(bonuses.life-current.life),Signed(bonuses.armor-current.armor)),16,Muted);
-                if(Button(new Rect(620,568,180,32),L.Format("Comparar ranura {0}",compareSlot+1)))compareSlot=1-compareSlot;
-                bool old=GUI.enabled;GUI.enabled=inventory.CanManage&&!showChest&&!weapon.isShield&&inventory.EquippedId(compareSlot)!=selected;
-                if(Button(new Rect(814,568,190,32),L.Format("Equipar en {0}",compareSlot+1)))inventory.TryEquip(compareSlot,selected);
-                GUI.enabled=old;
-                if(Button(new Rect(1018,568,190,32),"Ver habilidades")){OpenPage(Page.Skills);skillsWeapon=weapon;}
-                GUI.enabled=old&&inventory.CanManage&&!showChest&&inventory.CanUseOffhand(compareSlot,selected)&&inventory.OffhandId(compareSlot)!=selected;
-                if(Button(new Rect(620,603,285,23),"Mano secundaria del conjunto "+(compareSlot+1)))inventory.TryEquipOffhand(compareSlot,selected);
-                GUI.enabled=old&&inventory.CanManage&&inventory.OffhandId(compareSlot)!=null;
-                if(Button(new Rect(920,603,285,23),"Dejar mano secundaria libre"))inventory.TryEquipOffhand(compareSlot,null);
-                GUI.enabled=old;
-            }
-            bool was=GUI.enabled;GUI.enabled=inventory.CanManage&&inventory.AtChest&&(!inventory.IsEquipped(selected)||selectedMaterial);
-            if(Button(new Rect(620,628,275,36),showChest?"Retirar del cofre":"Guardar en cofre"))
-            {if(inventory.Transfer(selected,selectedMaterial,amount,!showChest)){selected=null;previewDirty=true;}}
-            GUI.enabled=was&&selected!=null&&!showChest&&inventory.CanDiscard(selected,selectedMaterial);
-            if(Button(new Rect(915,628,295,36),"Descartar…"))confirmDiscard=true;
-            GUI.enabled=was;
-        }
+
+
         void DrawDiscardConfirmation()
         {
             PlayerHUD.Fill(new Rect(0,0,1280,800),new Color(0,0,0,.85f));

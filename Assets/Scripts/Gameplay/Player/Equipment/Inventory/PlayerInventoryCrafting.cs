@@ -86,6 +86,26 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public float PotionCooldownRemaining=>IsReady?(float)Math.Max(0,profile.potionReadyAt-WorldPlaySeconds):0;
         public float WeaponBuffRemaining=>IsReady?(float)Math.Max(0,profile.weaponBuffUntil-WorldPlaySeconds):0;
         public float WeaponConsumableBonus(WeaponDefinition weapon)=>WeaponBuffRemaining>0&&EquippedItem(weapon)?.instanceId==profile.buffedWeaponId?profile.weaponBuffDamage:0;
+        public string ConsumableSlot(int slot)
+        {
+            var slots=profile?.consumableSlots;
+            return slots!=null&&slot>=0&&slot<slots.Length&&!string.IsNullOrEmpty(slots[slot])?slots[slot]:null;
+        }
+        public bool CanAssignConsumable(string id)=>CanManage&&Material(id)?.IsConsumable==true&&MaterialCount(id)>0;
+        public bool AssignConsumable(int slot,string id)
+        {
+            if(!IsReady||!CanManage||slot<0||slot>=4||id!=null&&!CanAssignConsumable(id))return false;
+            var next=profile.Copy();
+            if(next.consumableSlots==null||next.consumableSlots.Length==0)next.consumableSlots=new string[4];
+            for(int i=0;i<4;i++)if(id!=null&&next.consumableSlots[i]==id)next.consumableSlots[i]=null;
+            next.consumableSlots[slot]=id;
+            return Commit(next,"",false);
+        }
+        public bool TryUseConsumableSlot(int slot)
+        {
+            var id=ConsumableSlot(slot);
+            return !string.IsNullOrEmpty(id)&&TryUseConsumable(id);
+        }
         public string ConsumableBlockReason(string id)
         {
             var material=Material(id);var health=GetComponent<Health>();

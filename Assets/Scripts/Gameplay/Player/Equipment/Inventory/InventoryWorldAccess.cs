@@ -89,7 +89,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             string prompt=AtChest?"[F] Abrir cofre personal":null;
             if(prompt==null)foreach(var loot in inventory.PendingLoot)
                 if(Vector3.Distance(transform.position,new Vector3(loot.x,loot.y,loot.z))<=3){prompt="[F] Recoger botín";break;}
-            if(prompt!=null)GUI.Box(new Rect(Screen.width/2-170,Screen.height-130,340,40),prompt,new GUIStyle(GUI.skin.box){fontSize=20});
+            if(prompt!=null)GUI.Box(new Rect(Screen.width/2-170,Screen.height-130,340,40),prompt,new GUIStyle(GUI.skin.box){font=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.Body,fontSize=20});
         }
         void OnDestroy()
         {
