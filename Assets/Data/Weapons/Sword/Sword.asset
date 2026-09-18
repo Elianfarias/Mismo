@@ -32,8 +32,8 @@ MonoBehaviour:
   secondaryEquipped:
     anchor: 2
     bonePath: 
-    offset: {x: -0.3334794, y: 0.32662046, z: 0.00000008153153}
-    rotation: {x: 0.000004787763, y: 0.000002090658, z: 66.68407}
+    offset: {x: -0.385101, y: 0.3266207, z: 0.000000018717582}
+    rotation: {x: 0.000004817386, y: 0.0000014160937, z: 66.68407}
     scale: 1
   secondaryHolstered:
     anchor: 0
