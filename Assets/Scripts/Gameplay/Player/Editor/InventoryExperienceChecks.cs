@@ -55,6 +55,62 @@ namespace Mismo.Gameplay.Player.Editor
             Debug.Log("INVENTORY_EXPERIENCE_"+(pass?"PASS ":"FAIL ")+message);EditorApplication.Exit(pass?0:1);
         }
         static void Field(object target,string name,object value)=>target.GetType().GetField(name,BindingFlags.Instance|BindingFlags.NonPublic).SetValue(target,value);
+        static bool PanelAction(InventoryPanel panel,string method,string id,int hand)=>(bool)typeof(InventoryPanel)
+            .GetMethod(method,BindingFlags.Instance|BindingFlags.NonPublic).Invoke(panel,new object[]{id,hand});
+        static void CheckVisualEquipment(InventoryPanel panel,PlayerInventory inventory)
+        {
+            string sword=inventory.EquippedId(0),bow=inventory.EquippedId(1);
+            long occupied=inventory.UsedSlots(false);
+            Check(!PanelAction(panel,"CanDropWeapon",bow,1),"Drag target rejects bow in offhand");
+            Check(!PanelAction(panel,"CanDropWeapon",sword,1),"Drag target rejects duplicating a main-hand instance");
+            Check(PanelAction(panel,"EquipAtHand",bow,0),"Main-hand drop swaps equipped sets atomically");
+            Check(inventory.EquippedId(0)==bow&&inventory.EquippedId(1)==sword,"Set swap retains both weapon instances");
+            Check(inventory.UsedSlots(false)==occupied,"Equipment drop does not free occupied backpack cells");
+            Check(PanelAction(panel,"EquipAtHand",sword,0),"Main-hand drop restores original sets");
+            Field(panel,"showChest",true);
+            Check(!PanelAction(panel,"CanDropWeapon",sword,0),"Chest view cannot bypass withdrawal rules");
+            Field(panel,"showChest",false);
+            var spare=inventory.GridItems(false).Find(item=>!item.material&&!inventory.IsEquipped(item.id)&&inventory.CanUseOffhand(0,item.id));
+            if(spare!=null)
+            {
+                Check(PanelAction(panel,"EquipAtHand",spare.id,1)&&inventory.OffhandId(0)==spare.id,"Compatible offhand drop equips a second object");
+                Check(inventory.TryEquipOffhand(0,null)&&inventory.Item(spare.id)!=null,"Removing offhand retains its owned object");
+            }
+            Field(panel,"draggedGrid",sword);
+            typeof(InventoryPanel).GetMethod("OnApplicationFocus",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(panel,new object[]{false});
+            Check(typeof(InventoryPanel).GetField("draggedGrid",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(panel)==null,"Focus loss cancels pending inventory drag");
+        }
+        sealed class RejectQuickSlotSave:IProfileRepository
+        {
+            public ProfileReadResult Read(Func<string,bool> validate,out string payload){payload=null;return ProfileReadResult.Missing;}
+            public void Write(string payload){throw new IOException("Injected quick slot save failure");}
+        }
+        static void CheckConsumableSlots(PlayerInventory inventory,string path)
+        {
+            Check(inventory.TryGrantMaterial("MAT-08",2),"Grant two quick-slot potions");
+            long cells=inventory.UsedSlots(false);
+            Check(!inventory.AssignConsumable(-1,"MAT-08")&&!inventory.AssignConsumable(4,"MAT-08"),"Quick-slot bounds reject invalid indices");
+            Check(!inventory.AssignConsumable(0,MaterialCatalog.Wood),"Quick slots reject materials");
+            Check(inventory.AssignConsumable(0,"MAT-08")&&inventory.ConsumableSlot(0)=="MAT-08","Assign owned potion");
+            Check(inventory.AssignConsumable(3,"MAT-08")&&inventory.ConsumableSlot(0)==null&&inventory.ConsumableSlot(3)=="MAT-08","Moving assignment avoids duplicate bindings");
+            Check(inventory.UsedSlots(false)==cells&&inventory.MaterialCount("MAT-08")==2,"Assignment neither moves nor duplicates inventory stock");
+            new ProtectedProfileRepository(path).Read(_=>true,out var json);
+            var saved=JsonUtility.FromJson<InventoryProfile>(json);var copy=saved.Copy();copy.consumableSlots[3]=null;
+            Check(saved.consumableSlots[3]=="MAT-08","Assignments survive save and profile copies are independent");
+            var repository=typeof(PlayerInventory).GetField("repository",BindingFlags.Instance|BindingFlags.NonPublic);
+            var original=repository.GetValue(inventory);repository.SetValue(inventory,new RejectQuickSlotSave());
+            try{Check(!inventory.AssignConsumable(1,"MAT-08")&&inventory.ConsumableSlot(3)=="MAT-08"&&inventory.ConsumableSlot(1)==null,"Failed save retains previous assignment");}
+            finally{repository.SetValue(inventory,original);}
+            Check(inventory.AssignConsumable(0,"MAT-08"),"Restore quick slot after failed save");
+            var health=inventory.GetComponent<Health>();
+            health.Heal(health.Maximum);
+            Check(!inventory.TryUseConsumableSlot(0)&&inventory.MaterialCount("MAT-08")==2,"Full health does not consume quick potion");
+            health.ApplyDamage(new DamageInfo(60,null,Vector3.zero,Vector3.forward));
+            float before=health.Current;
+            Check(inventory.TryUseConsumableSlot(0)&&health.Current>before&&inventory.MaterialCount("MAT-08")==1,"Quick slot uses existing healing and spends one item");
+            Check(!inventory.TryUseConsumableSlot(0)&&inventory.MaterialCount("MAT-08")==1,"Quick slots respect potion cooldown");
+            health.Heal(health.Maximum);
+        }
         static IEnumerator Run()
         {
             Application.runInBackground=true;
@@ -71,6 +127,11 @@ namespace Mismo.Gameplay.Player.Editor
             var inventory=player.gameObject.AddComponent<PlayerInventory>();
             var path=Path.Combine(Output,"test-"+Guid.NewGuid().ToString("N")+".mismo");
             inventory.Initialize(Resources.Load<ItemCatalog>("ItemCatalog"),new ProtectedProfileRepository(path));
+            Check(inventory.IsReady,"Test inventory initializes: "+inventory.Notice);
+            var uiArt=Resources.Load<InventoryUIIcons>("InventoryUIIcons");
+            Check(uiArt!=null&&uiArt.weaponSlotBackground!=null&&uiArt.consumableSlotBackground!=null&&
+                uiArt.weaponSlotUV.width>0&&uiArt.weaponSlotUV.height>0&&uiArt.consumableSlotUV.width>0&&uiArt.consumableSlotUV.height>0,
+                "Slot artwork loads with nonempty texture regions");
             Check(inventory.Material(MaterialCatalog.Wood).icon!=null&&inventory.Definition(inventory.EquippedId(0)).inventoryIcon!=null,"Grid icons are imported as usable sprites");
             var panel=player.gameObject.AddComponent<InventoryPanel>();
             var settings=InventorySettings.Current;settings.backpackColumns=3;settings.backpackRows=1;
@@ -115,15 +176,25 @@ namespace Mismo.Gameplay.Player.Editor
             foreach(var weapon in itemCatalog.weapons){weapon.gridWidth=weapon.isBow?2:1;weapon.gridHeight=3;}
             foreach(var material in inventory.Materials){material.gridWidth=material.id==MaterialCatalog.Wood?2:1;material.gridHeight=1;}
             inventory.TryGrantMaterial(MaterialCatalog.Herb,8);inventory.TryGrantMaterial(MaterialCatalog.Wood,14);
-            var layout=inventory.GridPositions(false);var moving=layout[0];
-            Check(inventory.MoveGrid(moving.key,false,6,3,false),"Grid item moves into free cells");
+            var layout=inventory.GridPositions(false);var moving=layout.Find(p=>p.key==inventory.EquippedId(0));
+            Vector2Int FindFree(bool rotated)
+            {
+                for(int y=inventory.GridRows(false)-1;y>=0;y--)for(int x=inventory.GridColumns(false)-1;x>=0;x--)
+                    if((x!=moving.x||y!=moving.y)&&inventory.CanMoveGrid(moving.key,false,x,y,rotated))return new Vector2Int(x,y);
+                throw new Exception("No free test destination");
+            }
+            var destination=FindFree(false);
+            Check(inventory.MoveGrid(moving.key,false,destination.x,destination.y,false),"Grid item moves into free cells");
             Check(!inventory.MoveGrid(moving.key,false,8,0,false),"Grid item cannot move outside bag");
-            Check(inventory.MoveGrid(moving.key,false,4,4,true),"Weapon rotates into horizontal footprint");
+            var rotatedDestination=FindFree(true);
+            Check(inventory.MoveGrid(moving.key,false,rotatedDestination.x,rotatedDestination.y,true),"Weapon rotates into horizontal footprint");
             var freshStore=new ProtectedProfileRepository(path);freshStore.Read(_=>true,out var gridJson);
             var gridSaved=JsonUtility.FromJson<InventoryProfile>(gridJson);
-            Check(gridSaved.gridPlacements.Exists(g=>g.key==moving.key&&g.rotated&&g.x==4&&g.y==4),"Grid position and rotation survive serialization");
+            Check(gridSaved.gridPlacements.Exists(g=>g.key==moving.key&&g.rotated&&g.x==rotatedDestination.x&&g.y==rotatedDestination.y),"Grid position and rotation survive serialization");
             Check(inventory.OrganizeGrid(false),"Automatic organization fits the current collection");
             Check(panel.TryOpen()&&panel.BlocksGameplay&&Cursor.visible,"Inventory opens and blocks gameplay input");
+            CheckVisualEquipment(panel,inventory);
+            CheckConsumableSlots(inventory,path);
             for(int i=0;i<15;i++)yield return null;
             ScreenCapture.CaptureScreenshot(Path.Combine(Output,"inventory-character.png"));
             for(int i=0;i<15;i++)yield return null;
@@ -131,6 +202,16 @@ namespace Mismo.Gameplay.Player.Editor
             for(int i=0;i<15;i++)yield return null;
             ScreenCapture.CaptureScreenshot(Path.Combine(Output,"inventory-weapon.png"));
             for(int i=0;i<15;i++)yield return null;
+            Check(uiArt.oliveWeaponSlotBackground!=null&&uiArt.oliveConsumableSlotBackground!=null,"Olive theme artwork is assigned");
+            uiArt.useOliveTheme=true;
+            for(int i=0;i<15;i++)yield return null;
+            var themeField=typeof(InventoryPanel).GetField("inventoryBackdropOlive",BindingFlags.Instance|BindingFlags.NonPublic);
+            Check((bool)themeField.GetValue(panel),"Olive theme updates while inventory stays open");
+            ScreenCapture.CaptureScreenshot(Path.Combine(Output,"inventory-olive.png"));
+            for(int i=0;i<15;i++)yield return null;
+            uiArt.useOliveTheme=false;
+            for(int i=0;i<15;i++)yield return null;
+            Check(!(bool)themeField.GetValue(panel),"Gray theme restores without restarting Play");
             Check(inventory.MoveGrid(moving.key,false,4,4,true),"Horizontal icon fits inside its grid footprint");
             var bowItem=inventory.GridItems(false).Find(item=>item.id==inventory.EquippedId(1));
             Check(bowItem!=null&&inventory.MoveGrid(bowItem.key,false,0,3,true),"Bow displays horizontally in its rotated footprint");

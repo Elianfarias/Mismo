@@ -1064,6 +1064,61 @@
       "key": "mount.collection.10",
       "es": "Desmontá y salí de combate para cambiar de acompañante.",
       "en": "Dismount and leave combat to change companions."
+    },
+    {
+      "key": "inventory.visual.hint",
+      "es": "Arrastrá al equipo · R para girar · Clic en objeto y mano para equipar",
+      "en": "Drag to equipment · R to rotate · Click an item and a hand to equip"
+    },
+    {
+      "key": "inventory.visual.set",
+      "es": "Conjunto {0}",
+      "en": "Set {0}"
+    },
+    {
+      "key": "inventory.visual.main",
+      "es": "Principal",
+      "en": "Main hand"
+    },
+    {
+      "key": "inventory.visual.off",
+      "es": "Secundaria",
+      "en": "Off hand"
+    },
+    {
+      "key": "inventory.visual.drop",
+      "es": "Soltar en conjunto {0} · {1}",
+      "en": "Drop in set {0} · {1}"
+    },
+    {
+      "key": "inventory.visual.invalid",
+      "es": "Esta mano no admite el objeto seleccionado.",
+      "en": "This hand cannot hold the selected item."
+    },
+    {
+      "key": "inventory.visual.replace",
+      "es": "Arrastrá otra arma a la mano principal para reemplazarla.",
+      "en": "Drag another weapon to the main hand to replace it."
+    },
+    {
+      "key": "inventory.visual.unchanged",
+      "es": "El objeto permanece en su lugar.",
+      "en": "The item remains in place."
+    },
+    {
+      "key": "inventory.visual.quantity",
+      "es": "Cantidad: {0}",
+      "en": "Quantity: {0}"
+    },
+    {
+      "key": "inventory.visual.compare",
+      "es": "{0} · Daño {1} pp · Velocidad {2} pp",
+      "en": "{0} · Damage {1} pp · Speed {2} pp"
+    },
+    {
+      "key": "inventory.visual.chest",
+      "es": "Cofre",
+      "en": "Chest"
     }
   ]
 }

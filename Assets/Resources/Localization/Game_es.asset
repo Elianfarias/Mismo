@@ -888,6 +888,50 @@ MonoBehaviour:
     m_Localized: "Desmont\xE1 y sal\xED de combate para cambiar de acompa\xF1ante."
     m_Metadata:
       m_Items: []
+  - m_Id: 9900000000100
+    m_Localized: "Arrastrá al equipo · R para girar · Clic en objeto y mano para equipar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000101
+    m_Localized: "Conjunto {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000102
+    m_Localized: "Principal"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000103
+    m_Localized: "Secundaria"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000104
+    m_Localized: "Soltar en conjunto {0} · {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000105
+    m_Localized: "Esta mano no admite el objeto seleccionado."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000106
+    m_Localized: "Arrastrá otra arma a la mano principal para reemplazarla."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000107
+    m_Localized: "El objeto permanece en su lugar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000108
+    m_Localized: "Cantidad: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000109
+    m_Localized: "{0} · Daño {1} pp · Velocidad {2} pp"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9900000000110
+    m_Localized: "Cofre"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -162,7 +162,7 @@ namespace Mismo.Menu
         {
             var go=new GameObject(text,typeof(RectTransform),typeof(Text));go.transform.SetParent(parent,false);
             var rect=go.GetComponent<RectTransform>();rect.anchorMin=rect.anchorMax=new Vector2(0,1);rect.pivot=new Vector2(0,1);rect.anchoredPosition=new Vector2(position.x,-position.y);rect.sizeDelta=size;
-            var label=go.GetComponent<Text>();label.text=text;label.font=Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");label.fontSize=fontSize;label.color=color;label.raycastTarget=false;
+            var label=go.GetComponent<Text>();label.text=text;label.font=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.Body;label.fontSize=fontSize;label.color=color;label.raycastTarget=false;
             label.verticalOverflow=VerticalWrapMode.Overflow;return label;
         }
         internal static Button ButtonAt(Transform parent,string title,float y,bool primary)

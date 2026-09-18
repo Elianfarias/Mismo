@@ -1,9 +1,0 @@
-Voxel Styled Weapon and Tool Set Pack!
-
-Each set includes voxel designs of essential tools and weapons.
-
-Four distinct material variations – Crimson, Obsidian, Death, Frozen and Spirit.
-
-Compatible with Unity and Blender, our pack provides .FBX, .OBJ, and .VOX files.
-
-Comes with a ready-made 1024x1024 .PNG icon image of each item.

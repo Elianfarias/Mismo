@@ -71,7 +71,7 @@ namespace Mismo.Gameplay.Player.World
             if(inventory==null||health==null||health.IsDead)return;
             if(station!=null){int depth=GUI.depth;GUI.depth=-45;DrawStation();GUI.depth=depth;return;}
             if(InventoryPanel.AnyOpen||Presentation.WorldMapPanel.AnyOpen)return;
-            var style=new GUIStyle(GUI.skin.box){fontSize=18,wordWrap=true};
+            var style=new GUIStyle(GUI.skin.box){font=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.Body,fontSize=18,wordWrap=true};
             if(IsHarvesting)
             {
                 GUI.Box(new Rect(Screen.width/2-200,Screen.height-195,400,50),L.Format("Recolectando: {0} · {1:0}%",L.Text(harvesting.definition.displayName),Mathf.Clamp01(progress/harvesting.definition.harvestSeconds)*100),style);
@@ -83,7 +83,7 @@ namespace Mismo.Gameplay.Player.World
             Presentation.PlayerHUD.Fill(new Rect(0,0,Screen.width,Screen.height),new Color(.015f,.022f,.03f,.96f));
             var old=GUI.matrix;float scale=Mathf.Min(Screen.width/1000f,Screen.height/720f);GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-1000*scale)/2,(Screen.height-720*scale)/2),Quaternion.identity,Vector3.one*scale);
             var previousBackground=GUI.backgroundColor;GUI.backgroundColor=new Color(.14f,.18f,.20f);
-            var label=new GUIStyle(GUI.skin.label){fontSize=18,wordWrap=true};var button=new GUIStyle(GUI.skin.button){fontSize=18,wordWrap=true};
+            var label=new GUIStyle(GUI.skin.label){font=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.Body,fontSize=18,wordWrap=true};var button=new GUIStyle(GUI.skin.button){font=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.Body,fontSize=18,wordWrap=true};
             button.normal.background=Texture2D.whiteTexture;button.hover.background=Texture2D.whiteTexture;button.active.background=Texture2D.whiteTexture;
             button.normal.textColor=Color.white;button.hover.textColor=Presentation.PlayerHUD.Gold;
             label.normal.textColor=Presentation.PlayerHUD.Gold;label.fontSize=26;

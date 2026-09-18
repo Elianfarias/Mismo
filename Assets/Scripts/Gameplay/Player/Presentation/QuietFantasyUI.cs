@@ -13,8 +13,8 @@ namespace Mismo.Gameplay.Player.Presentation
         static Font heading,body;
         static GUIStyle words,action;
         static readonly Dictionary<string,Texture2D> icons=new Dictionary<string,Texture2D>();
-        public static Font Body=>body!=null?body:body=Resources.Load<Font>("UI/QuietFantasy/Fonts/SourceSans3-Regular");
-        public static Font Heading=>heading!=null?heading:heading=Resources.Load<Font>("UI/QuietFantasy/Fonts/Cinzel-Regular");
+        public static Font Body=>body!=null?body:body=Resources.Load<Font>("Fonts/Cagliostro-Regular");
+        public static Font Heading=>heading!=null?heading:heading=Resources.Load<Font>("Fonts/Cagliostro-Regular");
         public static void Text(Rect rect,string value,int size=20,Color? color=null,bool title=false,TextAnchor alignment=TextAnchor.UpperLeft)
         {
             if(words==null)words=new GUIStyle(GUI.skin.label){padding=new RectOffset(),wordWrap=true};

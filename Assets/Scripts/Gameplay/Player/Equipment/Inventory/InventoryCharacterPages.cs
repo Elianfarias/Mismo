@@ -13,7 +13,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         Vector2 skillDragOrigin,detailScroll;
         WeaponDefinition skillDragWeapon;
         bool showUICredits;
-        void OnApplicationFocus(bool focused){if(!focused)CancelSkillDrag();}
+        void OnApplicationFocus(bool focused){if(!focused){CancelSkillDrag();CancelInventoryDrag();rotatingPreview=false;}}
         bool IsQuietPage=>page==Page.Character||page==Page.Weapons||page==Page.Skills;
         WeaponDefinition CurrentMenuWeapon=>skillsWeapon==loadout.GetSlot(0)||skillsWeapon==loadout.GetSlot(1)?skillsWeapon??loadout.ActiveDefinition:loadout.ActiveDefinition;
         void CancelSkillDrag()
@@ -44,7 +44,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 CancelSkillDrag();
                 PlayerHUD.Fill(new Rect(30,133,1220,617),new Color(.035f,.043f,.038f,.99f));
                 U.Text(new Rect(95,208,1080,55),"CRÉDITOS DE LA INTERFAZ",30,null,true);
-                U.Text(new Rect(95,288,1080,360),"Iconos: Lorc y Skoll · Game-icons.net\nCC BY 3.0 · creativecommons.org/licenses/by/3.0\nAdaptación: escala y tinte marfil.\n\nCinzel: The Cinzel Project Authors · SIL OFL 1.1\nSource Sans 3: Adobe · SIL OFL 1.1\n\nFantasy UI Borders: Kenney · CC0\nLas licencias y fuentes originales se incluyen con el juego.",23,U.Ink);
+                U.Text(new Rect(95,288,1080,360),"Iconos: Lorc y Skoll · Game-icons.net\nCC BY 3.0 · creativecommons.org/licenses/by/3.0\nAdaptación: escala y tinte marfil.\n\nCagliostro: Matthew Desmond · SIL OFL 1.1\n\nFantasy UI Borders: Kenney · CC0\nLas licencias y fuentes originales se incluyen con el juego.",23,U.Ink);
                 if(U.Button(new Rect(95,681,240,44),"Volver"))showUICredits=false;
             }
         }

@@ -42,6 +42,7 @@ namespace Mismo.Gameplay.Player.Presentation
         }
         public static void StyleButton(GUIStyle style)
         {
+            style.font=QuietFantasyUI.Body;
             style.border=new RectOffset(12,12,12,12);
             style.normal.background=PanelTexture;
             style.hover.background=PanelTexture;style.active.background=PanelTexture;
