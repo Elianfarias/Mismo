@@ -65,3 +65,25 @@ MonoBehaviour:
   backgroundTint: {r: 1, g: 1, b: 1, a: 1}
   slotTint: {r: 1, g: 1, b: 1, a: 1}
   special: {fileID: 2800000, guid: 8938666dd1ca9c24c895c375045457b0, type: 3}
+  abilityIcons:
+  - {fileID: 2800000, guid: c030e7e3c20fe624aadfea8120d6e9cf, type: 3}
+  - {fileID: 2800000, guid: cdcf125569e9ffd4da8e7711870f697d, type: 3}
+  - {fileID: 2800000, guid: c4ab92e2bedcb314880c3ed5cc22d738, type: 3}
+  - {fileID: 2800000, guid: 8c093697f97734f458b254aa80b0c556, type: 3}
+  - {fileID: 2800000, guid: ae67366502e2aa641b053543ea7ee9c2, type: 3}
+  - {fileID: 2800000, guid: 3cb3f85a61a727b4d972d33521b29f96, type: 3}
+  - {fileID: 2800000, guid: 0c7e8246b40f4324eb1015f68274eefb, type: 3}
+  - {fileID: 2800000, guid: 770aa3cda3518b64ea91068b3cff6748, type: 3}
+  - {fileID: 2800000, guid: 390160a9deb69114bbd17b2e2b86519d, type: 3}
+  - {fileID: 2800000, guid: 871efee3e5059b7418c26521cdaf34e8, type: 3}
+  - {fileID: 2800000, guid: 3a248bf3e0bf86d4c9a025000ac64ca2, type: 3}
+  - {fileID: 2800000, guid: 94ebe619e19256444b5921e305603757, type: 3}
+  - {fileID: 2800000, guid: 37de08b5a97ba244789c8351e8f4e35e, type: 3}
+  - {fileID: 2800000, guid: 312f4b68bab2dcb43894d8d79fba6588, type: 3}
+  - {fileID: 2800000, guid: 8938666dd1ca9c24c895c375045457b0, type: 3}
+  - {fileID: 2800000, guid: 37b0cce6d66476e42a18d57e46a22158, type: 3}
+  - {fileID: 2800000, guid: a04dd8c39e34d14499c7de43fb982fb6, type: 3}
+  - {fileID: 2800000, guid: 902cc6be628b17e43871a344959a1b8c, type: 3}
+  - {fileID: 2800000, guid: 61df79d0d5a954e498041bccbe6ace57, type: 3}
+  - {fileID: 2800000, guid: 891f4f2f404475547b86dc7e65aa809a, type: 3}
+  - {fileID: 2800000, guid: 6f0eb6a23328f014999aef99833b2355, type: 3}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BowRetreat
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: RETIRADA
+  icon: {fileID: 2800000, guid: c030e7e3c20fe624aadfea8120d6e9cf, type: 3}
   abilityId: 
   animationSource: {fileID: 0}
   passive: 0

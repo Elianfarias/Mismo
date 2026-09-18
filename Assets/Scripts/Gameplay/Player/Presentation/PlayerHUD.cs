@@ -130,16 +130,16 @@ namespace Mismo.Gameplay.Player.Presentation
                 }
                 if(equipment.ActiveDefinition.isBow) Label(new Rect(width*Equipment.WeaponAim.Viewport.x-12,height*(1-Equipment.WeaponAim.Viewport.y)-12,24,24),"+",22,Gold,TextAnchor.MiddleCenter);
             }
-            Ability(left+432,height-115,"C",dash!=null?dash.DisplayName.ToUpperInvariant():"ESPECIAL",Status(dash!=null?dash.CooldownRemaining:0,dash!=null&&dash.IsActive),dash!=null&&dash.CooldownDuration>0?dash.CooldownRemaining/dash.CooldownDuration:0,true);
+            Ability(left+432,height-115,"C",dash!=null?dash.DisplayName.ToUpperInvariant():"ESPECIAL",Status(dash!=null?dash.CooldownRemaining:0,dash!=null&&dash.IsActive),dash!=null&&dash.CooldownDuration>0?dash.CooldownRemaining/dash.CooldownDuration:0,true,dash!=null&&dash.Definition!=null?dash.Definition.icon:null);
             if(health.IsDead)
             {Fill(new Rect(width/2-210,height/2-46,420,92),Panel);Label(new Rect(width/2-200,height/2-36,400,40),"HAS CAÍDO",26,Gold,TextAnchor.MiddleCenter);Label(new Rect(width/2-200,height/2+5,400,30),"Regresando al pueblo…",16,Color.white,TextAnchor.MiddleCenter);}
             GUI.matrix=old;
         }
         private static string Status(float cooldown,bool active)=>active?"ACTIVO":cooldown>.01f?cooldown.ToString("0.0")+" s":"LISTO";
-        private void Ability(float x,float y,string key,string name,string status,float cooldown,bool affordable,string icon="sprint")
+        private void Ability(float x,float y,string key,string name,string status,float cooldown,bool affordable,Texture2D icon=null)
         {
             Fill(new Rect(x,y,96,88),QuietFantasyUI.Surface);
-            QuietFantasyUI.DrawIcon(new Rect(x+28,y+15,43,43),icon,affordable?QuietFantasyUI.Ink:QuietFantasyUI.Muted);
+            QuietFantasyUI.DrawIcon(new Rect(x+28,y+15,43,43),icon!=null?icon:QuietFantasyUI.Icon("sprint"),affordable?QuietFantasyUI.Ink:QuietFantasyUI.Muted);
             if(cooldown>0)Fill(new Rect(x,y+88*(1-Mathf.Clamp01(cooldown)),96,88*Mathf.Clamp01(cooldown)),new Color(.17f,.20f,.24f,.85f));
             Label(new Rect(x+6,y+2,84,19),key,13,QuietFantasyUI.Amber);
             Label(new Rect(x+3,y+58,90,17),name,12,QuietFantasyUI.Ink,TextAnchor.MiddleCenter);

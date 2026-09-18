@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BowPower
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: POTENTE
+  icon: {fileID: 2800000, guid: 61df79d0d5a954e498041bccbe6ace57, type: 3}
   abilityId: 
   animationSource: {fileID: 0}
   passive: 0

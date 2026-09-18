@@ -7,6 +7,8 @@ namespace Mismo.Gameplay.Player.Dash
     {
         [Header("Inventory presentation")]
         public Sprite inventoryIcon;
+        [Tooltip("Imagen del especial en el HUD. Vacío conserva el ícono predeterminado.")]
+        public Texture2D icon;
         [Header("Sonido del especial equipado")]
         [Tooltip("Se reproduce una vez al activar este especial. Vacío = sin sonido.")]
         public AudioClip activationSfx;
