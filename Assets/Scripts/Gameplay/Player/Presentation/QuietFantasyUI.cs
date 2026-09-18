@@ -13,6 +13,7 @@ namespace Mismo.Gameplay.Player.Presentation
         static Font heading,body;
         static GUIStyle words,action;
         static readonly Dictionary<string,Texture2D> icons=new Dictionary<string,Texture2D>();
+        static Equipment.Inventory.InventoryUIIcons sharedIcons;
         public static Font Body=>body!=null?body:body=Resources.Load<Font>("Fonts/Cagliostro-Regular");
         public static Font Heading=>heading!=null?heading:heading=Resources.Load<Font>("Fonts/Cagliostro-Regular");
         public static void Text(Rect rect,string value,int size=20,Color? color=null,bool title=false,TextAnchor alignment=TextAnchor.UpperLeft)
@@ -43,7 +44,15 @@ namespace Mismo.Gameplay.Player.Presentation
         public static Texture2D Icon(string name)
         {
             if(string.IsNullOrEmpty(name))return null;
-            if(!icons.TryGetValue(name,out var icon)){icon=Resources.Load<Texture2D>("UI/QuietFantasy/Icons/"+name);icons[name]=icon;}
+            if(!icons.TryGetValue(name,out var icon)||icon==null)
+            {
+                if(sharedIcons==null)sharedIcons=Resources.Load<Equipment.Inventory.InventoryUIIcons>("InventoryUIIcons");
+                if(sharedIcons!=null&&sharedIcons.abilityIcons!=null)
+                    foreach(var texture in sharedIcons.abilityIcons)
+                        if(texture!=null&&texture.name==name){icon=texture;break;}
+                if(icon==null)icon=Resources.Load<Texture2D>("UI/QuietFantasy/Icons/"+name);
+                if(icon!=null)icons[name]=icon;
+            }
             return icon;
         }
         public static void DrawIcon(Rect rect,string name,Color? tint=null)
@@ -52,7 +61,16 @@ namespace Mismo.Gameplay.Player.Presentation
             var old=GUI.color;GUI.color=tint??Ink;GUI.DrawTexture(rect,icon,ScaleMode.ScaleToFit);GUI.color=old;
         }
         // Stable ability identifiers keep the visual vocabulary independent of translation and loadout order.
-        public static string AbilityIcon(AbilityDefinition ability)
+        public static Texture2D AbilityIcon(AbilityDefinition ability)
+        {
+            return ability!=null&&ability.icon!=null?ability.icon:Icon(DefaultAbilityIcon(ability));
+        }
+        public static void DrawIcon(Rect rect,Texture2D icon,Color? tint=null)
+        {
+            if(icon==null)return;
+            var old=GUI.color;GUI.color=tint??Ink;GUI.DrawTexture(rect,icon,ScaleMode.ScaleToFit);GUI.color=old;
+        }
+        static string DefaultAbilityIcon(AbilityDefinition ability)
         {
             if(ability==null)return "locked-chest";
             switch(ability.Id)

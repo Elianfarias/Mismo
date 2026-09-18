@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SideStep
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: Paso lateral
+  icon: {fileID: 2800000, guid: 891f4f2f404475547b86dc7e65aa809a, type: 3}
   abilityId: SideStep
   animationSource: {fileID: 0}
   passive: 0

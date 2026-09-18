@@ -21,6 +21,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public RectOffset slotBorder;
         public Color backgroundTint=Color.white, slotTint=Color.white;
         public Texture2D special;
+        [Header("Shared HUD and ability icons")]
+        public Texture2D[] abilityIcons;
         void OnEnable()
         {
             if(backgroundBorder==null)backgroundBorder=new RectOffset(16,16,16,16);

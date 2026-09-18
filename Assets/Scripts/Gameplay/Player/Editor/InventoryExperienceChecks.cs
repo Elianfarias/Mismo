@@ -132,6 +132,9 @@ namespace Mismo.Gameplay.Player.Editor
             Check(uiArt!=null&&uiArt.weaponSlotBackground!=null&&uiArt.consumableSlotBackground!=null&&
                 uiArt.weaponSlotUV.width>0&&uiArt.weaponSlotUV.height>0&&uiArt.consumableSlotUV.width>0&&uiArt.consumableSlotUV.height>0,
                 "Slot artwork loads with nonempty texture regions");
+            Check(uiArt.abilityIcons!=null&&uiArt.abilityIcons.Length==21,"Shared HUD icon references are populated");
+            foreach(var icon in uiArt.abilityIcons)
+                Check(icon!=null&&Mismo.Gameplay.Player.Presentation.QuietFantasyUI.Icon(icon.name)==icon,"HUD resolves referenced icon: "+(icon!=null?icon.name:"missing"));
             Check(inventory.Material(MaterialCatalog.Wood).icon!=null&&inventory.Definition(inventory.EquippedId(0)).inventoryIcon!=null,"Grid icons are imported as usable sprites");
             var panel=player.gameObject.AddComponent<InventoryPanel>();
             var settings=InventorySettings.Current;settings.backpackColumns=3;settings.backpackRows=1;

@@ -11,6 +11,8 @@ namespace Mismo.Gameplay.Player.Equipment
     public sealed class AbilityDefinition : ScriptableObject
     {
         public string displayName;
+        [Tooltip("Imagen para el HUD y el menú de habilidades. Vacío conserva el ícono predeterminado.")]
+        public Texture2D icon;
         [Tooltip("ID persistente para guardar la selección; no cambiar después de publicar.")]
         public string abilityId;
         [Tooltip("Reutiliza la animación de otra habilidad de esta familia, sin copiar su comportamiento.")]

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SwordParry
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: PARRY
+  icon: {fileID: 2800000, guid: 312f4b68bab2dcb43894d8d79fba6588, type: 3}
   abilityId: 
   animationSource: {fileID: 0}
   passive: 0

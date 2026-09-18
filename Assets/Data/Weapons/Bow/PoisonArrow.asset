@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PoisonArrow
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: Flecha venenosa
+  icon: {fileID: 2800000, guid: 37de08b5a97ba244789c8351e8f4e35e, type: 3}
   abilityId: PoisonArrow
   animationSource: {fileID: 11400000, guid: 836e0b8ee1233e84d8824149cfabfc61, type: 2}
   passive: 0
@@ -80,6 +81,12 @@ MonoBehaviour:
   cancelRecovery: 0
   focusCost: 0
   focusGainOnHit: 0
+  preparationSfx: {fileID: 0}
+  preparationSfxVolume: 1
+  loopPreparationSfx: 0
+  executionSfx: {fileID: 0}
+  executionSfxVolume: 1
+  comboStepSfx: []
   pose: 4
   usesSwordCombo: 0
   targetsGround: 0
