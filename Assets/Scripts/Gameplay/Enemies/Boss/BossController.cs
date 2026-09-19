@@ -137,6 +137,7 @@ namespace Mismo.Gameplay.Enemies
             started = true;
             home = transform.position;
             health.ConfigureMaximum(settings.health*(GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>()?.HealthMultiplier??1));
+            (GetComponent<CombatAilment>()??gameObject.AddComponent<CombatAilment>()).ConfigureArmor(settings.armor);
             ResetLife();
         }
 

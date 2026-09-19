@@ -41,6 +41,8 @@ namespace Mismo.Gameplay.Player.Equipment
         public float forward = .8f;
         public override void Tick(AbilityExecution c, float dt)
         {
+            // Igual que ProjectileAction: solo participa de pasivas de "básico" cuando esta es la habilidad del slot Basic.
+            var effects=c.Definition==c.Weapon.GetAbility(AbilitySlot.Basic)?c.Owner.GetComponent<WeaponSkillEffects>():null;
             Vector3 origin = c.Owner.transform.position + Vector3.up + c.Direction * forward;
             foreach (var other in Physics.OverlapSphere(origin, radius, ~0, QueryTriggerInteraction.Ignore))
             {
@@ -48,7 +50,9 @@ namespace Mismo.Gameplay.Player.Equipment
                 if (!(receiver is Component target) || target.transform.root == c.Owner.transform.root || !c.HitTargets.Add(target)) continue;
                 Vector3 point = other.ClosestPoint(origin);
                 if (Physics.Linecast(origin, point, out var wall, ~0, QueryTriggerInteraction.Ignore) && wall.transform.root != c.Owner.transform.root && wall.collider.GetComponentInParent<IDamageReceiver>() != receiver) continue;
-                receiver.ReceiveDamage(new DamageInfo(damage*c.DamageMultiplier, c.Owner, other.ClosestPoint(origin), (target.transform.position-c.Owner.transform.position).normalized, c.AttackId, postureDamage, weaponFamilyId:c.WeaponFamilyId,focusGainOnHit:c.Definition.focusGainOnHit));
+                float multiplier=effects!=null?effects.BasicMultiplier(c.AttackId,point,target):1;
+                bool hit=receiver.ReceiveDamage(new DamageInfo(damage*multiplier*c.DamageMultiplier, c.Owner, point, (target.transform.position-c.Owner.transform.position).normalized, c.AttackId, postureDamage, weaponFamilyId:c.WeaponFamilyId,focusGainOnHit:c.Definition.focusGainOnHit));
+                if(hit&&effects!=null)effects.BasicHit(c.AttackId,target);
             }
         }
     }

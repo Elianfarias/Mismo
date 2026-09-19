@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf8867b6da099e8469bd87205a7291de, type: 3}
+  m_Name: AxePose
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.WeaponPoseProfile
+  hiddenRendererPaths: []
+  equipped:
+    anchor: 1
+    bonePath: Armature_Humanoid/Root/Hips/Spine/Chest/Clavicle.R/UpperArm.R/LowerArm.R/Hand.R
+    offset: {x: 0.37124735, y: 0.42183843, z: -0.013746208}
+    rotation: {x: 311.60645, y: 303.93655, z: 331.8612}
+    scale: 1
+  holstered:
+    anchor: 0
+    bonePath: 
+    offset: {x: 0, y: 1.2, z: -0.25}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: 1
+  animations: {fileID: 22100000, guid: 761316247099e594f894e862f12a1ac4, type: 2}
+  meleeTrail: 1
+  trailTip: {x: 0, y: 0.55, z: 0}
+  trailDuration: 0.1
+  trailWidth: 0.28
+  trailStartColor: {r: 1, g: 0.88, b: 0.5, a: 0.8}
+  trailEndColor: {r: 1, g: 0.7, b: 0.2, a: 0}
+  trailMaterial: {fileID: 0}

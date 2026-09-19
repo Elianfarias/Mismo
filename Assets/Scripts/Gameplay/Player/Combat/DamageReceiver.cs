@@ -74,6 +74,7 @@ namespace Mismo.Gameplay.Combat
             float amount=damage.Amount*multiplier;
             var inventory=GetComponent<Mismo.Gameplay.Player.Equipment.Inventory.PlayerInventory>();
             if(inventory!=null&&inventory.IsReady)amount*=inventory.IncomingDamageMultiplier;
+            else{var ailment=GetComponent<CombatAilment>();if(ailment!=null)amount*=ailment.IncomingDamageMultiplier;}
             var skillEffects=GetComponent<Mismo.Gameplay.Player.Equipment.WeaponSkillEffects>();
             if(skillEffects!=null)amount=skillEffects.Absorb(amount,damage.Direction);
             float previousHealth=health.Current;

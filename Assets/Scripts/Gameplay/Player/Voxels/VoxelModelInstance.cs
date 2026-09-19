@@ -34,7 +34,17 @@ namespace Mismo.Gameplay.Voxels
 
         private void OnValidate()
         {
-            if (!rebuilding && rebuildOnEnable && asset != null) Rebuild();
+            if (rebuilding || !rebuildOnEnable || asset == null) return;
+#if UNITY_EDITOR
+            // Rebuilding creates/destroys child GameObjects, which Unity disallows while this
+            // instance is only being imported or previewed as prefab-asset data (not actively
+            // edited in Prefab Mode or a real scene). Doing it there corrupts the AssetDatabase.
+            if (UnityEditor.AssetDatabase.IsAssetImportWorkerProcess()) return;
+            if (UnityEditor.PrefabUtility.IsPartOfPrefabAsset(this) &&
+                UnityEditor.SceneManagement.PrefabStageUtility.GetPrefabStage(gameObject) == null)
+                return;
+#endif
+            Rebuild();
         }
 
         [ContextMenu("Rebuild Voxels")]

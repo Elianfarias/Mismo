@@ -17,4 +17,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 835c07f02b4157f4ca9e69fe3d5490ad, type: 2}
   - {fileID: 11400000, guid: e8c96e7a7e2844a7945b475ac868082d, type: 2}
   - {fileID: 11400000, guid: 9730c1846a505d8eb7477fd525c828d0, type: 2}
+  - {fileID: 11400000, guid: 70c82de574ab42b0ade86ebe5f1bb8a2, type: 2}
   bossReward: {fileID: 11400000, guid: e8c96e7a7e2844a7945b475ac868082d, type: 2}

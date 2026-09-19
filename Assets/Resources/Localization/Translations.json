@@ -1119,6 +1119,76 @@
       "key": "inventory.visual.chest",
       "es": "Cofre",
       "en": "Chest"
+    },
+    {
+      "key": "ability.axe.axebasic.name",
+      "es": "HACHAZO",
+      "en": "AXE SWING"
+    },
+    {
+      "key": "ability.axe.axebasic.description",
+      "es": "Golpe básico del hacha.",
+      "en": "Basic axe strike."
+    },
+    {
+      "key": "ability.axe.axebleedingcut.name",
+      "es": "Tajo sangrante",
+      "en": "Bleeding Cut"
+    },
+    {
+      "key": "ability.axe.axebleedingcut.description",
+      "es": "Marca tu próximo básico impactado en los próximos 4 s; ese golpe aplica sangrado de 1 de daño por segundo durante 5 s. Reaplicar renueva la duración.",
+      "en": "Marks your next landed basic within 4s; that hit applies bleed for 1 damage per second over 5s. Reapplying refreshes the duration."
+    },
+    {
+      "key": "ability.axe.axearmorrend.name",
+      "es": "Desgarre",
+      "en": "Rend"
+    },
+    {
+      "key": "ability.axe.axearmorrend.description",
+      "es": "Golpe que reduce un 20 % la armadura del objetivo durante 4 s. No acumulable.",
+      "en": "A strike that reduces the target's armor by 20% for 4s. Does not stack."
+    },
+    {
+      "key": "ability.axe.axeforwardswing.name",
+      "es": "Hachazo",
+      "en": "Axe Strike"
+    },
+    {
+      "key": "ability.axe.axeforwardswing.description",
+      "es": "Golpe hacia adelante sin desplazamiento. Hace un 40 % de daño adicional respecto del básico.",
+      "en": "A forward strike with no movement. Deals 40% more damage than your basic attack."
+    },
+    {
+      "key": "ability.axe.axesplittingblow.name",
+      "es": "Golpe partidor",
+      "en": "Splitting Blow"
+    },
+    {
+      "key": "ability.axe.axesplittingblow.description",
+      "es": "Golpe cargado que hace un 30 % de daño adicional si el objetivo está sangrando o con Desgarre activo.",
+      "en": "A charged strike that deals 30% more damage if the target is bleeding or has Rend active."
+    },
+    {
+      "key": "ability.axe.axecrueledge.name",
+      "es": "Filo cruel",
+      "en": "Cruel Edge"
+    },
+    {
+      "key": "ability.axe.axecrueledge.description",
+      "es": "Cada básico que impacta a un objetivo sangrando genera 1 Focus adicional.",
+      "en": "Each basic that hits a bleeding target grants 1 additional Focus."
+    },
+    {
+      "key": "ability.axe.axeexecutioner.name",
+      "es": "Verdugo",
+      "en": "Executioner"
+    },
+    {
+      "key": "ability.axe.axeexecutioner.description",
+      "es": "Básicos contra objetivos con sangrado activo hacen un 20 % de daño adicional.",
+      "en": "Basic attacks against bleeding targets deal 20% more damage."
     }
   ]
 }

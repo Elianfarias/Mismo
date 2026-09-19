@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: StartingWeapons
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.WeaponSetDefinition
   primary: {fileID: 11400000, guid: eef430b445c2b1b4183683d0b73234ca, type: 2}
-  secondary: {fileID: 11400000, guid: 835c07f02b4157f4ca9e69fe3d5490ad, type: 2}
+  secondary: {fileID: 11400000, guid: 70c82de574ab42b0ade86ebe5f1bb8a2, type: 2}

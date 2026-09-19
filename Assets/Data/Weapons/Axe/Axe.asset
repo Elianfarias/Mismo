@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6caf7fcd2b3f4459a35afabcca675b39, type: 3}
+  m_Name: Axe
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.WeaponDefinition
+  id: axe.basic
+  displayName: Hacha
+  basicAttackCooldown: 0.45
+  abilities:
+  - {fileID: 11400000, guid: fbd691e815e943629523ca0591b2ce8a, type: 2}
+  - {fileID: 11400000, guid: f22be05e1dd3444f8d80b964dcc944fd, type: 2}
+  - {fileID: 11400000, guid: f138122e27574d65b2fa7bf43e4e1937, type: 2}
+  - {fileID: 11400000, guid: b540621fe8f44537a590796373ad3190, type: 2}
+  family: {fileID: 11400000, guid: d5214838f4d74ed0b4c183904d17598f, type: 2}
+  isShield: 0
+  dualSwordFamily: {fileID: 0}
+  swordShieldFamily: {fileID: 0}
+  overrideFamilyAbilities: 0
+  visualPrefab: {fileID: 919132149155446097, guid: 611168c4d6c004b4abc7fca23db05f56, type: 3}
+  isTwoHanded: 0
+  dualWield: 0
+  secondaryVisualPrefab: {fileID: 0}
+  secondaryEquipped:
+    anchor: 2
+    bonePath: 
+    offset: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: 1
+  secondaryHolstered:
+    anchor: 0
+    bonePath: 
+    offset: {x: -0.2, y: 1.2, z: -0.25}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: 1
+  poseProfile: {fileID: 11400000, guid: add1b38f9bdad7649a718e3c00014525, type: 2}
+  isBow: 0
+  inventoryDescription: Hacha de una mano. Golpes firmes que sangran y debilitan la armadura del objetivo.
+  canDiscard: 1
+  gridWidth: 2
+  gridHeight: 2
+  canRotate: 1
+  inventoryIcon: {fileID: 21300000, guid: 3c2aaa1eb65602a49ae833af9e06ef8b, type: 3}
+  inventoryPreviewRotation: {x: 0, y: 0, z: 0}
+  canSell: 1
+  sellValue: 10
+  handRotation: {x: 0, y: 0, z: 0}
+  backRotation: {x: 0, y: 0, z: 35}
+  handOffset: {x: 0, y: 0, z: 0}
+  backOffset: {x: 0, y: 1.2, z: -0.25}

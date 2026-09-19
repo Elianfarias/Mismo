@@ -15,7 +15,7 @@ namespace Mismo.Gameplay.Player.Equipment
         readonly Queue<long> basicOrder = new Queue<long>();
         int hits, rhythm, sameTargetHits, twoTimes;
         UnityEngine.Object lastTarget;
-        float rhythmUntil, empoweredUntil, twoTimesUntil, bucklerReady;
+        float rhythmUntil, empoweredUntil, twoTimesUntil, bucklerReady, bleedPrimedUntil;
         float bucklerThrownAt=-100,bucklerAbsentUntil;
         public bool BucklerAbsent=>Has(WeaponPassive.Buckler)&&Time.time<bucklerAbsentUntil;
         public bool BucklerAnimating=>BucklerAbsent&&Time.time-bucklerThrownAt<.5f;
@@ -33,7 +33,7 @@ namespace Mismo.Gameplay.Player.Equipment
         public void ResetEffects()
         {
             hits=rhythm=sameTargetHits=twoTimes=0;lastTarget=null;
-            rhythmUntil=empoweredUntil=twoTimesUntil=0;Barrier=0;basics.Clear();basicOrder.Clear();
+            rhythmUntil=empoweredUntil=twoTimesUntil=bleedPrimedUntil=0;Barrier=0;basics.Clear();basicOrder.Clear();
             bucklerAbsentUntil=0;
             // Keep buckler cooldown across equipment changes.
         }
@@ -46,6 +46,7 @@ namespace Mismo.Gameplay.Player.Equipment
         public float SpeedBonus => Has(WeaponPassive.Rhythm)&&Time.time<rhythmUntil?rhythm*.04f:0;
         public void Empower()=>empoweredUntil=Time.time+4;
         public void TwoTimes(){twoTimes=2;twoTimesUntil=Time.time+5;}
+        public void PrimeBleed()=>bleedPrimedUntil=Time.time+4;
         public float BasicMultiplier(long attack,Vector3 target,Component receiver=null)
         {
             float value=1;
@@ -54,6 +55,7 @@ namespace Mismo.Gameplay.Player.Equipment
             if(Time.time<empoweredUntil)value*=1.5f;
             if(Time.time<twoTimesUntil&&twoTimes==1)value*=1.75f;
             if(Has(WeaponPassive.Finisher)&&sameTargetHits>=3&&lastTarget==receiver)value*=1.5f;
+            if(Has(WeaponPassive.Verdugo)&&receiver!=null&&receiver.GetComponent<CombatAilment>()?.Poisoned==true)value*=1.2f;
             return value;
         }
         public void BasicHit(long attack,Component target)
@@ -66,6 +68,13 @@ namespace Mismo.Gameplay.Player.Equipment
                 if(twoTimes==2)CombatAilment.Slow(target.gameObject,.5f,2);
                 twoTimes--;
             }
+            if(Time.time<bleedPrimedUntil)
+            {
+                CombatAilment.Poison(target.gameObject,gameObject,loadout?.ActiveDefinition?.MasteryId,1,5);
+                bleedPrimedUntil=0;
+            }
+            if(Has(WeaponPassive.FiloCruel)&&target.GetComponent<CombatAilment>()?.Poisoned==true)
+                GetComponent<CombatState>()?.Reward(1,"FILO CRUEL");
             if(Time.time>=rhythmUntil)rhythm=0;
             rhythm=Mathf.Min(5,rhythm+1);rhythmUntil=Time.time+2;
             sameTargetHits=lastTarget==target?sameTargetHits+1:1;lastTarget=target;

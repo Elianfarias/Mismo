@@ -20,5 +20,7 @@ namespace Mismo.Gameplay.Combat
         public float perfectParryWindow=.09f, perfectDodgeWindow=.085f;
         public float perfectParryPosture=35, parryPosture=12;
         public float perfectFocus=20, backFocus=8, openingFocus=6;
+        [Tooltip("Escala de mitigación de armadura para enemigos (mismo formato que ProgressionRules.armorScale del jugador).")]
+        public float armorScale=100;
     }
 }

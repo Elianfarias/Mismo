@@ -61,6 +61,7 @@ namespace Mismo.Gameplay.Enemies
         public string displayName="Goblin";
         public bool isBoss;
         [Min(1)] public float posture=70;
+        [Min(0)] public float armor=10;
         [Min(.1f)] public float sightHeight=.9f,allowedHeightDifference=1.2f;
         [Min(0)] public float preferredRange=1.7f;
         public GoblinAttack[] attacks=Array.Empty<GoblinAttack>();

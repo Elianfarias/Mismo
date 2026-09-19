@@ -5,7 +5,7 @@ namespace Mismo.Gameplay.Player.Equipment
 {
     public enum AbilitySlot { Basic, Q, E, R }
     public enum AbilityPose { None, Lunge, Parry, Spin, Bow }
-    public enum WeaponPassive { None, ThirdArrow, SwordTip, Rhythm, Finisher, Coverage, Buckler }
+    public enum WeaponPassive { None, ThirdArrow, SwordTip, Rhythm, Finisher, Coverage, Buckler, FiloCruel, Verdugo }
 
     [CreateAssetMenu(menuName = "Mismo/Combat/Ability")]
     public sealed class AbilityDefinition : ScriptableObject
