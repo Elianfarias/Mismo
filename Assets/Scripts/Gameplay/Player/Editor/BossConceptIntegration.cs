@@ -13,7 +13,7 @@ namespace Mismo.Gameplay.Player.Editor
 {
     public static class BossConceptIntegration
     {
-        const string Prefab="Assets/Prefabs/Enemies/FirstBoss.prefab";
+        const string Prefab="Assets/Art/Prefabs/Enemies/FirstBoss.prefab";
         const string Pending="Mismo.BossConcept.Checks";
         public static void RunBatch()
         {
@@ -27,7 +27,7 @@ namespace Mismo.Gameplay.Player.Editor
                     var model=visual.Find("ConceptGoblin");
                     if(model==null)model=((GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(GoblinConceptIntegration.Model),visual)).transform;
                     model.name="ConceptGoblin";model.gameObject.SetActive(true);model.localPosition=Vector3.zero;model.localRotation=Quaternion.identity;model.localScale=Vector3.one*1.6f;
-                    var normal=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Goblin.prefab").GetComponentsInChildren<SkinnedMeshRenderer>(true).First(r=>r.name=="Goblin_Concept_Mesh");
+                    var normal=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Enemies/Goblin.prefab").GetComponentsInChildren<SkinnedMeshRenderer>(true).First(r=>r.name=="Goblin_Concept_Mesh");
                     model.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterials=normal.sharedMaterials;
                     var animator=model.GetComponent<Animator>();animator.runtimeAnimatorController=AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>("Assets/Art/Animations/GoblinConcept/Goblin.controller");animator.applyRootMotion=false;animator.cullingMode=AnimatorCullingMode.AlwaysAnimate;
                     var driver=boss.GetComponent<BossAnimationDriver>()??boss.AddComponent<BossAnimationDriver>();driver.Configure(animator);
@@ -41,7 +41,7 @@ namespace Mismo.Gameplay.Player.Editor
                 EditorSceneManager.NewScene(NewSceneSetup.EmptyScene);
                 var instance=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(Prefab));
                 instance.GetComponent<BossController>().enabled=false;instance.GetComponent<NavMeshAgent>().enabled=false;
-                var goblin=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Goblin.prefab"));
+                var goblin=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Enemies/Goblin.prefab"));
                 goblin.transform.position=Vector3.right*4;goblin.GetComponent<GoblinController>().enabled=false;goblin.GetComponent<NavMeshAgent>().enabled=false;
                 SessionState.SetBool(Pending,true);EditorApplication.EnterPlaymode();
             }

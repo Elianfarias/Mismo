@@ -33,7 +33,7 @@ namespace Mismo.Gameplay.Player.World
         static void Register(){SceneManager.sceneLoaded-=OnSceneLoaded;SceneManager.sceneLoaded+=OnSceneLoaded;}
         static void OnSceneLoaded(Scene scene,LoadSceneMode mode)
         {
-            var settings=Resources.Load<ExplorationWorldSettings>("ExplorationWorldSettings");
+            var settings=Mismo.Core.ProjectAssets.Load<ExplorationWorldSettings>("ExplorationWorldSettings");
             if(settings==null||!settings.streamingEnabled)return;
             var region=scene.GetRootGameObjects().FirstOrDefault(g=>g.name.StartsWith("Voxel Region"));
             if(region==null||region.GetComponent<ExplorationChunks>()!=null)return;
@@ -56,13 +56,13 @@ namespace Mismo.Gameplay.Player.World
             if(WorldSession.Current!=null)
             {
                 inventory=inventory??target.gameObject.AddComponent<Equipment.Inventory.PlayerInventory>();
-                inventory.Initialize(Resources.Load<Equipment.Inventory.ItemCatalog>("ItemCatalog"));
+                inventory.Initialize(Mismo.Core.ProjectAssets.Load<Equipment.Inventory.ItemCatalog>("ItemCatalog"));
             }
             if(target.GetComponent<Presentation.WorldSurfaceFeedback>()==null)target.gameObject.AddComponent<Presentation.WorldSurfaceFeedback>();
             geometry=transform.Find("RegionGeometry");
             if(geometry==null){enabled=false;return;}
             material=geometry.GetComponentsInChildren<MeshRenderer>().First(r=>r.name.StartsWith("Terrain_")).sharedMaterial;
-            var surface=Resources.Load<Material>("TerrainSurface");
+            var surface=Mismo.Core.ProjectAssets.Load<Material>("TerrainSurface");
             if(surface!=null)
             {
                 material=surface;
@@ -134,7 +134,7 @@ namespace Mismo.Gameplay.Player.World
                 target.rotation=Quaternion.Euler(0,saved.yaw,0);
                 if(target.GetComponent<WorldCheckpoint>()==null)target.gameObject.AddComponent<WorldCheckpoint>();
             }
-            var lighting=GetComponent<DayNightCycle>();if(lighting==null)lighting=gameObject.AddComponent<DayNightCycle>();lighting.Initialize(Resources.Load<DayNightSettings>("DayNightSettings"));
+            var lighting=GetComponent<DayNightCycle>();if(lighting==null)lighting=gameObject.AddComponent<DayNightCycle>();lighting.Initialize(Mismo.Core.ProjectAssets.Load<DayNightSettings>("DayNightSettings"));
         }
         void Update()
         {

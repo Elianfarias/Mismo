@@ -82,15 +82,15 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         [Tooltip("Opacidad del fondo y marco del selector de arma Tab. Sus iconos y texto permanecen sólidos.")]
         [Range(0,1)] public float hudTabOpacity=1f;
         [System.NonSerialized] Texture2D defaultPaintedFrames,defaultPaintedFill;
-        public Texture2D PaintedFrames => hudPaintedFrames!=null?hudPaintedFrames:defaultPaintedFrames!=null?defaultPaintedFrames:defaultPaintedFrames=Resources.Load<Texture2D>("UI/HUD/VitalsPaintedFrames");
-        public Texture2D PaintedFill => hudPaintedFill!=null?hudPaintedFill:defaultPaintedFill!=null?defaultPaintedFill:defaultPaintedFill=Resources.Load<Texture2D>("UI/HUD/VitalsPaintedFill");
+        public Texture2D PaintedFrames => hudPaintedFrames!=null?hudPaintedFrames:defaultPaintedFrames!=null?defaultPaintedFrames:defaultPaintedFrames=Mismo.Core.ProjectAssets.Load<Texture2D>("UI/HUD/VitalsPaintedFrames");
+        public Texture2D PaintedFill => hudPaintedFill!=null?hudPaintedFill:defaultPaintedFill!=null?defaultPaintedFill:defaultPaintedFill=Mismo.Core.ProjectAssets.Load<Texture2D>("UI/HUD/VitalsPaintedFill");
         public Texture2D hudVitalsBackground;
         [System.NonSerialized] Texture2D defaultVitalsBackground;
         public Texture2D VitalsBackground => hudVitalsBackground!=null?hudVitalsBackground:
-            defaultVitalsBackground!=null?defaultVitalsBackground:defaultVitalsBackground=Resources.Load<Texture2D>("UI/HUD/VitalsBackground-Slate");
+            defaultVitalsBackground!=null?defaultVitalsBackground:defaultVitalsBackground=Mismo.Core.ProjectAssets.Load<Texture2D>("UI/HUD/VitalsBackground-Slate");
         [System.NonSerialized] Texture2D defaultVitalsFrame;
         public Texture2D VitalsFrame => hudVitalsFrame!=null?hudVitalsFrame:
-            defaultVitalsFrame!=null?defaultVitalsFrame:defaultVitalsFrame=Resources.Load<Texture2D>("UI/HUD/VitalsContainer-Clean-v3");
+            defaultVitalsFrame!=null?defaultVitalsFrame:defaultVitalsFrame=Mismo.Core.ProjectAssets.Load<Texture2D>("UI/HUD/VitalsContainer-Clean-v3");
         [Range(0,1)] public float hudBackgroundOpacity=.65f;
         public Texture2D[] abilityIcons;
         void OnEnable()

@@ -4,7 +4,7 @@ El mundo aplica automáticamente los cinco cubemaps EXR (tiras de seis caras) de
 
 ## Configuración en Unity
 
-Seleccionar `Assets/Resources/DayNightSettings.asset` en Project y editar en Inspector:
+Seleccionar `Assets/Data/World/DayNightSettings.asset` en Project y editar en Inspector:
 
 - **Running**: activa o detiene el reloj.
 - **Cycle Minutes**: minutos reales por día completo (30 por defecto).

@@ -1,6 +1,6 @@
 # Exploración, escalada y habilidad especial
 
-Abrir `Assets/Scenes/VoxelRegion_7319.unity` y entrar en Play. `Assets/Resources/ExplorationWorldSettings.asset` activa la extensión procedural. El pueblo, terreno central, edificios y encuentros guardados se conservan. Los límites invisibles y el paisaje decorativo exterior se desactivan durante Play.
+Abrir `Assets/Scenes/VoxelRegion_7319.unity` y entrar en Play. `Assets/Data/World/ExplorationWorldSettings.asset` activa la extensión procedural. El pueblo, terreno central, edificios y encuentros guardados se conservan. Los límites invisibles y el paisaje decorativo exterior se desactivan durante Play.
 
 ## Chunks
 

@@ -1,6 +1,6 @@
 # Dos armas y habilidades reutilizables
 
-La espada y el arco se cargan desde `Assets/Resources/StartingWeapons.asset` al iniciar el jugador. Funciona con las escenas existentes sin regenerar el terreno. Los datos del kit y sus visuales se encuentran en `Assets/Data/Weapons`.
+La espada y el arco se cargan desde `Assets/Data/Weapons/StartingWeapons.asset` al iniciar el jugador. Funciona con las escenas existentes sin regenerar el terreno. Los datos del kit y sus visuales se encuentran en `Assets/Data/Weapons`.
 
 ## Controles
 

@@ -1,18 +1,19 @@
 {
-    "name": "Mismo.Gameplay.Player",
-    "rootNamespace": "Mismo.Gameplay.Player",
-    "references": [
-        "Unity.Localization",
-        "Unity.InputSystem",
-        "Mismo.Audio"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "Mismo.Gameplay.Player",
+  "rootNamespace": "Mismo.Gameplay.Player",
+  "references": [
+    "Unity.Localization",
+    "Unity.InputSystem",
+    "Mismo.Audio",
+    "Mismo.Core"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
 }

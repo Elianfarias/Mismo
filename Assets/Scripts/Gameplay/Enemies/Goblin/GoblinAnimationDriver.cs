@@ -19,7 +19,7 @@ namespace Mismo.Gameplay.Enemies
         public AnimationClip ActionClip => playback.ActionClip;
         public Animator Animator => animator;
         public void Configure(Animator value) => animator=value;
-        private void Awake(){goblin=GetComponent<GoblinController>();agent=GetComponent<NavMeshAgent>();health=GetComponent<Health>();if(animator==null)animator=GetComponentInChildren<Animator>();hitClip=Resources.Load<AnimationClip>("CombatPresentation/Human_Goblin_CombatDamage01");hitMask=Resources.Load<AvatarMask>("CombatPresentation/GoblinUpperBody");}
+        private void Awake(){goblin=GetComponent<GoblinController>();agent=GetComponent<NavMeshAgent>();health=GetComponent<Health>();if(animator==null)animator=GetComponentInChildren<Animator>();hitClip=Mismo.Core.ProjectAssets.Load<AnimationClip>("CombatPresentation/Human_Goblin_CombatDamage01");hitMask=Mismo.Core.ProjectAssets.Load<AvatarMask>("CombatPresentation/GoblinUpperBody");}
         private void OnEnable(){if(health!=null)health.Damaged+=OnHit;}
         private void OnDisable(){if(health!=null)health.Damaged-=OnHit;hitAt=-10;playback.Dispose();}
         private void OnHit(DamageInfo _) => hitAt=Time.time;

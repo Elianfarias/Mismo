@@ -1,6 +1,6 @@
 # Goblin Elite
 
-`Assets/Prefabs/Enemies/GoblinElite.prefab` es una variante del prefab base. Mantiene la misma IA, ataques, daño, stagger y muerte del Goblin; la tarea de diferenciación provisional vive en `GoblinEliteVisual` y `GoblinVisualStyle`.
+`Assets/Art/Prefabs/Enemies/GoblinElite.prefab` es una variante del prefab base. Mantiene la misma IA, ataques, daño, stagger y muerte del Goblin; la tarea de diferenciación provisional vive en `GoblinEliteVisual` y `GoblinVisualStyle`.
 
 Durante Play Mode el Elite se distingue por:
 

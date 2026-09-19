@@ -4,13 +4,13 @@ Los 26 FBX de `Assets/Art/FBX/Nature/Nature` se usan en 28 prefabs: ocho árbole
 
 ## Configuración
 
-Seleccionar `Assets/Resources/WorldContentCatalog.asset` en el Inspector:
+Seleccionar `Assets/Data/World/WorldContentCatalog.asset` en el Inspector:
 
 - Assets: entradas `nature.*`, con prefab, tipo, biomas, peso, tamaño, pendiente máxima y rango de escala. Biomes vacío admite todos; Deadwood está limitado al bosque.
 - Ground Vegetation Density: densidades de pasto, arbustos, flores, rocas y troncos caídos. Estos valores se aplican a las partidas existentes al recargar sectores.
 - Árboles: Tree Density y Biomes → Trees en ExplorationWorldSettings conservan la densidad de la geografía guardada; los nuevos prefabs sustituyen su apariencia. Scale Range del catálogo cambia la variación de tamaño de los prefabs.
 
-Prefabs editables en `Assets/Prefabs/World/Nature`; materiales y paletas recuperadas en `Assets/Art/Materials/Nature`. El menú Mismo → World → Integrate Nature assets reconstruye prefabs y materiales, conservando parámetros de las entradas existentes del catálogo. Las modificaciones manuales dentro de esos prefabs se sobrescriben al ejecutar el importador.
+Prefabs editables en `Assets/Art/Prefabs/World/Nature`; materiales y paletas recuperadas en `Assets/Art/Materials/Nature`. El menú Mismo → World → Integrate Nature assets reconstruye prefabs y materiales, conservando parámetros de las entradas existentes del catálogo. Las modificaciones manuales dentro de esos prefabs se sobrescriben al ejecutar el importador.
 
 ## Aparición y colisiones
 

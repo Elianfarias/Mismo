@@ -42,7 +42,7 @@ namespace Mismo.Gameplay.Player.Editor
                 if(source==null||target==null)return;
                 bool changed=false;
                 foreach(string filter in new[]{"t:GoblinSettings","t:BossSettings"})
-                foreach(string guid in AssetDatabase.FindAssets(filter,new[]{"Assets/Data"}))
+                foreach(string guid in AssetDatabase.FindAssets(filter,new[]{"Assets/Data", "Assets/Art/Prefabs"}))
                 {
                     var asset=AssetDatabase.LoadAssetAtPath<ScriptableObject>(AssetDatabase.GUIDToAssetPath(guid));
                     EnemyAttackAnimation[] bindings=asset is GoblinSettings g?new[]{g.slash?.animation,g.charge?.animation}
@@ -179,8 +179,9 @@ namespace Mismo.Gameplay.Player.Editor
     {
         static void OnPostprocessAllAssets(string[] imported,string[] deleted,string[] moved,string[] previous)
         {
+            if (SessionState.GetBool("Mismo.Organization.Running", false)) return;
             if(imported.Concat(moved).Any(p=>!p.Contains("/Compatible/")&&
-                (p.EndsWith(".anim")||p.EndsWith(".fbx")||p.StartsWith("Assets/Data/Enemies/"))))EnemyAnimationRetargeter.Queue();
+                (p.EndsWith(".anim")||p.EndsWith(".fbx")||p.StartsWith("Assets/Data/Enemies/")||p.StartsWith("Assets/Art/Prefabs/Enemies/"))))EnemyAnimationRetargeter.Queue();
         }
     }
     [CustomEditor(typeof(GoblinSettings))]

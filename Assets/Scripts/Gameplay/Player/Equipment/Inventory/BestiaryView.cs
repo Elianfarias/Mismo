@@ -11,7 +11,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public void Reset()=>last=-1;
         public void Draw(PlayerInventory inventory,InventoryPreview preview,InventoryUIIcons icons=null,System.Action<Rect> drawPreview=null)
         {
-            var book=Resources.Load<BestiaryBook>("BestiaryBook");if(book==null||book.pages==null||book.pages.Length==0)return;
+            var book=Mismo.Core.ProjectAssets.Load<BestiaryBook>("BestiaryBook");if(book==null||book.pages==null||book.pages.Length==0)return;
             var pages=System.Array.FindAll(book.pages,s=>s!=null&&inventory.HasSeenSpecies(s.id));
             if(pages.Length==0){U.Text(new Rect(200,280,860,150),"Todavía no descubriste ninguna criatura. Explorá el mundo para completar el bestiario.",26,U.Muted,false,TextAnchor.MiddleCenter);return;}
             page=Mathf.Clamp(page,0,pages.Length-1);var species=pages[page];

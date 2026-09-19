@@ -174,7 +174,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 FantasyUI.StyleButton(button);
                 field=new GUIStyle(GUI.skin.textField){font=QuietFantasyUI.Body,fontSize=20,padding=new RectOffset(12,12,7,7)};
             }
-            if(inventoryIcons==null)inventoryIcons=Resources.Load<InventoryUIIcons>("InventoryUIIcons");
+            if(inventoryIcons==null)inventoryIcons=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");
             var matrix=GUI.matrix;int depth=GUI.depth;
             if(IsOpen&&page!=Page.Menu){GUI.depth=-40;PlayerHUD.Fill(new Rect(0,0,Screen.width,Screen.height),IsQuietPage?new Color(.015f,.022f,.03f,.25f*PanelOpacity):new Color(.015f,.022f,.03f,.86f*PanelOpacity));}
             const float canvasWidth=1280f;

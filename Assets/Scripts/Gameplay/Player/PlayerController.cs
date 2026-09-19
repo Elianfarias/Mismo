@@ -32,7 +32,7 @@ namespace Mismo.Gameplay.Player
             // Arena tools remain isolated from the single-player profile.
             if (GetComponent<World.RegionRespawn>() == null) return;
             var inventory = GetComponent<Equipment.Inventory.PlayerInventory>() ?? gameObject.AddComponent<Equipment.Inventory.PlayerInventory>();
-            inventory.Initialize(Resources.Load<Equipment.Inventory.ItemCatalog>("ItemCatalog"));
+            inventory.Initialize(Mismo.Core.ProjectAssets.Load<Equipment.Inventory.ItemCatalog>("ItemCatalog"));
             inventoryPanel = GetComponent<Equipment.Inventory.InventoryPanel>() ?? gameObject.AddComponent<Equipment.Inventory.InventoryPanel>();
         }
         private void Update()

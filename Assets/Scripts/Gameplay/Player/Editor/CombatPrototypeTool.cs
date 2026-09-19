@@ -16,9 +16,9 @@ namespace Mismo.Gameplay.Player.Editor
     public static class CombatPrototypeTool
     {
         private const string ScenePath = "Assets/Scenes/MovementPrototype.unity";
-        private const string PlayerPrefabPath = "Assets/Prefabs/Player/Player.prefab";
-        private const string SwordPrefabPath = "Assets/Prefabs/Player/BasicSword.prefab";
-        private const string DummyPrefabPath = "Assets/Prefabs/Combat/TrainingDummy.prefab";
+        private const string PlayerPrefabPath = "Assets/Art/Prefabs/Player/Player.prefab";
+        private const string SwordPrefabPath = "Assets/Art/Prefabs/Player/BasicSword.prefab";
+        private const string DummyPrefabPath = "Assets/Art/Prefabs/Combat/TrainingDummy.prefab";
 
         [MenuItem("Mismo/Prototype/Build Sword Combat Training Setup")]
         public static void BuildSetup()
@@ -29,7 +29,7 @@ namespace Mismo.Gameplay.Player.Editor
                 return;
             }
 
-            EnsureFolder("Assets/Prefabs/Combat");
+            EnsureFolder("Assets/Art/Prefabs/Combat");
             EnsurePlayerFeedback();
             GameObject dummyPrefab = EnsureDummyPrefab();
             EnsureDummyInPrototype(dummyPrefab);

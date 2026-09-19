@@ -48,7 +48,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
 
         void DrawVisualInventory()
         {
-            if(inventoryIcons==null)inventoryIcons=Resources.Load<InventoryUIIcons>("InventoryUIIcons");
+            if(inventoryIcons==null)inventoryIcons=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");
             var e=Event.current;
             if(showItemActions && e.type==EventType.MouseDown && !ItemActionsRect.Contains(e.mousePosition))
             { showItemActions=false;e.Use(); }
@@ -98,7 +98,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
 
         void DrawInventoryBackdrop()
         {
-            if(inventoryIcons==null)inventoryIcons=Resources.Load<InventoryUIIcons>("InventoryUIIcons");
+            if(inventoryIcons==null)inventoryIcons=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");
             // Rebuild only when the inspector's live theme switch changes.
             if(inventoryBackdrop==null||inventoryBackdropOlive!=OliveTheme)
             {
@@ -144,7 +144,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(next==radialSelected)return;
             radialSelected=next;
             if(next<0||Time.unscaledTime<radialHoverReadyAt)return;
-            if(inventoryIcons==null)inventoryIcons=Resources.Load<InventoryUIIcons>("InventoryUIIcons");
+            if(inventoryIcons==null)inventoryIcons=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");
             float volume=inventoryIcons!=null?Mathf.Clamp01(inventoryIcons.radialHoverVolume):.7f;
             if(volume<=0)return;
             radialHoverReadyAt=Time.unscaledTime+(inventoryIcons!=null?Mathf.Max(0,inventoryIcons.radialHoverCooldown):.08f);
@@ -189,7 +189,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         void DisposeRadialTextures(){if(radialWedges!=null)foreach(var texture in radialWedges)Destroy(texture);if(radialEdges!=null)foreach(var texture in radialEdges)Destroy(texture);if(radialCenter!=null)Destroy(radialCenter);}
         void DrawMenu()
         {
-            if(inventoryIcons==null)inventoryIcons=Resources.Load<InventoryUIIcons>("InventoryUIIcons");
+            if(inventoryIcons==null)inventoryIcons=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");
             EnsureRadialTextures();
             var oldColor=GUI.color;var oldMatrix=GUI.matrix;
             var rect=new Rect(400,160,480,480);

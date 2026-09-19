@@ -33,7 +33,7 @@ namespace Mismo.Menu
         }
         void Awake()
         {
-            icons=Resources.Load<InventoryUIIcons>("InventoryUIIcons");
+            icons=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");
             if(PlayerPrefs.HasKey("Mismo.Quality"))QualitySettings.SetQualityLevel(Mathf.Clamp(PlayerPrefs.GetInt("Mismo.Quality"),0,QualitySettings.names.Length-1),true);
             if(PlayerPrefs.HasKey("Mismo.VSync"))QualitySettings.vSyncCount=PlayerPrefs.GetInt("Mismo.VSync");
             if(PlayerPrefs.HasKey("Mismo.FPS"))Application.targetFrameRate=PlayerPrefs.GetInt("Mismo.FPS");

@@ -13,24 +13,24 @@ namespace Mismo.Gameplay.Player.Editor
         [MenuItem("Mismo/Criaturas/Preparar bestiario y efectos")]
         public static void Create()
         {
-            Directory.CreateDirectory("Assets/Resources/Bestiary");Directory.CreateDirectory("Assets/Data/RiderPoses");AssetDatabase.Refresh();
-            var paths=AssetDatabase.FindAssets("t:Prefab",new[]{"Assets/Prefabs/Enemies"}).Select(AssetDatabase.GUIDToAssetPath).ToArray();
+            Directory.CreateDirectory("Assets/Data/Bestiary");Directory.CreateDirectory("Assets/Data/RiderPoses");AssetDatabase.Refresh();
+            var paths=AssetDatabase.FindAssets("t:Prefab",new[]{"Assets/Art/Prefabs/Enemies"}).Select(AssetDatabase.GUIDToAssetPath).ToArray();
             var entries=new List<CreatureSpecies>();
             string[] ids={"boar","spider","goblin","golem","boss"};string[] names={"Jabalí","Araña","Goblin","Gólem","Guardián"};string[] match={"Boar_","Spider_","Goblin","Golem","Boss"};
             for(int i=0;i<ids.Length;i++)
             {
                 var models=paths.Where(p=>Path.GetFileNameWithoutExtension(p).IndexOf(match[i],StringComparison.OrdinalIgnoreCase)>=0).Select(AssetDatabase.LoadAssetAtPath<GameObject>).ToArray();if(models.Length==0)continue;
-                var entry=Asset<CreatureSpecies>("Assets/Resources/Bestiary/"+ids[i]+".asset");
+                var entry=Asset<CreatureSpecies>("Assets/Data/Bestiary/"+ids[i]+".asset");
                 if(string.IsNullOrEmpty(entry.id)){entry.id=ids[i];entry.displayName=names[i];entry.description=i==0?"Habitante del bosque. Puede reconocerte como su amo después de vencerlo.":"Una criatura descubierta durante tus viajes.";entry.domesticable=entry.mountable=i==0;entry.recognitionChance=.1f;}
                 entry.prefabs=models;
                 if(entry.mountable&&entry.riderPose==null)entry.riderPose=Asset<RiderPose>("Assets/Data/RiderPoses/"+ids[i]+".asset");
                 if(entry.riderPose!=null&&(entry.riderPose.bones==null||entry.riderPose.bones.Length==0))DefaultPose(entry);
                 EditorUtility.SetDirty(entry);entries.Add(entry);
             }
-            var book=Asset<BestiaryBook>("Assets/Resources/BestiaryBook.asset");book.pages=entries.ToArray();EditorUtility.SetDirty(book);
-            var catalog=Resources.Load<WorldContentCatalog>("WorldContentCatalog");var gathering=Resources.Load<GatheringSettings>("GatheringSettings");
+            var book=Asset<BestiaryBook>("Assets/Data/Bestiary/BestiaryBook.asset");book.pages=entries.ToArray();EditorUtility.SetDirty(book);
+            var catalog=Mismo.Core.ProjectAssets.Load<WorldContentCatalog>("WorldContentCatalog");var gathering=Mismo.Core.ProjectAssets.Load<GatheringSettings>("GatheringSettings");
             var resources=new HashSet<GameObject>(catalog.assets.Where(a=>a.prefab!=null&&a.kind!=WorldAssetKind.Grass).Select(a=>a.prefab));
-            foreach(var node in Resources.LoadAll<ResourceNodeDefinition>("Gathering"))if(node.availablePrefab!=null)resources.Add(node.availablePrefab);
+            foreach(var node in Mismo.Core.ProjectAssets.LoadAll<ResourceNodeDefinition>("Gathering"))if(node.availablePrefab!=null)resources.Add(node.availablePrefab);
             foreach(var prefab in resources)BakePalette(prefab);
             AssetDatabase.SaveAssets();
         }
@@ -62,7 +62,7 @@ namespace Mismo.Gameplay.Player.Editor
         }
         static void DefaultPose(CreatureSpecies species)
         {
-            var source=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/Player.prefab");var player=CompanionPlayer.CloneVisual(source);var animator=player.GetComponentInChildren<Animator>();
+            var source=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/Player.prefab");var player=CompanionPlayer.CloneVisual(source);var animator=player.GetComponentInChildren<Animator>();
             var bones=new List<RiderPose.Bone>();
             var hips=animator.GetComponentsInChildren<Transform>().FirstOrDefault(t=>t.name=="Hips");
             if(hips!=null)species.riderPose.position=new Vector3(0,1.05f-(hips.position.y-player.transform.position.y),0);
@@ -86,7 +86,7 @@ namespace Mismo.Gameplay.Player.Editor
         {
             if(!Directory.GetCurrentDirectory().Replace("\\","/").Contains("/.validation/"))throw new InvalidOperationException("Use an isolated project.");
             Create();TranslationTables.Import();
-            var player=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/Player.prefab");var animator=player.GetComponentInChildren<Animator>();
+            var player=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/Player.prefab");var animator=player.GetComponentInChildren<Animator>();
             File.WriteAllText("../../.validation/rider-bones.txt",string.Join("\n",animator.GetComponentsInChildren<Transform>().Select(t=>AnimationUtility.CalculateTransformPath(t,animator.transform))));
             CreatureFeatureChecks.RunBatch();
         }

@@ -25,7 +25,7 @@ namespace Mismo.Gameplay.Player.Editor
             InventoryPresentationAssets.GenerateGridIcons();
             EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);
             var floor=GameObject.CreatePrimitive(PrimitiveType.Cube);floor.transform.position=new Vector3(0,-.5f,0);floor.transform.localScale=new Vector3(80,1,80);
-            var player=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/Player.prefab"));
+            var player=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/Player.prefab"));
             var respawn=player.GetComponent<World.RegionRespawn>();if(respawn!=null)Object.DestroyImmediate(respawn);
             player.transform.position=Vector3.up*.2f;
             var camera=new GameObject("Camera").AddComponent<UnityEngine.Camera>();camera.tag="MainCamera";
@@ -128,9 +128,9 @@ namespace Mismo.Gameplay.Player.Editor
             var loadout=player.GetComponent<EquipmentLoadout>();loadout.Runner.Cancel();loadout.Belt?.Cancel();
             var inventory=player.gameObject.AddComponent<PlayerInventory>();
             var path=Path.Combine(Output,"test-"+Guid.NewGuid().ToString("N")+".mismo");
-            inventory.Initialize(Resources.Load<ItemCatalog>("ItemCatalog"),new ProtectedProfileRepository(path));
+            inventory.Initialize(Mismo.Core.ProjectAssets.Load<ItemCatalog>("ItemCatalog"),new ProtectedProfileRepository(path));
             Check(inventory.IsReady,"Test inventory initializes: "+inventory.Notice);
-            var uiArt=Resources.Load<InventoryUIIcons>("InventoryUIIcons");
+            var uiArt=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");
             Check(uiArt!=null&&uiArt.weaponSlotBackground!=null&&uiArt.consumableSlotBackground!=null&&
                 uiArt.weaponSlotUV.width>0&&uiArt.weaponSlotUV.height>0&&uiArt.consumableSlotUV.width>0&&uiArt.consumableSlotUV.height>0,
                 "Slot artwork loads with nonempty texture regions");
@@ -141,7 +141,7 @@ namespace Mismo.Gameplay.Player.Editor
             Check(inventory.Material(MaterialCatalog.Wood).icon!=null&&inventory.Definition(inventory.EquippedId(0)).inventoryIcon!=null,"Grid icons are imported as usable sprites");
             var panel=player.gameObject.AddComponent<InventoryPanel>();
             var settings=InventorySettings.Current;settings.backpackColumns=3;settings.backpackRows=1;
-            var itemCatalog=Resources.Load<ItemCatalog>("ItemCatalog");
+            var itemCatalog=Mismo.Core.ProjectAssets.Load<ItemCatalog>("ItemCatalog");
             foreach(var weapon in itemCatalog.weapons){weapon.gridWidth=1;weapon.gridHeight=1;}
             foreach(var material in inventory.Materials){material.gridWidth=1;material.gridHeight=1;}
             Check(inventory.IsReady&&inventory.UsedSlots(false)==0&&inventory.GridItems(false).Count==0,"Both equipped sets are outside backpack capacity");
@@ -151,7 +151,7 @@ namespace Mismo.Gameplay.Player.Editor
             Check(inventory.TryGrantVictory(25,null,null,"inventory-test-enemy",new System.Collections.Generic.Dictionary<string,int>{{MaterialCatalog.Stone,2}},player.transform.position),"Victory saves EXP and overflow loot");
             string pending=null;foreach(var loot in inventory.PendingLoot)pending=loot.id;
             Check(pending!=null,"Full backpack preserves collectible loot");
-            var defs=new System.Collections.Generic.HashSet<string>();foreach(var w in Resources.Load<ItemCatalog>("ItemCatalog").weapons)defs.Add(w.Id);
+            var defs=new System.Collections.Generic.HashSet<string>();foreach(var w in Mismo.Core.ProjectAssets.Load<ItemCatalog>("ItemCatalog").weapons)defs.Add(w.Id);
             var rewardDefs=new System.Collections.Generic.Dictionary<string,string>{{ItemCatalog.BossRewardId,inventory.BossReward.Id}};
             var reopen=new ProtectedProfileRepository(path);reopen.Read(_=>true,out var pendingJson);
             var pendingSaved=JsonUtility.FromJson<InventoryProfile>(pendingJson);
@@ -326,7 +326,7 @@ namespace Mismo.Gameplay.Player.Editor
             for(int i=0;i<5;i++)yield return null;
             Check(masteryDraft[0]==0&&masteryDraft[1]==0,"Changing weapons discards unconfirmed mastery points");
             masteryDraft[0]=1;panel.Close();Check(masteryDraft[0]==0,"Closing discards mastery draft");
-            var book=Resources.Load<World.BestiaryBook>("BestiaryBook");
+            var book=Mismo.Core.ProjectAssets.Load<World.BestiaryBook>("BestiaryBook");
             var modelFixture=GameObject.CreatePrimitive(PrimitiveType.Cube);
             modelFixture.name="Bestiary model regression fixture";
             var textFixture=new GameObject("State Label",typeof(TextMesh));textFixture.transform.SetParent(modelFixture.transform,false);

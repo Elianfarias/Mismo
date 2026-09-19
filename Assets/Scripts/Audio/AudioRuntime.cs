@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 public sealed class AudioRuntime : MonoBehaviour
 {
     public static AudioRuntime Instance {get;private set;}
-    public static AudioMixer Mixer => Resources.Load<AudioMixer>("Audio/AudioMixer");
+    public static AudioMixer Mixer => Mismo.Core.ProjectAssets.Load<AudioMixer>("Audio/AudioMixer");
     public static AudioMixerGroup SfxGroup => Mixer != null ? Mixer.FindMatchingGroups("SFX").FirstOrDefault(g=>g.name=="SFX") : null;
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void Boot()

@@ -27,7 +27,7 @@ namespace Mismo.Gameplay.Player.Editor
         {
             try
             {
-                var settings=Resources.Load<ExplorationWorldSettings>("ExplorationWorldSettings");Check(settings!=null,"Streaming configuration included in Resources");
+                var settings=Mismo.Core.ProjectAssets.Load<ExplorationWorldSettings>("ExplorationWorldSettings");Check(settings!=null,"Streaming configuration included in Resources");
                 var field=new World.VoxelRegionHeightfield(settings.seed,settings.authoredSize,settings.relief,settings.stepHeight);
                 Check(ExplorationChunks.Coordinate(new Vector3(-.01f,0,-32.01f))==new Vector2Int(-1,-2),"Negative chunk coordinates use floor");
                 var mesh=ExplorationChunks.BuildTerrain(field,new Vector2Int(4,0));var repeat=ExplorationChunks.BuildTerrain(field,new Vector2Int(4,0));

@@ -14,7 +14,7 @@ namespace Mismo.Gameplay.Player.Editor
         private const string DataFolder = "Assets/Data";
         private const string PlayerDataFolder = "Assets/Data/Player";
         private const string SwordAssetPath = PlayerDataFolder + "/BasicSword.asset";
-        private const string SwordPrefabPath = "Assets/Prefabs/Player/BasicSword.prefab";
+        private const string SwordPrefabPath = "Assets/Art/Prefabs/Player/BasicSword.prefab";
 
         [MenuItem("Mismo/Prototype/Create Basic Sword On Selected Character")]
         public static void CreateAndEquip()

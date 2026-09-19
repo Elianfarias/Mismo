@@ -15,7 +15,7 @@ namespace Mismo.Gameplay.Player.Presentation
         public static Texture2D FrameTexture => Load(ref frame,"Frame");
         static Texture2D Load(ref Texture2D texture,string name)
         {
-            if(texture==null)texture=Resources.Load<Texture2D>("UI/FantasyBorders/"+name);
+            if(texture==null)texture=Mismo.Core.ProjectAssets.Load<Texture2D>("UI/FantasyBorders/"+name);
             if(texture!=null){texture.filterMode=FilterMode.Point;texture.wrapMode=TextureWrapMode.Clamp;}
             return texture;
         }
@@ -83,7 +83,7 @@ namespace Mismo.Gameplay.Player.Presentation
         private void Start()
         {
             combat=GetComponent<CombatState>();if(combat!=null)combat.Rewarded+=OnReward;
-            icons=Resources.Load<InventoryUIIcons>("InventoryUIIcons");inventory=GetComponent<PlayerInventory>();
+            icons=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");inventory=GetComponent<PlayerInventory>();
             Active=this;health=GetComponent<Health>();stamina=GetComponent<Stamina>();dash=GetComponent<BeltDash>();
             combo=GetComponentInChildren<BasicSwordCombo>();lunge=GetComponentInChildren<SwordLunge>();parry=GetComponentInChildren<SwordParry>();spin=GetComponentInChildren<SwordSpinAttack>();
             LoadRuntimeLayout();

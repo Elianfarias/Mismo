@@ -26,7 +26,7 @@ namespace Mismo.Gameplay.Player.Editor
             GatheringAssets.Create();TranslationTables.Import();
             EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);
             var floor=GameObject.CreatePrimitive(PrimitiveType.Cube);floor.transform.position=new Vector3(0,-.5f,0);floor.transform.localScale=new Vector3(80,1,80);
-            var player=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/Player.prefab"));
+            var player=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/Player.prefab"));
             Object.DestroyImmediate(player.GetComponent<RegionRespawn>());player.transform.position=Vector3.up*.2f;
             var camera=new GameObject("Camera").AddComponent<UnityEngine.Camera>();camera.tag="MainCamera";camera.transform.position=new Vector3(5,4,-8);camera.transform.LookAt(Vector3.up);
             var sun=new GameObject("Sun").AddComponent<Light>();sun.type=LightType.Directional;sun.transform.rotation=Quaternion.Euler(45,30,0);
@@ -52,14 +52,14 @@ namespace Mismo.Gameplay.Player.Editor
             Application.runInBackground=true;
             var player=Object.FindFirstObjectByType<PlayerController>();player.enabled=false;
             var inventory=player.gameObject.AddComponent<PlayerInventory>();var path=Path.Combine(Output,Guid.NewGuid().ToString("N")+".mismo");
-            inventory.Initialize(Resources.Load<ItemCatalog>("ItemCatalog"),new ProtectedProfileRepository(path));
+            inventory.Initialize(Mismo.Core.ProjectAssets.Load<ItemCatalog>("ItemCatalog"),new ProtectedProfileRepository(path));
             var gathering=player.gameObject.AddComponent<GatheringPlayer>();var health=player.GetComponent<Health>();
-            var settings=Resources.Load<GatheringSettings>("GatheringSettings");
+            var settings=Mismo.Core.ProjectAssets.Load<GatheringSettings>("GatheringSettings");
             Check(inventory.IsReady&&settings.recipes.Length==2,"Surface assets and recipes load");
             if(settings.minerals!=null&&settings.minerals.Length>0)
             {
                 Check(settings.minerals.Length==30&&settings.Mineral(int.MinValue)!=null,"Mineral variants load and accept negative world seeds");
-                var rose=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/World/Nature/flower_rose.prefab");
+                var rose=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/World/Nature/flower_rose.prefab");
                 Check(settings.herb.availablePrefab==rose&&inventory.Material(MaterialCatalog.Herb).pickupPrefab==rose,"Harvestable rose and inventory ingredient share the existing model");
             }
             var herb=Object.Instantiate(settings.herb);herb.harvestSeconds=.1f;herb.regenerationSeconds=30;
@@ -117,7 +117,7 @@ namespace Mismo.Gameplay.Player.Editor
             Check(gathering.BlocksGameplay,"Workbench opens through G and blocks gameplay controls");
             for(int i=0;i<10;i++)yield return null;ScreenCapture.CaptureScreenshot(Path.Combine(Output,"crafting.png"));for(int i=0;i<10;i++)yield return null;
             InputSystem.RemoveDevice(keyboard);
-            var worldCatalog=Resources.Load<WorldContentCatalog>("WorldContentCatalog");
+            var worldCatalog=Mismo.Core.ProjectAssets.Load<WorldContentCatalog>("WorldContentCatalog");
             foreach(var kind in new[]{WorldAssetKind.Tree,WorldAssetKind.Rock,WorldAssetKind.Deadwood,WorldAssetKind.Bush,WorldAssetKind.Flower,WorldAssetKind.Grass})
             {
                 var entry=Array.Find(worldCatalog.assets,e=>e.kind==kind&&e.prefab!=null);

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using Mismo.Gameplay.Enemies;
 using Mismo.Gameplay.Player.World;
@@ -42,8 +43,10 @@ namespace Mismo.Gameplay.Player.Editor
             var setup=EditorSceneManager.GetSceneManagerSetup();
             string name="VoxelRegion_"+settings.seed;
             string scenePath=AssetDatabase.GenerateUniqueAssetPath("Assets/Scenes/"+name+".unity");
-            Folder(DataRoot+"/Generated");
-            string folder=AssetDatabase.GenerateUniqueAssetPath(DataRoot+"/Generated/"+name);
+            Folder("Assets/Art/Meshes/World/Generated");
+            string folder=AssetDatabase.GenerateUniqueAssetPath("Assets/Art/Meshes/World/Generated/"+name);
+            string dataFolder=DataRoot+"/Generated/"+Path.GetFileName(folder);Folder(dataFolder);
+            string materialFolder="Assets/Art/Materials/World/Generated/"+Path.GetFileName(folder);Folder(materialFolder);
             Folder(folder);
             // Opening a scene unloads unreferenced editor assets; retain a transient copy.
             settings=Object.Instantiate(settings);
@@ -56,9 +59,9 @@ namespace Mismo.Gameplay.Player.Editor
                 foreach(var root in scene.GetRootGameObjects())
                     if(root.GetComponentInChildren<PlayerController>()==null && root.GetComponent<UnityEngine.Camera>()==null && root.GetComponent<Light>()==null)
                         Object.DestroyImmediate(root);
-                var snapshot=Object.Instantiate(settings);snapshot.hideFlags=HideFlags.None;snapshot.name="Generation Settings";AssetDatabase.CreateAsset(snapshot,folder+"/Settings.asset");
+                var snapshot=Object.Instantiate(settings);snapshot.hideFlags=HideFlags.None;snapshot.name="Generation Settings";AssetDatabase.CreateAsset(snapshot,dataFolder+"/Settings.asset");
                 var material=new Material(Shader.Find("Mismo/Voxel Landscape") ?? throw new InvalidOperationException("Falta shader Voxel Landscape"));
-                AssetDatabase.CreateAsset(material,folder+"/Landscape.mat");
+                AssetDatabase.CreateAsset(material,materialFolder+"/Landscape.mat");
                 var rootRegion=new GameObject("Voxel Region · seed "+settings.seed+" · v"+VoxelRegionSettings.GeneratorVersion);
                 Undo.RegisterCreatedObjectUndo(rootRegion,"Generate Voxel Region");
                 Transform generated=Group("GeneratedGeometry",rootRegion.transform);
@@ -304,7 +307,7 @@ namespace Mismo.Gameplay.Player.Editor
         }
         private static GameObject Spawn(string name,Vector3 position,Transform parent)
         {
-            var prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/"+name+".prefab");
+            var prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Enemies/"+name+".prefab");
             if(prefab==null)throw new InvalidOperationException("Falta "+name);
             var go=(GameObject)PrefabUtility.InstantiatePrefab(prefab,parent);go.transform.position=position;return go;
         }

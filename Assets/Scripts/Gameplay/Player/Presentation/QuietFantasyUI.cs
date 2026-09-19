@@ -55,8 +55,8 @@ namespace Mismo.Gameplay.Player.Presentation
         }
         static readonly Dictionary<string,Texture2D> icons=new Dictionary<string,Texture2D>();
         static Equipment.Inventory.InventoryUIIcons sharedIcons;
-        public static Font Body=>body!=null?body:body=Resources.Load<Font>("Fonts/Cagliostro-Regular");
-        public static Font Heading=>heading!=null?heading:heading=Resources.Load<Font>("Fonts/Cagliostro-Regular");
+        public static Font Body=>body!=null?body:body=Mismo.Core.ProjectAssets.Load<Font>("Fonts/Cagliostro-Regular");
+        public static Font Heading=>heading!=null?heading:heading=Mismo.Core.ProjectAssets.Load<Font>("Fonts/Cagliostro-Regular");
         public static void Text(Rect rect,string value,int size=20,Color? color=null,bool title=false,TextAnchor alignment=TextAnchor.UpperLeft)
         {
             if(words==null)words=new GUIStyle(GUI.skin.label){padding=new RectOffset(),wordWrap=true};
@@ -87,11 +87,11 @@ namespace Mismo.Gameplay.Player.Presentation
             if(string.IsNullOrEmpty(name))return null;
             if(!icons.TryGetValue(name,out var icon)||icon==null)
             {
-                if(sharedIcons==null)sharedIcons=Resources.Load<Equipment.Inventory.InventoryUIIcons>("InventoryUIIcons");
+                if(sharedIcons==null)sharedIcons=Mismo.Core.ProjectAssets.Load<Equipment.Inventory.InventoryUIIcons>("InventoryUIIcons");
                 if(sharedIcons!=null&&sharedIcons.abilityIcons!=null)
                     foreach(var texture in sharedIcons.abilityIcons)
                         if(texture!=null&&texture.name==name){icon=texture;break;}
-                if(icon==null)icon=Resources.Load<Texture2D>("UI/QuietFantasy/Icons/"+name);
+                if(icon==null)icon=Mismo.Core.ProjectAssets.Load<Texture2D>("UI/QuietFantasy/Icons/"+name);
                 if(icon!=null)icons[name]=icon;
             }
             return icon;

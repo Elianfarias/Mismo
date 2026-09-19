@@ -9,13 +9,13 @@ namespace Mismo.Gameplay.Player.Editor
 {
     /// <summary>
     /// Taller de voxelización aislado. No modifica MovementPrototype ni prefabs existentes:
-    /// crea sus resultados en Assets/Data/Voxels, Assets/Prefabs/Voxel y VoxelWorkshop.unity.
+    /// crea sus resultados en Assets/Data/Voxels, Assets/Art/Prefabs/Voxel y VoxelWorkshop.unity.
     /// </summary>
     public sealed class VoxelWorkshopWindow : EditorWindow
     {
         private const string WorkshopScenePath = "Assets/Scenes/VoxelWorkshop.unity";
         private const string VoxelDataFolder = "Assets/Data/Voxels";
-        private const string VoxelPrefabFolder = "Assets/Prefabs/Voxel";
+        private const string VoxelPrefabFolder = "Assets/Art/Prefabs/Voxel";
         private const string MaterialFolder = "Assets/Art/Materials";
 
         private GameObject sourceModel;
@@ -283,7 +283,7 @@ namespace Mismo.Gameplay.Player.Editor
         {
             EnsureFolder("Assets/Data");
             EnsureFolder(VoxelDataFolder);
-            EnsureFolder("Assets/Prefabs");
+            EnsureFolder("Assets/Art/Prefabs");
             EnsureFolder(VoxelPrefabFolder);
             EnsureFolder("Assets/Art");
             EnsureFolder(MaterialFolder);

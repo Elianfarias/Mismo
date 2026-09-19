@@ -14,20 +14,20 @@ namespace Mismo.Gameplay.Player.Editor
         [MenuItem("Mismo/Languages/Import Spanish and English tables")]
         public static void Import()
         {
-            const string folder="Assets/Resources/Localization";
+            const string folder="Assets/Data/Localization";
             var data=JsonUtility.FromJson<GameLanguage.Catalog>(File.ReadAllText(folder+"/Translations.json"));
             var seen=new System.Collections.Generic.HashSet<string>();
             foreach(var row in data.entries)if(string.IsNullOrWhiteSpace(row.key)||!seen.Add(row.key)||string.IsNullOrWhiteSpace(row.es)||string.IsNullOrWhiteSpace(row.en))throw new System.InvalidOperationException("Invalid translation: "+row.key);
-            Directory.CreateDirectory("Assets/Localization");AssetDatabase.Refresh();
+            Directory.CreateDirectory("Assets/Data/Localization");AssetDatabase.Refresh();
             if(LocalizationEditorSettings.ActiveLocalizationSettings==null)
             {
                 var settings=ScriptableObject.CreateInstance<LocalizationSettings>();
-                AssetDatabase.CreateAsset(settings,"Assets/Localization/LocalizationSettings.asset");
+                AssetDatabase.CreateAsset(settings,"Assets/Data/Localization/LocalizationSettings.asset");
                 LocalizationEditorSettings.ActiveLocalizationSettings=settings;
             }
             foreach(string code in new[]{"es","en"})if(LocalizationEditorSettings.GetLocale(code)==null)
             {
-                var locale=Locale.CreateLocale(code);AssetDatabase.CreateAsset(locale,"Assets/Localization/"+code+".asset");LocalizationEditorSettings.AddLocale(locale);
+                var locale=Locale.CreateLocale(code);AssetDatabase.CreateAsset(locale,"Assets/Data/Localization/"+code+".asset");LocalizationEditorSettings.AddLocale(locale);
             }
             var collection=LocalizationEditorSettings.GetStringTableCollection("Game")??LocalizationEditorSettings.CreateStringTableCollection("Game",folder);
             foreach(string code in new[]{"es","en"})

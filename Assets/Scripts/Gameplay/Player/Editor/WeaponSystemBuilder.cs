@@ -14,7 +14,8 @@ namespace Mismo.Gameplay.Player.Editor
         public static void Apply()
         {
             System.IO.Directory.CreateDirectory(Folder);
-            System.IO.Directory.CreateDirectory("Assets/Resources");
+            System.IO.Directory.CreateDirectory("Assets/Art/Prefabs/Weapons");
+            System.IO.Directory.CreateDirectory("Assets/Art/Materials/Weapons");
             AssetDatabase.Refresh();
             var arrow = Visual("arrow_B", .85f, true);
             var bowVisual = Visual("bow_B_withString", 1.15f, false);
@@ -46,8 +47,8 @@ namespace Mismo.Gameplay.Player.Editor
             var bow = Asset<WeaponDefinition>("Bow"); bow.Configure("bow.basic", "Arco", .45f); bow.isBow = true;
             bow.abilities = new[] { shot, power, retreat, rain }; bow.visualPrefab = bowVisual;
             bow.handRotation = Vector3.zero; bow.handOffset = new Vector3(0, 0, -.10612866f); bow.backRotation = new Vector3(0, 0, -25);
-            var set = AssetDatabase.LoadAssetAtPath<WeaponSetDefinition>("Assets/Resources/StartingWeapons.asset");
-            if (set == null) { set = ScriptableObject.CreateInstance<WeaponSetDefinition>(); AssetDatabase.CreateAsset(set, "Assets/Resources/StartingWeapons.asset"); }
+            var set = AssetDatabase.LoadAssetAtPath<WeaponSetDefinition>("Assets/Data/Weapons/StartingWeapons.asset");
+            if (set == null) { set = ScriptableObject.CreateInstance<WeaponSetDefinition>(); AssetDatabase.CreateAsset(set, "Assets/Data/Weapons/StartingWeapons.asset"); }
             set.primary = sword; set.secondary = bow;
             foreach (var asset in new Object[] { basic, lunge, parry, spin, shot, power, retreat, rain, sword, bow, set }) EditorUtility.SetDirty(asset);
             AssetDatabase.SaveAssets();
@@ -82,16 +83,16 @@ namespace Mismo.Gameplay.Player.Editor
                 model.transform.localRotation = Quaternion.FromToRotation(axis, arrow ? Vector3.forward : Vector3.up) * model.transform.localRotation;
                 bounds = renderers[0].bounds; foreach (var renderer in renderers) bounds.Encapsulate(renderer.bounds);
                 model.transform.position -= bounds.center;
-                var mat = AssetDatabase.LoadAssetAtPath<Material>(Folder + "/Weapons.mat");
+                var mat = AssetDatabase.LoadAssetAtPath<Material>("Assets/Art/Materials/Weapons/Weapons.mat");
                 if (mat == null)
                 {
                     mat = new Material(Shader.Find("Universal Render Pipeline/Lit") ?? Shader.Find("Standard"));
-                    var texture = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Art/FBX/Weapons/Textures/weapons_bits_texture.png");
+                    var texture = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Art/Textures/Weapons/weapons_bits_texture.png");
                     mat.SetTexture(mat.HasProperty("_BaseMap") ? "_BaseMap" : "_MainTex", texture);
-                    AssetDatabase.CreateAsset(mat, Folder + "/Weapons.mat");
+                    AssetDatabase.CreateAsset(mat, "Assets/Art/Materials/Weapons/Weapons.mat");
                 }
                 foreach (var renderer in renderers) renderer.sharedMaterials = Enumerable.Repeat(mat, renderer.sharedMaterials.Length).ToArray();
-                return PrefabUtility.SaveAsPrefabAsset(root, Folder + "/" + modelName + ".prefab");
+                return PrefabUtility.SaveAsPrefabAsset(root, "Assets/Art/Prefabs/Weapons/" + modelName + ".prefab");
             }
             finally { Object.DestroyImmediate(root); }
         }

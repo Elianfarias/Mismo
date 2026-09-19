@@ -1,6 +1,9 @@
 {
-    "name": "Mismo.Gameplay.Enemies",
-    "rootNamespace": "Mismo.Gameplay.Enemies",
-    "references": ["Mismo.Gameplay.Player"],
-    "autoReferenced": true
+  "name": "Mismo.Gameplay.Enemies",
+  "rootNamespace": "Mismo.Gameplay.Enemies",
+  "references": [
+    "Mismo.Gameplay.Player",
+    "Mismo.Core"
+  ],
+  "autoReferenced": true
 }

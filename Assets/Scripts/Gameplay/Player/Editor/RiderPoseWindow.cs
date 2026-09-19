@@ -10,7 +10,7 @@ namespace Mismo.Gameplay.Player.Editor
         CreatureSpecies species;RiderPose pose;GameObject playerPrefab,rider,mount;WeaponPoseStage stage;UnityEditor.Editor inspector;Animator animator;Vector2 scroll;int boneIndex;
         [MenuItem("Mismo/Criaturas/Taller de poses de montura")]
         public static void Open()=>GetWindow<RiderPoseWindow>("Poses de montura");
-        void OnEnable(){playerPrefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/Player.prefab");SceneView.duringSceneGui+=HandlesGUI;}
+        void OnEnable(){playerPrefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/Player.prefab");SceneView.duringSceneGui+=HandlesGUI;}
         void OnDisable(){SceneView.duringSceneGui-=HandlesGUI;Close();}
         void Close(){if(stage!=null&&StageUtility.GetCurrentStage()==stage)StageUtility.GoToMainStage();if(inspector!=null)DestroyImmediate(inspector);stage=null;mount=rider=null;}
         void OnGUI()

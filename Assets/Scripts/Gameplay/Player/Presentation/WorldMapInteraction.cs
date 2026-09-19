@@ -23,7 +23,7 @@ namespace Mismo.Gameplay.Player.Presentation
         public IReadOnlyList<MapPin> Pins => pins;
         void LoadPins()
         {
-            catalog=Resources.Load<MapMarkerCatalog>("MapMarkerCatalog");
+            catalog=Mismo.Core.ProjectAssets.Load<MapMarkerCatalog>("MapMarkerCatalog");
             if(catalog==null){catalog=ScriptableObject.CreateInstance<MapMarkerCatalog>();ownedCatalog=true;}
             pins.Clear();if(WorldSession.Current?.mapPins!=null)foreach(var pin in WorldSession.Current.mapPins)if(pin!=null)pins.Add(Clone(pin));
         }

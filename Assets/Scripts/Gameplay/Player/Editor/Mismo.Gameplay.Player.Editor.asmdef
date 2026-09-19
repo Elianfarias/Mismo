@@ -1,22 +1,23 @@
 {
-    "name": "Mismo.Gameplay.Player.Editor",
-    "rootNamespace": "Mismo.Gameplay.Player.Editor",
-    "references": [
-        "Unity.Localization",
-        "Unity.Localization.Editor",
-        "Mismo.Gameplay.Player",
-        "Mismo.Gameplay.Enemies",
-        "Unity.InputSystem"
-    ],
-    "includePlatforms": [
-        "Editor"
-    ],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "Mismo.Gameplay.Player.Editor",
+  "rootNamespace": "Mismo.Gameplay.Player.Editor",
+  "references": [
+    "Unity.Localization",
+    "Unity.Localization.Editor",
+    "Mismo.Gameplay.Player",
+    "Mismo.Gameplay.Enemies",
+    "Unity.InputSystem",
+    "Mismo.Core"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
 }

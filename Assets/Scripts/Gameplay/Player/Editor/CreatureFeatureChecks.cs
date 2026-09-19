@@ -19,7 +19,7 @@ namespace Mismo.Gameplay.Player.Editor
             if(!Directory.GetCurrentDirectory().Replace("\\","/").Contains("/.validation/"))throw new InvalidOperationException("Use an isolated validation project.");
             EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);
             var floor=GameObject.CreatePrimitive(PrimitiveType.Cube);floor.name="Ground";floor.transform.position=new Vector3(0,-.5f,0);floor.transform.localScale=new Vector3(60,1,60);
-            var player=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/Player.prefab"));Object.DestroyImmediate(player.GetComponent<RegionRespawn>());player.transform.position=Vector3.up*.1f;
+            var player=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/Player.prefab"));Object.DestroyImmediate(player.GetComponent<RegionRespawn>());player.transform.position=Vector3.up*.1f;
             var camera=new GameObject("Camera").AddComponent<UnityEngine.Camera>();camera.tag="MainCamera";camera.transform.position=new Vector3(0,2,-7);camera.transform.LookAt(new Vector3(0,1,4));
             var sun=new GameObject("Sun").AddComponent<Light>();sun.type=LightType.Directional;sun.transform.rotation=Quaternion.Euler(45,30,0);
             EditorWindow.GetWindow(typeof(EditorWindow).Assembly.GetType("UnityEditor.GameView")).Focus();
@@ -33,8 +33,8 @@ namespace Mismo.Gameplay.Player.Editor
         static IEnumerator Run()
         {
             var player=Object.FindFirstObjectByType<PlayerController>();player.enabled=false;
-            var inventory=player.gameObject.AddComponent<PlayerInventory>();inventory.Initialize(Resources.Load<ItemCatalog>("ItemCatalog"),new ProtectedProfileRepository(Path.GetFullPath("../../.validation/creature-"+Guid.NewGuid().ToString("N")+".mismo")));
-            var book=Resources.Load<BestiaryBook>("BestiaryBook");var boar=CreatureSpecies.Find("boar");var spider=CreatureSpecies.Find("spider");
+            var inventory=player.gameObject.AddComponent<PlayerInventory>();inventory.Initialize(Mismo.Core.ProjectAssets.Load<ItemCatalog>("ItemCatalog"),new ProtectedProfileRepository(Path.GetFullPath("../../.validation/creature-"+Guid.NewGuid().ToString("N")+".mismo")));
+            var book=Mismo.Core.ProjectAssets.Load<BestiaryBook>("BestiaryBook");var boar=CreatureSpecies.Find("boar");var spider=CreatureSpecies.Find("spider");
             Check(book!=null&&book.pages.Length>=4&&boar!=null,"Book and species assets load");
             Check(Array.TrueForAll(book.pages,s=>!inventory.HasSeenSpecies(s.id)),"New bestiary is empty");
             inventory.TryGrantVictory(0,null,null,"test:unseen",null,null,"golem");
@@ -70,7 +70,7 @@ namespace Mismo.Gameplay.Player.Editor
             Directory.CreateDirectory("../../output/creatures");for(int i=0;i<10;i++)yield return null;ScreenCapture.CaptureScreenshot("../../output/creatures/mount.png");for(int i=0;i<10;i++)yield return null;
             typeof(CompanionPlayer).GetMethod("Dismount",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(companion,null);yield return null;
             Check(!companion.Riding&&player.GetComponent<CharacterController>().enabled,"Dismount finds a clear grounded position");player.enabled=false;
-            var mineral=Resources.Load<GatheringSettings>("GatheringSettings").minerals[0];var resource=Object.Instantiate(mineral.availablePrefab,new Vector3(3,0,3),Quaternion.identity);
+            var mineral=Mismo.Core.ProjectAssets.Load<GatheringSettings>("GatheringSettings").minerals[0];var resource=Object.Instantiate(mineral.availablePrefab,new Vector3(3,0,3),Quaternion.identity);
             Check(resource.GetComponent<ResourceImpactPalette>()?.colors.Length>0,"Mineral has baked source colors");ResourceChips.Emit(resource,player.transform.position);yield return null;
             Check(Object.FindObjectsByType<ResourceChips>(FindObjectsSortMode.None).Length>0,"Resource strike emits voxel fragments");
             camera.transform.position=resource.transform.position+new Vector3(2,1.5f,-2);camera.transform.LookAt(resource.transform.position+Vector3.up*.7f);ResourceChips.Emit(resource,camera.transform.position,14);

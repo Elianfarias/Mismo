@@ -28,7 +28,7 @@ namespace Mismo.Gameplay.Enemies
         void Awake()
         {
             health=GetComponent<Health>();receiver=GetComponent<DamageReceiver>();
-            if(materialLoot==null&&GetComponent<GoblinController>()!=null)materialLoot=Resources.Load<Mismo.Gameplay.Player.World.GatheringSettings>("GatheringSettings")?.monsterLoot;
+            if(materialLoot==null&&GetComponent<GoblinController>()!=null)materialLoot=Mismo.Core.ProjectAssets.Load<Mismo.Gameplay.Player.World.GatheringSettings>("GatheringSettings")?.monsterLoot;
         }
         void OnEnable(){if(receiver!=null)receiver.Resolved+=OnResolved;}
         void OnDisable(){if(receiver!=null)receiver.Resolved-=OnResolved;}
@@ -52,7 +52,7 @@ namespace Mismo.Gameplay.Enemies
             }
             if(!health.IsDead)return;
             Observe();
-            var rules=player.Rules;bool boss=GetComponent<BossController>()!=null||GetComponent<GoblinController>()?.Settings?.isBoss==true;
+            var rules=player.Rules;bool boss=GetComponent<BossController>()!=null||GetComponent<DragonBossController>()!=null||GetComponent<GoblinController>()?.Settings?.isBoss==true;
             experience=boss?rules.bossExperience:rules.enemyExperience;
             int masteryPool=boss?rules.bossMasteryExperience:rules.enemyMasteryExperience;
             float total=0;foreach(float contribution in contributions.Values)total+=contribution;

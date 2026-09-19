@@ -1,0 +1,1 @@
+Moved 1353 assets; verified 2261 manifest entries; catalog registered in Preloaded Assets.

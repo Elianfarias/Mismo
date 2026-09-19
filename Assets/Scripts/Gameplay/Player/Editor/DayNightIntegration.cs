@@ -11,7 +11,7 @@ namespace Mismo.Gameplay.Player.Editor
 {
     public static class DayNightIntegration
     {
-        const string Source="Assets/Art/Texture/Skybox/Textures/";
+        const string Source="Assets/Art/Textures/Skybox/";
         static Cubemap Sky(string name)
         {
             string path=Source+name+".exr";var importer=(TextureImporter)AssetImporter.GetAtPath(path);
@@ -25,7 +25,7 @@ namespace Mismo.Gameplay.Player.Editor
         public static void Apply()
         {
             var night=Sky("Deep Midnight");var dawn=Sky("Cotton Candy Morning");var warm=Sky("Warm Sunrise Glow");var day=Sky("Cloudy Bright Day");var noon=Sky("Tropical Noon");
-            const string path="Assets/Resources/DayNightSettings.asset";var settings=AssetDatabase.LoadAssetAtPath<DayNightSettings>(path);
+            const string path="Assets/Data/World/DayNightSettings.asset";var settings=AssetDatabase.LoadAssetAtPath<DayNightSettings>(path);
             if(settings==null)
             {
                 settings=ScriptableObject.CreateInstance<DayNightSettings>();
@@ -55,18 +55,18 @@ namespace Mismo.Gameplay.Player.Editor
             try
             {
                 EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);Apply();Directory.CreateDirectory("Docs/Validation/DayNight");
-                var settings=Object.Instantiate(Resources.Load<DayNightSettings>("DayNightSettings"));
+                var settings=Object.Instantiate(Mismo.Core.ProjectAssets.Load<DayNightSettings>("DayNightSettings"));
                 if(settings.phases.Select(p=>p.sky).Distinct().Count()!=5)throw new Exception("Missing supplied panorama");
                 for(float h=0;h<24;h+=.25f){settings.Sample(h,out var a,out var b,out float t);if(a==null||b==null||t<0||t>1)throw new Exception("Invalid phase interpolation at "+h);}
                 var camera=new GameObject("Camera").AddComponent<UnityEngine.Camera>();camera.tag="MainCamera";camera.transform.position=new Vector3(40,15,-40);camera.transform.LookAt(new Vector3(0,5,0));camera.farClipPlane=500;
                 var ground=GameObject.CreatePrimitive(PrimitiveType.Plane);ground.transform.localScale=Vector3.one*30;var mat=new Material(Shader.Find("Standard")){color=new Color(.3f,.45f,.2f)};ground.GetComponent<Renderer>().sharedMaterial=mat;
-                var village=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/World/Villages/MedievalVillage.prefab");if(village!=null)Object.Instantiate(village);
+                var village=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/World/Villages/MedievalVillage.prefab");if(village!=null)Object.Instantiate(village);
                 var cycle=new GameObject("Day-night cycle").AddComponent<DayNightCycle>();cycle.Initialize(settings);
                 cycle.SetHour(23);cycle.Advance(settings.cycleMinutes*60/24*2);if(Mathf.Abs(cycle.hour-1)>.001f)throw new Exception("Clock midnight wrap");
                 settings.running=false;cycle.Advance(60);if(Mathf.Abs(cycle.hour-1)>.001f)throw new Exception("Stopped clock advances");
                 var record=new WorldSaveData{id=Guid.NewGuid().ToString("N"),seed=1,settingsJson="{}"};if(!record.IsValid())throw new Exception("Old saves incompatible");
                 record.hasTimeOfDay=true;record.timeOfDay=18.5f;var restored=JsonUtility.FromJson<WorldSaveData>(JsonUtility.ToJson(record));if(!restored.IsValid()||restored.timeOfDay!=18.5f)throw new Exception("Hour persistence");record.timeOfDay=24;if(record.IsValid())throw new Exception("Invalid clock accepted");
-                var world=Resources.Load<WorldContentCatalog>("WorldContentCatalog");
+                var world=Mismo.Core.ProjectAssets.Load<WorldContentCatalog>("WorldContentCatalog");
                 var rt=new RenderTexture(1280,800,24);camera.targetTexture=rt;
                 foreach(float hour in new[]{6f,12f,18f,0f})
                 {

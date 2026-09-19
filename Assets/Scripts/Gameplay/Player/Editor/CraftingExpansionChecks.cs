@@ -24,7 +24,7 @@ namespace Mismo.Gameplay.Player.Editor
             CraftingExpansionAssets.Create();
             EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);
             var floor=GameObject.CreatePrimitive(PrimitiveType.Cube);floor.transform.position=new Vector3(0,-.5f,0);floor.transform.localScale=new Vector3(80,1,80);
-            var player=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/Player.prefab"));Object.DestroyImmediate(player.GetComponent<RegionRespawn>());
+            var player=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/Player.prefab"));Object.DestroyImmediate(player.GetComponent<RegionRespawn>());
             var camera=new GameObject("Camera").AddComponent<UnityEngine.Camera>();camera.tag="MainCamera";camera.transform.position=new Vector3(4,3,-7);camera.transform.LookAt(Vector3.up);
             new GameObject("Sun").AddComponent<Light>().type=LightType.Directional;
             EditorWindow.GetWindow(typeof(EditorWindow).Assembly.GetType("UnityEditor.GameView")).Focus();
@@ -48,9 +48,9 @@ namespace Mismo.Gameplay.Player.Editor
         static IEnumerator Run()
         {
             var player=Object.FindFirstObjectByType<PlayerController>();player.enabled=false;
-            var storage=new Memory();var inventory=player.GetComponent<PlayerInventory>()??player.gameObject.AddComponent<PlayerInventory>();inventory.Initialize(Resources.Load<ItemCatalog>("ItemCatalog"),storage);
+            var storage=new Memory();var inventory=player.GetComponent<PlayerInventory>()??player.gameObject.AddComponent<PlayerInventory>();inventory.Initialize(Mismo.Core.ProjectAssets.Load<ItemCatalog>("ItemCatalog"),storage);
             var health=player.GetComponent<Health>();var loadout=player.GetComponent<EquipmentLoadout>();
-            var settings=Resources.Load<GatheringSettings>("GatheringSettings");
+            var settings=Mismo.Core.ProjectAssets.Load<GatheringSettings>("GatheringSettings");
             Check(settings.recipes.Length==8,"Eight recipes load");
             Check(settings.recipes.Count(r=>r.Category==RecipeCategory.Preparation)==3&&settings.recipes.Count(r=>r.Category==RecipeCategory.Upgrades)==3&&settings.recipes.Count(r=>r.Category==RecipeCategory.Equipment)==2,"Three complete recipe categories");
             Check(settings.minerals.Any(n=>n.rewards.entries[0].material.id=="MAT-06")&&settings.minerals.Any(n=>n.rewards.entries[0].material.id=="MAT-07"),"Minerals yield iron and arcane crystal");

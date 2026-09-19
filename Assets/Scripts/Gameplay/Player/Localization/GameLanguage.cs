@@ -22,7 +22,7 @@ namespace Mismo.Gameplay.Player.Localization
                 if(languages==null)
                 {
                     var codes=new List<string>();
-                    foreach(var t in Resources.LoadAll<StringTable>("Localization"))if(!codes.Contains(t.LocaleIdentifier.Code))codes.Add(t.LocaleIdentifier.Code);
+                    foreach(var t in Mismo.Core.ProjectAssets.LoadAll<StringTable>("Localization"))if(!codes.Contains(t.LocaleIdentifier.Code))codes.Add(t.LocaleIdentifier.Code);
                     if(codes.Count==0)codes.Add("es");codes.Sort(StringComparer.Ordinal);languages=codes.ToArray();
                 }
                 return (string[])languages.Clone();
@@ -45,10 +45,10 @@ namespace Mismo.Gameplay.Player.Localization
         }
         public static string Get(string key,string fallback)
         {
-            if(table==null)table=Resources.Load<StringTable>("Localization/Game_"+Code);
+            if(table==null)table=Mismo.Core.ProjectAssets.Load<StringTable>("Localization/Game_"+Code);
             var value=table?.GetEntry(key)?.LocalizedValue;
             if(!string.IsNullOrEmpty(value))return value;
-            if(spanish==null)spanish=Resources.Load<StringTable>("Localization/Game_es");
+            if(spanish==null)spanish=Mismo.Core.ProjectAssets.Load<StringTable>("Localization/Game_es");
             var backup=spanish?.GetEntry(key)?.LocalizedValue;
             return string.IsNullOrEmpty(backup)?fallback??"":backup;
         }
@@ -58,7 +58,7 @@ namespace Mismo.Gameplay.Player.Localization
             if(sourceKeys==null)
             {
                 sourceKeys=new Dictionary<string,string>(StringComparer.Ordinal);
-                var json=Resources.Load<TextAsset>("Localization/Translations");
+                var json=Mismo.Core.ProjectAssets.Load<TextAsset>("Localization/Translations");
                 if(json!=null)foreach(var row in JsonUtility.FromJson<Catalog>(json.text).entries)sourceKeys[row.es]=row.key;
             }
             return sourceKeys.TryGetValue(source,out var key)?Get(key,source):source;

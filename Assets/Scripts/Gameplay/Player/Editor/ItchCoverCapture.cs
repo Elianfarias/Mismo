@@ -36,12 +36,12 @@ namespace Mismo.Gameplay.Player.Editor
                 var fill=new GameObject("Rim light").AddComponent<Light>();fill.type=LightType.Directional;fill.intensity=.65f;fill.color=new Color(.58f,.8f,1);fill.transform.rotation=Quaternion.Euler(25,-30,0);
                 Box("Earth",new Vector3(0,-.5f,0),new Vector3(10,1,8),new Color(.18f,.22f,.13f));
                 Box("Grass terrace",new Vector3(-.5f,-.13f,-.3f),new Vector3(9,.25f,7),new Color(.29f,.4f,.17f));
-                Model("Assets/Prefabs/Enemies/Goblin.prefab",new Vector3(-1.25f,-.4f,0),4.3f,18);
-                Model("Assets/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab",new Vector3(1.7f,0,1),1.9f,-12);
-                Model("Assets/Prefabs/World/Nature/Tree_0.prefab",new Vector3(-4.2f,0,-3.5f),5.5f,0);
-                Model("Assets/Prefabs/World/Nature/Tree_2.prefab",new Vector3(4.3f,0,-3.5f),5.5f,20);
-                Model("Assets/Prefabs/World/Nature/rock_0.prefab",new Vector3(-3,0,2),.7f,20);
-                Model("Assets/Prefabs/World/Nature/grass_1.prefab",new Vector3(2.9f,0,2.6f),.5f,30);
+                Model("Assets/Art/Prefabs/Enemies/Goblin.prefab",new Vector3(-1.25f,-.4f,0),4.3f,18);
+                Model("Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab",new Vector3(1.7f,0,1),1.9f,-12);
+                Model("Assets/Art/Prefabs/World/Nature/Tree_0.prefab",new Vector3(-4.2f,0,-3.5f),5.5f,0);
+                Model("Assets/Art/Prefabs/World/Nature/Tree_2.prefab",new Vector3(4.3f,0,-3.5f),5.5f,20);
+                Model("Assets/Art/Prefabs/World/Nature/rock_0.prefab",new Vector3(-3,0,2),.7f,20);
+                Model("Assets/Art/Prefabs/World/Nature/grass_1.prefab",new Vector3(2.9f,0,2.6f),.5f,30);
                 var camera=new GameObject("Cover camera").AddComponent<UnityEngine.Camera>();camera.transform.position=new Vector3(3,4.5f,13);camera.transform.LookAt(new Vector3(0,2.2f,0));camera.orthographic=true;camera.orthographicSize=3.6f;camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.055f,.115f,.105f);camera.farClipPlane=100;
                 var canvas=new GameObject("Typography").AddComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceCamera;canvas.worldCamera=camera;canvas.planeDistance=1;var scaler=canvas.gameObject.AddComponent<CanvasScaler>();scaler.uiScaleMode=CanvasScaler.ScaleMode.ScaleWithScreenSize;scaler.referenceResolution=new Vector2(1260,1000);scaler.matchWidthOrHeight=.5f;
                 Label(canvas.transform,"MISMO",218,new Vector2(3,-42),new Color(.03f,.07f,.065f));

@@ -10,10 +10,10 @@ namespace Mismo.Gameplay.Player.Editor
         public static void RunBatch()
         {
             EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
-            var material=AssetDatabase.LoadAssetAtPath<Material>("Assets/Art/fbx/Town/TownVoxelPalette.mat");
+            var material=AssetDatabase.LoadAssetAtPath<Material>("Assets/Art/Materials/Town/TownVoxelPalette.mat");
             if(material==null || material.mainTexture==null)throw new System.Exception("Town palette missing");
             int index=0;
-            foreach(string path in Directory.GetFiles("Assets/Art/fbx/Town","*.obj"))
+            foreach(string path in Directory.GetFiles("Assets/Art/Models/Town","*.obj"))
             {
                 var model=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(path));
                 var renderers=model.GetComponentsInChildren<MeshRenderer>();
