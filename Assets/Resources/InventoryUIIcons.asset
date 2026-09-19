@@ -94,12 +94,23 @@ MonoBehaviour:
   hudPaintedFrames: {fileID: 0}
   hudPaintedFill: {fileID: 0}
   hudVitalsPosition: {x: 16, y: 18}
-  hudHealthOffset: {x: 0, y: 0}
+  hudHealthOffset: {x: 0, y: -7.14}
   hudStaminaOffset: {x: 0, y: 15}
-  hudFocusOffset: {x: 0, y: 30}
+  hudFocusOffset: {x: 772.7, y: 725.4}
   hudVitalsWidth: 380
+  hudSkillsYOffset: 0
+  hudConsumablesYOffset: 0
+  hudSkillsAsColumn: 0
+  hudConsumablesAsColumn: 0
+  hudSkillsOffset: {x: 0, y: 0}
+  hudDashOffset: {x: 0, y: 0}
+  hudTabOffset: {x: 0, y: 0}
+  hudConsumablesOffset: {x: 0, y: 0}
+  hudShowActionSeparators: 1
+  hudVitalsOpacity: 1
+  hudTabOpacity: 1
   hudVitalsBackground: {fileID: 0}
-  hudBackgroundOpacity: 0
+  hudBackgroundOpacity: 1
   abilityIcons:
   - {fileID: 2800000, guid: c030e7e3c20fe624aadfea8120d6e9cf, type: 3}
   - {fileID: 2800000, guid: cdcf125569e9ffd4da8e7711870f697d, type: 3}

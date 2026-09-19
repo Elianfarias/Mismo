@@ -57,6 +57,30 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public Vector2 hudFocusOffset=new Vector2(0,30);
         [Min(1),Tooltip("Ancho compartido de las tres barras.")]
         public float hudVitalsWidth=380;
+        [Header("HUD action bars layout — live")]
+        [Tooltip("Desplazamiento vertical de las habilidades respecto a su posición inferior. Valores negativos las suben.")]
+        public float hudSkillsYOffset=0;
+        [Tooltip("Desplazamiento vertical de los consumibles respecto a su posición inferior. Valores negativos los suben.")]
+        public float hudConsumablesYOffset=0;
+        [Tooltip("Convierte las habilidades en una columna vertical.")]
+        public bool hudSkillsAsColumn;
+        [Tooltip("Convierte los consumibles en una columna vertical.")]
+        public bool hudConsumablesAsColumn;
+        [Tooltip("Movimiento independiente del bloque completo de habilidades.")]
+        public Vector2 hudSkillsOffset=Vector2.zero;
+        [Tooltip("Movimiento independiente del bloque de dash/especial.")]
+        public Vector2 hudDashOffset=Vector2.zero;
+        [Tooltip("Movimiento independiente del selector de arma Tab.")]
+        public Vector2 hudTabOffset=Vector2.zero;
+        [Tooltip("Movimiento independiente del bloque completo de consumibles.")]
+        public Vector2 hudConsumablesOffset=Vector2.zero;
+        [Tooltip("Muestra u oculta los separadores verticales entre habilidades, dash y consumibles.")]
+        public bool hudShowActionSeparators=true;
+        [Header("HUD opacity — live")]
+        [Tooltip("Opacidad del fondo/marco y del relleno de vida, stamina y focus. Los textos permanecen legibles.")]
+        [Range(0,1)] public float hudVitalsOpacity=1f;
+        [Tooltip("Opacidad del fondo y marco del selector de arma Tab. Sus iconos y texto permanecen sólidos.")]
+        [Range(0,1)] public float hudTabOpacity=1f;
         [System.NonSerialized] Texture2D defaultPaintedFrames,defaultPaintedFill;
         public Texture2D PaintedFrames => hudPaintedFrames!=null?hudPaintedFrames:defaultPaintedFrames!=null?defaultPaintedFrames:defaultPaintedFrames=Resources.Load<Texture2D>("UI/HUD/VitalsPaintedFrames");
         public Texture2D PaintedFill => hudPaintedFill!=null?hudPaintedFill:defaultPaintedFill!=null?defaultPaintedFill:defaultPaintedFill=Resources.Load<Texture2D>("UI/HUD/VitalsPaintedFill");

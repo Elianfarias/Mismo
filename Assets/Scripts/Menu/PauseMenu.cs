@@ -13,7 +13,7 @@ namespace Mismo.Menu
     [DefaultExecutionOrder(-10000)]
     public sealed class PauseMenu : MonoBehaviour
     {
-        bool opened,options,confirmExit,vsync;
+        bool opened,options,confirmExit,vsync,uiEditor;
         int tab,mode,resolution,quality,fps;
         InventoryUIIcons icons;
         readonly List<Vector2Int> resolutions=new List<Vector2Int>();
@@ -43,7 +43,7 @@ namespace Mismo.Menu
         {
             if(revertAt>0&&Time.unscaledTime>=revertAt)RevertDisplay();
             if(Keyboard.current?.escapeKey.wasPressedThisFrame!=true)return;
-            if(opened){if(revertAt>0)RevertDisplay();else if(confirmExit)confirmExit=false;else if(options)options=false;else Resume();return;}
+            if(opened){if(uiEditor)EndUIEditor();else if(revertAt>0)RevertDisplay();else if(confirmExit)confirmExit=false;else if(options)options=false;else Resume();return;}
             if(!InventoryPanel.AnyOpen&&!WorldMapPanel.BlocksGameplay)Open();
         }
         public void Open()
@@ -52,7 +52,9 @@ namespace Mismo.Menu
             GameplayPause.Pause();opened=true;options=false;confirmExit=false;ReadSettings();GameAudio.Play(GameSound.MenuOpen);
         }
         public void Resume()
-        {if(!opened)return;if(revertAt>0)RevertDisplay();opened=false;GameplayPause.Resume();PlayerPrefs.Save();GameAudio.Play(GameSound.MenuClose);}
+        {if(!opened)return;if(uiEditor)EndUIEditor();if(revertAt>0)RevertDisplay();opened=false;GameplayPause.Resume();PlayerPrefs.Save();GameAudio.Play(GameSound.MenuClose);}
+        void BeginUIEditor(){uiEditor=true;options=false;PlayerHUD.SetUIEditMode(true);GameAudio.Play(GameSound.MenuOpen);}
+        void EndUIEditor(){uiEditor=false;PlayerHUD.SetUIEditMode(false);options=true;PlayerPrefs.Save();GameAudio.Play(GameSound.MenuClose);}
         void OnDisable(){Resume();}
         void ReadSettings()
         {
@@ -83,6 +85,34 @@ namespace Mismo.Menu
             float scale=Mathf.Min(Screen.width/1280f,Screen.height/800f)*.9f;
             GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-1280*scale)/2,(Screen.height-800*scale)/2,0),Quaternion.identity,Vector3.one*scale);
             var panel=options?new Rect(155,80,970,640):new Rect(410,150,460,500);
+            if(uiEditor)
+            {
+                PlayerHUD.Fill(new Rect(320,20,640,290),icons!=null&&icons.useOliveTheme?new Color(.20f,.27f,.18f,.94f):new Color(.105f,.15f,.21f,.94f));
+                U.Border(new Rect(320,20,640,290),U.Rule);
+                Text(390,40,250,"Modificar HUD",24);
+                Text(390,70,320,"Arrastrá cada bloque para moverlo",16);
+                if(icons!=null)
+                {
+                    Text(390,102,180,"Fondo de slots",16);Text(820,102,90,Mathf.RoundToInt(icons.hudBackgroundOpacity*100)+" %",16);
+                    float background=GUI.HorizontalSlider(new Rect(570,111,240,16),icons.hudBackgroundOpacity,0,1);
+                    Text(390,135,180,"Barras",16);Text(820,135,90,Mathf.RoundToInt(icons.hudVitalsOpacity*100)+" %",16);
+                    float vitals=GUI.HorizontalSlider(new Rect(570,144,240,16),icons.hudVitalsOpacity,0,1);
+                    Text(390,168,180,"Tab",16);Text(820,168,90,Mathf.RoundToInt(icons.hudTabOpacity*100)+" %",16);
+                    float tab=GUI.HorizontalSlider(new Rect(570,177,240,16),icons.hudTabOpacity,0,1);
+                    if(!Mathf.Approximately(background,icons.hudBackgroundOpacity)){icons.hudBackgroundOpacity=background;PlayerPrefs.SetFloat("Mismo.HUD.BackgroundOpacity",background);}
+                    if(!Mathf.Approximately(vitals,icons.hudVitalsOpacity)){icons.hudVitalsOpacity=vitals;PlayerPrefs.SetFloat("Mismo.HUD.VitalsOpacity",vitals);}
+                    if(!Mathf.Approximately(tab,icons.hudTabOpacity)){icons.hudTabOpacity=tab;PlayerPrefs.SetFloat("Mismo.HUD.TabOpacity",tab);}
+                }
+                if(icons!=null)
+                {
+                    if(Button(new Rect(390,210,135,38),icons.hudSkillsAsColumn?"Skills: columna":"Skills: fila")){icons.hudSkillsAsColumn=!icons.hudSkillsAsColumn;PlayerPrefs.SetInt("Mismo.HUD.SkillsColumn",icons.hudSkillsAsColumn?1:0);}
+                    if(Button(new Rect(535,210,135,38),icons.hudConsumablesAsColumn?"Items: columna":"Items: fila")){icons.hudConsumablesAsColumn=!icons.hudConsumablesAsColumn;PlayerPrefs.SetInt("Mismo.HUD.ConsumablesColumn",icons.hudConsumablesAsColumn?1:0);}
+                }
+                if(Button(new Rect(680,210,130,38),"Guardar"))EndUIEditor();
+                if(Button(new Rect(820,210,120,38),"Restablecer")){if(icons!=null){icons.hudBackgroundOpacity=.65f;icons.hudVitalsOpacity=1;icons.hudTabOpacity=1;PlayerPrefs.SetFloat("Mismo.HUD.BackgroundOpacity",.65f);PlayerPrefs.SetFloat("Mismo.HUD.VitalsOpacity",1);PlayerPrefs.SetFloat("Mismo.HUD.TabOpacity",1);}PlayerPrefs.Save();}
+                if(icons!=null&&Button(new Rect(390,255,220,30),icons.hudShowActionSeparators?"Pipes: visibles":"Pipes: ocultos")){icons.hudShowActionSeparators=!icons.hudShowActionSeparators;PlayerPrefs.SetInt("Mismo.HUD.ActionSeparators",icons.hudShowActionSeparators?1:0);}
+                GUI.matrix=matrix;GUI.depth=depth;return;
+            }
             PlayerHUD.Fill(panel,icons!=null&&icons.useOliveTheme?new Color(.20f,.27f,.18f,opacity):new Color(.105f,.15f,.21f,opacity));
             U.Border(new Rect(panel.x+28,panel.y+75,panel.width-56,1),U.Rule);Text(panel.x+30,panel.y+23,350,options?"Opciones":"Pausa",27);
             if(IconButton(new Rect(panel.xMax-68,panel.y+18,42,42),icons?.close,"×"))Resume();
@@ -148,7 +178,14 @@ namespace Mismo.Menu
             float sensitivity=PlayerPrefs.GetFloat("Mismo.LookSensitivity",1);Text(215,295,550,"Sensibilidad del mouse");Text(960,295,110,sensitivity.ToString("0.0")+"×");
             float next=GUI.HorizontalSlider(new Rect(215,345,835,22),sensitivity,.2f,3);if(!Mathf.Approximately(next,sensitivity))PlayerPrefs.SetFloat("Mismo.LookSensitivity",next);
             bool invert=PlayerPrefs.GetInt("Mismo.InvertLookY",0)==1;bool changed=Choice(390,"Invertir cámara vertical",invert?1:0,new[]{"No","Sí"})==1;if(changed!=invert)PlayerPrefs.SetInt("Mismo.InvertLookY",changed?1:0);
-            controlScroll=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.BeginScrollView(new Rect(215,470,840,130),controlScroll,new Rect(0,0,805,300));
+            if(Button(new Rect(215,445,260,43),"Modificar UI"))BeginUIEditor();
+            if(icons!=null)
+            {
+                Text(500,445,180,"Opacidad del fondo",18);Text(960,445,110,Mathf.RoundToInt(icons.hudBackgroundOpacity*100)+" %");
+                float nextBackground=GUI.HorizontalSlider(new Rect(500,478,550,18),icons.hudBackgroundOpacity,0,1);
+                if(!Mathf.Approximately(nextBackground,icons.hudBackgroundOpacity)){icons.hudBackgroundOpacity=nextBackground;PlayerPrefs.SetFloat("Mismo.HUD.BackgroundOpacity",nextBackground);}
+            }
+            controlScroll=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.BeginScrollView(new Rect(215,520,840,80),controlScroll,new Rect(0,0,805,300));
             string[] help={"Moverse · WASD     Correr · Shift     Saltar · Espacio","Ataque · Clic izquierdo     Habilidades · Q / E / R","Especial · C     Cambiar arma · Tab     Consumibles · 1–4","Menú radial · Mantener B     Inventario · I","Personaje · P     Habilidades · K     Mapa · M","Pausa / volver · Esc"};
             for(int i=0;i<help.Length;i++)Text(0,i*48,795,help[i],18);GUI.EndScrollView();
         }
