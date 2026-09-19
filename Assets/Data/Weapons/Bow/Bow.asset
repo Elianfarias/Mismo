@@ -25,7 +25,7 @@ MonoBehaviour:
   dualSwordFamily: {fileID: 0}
   swordShieldFamily: {fileID: 0}
   overrideFamilyAbilities: 0
-  visualPrefab: {fileID: 919132149155446097, guid: d77f05dd5520fac43be94540c108f2a5, type: 3}
+  visualPrefab: {fileID: 365415738451728255, guid: a7db06eb27bb0c2499fb6f330ed3b617, type: 3}
   isTwoHanded: 0
   dualWield: 0
   secondaryVisualPrefab: {fileID: 0}
