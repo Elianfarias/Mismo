@@ -33,6 +33,7 @@ namespace Mismo.Gameplay.Player.Localization
             get{if(language==null){var saved=PlayerPrefs.GetString("Mismo.Language","es");language=Array.IndexOf(Languages,saved)>=0?saved:"es";}return language;}
         }
         public static CultureInfo Culture => CultureInfo.GetCultureInfo(Code=="es"?"es-AR":Code);
+        // Kept for menu/configuration integrations; the gameplay HUD does not display this selector.
         public static string LanguageLabel => Text("Idioma")+": "+Culture.NativeName;
         public static void Next(){var codes=Languages;Set(codes[(Array.IndexOf(codes,Code)+1)%codes.Length]);}
         public static void Set(string code,bool persist=true)

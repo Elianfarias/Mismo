@@ -36,6 +36,8 @@ namespace Mismo.Gameplay.Player.Equipment
         [Range(1,12)] public int gridHeight = 3;
         public bool canRotate = true;
         public Sprite inventoryIcon;
+        [Tooltip("Ícono del arma en el selector de Tab de la HUD. Vacío usa el ícono predeterminado de espada/arco. Se puede cambiar durante Play.")]
+        public Texture2D hudIcon;
         public Vector3 inventoryPreviewRotation;
         public bool canSell = true;
         [Min(0)] public int sellValue = 10;

@@ -13,7 +13,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             var items=new List<GridItem>();if(value==null)return items;
             foreach(var w in value.weapons)
             {
-                if(w.inChest!=chest)continue;var definition=catalog.Find(w.definitionId);
+                if(w.inChest!=chest||value.IsEquipped(w.instanceId))continue;var definition=catalog.Find(w.definitionId);
                 items.Add(new GridItem{key=w.instanceId,id=w.instanceId,width=Mathf.Clamp(definition.gridWidth,1,12),height=Mathf.Clamp(definition.gridHeight,1,12),canRotate=definition.canRotate});
             }
             var materials=chest?value.chestMaterials:value.materials;

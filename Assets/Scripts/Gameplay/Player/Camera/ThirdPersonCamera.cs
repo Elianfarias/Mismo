@@ -62,7 +62,8 @@ namespace Mismo.Gameplay.Player.Camera
             }
             if (input == null || Cursor.lockState != CursorLockMode.Locked) return;
             Vector2 look = input.Look;
-            float scale = input.LookUsesPointer ? mouseSensitivity : stickDegreesPerSecond * Time.deltaTime;
+            float scale = input.LookUsesPointer ? mouseSensitivity*Mathf.Clamp(PlayerPrefs.GetFloat("Mismo.LookSensitivity",1),.2f,3) : stickDegreesPerSecond * Time.deltaTime;
+            if(PlayerPrefs.GetInt("Mismo.InvertLookY",0)==1)look.y=-look.y;
             yaw += look.x * scale;
             pitch = Mathf.Clamp(pitch - look.y * scale, minPitch, maxPitch);
             transform.rotation = Quaternion.Euler(pitch, yaw, 0f);

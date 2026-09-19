@@ -220,6 +220,14 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             }
             return Commit(next,"Atributo guardado.",false);
         }
+        public bool TrySpendAttributes(int life,int attack,int armor)
+        {
+            long total=(long)life+attack+armor;
+            if(!CanManage||life<0||attack<0||armor<0||total<=0||total>profile.progression.Available)return false;
+            var next=profile.Copy();
+            next.progression.lifePoints+=life;next.progression.attackPoints+=attack;next.progression.armorPoints+=armor;
+            return Commit(next,"Atributos guardados.",false);
+        }
         public bool TrySpendMastery(WeaponDefinition weapon,MasteryAttribute attribute)
         {
             if(!IsReady||weapon==null||!loadout.CanChangeEquipment)return false;
@@ -227,6 +235,15 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(mastery==null||mastery.Available<=0)return false;
             if(attribute==MasteryAttribute.Damage)mastery.damagePoints++;
             else if(attribute==MasteryAttribute.Speed)mastery.speedPoints++;else return false;
+            return Commit(next,"Maestría guardada.",false);
+        }
+        public bool TrySpendMasteryPoints(WeaponDefinition weapon,int damage,int speed)
+        {
+            long total=(long)damage+speed;
+            if(!CanManage||weapon==null||damage<0||speed<0||total<=0)return false;
+            var next=profile.Copy();var mastery=next.progression.Find(weapon.MasteryId);
+            if(mastery==null||total>mastery.Available)return false;
+            mastery.damagePoints+=damage;mastery.speedPoints+=speed;
             return Commit(next,"Maestría guardada.",false);
         }
         // A kill's experience and rolled item are committed together. Failed writes apply neither.
@@ -305,7 +322,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if (!IsReady || !loadout.CanChangeEquipment || Definition(instanceId)==null || Definition(instanceId).isShield) return false;
             var next = profile.Copy();
             if(!next.TryEquip(slot,instanceId))return false;
-            NormalizeHands(next);return Commit(next,"Equipamiento guardado.",true,GameSound.ItemEquipped);
+            NormalizeHands(next);
+            return Fits(next,false)&&Commit(next,"Equipamiento guardado.",true,GameSound.ItemEquipped);
         }
 
         public bool TryEquipDefinition(int slot, WeaponDefinition definition)

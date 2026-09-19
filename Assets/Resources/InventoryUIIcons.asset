@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: InventoryUIIcons
   m_EditorClassIdentifier: 
   useOliveTheme: 0
+  panelOpacity: 0.8
+  navigationIconOpacity: 1
   oliveWeaponSlotBackground: {fileID: 2800000, guid: 3b686c6e64c84f05a6163ea3e32b71a9, type: 3}
   oliveConsumableSlotBackground: {fileID: 2800000, guid: fa210eeab66c47f3b13519caf4030282, type: 3}
   oliveWeaponSlotUV:
@@ -36,6 +38,26 @@ MonoBehaviour:
   consumables: {fileID: 2800000, guid: 8cd1e4b0063604a4199d4d484c0ee551, type: 3}
   favorites: {fileID: 2800000, guid: 7ffd766c2c5830a4f9306608a91f3fc1, type: 3}
   backpack: {fileID: 2800000, guid: 3c3ac6f2ea7d6184d85f25da875cf08c, type: 3}
+  chest: {fileID: 2800000, guid: b694b0538b5d4e549bff71e22362ec0b, type: 3}
+  pauseResume: {fileID: 0}
+  pauseOptions: {fileID: 0}
+  pauseMainMenu: {fileID: 0}
+  settingsSound: {fileID: 2800000, guid: 93f71502e8ec58b41ae2f0d390d09a7e, type: 3}
+  settingsDisplay: {fileID: 2800000, guid: c812209b71b4e534788a548b8bd94dee, type: 3}
+  settingsGraphics: {fileID: 2800000, guid: e0ce200d45f33ab4d85d1e800e960f5b, type: 3}
+  settingsControls: {fileID: 2800000, guid: 0291324cc073c5e439ab1f2f52934d4e, type: 3}
+  previousPage: {fileID: 2800000, guid: b68d30fe88bdb6848a96ffa168cb0fdb, type: 3}
+  nextPage: {fileID: 2800000, guid: 025159cfab002ba4cac2b8c053cc0314, type: 3}
+  radialCharacter: {fileID: 2800000, guid: 390160a9deb69114bbd17b2e2b86519d, type: 3}
+  radialInventory: {fileID: 2800000, guid: 3c3ac6f2ea7d6184d85f25da875cf08c, type: 3}
+  radialMap: {fileID: 2800000, guid: a8c8d9224043d7c4b995ae4a8e8a8612, type: 3}
+  radialMounts: {fileID: 2800000, guid: 891f4f2f404475547b86dc7e65aa809a, type: 3}
+  radialBestiary: {fileID: 2800000, guid: 809767bb7541ac34ba0958f19686a08c, type: 3}
+  radialSkills: {fileID: 2800000, guid: d4968ef72859d274b807a9043103c6bf, type: 3}
+  radialCancel: {fileID: 2800000, guid: c4db98a900cfdb942a8c9ba7e16cb56f, type: 3}
+  radialHoverSound: {fileID: 0}
+  radialHoverVolume: 0.7
+  radialHoverCooldown: 0.08
   background: {fileID: 0}
   slotBackground: {fileID: 0}
   weaponSlotBackground: {fileID: 2800000, guid: adc34ca2805947a183dcb3f170c7c80c, type: 3}
@@ -65,6 +87,30 @@ MonoBehaviour:
   backgroundTint: {r: 1, g: 1, b: 1, a: 1}
   slotTint: {r: 1, g: 1, b: 1, a: 1}
   special: {fileID: 2800000, guid: 8938666dd1ca9c24c895c375045457b0, type: 3}
+  hudHealth: {fileID: 0}
+  hudStamina: {fileID: 2800000, guid: 4d60469b4eef5ea4ea5ea289d868e976, type: 3}
+  hudFocus: {fileID: 2800000, guid: 4b871f1bcf1031e4eb5d4f3090bee73d, type: 3}
+  hudVitalsFrame: {fileID: 2800000, guid: d0abd540c231458eb16164837d8b9dfd, type: 3}
+  hudPaintedFrames: {fileID: 0}
+  hudPaintedFill: {fileID: 0}
+  hudVitalsPosition: {x: 16, y: 18}
+  hudHealthOffset: {x: 0, y: -7.14}
+  hudStaminaOffset: {x: 0, y: 15}
+  hudFocusOffset: {x: 772.7, y: 725.4}
+  hudVitalsWidth: 380
+  hudSkillsYOffset: 0
+  hudConsumablesYOffset: 0
+  hudSkillsAsColumn: 0
+  hudConsumablesAsColumn: 0
+  hudSkillsOffset: {x: 0, y: 0}
+  hudDashOffset: {x: 0, y: 0}
+  hudTabOffset: {x: 0, y: 0}
+  hudConsumablesOffset: {x: 0, y: 0}
+  hudShowActionSeparators: 1
+  hudVitalsOpacity: 1
+  hudTabOpacity: 1
+  hudVitalsBackground: {fileID: 0}
+  hudBackgroundOpacity: 1
   abilityIcons:
   - {fileID: 2800000, guid: c030e7e3c20fe624aadfea8120d6e9cf, type: 3}
   - {fileID: 2800000, guid: cdcf125569e9ffd4da8e7711870f697d, type: 3}

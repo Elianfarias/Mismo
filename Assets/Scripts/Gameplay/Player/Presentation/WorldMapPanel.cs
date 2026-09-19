@@ -63,8 +63,8 @@ namespace Mismo.Gameplay.Player.Presentation
             get
             {
                 float scale=PlayerHUD.Scale;
-                float width=Mathf.Min(miniWidth*scale,Screen.width-40*scale,(Screen.height-84*scale)*330f/280f);
-                return new Rect(Screen.width-20*scale-width,42*scale,width,width*280f/330f);
+                float width=Mathf.Min(miniWidth*scale,Screen.width-40*scale,(Screen.height-48*scale)*330f/280f);
+                return new Rect(Screen.width-20*scale-width,18*scale,width,width*280f/330f);
             }
         }
         float ViewZoom => IsOpen ? Zoom : miniZoom;
