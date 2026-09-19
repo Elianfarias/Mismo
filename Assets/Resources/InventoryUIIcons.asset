@@ -91,9 +91,15 @@ MonoBehaviour:
   hudStamina: {fileID: 2800000, guid: 4d60469b4eef5ea4ea5ea289d868e976, type: 3}
   hudFocus: {fileID: 2800000, guid: 4b871f1bcf1031e4eb5d4f3090bee73d, type: 3}
   hudVitalsFrame: {fileID: 2800000, guid: d0abd540c231458eb16164837d8b9dfd, type: 3}
-  hudMinimapFrame: {fileID: 0}
+  hudPaintedFrames: {fileID: 0}
+  hudPaintedFill: {fileID: 0}
+  hudVitalsPosition: {x: 16, y: 18}
+  hudHealthOffset: {x: 0, y: 0}
+  hudStaminaOffset: {x: 0, y: 15}
+  hudFocusOffset: {x: 0, y: 30}
+  hudVitalsWidth: 380
   hudVitalsBackground: {fileID: 0}
-  hudBackgroundOpacity: 0.65
+  hudBackgroundOpacity: 0
   abilityIcons:
   - {fileID: 2800000, guid: c030e7e3c20fe624aadfea8120d6e9cf, type: 3}
   - {fileID: 2800000, guid: cdcf125569e9ffd4da8e7711870f697d, type: 3}

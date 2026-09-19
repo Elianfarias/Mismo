@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using U=Mismo.Gameplay.Player.Presentation.QuietFantasyUI;
+using L=Mismo.Gameplay.Player.Localization.GameLanguage;
 
 namespace Mismo.Menu
 {
@@ -140,10 +141,14 @@ namespace Mismo.Menu
         }
         void DrawControls()
         {
-            float sensitivity=PlayerPrefs.GetFloat("Mismo.LookSensitivity",1);Text(215,255,550,"Sensibilidad del mouse");Text(960,255,110,sensitivity.ToString("0.0")+"×");
-            float next=GUI.HorizontalSlider(new Rect(215,305,835,22),sensitivity,.2f,3);if(!Mathf.Approximately(next,sensitivity))PlayerPrefs.SetFloat("Mismo.LookSensitivity",next);
-            bool invert=PlayerPrefs.GetInt("Mismo.InvertLookY",0)==1;bool changed=Choice(345,"Invertir cámara vertical",invert?1:0,new[]{"No","Sí"})==1;if(changed!=invert)PlayerPrefs.SetInt("Mismo.InvertLookY",changed?1:0);
-            controlScroll=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.BeginScrollView(new Rect(215,420,840,180),controlScroll,new Rect(0,0,805,300));
+            var languageCodes=L.Languages;var languageNames=new string[languageCodes.Length];
+            for(int i=0;i<languageCodes.Length;i++)languageNames[i]=languageCodes[i]=="es"?"Español":"English";
+            int languageIndex=Mathf.Max(0,System.Array.IndexOf(languageCodes,L.Code));int selectedLanguage=Choice(230,"Idioma",languageIndex,languageNames);
+            if(selectedLanguage!=languageIndex)L.Set(languageCodes[selectedLanguage]);
+            float sensitivity=PlayerPrefs.GetFloat("Mismo.LookSensitivity",1);Text(215,295,550,"Sensibilidad del mouse");Text(960,295,110,sensitivity.ToString("0.0")+"×");
+            float next=GUI.HorizontalSlider(new Rect(215,345,835,22),sensitivity,.2f,3);if(!Mathf.Approximately(next,sensitivity))PlayerPrefs.SetFloat("Mismo.LookSensitivity",next);
+            bool invert=PlayerPrefs.GetInt("Mismo.InvertLookY",0)==1;bool changed=Choice(390,"Invertir cámara vertical",invert?1:0,new[]{"No","Sí"})==1;if(changed!=invert)PlayerPrefs.SetInt("Mismo.InvertLookY",changed?1:0);
+            controlScroll=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.BeginScrollView(new Rect(215,470,840,130),controlScroll,new Rect(0,0,805,300));
             string[] help={"Moverse · WASD     Correr · Shift     Saltar · Espacio","Ataque · Clic izquierdo     Habilidades · Q / E / R","Especial · C     Cambiar arma · Tab     Consumibles · 1–4","Menú radial · Mantener B     Inventario · I","Personaje · P     Habilidades · K     Mapa · M","Pausa / volver · Esc"};
             for(int i=0;i<help.Length;i++)Text(0,i*48,795,help[i],18);GUI.EndScrollView();
         }

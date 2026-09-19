@@ -31,15 +31,6 @@ namespace Mismo.Menu
         readonly System.Collections.Generic.Dictionary<Text,string> originalLabels=new System.Collections.Generic.Dictionary<Text,string>();
         void OnDestroy(){L.Changed-=RefreshLanguage;if(fantasyFrame!=null)Destroy(fantasyFrame);}
         void RefreshLanguage(){foreach(var pair in originalLabels)if(pair.Key!=null)pair.Key.text=L.Text(pair.Value);}
-        void OnGUI()
-        {
-            if(loading)return;
-            var old=GUI.matrix;
-            float scale=Mathf.Min(Screen.width/1600f,Screen.height/900f);
-            GUI.matrix=Matrix4x4.Scale(Vector3.one*scale);
-            if(FantasyUI.Button(new Rect(1280,24,270,46),L.LanguageLabel))L.Next();
-            GUI.matrix=old;
-        }
         void Awake()
         {
             Time.timeScale=1; Cursor.lockState=CursorLockMode.None;Cursor.visible=true;

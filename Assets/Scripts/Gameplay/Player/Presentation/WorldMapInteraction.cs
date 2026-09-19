@@ -10,7 +10,6 @@ namespace Mismo.Gameplay.Player.Presentation
     public sealed partial class WorldMapPanel
     {
         MapMarkerCatalog catalog;
-        Mismo.Gameplay.Player.Equipment.Inventory.InventoryUIIcons hudTheme;
         bool ownedCatalog,miniInteractive;
         readonly List<MapPin> pins=new List<MapPin>();
         MapPin draft;
@@ -107,17 +106,12 @@ namespace Mismo.Gameplay.Player.Presentation
             else
             {
                 GUI.depth=-150;
-
+                float brightness=Mismo.Gameplay.Player.World.DayNightCycle.Current?.MinimapBrightness??1f;
+                var previousColor=GUI.color;
+                GUI.color=new Color(brightness,brightness,brightness,1);
                 if(texture!=null)GUI.DrawTexture(MiniRect,texture,ScaleMode.StretchToFill);
-
                 DrawMarkers(MiniRect,miniInteractive);
-                if(hudTheme==null)hudTheme=Resources.Load<Mismo.Gameplay.Player.Equipment.Inventory.InventoryUIIcons>("InventoryUIIcons");
-                if(hudTheme?.MinimapFrame!=null)
-                {
-                    float inset=MiniRect.width*.045f;
-                    GUI.DrawTexture(new Rect(MiniRect.x-inset,MiniRect.y-inset,MiniRect.width+inset*2,MiniRect.height+inset*2),hudTheme.MinimapFrame,ScaleMode.StretchToFill);
-                }
-                else QuietFantasyUI.Border(MiniRect,new Color(.58f,.63f,.68f,.9f),2);
+                GUI.color=previousColor;
                 if(miniInteractive||!followPlayer||miniOrbitOffset.sqrMagnitude>.001f)if(MapIcons.Button(new Rect(MiniRect.xMax-34,MiniRect.yMax-34,32,32),MapSymbol.Center,"Centrar y restablecer orientación"))Recenter();
                 float radians=-renderedYaw*Mathf.Deg2Rad;var north=MiniRect.center+new Vector2(Mathf.Sin(radians),-Mathf.Cos(radians))*(MiniRect.width*.43f);
                 QuietFantasyUI.Text(new Rect(north.x-10,north.y-10,20,20),"N",14,Color.white,false,TextAnchor.MiddleCenter);

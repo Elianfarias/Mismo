@@ -58,7 +58,7 @@ namespace Mismo.Gameplay.Player.Presentation
     public sealed class PlayerHUD : MonoBehaviour
     {
         public static PlayerHUD Active {get;private set;}
-        public static readonly Color Panel=new Color(.045f,.065f,.085f,.94f),Gold=new Color(.91f,.76f,.43f),Muted=new Color(.65f,.72f,.74f);
+        public static readonly Color Panel=new Color(.075f,.125f,.095f,.94f),Gold=new Color(.85f,.68f,.32f),Muted=new Color(.61f,.66f,.58f);
         private Health health;
         private InventoryUIIcons icons; private PlayerInventory inventory;
         private CombatState combat;
@@ -99,9 +99,12 @@ namespace Mismo.Gameplay.Player.Presentation
             if(health==null)return;
             Matrix4x4 old=GUI.matrix;float scale=Scale;GUI.matrix=Matrix4x4.Scale(Vector3.one*scale);
             float width=Screen.width/scale,height=Screen.height/scale;
-            PaintedBar(0,30,health.Normalized,new Color(.95f,.30f,.32f),icons?.hudHealth,"heart-inside");
-            PaintedBar(1,67,stamina!=null?stamina.Normalized:0,new Color(.50f,.76f,.39f),icons?.hudStamina,"wingfoot");
-            PaintedBar(2,98,combat!=null?combat.Focus/100:0,new Color(1f,.82f,.25f),icons?.hudFocus,"dead-eye");
+            // Read layout values every frame so they can be tuned live from InventoryUIIcons.
+            var vitalsPosition=icons!=null?icons.hudVitalsPosition:new Vector2(16,18);
+            float vitalsWidth=icons!=null?Mathf.Max(1,icons.hudVitalsWidth):380;
+            PaintedBar(0,vitalsPosition+(icons!=null?icons.hudHealthOffset:Vector2.zero),health.Normalized,new Color(.95f,.30f,.32f),vitalsWidth);
+            PaintedBar(1,vitalsPosition+(icons!=null?icons.hudStaminaOffset:new Vector2(0,15)),stamina!=null?stamina.Normalized:0,new Color(.50f,.76f,.39f),vitalsWidth);
+            PaintedBar(2,vitalsPosition+(icons!=null?icons.hudFocusOffset:new Vector2(0,30)),combat!=null?combat.Focus/100:0,new Color(1f,.82f,.25f),vitalsWidth);
             DrawNavigation(height);
             if(Time.unscaledTime<rewardUntil)Label(new Rect(width/2-230,height/2+65,460,35),reward,23,Gold,TextAnchor.MiddleCenter);
             float left=(width-792)/2;
@@ -164,19 +167,18 @@ namespace Mismo.Gameplay.Player.Presentation
             if(art!=null)GUI.DrawTextureWithTexCoords(rect,art,uv);
             else QuietFantasyUI.Border(rect,new Color(.58f,.63f,.68f,.8f));
         }
-        void PaintedBar(int row,float y,float value,Color tint,Texture2D icon,string fallback)
+        void PaintedBar(int row,Vector2 position,float value,Color tint,float width)
         {
             bool healthRow=row==0;
             float height=healthRow?28:21;
-            var frame=new Rect(66,y,380,height);
-            QuietFantasyUI.DrawIcon(new Rect(30,y+height/2-12,24,24),MapIcons.Mask(icon!=null?icon:QuietFantasyUI.Icon(fallback)),tint);
+            var frame = new Rect(position.x, position.y, width, height);
             // Pixel regions in the generated atlas; Unity UVs start at the bottom.
             float top=row==0?138:row==1?353:537;
             float cropHeight=row==0?130:106;
             float cropWidth=row==0?1928:1876;
             if(icons?.PaintedFrames!=null)
                 GUI.DrawTextureWithTexCoords(frame,icons.PaintedFrames,new Rect(38f/1983,(793-top-cropHeight)/793,cropWidth/1983,cropHeight/793));
-            var well=new Rect(frame.x+15,frame.y+(healthRow?8:6),healthRow?327:335,healthRow?13:9);
+            var well=new Rect(frame.x+15,frame.y+(healthRow?8:6),Mathf.Max(1,width-(healthRow?53:45)),healthRow?13:9);
             if(icons?.PaintedFrames==null)Fill(well,new Color(.03f,.05f,.06f,.9f));
             if(value<=0)return;
             GUI.BeginGroup(new Rect(well.x,well.y,well.width*Mathf.Clamp01(value),well.height));

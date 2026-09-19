@@ -46,13 +46,20 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public Texture2D hudVitalsFrame;
         [Header("Painted fantasy resource bars")]
         public Texture2D hudPaintedFrames, hudPaintedFill;
+        [Header("HUD vital bars layout — live")]
+        [Tooltip("Posición base en el canvas lógico 1600×900. Se actualiza mientras el juego está en Play.")]
+        public Vector2 hudVitalsPosition=new Vector2(16,18);
+        [Tooltip("Desplazamiento independiente de la barra de vida.")]
+        public Vector2 hudHealthOffset=Vector2.zero;
+        [Tooltip("Desplazamiento independiente de stamina.")]
+        public Vector2 hudStaminaOffset=new Vector2(0,15);
+        [Tooltip("Desplazamiento independiente de focus.")]
+        public Vector2 hudFocusOffset=new Vector2(0,30);
+        [Min(1),Tooltip("Ancho compartido de las tres barras.")]
+        public float hudVitalsWidth=380;
         [System.NonSerialized] Texture2D defaultPaintedFrames,defaultPaintedFill;
         public Texture2D PaintedFrames => hudPaintedFrames!=null?hudPaintedFrames:defaultPaintedFrames!=null?defaultPaintedFrames:defaultPaintedFrames=Resources.Load<Texture2D>("UI/HUD/VitalsPaintedFrames");
         public Texture2D PaintedFill => hudPaintedFill!=null?hudPaintedFill:defaultPaintedFill!=null?defaultPaintedFill:defaultPaintedFill=Resources.Load<Texture2D>("UI/HUD/VitalsPaintedFill");
-        public Texture2D hudMinimapFrame;
-        [System.NonSerialized] Texture2D defaultMinimapFrame;
-        public Texture2D MinimapFrame => hudMinimapFrame!=null?hudMinimapFrame:
-            defaultMinimapFrame!=null?defaultMinimapFrame:defaultMinimapFrame=Resources.Load<Texture2D>("UI/HUD/MinimapFrame-Silver");
         public Texture2D hudVitalsBackground;
         [System.NonSerialized] Texture2D defaultVitalsBackground;
         public Texture2D VitalsBackground => hudVitalsBackground!=null?hudVitalsBackground:
