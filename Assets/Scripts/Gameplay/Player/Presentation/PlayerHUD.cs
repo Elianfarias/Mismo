@@ -170,7 +170,8 @@ namespace Mismo.Gameplay.Player.Presentation
                 Fill(new Rect(left+469+dashOffset.x,height-115+skillsYOffset+dashOffset.y,1.5f,70),new Color(.65f,.69f,.73f,.8f));
             }
             // All slots and separators share the same vertical center (height - 80).
-            DrawConsumables(left+488+consumablesOffset.x,height-80-56/2f+consumablesYOffset+consumablesOffset.y,consumablesAsColumn);
+            var consumablePosition=ConsumablesPosition(width,height,left,consumablesAsColumn);
+            DrawConsumables(consumablePosition.x,consumablePosition.y,consumablesAsColumn,width);
             if(UIEditMode)DrawUIEditOverlay(width,height,left,skillsAsColumn,consumablesAsColumn);
             if(health.IsDead)
             {Fill(new Rect(width/2-210,height/2-46,420,92),Panel);Label(new Rect(width/2-200,height/2-36,400,40),"HAS CAÍDO",26,Gold,TextAnchor.MiddleCenter);Label(new Rect(width/2-200,height/2+5,400,30),"Regresando al pueblo…",16,Color.white,TextAnchor.MiddleCenter);}
@@ -220,10 +221,21 @@ namespace Mismo.Gameplay.Player.Presentation
                 var offset=icons!=null?icons.hudDashOffset:Vector2.zero;
                 return ExpandRect(new Rect(left+376+offset.x,height-118+(icons!=null?icons.hudSkillsYOffset:0)+offset.y,76,100),8);
             }
-            var consumableOffset=icons!=null?icons.hudConsumablesOffset:Vector2.zero;
-            float consumableY=height-108+(icons!=null?icons.hudConsumablesYOffset:0)+consumableOffset.y;
+            var consumablePosition=ConsumablesPosition(width,height,left,consumablesAsColumn);
             float consumableW=consumablesAsColumn?56:4*76-20;float consumableH=consumablesAsColumn?4*70+80:95;
-            return ExpandRect(new Rect(left+488+consumableOffset.x,consumableY,consumableW,consumableH),8);
+            return ExpandRect(new Rect(consumablePosition.x,consumablePosition.y,consumableW,consumableH),8);
+        }
+        Vector2 ConsumablesPosition(float width,float height,float left,bool asColumn)
+        {
+            var offset=icons!=null?icons.hudConsumablesOffset:Vector2.zero;
+            float x=left+488+offset.x;
+            float y=height-80-56/2f+(icons!=null?icons.hudConsumablesYOffset:0)+offset.y;
+            float contentWidth=asColumn?56:4*76-20;
+            float contentHeight=asColumn?4*70+80:95;
+            const float margin=8;
+            x=Mathf.Clamp(x,margin,Mathf.Max(margin,width-contentWidth-margin));
+            y=Mathf.Clamp(y,margin,Mathf.Max(margin,height-contentHeight-margin));
+            return new Vector2(x,y);
         }
         static Rect CombineRects(Rect a,Rect b)
         {return Rect.MinMaxRect(Mathf.Min(a.xMin,b.xMin),Mathf.Min(a.yMin,b.yMin),Mathf.Max(a.xMax,b.xMax),Mathf.Max(a.yMax,b.yMax));}
@@ -349,7 +361,7 @@ namespace Mismo.Gameplay.Player.Presentation
             QuietFantasyUI.DrawIcon(new Rect(110,height-68,32,32),icons?.backpack!=null?MapIcons.Mask(icons.backpack):null);
             Label(new Rect(149,height-68,28,32),"I",17,QuietFantasyUI.Ink);
         }
-        void DrawConsumables(float x,float y,bool asColumn)
+        void DrawConsumables(float x,float y,bool asColumn,float canvasWidth)
         {
             for(int i=0;i<4;i++)
             {
@@ -374,7 +386,10 @@ namespace Mismo.Gameplay.Player.Presentation
                     }
                     Label(new Rect(rect.x+30,rect.y+33,22,20),count.ToString(),14,QuietFantasyUI.Ink,TextAnchor.MiddleRight);
                 }
-                var keyRect=asColumn?new Rect(rect.x+60,rect.y+16,28,24):new Rect(rect.x,rect.yMax+14,rect.width,24);
+                float keyX=rect.x+60;
+                if(asColumn&&keyX+28>canvasWidth-4)keyX=rect.x-30;
+                if(asColumn)keyX=Mathf.Clamp(keyX,4,Mathf.Max(4,canvasWidth-32));
+                var keyRect=asColumn?new Rect(keyX,rect.y+16,28,24):new Rect(rect.x,rect.yMax+14,rect.width,24);
                 Label(keyRect,(i+1).ToString(),17,QuietFantasyUI.Ink,TextAnchor.MiddleCenter);
             }
         }

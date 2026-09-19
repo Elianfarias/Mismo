@@ -84,7 +84,7 @@ namespace Mismo.Menu
             PlayerHUD.Fill(new Rect(0,0,Screen.width,Screen.height),new Color(.015f,.022f,.03f,.3f*opacity));
             float scale=Mathf.Min(Screen.width/1280f,Screen.height/800f)*.9f;
             GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-1280*scale)/2,(Screen.height-800*scale)/2,0),Quaternion.identity,Vector3.one*scale);
-            var panel=options?new Rect(155,80,970,640):new Rect(410,150,460,500);
+            var panel=options?new Rect(155,80,970,640):new Rect(460,250,360,285);
             if(uiEditor)
             {
                 PlayerHUD.Fill(new Rect(320,20,640,290),icons!=null&&icons.useOliveTheme?new Color(.20f,.27f,.18f,.94f):new Color(.105f,.15f,.21f,.94f));
@@ -131,9 +131,9 @@ namespace Mismo.Menu
             }
             else if(!options)
             {
-                if(IconButton(new Rect(450,285,380,52),icons?.pauseResume,"Continuar",false,true))Resume();
-                if(IconButton(new Rect(450,365,380,52),icons?.pauseOptions,"Opciones",false,true)){ReadSettings();options=true;}
-                if(IconButton(new Rect(450,445,380,52),icons?.pauseMainMenu,"Menú principal",false,true))confirmExit=true;
+                if(IconButton(new Rect(panel.x+30,panel.y+92,300,44),icons?.pauseResume,"Continuar",false,true))Resume();
+                if(IconButton(new Rect(panel.x+30,panel.y+148,300,44),icons?.pauseOptions,"Opciones",false,true)){ReadSettings();options=true;}
+                if(IconButton(new Rect(panel.x+30,panel.y+204,300,44),icons?.pauseMainMenu,"Menú principal",false,true))confirmExit=true;
             }
             else
             {
