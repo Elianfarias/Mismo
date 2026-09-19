@@ -10,23 +10,24 @@ namespace Mismo.Gameplay.Player.Editor
 {
     public static class MineralAssets
     {
-        const string Art="Assets/Art/Gathering/Minerals";
-        const string Data="Assets/Resources/Gathering/Minerals";
+        const string Art="Assets/Art/Prefabs/Gathering/Minerals";
+        const string Materials="Assets/Art/Materials/Gathering/Minerals";
+        const string Data="Assets/Data/Gathering/Minerals";
         const string Source="Assets/Art/FBX/Minerals/SimplePolygon_Minerals.fbx";
         static T LoadOrCreate<T>(string path) where T:ScriptableObject
         {var value=AssetDatabase.LoadAssetAtPath<T>(path);if(value!=null)return value;value=ScriptableObject.CreateInstance<T>();AssetDatabase.CreateAsset(value,path);return value;}
         [MenuItem("Mismo/Crafting/Import mineral models and rose")]
         public static void Create()
         {
-            Directory.CreateDirectory(Art);Directory.CreateDirectory(Data);AssetDatabase.Refresh();
+            Directory.CreateDirectory(Art);Directory.CreateDirectory(Materials);Directory.CreateDirectory(Data);AssetDatabase.Refresh();
             var model=AssetDatabase.LoadAssetAtPath<GameObject>(Source);
             if(model==null)throw new InvalidOperationException("Missing mineral FBX.");
             var meshes=model.GetComponentsInChildren<MeshRenderer>(true).OrderBy(r=>r.name,StringComparer.Ordinal).ToArray();
-            var palette=AssetDatabase.LoadAssetAtPath<Material>(Art+"/MineralPalette.mat");
-            if(palette==null){palette=new Material(Shader.Find("Universal Render Pipeline/Lit")??Shader.Find("Standard"));palette.mainTexture=AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Art/FBX/Minerals/SimplePolygon_MultiColorPalette.png");AssetDatabase.CreateAsset(palette,Art+"/MineralPalette.mat");}
-            var depleted=AssetDatabase.LoadAssetAtPath<Material>(Art+"/Depleted.mat");
-            if(depleted==null){depleted=new Material(Shader.Find("Universal Render Pipeline/Lit")??Shader.Find("Standard")){color=new Color(.29f,.31f,.34f)};AssetDatabase.CreateAsset(depleted,Art+"/Depleted.mat");}
-            var settings=Resources.Load<GatheringSettings>("GatheringSettings");var stone=settings.stone;
+            var palette=AssetDatabase.LoadAssetAtPath<Material>(Materials+"/MineralPalette.mat");
+            if(palette==null){palette=new Material(Shader.Find("Universal Render Pipeline/Lit")??Shader.Find("Standard"));palette.mainTexture=AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Art/Textures/Minerals/SimplePolygon_MultiColorPalette.png");AssetDatabase.CreateAsset(palette,Materials+"/MineralPalette.mat");}
+            var depleted=AssetDatabase.LoadAssetAtPath<Material>(Materials+"/Depleted.mat");
+            if(depleted==null){depleted=new Material(Shader.Find("Universal Render Pipeline/Lit")??Shader.Find("Standard")){color=new Color(.29f,.31f,.34f)};AssetDatabase.CreateAsset(depleted,Materials+"/Depleted.mat");}
+            var settings=Mismo.Core.ProjectAssets.Load<GatheringSettings>("GatheringSettings");var stone=settings.stone;
             var baseRock=meshes.OrderBy(r=>r.bounds.size.y).First();
             var exhausted=Prefab(baseRock,"Depleted",depleted,.22f);
             var nodes=new ResourceNodeDefinition[meshes.Length];
@@ -43,14 +44,14 @@ namespace Mismo.Gameplay.Player.Editor
             }
             settings.minerals=nodes;stone.availablePrefab=nodes[0].availablePrefab;stone.depletedPrefab=exhausted;
             EditorUtility.SetDirty(stone);EditorUtility.SetDirty(settings);
-            var stoneItem=Resources.Load<MaterialDefinition>("Materials/Stone");stoneItem.pickupPrefab=nodes[0].availablePrefab;stoneItem.icon=null;EditorUtility.SetDirty(stoneItem);
-            var rose=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/World/Nature/flower_rose.prefab");
+            var stoneItem=Mismo.Core.ProjectAssets.Load<MaterialDefinition>("Materials/Stone");stoneItem.pickupPrefab=nodes[0].availablePrefab;stoneItem.icon=null;EditorUtility.SetDirty(stoneItem);
+            var rose=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/World/Nature/flower_rose.prefab");
             if(rose==null)throw new InvalidOperationException("Missing flower_rose prefab.");
             var empty=AssetDatabase.LoadAssetAtPath<GameObject>(Art+"/RosePicked.prefab");
             if(empty==null){var go=new GameObject("Rose picked - regrowing");empty=PrefabUtility.SaveAsPrefabAsset(go,Art+"/RosePicked.prefab");Object.DestroyImmediate(go);}
             settings.herb.availablePrefab=rose;settings.herb.depletedPrefab=empty;EditorUtility.SetDirty(settings.herb);
-            var herb=Resources.Load<MaterialDefinition>("Materials/Herb");herb.pickupPrefab=rose;herb.icon=null;EditorUtility.SetDirty(herb);
-            var catalog=Resources.Load<WorldContentCatalog>("WorldContentCatalog");
+            var herb=Mismo.Core.ProjectAssets.Load<MaterialDefinition>("Materials/Herb");herb.pickupPrefab=rose;herb.icon=null;EditorUtility.SetDirty(herb);
+            var catalog=Mismo.Core.ProjectAssets.Load<WorldContentCatalog>("WorldContentCatalog");
             foreach(var entry in catalog.assets)if(entry.id=="nature.flower_rose")entry.gatheringNode=settings.herb;
             EditorUtility.SetDirty(catalog);AssetDatabase.SaveAssets();InventoryPresentationAssets.GenerateGridIcons();
             Debug.Log("MINERALS_IMPORTED "+nodes.Length);
@@ -70,10 +71,10 @@ namespace Mismo.Gameplay.Player.Editor
         public static void RunBatch()
         {
             if(!Directory.GetCurrentDirectory().Replace("\\","/").Contains("/.validation/"))throw new InvalidOperationException("Use isolated validation project.");
-            Create();var settings=Resources.Load<GatheringSettings>("GatheringSettings");
+            Create();var settings=Mismo.Core.ProjectAssets.Load<GatheringSettings>("GatheringSettings");
             if(settings.minerals.Length!=30)throw new Exception("Expected 30 individual minerals.");
             foreach(var node in settings.minerals){var r=node.availablePrefab.GetComponentInChildren<Renderer>();if(r==null||Mathf.Abs(r.bounds.min.y)>.02f||r.bounds.size.x>1.5f||r.bounds.size.z>1.5f||node.rewards.Roll().Count==0)throw new Exception("Invalid node: "+node.name);}
-            if(!Resources.Load<WorldContentCatalog>("WorldContentCatalog").assets.Any(a=>a.id=="nature.flower_rose"&&a.gatheringNode==settings.herb))throw new Exception("Rose decoration not integrated");
+            if(!Mismo.Core.ProjectAssets.Load<WorldContentCatalog>("WorldContentCatalog").assets.Any(a=>a.id=="nature.flower_rose"&&a.gatheringNode==settings.herb))throw new Exception("Rose decoration not integrated");
             var scene=UnityEditor.SceneManagement.EditorSceneManager.NewScene(UnityEditor.SceneManagement.NewSceneSetup.EmptyScene,UnityEditor.SceneManagement.NewSceneMode.Single);
             for(int i=0;i<settings.minerals.Length;i++)Object.Instantiate(settings.minerals[i].availablePrefab,new Vector3((i%6)*2.1f,0,(i/6)*2.4f),Quaternion.identity);
             Object.Instantiate(settings.herb.availablePrefab,new Vector3(-2,0,3),Quaternion.identity);

@@ -1,0 +1,11 @@
+{
+  "manifest_assets": 2261,
+  "moved_assets": 1353,
+  "missing_files": [],
+  "changed_guids": [],
+  "content_changes_other_than_mtl": [
+    "Assets/Art/Materials/Monsters/FourEvilDragonsPBR/DragonNightmare/BluePBR.mat",
+    "Assets/Art/Materials/Monsters/FourEvilDragonsPBR/DragonNightmare/RedPBR.mat"
+  ],
+  "resources_folders": []
+}

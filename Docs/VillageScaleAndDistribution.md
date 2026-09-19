@@ -11,12 +11,12 @@
 
 ## Configuración
 
-`Assets/Resources/WorldContentCatalog.asset`:
+`Assets/Data/World/WorldContentCatalog.asset`:
 - Village Size Multiplier: 2.
 - Village Ground Offset: -0.19670273, en unidades del prefab antes de escalar.
 - Village Spawn Offset: coordenada de llegada antes de escalar.
 
-`Assets/Resources/ExplorationWorldSettings.asset`:
+`Assets/Data/World/ExplorationWorldSettings.asset`:
 - Village Region Cells: 8. Cada celda usa Site Spacing (128 m).
 - Village Region Chance: 0.65.
 

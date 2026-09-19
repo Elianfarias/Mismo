@@ -57,8 +57,8 @@ namespace Mismo.Gameplay.Player.Presentation
             if (animator != null) animator.applyRootMotion = false;
             if (animator != null) baseController = animator.runtimeAnimatorController;
             loadout = GetComponent<Equipment.EquipmentLoadout>();
-            hitClip = Resources.Load<AnimationClip>("CombatPresentation/Human_Player_CombatDamage01");
-            hitMask = Resources.Load<AvatarMask>("CombatPresentation/PlayerUpperBody");
+            hitClip = Mismo.Core.ProjectAssets.Load<AnimationClip>("CombatPresentation/Human_Player_CombatDamage01");
+            hitMask = Mismo.Core.ProjectAssets.Load<AvatarMask>("CombatPresentation/PlayerUpperBody");
         }
         private void OnEnable() { if(motor != null) { motor.Jumped += OnJump; motor.Landed += OnLand; } if(health!=null)health.Damaged+=OnHit; }
         private void OnDisable() { RestoreTorso();torsoCorrection=targetTorsoCorrection=0;if(motor != null) { motor.Jumped -= OnJump; motor.Landed -= OnLand; } if(health!=null)health.Damaged-=OnHit;hitAt=-10f;playback?.Dispose();playback=null;ActionClip=null; }

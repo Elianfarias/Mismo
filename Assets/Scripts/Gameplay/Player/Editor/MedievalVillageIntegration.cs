@@ -13,16 +13,18 @@ namespace Mismo.Gameplay.Player.Editor
 {
     public static class MedievalVillageIntegration
     {
-        const string Source="Assets/Art/FBX/Town/Medieval Assets/OBJ_OP";
-        const string Output="Assets/Prefabs/World/Villages";
+        const string Source="Assets/Art/Models/Town/Medieval Assets/OBJ_OP";
+        const string Textures="Assets/Art/Textures/Town/Medieval Assets/OBJ_OP";
+        const string Models="Assets/Art/Models/MedievalVillage";
+        const string Output="Assets/Art/Prefabs/World/Villages";
         const string Art="Assets/Art/Materials/MedievalVillage";
         static void Folder(string path){if(AssetDatabase.IsValidFolder(path))return;var parent=Path.GetDirectoryName(path).Replace('\\','/');Folder(parent);AssetDatabase.CreateFolder(parent,Path.GetFileName(path));}
         static Bounds BoundsOf(GameObject root){var rs=root.GetComponentsInChildren<Renderer>();var bounds=rs[0].bounds;foreach(var r in rs)bounds.Encapsulate(r.bounds);return bounds;}
         [MenuItem("Mismo/World/Integrate medieval village")]
         public static void Apply()
         {
-            Folder(Output);Folder(Art);
-            string path=Art+"/MedievalVillage.obj";
+            Folder(Output);Folder(Art);Folder(Models);
+            string path=Models+"/MedievalVillage.obj";
             int removedFaces=0;bool omit=false;var obj=new List<string>();
             foreach(string line in File.ReadLines(Source+"/Medieval_Voxel_Assets_Example.obj"))
             {
@@ -30,7 +32,7 @@ namespace Mismo.Gameplay.Player.Editor
                 if(line.StartsWith("usemtl ")){string name=line.Substring(7);omit=name.StartsWith("Ground")||name.StartsWith("Wall_Entrance_Door")||name.StartsWith("Entrance_Bridge_Close")||name.StartsWith("Entrance_Bridge_MidOpen");}
                 if(omit&&line.StartsWith("f ")){removedFaces++;continue;}obj.Add(line);
             }
-            File.WriteAllLines(path,obj);File.WriteAllLines(Art+"/MedievalVillage.mtl",File.ReadLines(Source+"/Medieval_Voxel_Assets_Example.mtl").Where(line=>!line.StartsWith("map_")));AssetDatabase.ImportAsset(path,ImportAssetOptions.ForceSynchronousImport);
+            File.WriteAllLines(path,obj);File.WriteAllLines(Models+"/MedievalVillage.mtl",File.ReadLines(Source+"/Medieval_Voxel_Assets_Example.mtl").Where(line=>!line.StartsWith("map_")));AssetDatabase.ImportAsset(path,ImportAssetOptions.ForceSynchronousImport);
             var importer=(ModelImporter)AssetImporter.GetAtPath(path);importer.isReadable=true;importer.importAnimation=false;importer.materialImportMode=ModelImporterMaterialImportMode.ImportStandard;importer.SaveAndReimport();
             var root=new GameObject("MedievalVillage");var model=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(path));model.name="Example layout";
             var b=BoundsOf(model);float scale=44/Mathf.Max(b.size.x,b.size.z);model.transform.localScale*=scale;b=BoundsOf(model);model.transform.position-=new Vector3(b.center.x,b.min.y,b.center.z);model.transform.SetParent(root.transform,true);
@@ -44,7 +46,7 @@ namespace Mismo.Gameplay.Player.Editor
                     string name=materials[slot]!=null?materials[slot].name:"Ground";name=name.Replace(" (Instance)","");int dot=name.IndexOf('.');if(dot>=0)name=name.Substring(0,dot);
                     string materialPath=Art+"/"+name+".mat";var material=AssetDatabase.LoadAssetAtPath<Material>(materialPath);
                     if(material==null){material=new Material(Shader.Find("Standard"));AssetDatabase.CreateAsset(material,materialPath);}
-                    var texturePath=Directory.GetFiles(Source,name+".png",SearchOption.AllDirectories).FirstOrDefault();
+                    var texturePath=Directory.GetFiles(Textures,name+".png",SearchOption.AllDirectories).FirstOrDefault();
                     if(texturePath!=null)
                     {
                         texturePath=texturePath.Replace('\\','/');var ti=(TextureImporter)AssetImporter.GetAtPath(texturePath);ti.filterMode=FilterMode.Point;ti.mipmapEnabled=true;ti.maxTextureSize=2048;ti.textureCompression=TextureImporterCompression.CompressedHQ;ti.SaveAndReimport();
@@ -63,7 +65,7 @@ namespace Mismo.Gameplay.Player.Editor
             model.transform.position+=Vector3.forward*2.3f;
             // The levelled terrain is the village floor; no artificial platform.
             var prefab=PrefabUtility.SaveAsPrefabAsset(root,Output+"/MedievalVillage.prefab");Object.DestroyImmediate(root);
-            var catalog=Resources.Load<WorldContentCatalog>("WorldContentCatalog");var entries=catalog.assets.ToList();var entry=entries.Find(a=>a.id=="medieval.village");
+            var catalog=Mismo.Core.ProjectAssets.Load<WorldContentCatalog>("WorldContentCatalog");var entries=catalog.assets.ToList();var entry=entries.Find(a=>a.id=="medieval.village");
             if(entry==null){entry=new WorldAssetEntry{id="medieval.village",kind=WorldAssetKind.Village,weight=1,footprint=new Vector2(44,44),scaleRange=Vector2.one,rotations=new[]{0f}};entries.Add(entry);}
             entry.prefab=prefab;catalog.assets=entries.ToArray();EditorUtility.SetDirty(catalog);AssetDatabase.SaveAssets();
             if(removed==0)throw new Exception("No closed gates removed");

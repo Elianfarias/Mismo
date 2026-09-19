@@ -21,11 +21,11 @@ namespace Mismo.Gameplay.Player.World
                 if(!hit.transform.IsChildOf(creature)&&!hit.transform.IsChildOf(observer))return false;
             return true;
         }
-        public static CreatureSpecies Find(string id)=>System.Array.Find(Resources.LoadAll<CreatureSpecies>("Bestiary"),s=>s.id==id);
+        public static CreatureSpecies Find(string id)=>System.Array.Find(Mismo.Core.ProjectAssets.LoadAll<CreatureSpecies>("Bestiary"),s=>s.id==id);
         public static CreatureSpecies For(GameObject actor)
         {
             string name=actor.name.Replace("(Clone)","").Trim();
-            foreach(var species in Resources.LoadAll<CreatureSpecies>("Bestiary"))
+            foreach(var species in Mismo.Core.ProjectAssets.LoadAll<CreatureSpecies>("Bestiary"))
                 if(species.prefabs!=null)foreach(var prefab in species.prefabs)if(prefab!=null&&prefab.name==name)return species;
             return null;
         }

@@ -7,27 +7,29 @@ namespace Mismo.Gameplay.Player.Editor
 {
     public static class GatheringAssets
     {
-        const string Art="Assets/Art/Gathering";
+        const string Art="Assets/Art/Prefabs/Gathering";
+        const string Audio="Assets/Art/Audio/Gathering";
+        const string Materials="Assets/Art/Materials/Gathering";
         static T Asset<T>(string path)where T:ScriptableObject
         {var asset=AssetDatabase.LoadAssetAtPath<T>(path);if(asset!=null)return asset;asset=ScriptableObject.CreateInstance<T>();AssetDatabase.CreateAsset(asset,path);return asset;}
         [MenuItem("Mismo/Crafting/Create surface defaults")]
         public static void Create()
         {
-            Directory.CreateDirectory(Art);Directory.CreateDirectory("Assets/Resources/Recipes");AssetDatabase.Refresh();
-            var settings=Asset<GatheringSettings>("Assets/Resources/GatheringSettings.asset");
-            settings.herb=Resources.Load<ResourceNodeDefinition>("Gathering/HerbNode");settings.tree=Resources.Load<ResourceNodeDefinition>("Gathering/WoodNode");settings.stone=Resources.Load<ResourceNodeDefinition>("Gathering/StoneNode");
-            settings.monsterLoot=Resources.Load<MaterialLootTable>("Gathering/MonsterComponentLoot");
+            Directory.CreateDirectory(Art);Directory.CreateDirectory(Audio);Directory.CreateDirectory(Materials);Directory.CreateDirectory("Assets/Data/Crafting/Recipes");AssetDatabase.Refresh();
+            var settings=Asset<GatheringSettings>("Assets/Data/Gathering/GatheringSettings.asset");
+            settings.herb=Mismo.Core.ProjectAssets.Load<ResourceNodeDefinition>("Gathering/HerbNode");settings.tree=Mismo.Core.ProjectAssets.Load<ResourceNodeDefinition>("Gathering/WoodNode");settings.stone=Mismo.Core.ProjectAssets.Load<ResourceNodeDefinition>("Gathering/StoneNode");
+            settings.monsterLoot=Mismo.Core.ProjectAssets.Load<MaterialLootTable>("Gathering/MonsterComponentLoot");
             Node(settings.herb,0);Node(settings.tree,1);Node(settings.stone,2);
             if(settings.workbenchPrefab==null)settings.workbenchPrefab=Model("Workbench",3,false);
-            var potion=Asset<MaterialDefinition>("Assets/Resources/Materials/HerbalSalve.asset");
+            var potion=Asset<MaterialDefinition>("Assets/Data/Inventory/Materials/HerbalSalve.asset");
             potion.id="MAT-05";potion.displayName="Ungüento de hierbas";potion.description="Recupera vida gradualmente fuera de combate. El daño interrumpe el efecto.";
             potion.category=InventoryItemCategory.Consumable;potion.healingAmount=40;potion.healingSeconds=5;potion.stackSize=5;potion.gridWidth=potion.gridHeight=1;
             if(potion.pickupPrefab==null)potion.pickupPrefab=Model("HerbalSalve",4,false);EditorUtility.SetDirty(potion);
-            var salve=Asset<CraftingRecipe>("Assets/Resources/Recipes/HerbalSalve.asset");salve.id="REC-01";salve.displayName=potion.displayName;salve.description=potion.description;
-            salve.ingredients=new[]{new RecipeIngredient{material=Resources.Load<MaterialDefinition>("Materials/Herb"),quantity=2}};salve.result=potion;salve.quantity=1;EditorUtility.SetDirty(salve);
-            var upgrade=Asset<CraftingRecipe>("Assets/Resources/Recipes/InitialWeaponUpgrade.asset");upgrade.id="REC-02";upgrade.displayName="Mejora inicial del arma";upgrade.description="Mejora el ejemplar seleccionado conservando su variante y maestría.";
+            var salve=Asset<CraftingRecipe>("Assets/Data/Crafting/Recipes/HerbalSalve.asset");salve.id="REC-01";salve.displayName=potion.displayName;salve.description=potion.description;
+            salve.ingredients=new[]{new RecipeIngredient{material=Mismo.Core.ProjectAssets.Load<MaterialDefinition>("Materials/Herb"),quantity=2}};salve.result=potion;salve.quantity=1;EditorUtility.SetDirty(salve);
+            var upgrade=Asset<CraftingRecipe>("Assets/Data/Crafting/Recipes/InitialWeaponUpgrade.asset");upgrade.id="REC-02";upgrade.displayName="Mejora inicial del arma";upgrade.description="Mejora el ejemplar seleccionado conservando su variante y maestría.";
             upgrade.upgradeWeapon=true;upgrade.fromTier=1;upgrade.toTier=2;
-            upgrade.ingredients=new[]{new RecipeIngredient{material=Resources.Load<MaterialDefinition>("Materials/Wood"),quantity=2},new RecipeIngredient{material=Resources.Load<MaterialDefinition>("Materials/Stone"),quantity=3},new RecipeIngredient{material=Resources.Load<MaterialDefinition>("Materials/MonsterComponent"),quantity=1}};
+            upgrade.ingredients=new[]{new RecipeIngredient{material=Mismo.Core.ProjectAssets.Load<MaterialDefinition>("Materials/Wood"),quantity=2},new RecipeIngredient{material=Mismo.Core.ProjectAssets.Load<MaterialDefinition>("Materials/Stone"),quantity=3},new RecipeIngredient{material=Mismo.Core.ProjectAssets.Load<MaterialDefinition>("Materials/MonsterComponent"),quantity=1}};
             EditorUtility.SetDirty(upgrade);settings.recipes=new[]{salve,upgrade};EditorUtility.SetDirty(settings);AssetDatabase.SaveAssets();
             InventoryPresentationAssets.GenerateGridIcons();
         }
@@ -43,7 +45,7 @@ namespace Mismo.Gameplay.Player.Editor
         }
         static AudioClip Sound(string name,int frequency)
         {
-            string path=Art+"/"+name+".wav";
+            string path=Audio+"/"+name+".wav";
             if(!File.Exists(path))
             {
                 const int rate=22050,samples=3307;
@@ -91,7 +93,7 @@ namespace Mismo.Gameplay.Player.Editor
         static void Part(GameObject root,Vector3 p,Vector3 scale,Color color,bool collider)
         {
             var piece=GameObject.CreatePrimitive(PrimitiveType.Cube);piece.transform.SetParent(root.transform,false);piece.transform.localPosition=p;piece.transform.localScale=scale;
-            string path=Art+"/Color-"+ColorUtility.ToHtmlStringRGB(color)+".mat";var mat=AssetDatabase.LoadAssetAtPath<Material>(path);
+            string path=Materials+"/Color-"+ColorUtility.ToHtmlStringRGB(color)+".mat";var mat=AssetDatabase.LoadAssetAtPath<Material>(path);
             if(mat==null){mat=new Material(Shader.Find("Universal Render Pipeline/Lit")??Shader.Find("Standard")){color=color};AssetDatabase.CreateAsset(mat,path);}
             piece.GetComponent<Renderer>().sharedMaterial=mat;if(!collider)Object.DestroyImmediate(piece.GetComponent<Collider>());
         }

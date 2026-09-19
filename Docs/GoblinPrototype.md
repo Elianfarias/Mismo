@@ -17,7 +17,7 @@ Controles: WASD, mouse para cámara, click para combo, Q estocada, E parry, R gi
 
 ## Ajustes y reutilización
 
-`Assets/Data/Enemies/BaseGoblin.asset` contiene vida, percepción, velocidad, stagger y parámetros de ambos ataques. `Assets/Prefabs/Enemies/Goblin.prefab` contiene el enemigo reutilizable. Los tiempos y cifras son valores iniciales de prototipado, no valores fijados por el GDD.
+`Assets/Data/Enemies/BaseGoblin.asset` contiene vida, percepción, velocidad, stagger y parámetros de ambos ataques. `Assets/Art/Prefabs/Enemies/Goblin.prefab` contiene el enemigo reutilizable. Los tiempos y cifras son valores iniciales de prototipado, no valores fijados por el GDD.
 
 El menú `Mismo > Prototype > Goblin > Build Goblin Arena` crea los assets faltantes y conserva los existentes. `Add Goblin To Current Scene` agrega una instancia con Undo; `Remove Selected Goblin` permite quitarla con Undo. Fuera de la arena, el prefab necesita un NavMesh existente. `GoblinNavigation` permite construir uno al iniciar a partir del árbol de colliders estáticos asignado a `geometry`; no incluir jugadores ni enemigos en ese árbol. La geometría de la arena es estática y no se reconstruye automáticamente al mover obstáculos durante Play.
 

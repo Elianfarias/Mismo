@@ -13,9 +13,9 @@ Integración de los paquetes Jabali, Arana y Golem V3 sobre la IA y el combate e
 
 `Assets/Data/Enemies/ForestCreatures` contiene Boar, Spider y Golem (CreatureSettings). Editar vida, postura, velocidad, percepción y el arreglo attacks: habilitación, peso, distancia mínima/máxima, daño, tiempos, desplazamiento, hitbox, cooldown y proyectil. Las variantes de una especie comparten configuración; duplicar el asset y asignarlo en el prefab para diferenciarlas. Los valores iniciales requieren balance de juego.
 
-Los ocho prefabs están en `Assets/Prefabs/Enemies/ForestCreatures`. CreatureAnimationDriver sincroniza los clips con las fases de GoblinController; los goblins que no tienen una lista genérica conservan su selección anterior. Cada variante conserva su propio avatar Generic y paleta.
+Los ocho prefabs están en `Assets/Art/Prefabs/Enemies/ForestCreatures`. CreatureAnimationDriver sincroniza los clips con las fases de GoblinController; los goblins que no tienen una lista genérica conservan su selección anterior. Cada variante conserva su propio avatar Generic y paleta.
 
-En `Assets/Resources/WorldContentCatalog.asset`, las entradas `forest.*` controlan bioma, tipo de sitio, peso, cantidad, nivel, altura y distancia mínima al jugador. Los jabalíes aparecen en grupos de 1–2, las arañas de 1–3; el gólem ocupa un único puesto por encuentro BossArena del bosque. No es un enemigo de encuentros ordinarios. La integración usa el streaming y la identidad persistente de enemigos del mundo existente.
+En `Assets/Data/World/WorldContentCatalog.asset`, las entradas `forest.*` controlan bioma, tipo de sitio, peso, cantidad, nivel, altura y distancia mínima al jugador. Los jabalíes aparecen en grupos de 1–2, las arañas de 1–3; el gólem ocupa un único puesto por encuentro BossArena del bosque. No es un enemigo de encuentros ordinarios. La integración usa el streaming y la identidad persistente de enemigos del mundo existente.
 
 El menú `Mismo/Enemies/Integrate forest creatures` reconstruye la integración con las APIs de Unity. Conserva las configuraciones existentes; regenera la jerarquía Visual de los prefabs. No modificar esa jerarquía a mano si se va a repetir el importador.
 

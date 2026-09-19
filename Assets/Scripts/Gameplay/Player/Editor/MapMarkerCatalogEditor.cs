@@ -13,12 +13,12 @@ namespace Mismo.Gameplay.Player.Editor
         public static void Open() => GetWindow<MapMarkerCatalogWindow>("Mapa y minimapa");
         void OnGUI()
         {
-            var catalog=Resources.Load<MapMarkerCatalog>("MapMarkerCatalog");
+            var catalog=Mismo.Core.ProjectAssets.Load<MapMarkerCatalog>("MapMarkerCatalog");
             if(catalog==null)
             {
                 EditorGUILayout.HelpBox("Creá el catálogo para personalizar los iconos disponibles en el mapa.",MessageType.Info);
                 if(GUILayout.Button("Crear catálogo"))
-                {catalog=CreateInstance<MapMarkerCatalog>();AssetDatabase.CreateAsset(catalog,"Assets/Resources/MapMarkerCatalog.asset");AssetDatabase.SaveAssets();}
+                {catalog=CreateInstance<MapMarkerCatalog>();AssetDatabase.CreateAsset(catalog,"Assets/Data/UI/MapMarkerCatalog.asset");AssetDatabase.SaveAssets();}
                 return;
             }
             EditorGUILayout.HelpBox("Distancia visible: bajala para acercar el minimapa; subila para ver más terreno. Los ajustes se aplican en vivo. Guardá el catálogo para conservarlos. En Marcadores podés agregar o quitar iconos; conservá los ID usados en partidas.",MessageType.Info);

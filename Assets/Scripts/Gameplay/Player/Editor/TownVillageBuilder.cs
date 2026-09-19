@@ -10,7 +10,7 @@ namespace Mismo.Gameplay.Player.Editor
     /// <summary>Seeded decoration inside fixed village lots, keeping the central route clear.</summary>
     public static class TownVillageBuilder
     {
-        private const string Folder = "Assets/Art/fbx/Town/";
+        private const string Folder = "Assets/Art/Models/Town/";
         public static void Build(Transform village, VoxelRegionSettings settings)
         {
             var previous = village.Find("Imported Town");

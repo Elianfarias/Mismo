@@ -43,7 +43,7 @@ namespace Mismo.Gameplay.Player.Equipment
             if (weapon == null) weapon = gameObject.AddComponent<EquippedWeapon>();
             if (belt == null) belt = GetComponent<BeltDash>();
             if (runner != null) return;
-            if (startingWeapons == null) startingWeapons = Resources.Load<WeaponSetDefinition>("StartingWeapons");
+            if (startingWeapons == null) startingWeapons = Mismo.Core.ProjectAssets.Load<WeaponSetDefinition>("StartingWeapons");
             slots[0] = startingWeapons != null ? startingWeapons.primary : weapon.Definition;
             slots[1] = startingWeapons != null ? startingWeapons.secondary : null;
             if (slots[0] != null) weapon.Configure(slots[0]);

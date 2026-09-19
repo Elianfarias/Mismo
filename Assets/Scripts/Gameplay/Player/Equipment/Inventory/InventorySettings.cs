@@ -18,7 +18,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             get
             {
-                if(current==null) current=Resources.Load<InventorySettings>("InventorySettings");
+                if(current==null) current=Mismo.Core.ProjectAssets.Load<InventorySettings>("InventorySettings");
                 if(current==null) current=CreateInstance<InventorySettings>();
                 return current;
             }

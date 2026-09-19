@@ -23,11 +23,11 @@ namespace Mismo.Gameplay.Player.Editor
         }
         private static void ConfigureBowMask()
         {
-            var catalog=Resources.Load<ItemCatalog>("ItemCatalog");
+            var catalog=Mismo.Core.ProjectAssets.Load<ItemCatalog>("ItemCatalog");
             var bow=catalog.weapons.Single(w=>w.Id=="bow.basic");
             Check(bow.family!=null && bow.family.animations!=null,"Bow family exists");
             if(bow.family.animations.actionMask!=null)return;
-            var prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/Player.prefab");
+            var prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/Player.prefab");
             var driver=prefab.GetComponent<PlayerAnimationDriver>();
             var animator=driver.Animator;
             var spine=animator.isHuman?animator.GetBoneTransform(HumanBodyBones.Spine):
@@ -43,7 +43,7 @@ namespace Mismo.Gameplay.Player.Editor
                 string path=AnimationUtility.CalculateTransformPath(bones[i],animator.transform);
                 mask.SetTransformPath(i,path);mask.SetTransformActive(i,path==spinePath || path.StartsWith(spinePath+"/",StringComparison.Ordinal));
             }
-            string assetPath=AssetDatabase.GenerateUniqueAssetPath("Assets/Data/WeaponFamilies/BowUpperBody.mask");
+            string assetPath=AssetDatabase.GenerateUniqueAssetPath("Assets/Art/Animations/WeaponFamilies/BowUpperBody.mask");
             AssetDatabase.CreateAsset(mask,assetPath);bow.family.animations.actionMask=mask;
             EditorUtility.SetDirty(bow.family.animations);AssetDatabase.SaveAssets();
             Check(!mask.GetHumanoidBodyPartActive(AvatarMaskBodyPart.Root) && !mask.GetHumanoidBodyPartActive(AvatarMaskBodyPart.LeftLeg),"Bow mask excludes root and legs");
@@ -118,7 +118,7 @@ namespace Mismo.Gameplay.Player.Editor
         }
         private static void VerifyActualBow()
         {
-            var bow=Resources.Load<ItemCatalog>("ItemCatalog").weapons.Single(w=>w.Id=="bow.basic");
+            var bow=Mismo.Core.ProjectAssets.Load<ItemCatalog>("ItemCatalog").weapons.Single(w=>w.Id=="bow.basic");
             var set=bow.family.animations;
             var clip=set.Find(bow.GetAbility(AbilitySlot.Basic)).clip;
             Check(clip!=null && set.actionMask!=null,"Actual bow clip and upper-body mask are configured");
@@ -126,7 +126,7 @@ namespace Mismo.Gameplay.Player.Editor
             WeaponActionPlayback playback=null;
             try
             {
-                var character=stage.Clone(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/Player.prefab"));
+                var character=stage.Clone(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/Player.prefab"));
                 var animator=character.GetComponent<PlayerAnimationDriver>().Animator;
                 var controller=bow.poseProfile!=null && bow.poseProfile.animations!=null ? bow.poseProfile.animations : set.locomotion!=null?set.locomotion:animator.runtimeAnimatorController;
                 var bones=animator.GetComponentsInChildren<Transform>(true);

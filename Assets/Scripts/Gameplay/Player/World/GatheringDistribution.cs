@@ -5,7 +5,7 @@ namespace Mismo.Gameplay.Player.World
     {
         public static void WrapTree(GameObject tree,string id)
         {
-            var settings=Resources.Load<GatheringSettings>("GatheringSettings");if(settings==null||settings.tree==null)return;
+            var settings=Mismo.Core.ProjectAssets.Load<GatheringSettings>("GatheringSettings");if(settings==null||settings.tree==null)return;
             var node=Place(settings.tree,id,tree.transform.position,tree.transform.parent);
             node.transform.rotation=tree.transform.rotation;
             tree.transform.SetParent(node.transform,true);tree.transform.localPosition=Vector3.zero;tree.transform.localRotation=Quaternion.identity;
@@ -14,7 +14,7 @@ namespace Mismo.Gameplay.Player.World
         public static GameObject PlaceAsset(WorldAssetEntry asset,string id,Vector3 point,Quaternion rotation,Transform parent)
         {
             if(asset.decorativeOnly)return Object.Instantiate(asset.prefab,point,rotation,parent);
-            var settings=Resources.Load<GatheringSettings>("GatheringSettings");
+            var settings=Mismo.Core.ProjectAssets.Load<GatheringSettings>("GatheringSettings");
             var definition=asset.gatheringNode;
             if(definition==null&&settings!=null)
             {
@@ -40,7 +40,7 @@ namespace Mismo.Gameplay.Player.World
         }
         public static void Decorate(ExplorationWorldSettings world,ExplorationTerrain terrain,Vector2Int chunk,Transform root)
         {
-            var settings=Resources.Load<GatheringSettings>("GatheringSettings");if(settings==null)return;
+            var settings=Mismo.Core.ProjectAssets.Load<GatheringSettings>("GatheringSettings");if(settings==null)return;
             var rng=new System.Random(ExplorationTerrain.Hash(world.seed,chunk.x,chunk.y,910+settings.generationVersion));
             var placed=new System.Collections.Generic.List<Vector3>();
             Physics.SyncTransforms();
@@ -65,7 +65,7 @@ namespace Mismo.Gameplay.Player.World
         GameObject root;bool stationPlaced;readonly bool[] resources=new bool[3];float retryAt;
         void Start()
         {
-            settings=Resources.Load<GatheringSettings>("GatheringSettings");var world=WorldSession.Current;
+            settings=Mismo.Core.ProjectAssets.Load<GatheringSettings>("GatheringSettings");var world=WorldSession.Current;
             arrival=world!=null?new Vector3(world.spawnX,world.spawnY,world.spawnZ):transform.position;
             root=new GameObject("Arrival gathering and workbench");
         }

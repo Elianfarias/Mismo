@@ -59,7 +59,7 @@ namespace Mismo.Gameplay.Player.Editor
             var loadout=player.GetComponent<EquipmentLoadout>();loadout.Runner.Cancel();loadout.Belt?.Cancel();
             var health=player.GetComponent<Health>();health.Revive();
             float until=Time.time+7;while(loadout.InCombat&&Time.time<until)yield return null;
-            var catalog=Resources.Load<ItemCatalog>("ItemCatalog");
+            var catalog=Mismo.Core.ProjectAssets.Load<ItemCatalog>("ItemCatalog");
             var old=new InventoryProfile{version=1,progression=null};
             for(int i=0;i<2;i++){var item=new OwnedWeapon{instanceId=Guid.NewGuid().ToString("N"),definitionId=loadout.GetSlot(i).Id,tier=0};old.weapons.Add(item);old.equipped[i]=item.instanceId;}
             var storage=new MemoryStore{json=JsonUtility.ToJson(old)};

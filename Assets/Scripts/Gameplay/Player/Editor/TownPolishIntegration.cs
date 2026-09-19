@@ -14,7 +14,7 @@ namespace Mismo.Gameplay.Player.Editor
             try
             {
                 EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);
-                const string path="Assets/Prefabs/World/Villages/MedievalVillage.prefab";
+                const string path="Assets/Art/Prefabs/World/Villages/MedievalVillage.prefab";
                 var root=PrefabUtility.LoadPrefabContents(path);
                 var floor=root.transform.Find("Stone foundation");if(floor!=null)Object.DestroyImmediate(floor.gameObject);
                 Vector3 entrance=Vector3.zero;bool found=false;
@@ -32,9 +32,9 @@ namespace Mismo.Gameplay.Player.Editor
                 }
                 if(!found)throw new Exception("Open entrance not found");
                 Vector3 outward=Mathf.Abs(entrance.x)>Mathf.Abs(entrance.z)?Vector3.right*Mathf.Sign(entrance.x):Vector3.forward*Mathf.Sign(entrance.z);
-                var catalog=Resources.Load<WorldContentCatalog>("WorldContentCatalog");catalog.villageSpawnOffset=entrance+outward*11;catalog.villageSpawnOffset.y=0;catalog.villageSpawnYaw=Quaternion.LookRotation(-outward).eulerAngles.y;EditorUtility.SetDirty(catalog);
+                var catalog=Mismo.Core.ProjectAssets.Load<WorldContentCatalog>("WorldContentCatalog");catalog.villageSpawnOffset=entrance+outward*11;catalog.villageSpawnOffset.y=0;catalog.villageSpawnYaw=Quaternion.LookRotation(-outward).eulerAngles.y;EditorUtility.SetDirty(catalog);
                 PrefabUtility.SaveAsPrefabAsset(root,path);PrefabUtility.UnloadPrefabContents(root);
-                const string surfacePath="Assets/Resources/TerrainSurface.mat";var material=AssetDatabase.LoadAssetAtPath<Material>(surfacePath);
+                const string surfacePath="Assets/Art/Materials/TerrainSurface.mat";var material=AssetDatabase.LoadAssetAtPath<Material>(surfacePath);
                 if(material==null){material=new Material(Shader.Find("Mismo/Textured Terrain"));AssetDatabase.CreateAsset(material,surfacePath);}
                 AssetDatabase.SaveAssets();
                 Debug.Log("TOWN_POLISH_PASS entrance="+entrance+" spawn="+catalog.villageSpawnOffset+" yaw="+catalog.villageSpawnYaw);

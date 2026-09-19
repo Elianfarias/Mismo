@@ -5,7 +5,7 @@ using UnityEngine;
 
 public sealed class GameSoundWindow : EditorWindow
 {
-    const string Path = "Assets/Resources/Audio/GameSounds.asset";
+    const string Path = "Assets/Data/Audio/GameSounds.asset";
     GameSoundCatalog catalog;
     SerializedObject serialized;
     Vector2 scroll;
@@ -25,11 +25,11 @@ public sealed class GameSoundWindow : EditorWindow
         catalog = AssetDatabase.LoadAssetAtPath<GameSoundCatalog>(Path);
         if (catalog == null)
         {
-            System.IO.Directory.CreateDirectory("Assets/Resources/Audio");
+            System.IO.Directory.CreateDirectory("Assets/Data/Audio");
             AssetDatabase.Refresh();
             catalog = CreateInstance<GameSoundCatalog>();
-            catalog.explorationMusic = Resources.Load<AudioClip>("Audio/Music/Exploration");
-            catalog.combatMusic = Resources.Load<AudioClip>("Audio/Music/Combat");
+            catalog.explorationMusic = Mismo.Core.ProjectAssets.Load<AudioClip>("Audio/Music/Exploration");
+            catalog.combatMusic = Mismo.Core.ProjectAssets.Load<AudioClip>("Audio/Music/Combat");
             catalog.EnsureEvents();
             AssetDatabase.CreateAsset(catalog, Path);
         }

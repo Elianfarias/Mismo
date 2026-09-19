@@ -34,7 +34,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             get
             {
-                var asset=Resources.Load<ProgressionRules>("ProgressionRules");
+                var asset=Mismo.Core.ProjectAssets.Load<ProgressionRules>("ProgressionRules");
                 if(asset!=null)return asset;
                 if(fallback==null){fallback=CreateInstance<ProgressionRules>();fallback.hideFlags=HideFlags.HideAndDontSave;}
                 return fallback;

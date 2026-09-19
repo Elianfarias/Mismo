@@ -14,7 +14,7 @@ namespace Mismo.Gameplay.Player.Editor
         public static void RunBatch()
         {
             if(!AssetDatabase.IsValidFolder(Folder))AssetDatabase.CreateFolder("Assets/Data","WeaponFamilies");
-            var catalog=Resources.Load<ItemCatalog>("ItemCatalog");
+            var catalog=Mismo.Core.ProjectAssets.Load<ItemCatalog>("ItemCatalog");
             var sword=catalog.weapons.Single(w=>w.Id=="sword.basic");
             var bow=catalog.weapons.Single(w=>w.Id=="bow.basic");
             var family=Create(sword,"OneHandSword",true);

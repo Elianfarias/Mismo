@@ -1,6 +1,7 @@
 {
   "name": "Mismo.Audio",
   "references": [
-    "Unity.ugui"
+    "Unity.ugui",
+    "Mismo.Core"
   ]
 }

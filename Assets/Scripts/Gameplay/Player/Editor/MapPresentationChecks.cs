@@ -41,7 +41,7 @@ namespace Mismo.Gameplay.Player.Editor
         static void Finish(string result){SessionState.SetBool(Pending,false);EditorApplication.update-=Step;File.WriteAllText(".validation/map-play-checks.txt",result);EditorApplication.Exit(result.StartsWith("PASS")?0:1);}
         static IEnumerator Run()
         {
-            var settings=Object.Instantiate(Resources.Load<ExplorationWorldSettings>("ExplorationWorldSettings"));settings.preserveAuthoredCenter=false;settings.content=null;
+            var settings=Object.Instantiate(Mismo.Core.ProjectAssets.Load<ExplorationWorldSettings>("ExplorationWorldSettings"));settings.preserveAuthoredCenter=false;settings.content=null;
             var terrain=new ExplorationTerrain(settings);var village=terrain.Site(Vector2Int.zero);
             var player=new GameObject("Map validation player");player.transform.position=village.position+new Vector3(20,5,-55);player.AddComponent<PlayerMotor>();
             var camera=new GameObject("Background camera").AddComponent<UnityEngine.Camera>();camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.035f,.055f,.075f);camera.cullingMask=0;

@@ -17,8 +17,8 @@ namespace Mismo.Gameplay.Player.Editor
     public static class GoblinPrototypeTool
     {
         public const string ScenePath = "Assets/Scenes/GoblinArena.unity";
-        public const string PrefabPath = "Assets/Prefabs/Enemies/Goblin.prefab";
-        public const string ElitePrefabPath = "Assets/Prefabs/Enemies/GoblinElite.prefab";
+        public const string PrefabPath = "Assets/Art/Prefabs/Enemies/Goblin.prefab";
+        public const string ElitePrefabPath = "Assets/Art/Prefabs/Enemies/GoblinElite.prefab";
         public const string SettingsPath = "Assets/Data/Enemies/BaseGoblin.asset";
         public const string EliteScenePath = "Assets/Scenes/GoblinEliteArena.unity";
 
@@ -31,7 +31,7 @@ namespace Mismo.Gameplay.Player.Editor
                 if (Application.isBatchMode) EditorSceneManager.OpenScene("Assets/Scenes/SampleScene.unity", OpenSceneMode.Single);
                 else { Debug.LogWarning("Guardá la escena sin título antes de crear la arena."); return; }
             }
-            EnsureFolder("Assets/Prefabs/Enemies"); EnsureFolder("Assets/Data/Enemies"); EnsureFolder("Assets/Art/Materials/Goblin");
+            EnsureFolder("Assets/Art/Prefabs/Enemies"); EnsureFolder("Assets/Data/Enemies"); EnsureFolder("Assets/Art/Materials/Goblin");
             var settings = AssetDatabase.LoadAssetAtPath<GoblinSettings>(SettingsPath);
             if (settings == null)
             { settings = ScriptableObject.CreateInstance<GoblinSettings>(); AssetDatabase.CreateAsset(settings, SettingsPath); }
@@ -75,7 +75,7 @@ namespace Mismo.Gameplay.Player.Editor
                 if (Application.isBatchMode) EditorSceneManager.OpenScene("Assets/Scenes/SampleScene.unity", OpenSceneMode.Single);
                 else { Debug.LogWarning("Guardá la escena sin título antes de crear el Elite."); return; }
             }
-            EnsureFolder("Assets/Prefabs/Enemies"); EnsureFolder("Assets/Data/Enemies"); EnsureFolder("Assets/Art/Materials/Goblin");
+            EnsureFolder("Assets/Art/Prefabs/Enemies"); EnsureFolder("Assets/Data/Enemies"); EnsureFolder("Assets/Art/Materials/Goblin");
             var basePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(PrefabPath);
             if (basePrefab == null)
             {
@@ -166,7 +166,7 @@ namespace Mismo.Gameplay.Player.Editor
 
         private static void CreateArena(GameObject goblinPrefab, string scenePath)
         {
-            GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/Player.prefab");
+            GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/Player.prefab");
             if (playerPrefab == null) throw new InvalidOperationException("Falta el prefab Player del prototipo.");
             Scene previous = SceneManager.GetActiveScene();
             Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Additive);
@@ -191,7 +191,7 @@ namespace Mismo.Gameplay.Player.Editor
                 if (player.transform.GetComponentInChildren<MeshRenderer>() != null &&
                     Array.Find(player.GetComponentsInChildren<Transform>(), t => t.name == "BasicSword") == null)
                 {
-                    GameObject swordPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/BasicSword.prefab");
+                    GameObject swordPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/BasicSword.prefab");
                     if (swordPrefab != null)
                     {
                         var sword = (GameObject)PrefabUtility.InstantiatePrefab(swordPrefab, scene);

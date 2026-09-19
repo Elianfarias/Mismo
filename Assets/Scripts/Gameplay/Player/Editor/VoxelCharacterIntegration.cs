@@ -15,7 +15,7 @@ namespace Mismo.Gameplay.Player.Editor
     {
         public const string ModelPath = "Assets/Art/FBX/Characters/Voxel_Adventurer_Animated.fbx";
         public const string ControllerPath = "Assets/Art/Animations/VoxelLocomotion.controller";
-        public const string PrefabPath = "Assets/Prefabs/Player/PlayerVoxelSwordE.prefab";
+        public const string PrefabPath = "Assets/Art/Prefabs/Player/PlayerVoxelSwordE.prefab";
         [MenuItem("Mismo/Character/Integrate Sword E And Locomotion")]
         public static void Apply()
         {
@@ -72,7 +72,7 @@ namespace Mismo.Gameplay.Player.Editor
             var idle=sm.states.First(s=>s.state.name=="Idle").state;
             idle.motion=locomotion;idle.speedParameter="PlaybackRate";idle.speedParameterActive=true;
             EditorUtility.SetDirty(controller); AssetDatabase.SaveAssets();
-            var prefab = PrefabUtility.LoadPrefabContents("Assets/Prefabs/Player/Player.prefab");
+            var prefab = PrefabUtility.LoadPrefabContents("Assets/Art/Prefabs/Player/Player.prefab");
             try { Configure(prefab,controller); PrefabUtility.SaveAsPrefabAsset(prefab,PrefabPath); }
             finally { PrefabUtility.UnloadPrefabContents(prefab); }
             var scene=EditorSceneManager.OpenScene("Assets/Scenes/VoxelRegion_7319.unity");
@@ -91,7 +91,7 @@ namespace Mismo.Gameplay.Player.Editor
             var model=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(ModelPath),player.transform);
             model.name="VoxelAdventurer"; model.transform.localPosition=Vector3.zero;model.transform.localRotation=Quaternion.identity;model.transform.localScale=Vector3.one;
             foreach(var t in model.GetComponentsInChildren<Transform>(true))t.gameObject.layer=player.layer;
-            string matFolder="Assets/Art/Animations/VoxelMaterials";
+            string matFolder="Assets/Art/Materials/VoxelMaterials";
             if(!AssetDatabase.IsValidFolder(matFolder))AssetDatabase.CreateFolder("Assets/Art/Animations","VoxelMaterials");
             foreach(var renderer in model.GetComponentsInChildren<Renderer>())
             {
@@ -111,7 +111,7 @@ namespace Mismo.Gameplay.Player.Editor
                         if(material.HasProperty("_Color"))material.SetColor("_Color",color);
                         if(source.name.ToLowerInvariant().Contains("weapons"))
                         {
-                            var texture=AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Art/FBX/Weapons/Textures/weapons_bits_texture.png");
+                            var texture=AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Art/Textures/Weapons/weapons_bits_texture.png");
                             if(material.HasProperty("_BaseMap"))material.SetTexture("_BaseMap",texture);
                             if(material.HasProperty("_MainTex"))material.SetTexture("_MainTex",texture);
                         }

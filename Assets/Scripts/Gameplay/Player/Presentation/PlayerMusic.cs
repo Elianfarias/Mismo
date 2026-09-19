@@ -43,9 +43,9 @@ namespace Mismo.Gameplay.Player.Presentation
         void Awake()
         {
             health = GetComponent<Health>();
-            catalog = Resources.Load<GameSoundCatalog>(GameSoundCatalog.ResourcePath);
-            exploration = Resources.Load<AudioClip>("Audio/Music/Exploration");
-            combat = Resources.Load<AudioClip>("Audio/Music/Combat");
+            catalog = Mismo.Core.ProjectAssets.Load<GameSoundCatalog>(GameSoundCatalog.ResourcePath);
+            exploration = Mismo.Core.ProjectAssets.Load<AudioClip>("Audio/Music/Exploration");
+            combat = Mismo.Core.ProjectAssets.Load<AudioClip>("Audio/Music/Combat");
         }
 
         void LateUpdate()

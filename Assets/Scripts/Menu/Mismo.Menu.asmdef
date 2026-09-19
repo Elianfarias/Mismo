@@ -4,6 +4,7 @@
     "Mismo.Audio",
     "Mismo.Gameplay.Player",
     "Unity.ugui",
-    "Unity.InputSystem"
+    "Unity.InputSystem",
+    "Mismo.Core"
   ]
 }

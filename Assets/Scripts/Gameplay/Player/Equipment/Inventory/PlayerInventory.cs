@@ -54,7 +54,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 if (definition == null || string.IsNullOrEmpty(definition.Id) || !definitions.Add(definition.Id))
                 { Notice = "El catálogo de armas contiene datos inválidos."; HasSaveProblem = true; return; }
             if (catalog.bossReward != null) rewards.Add(ItemCatalog.BossRewardId, catalog.bossReward.Id);
-            foreach (var material in Resources.LoadAll<MaterialDefinition>("Materials"))
+            foreach (var material in Mismo.Core.ProjectAssets.LoadAll<MaterialDefinition>("Materials"))
             {
                 if (!MaterialCatalog.ValidId(material.id) || string.IsNullOrWhiteSpace(material.displayName) || materialDefinitions.ContainsKey(material.id))
                 { Notice = "El catálogo de materiales contiene datos inválidos o IDs duplicados."; HasSaveProblem = true; return; }

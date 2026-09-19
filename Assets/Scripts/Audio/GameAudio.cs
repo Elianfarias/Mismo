@@ -18,7 +18,7 @@ public static class GameAudio
     public static void Play(GameSound sound)
     {
         if (!Application.isPlaying || AudioRuntime.Instance == null) return;
-        if (catalog == null) catalog = Resources.Load<GameSoundCatalog>(GameSoundCatalog.ResourcePath);
+        if (catalog == null) catalog = Mismo.Core.ProjectAssets.Load<GameSoundCatalog>(GameSoundCatalog.ResourcePath);
         var entry = catalog != null ? catalog.Find(sound) : null;
         if (entry == null || entry.clip == null || entry.volume <= 0) return;
         if (readyAt.TryGetValue(sound, out float time) && Time.unscaledTime < time) return;

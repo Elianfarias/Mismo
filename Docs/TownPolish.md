@@ -6,7 +6,7 @@ Las partidas nuevas aparecen once metros por fuera del centro del puente abierto
 
 La cámara comienza orientada como el personaje; conserva sus nueve metros de distancia y la protección contra obstáculos.
 
-El material Assets/Resources/TerrainSurface.mat controla las nuevas superficies procedurales:
+El material Assets/Art/Materials/TerrainSurface.mat controla las nuevas superficies procedurales:
 - Grass Color: tono del pasto.
 - Dirt Color: tono de los caminos y de las caras de tierra.
 - Texture Detail: intensidad del detalle pixelado.

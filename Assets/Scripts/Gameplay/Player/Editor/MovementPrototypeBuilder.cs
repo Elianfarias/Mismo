@@ -17,7 +17,7 @@ namespace Mismo.Gameplay.Player.Editor
     public static class MovementPrototypeBuilder
     {
         public const string ScenePath = "Assets/Scenes/MovementPrototype.unity";
-        private const string PrefabPath = "Assets/Prefabs/Player/Player.prefab";
+        private const string PrefabPath = "Assets/Art/Prefabs/Player/Player.prefab";
 
         /// <summary>Genera los assets faltantes sin sobrescribir una escena o un prefab existentes.</summary>
         [MenuItem("Mismo/Prototype/Build Complete Movement Prototype")]
@@ -38,7 +38,7 @@ namespace Mismo.Gameplay.Player.Editor
                 return;
             }
             PlayerSettingsBuilder.Build();
-            EnsureFolder("Assets/Prefabs/Player");
+            EnsureFolder("Assets/Art/Prefabs/Player");
             EnsureFolder("Assets/Art/Materials");
             var movement = AssetDatabase.LoadAssetAtPath<MovementSettings>("Assets/Data/Player/DefaultMovementSettings.asset");
             var stamina = AssetDatabase.LoadAssetAtPath<StaminaSettings>("Assets/Data/Player/DefaultStaminaSettings.asset");
@@ -108,7 +108,7 @@ namespace Mismo.Gameplay.Player.Editor
                     body.skinWidth = 0.04f;
                     body.minMoveDistance = 0f;
                     PlayerInput input = player.AddComponent<PlayerInput>();
-                    input.actions = AssetDatabase.LoadAssetAtPath<InputActionAsset>("Assets/InputSystem_Actions.inputactions");
+                    input.actions = AssetDatabase.LoadAssetAtPath<InputActionAsset>("Assets/Settings/Input/InputSystem_Actions.inputactions");
                     input.defaultActionMap = "Player";
                     input.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
                     player.AddComponent<PlayerInputReader>();

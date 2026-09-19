@@ -131,7 +131,7 @@ namespace Mismo.Gameplay.Player.Editor
         }
         private static GameObject Spawn(string name, Vector3 position, Transform parent)
         {
-            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/"+name+".prefab");
+            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Enemies/"+name+".prefab");
             if (prefab == null) throw new System.InvalidOperationException("Falta prefab "+name);
             var go = (GameObject)PrefabUtility.InstantiatePrefab(prefab, parent);
             go.transform.position=position; return go;
