@@ -29,18 +29,21 @@ namespace Mismo.Gameplay.Voxels
 
         private void OnEnable()
         {
-            if (rebuildOnEnable && asset != null) Rebuild();
+            if (rebuildOnEnable && asset != null && !IsPrefabAssetInEditor()) Rebuild();
         }
 
         private void OnValidate()
         {
-            if (!rebuilding && rebuildOnEnable && asset != null) Rebuild();
+            // Prefab assets already contain their serialized voxel children. Rebuilding them
+            // during import/validation tries to destroy and recreate prefab contents, which
+            // produces duplicate identifiers and SendMessage warnings in the Unity console.
+            if (!rebuilding && rebuildOnEnable && asset != null && !IsPrefabAssetInEditor()) Rebuild();
         }
 
         [ContextMenu("Rebuild Voxels")]
         public void Rebuild()
         {
-            if (rebuilding || asset == null) return;
+            if (rebuilding || asset == null || IsPrefabAssetInEditor()) return;
             rebuilding = true;
             try
             {
@@ -64,6 +67,15 @@ namespace Mismo.Gameplay.Voxels
             {
                 rebuilding = false;
             }
+        }
+
+        private bool IsPrefabAssetInEditor()
+        {
+#if UNITY_EDITOR
+            return !Application.isPlaying && UnityEditor.PrefabUtility.IsPartOfPrefabAsset(gameObject);
+#else
+            return false;
+#endif
         }
 
         /// <summary>Modifica esta instancia durante runtime sin tocar el asset compartido.</summary>
