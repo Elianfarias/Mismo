@@ -32,7 +32,7 @@ namespace Mismo.Gameplay.Player.Editor
         static IEnumerator Run()
         {
             foreach(var root in UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects())root.SetActive(false);
-            var settings=Object.Instantiate(Resources.Load<ExplorationWorldSettings>("ExplorationWorldSettings"));settings.preserveAuthoredCenter=false;
+            var settings=Object.Instantiate(Mismo.Core.ProjectAssets.Load<ExplorationWorldSettings>("ExplorationWorldSettings"));settings.preserveAuthoredCenter=false;
             var terrain=new ExplorationTerrain(settings);var site=terrain.Site(Vector2Int.zero);var center=ExplorationChunks.Coordinate(site.position);
             var rootTerrain=new GameObject("Test world");var material=new Material(Shader.Find("Mismo/Voxel Landscape"));
             for(int z=-2;z<=2;z++)for(int x=-2;x<=2;x++)

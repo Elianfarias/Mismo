@@ -17,7 +17,7 @@ namespace Mismo.Gameplay.Player.Editor
             {
                 EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);
                 var notes=new System.Collections.Generic.List<string>();
-                var settings=Object.Instantiate(Resources.Load<ExplorationWorldSettings>("ExplorationWorldSettings"));settings.preserveAuthoredCenter=false;
+                var settings=Object.Instantiate(Mismo.Core.ProjectAssets.Load<ExplorationWorldSettings>("ExplorationWorldSettings"));settings.preserveAuthoredCenter=false;
                 int total=0;
                 foreach(int seed in new[]{7319,12,654321})
                 {
@@ -39,7 +39,7 @@ namespace Mismo.Gameplay.Player.Editor
                 var arrival=origin.position+settings.content.VillageArrivalOffset;arrival.y=field.Height(arrival.x,arrival.z)+.3f;
                 if(Vector3.Distance(new Vector3(oldSave.x,oldSave.y,oldSave.z),arrival)>.01f||oldSave.villageLayoutRevision!=1)throw new Exception("Old save relocation");
                 var far=new WorldSaveData{x=9999,y=12,z=9999};WorldSession.MigrateVillageLayout(far,settings);if(far.x!=9999||far.y!=12||far.z!=9999)throw new Exception("Distant save moved");
-                var root=new GameObject("World");var center=ExplorationChunks.Coordinate(origin.position);var material=Resources.Load<Material>("TerrainSurface");
+                var root=new GameObject("World");var center=ExplorationChunks.Coordinate(origin.position);var material=Mismo.Core.ProjectAssets.Load<Material>("TerrainSurface");
                 for(int z=-2;z<=2;z++)for(int x=-2;x<=2;x++)
                 {var go=new GameObject("Terrain");go.transform.SetParent(root.transform);var mesh=ExplorationChunks.BuildTerrain(field,center+new Vector2Int(x,z));go.AddComponent<MeshFilter>().sharedMesh=mesh;go.AddComponent<MeshRenderer>().sharedMaterial=material;go.AddComponent<MeshCollider>().sharedMesh=mesh;}
                 new ExplorationContent(settings,field).Decorate(center,root.transform,material);
@@ -62,9 +62,9 @@ namespace Mismo.Gameplay.Player.Editor
                 var nav=NavMeshBuilder.BuildNavMeshData(NavMesh.GetSettingsByID(0),sources,new Bounds(origin.position,new Vector3(180,100,180)),Vector3.zero,Quaternion.identity);var instance=NavMesh.AddNavMeshData(nav);
                 if(!NavMesh.SamplePosition(arrival,out var entry,3,NavMesh.AllAreas)||!NavMesh.SamplePosition(new Vector3(origin.position.x,ground,origin.position.z),out var plaza,3,NavMesh.AllAreas))throw new Exception("Missing walkable entrance/plaza");
                 var path=new NavMeshPath();if(!NavMesh.CalculatePath(entry.position,plaza.position,NavMesh.AllAreas,path)||path.status!=NavMeshPathStatus.PathComplete)throw new Exception("Entrance cannot reach plaza");
-                var player=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/Player.prefab"));player.transform.position=arrival;player.transform.rotation=Quaternion.Euler(0,settings.content.villageSpawnYaw,0);
+                var player=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/Player.prefab"));player.transform.position=arrival;player.transform.rotation=Quaternion.Euler(0,settings.content.villageSpawnYaw,0);
                 var camera=new GameObject("Camera").AddComponent<UnityEngine.Camera>();camera.tag="MainCamera";camera.transform.position=origin.position+new Vector3(80,45,105);camera.transform.LookAt(origin.position+Vector3.up*5);camera.farClipPlane=500;
-                var cycle=new GameObject("Lighting").AddComponent<DayNightCycle>();cycle.Initialize(Resources.Load<DayNightSettings>("DayNightSettings"));cycle.SetHour(10);RenderSettings.fog=false;
+                var cycle=new GameObject("Lighting").AddComponent<DayNightCycle>();cycle.Initialize(Mismo.Core.ProjectAssets.Load<DayNightSettings>("DayNightSettings"));cycle.SetHour(10);RenderSettings.fog=false;
                 Directory.CreateDirectory("Docs/Validation/VillageSize");var rt=new RenderTexture(1260,850,24);camera.targetTexture=rt;camera.Render();RenderTexture.active=rt;var pixels=new Texture2D(1260,850,TextureFormat.RGB24,false);pixels.ReadPixels(new Rect(0,0,1260,850),0,0);pixels.Apply();File.WriteAllBytes("Docs/Validation/VillageSize/Town.png",pixels.EncodeToPNG());
                 notes.Add("PASS: 88m town, "+foundations+" structural bases touch ground, level full footprint, old-save migration, distant position preserved, 9m camera clearance, entrance-to-plaza navigation.");File.WriteAllLines("Docs/Validation/VillageSize/Checks.txt",notes);
                 instance.Remove();Debug.Log("VILLAGE_SIZE_PASS "+total);EditorApplication.Exit(0);
@@ -75,7 +75,7 @@ namespace Mismo.Gameplay.Player.Editor
             try
             {
                 EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);
-                var town=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/World/Villages/MedievalVillage.prefab"));
+                var town=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/World/Villages/MedievalVillage.prefab"));
                 var lines=new System.Collections.Generic.List<string>();
                 foreach(var filter in town.GetComponentsInChildren<MeshFilter>())
                 {

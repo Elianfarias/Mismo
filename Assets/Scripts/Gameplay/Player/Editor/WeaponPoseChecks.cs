@@ -19,8 +19,8 @@ namespace Mismo.Gameplay.Player.Editor
             {
                 StageUtility.GoToStage(stage,true);
                 Require(stage.scene.IsValid(),"Preview stage has an isolated scene");
-                var prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/PlayerVoxelSwordE.prefab");
-                if(prefab==null)prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/Player.prefab");
+                var prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/PlayerVoxelSwordE.prefab");
+                if(prefab==null)prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/Player.prefab");
                 var character=stage.Clone(prefab);
                 Require(character.scene==stage.scene,"Character clone stays inside preview scene");
                 foreach(var script in character.GetComponentsInChildren<MonoBehaviour>(true)) Require(!script.enabled,"Preview gameplay script disabled: "+script.GetType().Name);

@@ -19,7 +19,7 @@ namespace Mismo.Gameplay.Player.Editor
             {
                 UnityEditor.SceneManagement.EditorSceneManager.NewScene(UnityEditor.SceneManagement.NewSceneSetup.EmptyScene);
                 var floor=GameObject.CreatePrimitive(PrimitiveType.Cube);floor.transform.position=new Vector3(0,-.5f,0);floor.transform.localScale=new Vector3(10,1,10);
-                foreach(string path in new[]{"Assets/Prefabs/Enemies/Goblin.prefab","Assets/Prefabs/Enemies/FirstBoss.prefab"})
+                foreach(string path in new[]{"Assets/Art/Prefabs/Enemies/Goblin.prefab","Assets/Art/Prefabs/Enemies/FirstBoss.prefab"})
                 {
                     var root=UnityEngine.Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(path));
                     var animator=root.GetComponentInChildren<Animator>();animator.enabled=false;
@@ -61,7 +61,7 @@ namespace Mismo.Gameplay.Player.Editor
         }
         public static void GroundDiagnostic()
         {
-            var root=UnityEngine.Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Goblin.prefab"));
+            var root=UnityEngine.Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Enemies/Goblin.prefab"));
             root.transform.position=Vector3.zero;
             var animator=root.GetComponentInChildren<Animator>();animator.enabled=false;
             var contacts=EnemyAnimationRetargeter.FootContacts(animator.gameObject);
@@ -83,8 +83,8 @@ namespace Mismo.Gameplay.Player.Editor
             try
             {
                 EnemyAnimationRetargeter.RefreshAll();
-                Verify("Assets/Prefabs/Enemies/Goblin.prefab",false);
-                Verify("Assets/Prefabs/Enemies/FirstBoss.prefab",true);
+                Verify("Assets/Art/Prefabs/Enemies/Goblin.prefab",false);
+                Verify("Assets/Art/Prefabs/Enemies/FirstBoss.prefab",true);
                 var family=AssetDatabase.LoadAssetAtPath<WeaponFamilyDefinition>("Assets/Data/WeaponFamilies/OneHandSword.asset");
                 Check(family.DisplayName=="Arma a una mano"&&family.progressionId=="sword.onehand","Spanish family label preserves mastery ID");
                 var copy=UnityEngine.Object.Instantiate(family);copy.displayName="";

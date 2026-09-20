@@ -1,0 +1,1 @@
+CATALOG_PLAYER_OK: preloaded catalog, inventory, audio mixer, audio clips, UI, localization, typed material/shader and folder lookup loaded without AssetDatabase.

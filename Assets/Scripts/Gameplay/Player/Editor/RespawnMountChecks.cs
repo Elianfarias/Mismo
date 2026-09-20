@@ -29,7 +29,7 @@ namespace Mismo.Gameplay.Player.Editor
             storage.Write(File.ReadAllText("../../.validation/respawn-profile.json"));
             EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);
             var floor=GameObject.CreatePrimitive(PrimitiveType.Cube);floor.name="Ground";floor.transform.position=new Vector3(0,-.5f,0);floor.transform.localScale=new Vector3(60,1,60);
-            var player=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/Player.prefab"));player.transform.position=Vector3.up*.1f;
+            var player=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/Player.prefab"));player.transform.position=Vector3.up*.1f;
             var camera=new GameObject("Camera").AddComponent<UnityEngine.Camera>();camera.tag="MainCamera";camera.transform.position=new Vector3(4,3,-7);camera.transform.LookAt(Vector3.up);
             new GameObject("Sun").AddComponent<Light>().type=LightType.Directional;
             EditorSceneManager.SaveScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene(),"Assets/RespawnValidation.unity");
@@ -59,7 +59,7 @@ namespace Mismo.Gameplay.Player.Editor
             player=Object.FindFirstObjectByType<PlayerController>();player.enabled=false;inventory=player.GetComponent<PlayerInventory>();loadout=player.GetComponent<EquipmentLoadout>();
             Check(inventory.IsReady&&!inventory.HasSaveProblem&&inventory.MaterialCount("MAT-02")==wood&&inventory.Count==weapons,"Death and real scene reload preserve inventory");
             Check(inventory.Mounts.Length==1&&inventory.Mounts[0].id==expected.id,"Death preserves owned mount identity");
-            var herb=Resources.Load<GatheringSettings>("GatheringSettings").herb;
+            var herb=Mismo.Core.ProjectAssets.Load<GatheringSettings>("GatheringSettings").herb;
             var resource=new GameObject("Harvest after respawn").AddComponent<GatheringNode>();resource.transform.position=player.transform.position+Vector3.right;resource.Configure(herb,"respawn-test-node");
             for(int i=0;i<3;i++)yield return null;
             int herbs=inventory.MaterialCount("MAT-01");Check(resource.Available&&resource.Complete(inventory)&&inventory.MaterialCount("MAT-01")>herbs,"Gathering works after respawn");Object.Destroy(resource.gameObject);

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Mismo.Gameplay.Player.Presentation;
 using U = Mismo.Gameplay.Player.Presentation.QuietFantasyUI;
 using L = Mismo.Gameplay.Player.Localization.GameLanguage;
@@ -47,30 +48,11 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
 
         void DrawVisualInventory()
         {
-            if(inventoryIcons==null)inventoryIcons=Resources.Load<InventoryUIIcons>("InventoryUIIcons");
+            if(inventoryIcons==null)inventoryIcons=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");
             var e=Event.current;
             if(showItemActions && e.type==EventType.MouseDown && !ItemActionsRect.Contains(e.mousePosition))
             { showItemActions=false;e.Use(); }
-            // Rebuild only when the inspector's live theme switch changes.
-            if(inventoryBackdrop==null||inventoryBackdropOlive!=OliveTheme)
-            {
-                if(inventoryBackdrop!=null)Destroy(inventoryBackdrop);
-                inventoryBackdropOlive=OliveTheme;
-                inventoryBackdrop=new Texture2D(128,80,TextureFormat.RGBA32,false)
-                    {name="Inventory slate gradient",wrapMode=TextureWrapMode.Clamp,filterMode=FilterMode.Bilinear};
-                var colors=new Color[128*80];
-                for(int y=0;y<80;y++)for(int x=0;x<128;x++)
-                {
-                    float u=x/127f,v=y/79f;
-                    float glow=Mathf.Exp(-((u-.742f)*(u-.742f)/.10f+(v-.68f)*(v-.68f)/.23f));
-                    colors[y*128+x]=OliveTheme?
-                        Color.Lerp(Color.Lerp(new Color(.27f,.23f,.16f),new Color(.20f,.28f,.19f),v),new Color(.34f,.39f,.25f),glow*.60f):
-                        Color.Lerp(new Color(.063f,.090f,.133f),new Color(.157f,.208f,.278f),.28f+.72f*glow);
-                }
-                inventoryBackdrop.SetPixels(colors);inventoryBackdrop.Apply(false,true);
-            }
-            GUI.DrawTexture(new Rect(30,24,1220,752),inventoryBackdrop,ScaleMode.StretchToFill);
-            if(inventoryIcons?.background!=null)DrawInventoryTexture(new Rect(30,24,1220,752),inventoryIcons.background,inventoryIcons.backgroundBorder,inventoryIcons.backgroundTint);
+            DrawInventoryBackdrop();
             bool enabled=GUI.enabled;
             GUI.enabled=enabled&&!confirmDiscard&&!showItemActions;
             DrawBagGlyph(new Rect(66,45,30,34),U.Ink);
@@ -81,8 +63,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             U.Border(new Rect(64,94,1150,1),new Color(.78f,.70f,.51f,.35f));
             if(inventory.AtChest)
             {
-                if(U.Button(new Rect(410,45,85,36),"◀",!showChest)){showChest=false;selected=null;CancelInventoryDrag();}
-                if(U.Button(new Rect(503,45,115,36),"Cofre",showChest)){showChest=true;selected=null;CancelInventoryDrag();}
+                if(InventoryIconButton(new Rect(410,45,85,36),inventoryIcons?.backpack,"Mochila",!showChest)){showChest=false;selected=null;CancelInventoryDrag();}
+                if(InventoryIconButton(new Rect(503,45,115,36),inventoryIcons?.chest,"Cofre",showChest)){showChest=true;selected=null;CancelInventoryDrag();}
             }
             string[] categories={"Todos","Armas","Materiales","Consumo","Favoritos"};
             Texture2D[] categoryIcons={inventoryIcons?.all,inventoryIcons?.weapons,inventoryIcons?.materials,inventoryIcons?.consumables,inventoryIcons?.favorites};
@@ -114,11 +96,139 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(confirmDiscard)DrawDiscardConfirmation();
         }
 
+        void DrawInventoryBackdrop()
+        {
+            if(inventoryIcons==null)inventoryIcons=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");
+            // Rebuild only when the inspector's live theme switch changes.
+            if(inventoryBackdrop==null||inventoryBackdropOlive!=OliveTheme)
+            {
+                if(inventoryBackdrop!=null)Destroy(inventoryBackdrop);
+                inventoryBackdropOlive=OliveTheme;
+                inventoryBackdrop=new Texture2D(128,80,TextureFormat.RGBA32,false)
+                    {name="Inventory slate gradient",wrapMode=TextureWrapMode.Clamp,filterMode=FilterMode.Bilinear};
+                var colors=new Color[128*80];
+                for(int y=0;y<80;y++)for(int x=0;x<128;x++)
+                {
+                    float u=x/127f,v=y/79f;
+                    float glow=Mathf.Exp(-((u-.742f)*(u-.742f)/.10f+(v-.68f)*(v-.68f)/.23f));
+                    colors[y*128+x]=OliveTheme?
+                        Color.Lerp(Color.Lerp(new Color(.27f,.23f,.16f),new Color(.20f,.28f,.19f),v),new Color(.34f,.39f,.25f),glow*.60f):
+                        Color.Lerp(new Color(.063f,.090f,.133f),new Color(.157f,.208f,.278f),.28f+.72f*glow);
+                }
+                inventoryBackdrop.SetPixels(colors);inventoryBackdrop.Apply(false,true);
+            }
+            var previous=GUI.color;var tint=previous;tint.a*=PanelOpacity;GUI.color=tint;
+            GUI.DrawTexture(new Rect(30,24,1220,752),inventoryBackdrop,ScaleMode.StretchToFill);
+            if(inventoryIcons?.background!=null){var customTint=inventoryIcons.backgroundTint;customTint.a*=tint.a;DrawInventoryTexture(new Rect(30,24,1220,752),inventoryIcons.background,inventoryIcons.backgroundBorder,customTint);}
+            GUI.color=previous;
+        }
+        float PanelOpacity=>inventoryIcons!=null?Mathf.Clamp01(inventoryIcons.panelOpacity):1f;
+        Color NavigationTint(Color color){color.a*=inventoryIcons!=null?Mathf.Clamp01(inventoryIcons.navigationIconOpacity):1f;return color;}
+        int radialSelected=-1,radialOpenedFrame;
+        bool radialHeld;
+        float radialHoverReadyAt;
+        Texture2D[] radialWedges,radialEdges; Texture2D radialCenter;
+        static readonly Vector2 RadialCenter=new Vector2(640,400);
+        static readonly string[] RadialNames={"Personaje","Inventario","Mapa","Monturas","Bestiario","Habilidades"};
+        static int RadialIndex(Vector2 offset)
+        {
+            if(offset.sqrMagnitude<76*76)return -1;
+            return Mathf.FloorToInt(Mathf.Repeat(Mathf.Atan2(offset.y,offset.x)*Mathf.Rad2Deg+120,360)/60);
+        }
+        void UpdateRadialSelection()
+        {
+            if(Time.frameCount==radialOpenedFrame||Mouse.current==null)return;
+            var pointer=Mouse.current.position.ReadValue();
+            float scale=Mathf.Min(Screen.width/1280f,Screen.height/800f);
+            int next=RadialIndex(new Vector2(pointer.x-Screen.width*.5f,Screen.height*.5f-pointer.y)/Mathf.Max(.001f,scale));
+            if(next==radialSelected)return;
+            radialSelected=next;
+            if(next<0||Time.unscaledTime<radialHoverReadyAt)return;
+            if(inventoryIcons==null)inventoryIcons=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");
+            float volume=inventoryIcons!=null?Mathf.Clamp01(inventoryIcons.radialHoverVolume):.7f;
+            if(volume<=0)return;
+            radialHoverReadyAt=Time.unscaledTime+(inventoryIcons!=null?Mathf.Max(0,inventoryIcons.radialHoverCooldown):.08f);
+            if(inventoryIcons!=null&&inventoryIcons.radialHoverSound!=null)
+                AudioEvents.RaisePlayCue(inventoryIcons.radialHoverSound,volume);
+            else GameAudio.Play(GameSound.Hover);
+        }
+        void ConfirmRadialSelection()
+        {
+            int index=radialSelected;radialHeld=false;
+            if(index<0){Close();return;}
+            if(index==2){var map=GetComponent<WorldMapPanel>();Close();if(map!=null)map.Open();return;}
+            Page[] targets={Page.Character,Page.Inventory,Page.Menu,Page.Mounts,Page.Bestiary,Page.Skills};
+            OpenPage(targets[index]);
+        }
+        void EnsureRadialTextures()
+        {
+            if(radialWedges!=null)return;
+            const int size=512;
+            radialWedges=new Texture2D[6];radialEdges=new Texture2D[6];
+            for(int sector=0;sector<6;sector++){
+            var fill=new Color32[size*size];var border=new Color32[fill.Length];var center=new Color32[fill.Length];
+            for(int y=0;y<size;y++)for(int x=0;x<size;x++)
+            {
+                float dx=x+.5f-size*.5f,dy=y+.5f-size*.5f,r=Mathf.Sqrt(dx*dx+dy*dy);
+                float angle=Mathf.Abs(Mathf.DeltaAngle(Mathf.Atan2(dx,dy)*Mathf.Rad2Deg,sector*60));
+                float side=(28-angle)*Mathf.Deg2Rad*r;
+                float distance=Mathf.Min(Mathf.Min(r-92,248-r),side);
+                byte alpha=(byte)(255*Mathf.Clamp01(distance+.5f));
+                fill[y*size+x]=new Color32(255,255,255,alpha);
+                border[y*size+x]=new Color32(255,255,255,(byte)(alpha*Mathf.Clamp01(2-distance)));
+                center[y*size+x]=new Color32(255,255,255,(byte)(255*Mathf.Clamp01(80-r)));
+            }
+            radialWedges[sector]=MakeRadialTexture(fill,size);radialEdges[sector]=MakeRadialTexture(border,size);if(sector==0)radialCenter=MakeRadialTexture(center,size);
+            }
+        }
+        static Texture2D MakeRadialTexture(Color32[] pixels,int size)
+        {
+            var texture=new Texture2D(size,size,TextureFormat.RGBA32,false){name="Radial menu mask",hideFlags=HideFlags.DontSave,filterMode=FilterMode.Bilinear,wrapMode=TextureWrapMode.Clamp};
+            texture.SetPixels32(pixels);texture.Apply(false,true);return texture;
+        }
+        void DisposeRadialTextures(){if(radialWedges!=null)foreach(var texture in radialWedges)Destroy(texture);if(radialEdges!=null)foreach(var texture in radialEdges)Destroy(texture);if(radialCenter!=null)Destroy(radialCenter);}
+        void DrawMenu()
+        {
+            if(inventoryIcons==null)inventoryIcons=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");
+            EnsureRadialTextures();
+            var oldColor=GUI.color;var oldMatrix=GUI.matrix;
+            var rect=new Rect(400,160,480,480);
+            for(int i=0;i<6;i++)
+            {
+
+                GUI.color=i==radialSelected?(OliveTheme?new Color(.32f,.38f,.25f):new Color(.25f,.31f,.38f)):
+                    (OliveTheme?new Color(.19f,.25f,.17f):new Color(.10f,.15f,.21f));
+                GUI.DrawTexture(rect,radialWedges[i]);
+                GUI.color=i==radialSelected?U.Amber:new Color(.46f,.51f,.54f);GUI.DrawTexture(rect,radialEdges[i]);
+                GUI.matrix=oldMatrix;
+            }
+            GUI.color=OliveTheme?new Color(.14f,.19f,.12f):new Color(.075f,.11f,.15f);GUI.DrawTexture(rect,radialCenter);GUI.color=oldColor;
+            Texture2D[] icons={inventoryIcons?.radialCharacter,inventoryIcons?.radialInventory??inventoryIcons?.backpack,inventoryIcons?.radialMap,
+                inventoryIcons?.radialMounts,inventoryIcons?.radialBestiary,inventoryIcons?.radialSkills};
+            string[] fallback={"heart-inside","locked-chest","target-arrows","wingfoot","wolf-trap","crossed-swords"};
+            for(int i=0;i<6;i++)
+            {
+                float angle=(-90+i*60)*Mathf.Deg2Rad;
+                var position=RadialCenter+new Vector2(Mathf.Cos(angle),Mathf.Sin(angle))*157;
+                var iconRect=new Rect(position.x-25,position.y-30,50,50);
+                var tint=NavigationTint(i==radialSelected?U.Amber:U.Ink);
+                if(icons[i]!=null){GUI.color=tint;GUI.DrawTexture(iconRect,MapIcons.Mask(icons[i]),ScaleMode.ScaleToFit);GUI.color=oldColor;}
+                else U.DrawIcon(iconRect,fallback[i],tint);
+                if(i==radialSelected)U.Text(new Rect(position.x-76,position.y+29,152,27),RadialNames[i],18,U.Amber,false,TextAnchor.MiddleCenter);
+            }
+            var cancel=inventoryIcons?.radialCancel??inventoryIcons?.close;
+            if(cancel!=null){GUI.color=NavigationTint(radialSelected<0?U.Amber:U.Ink);GUI.DrawTexture(new Rect(620,380,40,40),MapIcons.Mask(cancel),ScaleMode.ScaleToFit);GUI.color=oldColor;}
+            else U.Text(new Rect(614,375,52,50),"×",36,U.Ink,false,TextAnchor.MiddleCenter);
+            var e=Event.current;
+            if(e.type==EventType.MouseDown&&e.button==0&&Time.frameCount!=radialOpenedFrame)
+            {radialSelected=RadialIndex(e.mousePosition-RadialCenter);e.Use();ConfirmRadialSelection();}
+        }
+
         bool InventoryIconButton(Rect rect,Texture2D icon,string caption,bool chosen=false)
         {
             if(icon==null)return U.Button(rect,caption,chosen);
             bool clicked=U.Button(rect,"",chosen);
-            var color=GUI.color;GUI.color=chosen?U.Amber:U.Ink;
+            var color=GUI.color;GUI.color=NavigationTint(chosen?U.Amber:U.Ink);
             float size=Mathf.Min(34,rect.height-8);
             GUI.DrawTexture(new Rect(rect.center.x-size/2,rect.center.y-size/2,size,size),MapIcons.Mask(icon),ScaleMode.ScaleToFit);
             GUI.color=color;
@@ -130,7 +240,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             if(inventoryIcons?.backpack!=null)
             {
-                var previous=GUI.color;GUI.color=color;
+                var previous=GUI.color;GUI.color=NavigationTint(color);
                 GUI.DrawTexture(rect,MapIcons.Mask(inventoryIcons.backpack),ScaleMode.ScaleToFit);
                 GUI.color=previous;
                 GUI.Label(rect,new GUIContent("",L.Text("Mochila")),GUIStyle.none);

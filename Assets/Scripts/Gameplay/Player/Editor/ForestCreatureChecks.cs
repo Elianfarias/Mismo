@@ -39,7 +39,7 @@ namespace Mismo.Gameplay.Player.Editor
         static IEnumerator Run()
         {
             var enemies=Object.FindObjectsByType<GoblinController>();Check(enemies.Length==8,"Eight variants in test scene");
-            var catalog=Resources.Load<World.WorldContentCatalog>("WorldContentCatalog");
+            var catalog=Mismo.Core.ProjectAssets.Load<World.WorldContentCatalog>("WorldContentCatalog");
             var forestIds=new System.Collections.Generic.HashSet<string>();bool outsideForest=false,bossInOrdinary=false;
             for(int i=0;i<1000;i++)
             {

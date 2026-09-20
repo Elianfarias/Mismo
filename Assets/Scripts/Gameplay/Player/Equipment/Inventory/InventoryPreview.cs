@@ -26,8 +26,10 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 if(filter!=null&&!filter(renderer))continue;
                 if(!renderer.enabled||(!renderer.gameObject.activeInHierarchy&&source.scene.IsValid())||renderer is ParticleSystemRenderer||renderer is TrailRenderer||renderer is LineRenderer)continue;
                 Mesh mesh=null;
-                if(renderer is SkinnedMeshRenderer skin){mesh=new Mesh();skin.BakeMesh(mesh,false);mesh.RecalculateBounds();baked.Add(mesh);}
-                else if(renderer is MeshRenderer)mesh=renderer.GetComponent<MeshFilter>()?.sharedMesh;
+                if(renderer is SkinnedMeshRenderer skin){if(skin.sharedMesh==null)continue;mesh=new Mesh();baked.Add(mesh);skin.BakeMesh(mesh,false);mesh.RecalculateBounds();}
+                // TextMesh also has a MeshRenderer but no MeshFilter. Unity's missing-component
+                // objects must be checked with its null semantics, not the ?. operator.
+                else if(renderer is MeshRenderer&&renderer.TryGetComponent<MeshFilter>(out var meshFilter))mesh=meshFilter.sharedMesh;
                 if(mesh==null)continue;
                 var go=new GameObject("Preview mesh");go.layer=30;go.transform.SetParent(root.transform,false);
                 go.transform.localPosition=Quaternion.Inverse(source.transform.rotation)*(renderer.transform.position-source.transform.position);
@@ -52,7 +54,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 go.AddComponent<MeshRenderer>().sharedMaterials=materials;
             }
             root.transform.rotation=Quaternion.Euler(rotation);
-            var copies=root.GetComponentsInChildren<Renderer>();if(copies.Length==0)return;
+            var copies=root.GetComponentsInChildren<Renderer>();if(copies.Length==0){Dispose();return;}
             HasModel=true;
             Bounds bounds=copies[0].bounds;foreach(var r in copies)bounds.Encapsulate(r.bounds);
             var cameraObject=new GameObject("Inventory preview camera");cameraObject.transform.SetParent(root.transform,false);

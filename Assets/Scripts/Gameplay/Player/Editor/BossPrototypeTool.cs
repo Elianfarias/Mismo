@@ -13,16 +13,16 @@ namespace Mismo.Gameplay.Player.Editor
     public static class BossPrototypeTool
     {
         public const string ScenePath = "Assets/Scenes/BossArena.unity";
-        public const string PrefabPath = "Assets/Prefabs/Enemies/FirstBoss.prefab";
+        public const string PrefabPath = "Assets/Art/Prefabs/Enemies/FirstBoss.prefab";
         public const string SettingsPath = "Assets/Data/Enemies/FirstBoss.asset";
-        private const string BasePrefabPath = "Assets/Prefabs/Enemies/Goblin.prefab";
+        private const string BasePrefabPath = "Assets/Art/Prefabs/Enemies/Goblin.prefab";
         private const string BaseScenePath = "Assets/Scenes/GoblinArena.unity";
 
         [MenuItem("Mismo/Prototype/Boss/Build First Boss")]
         public static void Build()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode) return;
-            EnsureFolder("Assets/Prefabs/Enemies");
+            EnsureFolder("Assets/Art/Prefabs/Enemies");
             EnsureFolder("Assets/Data/Enemies");
 
             BossSettings settings = AssetDatabase.LoadAssetAtPath<BossSettings>(SettingsPath);

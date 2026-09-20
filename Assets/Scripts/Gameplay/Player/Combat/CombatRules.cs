@@ -5,7 +5,7 @@ namespace Mismo.Gameplay.Combat
     public sealed class CombatRules : ScriptableObject
     {
         static CombatRules cached;
-        public static CombatRules Current => cached!=null?cached:(cached=Resources.Load<CombatRules>("CombatRules")??CreateInstance<CombatRules>());
+        public static CombatRules Current => cached!=null?cached:(cached=Mismo.Core.ProjectAssets.Load<CombatRules>("CombatRules")??CreateInstance<CombatRules>());
         [Range(0,1)] public float frontalDamage=.85f;
         public float backDamage=1.2f, backPosture=1.5f, openingPosture=1.4f;
         [Range(0,.1f)] public float distanceBonus=.075f;

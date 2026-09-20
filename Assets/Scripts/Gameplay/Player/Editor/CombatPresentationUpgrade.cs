@@ -15,7 +15,7 @@ namespace Mismo.Gameplay.Player.Editor
             var dark=Material(folder,"Dark",new Color(.07f,.08f,.06f));
             foreach(string enemy in new[]{"Goblin","FirstBoss"})
             {
-                string path="Assets/Prefabs/Enemies/"+enemy+".prefab";
+                string path="Assets/Art/Prefabs/Enemies/"+enemy+".prefab";
                 var root=PrefabUtility.LoadPrefabContents(path);
                 try
                 {

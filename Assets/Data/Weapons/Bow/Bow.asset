@@ -21,18 +21,39 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f897c3e3e29be294bac01266c17aebad, type: 2}
   - {fileID: 11400000, guid: 1937ac5ccc63f954f8d731a2d584f377, type: 2}
   family: {fileID: 11400000, guid: f805c3fe49bcda74981a71dec2327dbe, type: 2}
+  isShield: 0
+  dualSwordFamily: {fileID: 0}
+  swordShieldFamily: {fileID: 0}
   overrideFamilyAbilities: 0
-  visualPrefab: {fileID: 919132149155446097, guid: d77f05dd5520fac43be94540c108f2a5, type: 3}
+  visualPrefab: {fileID: 365415738451728255, guid: a7db06eb27bb0c2499fb6f330ed3b617, type: 3}
+  isTwoHanded: 0
+  dualWield: 0
+  secondaryVisualPrefab: {fileID: 0}
+  secondaryEquipped:
+    anchor: 2
+    bonePath: 
+    offset: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: 1
+  secondaryHolstered:
+    anchor: 0
+    bonePath: 
+    offset: {x: -0.2, y: 1.2, z: -0.25}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: 1
   poseProfile: {fileID: 11400000, guid: 8e32d4669f4a6f046a307b4115cb0ee8, type: 2}
   isBow: 1
   inventoryDescription: 
-  handRotation: {x: 0, y: 0, z: 0}
-  backRotation: {x: 0, y: 0, z: -25}
-  handOffset: {x: 0, y: 0, z: -0.10612866}
-  backOffset: {x: 0, y: 1.2, z: -0.25}
+  canDiscard: 1
   gridWidth: 2
   gridHeight: 3
   canRotate: 1
   inventoryIcon: {fileID: 21300000, guid: 33312e40f4dd18f4e89a7a2950448dc7, type: 3}
-
-  inventoryPreviewRotation: {x: 0, y: 90, z: 90}
+  hudIcon: {fileID: 2800000, guid: 15ac1974cf495e844bcee81bc680cfcd, type: 3}
+  inventoryPreviewRotation: {x: 0, y: 0, z: 0}
+  canSell: 1
+  sellValue: 10
+  handRotation: {x: 0, y: 0, z: 0}
+  backRotation: {x: 0, y: 0, z: -25}
+  handOffset: {x: 0, y: 0, z: -0.10612866}
+  backOffset: {x: 0, y: 1.2, z: -0.25}

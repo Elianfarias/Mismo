@@ -22,7 +22,7 @@ namespace Mismo.Gameplay.Player.Localization
                 if(languages==null)
                 {
                     var codes=new List<string>();
-                    foreach(var t in Resources.LoadAll<StringTable>("Localization"))if(!codes.Contains(t.LocaleIdentifier.Code))codes.Add(t.LocaleIdentifier.Code);
+                    foreach(var t in Mismo.Core.ProjectAssets.LoadAll<StringTable>("Localization"))if(!codes.Contains(t.LocaleIdentifier.Code))codes.Add(t.LocaleIdentifier.Code);
                     if(codes.Count==0)codes.Add("es");codes.Sort(StringComparer.Ordinal);languages=codes.ToArray();
                 }
                 return (string[])languages.Clone();
@@ -33,6 +33,7 @@ namespace Mismo.Gameplay.Player.Localization
             get{if(language==null){var saved=PlayerPrefs.GetString("Mismo.Language","es");language=Array.IndexOf(Languages,saved)>=0?saved:"es";}return language;}
         }
         public static CultureInfo Culture => CultureInfo.GetCultureInfo(Code=="es"?"es-AR":Code);
+        // Kept for menu/configuration integrations; the gameplay HUD does not display this selector.
         public static string LanguageLabel => Text("Idioma")+": "+Culture.NativeName;
         public static void Next(){var codes=Languages;Set(codes[(Array.IndexOf(codes,Code)+1)%codes.Length]);}
         public static void Set(string code,bool persist=true)
@@ -44,10 +45,10 @@ namespace Mismo.Gameplay.Player.Localization
         }
         public static string Get(string key,string fallback)
         {
-            if(table==null)table=Resources.Load<StringTable>("Localization/Game_"+Code);
+            if(table==null)table=Mismo.Core.ProjectAssets.Load<StringTable>("Localization/Game_"+Code);
             var value=table?.GetEntry(key)?.LocalizedValue;
             if(!string.IsNullOrEmpty(value))return value;
-            if(spanish==null)spanish=Resources.Load<StringTable>("Localization/Game_es");
+            if(spanish==null)spanish=Mismo.Core.ProjectAssets.Load<StringTable>("Localization/Game_es");
             var backup=spanish?.GetEntry(key)?.LocalizedValue;
             return string.IsNullOrEmpty(backup)?fallback??"":backup;
         }
@@ -57,7 +58,7 @@ namespace Mismo.Gameplay.Player.Localization
             if(sourceKeys==null)
             {
                 sourceKeys=new Dictionary<string,string>(StringComparer.Ordinal);
-                var json=Resources.Load<TextAsset>("Localization/Translations");
+                var json=Mismo.Core.ProjectAssets.Load<TextAsset>("Localization/Translations");
                 if(json!=null)foreach(var row in JsonUtility.FromJson<Catalog>(json.text).entries)sourceKeys[row.es]=row.key;
             }
             return sourceKeys.TryGetValue(source,out var key)?Get(key,source):source;

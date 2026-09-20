@@ -21,7 +21,7 @@ pausar durante una defensa perfecta y verificar que la pausa no termina sola.
 Abrir **Mismo > Audio > Configurar sonidos** en Unity.
 Arrastrar un AudioClip a cada evento, ajustar volumen e intervalo mínimo y pulsar
 **Guardar configuración**. Las asignaciones se guardan en
-`Assets/Resources/Audio/GameSounds.asset` y se incluyen en las builds.
+`Assets/Data/Audio/GameSounds.asset` y se incluyen en las builds.
 El catálogo inicial está sin sonidos: un evento sin clip permanece en silencio.
 
 ## Música por zona

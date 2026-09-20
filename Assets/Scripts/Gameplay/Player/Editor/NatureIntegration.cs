@@ -13,8 +13,9 @@ namespace Mismo.Gameplay.Player.Editor
 {
     public static class NatureIntegration
     {
-        const string Source="Assets/Art/FBX/Nature/Nature";
-        const string Output="Assets/Prefabs/World/Nature";
+        const string Source="Assets/Art/Models/Nature/Nature";
+        const string Textures="Assets/Art/Textures/Nature";
+        const string Output="Assets/Art/Prefabs/World/Nature";
         const string Materials="Assets/Art/Materials/Nature";
         static readonly List<string> report=new List<string>();
         static Bounds BoundsOf(GameObject go)
@@ -27,7 +28,8 @@ namespace Mismo.Gameplay.Player.Editor
             var go=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(path));go.name=Path.GetFileNameWithoutExtension(path);
             var b=BoundsOf(go);float scale=height/Mathf.Max(.001f,b.size.y);go.transform.localScale*=scale;
             b=BoundsOf(go);go.transform.position-=new Vector3(b.center.x,b.min.y,b.center.z);
-            string palette=Path.ChangeExtension(path,".png");
+            Folder(Textures);
+            string palette=Path.ChangeExtension(path.Replace("/Models/", "/Textures/"),".png");
             var texture=AssetDatabase.LoadAssetAtPath<Texture2D>(palette);if(texture==null)throw new Exception("Missing palette "+palette);
             // Several supplied PNGs are preview atlases, while FBX UVs address a
             // 256x1 MagicaVoxel palette. Recover the original colors from VOX.
@@ -42,7 +44,7 @@ namespace Mismo.Gameplay.Player.Editor
                     {
                         var colors=new Color32[256];for(int i=0;i<256;i++){int p=offset+12+i*4;colors[i]=new Color32(vox[p],vox[p+1],vox[p+2],255);}
                         var recovered=new Texture2D(256,1,TextureFormat.RGBA32,false);recovered.SetPixels32(colors);recovered.Apply();
-                        palette=Materials+"/"+go.name+"_Palette.png";File.WriteAllBytes(palette,recovered.EncodeToPNG());Object.DestroyImmediate(recovered);AssetDatabase.ImportAsset(palette);found=true;break;
+                        palette=Textures+"/"+go.name+"_Palette.png";File.WriteAllBytes(palette,recovered.EncodeToPNG());Object.DestroyImmediate(recovered);AssetDatabase.ImportAsset(palette);found=true;break;
                     }
                     if(size<0)break;offset+=12+size;
                 }
@@ -95,18 +97,18 @@ namespace Mismo.Gameplay.Player.Editor
                 var b=BoundsOf(root);root.transform.position-=new Vector3(b.center.x,b.min.y,b.center.z);
                 var wrapper=new GameObject(root.name);root.transform.SetParent(wrapper.transform,true);entries.Add(Save(wrapper,WorldAssetKind.Deadwood));
             }
-            string housePath="Assets/Art/FBX/Town/Medieval Town - Free Sample-2-House.obj";
+            string housePath="Assets/Art/Models/Town/Medieval Town - Free Sample-2-House.obj";
             var houseImporter=(ModelImporter)AssetImporter.GetAtPath(housePath);houseImporter.isReadable=true;houseImporter.SaveAndReimport();
             foreach(var kind in new[]{WorldAssetKind.House,WorldAssetKind.Blacksmith})
             {
                 var root=new GameObject(kind==WorldAssetKind.House?"MedievalHouse":"VillageWorkshop");
                 var model=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(housePath));var b=BoundsOf(model);
                 model.transform.localScale*=8/Mathf.Max(b.size.x,b.size.z);b=BoundsOf(model);model.transform.position-=new Vector3(b.center.x,b.min.y,b.center.z);model.transform.SetParent(root.transform,true);
-                var mat=AssetDatabase.LoadAssetAtPath<Material>("Assets/Art/FBX/Town/TownVoxelPalette.mat");if(mat==null)throw new Exception("Town palette missing");
+                var mat=AssetDatabase.LoadAssetAtPath<Material>("Assets/Art/Materials/Town/TownVoxelPalette.mat");if(mat==null)throw new Exception("Town palette missing");
                 foreach(var r in model.GetComponentsInChildren<Renderer>())r.sharedMaterials=Enumerable.Repeat(mat,r.sharedMaterials.Length).ToArray();
                 entries.Add(Save(root,kind));
             }
-            var catalog=Resources.Load<WorldContentCatalog>("WorldContentCatalog");var existing=catalog.assets.ToList();
+            var catalog=Mismo.Core.ProjectAssets.Load<WorldContentCatalog>("WorldContentCatalog");var existing=catalog.assets.ToList();
             foreach(var entry in entries){int index=existing.FindIndex(e=>e.id==entry.id);if(index<0)existing.Add(entry);else existing[index].prefab=entry.prefab;}
             catalog.assets=existing.ToArray();EditorUtility.SetDirty(catalog);AssetDatabase.SaveAssets();
             Validate(catalog);Directory.CreateDirectory("Docs/Validation");File.WriteAllLines("Docs/Validation/NatureIntegration.txt",report);Debug.Log("NATURE_INTEGRATION_PASS "+entries.Count);
@@ -122,7 +124,7 @@ namespace Mismo.Gameplay.Player.Editor
                 if(asset.kind==WorldAssetKind.Flower&&asset.prefab.GetComponentsInChildren<Collider>().Length!=0)throw new Exception("Flowers unexpectedly block navigation");
                 if((asset.kind==WorldAssetKind.Grass||asset.kind==WorldAssetKind.Tree)&&asset.prefab.GetComponentsInChildren<MeshCollider>().Length==0)throw new Exception("Missing solid vegetation "+asset.id);
             }
-            var settings=Object.Instantiate(Resources.Load<ExplorationWorldSettings>("ExplorationWorldSettings"));settings.preserveAuthoredCenter=false;
+            var settings=Object.Instantiate(Mismo.Core.ProjectAssets.Load<ExplorationWorldSettings>("ExplorationWorldSettings"));settings.preserveAuthoredCenter=false;
             var terrain=new ExplorationTerrain(settings);var content=new ExplorationContent(settings,terrain);
             int supported=0,rejected=0;
             for(int z=0;z<128;z+=3)for(int x=0;x<128;x+=3)
@@ -145,7 +147,7 @@ namespace Mismo.Gameplay.Player.Editor
             try
             {
                 EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);
-                var entries=Resources.Load<WorldContentCatalog>("WorldContentCatalog").assets.Where(a=>a.id.StartsWith("nature.")).ToArray();
+                var entries=Mismo.Core.ProjectAssets.Load<WorldContentCatalog>("WorldContentCatalog").assets.Where(a=>a.id.StartsWith("nature.")).ToArray();
                 for(int i=0;i<entries.Length;i++){var go=Object.Instantiate(entries[i].prefab);go.transform.position=new Vector3(i%6*11,0,i/6*11);}
                 var sun=new GameObject("Sun").AddComponent<Light>();sun.type=LightType.Directional;sun.transform.rotation=Quaternion.Euler(45,-35,0);sun.intensity=1.1f;
                 RenderSettings.fog=false;RenderSettings.ambientLight=new Color(.65f,.65f,.65f);

@@ -8,19 +8,36 @@ namespace Mismo.Gameplay.Player.Presentation
     public sealed class ActorCombatVisuals : MonoBehaviour
     {
         Health health;
+        float deathEffectDelay;
+        Coroutine pendingDeath;
+        public void DelayDeathEffect(float seconds) => deathEffectDelay = Mathf.Max(0, seconds);
         readonly List<Renderer> hidden = new List<Renderer>();
         void Awake() => health = GetComponent<Health>();
         void OnEnable() { health.Damaged += Hit; health.Died += Die; health.Changed += Changed; }
-        void OnDisable() { health.Damaged -= Hit; health.Died -= Die; health.Changed -= Changed; }
+        void OnDisable() { health.Damaged -= Hit; health.Died -= Die; health.Changed -= Changed; CancelPendingDeath(); }
         void Hit(DamageInfo damage) => DamageNumbers.Show(transform.position + Vector3.up * 1.8f,
             health.LastDamageApplied, GetComponent<PlayerController>() != null);
         void Changed(float value, float maximum)
         {
             if (value <= 0) return;
+            CancelPendingDeath();
             foreach (var renderer in hidden) if (renderer != null) renderer.enabled = true;
             hidden.Clear();
         }
         void Die(DamageInfo damage)
+        {
+            if (deathEffectDelay <= 0) { SpawnDeathCubes(damage); return; }
+            CancelPendingDeath(); pendingDeath = StartCoroutine(DelayedDeath(damage));
+        }
+        System.Collections.IEnumerator DelayedDeath(DamageInfo damage)
+        {
+            yield return new WaitForSeconds(deathEffectDelay);
+            pendingDeath = null;
+            if (health.IsDead) SpawnDeathCubes(damage);
+        }
+        void CancelPendingDeath()
+        { if (pendingDeath != null) StopCoroutine(pendingDeath); pendingDeath = null; }
+        void SpawnDeathCubes(DamageInfo damage)
         {
             if (hidden.Count != 0) return;
             var go = new GameObject("Death cubes");

@@ -4409,6 +4409,7 @@ MonoBehaviour:
   music: {fileID: 464213953}
   sfx: {fileID: 1208848707}
   ui: {fileID: 565324940}
+  flaticonAttribution: "Iconos de Flaticon \xB7 www.flaticon.com"
 --- !u!224 &752609448
 RectTransform:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ namespace Mismo.Gameplay.Player.Editor
     /// </summary>
     public static class PlayerInputDebugBuilder
     {
-        private const string InputAssetPath = "Assets/InputSystem_Actions.inputactions";
+        private const string InputAssetPath = "Assets/Settings/Input/InputSystem_Actions.inputactions";
         private const string DebugObjectName = "Player Input Debug";
 
         /// <summary>

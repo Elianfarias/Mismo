@@ -13,6 +13,7 @@ namespace Mismo.Gameplay.Player.Editor
     {
         public const string Model="Assets/Art/FBX/Goblins/Goblin_Concept_Animated.fbx";
         const string Folder="Assets/Art/Animations/GoblinConcept";
+        const string Materials="Assets/Art/Materials/GoblinConcept";
         [MenuItem("Mismo/Character/Integrate Concept Goblin")]
         public static void Apply()
         {
@@ -25,6 +26,7 @@ namespace Mismo.Gameplay.Player.Editor
                 string n=clip.name.Split('|').Last();clip.loopTime=n=="Idle"||n=="Walk"||n=="Run";clip.loopPose=clip.loopTime;
             }
             importer.clipAnimations=clips;importer.SaveAndReimport();
+            System.IO.Directory.CreateDirectory(Materials);AssetDatabase.Refresh();
             if(!AssetDatabase.IsValidFolder(Folder))AssetDatabase.CreateFolder("Assets/Art/Animations","GoblinConcept");
             var all=AssetDatabase.LoadAllAssetsAtPath(Model).OfType<AnimationClip>().Where(c=>!c.name.StartsWith("__preview")).ToArray();
             var controller=AssetDatabase.LoadAssetAtPath<AnimatorController>(Folder+"/Goblin.controller")??AnimatorController.CreateAnimatorControllerAtPath(Folder+"/Goblin.controller");
@@ -59,7 +61,7 @@ namespace Mismo.Gameplay.Player.Editor
                         var materials=r.sharedMaterials;
                         for(int j=0;j<materials.Length;j++)
                         {
-                            var source=materials[j];string safe=System.Text.RegularExpressions.Regex.Replace(source.name,@"[^a-zA-Z0-9_-]","_");string mp=Folder+"/"+safe+".mat";
+                            var source=materials[j];string safe=System.Text.RegularExpressions.Regex.Replace(source.name,@"[^a-zA-Z0-9_-]","_");string mp=Materials+"/"+safe+".mat";
                             var material=AssetDatabase.LoadAssetAtPath<Material>(mp);
                             if(material==null)
                             {

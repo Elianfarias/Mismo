@@ -41,7 +41,7 @@ namespace Mismo.Gameplay.Player.World
             if(!Read(out var data,out var result))return false;
             return data!=null||result==ProfileReadResult.Missing&&(File.Exists(LegacyProfilePath)||File.Exists(LegacyProfilePath+".bak"));
         }
-        static ExplorationWorldSettings Template()=>Resources.Load<ExplorationWorldSettings>("ExplorationWorldSettings");
+        static ExplorationWorldSettings Template()=>Mismo.Core.ProjectAssets.Load<ExplorationWorldSettings>("ExplorationWorldSettings");
         static WorldSaveData CreateRecord(bool legacy,int previousSeed=0)
         {
             var template=Template();if(template==null)throw new InvalidOperationException("Falta la configuración del mundo.");

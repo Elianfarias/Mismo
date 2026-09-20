@@ -13,14 +13,14 @@ namespace Mismo.Gameplay.Player.Editor
         [MenuItem("Mismo/World/Configure procedural content")]
         public static void Configure()
         {
-            const string path="Assets/Resources/WorldContentCatalog.asset";
+            const string path="Assets/Data/World/WorldContentCatalog.asset";
             var catalog=AssetDatabase.LoadAssetAtPath<WorldContentCatalog>(path);
             if(catalog==null)
             {
                 catalog=ScriptableObject.CreateInstance<WorldContentCatalog>();
-                var goblin=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Goblin.prefab");
-                var elite=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/GoblinElite.prefab");
-                var boss=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/FirstBoss.prefab");
+                var goblin=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Enemies/Goblin.prefab");
+                var elite=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Enemies/GoblinElite.prefab");
+                var boss=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Enemies/FirstBoss.prefab");
                 catalog.encounters=new[]{
                     new WorldEncounterEntry{id="Goblin patrol",prefab=goblin,elitePrefab=elite,weight=50},
                     new WorldEncounterEntry{id="Goblin camp",prefab=goblin,elitePrefab=elite,site=WorldSiteKind.Ruin,minimumCount=3,maximumCount=3,guaranteedElite=true},
@@ -28,7 +28,7 @@ namespace Mismo.Gameplay.Player.Editor
                     new WorldEncounterEntry{id="Sanctuary guardian",prefab=boss,site=WorldSiteKind.BossArena,minimumCount=1,maximumCount=1}};
                 AssetDatabase.CreateAsset(catalog,path);
             }
-            var settings=Resources.Load<ExplorationWorldSettings>("ExplorationWorldSettings");
+            var settings=Mismo.Core.ProjectAssets.Load<ExplorationWorldSettings>("ExplorationWorldSettings");
             if(settings==null)throw new Exception("Missing exploration settings");
             if(settings.content==null){settings.content=catalog;EditorUtility.SetDirty(settings);}
             AssetDatabase.SaveAssets();
@@ -40,7 +40,7 @@ namespace Mismo.Gameplay.Player.Editor
             try
             {
                 Configure();count=0;
-                var settings=Resources.Load<ExplorationWorldSettings>("ExplorationWorldSettings");
+                var settings=Mismo.Core.ProjectAssets.Load<ExplorationWorldSettings>("ExplorationWorldSettings");
                 var field=new ExplorationTerrain(settings);var old=new World.VoxelRegionHeightfield(settings.seed,settings.authoredSize,settings.relief,settings.stepHeight);
                 foreach(int sign in new[]{-1,1})for(int i=-128;i<=128;i+=8)
                 {Check(field.Height(sign*128.5f,i+.5f)==old.Height(sign*128.5f,i+.5f),"Saved centre X seam");Check(field.Height(i+.5f,sign*128.5f)==old.Height(i+.5f,sign*128.5f),"Saved centre Z seam");}

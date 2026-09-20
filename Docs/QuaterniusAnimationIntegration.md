@@ -1,6 +1,6 @@
 # Animaciones de Quaternius aplicadas
 
-Fuente: Universal Animation Library Standard, publicación de Quaternius en https://opengameart.org/content/universal-animation-library . Licencia original en Assets/Art/Animations/Quaternius/License.txt. Copia descargada desde OpenGameArt; no se afirma que sea la versión más reciente de itch.io.
+Fuente: Universal Animation Library Standard, publicación de Quaternius en https://opengameart.org/content/universal-animation-library . Licencia original en Assets/Documentation/Art/Animations/Quaternius/License.txt. Copia descargada desde OpenGameArt; no se afirma que sea la versión más reciente de itch.io.
 
 Reemplazos en VoxelLocomotion:
 - Idle → Idle_Loop

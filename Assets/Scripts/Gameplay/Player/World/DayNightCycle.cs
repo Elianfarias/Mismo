@@ -11,6 +11,15 @@ namespace Mismo.Gameplay.Player.World
         public DayNightSettings settings;
         [Range(0,24)] public float hour=9;
         public string Phase{get;private set;}
+        /// <summary>Brightness multiplier used by screen-space world previews such as the minimap.</summary>
+        public float MinimapBrightness
+        {
+            get
+            {
+                float elevation=Mathf.Sin((hour-6)*Mathf.PI/12f);
+                return Mathf.Lerp(.38f,1f,Mathf.SmoothStep(0,1,Mathf.InverseLerp(-.18f,.22f,elevation)));
+            }
+        }
         Material sky;
         Light sun,moon;
         public void Initialize(DayNightSettings value)

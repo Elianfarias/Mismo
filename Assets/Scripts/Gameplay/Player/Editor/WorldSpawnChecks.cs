@@ -16,7 +16,7 @@ namespace Mismo.Gameplay.Player.Editor
     {
         public static void ConfigureBalanceBatch()
         {
-            var catalog=Resources.Load<WorldContentCatalog>("WorldContentCatalog");
+            var catalog=Mismo.Core.ProjectAssets.Load<WorldContentCatalog>("WorldContentCatalog");
             catalog.clearingChance=.85f;catalog.roamingChance=.75f;catalog.roamingSpacing=64;
             catalog.fogEnabled=true;catalog.fogStart=28;catalog.fogEnd=90;
             foreach(var entry in catalog.encounters)
@@ -34,7 +34,7 @@ namespace Mismo.Gameplay.Player.Editor
             try
             {
                 EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);
-                var template=Resources.Load<ExplorationWorldSettings>("ExplorationWorldSettings");
+                var template=Mismo.Core.ProjectAssets.Load<ExplorationWorldSettings>("ExplorationWorldSettings");
                 Check(template!=null&&template.content!=null,"World resource loads its encounter catalog");
                 var settings=Object.Instantiate(template);settings.preserveAuthoredCenter=false;
                 var terrain=new ExplorationTerrain(settings);

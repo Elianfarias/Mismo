@@ -39,8 +39,8 @@ namespace Mismo.Gameplay.Player.Editor
         private void OnEnable()
         {
             SceneView.duringSceneGui += DrawHandles; Undo.undoRedoPerformed += Refresh;
-            if(characterPrefab==null)characterPrefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/PlayerVoxelSwordE.prefab");
-            if(characterPrefab==null)characterPrefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/Player.prefab");
+            if(characterPrefab==null)characterPrefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/PlayerVoxelSwordE.prefab");
+            if(characterPrefab==null)characterPrefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/Player.prefab");
             if(weapon==null)weapon=Selection.activeObject as WeaponDefinition;
         }
         private void OnDisable()

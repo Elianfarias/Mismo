@@ -54,7 +54,7 @@ namespace Mismo.Gameplay.Player.Editor
             foreach(var goblin in Object.FindObjectsByType<Enemies.GoblinController>())goblin.enabled=false;
             var equipment=player.GetComponent<EquipmentLoadout>();equipment.Runner.Cancel();equipment.Belt?.Cancel();player.GetComponent<Health>().Revive();
             float until=Time.time+7;while(equipment.InCombat && Time.time<until)yield return null;
-            var catalog=Resources.Load<ItemCatalog>("ItemCatalog");
+            var catalog=Mismo.Core.ProjectAssets.Load<ItemCatalog>("ItemCatalog");
             var sword=Array.Find(catalog.weapons,w=>w.Id=="sword.basic");var bow=Array.Find(catalog.weapons,w=>w.Id=="bow.basic");
             Check(sword.family!=null && catalog.bossReward.family==sword.family,"Sword and boss reward share one family");
             Check(bow.family!=null && bow.family!=sword.family,"Bow has an independent family");

@@ -6,7 +6,7 @@ El pueblo usa la composición `Medieval_Voxel_Assets_Example.obj` del paquete Me
 
 WorldContentCatalog contiene la entrada `medieval.village`, de tipo Village. ExplorationContent instancia el prefab completo en cada WorldSiteKind.Village, sustituyendo la composición provisional de cuatro casas. Respeta los puntos de interés de la semilla existente. En el centro original de partidas legacy/Play directo también sustituye el pueblo inicial.
 
-Prefab: `Assets/Prefabs/World/Villages/MedievalVillage.prefab`. Materiales y modelo adaptado: `Assets/Art/Materials/MedievalVillage`. Se pueden añadir otros prefabs Village al catálogo y controlar su peso y biomas. El menú Mismo → World → Integrate medieval village reconstruye el prefab y materiales del ejemplo; sobrescribe cambios manuales dentro del prefab generado. Las tiendas son edificios visuales; no se agregan NPC ni nuevos sistemas comerciales.
+Prefab: `Assets/Art/Prefabs/World/Villages/MedievalVillage.prefab`. Materiales y modelo adaptado: `Assets/Art/Materials/MedievalVillage`. Se pueden añadir otros prefabs Village al catálogo y controlar su peso y biomas. El menú Mismo → World → Integrate medieval village reconstruye el prefab y materiales del ejemplo; sobrescribe cambios manuales dentro del prefab generado. Las tiendas son edificios visuales; no se agregan NPC ni nuevos sistemas comerciales.
 
 ## Mapa
 

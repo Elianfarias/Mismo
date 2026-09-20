@@ -20,7 +20,7 @@ namespace Mismo.Gameplay.Player.Editor
     {
         const string Request="Temp/ForestCreatureIntegration.request";
         const string Report="Docs/Validation/ForestCreatureIntegration.txt";
-        public const string Prefabs="Assets/Prefabs/Enemies/ForestCreatures";
+        public const string Prefabs="Assets/Art/Prefabs/Enemies/ForestCreatures";
         const string Data="Assets/Data/Enemies/ForestCreatures";
         const string Animations="Assets/Art/Animations/ForestCreatures";
         static readonly string[] Boars={"Boar_Standard","Boar_Dark_Fur","Boar_Forest_Moss"};
@@ -55,7 +55,7 @@ namespace Mismo.Gameplay.Player.Editor
         }
         static void Folder(string path)
         {if(AssetDatabase.IsValidFolder(path))return;Folder(Path.GetDirectoryName(path).Replace('\\','/'));AssetDatabase.CreateFolder(Path.GetDirectoryName(path).Replace('\\','/'),Path.GetFileName(path));}
-        static string Model(string species,string name)=>"Assets/Art/Creatures/"+species+"/"+name+".fbx";
+        static string Model(string species,string name)=>"Assets/Art/FBX/Creatures/"+species+"/"+name+".fbx";
         static AnimationClip Clip(string species,string name)
         {
             string model=species=="Boar"?Boars[0]:species=="Spider"?Spiders[0]:"Forest_Golem_Stylized";
@@ -63,10 +63,11 @@ namespace Mismo.Gameplay.Player.Editor
                 .Single(c=>!c.name.StartsWith("__preview")&&c.name.Split('|').Last()==name);
         }
         static Material Material(string species,string palette)
-        {return AssetDatabase.LoadAssetAtPath<Material>("Assets/Art/Creatures/"+species+"/"+palette+".mat");}
+        {return AssetDatabase.LoadAssetAtPath<Material>("Assets/Art/Materials/Creatures/"+species+"/"+palette+".mat");}
         static void Import(string species,string name,string palette,bool animated=true)
         {
-            string folder="Assets/Art/Creatures/"+species+"/",texturePath=folder+palette+".png";
+            string folder="Assets/Art/Materials/Creatures/"+species+"/",texturePath="Assets/Art/Textures/Creatures/"+species+"/"+palette+".png";
+            Folder(folder.TrimEnd('/'));
             AssetDatabase.ImportAsset(texturePath,ImportAssetOptions.ForceSynchronousImport);
             var texture=(TextureImporter)AssetImporter.GetAtPath(texturePath);
             texture.filterMode=FilterMode.Point;texture.mipmapEnabled=false;texture.textureCompression=TextureImporterCompression.Uncompressed;texture.wrapMode=TextureWrapMode.Clamp;texture.SaveAndReimport();
@@ -212,7 +213,7 @@ namespace Mismo.Gameplay.Player.Editor
         }
         static void RegisterEncounters()
         {
-            var catalog=Resources.Load<WorldContentCatalog>("WorldContentCatalog");if(catalog==null)throw new Exception("Missing world content catalog");
+            var catalog=Mismo.Core.ProjectAssets.Load<WorldContentCatalog>("WorldContentCatalog");if(catalog==null)throw new Exception("Missing world content catalog");
             var entries=catalog.encounters.ToList();
             foreach(string name in Boars.Concat(Spiders).Concat(new[]{"Forest_Golem_Stylized"}))
             {
@@ -232,7 +233,7 @@ namespace Mismo.Gameplay.Player.Editor
             {
                 var ground=GameObject.CreatePrimitive(PrimitiveType.Cube);ground.name="Test ground";ground.transform.position=new Vector3(0,-.5f,18);ground.transform.localScale=new Vector3(110,1,100);
                 var navigation=new GameObject("Test navigation").AddComponent<GoblinNavigation>();navigation.Configure(ground.transform);
-                var player=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/Player.prefab"));player.transform.position=new Vector3(0,.2f,-20);
+                var player=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/Player.prefab"));player.transform.position=new Vector3(0,.2f,-20);
                 var camera=new GameObject("Camera",typeof(UnityEngine.Camera),typeof(AudioListener));camera.tag="MainCamera";
                 var cameraControl=camera.AddComponent<Mismo.Gameplay.Player.Camera.ThirdPersonCamera>();cameraControl.Configure(player.transform,player.GetComponent<Input.PlayerInputReader>());player.GetComponent<PlayerController>().Configure(camera.transform);
                 var sun=new GameObject("Sun").AddComponent<Light>();sun.type=LightType.Directional;sun.transform.rotation=Quaternion.Euler(45,-30,0);

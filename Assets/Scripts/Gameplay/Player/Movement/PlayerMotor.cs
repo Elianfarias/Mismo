@@ -42,7 +42,7 @@ namespace Mismo.Gameplay.Player.Movement
         private void Awake()
         {
             body = GetComponent<CharacterController>();
-            soundCatalog = Resources.Load<GameSoundCatalog>(GameSoundCatalog.ResourcePath);
+            soundCatalog = Mismo.Core.ProjectAssets.Load<GameSoundCatalog>(GameSoundCatalog.ResourcePath);
         }
         public void ClearControlledMovement() => pendingControlledMovement = null;
         public void Face(Vector3 direction)

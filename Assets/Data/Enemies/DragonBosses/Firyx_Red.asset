@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a4b6697e864313997206fd8ecb00a8, type: 3}
+  m_Name: Firyx_Red
+  m_EditorClassIdentifier: Mismo.Gameplay.Enemies::Mismo.Gameplay.Enemies.DragonBossSettings
+  displayName: "FIRYX \xB7 BRASA"
+  accent: {r: 1, g: 0.25, b: 0.06, a: 1}
+  health: 1700
+  posture: 350
+  detectionRange: 28
+  leashRange: 55
+  moveSpeed: 5
+  turnSpeed: 85
+  meleeRange: 7
+  breathRange: 22
+  clawDamage: 24
+  biteDamage: 32
+  breathDamage: 12
+  enrageThreshold: 0.5
+  recovery: 1.2
+  breathCooldown: 5
+  flightCooldown: 16
+  flightHeight: 4
+  flightDuration: 3
+  defendChance: 0.06
+  biteChance: 0.6
+  comboChance: 0.3
+  clips:
+  - {fileID: 7400000, guid: 720b06bb5a03299479a4214650709350, type: 2}
+  - {fileID: 7400000, guid: 3aa4d27814b58b3479869e8f36c0a603, type: 2}
+  - {fileID: 7400000, guid: 347cacfb03d900c4c99b4a0d5f94734f, type: 2}
+  - {fileID: 7400000, guid: 2e9d43deec6401646bbb1195c9092188, type: 2}
+  - {fileID: 7400000, guid: ed9e968301a797a4a8b2a595df128431, type: 2}
+  - {fileID: 7400000, guid: 195ba1479b8fc3d43b0fa615148c633b, type: 2}
+  - {fileID: 7400000, guid: b6e4c4c10d0b06849829b7492585663f, type: 2}
+  - {fileID: 7400000, guid: b643c1358d5ec0a4d8ab6dbd5c610607, type: 2}
+  - {fileID: 7400000, guid: 8a5d8c391cd8b9e4da99057276c9ae55, type: 2}
+  - {fileID: 7400000, guid: b82a08b3cd5c7e745bee8057adfcbfbc, type: 2}
+  - {fileID: 7400000, guid: 4976821ecb629bc40a55f3f32fd6486d, type: 2}
+  - {fileID: 7400000, guid: 01bbe98a38b044440ac1ced40f478237, type: 2}
+  - {fileID: 7400000, guid: 9a1a4b75300217d4891738ef4f52b259, type: 2}
+  - {fileID: 7400000, guid: 627385af1e1f5bb49aaf54a89c982a7f, type: 2}
+  - {fileID: 7400000, guid: 6da281b2bb6bb6040a83cdbd13af1d7e, type: 2}
+  - {fileID: 7400000, guid: e54eb57d640d94649b06255231170abe, type: 2}
+  - {fileID: 7400000, guid: 3641f94f70af22645b3296d50dc724cf, type: 2}
+  - {fileID: 7400000, guid: 84f3600bd8cdf8745a5d42d49c87270d, type: 2}

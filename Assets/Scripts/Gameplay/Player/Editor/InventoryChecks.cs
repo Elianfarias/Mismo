@@ -81,7 +81,7 @@ namespace Mismo.Gameplay.Player.Editor
             while (loadout.InCombat && Time.time < initialCombat) yield return null;
             Check(loadout.CanChangeEquipment, "Fixture has left initial arena combat");
             Check(player.GetComponent<PlayerInventory>() == null, "Arena does not load the user's single-player save");
-            var catalog = Resources.Load<ItemCatalog>("ItemCatalog");
+            var catalog = Mismo.Core.ProjectAssets.Load<ItemCatalog>("ItemCatalog");
             Check(catalog != null && catalog.bossReward != null && catalog.weapons.Length == 3, "Catalog and reward included in Resources");
             Check(!string.IsNullOrEmpty(catalog.bossReward.inventoryDescription), "Reward description is imported");
             testDirectory = Path.Combine(Application.temporaryCachePath, "InventoryChecks", Guid.NewGuid().ToString("N"));

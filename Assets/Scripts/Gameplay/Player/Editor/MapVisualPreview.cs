@@ -36,11 +36,11 @@ namespace Mismo.Gameplay.Player.Editor
         static IEnumerator Capture()
         {
             Directory.CreateDirectory(".validation");
-            var settings=Object.Instantiate(Resources.Load<ExplorationWorldSettings>("ExplorationWorldSettings"));
+            var settings=Object.Instantiate(Mismo.Core.ProjectAssets.Load<ExplorationWorldSettings>("ExplorationWorldSettings"));
             settings.preserveAuthoredCenter=false;settings.content=null;
             var terrain=new ExplorationTerrain(settings);var town=terrain.Site(Vector2Int.zero);
             var parent=new GameObject("Visual preview only");parent.SetActive(false);
-            var prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/Player.prefab");
+            var prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/Player.prefab");
             var player=Object.Instantiate(prefab,parent.transform);
             foreach(var behaviour in player.GetComponentsInChildren<MonoBehaviour>(true))behaviour.enabled=false;
             foreach(var collider in player.GetComponentsInChildren<Collider>(true))collider.enabled=false;

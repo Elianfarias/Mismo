@@ -35,12 +35,12 @@ namespace Mismo.Gameplay.Player.Editor
             try
             {
                 currentProperty.SetValue(null,null);
-                var catalog=Resources.Load<MapMarkerCatalog>("MapMarkerCatalog");
+                var catalog=Mismo.Core.ProjectAssets.Load<MapMarkerCatalog>("MapMarkerCatalog");
                 Check(catalog!=null&&catalog.ValidationError()==null,"Catálogo válido",notes);
                 Check(catalog.types.Count==11&&catalog.types.TrueForAll(t=>t.icon!=null),"Once iconos del pack referenciados",notes);
                 Check(catalog.villageIcon!=null,"Pueblo usa home.png",notes);
                 foreach(var type in catalog.types)Check(MapIcons.Mask(type.icon)!=null,"Máscara legible: "+type.id,notes);
-                settings=Object.Instantiate(Resources.Load<ExplorationWorldSettings>("ExplorationWorldSettings"));settings.preserveAuthoredCenter=false;
+                settings=Object.Instantiate(Mismo.Core.ProjectAssets.Load<ExplorationWorldSettings>("ExplorationWorldSettings"));settings.preserveAuthoredCenter=false;
                 var terrain=new ExplorationTerrain(settings);var village=terrain.Site(Vector2Int.zero);
                 player=new GameObject("Map verification");SceneManager.MoveGameObjectToScene(player,scene);player.transform.position=village.position;
                 map=player.AddComponent<WorldMapPanel>();map.Initialize(settings);

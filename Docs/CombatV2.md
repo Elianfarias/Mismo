@@ -34,7 +34,7 @@ DamageInfo transporta identificador de ejecución, daño de vida/Posture, autor,
 
 CombatState conserva Posture, Focus y la condición de apertura. DefenseWindow resuelve defensas independientemente de una espada concreta. SwordParry conserva la presentación y compatibilidad de escenas anteriores. AbilityRunner coordina carga, buffer, costos, cancelaciones e interrupción; AbilityExecution guarda estado por uso. PlayerMotor sigue siendo la única autoridad de movimiento.
 
-Assets/Resources/CombatRules.asset contiene multiplicadores direccionales, bonificación de distancia, ventanas perfectas y recompensas. Los assets de habilidades contienen preparación, costo de Focus, carga, curvas y compromiso. Los máximos iniciales de Posture se asignan al integrar Goblin/Boss; los demás parámetros de Posture pertenecen a CombatState.
+Assets/Data/Combat/CombatRules.asset contiene multiplicadores direccionales, bonificación de distancia, ventanas perfectas y recompensas. Los assets de habilidades contienen preparación, costo de Focus, carga, curvas y compromiso. Los máximos iniciales de Posture se asignan al integrar Goblin/Boss; los demás parámetros de Posture pertenecen a CombatState.
 
 ## Validación y límites
 

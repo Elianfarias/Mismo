@@ -12,7 +12,7 @@ Los goblins pueden dar armas con tier y variante. En esta etapa se incorporan di
 
 ## Balance configurable
 
-Editar `Assets/Resources/ProgressionRules.asset`. Todos los valores son iniciales para playtest.
+Editar `Assets/Data/Progression/ProgressionRules.asset`. Todos los valores son iniciales para playtest.
 
 | Sistema | Valor inicial |
 | --- | --- |

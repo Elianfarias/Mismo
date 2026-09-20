@@ -18,9 +18,9 @@ La cámara tiene distancia, sensibilidad, límites verticales y suavizado en su 
 
 `SwordParry` y `SwordSpinAttack` son habilidades exclusivas de la espada y opcionales en el personaje. Cada arma futura puede reemplazarlas por sus propios componentes y reglas, sin convertir sus habilidades en contratos globales del jugador. E abre el parry; R inicia el giro circular. El parry se configura en su componente; `DamageReceiver` lo consulta antes de aplicar daño, y un impacto válido durante la ventana se anula y emite `Parried`, que `CombatFeedback` representa con señal dorada y tono agudo. El giro usa un área temporal, aplica daño una vez por objetivo, consume stamina y dispara feedback celeste al comenzar.
 
-La herramienta de editor `SwordAssetTool` reutiliza `Assets/Data/Player/BasicSword.asset` y puede adjuntar el prefab visual temporal `Assets/Prefabs/Player/BasicSword.prefab` al personaje seleccionado. `Mismo > Prototype > Build Sword Combat Training Setup` agrega `SwordAnimationFeedback` al prefab del jugador, crea `Assets/Prefabs/Combat/TrainingDummy.prefab` y coloca una instancia frente al jugador en `MovementPrototype` sin duplicarla si ya existe.
+La herramienta de editor `SwordAssetTool` reutiliza `Assets/Data/Player/BasicSword.asset` y puede adjuntar el prefab visual temporal `Assets/Art/Prefabs/Player/BasicSword.prefab` al personaje seleccionado. `Mismo > Prototype > Build Sword Combat Training Setup` agrega `SwordAnimationFeedback` al prefab del jugador, crea `Assets/Art/Prefabs/Combat/TrainingDummy.prefab` y coloca una instancia frente al jugador en `MovementPrototype` sin duplicarla si ya existe.
 
-El prefab `Assets/Prefabs/Player/Player.prefab` contiene input, motor, stamina, cinturón y coordinación, además de las habilidades actuales de espada (`BasicSwordCombo`, `SwordLunge`, `SwordParry` y `SwordSpinAttack`). La referencia de cámara se conecta en cada escena. No hay estado de jugador mutable en ScriptableObjects ni singletons.
+El prefab `Assets/Art/Prefabs/Player/Player.prefab` contiene input, motor, stamina, cinturón y coordinación, además de las habilidades actuales de espada (`BasicSwordCombo`, `SwordLunge`, `SwordParry` y `SwordSpinAttack`). La referencia de cámara se conecta en cada escena. No hay estado de jugador mutable en ScriptableObjects ni singletons.
 
 ## Herramientas
 

@@ -12,10 +12,51 @@ namespace Mismo.Gameplay.Player.Presentation
         public static readonly Color Surface=new Color(.055f,.067f,.058f,.64f),Rule=new Color(.63f,.65f,.57f,.24f);
         static Font heading,body;
         static GUIStyle words,action;
+        static GUISkin scrollSkin,scrollSource;
+        static Texture2D scrollNormal,scrollHover;
+        // Keep Unity's wheel, drag and track-click handling, with a wider invisible grab area.
+        public static Vector2 BeginScrollView(Rect viewport,Vector2 position,Rect content)
+        {
+            var previous=GUI.skin;
+            if(scrollSkin==null||scrollSource!=previous)
+            {
+                if(scrollSkin!=null)Object.Destroy(scrollSkin);
+                scrollSource=previous;scrollSkin=Object.Instantiate(previous);
+                scrollSkin.hideFlags=HideFlags.HideAndDontSave;
+                if(scrollNormal==null)scrollNormal=ScrollThumb(6,.48f);
+                if(scrollHover==null)scrollHover=ScrollThumb(8,.82f);
+                scrollSkin.verticalScrollbar=new GUIStyle{name="verticalscrollbar",fixedWidth=18,stretchHeight=true};
+                var thumb=new GUIStyle{name="verticalscrollbarthumb",fixedWidth=18,border=new RectOffset(0,0,8,8)};
+                thumb.normal.background=scrollNormal;
+                thumb.hover.background=scrollHover;thumb.active.background=scrollHover;
+                scrollSkin.verticalScrollbarThumb=thumb;
+                scrollSkin.verticalScrollbarUpButton=new GUIStyle{name="verticalscrollbarupbutton",fixedHeight=0};
+                scrollSkin.verticalScrollbarDownButton=new GUIStyle{name="verticalscrollbardownbutton",fixedHeight=0};
+                var custom=new List<GUIStyle>();
+                foreach(var style in scrollSkin.customStyles)
+                    if(style!=null&&!style.name.StartsWith("verticalscrollbar",System.StringComparison.OrdinalIgnoreCase))custom.Add(style);
+                scrollSkin.customStyles=custom.ToArray();
+            }
+            GUI.skin=scrollSkin;
+            try{return GUI.BeginScrollView(viewport,position,content);}
+            finally{GUI.skin=previous;}
+        }
+        static Texture2D ScrollThumb(float width,float opacity)
+        {
+            var texture=new Texture2D(18,18,TextureFormat.RGBA32,false){name="Minimal scroll thumb",hideFlags=HideFlags.HideAndDontSave,filterMode=FilterMode.Bilinear,wrapMode=TextureWrapMode.Clamp};
+            var pixels=new Color[18*18];
+            for(int y=0;y<18;y++)for(int x=0;x<18;x++)
+            {
+                float centerY=Mathf.Clamp(y+.5f,width/2,18-width/2);
+                float distance=Vector2.Distance(new Vector2(x+.5f,y+.5f),new Vector2(9,centerY));
+                pixels[y*18+x]=new Color(.73f,.76f,.78f,opacity*Mathf.Clamp01(width/2+.5f-distance));
+            }
+            texture.SetPixels(pixels);texture.Apply(false,true);return texture;
+        }
         static readonly Dictionary<string,Texture2D> icons=new Dictionary<string,Texture2D>();
         static Equipment.Inventory.InventoryUIIcons sharedIcons;
-        public static Font Body=>body!=null?body:body=Resources.Load<Font>("Fonts/Cagliostro-Regular");
-        public static Font Heading=>heading!=null?heading:heading=Resources.Load<Font>("Fonts/Cagliostro-Regular");
+        public static Font Body=>body!=null?body:body=Mismo.Core.ProjectAssets.Load<Font>("Fonts/Cagliostro-Regular");
+        public static Font Heading=>heading!=null?heading:heading=Mismo.Core.ProjectAssets.Load<Font>("Fonts/Cagliostro-Regular");
         public static void Text(Rect rect,string value,int size=20,Color? color=null,bool title=false,TextAnchor alignment=TextAnchor.UpperLeft)
         {
             if(words==null)words=new GUIStyle(GUI.skin.label){padding=new RectOffset(),wordWrap=true};
@@ -46,11 +87,11 @@ namespace Mismo.Gameplay.Player.Presentation
             if(string.IsNullOrEmpty(name))return null;
             if(!icons.TryGetValue(name,out var icon)||icon==null)
             {
-                if(sharedIcons==null)sharedIcons=Resources.Load<Equipment.Inventory.InventoryUIIcons>("InventoryUIIcons");
+                if(sharedIcons==null)sharedIcons=Mismo.Core.ProjectAssets.Load<Equipment.Inventory.InventoryUIIcons>("InventoryUIIcons");
                 if(sharedIcons!=null&&sharedIcons.abilityIcons!=null)
                     foreach(var texture in sharedIcons.abilityIcons)
                         if(texture!=null&&texture.name==name){icon=texture;break;}
-                if(icon==null)icon=Resources.Load<Texture2D>("UI/QuietFantasy/Icons/"+name);
+                if(icon==null)icon=Mismo.Core.ProjectAssets.Load<Texture2D>("UI/QuietFantasy/Icons/"+name);
                 if(icon!=null)icons[name]=icon;
             }
             return icon;

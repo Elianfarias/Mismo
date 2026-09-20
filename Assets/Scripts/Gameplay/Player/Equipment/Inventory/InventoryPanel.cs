@@ -51,7 +51,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         void OnChanged(){message=inventory.Notice;messageUntil=Time.unscaledTime+5;previewDirty=true;}
         void Update()
         {
-            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) {if(IsOpen&&page==Page.Menu)Close();return;}
             if(IsOpen&&(health==null||health.IsDead)){Close();return;}
             if(showChest&&!inventory.AtChest){showChest=false;selected=null;confirmDiscard=false;showItemActions=false;CancelInventoryDrag();previewDirty=true;}
             var k=Keyboard.current;
@@ -73,9 +73,14 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                     else Close();
                 }
                 else if(!typing&&k.iKey.wasPressedThisFrame){if(IsOpen&&page==Page.Inventory)Close();else OpenPage(Page.Inventory);}
-                else if(!typing&&k.bKey.wasPressedThisFrame){if(IsOpen&&page==Page.Menu)Close();else OpenPage(Page.Menu);}
+                else if(!typing&&k.bKey.wasPressedThisFrame){if(OpenPage(Page.Menu))radialHeld=true;}
                 else if(!typing&&k.pKey.wasPressedThisFrame)OpenPage(Page.Character);
                 else if(!typing&&k.kKey.wasPressedThisFrame)OpenPage(Page.Skills);
+            }
+            if(IsOpen&&page==Page.Menu)
+            {
+                UpdateRadialSelection();
+                if(radialHeld&&k!=null&&k.bKey.wasReleasedThisFrame)ConfirmRadialSelection();
             }
             if(IsOpen&&draggedGrid!=null&&k!=null&&k.rKey.wasPressedThisFrame)
             {
@@ -85,6 +90,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(IsOpen&&previewDirty)
             {
                 previewDirty=false;
+                if(page==Page.Menu){preview.Dispose();return;}
                 GameObject source=gameObject;
                 if(page==Page.Bestiary||page==Page.Mounts){source=null;mountPreviewId=null;}
                 // Keep the character visible while inspecting inventory objects.
@@ -94,7 +100,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 preview.Show(source,rotation,page==Page.Character||page==Page.Weapons||page==Page.Inventory);
             }
         }
-        void LateUpdate(){if(IsOpen)preview.Render();}
+        void LateUpdate(){if(IsOpen&&page!=Page.Menu)preview.Render();}
         public bool TryOpen()=>OpenPage(Page.Inventory);
         bool OpenPage(Page target)
         {
@@ -112,7 +118,15 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             else if (page != target) GameAudio.Play(GameSound.TabChanged);
             if(target==Page.Skills&&page!=Page.Skills){skillsWeapon=loadout.ActiveDefinition;skillsScroll=Vector2.zero;}
             CancelSkillDrag();CancelInventoryDrag();showItemActions=false;
-            page=target;confirmDiscard=false;previewDirty=true;searchFocused=false;return true;
+            if(page!=target){System.Array.Clear(pendingAttributes,0,3);ResetMasteryDraft();}
+            page=target;confirmDiscard=false;previewDirty=true;searchFocused=false;
+            radialHeld=false;
+            if(target==Page.Menu)
+            {
+                radialSelected=-1;radialOpenedFrame=Time.frameCount;
+                Mouse.current?.WarpCursorPosition(new Vector2(Screen.width*.5f,Screen.height*.5f));
+            }
+            return true;
         }
         public bool OpenChest()
         {
@@ -123,12 +137,12 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             if(!IsOpen)return;
             GameAudio.Play(GameSound.MenuClose);
-            IsOpen=false;closedFrame=Time.frameCount;if(active==this)active=null;
+            IsOpen=false;System.Array.Clear(pendingAttributes,0,3);ResetMasteryDraft();radialHeld=false;closedFrame=Time.frameCount;if(active==this)active=null;
             Cursor.lockState=previousLock;Cursor.visible=previousVisible;confirmDiscard=false;showChest=false;draggedGrid=null;
             CancelSkillDrag();CancelInventoryDrag();showItemActions=false;preview.Dispose();searchFocused=false;rotatingPreview=false;
         }
         void OnDisable()=>Close();
-        void OnDestroy(){if(inventory!=null)inventory.Changed-=OnChanged;preview.Dispose();foreach(var icon in rotatedIcons.Values)Destroy(icon);rotatedIcons.Clear();if(inventoryBackdrop!=null)Destroy(inventoryBackdrop);}
+        void OnDestroy(){DisposeRadialTextures();if(inventory!=null)inventory.Changed-=OnChanged;preview.Dispose();foreach(var icon in rotatedIcons.Values)Destroy(icon);rotatedIcons.Clear();if(inventoryBackdrop!=null)Destroy(inventoryBackdrop);}
         void Text(Rect rect,string value,int size=18,Color? color=null)
         {label.fontSize=size;label.normal.textColor=color??Color.white;GUI.Label(rect,L.Text(value),label);}
         bool Button(Rect rect,string value)
@@ -160,12 +174,18 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 FantasyUI.StyleButton(button);
                 field=new GUIStyle(GUI.skin.textField){font=QuietFantasyUI.Body,fontSize=20,padding=new RectOffset(12,12,7,7)};
             }
+            if(inventoryIcons==null)inventoryIcons=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");
             var matrix=GUI.matrix;int depth=GUI.depth;
-            if(IsOpen){GUI.depth=-40;PlayerHUD.Fill(new Rect(0,0,Screen.width,Screen.height),IsQuietPage?new Color(.035f,.043f,.038f,.91f):new Color(.015f,.022f,.03f,.86f));}
+            if(IsOpen&&page!=Page.Menu){GUI.depth=-40;PlayerHUD.Fill(new Rect(0,0,Screen.width,Screen.height),IsQuietPage?new Color(.015f,.022f,.03f,.25f*PanelOpacity):new Color(.015f,.022f,.03f,.86f*PanelOpacity));}
             const float canvasWidth=1280f;
             float scale=Mathf.Min(Screen.width/canvasWidth,Screen.height/800f);
+            if(IsQuietPage)scale*=.9f;
             GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-canvasWidth*scale)/2,(Screen.height-800*scale)/2,0),Quaternion.identity,Vector3.one*scale);
             GUI.depth=-40;
+            if(IsOpen&&page==Page.Menu)
+            {
+                DrawMenu();GUI.matrix=matrix;GUI.depth=depth;return;
+            }
             if(IsOpen&&page==Page.Inventory)
             {
                 DrawVisualInventory();GUI.matrix=matrix;GUI.depth=depth;return;
@@ -176,7 +196,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             }
             if(!IsOpen)
             {
-                Text(new Rect(28,756,650,32),L.Format("[B] MENÚ   [I] MOCHILA   {0} / {1}",inventory.UsedSlots(false),inventory.BackpackCapacity),17,Accent);
+
                 if(Time.unscaledTime<messageUntil){PlayerHUD.Fill(new Rect(265,25,750,65),PlayerHUD.Panel);Text(new Rect(285,37,710,48),message,18,Accent);}
             }
             else
@@ -203,44 +223,45 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             }
             GUI.matrix=matrix;GUI.depth=depth;
         }
-        void DrawMenu()
-        {
-            if(Button(new Rect(40,105,300,38),L.LanguageLabel))L.Next();
-            Text(new Rect(405,135,500,38),"PREPARÁ TU PRÓXIMA SALIDA",21,Muted);
-            if(Button(new Rect(450,225,380,80),"PERSONAJE  [P]"))OpenPage(Page.Character);
-            if(Button(new Rect(745,365,360,80),"INVENTARIO  [I]"))OpenPage(Page.Inventory);
-            if(Button(new Rect(175,365,360,80),"HABILIDADES  [K]"))OpenPage(Page.Skills);
-            if(Button(new Rect(450,505,380,80),"MAPA  [M]"))
-            {
-                var map=GetComponent<WorldMapPanel>();if(map!=null){Close();map.Open();}
-            }
-            if(Button(new Rect(300,602,310,38),"BESTIARIO"))OpenPage(Page.Bestiary);
-            if(Button(new Rect(630,602,310,38),"MONTURAS"))OpenPage(Page.Mounts);
-            Text(new Rect(450,650,500,32),"El mundo continúa mientras consultás el menú.",17,Muted);
-        }
         void DrawMounts()
         {
             var mounts=inventory.Mounts;
-            if(mounts.Length==0){Text(new Rect(100,260,1050,110),"Todavía no tenés monturas. Algunas criaturas pueden reconocerte al vencerlas.",25,Muted);return;}
+            if(mounts.Length==0)
+            {
+                var color=GUI.color;GUI.color=NavigationTint(QuietFantasyUI.Muted);
+                if(inventoryIcons?.radialMounts!=null)GUI.DrawTexture(new Rect(604,270,72,72),MapIcons.Mask(inventoryIcons.radialMounts),ScaleMode.ScaleToFit);
+                else QuietFantasyUI.DrawIcon(new Rect(604,270,72,72),"wingfoot",NavigationTint(QuietFantasyUI.Muted));
+                GUI.color=color;
+                QuietFantasyUI.Text(new Rect(260,375,760,48),"Todavía no tenés monturas",27,QuietFantasyUI.Ink,false,TextAnchor.MiddleCenter);
+                QuietFantasyUI.Text(new Rect(290,432,700,72),"Algunas criaturas pueden reconocerte al vencerlas.",21,QuietFantasyUI.Muted,false,TextAnchor.MiddleCenter);
+                return;
+            }
             mountIndex=Mathf.Clamp(mountIndex,0,mounts.Length-1);
-            mountScroll=GUI.BeginScrollView(new Rect(45,125,490,450),mountScroll,new Rect(0,0,465,mounts.Length*65));
+            mountScroll=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.BeginScrollView(new Rect(65,155,410,510),mountScroll,new Rect(0,0,385,mounts.Length*65));
             for(int i=0;i<mounts.Length;i++)
             {
                 var sp=World.CreatureSpecies.Find(mounts[i].speciesId);
-                if(Tab(new Rect(0,i*65,450,55),(sp!=null?L.Text(sp.displayName):mounts[i].speciesId)+" · "+(i+1),i==mountIndex))mountIndex=i;
+                if(QuietFantasyUI.Button(new Rect(0,i*65,370,55),(sp!=null?L.Text(sp.displayName):mounts[i].speciesId)+" · "+(i+1),i==mountIndex)){mountIndex=i;rotatingPreview=false;}
             }
             GUI.EndScrollView();
             var mount=mounts[mountIndex];var species=World.CreatureSpecies.Find(mount.speciesId);
-            if(mountPreviewId!=mount.id){preview.Show(species?.prefabs==null?null:System.Array.Find(species.prefabs,p=>p!=null&&p.name==mount.prefabName),new Vector3(0,150,0));preview.Zoom(species!=null?species.bookZoom:1);mountPreviewId=mount.id;}
-            DrawPreview(new Rect(600,140,540,320));
-            Text(new Rect(590,470,610,65),"Tus monturas permanecen en la colección aunque mueras o las guardes.",20,Muted);
+            if(mountPreviewId!=mount.id)
+            {
+                mountPreviewId=mount.id;
+                try{preview.Show(species?.prefabs==null?null:System.Array.Find(species.prefabs,p=>p!=null&&p.name==mount.prefabName),new Vector3(0,150,0));preview.Zoom(species!=null?species.bookZoom:1);}
+                catch(Exception exception){preview.Dispose();Debug.LogWarning("Mount preview unavailable for "+mount.id+": "+exception.Message);}
+            }
+            PlayerHUD.Fill(new Rect(510,155,1,510),QuietFantasyUI.Rule);
+            QuietFantasyUI.Text(new Rect(555,151,630,40),species!=null?species.displayName:mount.speciesId,27,QuietFantasyUI.Ink,false,TextAnchor.MiddleCenter);
+            if(preview.HasModel)DrawPreview(new Rect(605,205,530,325));
+            else QuietFantasyUI.Text(new Rect(605,205,530,325),"Vista previa no disponible",20,QuietFantasyUI.Muted,false,TextAnchor.MiddleCenter);
             bool selectedActive=inventory.SelectedMountId==mount.id&&inventory.CompanionSummoned;
-            Text(new Rect(590,540,600,30),selectedActive?"Acompañante activo":"Guardada en tu colección",20,Accent);
+            QuietFantasyUI.Text(new Rect(555,540,630,32),selectedActive?"Acompañante activo":"Guardada en tu colección",20,QuietFantasyUI.Muted,false,TextAnchor.MiddleCenter);
             bool enabled=GUI.enabled;GUI.enabled=enabled&&inventory.CanCallMount&&species!=null;
-            if(Button(new Rect(590,585,280,42),selectedActive?"Invocar a mi lado":"Invocar montura"))inventory.SummonMount(mount.id);
+            if(QuietFantasyUI.Button(new Rect(565,597,285,45),selectedActive?"Invocar a mi lado":"Invocar montura"))inventory.SummonMount(mount.id);
             GUI.enabled=enabled&&inventory.CanCallMount&&inventory.CompanionSummoned;
-            if(Button(new Rect(890,585,280,42),"Guardar acompañante"))inventory.DismissMount();GUI.enabled=enabled;
-            if(!inventory.CanCallMount)Text(new Rect(590,640,600,42),"Desmontá y salí de combate para cambiar de acompañante.",17,Muted);
+            if(QuietFantasyUI.Button(new Rect(875,597,285,45),"Guardar acompañante"))inventory.DismissMount();GUI.enabled=enabled;
+            if(!inventory.CanCallMount)QuietFantasyUI.Text(new Rect(555,665,630,50),"Desmontá y salí de combate para cambiar de acompañante.",17,QuietFantasyUI.Muted,false,TextAnchor.MiddleCenter);
         }
 
         bool Matches(GridItem item)
@@ -258,7 +279,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             bool pointerInGrid=viewport.Contains(Event.current.mousePosition);
             var items=inventory.GridItems(showChest);var positions=inventory.GridPositions(showChest);
             var unplaced=items.FindAll(i=>!positions.Exists(p=>p.key==i.key));
-            scroll=GUI.BeginScrollView(viewport,scroll,new Rect(0,0,viewport.width-22,Mathf.Max(viewport.height-6,rows*cell+unplaced.Count*49+(unplaced.Count>0?38:0))));
+            scroll=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.BeginScrollView(viewport,scroll,new Rect(0,0,viewport.width-22,Mathf.Max(viewport.height-6,rows*cell+unplaced.Count*49+(unplaced.Count>0?38:0))));
             for(int y=0;y<rows;y++)for(int x=0;x<columns;x++)
             {
                 PlayerHUD.Fill(new Rect(x*cell,y*cell,cell-2,cell-2),OliveTheme?new Color(.43f,.41f,.28f,.65f):new Color(.36f,.39f,.44f,.55f));
@@ -367,12 +388,11 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             if(!preview.HasModel)return;
             GUI.DrawTexture(rect,preview.Texture,ScaleMode.ScaleToFit);
-            if(page!=Page.Inventory)Text(new Rect(rect.x,rect.yMax-22,rect.width,22),"Arrastrá para rotar",14,Muted);
             var e=Event.current;
             if(e.type==EventType.MouseDown&&e.button==0&&rect.Contains(e.mousePosition)&&GUI.enabled&&!confirmDiscard)
             {rotatingPreview=true;e.Use();}
             if(rotatingPreview&&e.type==EventType.MouseDrag)
-            {preview.Rotate(page==Page.Inventory?new Vector2(-e.delta.x,e.delta.y):e.delta);e.Use();}
+            {preview.Rotate(new Vector2(-e.delta.x,e.delta.y));e.Use();}
             if(e.rawType==EventType.MouseUp)rotatingPreview=false;
             if(e.type==EventType.MouseDown&&!rect.Contains(e.mousePosition))rotatingPreview=false;
         }

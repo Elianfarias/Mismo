@@ -10,14 +10,16 @@ namespace Mismo.Gameplay.Player.Editor
         [MenuItem("Mismo/Inventory/Create default material previews")]
         public static void CreateDefaults()
         {
-            const string folder="Assets/Art/Inventory";
+            const string folder="Assets/Art/Prefabs/Inventory";
+            const string materials="Assets/Art/Materials/Inventory";
+            Directory.CreateDirectory(materials);Directory.CreateDirectory("Assets/Art/UI/Inventory");
             Directory.CreateDirectory(folder);AssetDatabase.Refresh();
-            foreach(var definition in Resources.LoadAll<MaterialDefinition>("Materials"))
+            foreach(var definition in Mismo.Core.ProjectAssets.LoadAll<MaterialDefinition>("Materials"))
             {
                 if(definition.pickupPrefab!=null)continue;
                 var root=new GameObject(definition.displayName);
                 var color=definition.id==MaterialCatalog.Herb?new Color(.17f,.46f,.23f):definition.id==MaterialCatalog.Wood?new Color(.38f,.20f,.085f):definition.id==MaterialCatalog.Stone?new Color(.43f,.47f,.49f):new Color(.8f,.75f,.59f);
-                string materialPath=folder+"/"+definition.name+".mat";
+                string materialPath=materials+"/"+definition.name+".mat";
                 var material=AssetDatabase.LoadAssetAtPath<Material>(materialPath);
                 if(material==null){material=new Material(Shader.Find("Standard")){color=color};AssetDatabase.CreateAsset(material,materialPath);}
                 if(definition.id==MaterialCatalog.Herb)
@@ -40,9 +42,9 @@ namespace Mismo.Gameplay.Player.Editor
         public static void GenerateGridIcons()
         {
             CreateDefaults();
-            foreach(var material in Resources.LoadAll<MaterialDefinition>("Materials"))
+            foreach(var material in Mismo.Core.ProjectAssets.LoadAll<MaterialDefinition>("Materials"))
                 if(material.icon==null&&material.pickupPrefab!=null){material.icon=Icon(material.pickupPrefab,"material-"+material.name,material.inventoryPreviewRotation);EditorUtility.SetDirty(material);}
-            var catalog=Resources.Load<ItemCatalog>("ItemCatalog");
+            var catalog=Mismo.Core.ProjectAssets.Load<ItemCatalog>("ItemCatalog");
             if(catalog!=null)foreach(var weapon in catalog.weapons)
                 if(weapon.inventoryIcon==null&&weapon.visualPrefab!=null){weapon.inventoryIcon=Icon(weapon.visualPrefab,"weapon-"+weapon.name,weapon.inventoryPreviewRotation);EditorUtility.SetDirty(weapon);}
             AssetDatabase.SaveAssets();
@@ -62,7 +64,7 @@ namespace Mismo.Gameplay.Player.Editor
                 minX=Mathf.Max(0,minX-4);minY=Mathf.Max(0,minY-4);maxX=Mathf.Min(texture.width-1,maxX+4);maxY=Mathf.Min(texture.height-1,maxY+4);
                 var cropped=new Texture2D(maxX-minX+1,maxY-minY+1,TextureFormat.RGBA32,false);
                 cropped.SetPixels(texture.GetPixels(minX,minY,cropped.width,cropped.height));cropped.Apply();
-                string path="Assets/Art/Inventory/"+name+".png";File.WriteAllBytes(path,cropped.EncodeToPNG());
+                string path="Assets/Art/UI/Inventory/"+name+".png";File.WriteAllBytes(path,cropped.EncodeToPNG());
                 Object.DestroyImmediate(texture);Object.DestroyImmediate(cropped);AssetDatabase.ImportAsset(path);
                 var importer=(TextureImporter)AssetImporter.GetAtPath(path);importer.textureType=TextureImporterType.Sprite;importer.spriteImportMode=SpriteImportMode.Single;importer.alphaIsTransparency=true;importer.mipmapEnabled=false;importer.SaveAndReimport();
                 return AssetDatabase.LoadAssetAtPath<Sprite>(path);

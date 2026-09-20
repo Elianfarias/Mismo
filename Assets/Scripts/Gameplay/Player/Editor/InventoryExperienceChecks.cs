@@ -25,7 +25,7 @@ namespace Mismo.Gameplay.Player.Editor
             InventoryPresentationAssets.GenerateGridIcons();
             EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);
             var floor=GameObject.CreatePrimitive(PrimitiveType.Cube);floor.transform.position=new Vector3(0,-.5f,0);floor.transform.localScale=new Vector3(80,1,80);
-            var player=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/Player.prefab"));
+            var player=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/Player.prefab"));
             var respawn=player.GetComponent<World.RegionRespawn>();if(respawn!=null)Object.DestroyImmediate(respawn);
             player.transform.position=Vector3.up*.2f;
             var camera=new GameObject("Camera").AddComponent<UnityEngine.Camera>();camera.tag="MainCamera";
@@ -65,7 +65,7 @@ namespace Mismo.Gameplay.Player.Editor
             Check(!PanelAction(panel,"CanDropWeapon",sword,1),"Drag target rejects duplicating a main-hand instance");
             Check(PanelAction(panel,"EquipAtHand",bow,0),"Main-hand drop swaps equipped sets atomically");
             Check(inventory.EquippedId(0)==bow&&inventory.EquippedId(1)==sword,"Set swap retains both weapon instances");
-            Check(inventory.UsedSlots(false)==occupied,"Equipment drop does not free occupied backpack cells");
+            Check(inventory.UsedSlots(false)==occupied,"Swapping equipped sets leaves backpack capacity unchanged");
             Check(PanelAction(panel,"EquipAtHand",sword,0),"Main-hand drop restores original sets");
             Field(panel,"showChest",true);
             Check(!PanelAction(panel,"CanDropWeapon",sword,0),"Chest view cannot bypass withdrawal rules");
@@ -74,7 +74,9 @@ namespace Mismo.Gameplay.Player.Editor
             if(spare!=null)
             {
                 Check(PanelAction(panel,"EquipAtHand",spare.id,1)&&inventory.OffhandId(0)==spare.id,"Compatible offhand drop equips a second object");
+                Check(!inventory.GridItems(false).Exists(item=>item.id==spare.id)&&inventory.UsedSlots(false)<occupied,"Equipped offhand leaves the backpack and frees its cells");
                 Check(inventory.TryEquipOffhand(0,null)&&inventory.Item(spare.id)!=null,"Removing offhand retains its owned object");
+                Check(inventory.GridItems(false).Exists(item=>item.id==spare.id)&&inventory.UsedSlots(false)==occupied,"Unequipped offhand returns to backpack cells");
             }
             Field(panel,"draggedGrid",sword);
             typeof(InventoryPanel).GetMethod("OnApplicationFocus",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(panel,new object[]{false});
@@ -126,28 +128,30 @@ namespace Mismo.Gameplay.Player.Editor
             var loadout=player.GetComponent<EquipmentLoadout>();loadout.Runner.Cancel();loadout.Belt?.Cancel();
             var inventory=player.gameObject.AddComponent<PlayerInventory>();
             var path=Path.Combine(Output,"test-"+Guid.NewGuid().ToString("N")+".mismo");
-            inventory.Initialize(Resources.Load<ItemCatalog>("ItemCatalog"),new ProtectedProfileRepository(path));
+            inventory.Initialize(Mismo.Core.ProjectAssets.Load<ItemCatalog>("ItemCatalog"),new ProtectedProfileRepository(path));
             Check(inventory.IsReady,"Test inventory initializes: "+inventory.Notice);
-            var uiArt=Resources.Load<InventoryUIIcons>("InventoryUIIcons");
+            var uiArt=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");
             Check(uiArt!=null&&uiArt.weaponSlotBackground!=null&&uiArt.consumableSlotBackground!=null&&
                 uiArt.weaponSlotUV.width>0&&uiArt.weaponSlotUV.height>0&&uiArt.consumableSlotUV.width>0&&uiArt.consumableSlotUV.height>0,
                 "Slot artwork loads with nonempty texture regions");
+            Check(uiArt.VitalsFrame!=null,"Vitals frame loads without manual assignment");
             Check(uiArt.abilityIcons!=null&&uiArt.abilityIcons.Length==21,"Shared HUD icon references are populated");
             foreach(var icon in uiArt.abilityIcons)
                 Check(icon!=null&&Mismo.Gameplay.Player.Presentation.QuietFantasyUI.Icon(icon.name)==icon,"HUD resolves referenced icon: "+(icon!=null?icon.name:"missing"));
             Check(inventory.Material(MaterialCatalog.Wood).icon!=null&&inventory.Definition(inventory.EquippedId(0)).inventoryIcon!=null,"Grid icons are imported as usable sprites");
             var panel=player.gameObject.AddComponent<InventoryPanel>();
             var settings=InventorySettings.Current;settings.backpackColumns=3;settings.backpackRows=1;
-            var itemCatalog=Resources.Load<ItemCatalog>("ItemCatalog");
+            var itemCatalog=Mismo.Core.ProjectAssets.Load<ItemCatalog>("ItemCatalog");
             foreach(var weapon in itemCatalog.weapons){weapon.gridWidth=1;weapon.gridHeight=1;}
             foreach(var material in inventory.Materials){material.gridWidth=1;material.gridHeight=1;}
-            Check(inventory.IsReady&&inventory.UsedSlots(false)==2,"Two equipped weapons count toward capacity");
+            Check(inventory.IsReady&&inventory.UsedSlots(false)==0&&inventory.GridItems(false).Count==0,"Both equipped sets are outside backpack capacity");
+            Check(inventory.TryGrantMaterial("MAT-06",40),"Fill two backpack cells with material stacks");
             Check(inventory.TryGrantMaterial(MaterialCatalog.Wood,20)&&inventory.UsedSlots(false)==3,"Material fills last slot");
             Check(!inventory.TryGrantMaterial(MaterialCatalog.Wood,1)&&inventory.MaterialCount(MaterialCatalog.Wood)==20,"Full backpack rejects reward without mutation");
             Check(inventory.TryGrantVictory(25,null,null,"inventory-test-enemy",new System.Collections.Generic.Dictionary<string,int>{{MaterialCatalog.Stone,2}},player.transform.position),"Victory saves EXP and overflow loot");
             string pending=null;foreach(var loot in inventory.PendingLoot)pending=loot.id;
             Check(pending!=null,"Full backpack preserves collectible loot");
-            var defs=new System.Collections.Generic.HashSet<string>();foreach(var w in Resources.Load<ItemCatalog>("ItemCatalog").weapons)defs.Add(w.Id);
+            var defs=new System.Collections.Generic.HashSet<string>();foreach(var w in Mismo.Core.ProjectAssets.Load<ItemCatalog>("ItemCatalog").weapons)defs.Add(w.Id);
             var rewardDefs=new System.Collections.Generic.Dictionary<string,string>{{ItemCatalog.BossRewardId,inventory.BossReward.Id}};
             var reopen=new ProtectedProfileRepository(path);reopen.Read(_=>true,out var pendingJson);
             var pendingSaved=JsonUtility.FromJson<InventoryProfile>(pendingJson);
@@ -173,13 +177,29 @@ namespace Mismo.Gameplay.Player.Editor
             Check(bossLoot!=null,"Unique reward remains collectible on the ground");
             inventory.Discard(MaterialCatalog.Stone,true,1);
             Check(inventory.CollectPending(bossLoot),"Unique reward can be collected after making space");
+            var replacement=inventory.GridItems(false).Find(item=>!item.material);
+            var originalMain=inventory.EquippedId(0);
+            var originalDefinition=inventory.Definition(originalMain);
+            originalDefinition.gridHeight=2;
+            Check(!inventory.TryEquip(0,replacement.id)&&inventory.EquippedId(0)==originalMain&&inventory.GridItems(false).Exists(item=>item.id==replacement.id),"Oversized displaced weapon rejects equip without losing either item");
+            originalDefinition.gridHeight=1;
+            Check(inventory.TryEquip(0,replacement.id)&&inventory.UsedSlots(false)==3,"Full backpack swaps weapons using the incoming weapon's freed cell");
+            Check(inventory.TryEquip(0,originalMain),"Restore original main weapon after full-bag swap");
+            if(inventory.CanUseOffhand(0,replacement.id))
+            {
+                Check(inventory.TryEquipOffhand(0,replacement.id)&&inventory.UsedSlots(false)==2,"Offhand equipment frees one cell");
+                Check(inventory.TryGrantMaterial(MaterialCatalog.Wood,20),"Fill the cell freed by the offhand");
+                Check(!inventory.TryEquipOffhand(0,null)&&inventory.OffhandId(0)==replacement.id,"Full backpack rejects offhand removal without losing equipment");
+                Check(inventory.Discard(MaterialCatalog.Wood,true,20)&&inventory.TryEquipOffhand(0,null),"Offhand removal succeeds after making room");
+            }
             player.transform.position=new Vector3(20,1,20);
             Check(!inventory.Transfer(MaterialCatalog.Wood,true,1,false),"Remote chest withdrawals are blocked");
             settings.backpackColumns=8;settings.backpackRows=6;
             foreach(var weapon in itemCatalog.weapons){weapon.gridWidth=weapon.isBow?2:1;weapon.gridHeight=3;}
             foreach(var material in inventory.Materials){material.gridWidth=material.id==MaterialCatalog.Wood?2:1;material.gridHeight=1;}
             inventory.TryGrantMaterial(MaterialCatalog.Herb,8);inventory.TryGrantMaterial(MaterialCatalog.Wood,14);
-            var layout=inventory.GridPositions(false);var moving=layout.Find(p=>p.key==inventory.EquippedId(0));
+            var spareWeapon=inventory.GridItems(false).Find(item=>!item.material);
+            var layout=inventory.GridPositions(false);var moving=layout.Find(p=>p.key==spareWeapon.key);
             Vector2Int FindFree(bool rotated)
             {
                 for(int y=inventory.GridRows(false)-1;y>=0;y--)for(int x=inventory.GridColumns(false)-1;x>=0;x--)
@@ -193,6 +213,7 @@ namespace Mismo.Gameplay.Player.Editor
             Check(inventory.MoveGrid(moving.key,false,rotatedDestination.x,rotatedDestination.y,true),"Weapon rotates into horizontal footprint");
             var freshStore=new ProtectedProfileRepository(path);freshStore.Read(_=>true,out var gridJson);
             var gridSaved=JsonUtility.FromJson<InventoryProfile>(gridJson);
+            Check(!gridSaved.gridPlacements.Exists(g=>gridSaved.IsEquipped(g.key)),"Saved grid excludes all equipped weapons");
             Check(gridSaved.gridPlacements.Exists(g=>g.key==moving.key&&g.rotated&&g.x==rotatedDestination.x&&g.y==rotatedDestination.y),"Grid position and rotation survive serialization");
             Check(inventory.OrganizeGrid(false),"Automatic organization fits the current collection");
             Check(panel.TryOpen()&&panel.BlocksGameplay&&Cursor.visible,"Inventory opens and blocks gameplay input");
@@ -216,8 +237,7 @@ namespace Mismo.Gameplay.Player.Editor
             for(int i=0;i<15;i++)yield return null;
             Check(!(bool)themeField.GetValue(panel),"Gray theme restores without restarting Play");
             Check(inventory.MoveGrid(moving.key,false,4,4,true),"Horizontal icon fits inside its grid footprint");
-            var bowItem=inventory.GridItems(false).Find(item=>item.id==inventory.EquippedId(1));
-            Check(bowItem!=null&&inventory.MoveGrid(bowItem.key,false,0,3,true),"Bow displays horizontally in its rotated footprint");
+            Check(!inventory.GridItems(false).Exists(item=>inventory.IsEquipped(item.id)),"Equipped weapons never appear in the bag grid");
             var preview=(InventoryPreview)typeof(InventoryPanel).GetField("preview",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(panel);
             var cameraField=typeof(InventoryPreview).GetField("camera",BindingFlags.Instance|BindingFlags.NonPublic);
             var previewCamera=(UnityEngine.Camera)cameraField.GetValue(preview);
@@ -243,6 +263,20 @@ namespace Mismo.Gameplay.Player.Editor
             for(int i=0;i<15;i++)yield return null;
             ScreenCapture.CaptureScreenshot(Path.Combine(Output,"inventory-menu.png"));
             for(int i=0;i<15;i++)yield return null;
+            var radialIndex=typeof(InventoryPanel).GetMethod("RadialIndex",BindingFlags.Static|BindingFlags.NonPublic);
+            Check((int)radialIndex.Invoke(null,new object[]{Vector2.zero})==-1,"Radial center cancels");
+            for(int i=0;i<6;i++)
+            {
+                float angle=(-90+i*60)*Mathf.Deg2Rad;
+                Check((int)radialIndex.Invoke(null,new object[]{new Vector2(Mathf.Cos(angle),Mathf.Sin(angle))*180})==i,"Radial direction selects sector "+i);
+            }
+            Check(Mathf.Approximately(Time.timeScale,1),"Radial menu keeps world running");
+            Field(panel,"radialSelected",1);
+            typeof(InventoryPanel).GetMethod("ConfirmRadialSelection",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(panel,null);
+            Check(panel.IsOpen&&pageField.GetValue(panel).ToString()=="Inventory","Radial inventory selection opens its page");
+            pageField.SetValue(panel,Enum.Parse(pageField.FieldType,"Menu"));Field(panel,"radialSelected",-1);
+            typeof(InventoryPanel).GetMethod("ConfirmRadialSelection",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(panel,null);
+            Check(!panel.IsOpen,"Radial center closes without opening a page");
             player.transform.position=chest.transform.position+Vector3.back;
             Check(panel.OpenChest(),"Chest opens from proximity");
             for(int i=0;i<15;i++)yield return null;
@@ -256,6 +290,112 @@ namespace Mismo.Gameplay.Player.Editor
             Check(repository.Read(_=>true,out var json)==ProfileReadResult.Loaded,"New repository reopens protected save");
             var restored=JsonUtility.FromJson<InventoryProfile>(json);
             Check(restored.chestMaterials.Find(s=>s.id==MaterialCatalog.Wood).quantity==20&&restored.pendingLoot.Count==0,"Chest and consumed loot persist across reload");
+            Check(inventory.TryGrantVictory(300,null,null,"attribute-draft-test"),"Grant attribute points for allocation checks");
+            var before=inventory.Progression;
+            Check(!inventory.TrySpendAttributes(-1,1,0)&&!inventory.TrySpendAttributes(int.MaxValue,1,0),"Invalid attribute batches are rejected");
+            var storageField=typeof(PlayerInventory).GetField("repository",BindingFlags.Instance|BindingFlags.NonPublic);
+            var originalStorage=storageField.GetValue(inventory);
+            storageField.SetValue(inventory,new RejectQuickSlotSave());
+            Check(!inventory.TrySpendAttributes(1,1,0)&&inventory.Progression.lifePoints==before.lifePoints&&inventory.Progression.attackPoints==before.attackPoints,"Failed attribute save applies no partial allocation");
+            storageField.SetValue(inventory,originalStorage);
+            Check(inventory.TrySpendAttributes(1,1,0)&&inventory.Progression.Available==before.Available-2,"Apply commits the attribute allocation together");
+            var openPage=typeof(InventoryPanel).GetMethod("OpenPage",BindingFlags.Instance|BindingFlags.NonPublic);
+            openPage.Invoke(panel,new object[]{Enum.Parse(pageField.FieldType,"Character")});
+            var draft=(int[])typeof(InventoryPanel).GetField("pendingAttributes",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(panel);
+            draft[2]=1;
+            for(int i=0;i<15;i++)yield return null;
+            ScreenCapture.CaptureScreenshot(Path.Combine(Output,"character-refactor.png"));
+            for(int i=0;i<15;i++)yield return null;
+            panel.Close();Check(draft[2]==0,"Closing the character sheet discards unconfirmed points");
+            var masteryWeapon=loadout.GetSlot(0);
+            Check(inventory.TryGrantVictory(0,new System.Collections.Generic.Dictionary<string,int>{{masteryWeapon.MasteryId,300}},null,"mastery-draft-test"),"Grant points for mastery allocation");
+            var masteryBefore=inventory.Mastery(masteryWeapon);
+            Check(!inventory.TrySpendMasteryPoints(masteryWeapon,-1,1)&&!inventory.TrySpendMasteryPoints(masteryWeapon,int.MaxValue,1),"Mastery rejects invalid and excessive batches");
+            storageField.SetValue(inventory,new RejectQuickSlotSave());
+            Check(!inventory.TrySpendMasteryPoints(masteryWeapon,1,1)&&inventory.Mastery(masteryWeapon).Available==masteryBefore.Available,"Failed mastery save spends no points");
+            storageField.SetValue(inventory,originalStorage);
+            Check(inventory.TrySpendMasteryPoints(masteryWeapon,1,1)&&inventory.Mastery(masteryWeapon).Available==masteryBefore.Available-2,"Mastery applies damage and speed atomically");
+            openPage.Invoke(panel,new object[]{Enum.Parse(pageField.FieldType,"Weapons")});Field(panel,"skillsWeapon",masteryWeapon);
+            for(int i=0;i<5;i++)yield return null;
+            var masteryDraft=(int[])typeof(InventoryPanel).GetField("pendingMastery",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(panel);
+            masteryDraft[0]=1;
+            for(int i=0;i<5;i++)yield return null;
+            ScreenCapture.CaptureScreenshot(Path.Combine(Output,"mastery-allocation.png"));
+            for(int i=0;i<5;i++)yield return null;
+            Field(panel,"skillsWeapon",loadout.GetSlot(1));
+            for(int i=0;i<5;i++)yield return null;
+            Check(masteryDraft[0]==0&&masteryDraft[1]==0,"Changing weapons discards unconfirmed mastery points");
+            masteryDraft[0]=1;panel.Close();Check(masteryDraft[0]==0,"Closing discards mastery draft");
+            var book=Mismo.Core.ProjectAssets.Load<World.BestiaryBook>("BestiaryBook");
+            var modelFixture=GameObject.CreatePrimitive(PrimitiveType.Cube);
+            modelFixture.name="Bestiary model regression fixture";
+            var textFixture=new GameObject("State Label",typeof(TextMesh));textFixture.transform.SetParent(modelFixture.transform,false);
+            var fixturePreview=new InventoryPreview();fixturePreview.Show(modelFixture);
+            Check(fixturePreview.HasModel,"Model preview ignores text renderers without MeshFilter");
+            fixturePreview.Dispose();
+            fixturePreview.Show(textFixture);Check(!fixturePreview.HasModel,"Text-only prefab safely has no model");fixturePreview.Dispose();
+            Object.Destroy(modelFixture);
+            if(book!=null&&book.pages!=null)foreach(var species in book.pages)if(species!=null)inventory.DiscoverSpecies(species.id);
+            uiArt.panelOpacity=.6f;uiArt.navigationIconOpacity=.8f;
+            openPage.Invoke(panel,new object[]{Enum.Parse(pageField.FieldType,"Bestiary")});
+            for(int i=0;i<15;i++)yield return null;
+            var bestiaryView=(BestiaryView)typeof(InventoryPanel).GetField("bestiary",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(panel);
+            var bestiaryPage=typeof(BestiaryView).GetField("page",BindingFlags.Instance|BindingFlags.NonPublic);
+            var bestiaryLast=typeof(BestiaryView).GetField("last",BindingFlags.Instance|BindingFlags.NonPublic);
+            int speciesCount=book==null||book.pages==null?0:Array.FindAll(book.pages,s=>s!=null).Length;
+            for(int index=0;index<speciesCount;index++)
+            {
+                bestiaryPage.SetValue(bestiaryView,index);
+                for(int i=0;i<4;i++)yield return null;
+                Check((int)bestiaryLast.GetValue(bestiaryView)==index,"Bestiary page loads or falls back once: "+index);
+                if(preview.HasModel)
+                {
+                    var modelCamera=(UnityEngine.Camera)cameraField.GetValue(preview);
+                    var startPosition=modelCamera.transform.position;preview.Rotate(new Vector2(-40,20));
+                    Check(Vector3.Distance(startPosition,modelCamera.transform.position)>.01f,"Bestiary model can orbit: "+index);
+                }
+            }
+            bestiaryPage.SetValue(bestiaryView,0);
+            for(int i=0;i<4;i++)yield return null;
+            ScreenCapture.CaptureScreenshot(Path.Combine(Output,"bestiary-opacity.png"));
+            for(int i=0;i<15;i++)yield return null;
+            panel.Close();uiArt.panelOpacity=1;uiArt.navigationIconOpacity=1;
+            Type pauseType=null;foreach(var assembly in AppDomain.CurrentDomain.GetAssemblies()){pauseType=assembly.GetType("Mismo.Menu.PauseMenu");if(pauseType!=null)break;}
+            Check(pauseType!=null,"Pause menu assembly is available");
+            var pause=Object.FindAnyObjectByType(pauseType) as Component;
+            if(pause==null)pause=new GameObject("Pause test").AddComponent(pauseType);
+            pauseType.GetMethod("Open").Invoke(pause,null);
+            Check(Presentation.GameplayPause.IsPaused&&Mathf.Approximately(Time.timeScale,0),"Pause freezes gameplay");
+            for(int i=0;i<8;i++)yield return null;
+            ScreenCapture.CaptureScreenshot(Path.Combine(Output,"pause-home.png"));
+            for(int i=0;i<4;i++)yield return null;
+            Field(pause,"options",true);
+            for(int category=0;category<4;category++)
+            {
+                Field(pause,"tab",category);
+                for(int i=0;i<5;i++)yield return null;
+                Check(Presentation.GameplayPause.IsPaused,"Options keeps game paused: "+category);
+                ScreenCapture.CaptureScreenshot(Path.Combine(Output,"pause-options-"+category+".png"));
+                for(int i=0;i<4;i++)yield return null;
+            }
+            pauseType.GetMethod("Resume").Invoke(pause,null);
+            Check(!Presentation.GameplayPause.IsPaused&&Mathf.Approximately(Time.timeScale,1),"Resume restores gameplay time");
+            for(int i=0;i<8;i++)yield return null;
+            ScreenCapture.CaptureScreenshot(Path.Combine(Output,"hud-refactor.png"));
+            for(int i=0;i<4;i++)yield return null;
+            var menuRoot=new GameObject("Credits validation");menuRoot.SetActive(false);
+            Type menuType=null;foreach(var assembly in AppDomain.CurrentDomain.GetAssemblies()){menuType=assembly.GetType("Mismo.Menu.MainMenuView");if(menuType!=null)break;}
+            Check(menuType!=null,"Main menu assembly is available");
+            var menu=menuRoot.AddComponent(menuType);menuType.GetMethod("CreateLayout").Invoke(menu,null);menuRoot.SetActive(true);
+            for(int i=0;i<5;i++)yield return null;
+            menuType.GetMethod("ShowCredits",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(menu,null);
+            var credits=(GameObject)menuType.GetField("credits",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(menu);
+            Check(credits.activeSelf&&!(bool)menuType.GetProperty("OptionsVisible").GetValue(menu),"Main menu opens a separate credits page");
+            for(int i=0;i<10;i++)yield return null;
+            ScreenCapture.CaptureScreenshot(Path.Combine(Output,"main-menu-credits.png"));
+            for(int i=0;i<10;i++)yield return null;
+            menuType.GetMethod("ShowOptions").Invoke(menu,new object[]{false});Check(!credits.activeSelf,"Credits returns to the main menu");
+            Object.Destroy(menuRoot);
             Localization.GameLanguage.Set(previousLanguage,false);
         }
     }

@@ -1,12 +1,12 @@
 # Estructura de código
 
-Esta estructura cubre la milestone de movimiento y su equipamiento mínimo.
+Para guardar, importar o generar archivos, seguir [Buenas prácticas de assets](Buenas-practicas-de-assets.md). Esta página describe además la estructura de código de movimiento y equipamiento.
 
 ## Carpetas
 
 - `Assets/Art`: assets visuales y de audio, sin lógica de gameplay.
-- `Assets/Data`: instancias configurables, incluidos los ScriptableObjects.
-- `Assets/Prefabs`: prefabs listos para utilizar en escenas.
+- `Assets/Data`: ScriptableObjects y datos, separados por sistema.
+- `Assets/Art/Prefabs`: prefabs listos para utilizar en escenas.
 - `Assets/Scenes`: escenas del proyecto.
 - `Assets/Scripts/Gameplay/Player`: código runtime de la milestone.
 - `Assets/Scripts/Gameplay/Player/Editor`: herramientas exclusivas del editor.
@@ -21,6 +21,8 @@ Dentro de `Player`, el código se agrupa por responsabilidad:
 - `Cooldowns`: servicio genérico por clave para reutilizar temporizadores entre armas, habilidades y cinturones.
 - `Camera`: seguimiento y órbita en tercera persona.
 - `Presentation`: presentación y feedback provisional de movimiento y combate que leen el estado del jugador.
+
+El catálogo común de carga está en `Assets/Scripts/Core`; la organización y sus comprobaciones, en `Assets/Scripts/Editor`.
 
 ## Assemblies
 
