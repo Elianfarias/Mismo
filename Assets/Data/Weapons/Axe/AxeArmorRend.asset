@@ -20,9 +20,9 @@ MonoBehaviour:
   description: Golpe que reduce un 20 % la armadura del objetivo durante 4 s. No acumulable.
   localizationKey: ability.axe.axearmorrend
   preparation: 0.4
-  active: 0.15
-  recovery: 0.2
-  cooldown: 6
+  active: 0.9
+  recovery: 0.33
+  cooldown: 0
   staminaCost: 0
   chargeable: 0
   maximumCharge: 0.9

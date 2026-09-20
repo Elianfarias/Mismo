@@ -127,16 +127,16 @@ namespace Mismo.Gameplay.Player.Presentation
             else if (!moving && Time.time-landedAt<.18f) Motion=CharacterMotion.Land;
             else if (moving) Motion=running ? CharacterMotion.Run : CharacterMotion.Walk;
             else Motion=CharacterMotion.Idle;
-            ActionClip=null;float clipTime=0,blend=.06f;AvatarMask resolvedMask=actionMask;
+            ActionClip=null;float clipTime=0,blend=.06f;AvatarMask resolvedMask=actionMask;bool unstoppable=false;
             if((health==null || !health.IsDead) && animationSet!=null && abilityRunner!=null && abilityRunner.TryGetAnimationFrame(out var actionFrame))
             {
                 var binding=animationSet.Find(actionFrame.Ability);
                 if(binding!=null && binding.TrySample(actionFrame,out var actionClip,out clipTime))
-                {ActionClip=actionClip;blend=binding.blendSeconds;resolvedMask=binding.ResolveMask(actionMask);targetTorsoCorrection=binding.torsoUprightDegrees;}
+                {ActionClip=actionClip;blend=binding.blendSeconds;resolvedMask=binding.ResolveMask(actionMask);targetTorsoCorrection=binding.torsoUprightDegrees;unstoppable=actionFrame.Ability!=null&&actionFrame.Ability.unstoppable;}
             }
             if(ActionClip==null && (health==null || !health.IsDead))
             {var motion=Motion;legacy.Resolve(abilityRunner,ref motion,ref actionTime);Motion=motion;}
-            if (hitClip != null && health != null && !health.IsDead && Time.time - hitAt < HitDuration)
+            if (hitClip != null && !unstoppable && health != null && !health.IsDead && Time.time - hitAt < HitDuration)
             {
                 ActionClip = hitClip; clipTime = Mathf.Clamp01((Time.time - hitAt) / HitDuration);
                 blend = .045f; resolvedMask = hitMask;

@@ -1161,14 +1161,14 @@
       "en": "A forward strike with no movement. Deals 40% more damage than your basic attack."
     },
     {
-      "key": "ability.axe.axesplittingblow.name",
-      "es": "Golpe partidor",
-      "en": "Splitting Blow"
+      "key": "ability.axe.axefuriouscombo.name",
+      "es": "Combo furioso",
+      "en": "Furious Combo"
     },
     {
-      "key": "ability.axe.axesplittingblow.description",
-      "es": "Golpe cargado que hace un 30 % de daño adicional si el objetivo está sangrando o con Desgarre activo.",
-      "en": "A charged strike that deals 30% more damage if the target is bleeding or has Rend active."
+      "key": "ability.axe.axefuriouscombo.description",
+      "es": "Avanza mientras golpea tres veces con el hacha, con un 100 %, 120 % y 150 % del daño. Si los tres golpes impactan al mismo enemigo, lo aturde brevemente.",
+      "en": "Advance while striking three times with the axe, for 100%, 120% and 150% of the damage. If all three hits land on the same enemy, it is briefly stunned."
     },
     {
       "key": "ability.axe.axecrueledge.name",

@@ -16,7 +16,7 @@ MonoBehaviour:
   actionMask: {fileID: 0}
   actions:
   - ability: {fileID: 11400000, guid: fbd691e815e943629523ca0591b2ce8a, type: 2}
-    clip: {fileID: 0}
+    clip: {fileID: 7400000, guid: ce9e7235bec51bb42b4ca7bdd57d5a9b, type: 2}
     maskMode: 0
     customMask: {fileID: 0}
     comboClips:
@@ -28,7 +28,7 @@ MonoBehaviour:
     blendSeconds: 0.08
     torsoUprightDegrees: 12
   - ability: {fileID: 11400000, guid: f3f10e25ac694bd3b0ae58285fe6332b, type: 2}
-    clip: {fileID: 7400000, guid: f2eec29e0aa54763a54d75618040974c, type: 2}
+    clip: {fileID: 0}
     maskMode: 0
     customMask: {fileID: 0}
     comboClips: []
@@ -46,7 +46,7 @@ MonoBehaviour:
     blendSeconds: 0
     torsoUprightDegrees: -20.2
   - ability: {fileID: 11400000, guid: f22be05e1dd3444f8d80b964dcc944fd, type: 2}
-    clip: {fileID: 7400000, guid: 5f6fa533fb1d4237815945c56a470c9b, type: 2}
+    clip: {fileID: 7400000, guid: 481687fa557c03e43a39cb833d6e78ee, type: 2}
     maskMode: 0
     customMask: {fileID: 0}
     comboClips: []
@@ -55,7 +55,7 @@ MonoBehaviour:
     blendSeconds: 0.08
     torsoUprightDegrees: 0
   - ability: {fileID: 11400000, guid: f138122e27574d65b2fa7bf43e4e1937, type: 2}
-    clip: {fileID: 7400000, guid: 8386fa99223c4ec4ba2493c37bfe3409, type: 2}
+    clip: {fileID: 7400000, guid: 54f758c7e22466845abee53044d83684, type: 2}
     maskMode: 0
     customMask: {fileID: 0}
     comboClips: []
@@ -64,7 +64,7 @@ MonoBehaviour:
     blendSeconds: 0.08
     torsoUprightDegrees: 0
   - ability: {fileID: 11400000, guid: 283e2b64f80946e48385511d516b78d7, type: 2}
-    clip: {fileID: 7400000, guid: 5f6fa533fb1d4237815945c56a470c9b, type: 2}
+    clip: {fileID: 0}
     maskMode: 0
     customMask: {fileID: 0}
     comboClips: []
@@ -72,12 +72,12 @@ MonoBehaviour:
     recoveryStartsAt: 0.65
     blendSeconds: 0.08
     torsoUprightDegrees: 0
-  - ability: {fileID: 11400000, guid: 7e4da6df4b3e5b969eb93cbdf5cf8d60, type: 2}
-    clip: {fileID: 7400000, guid: 5f6fa533fb1d4237815945c56a470c9b, type: 2}
+  - ability: {fileID: 11400000, guid: 63fec9d0fa7d41b794bf0a90d4886400, type: 2}
+    clip: {fileID: 7400000, guid: adb9d4af4bb55be47abe0681990858bf, type: 2}
     maskMode: 0
     customMask: {fileID: 0}
     comboClips: []
-    activeStartsAt: 0.3
-    recoveryStartsAt: 0.65
+    activeStartsAt: 0.1966
+    recoveryStartsAt: 0.6667
     blendSeconds: 0.08
     torsoUprightDegrees: 0

@@ -26,5 +26,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 63fec9d0fa7d41b794bf0a90d4886400, type: 2}
   - {fileID: 11400000, guid: f3f10e25ac694bd3b0ae58285fe6332b, type: 2}
   - {fileID: 11400000, guid: 283e2b64f80946e48385511d516b78d7, type: 2}
-  masteryLevelsPerUnlock: 3
+  masteryLevelsPerUnlock: 1
   animations: {fileID: 11400000, guid: 9b258c32814c113488ab41f4a7af5e61, type: 2}

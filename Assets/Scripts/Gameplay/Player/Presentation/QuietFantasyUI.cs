@@ -98,7 +98,7 @@ namespace Mismo.Gameplay.Player.Presentation
                 case "AxeBleedingCut":return "bleeding-wound";
                 case "AxeArmorRend":return "checked-shield";
                 case "AxeForwardSwing":return "sword-clash";
-                case "AxeSplittingBlow":return "blade-fall";
+                case "AxeFuriousCombo":return "hatchets";
                 case "AxeCruelEdge":case "AxeExecutioner":return "dead-eye";
             }
             if(ability.pose==AbilityPose.Bow)return "target-arrows";
