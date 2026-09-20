@@ -51,7 +51,7 @@ namespace Mismo.Gameplay.Player.World
                 if(terrain.Reserved(x,z,4)||!ExplorationContent.TrySupport(terrain,new Vector2(x,z),Vector2.one*2.2f,0,out float y))continue;
                 var point=new Vector3(x,y,z);if(!Clear(point)||placed.Exists(p=>Vector3.Distance(p,point)<settings.minimumSeparation))continue;
                 var biome=terrain.Biome(x,z);
-                var definition=biome==WorldBiome.Forest?settings.tree:biome==WorldBiome.Highlands?settings.stone:settings.herb;
+                var definition=biome==WorldBiome.Forest?settings.tree:biome==WorldBiome.Highlands||biome==WorldBiome.Desert||biome==WorldBiome.Ice||biome==WorldBiome.Mountains?settings.stone:settings.herb;
                 // Deterministic minority resources keep each biome useful without uniform coverage.
                 if(rng.NextDouble()<.25)definition=slot%2==0?settings.stone:settings.herb;
                 if(definition==settings.stone)definition=settings.Mineral(ExplorationTerrain.Hash(world.seed,chunk.x,chunk.y,930+slot));

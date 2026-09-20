@@ -1,0 +1,28 @@
+CAMERA_CHEATS_CHECK Cheats attach to the existing player and default off
+CAMERA_CHEATS_CHECK Reproduces the original camera collapse against equipped geometry
+CAMERA_CHEATS_CHECK Own colliders do not shorten the camera distance
+CAMERA_CHEATS_CHECK A wall behind an ignored own collider still stops the camera
+CAMERA_CHEATS_CHECK Triggers do not zoom the camera
+CAMERA_CHEATS_CHECK Growing the cast buffer preserves real obstacles in crowded equipment
+CAMERA_CHEATS_CHECK Camera recovers outward smoothly after the wall clears
+CAMERA_CHEATS_CHECK New close obstacles take priority over smoothing
+CAMERA_CHEATS_CHECK A wall forcing the camera inside the avatar hides that avatar for this render
+CAMERA_CHEATS_CHECK Renderer state is restored without unhiding other hidden objects
+CAMERA_CHEATS_CHECK The minimap and other cameras keep the character visible
+CAMERA_CHEATS_CHECK Flight ascends and bypasses the progression movement constraint
+CAMERA_CHEATS_CHECK Inventory/menu locomotion ticks do not apply gravity during flight
+CAMERA_CHEATS_CHECK Sprint accelerates flight
+CAMERA_CHEATS_CHECK Flight descent respects terrain collision
+CAMERA_CHEATS_CHECK Leaving flight restores normal gravity
+CAMERA_CHEATS_CHECK Failed saves do not partially grant weapons
+CAMERA_CHEATS_CHECK Enabling cheats starts flight and grants the arsenal
+CAMERA_CHEATS_CHECK Every catalog weapon, including the boss weapon, is saved
+CAMERA_CHEATS_CHECK Repeated grants are idempotent
+CAMERA_CHEATS_CHECK Disabling cheats restores walking and retains granted weapons
+CAMERA_CHEATS_CHECK The arsenal preserves equipped items and boss reward progress
+CAMERA_CHEATS_CHECK A full inventory still accepts the arsenal through persistent pending loot
+CAMERA_CHEATS_CHECK Overflow preserves existing possessions and every granted definition
+CAMERA_CHEATS_CHECK Weapons requested in flight fall back to loot at ground level
+CAMERA_CHEATS_CHECK Pending weapons are not duplicated by repeat grants
+PROJECT_LAYOUT_CHECKS_OK: categorías, catálogo y eliminación de cargas Resources verificados.
+CAMERA_CHEATS_PASS 26 checks

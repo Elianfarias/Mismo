@@ -1,0 +1,2 @@
+PROJECT_LAYOUT_CHECKS_OK: categorías, catálogo y eliminación de cargas Resources verificados.
+FINITE_WORLD_BUILD_PASS

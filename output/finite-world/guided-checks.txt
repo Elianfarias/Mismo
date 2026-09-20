@@ -1,0 +1,3 @@
+PASS: 508929 assertions; 24 seeds; ordered stages, inland connected route, reachable objectives, movement bounds, deterministic terrain and saves, legacy generators, real NavMesh paths, project organization.
+PASS: legacy baseline from git HEAD, 31080 height/color/biome samples and 2178 sites. Existing ProceduralWorldChecks raw-centre seam assertion also fails before these changes (enlarged village apron).
+PASS: version 2 topology matches SW meadow, SE desert, NW ice and NE mountains; airborne shortcuts blocked, designated passes open; real distant renderer and camera range captured in Unity; Windows development build succeeded.

@@ -24,6 +24,7 @@ namespace Mismo.Gameplay.Player
             loadout = GetComponent<EquipmentLoadout>(); loadout.Initialize();
             if (GetComponent<Presentation.PlayerMusic>() == null) gameObject.AddComponent<Presentation.PlayerMusic>();
             climbing=GetComponent<TreeClimbing>()??gameObject.AddComponent<TreeClimbing>();
+            if (GetComponent<PlayerCheats>() == null) gameObject.AddComponent<PlayerCheats>();
             if (GetComponent<Presentation.MovementFeedback>() == null) gameObject.AddComponent<Presentation.MovementFeedback>();
             if (GetComponent<Mismo.Gameplay.Combat.Health>() != null && GetComponent<Presentation.PlayerHUD>() == null) gameObject.AddComponent<Presentation.PlayerHUD>();
         }
@@ -54,6 +55,16 @@ namespace Mismo.Gameplay.Player
             Vector2 move = Vector2.ClampMagnitude(input.Move, 1);
             Vector3 forward = Vector3.ProjectOnPlane(cameraBasis.forward, Vector3.up).normalized;
             Vector3 direction = forward * move.y + Vector3.Cross(Vector3.up, forward) * move.x;
+            if (motor.IsFlying)
+            {
+                climbing.Release(); runner.SetHeld(false); runner.Cancel(); belt?.Cancel();
+                IsSprinting = false; stamina.Tick(false, dt);
+                var keyboard = UnityEngine.InputSystem.Keyboard.current;
+                float vertical = (input.JumpHeld ? 1f : 0f) -
+                    (keyboard != null && (keyboard.leftCtrlKey.isPressed || keyboard.rightCtrlKey.isPressed) ? 1f : 0f);
+                motor.TickFlight(direction + Vector3.up * vertical, input.SprintHeld, dt);
+                return;
+            }
             belt?.TickCooldown(dt);
             var playerHealth=GetComponent<Mismo.Gameplay.Combat.Health>();
             if((playerHealth==null||!playerHealth.IsDead)&&!runner.IsBusy&&(belt==null||!belt.IsActive)&&climbing.Step(motor,stamina,direction,move.y,input.JumpHeld,dt))

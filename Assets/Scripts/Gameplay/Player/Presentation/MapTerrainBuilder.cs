@@ -14,6 +14,7 @@ namespace Mismo.Gameplay.Player.Presentation
             var key=new Vector2(x,z);
             if(mapSamples.TryGetValue(key,out var sample))return sample;
             sample=new MapSample{height=Mathf.Floor(terrain.Height(x,z)*2)*.5f,path=terrain.PathDistance(x,z),biome=terrain.Biome(x,z)};
+            if(terrain.Plan!=null)sample.height=Mathf.Max(FiniteWorldPlan.SeaLevel,sample.height);
             mapSamples.Add(key,sample);return sample;
         }
         IEnumerator Build()
@@ -54,6 +55,7 @@ namespace Mismo.Gameplay.Player.Presentation
                         color=biome==WorldBiome.Forest?new Color(.30f,.61f,.25f):biome==WorldBiome.Highlands?new Color(.48f,.65f,.31f):new Color(.52f,.76f,.29f);
                         color=Color.Lerp(color,new Color(.72f,.75f,.68f),Mathf.SmoothStep(0,1,Mathf.InverseLerp(38,48,y)));
                         if(sample.path<Mathf.Max(2.7f,Mathf.Min(step*.4f,8)))color=new Color(.88f,.75f,.45f);
+                        if(terrain.Plan!=null){color=terrain.Top(px,pz,y);color.a=1;}
                         float hollow=Mathf.Max(heights[x+1,z],heights[x,z+1])-y;
                         color*=Mathf.Lerp(1,.76f,Mathf.Clamp01(hollow/4));color.a=1;
                     }
@@ -103,7 +105,7 @@ namespace Mismo.Gameplay.Player.Presentation
                 }
                 if(budget.ElapsedMilliseconds>=3){yield return null;budget.Restart();}
             }
-            var nextSites=new List<WorldSite>();int spacing=Mathf.Max(64,settings.siteSpacing);
+            var nextSites=new List<WorldSite>();int spacing=terrain.SiteSpacing;
             int radius=Mathf.CeilToInt(extent/spacing)+1;var cell=new Vector2Int(Mathf.FloorToInt(center.x/spacing),Mathf.FloorToInt(center.y/spacing));
             for(int z=-radius;z<=radius;z++)
             {

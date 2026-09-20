@@ -1,6 +1,8 @@
 using Mismo.Gameplay.Player.Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using System.Collections.Generic;
 
 namespace Mismo.Gameplay.Player.Camera
 {
@@ -22,12 +24,27 @@ namespace Mismo.Gameplay.Player.Camera
         private float pitch = 25f;
         private Vector3 pivot;
         private Vector3 smoothVelocity;
+        private RaycastHit[] obstacleHits = new RaycastHit[16];
+        private float currentDistance;
+        private bool distanceInitialized;
+        private UnityEngine.Camera view;
+        private readonly List<Renderer> hiddenRenderers = new List<Renderer>();
+
+        private void OnEnable()
+        {
+            view = GetComponent<UnityEngine.Camera>();
+            RenderPipelineManager.beginCameraRendering += BeforeCamera;
+            RenderPipelineManager.endCameraRendering += AfterCamera;
+        }
 
         /// <summary>Conecta la cámara con el objetivo y el input locales.</summary>
         public void Configure(Transform followTarget, PlayerInputReader reader)
         {
             target = followTarget;
             input = reader;
+            if (target != null) pivot = target.position + Vector3.up * height;
+            smoothVelocity = Vector3.zero;
+            distanceInitialized = false;
         }
 
         /// <summary>Inicializa la órbita y captura el cursor.</summary>
@@ -75,18 +92,70 @@ namespace Mismo.Gameplay.Player.Camera
             if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
             if (target == null) return;
             Vector3 desiredPivot = target.position + Vector3.up * height;
-            if (Vector3.Distance(pivot, desiredPivot) > 12f) pivot = desiredPivot;
+            if (Vector3.Distance(pivot, desiredPivot) > 12f)
+            {
+                pivot = desiredPivot;
+                smoothVelocity = Vector3.zero;
+                distanceInitialized = false;
+            }
             pivot = Vector3.SmoothDamp(pivot, desiredPivot, ref smoothVelocity, followTime);
             Vector3 backward = -transform.forward;
-            float actualDistance = distance;
-            if (Physics.SphereCast(pivot, 0.25f, backward, out RaycastHit hit, distance, obstacleMask, QueryTriggerInteraction.Ignore))
-                actualDistance = Mathf.Max(0f, hit.distance - 0.1f);
-            transform.position = pivot + backward * actualDistance;
+            float actualDistance = ObstacleDistance(pivot, backward);
+            // Move inward immediately to avoid walls; ease outward after an obstruction clears.
+            currentDistance = !distanceInitialized || actualDistance < currentDistance ? actualDistance :
+                Mathf.Lerp(currentDistance, actualDistance, 1f - Mathf.Exp(-Time.deltaTime / .2f));
+            distanceInitialized = true;
+            transform.position = pivot + backward * currentDistance;
+        }
+
+        private float ObstacleDistance(Vector3 origin, Vector3 direction)
+        {
+            float radius = .25f;
+            if (view != null && !view.orthographic)
+            {
+                float halfHeight = view.nearClipPlane * Mathf.Tan(view.fieldOfView * .5f * Mathf.Deg2Rad);
+                radius = Mathf.Max(radius, new Vector3(halfHeight * view.aspect, halfHeight, view.nearClipPlane).magnitude);
+            }
+            int count;
+            // A full buffer may omit the closest world hit: grow and repeat rather than truncate.
+            while ((count = Physics.SphereCastNonAlloc(origin, radius, direction, obstacleHits, distance,
+                obstacleMask, QueryTriggerInteraction.Ignore)) == obstacleHits.Length)
+                System.Array.Resize(ref obstacleHits, obstacleHits.Length * 2);
+            float result = distance;
+            for (int i = 0; i < count; i++)
+            {
+                var hit = obstacleHits[i];
+                if (target != null && (hit.transform.IsChildOf(target) || target.IsChildOf(hit.transform))) continue;
+                result = Mathf.Min(result, Mathf.Max(0f, hit.distance - .1f));
+            }
+            return result;
+        }
+
+        // Hide only during this camera's render when a real wall forces it inside the avatar.
+        // The minimap and inventory preview retain their character renderers.
+        private void BeforeCamera(ScriptableRenderContext context, UnityEngine.Camera camera)
+        {
+            if (camera != view || target == null || Vector3.Distance(transform.position, target.position + Vector3.up * height) >= 1.4f) return;
+            RestoreRenderers();
+            foreach (var renderer in target.GetComponentsInChildren<Renderer>())
+                if (!renderer.forceRenderingOff) { hiddenRenderers.Add(renderer); renderer.forceRenderingOff = true; }
+        }
+        private void AfterCamera(ScriptableRenderContext context, UnityEngine.Camera camera)
+        { if (camera == view) RestoreRenderers(); }
+        private void OnPreCull() => BeforeCamera(default, view);
+        private void OnPostRender() => RestoreRenderers();
+        private void RestoreRenderers()
+        {
+            foreach (var renderer in hiddenRenderers) if (renderer != null) renderer.forceRenderingOff = false;
+            hiddenRenderers.Clear();
         }
 
         /// <summary>Libera el cursor cuando se desactiva la cámara.</summary>
         private void OnDisable()
         {
+            RenderPipelineManager.beginCameraRendering -= BeforeCamera;
+            RenderPipelineManager.endCameraRendering -= AfterCamera;
+            RestoreRenderers();
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }

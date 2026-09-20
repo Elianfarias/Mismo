@@ -20,6 +20,7 @@ namespace Mismo.Gameplay.Player.World
         Material material;
         Mesh[] trees;
         ExplorationTerrain field;
+        FiniteWorldHorizon finiteHorizon;
         ExplorationContent content;
         Equipment.Inventory.PlayerInventory inventory;
         float nextDiscovery;
@@ -48,6 +49,8 @@ namespace Mismo.Gameplay.Player.World
         public void Initialize(ExplorationWorldSettings settings,Transform target)
         {
             Settings=settings;player=target;field=new ExplorationTerrain(settings);
+            var motor=target.GetComponent<Movement.PlayerMotor>();
+            if(motor!=null&&field.Plan!=null)motor.MovementConstraint=field.Plan.ConstrainMovement;
             var music = target.GetComponent<Presentation.PlayerMusic>() ?? target.gameObject.AddComponent<Presentation.PlayerMusic>();
             music.InitializeWorld(field);
             var map=target.GetComponent<Presentation.WorldMapPanel>();if(map==null)map=target.gameObject.AddComponent<Presentation.WorldMapPanel>();map.Initialize(settings);
@@ -116,6 +119,11 @@ namespace Mismo.Gameplay.Player.World
                 previousNavigation?.StopNavigation();
                 foreach(Transform child in transform)child.gameObject.SetActive(false);
             }
+            if(field.Plan?.Layout!=null)
+            {
+                var distant=new GameObject("Finite distant landscape");distant.transform.SetParent(transform,false);
+                finiteHorizon=distant.AddComponent<FiniteWorldHorizon>();finiteHorizon.Initialize(field,material);
+            }
             navigation=new NavMeshData(0);navInstance=NavMesh.AddNavMeshData(navigation);dirty=true;
             if(WorldSession.Current!=null)
             {
@@ -140,20 +148,26 @@ namespace Mismo.Gameplay.Player.World
         {
             if(Settings==null||player==null)return;
             if(Settings.content!=null)Settings.content.ApplyAtmosphere(Settings.loadRadius);
+            if(finiteHorizon!=null)finiteHorizon.UpdateView();
             if(inventory==null)inventory=player.GetComponent<Equipment.Inventory.PlayerInventory>();
             var center=Coordinate(player.position);int radius=Mathf.Clamp(Settings.loadRadius,2,5);
             if(inventory!=null&&inventory.IsReady&&field.IsExterior(player.position.x,player.position.z)&&Time.unscaledTime>=nextDiscovery)
-            {inventory.TryDiscoverRegion(field.RegionId(player.position.x,player.position.z),Settings.regionalLevelIncrement);nextDiscovery=Time.unscaledTime+2;}
+            {
+                string region=field.RegionId(player.position.x,player.position.z);
+                if(field.Plan!=null)inventory.TryDiscoverPlannedRegion(region,field.Plan.MinimumLevel(player.position.x,player.position.z));
+                else inventory.TryDiscoverRegion(region,Settings.regionalLevelIncrement);
+                nextDiscovery=Time.unscaledTime+2;
+            }
             Vector2Int? nearest=null;int best=int.MaxValue;
             for(int z=-radius;z<=radius;z++)for(int x=-radius;x<=radius;x++)
-            {var id=center+new Vector2Int(x,z);if(IsAuthored(id)||chunks.ContainsKey(id))continue;int d=x*x+z*z;if(d<best){best=d;nearest=id;}}
+            {var id=center+new Vector2Int(x,z);if(!CanCreateChunk(id)||IsAuthored(id)||chunks.ContainsKey(id))continue;int d=x*x+z*z;if(d<best){best=d;nearest=id;}}
             if(nearest.HasValue){CreateChunk(nearest.Value);dirty=true;}
             if(navOperation==null||navOperation.isDone)
             {
                 if(navOperation!=null){navOperation=null;navigationReady=true;previousNavigation?.StopNavigation();}
                 foreach(var id in chunks.Keys.Where(id=>Mathf.Abs(id.x-center.x)>radius+1||Mathf.Abs(id.y-center.y)>radius+1).ToArray())
                 {
-                    var chunk=chunks[id];if(chunk.GetComponentsInChildren<WorldEnemyIdentity>().Any(e=>e.PendingReward))continue;content.Unload(id);var mesh=chunk.GetComponent<MeshFilter>().sharedMesh;chunk.SetActive(false);Destroy(chunk);Destroy(mesh);chunks.Remove(id);dirty=true;
+                    var chunk=chunks[id];if(chunk.GetComponentsInChildren<WorldEnemyIdentity>().Any(e=>e.PendingReward))continue;content.Unload(id);var mesh=chunk.GetComponent<MeshFilter>().sharedMesh;chunk.SetActive(false);Destroy(chunk);Destroy(mesh);chunks.Remove(id);if(finiteHorizon!=null)finiteHorizon.SetChunkLoaded(id,false);dirty=true;
                 }
                 // Moving keeps adding chunks. Populate from completed navigation instead of
                 // waiting for the entire streaming window to stop changing.
@@ -181,7 +195,7 @@ namespace Mismo.Gameplay.Player.World
                     if(Settings.preserveAuthoredCenter)NavMeshBuilder.CollectSources(geometry,~0,NavMeshCollectGeometry.PhysicsColliders,0,new List<NavMeshBuildMarkup>(),sources);
                     foreach(var chunk in chunks.Values.Concat(authoredEncounters.Values))
                     {var extra=new List<NavMeshBuildSource>();NavMeshBuilder.CollectSources(chunk.transform,~0,NavMeshCollectGeometry.PhysicsColliders,0,chunk.GetComponentsInChildren<WorldEnemyIdentity>().Select(e=>new NavMeshBuildMarkup{root=e.transform,ignoreFromBuild=true}).ToList(),extra);sources.AddRange(extra);}
-                    var bounds=new Bounds(new Vector3(player.position.x,30,player.position.z),new Vector3((radius+2)*64,140,(radius+2)*64));
+                    var bounds=new Bounds(new Vector3(player.position.x,field.Plan?.Layout!=null?160:30,player.position.z),new Vector3((radius+2)*64,field.Plan?.Layout!=null?500:140,(radius+2)*64));
                     if(Settings.preserveAuthoredCenter)bounds.Encapsulate(new Bounds(new Vector3(0,30,0),new Vector3(Settings.authoredSize,140,Settings.authoredSize)));
                     navOperation=NavMeshBuilder.UpdateNavMeshDataAsync(navigation,NavMesh.GetSettingsByID(0),sources,bounds);dirty=false;nextNav=Time.time+1;
                 }
@@ -189,6 +203,7 @@ namespace Mismo.Gameplay.Player.World
         }
         public GameObject CreateChunk(Vector2Int id)
         {
+            if(!CanCreateChunk(id))return null;
             if(chunks.TryGetValue(id,out var existing))return existing;
             var root=new GameObject("Chunk "+id.x+", "+id.y);root.transform.SetParent(transform,false);
             var mesh=BuildTerrain(field,id);root.AddComponent<MeshFilter>().sharedMesh=mesh;root.AddComponent<MeshRenderer>().sharedMaterial=material;root.AddComponent<MeshCollider>().sharedMesh=mesh;
@@ -208,7 +223,23 @@ namespace Mismo.Gameplay.Player.World
                 var trunk=tree.AddComponent<BoxCollider>();trunk.center=new Vector3(0,3,0);trunk.size=new Vector3(.9f,6,.9f);tree.AddComponent<ClimbableTree>();
                 GatheringDistribution.WrapTree(tree,"gather-tree-v1:"+Settings.seed+":"+id.x+":"+id.y+":"+x+":"+z);
             }
-            content.Decorate(id,root.transform,material);GatheringDistribution.Decorate(Settings,field,id,root.transform);chunks.Add(id,root);return root;
+            if(field.Plan!=null)CreateSea(id,root.transform);
+            content.Decorate(id,root.transform,material);GatheringDistribution.Decorate(Settings,field,id,root.transform);chunks.Add(id,root);if(finiteHorizon!=null)finiteHorizon.SetChunkLoaded(id,true);return root;
+        }
+        public bool CanCreateChunk(Vector2Int id)=>field?.Plan==null||field.Plan.ContainsChunk(id);
+        void CreateSea(Vector2Int id,Transform root)
+        {
+            var sea=new VoxelRegionGeometry();bool wet=false;
+            for(int z=id.y*32;z<id.y*32+32;z+=4)for(int x=id.x*32;x<id.x*32+32;x+=4)
+            {
+                if(field.Plan.Contains(x+2,z+2,64))continue;
+                wet=true;var color=new Color(.12f,.35f,.46f,0);
+                sea.Quad(new Vector3(x,0,z),new Vector3(x,0,z+4),new Vector3(x+4,0,z+4),new Vector3(x+4,0,z),color);
+            }
+            if(!wet)return;
+            var water=new GameObject("Coastal sea");water.transform.SetParent(root,false);
+            var owned=water.AddComponent<GeneratedWorldMesh>();owned.Value=sea.Mesh("Coastal sea");
+            water.AddComponent<MeshFilter>().sharedMesh=owned.Value;water.AddComponent<MeshRenderer>().sharedMaterial=material;
         }
         public static Mesh BuildTerrain(VoxelRegionHeightfield field,Vector2Int id)
         {
@@ -218,6 +249,7 @@ namespace Mismo.Gameplay.Player.World
             for(int z=sz;z<sz+32;z++)for(int x=sx;x<sx+32;x++)
             {
                 float y=heights[x-sx+1,z-sz+1];Color side=new Color(.32f,.43f,.17f);
+                if(field is ExplorationTerrain terrain&&terrain.Plan!=null){side=terrain.Plan.GroundColor(x,z)*.7f;side.a=0;}
                 mesh.Quad(new Vector3(x,y,z),new Vector3(x,y,z+1),new Vector3(x+1,y,z+1),new Vector3(x+1,y,z),field.Top(x,z,y));
                 float low=heights[x-sx+2,z-sz+1];if(y>low)mesh.Quad(new Vector3(x+1,low,z),new Vector3(x+1,y,z),new Vector3(x+1,y,z+1),new Vector3(x+1,low,z+1),side);
                 low=heights[x-sx,z-sz+1];if(y>low)mesh.Quad(new Vector3(x,low,z+1),new Vector3(x,y,z+1),new Vector3(x,y,z),new Vector3(x,low,z),side);
@@ -228,6 +260,7 @@ namespace Mismo.Gameplay.Player.World
         }
         void OnDestroy()
         {
+            if(player!=null&&field?.Plan!=null){var motor=player.GetComponent<Movement.PlayerMotor>();if(motor!=null)motor.MovementConstraint=null;}
             if(WorldSession.Current!=null&&Settings!=null)Destroy(Settings);
             if(navigation!=null)NavMeshBuilder.Cancel(navigation);
             if(navInstance.valid)navInstance.Remove();if(navigation!=null)Destroy(navigation);
