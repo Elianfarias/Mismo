@@ -26,7 +26,7 @@ namespace Mismo.Gameplay.Player.World
             float x=(cx+.3f+(float)rng.NextDouble()*.4f)*spacing,z=(cz+.3f+(float)rng.NextDouble()*.4f)*spacing;
             var p=new Vector3(x,terrain.Height(x,z),z);
             if(ExplorationChunks.Coordinate(p)!=chunk||terrain.Reserved(x,z,6))yield break;
-            int siteSpacing=Mathf.Max(64,settings.siteSpacing);
+            int siteSpacing=terrain.SiteSpacing;
             var siteCell=new Vector2Int(Mathf.FloorToInt(x/siteSpacing),Mathf.FloorToInt(z/siteSpacing));
             for(int dz=-1;dz<=1;dz++)for(int dx=-1;dx<=1;dx++)
             {
@@ -38,7 +38,7 @@ namespace Mismo.Gameplay.Player.World
         }
         public IEnumerable<WorldSite> Sites(Vector2Int chunk)
         {
-            int spacing=Mathf.Max(64,settings.siteSpacing);
+            int spacing=terrain.SiteSpacing;
             int x=Mathf.FloorToInt(chunk.x*32f/spacing),z=Mathf.FloorToInt(chunk.y*32f/spacing);
             for(int dz=-1;dz<=1;dz++)for(int dx=-1;dx<=1;dx++)
             {
@@ -97,7 +97,10 @@ namespace Mismo.Gameplay.Player.World
                     var rng=new System.Random(seed);if(rng.NextDouble()>densities[k])continue;
                     float px=chunk.x*32+x+((float)rng.NextDouble()-.5f)*2,pz=chunk.y*32+z+((float)rng.NextDouble()-.5f)*2;
                     if(terrain.Reserved(px,pz,k==0?0:2))continue;
-                    var asset=catalog.Asset(kinds[k],terrain.Biome(px,pz),ExplorationTerrain.Hash(seed,x,z,650));if(asset==null)continue;
+                    var biome=terrain.Biome(px,pz);
+                    var asset=catalog.Asset(kinds[k],biome,ExplorationTerrain.Hash(seed,x,z,650));if(asset==null)continue;
+                    // Generic meadow flowers/grass should not carpet the new desert or glacier.
+                    if(terrain.Plan!=null&&terrain.Plan.Stage(px,pz)>0&&kinds[k]!=WorldAssetKind.Rock&&(asset.biomes==null||asset.biomes.Length==0))continue;
                     float y=terrain.Height(px,pz),r=Mathf.Max(.4f,Mathf.Max(asset.footprint.x,asset.footprint.y)*.5f);
                     float delta=Mathf.Max(Mathf.Abs(y-terrain.Height(px+r,pz)),Mathf.Abs(y-terrain.Height(px,pz+r)));
                     if(Mathf.Atan2(delta,r)*Mathf.Rad2Deg>asset.maxSlope)continue;

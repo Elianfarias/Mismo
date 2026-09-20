@@ -14,18 +14,26 @@ namespace Mismo.Gameplay.Player.World
     public sealed class ExplorationTerrain : VoxelRegionHeightfield
     {
         readonly ExplorationWorldSettings settings;
+        public FiniteWorldPlan Plan {get;}
+        public int SiteSpacing=>Plan!=null?Plan.SiteSpacing:Mathf.Max(64,settings.siteSpacing);
         readonly System.Collections.Generic.Dictionary<Vector2Int,WorldSite> sites=new System.Collections.Generic.Dictionary<Vector2Int,WorldSite>();
-        public ExplorationTerrain(ExplorationWorldSettings s):base(s.seed,s.authoredSize,s.relief,s.stepHeight){settings=s;}
+        public ExplorationTerrain(ExplorationWorldSettings s):base(s.seed,s.authoredSize,s.relief,s.stepHeight)
+        {settings=s;Plan=s.UsesFiniteWorld?new FiniteWorldPlan(s):null;}
         public static int Hash(int seed,int x,int z,int stream)
         {unchecked{uint h=(uint)seed^(uint)x*73856093u^(uint)z*19349663u^(uint)stream*83492791u;h^=h>>16;h*=0x7feb352du;h^=h>>15;h*=0x846ca68bu;return (int)(h^(h>>16));}}
         static float Unit(int hash)=>(uint)hash/(float)uint.MaxValue;
         float Noise(float x,float z,float scale,int stream)=>Mathf.PerlinNoise(x/Mathf.Max(1,scale)+(settings.seed&4095)*.173f+stream*17.7f,z/Mathf.Max(1,scale)+stream*31.3f);
         public Vector2Int Region(float x,float z)=>new Vector2Int(Mathf.FloorToInt(x/Mathf.Max(128,settings.regionSize)),Mathf.FloorToInt(z/Mathf.Max(128,settings.regionSize)));
-        public string RegionId(float x,float z){var r=Region(x,z);return "world-v1:"+settings.seed+":"+r.x+":"+r.y;}
-        public WorldBiome Biome(float x,float z){float n=Noise(x,z,Mathf.Max(128,settings.regionSize),5);return n<.43f?WorldBiome.Meadow:n<.64f?WorldBiome.Forest:WorldBiome.Highlands;}
+        public string RegionId(float x,float z){if(Plan!=null)return "world-plan-v"+Plan.Version+":"+settings.seed+":"+Plan.Stage(x,z);var r=Region(x,z);return "world-v1:"+settings.seed+":"+r.x+":"+r.y;}
+        public WorldBiome Biome(float x,float z){if(Plan!=null)return Plan.Biome(x,z);float n=Noise(x,z,Mathf.Max(128,settings.regionSize),5);return n<.43f?WorldBiome.Meadow:n<.64f?WorldBiome.Forest:WorldBiome.Highlands;}
         TerrainBiome Profile(WorldBiome b)
         {if(settings.biomes!=null)foreach(var p in settings.biomes)if(p!=null&&p.kind==b)return p;return new TerrainBiome{kind=b};}
-        public float TreeDensity(float x,float z)=>Profile(Biome(x,z)).trees;
+        public float TreeDensity(float x,float z)
+        {
+            var biome=Biome(x,z);
+            if(biome==WorldBiome.Desert||biome==WorldBiome.Ice||biome==WorldBiome.Mountains||biome==WorldBiome.Ocean)return 0;
+            return Profile(biome).trees;
+        }
         float Natural(float x,float z)
         {
             // Blend regional properties continuously to avoid biome boundary cliffs.
@@ -51,7 +59,7 @@ namespace Mismo.Gameplay.Player.World
         {
             float extent = VillageHalfExtent + Mathf.Clamp(margin, 0, 128);
             if (settings.preserveAuthoredCenter && Mathf.Max(Mathf.Abs(x + 50), Mathf.Abs(z + 70)) <= extent) return true;
-            int spacing = Mathf.Max(64, settings.siteSpacing);
+            int spacing = SiteSpacing;
             int cx = Mathf.FloorToInt(x / spacing), cz = Mathf.FloorToInt(z / spacing);
             int radius = Mathf.CeilToInt((extent + 12) / spacing) + 1;
             for (int dz = -radius; dz <= radius; dz++)
@@ -81,16 +89,50 @@ namespace Mismo.Gameplay.Player.World
         public WorldSite Site(Vector2Int cell)
         {
             if(sites.TryGetValue(cell,out var cached))return cached;
-            int spacing=Mathf.Max(64,settings.siteSpacing);int h=Hash(settings.seed,cell.x,cell.y,20);
+            int spacing=SiteSpacing;int h=Hash(settings.seed,cell.x,cell.y,20);
             float x=(cell.x+.5f)*spacing+(Unit(Hash(h,0,0,21))-.5f)*24,z=(cell.y+.5f)*spacing+(Unit(Hash(h,0,0,22))-.5f)*24;
             float roll=Unit(h);var kind=roll<.12f?WorldSiteKind.Clearing:roll<.18f?WorldSiteKind.BossArena:roll<.32f?WorldSiteKind.Ruin:roll<.40f?WorldSiteKind.Secret:WorldSiteKind.Clearing;
             if(IsVillageCell(cell))kind=WorldSiteKind.Village;
-            var result=new WorldSite{cell=cell,position=new Vector3(x,Natural(x,z),z),kind=kind,radius=kind==WorldSiteKind.Village?VillageHalfExtent:kind==WorldSiteKind.BossArena?20:12};
+            int objective=Plan!=null?Plan.ObjectiveStage(cell):-1;
+            float roadClearance=kind==WorldSiteKind.Village?VillageHalfExtent*1.415f+32:64;
+            bool suppressed=Plan!=null&&(!Plan.Contains(x,z,VillageHalfExtent+40)||Plan.RouteDistance(x,z,out _) < roadClearance||Plan.BarrierDistance(x,z)<VillageHalfExtent+40);
+            if(suppressed)kind=WorldSiteKind.Clearing;
+            if(Plan!=null&&cell==Vector2Int.zero)kind=WorldSiteKind.Village;
+            if(objective>=0)kind=WorldSiteKind.BossArena;
+            float y=Plan==null?Natural(x,z):Plan.NaturalHeight(x,z);
+            if(Plan!=null&&cell==Vector2Int.zero)y=12;
+            if(objective>=0)Plan.RouteDistance(x,z,out y);
+            var result=new WorldSite{cell=cell,position=new Vector3(x,y,z),kind=kind,radius=kind==WorldSiteKind.Village?VillageHalfExtent:kind==WorldSiteKind.BossArena?(Plan==null?20:24):suppressed?0:12};
             if(sites.Count>=4096)sites.Clear();sites[cell]=result;return result;
         }
-        public bool IsExterior(float x,float z)=>!settings.preserveAuthoredCenter||Mathf.Max(Mathf.Abs(x),Mathf.Abs(z))>settings.authoredSize*.5f+Mathf.Max(64,settings.transitionWidth);
+        public bool IsExterior(float x,float z)=>Plan!=null?Plan.Contains(x,z,80):!settings.preserveAuthoredCenter||Mathf.Max(Mathf.Abs(x),Mathf.Abs(z))>settings.authoredSize*.5f+Mathf.Max(64,settings.transitionWidth);
+        float FinitePass(float x,float z,out float distance,out bool reserved)
+        {
+            float y=Plan.NaturalHeight(x,z);reserved=!Plan.Contains(x,z,80)||Plan.BarrierDistance(x,z)<48;
+            int cx=Mathf.FloorToInt(x/SiteSpacing),cz=Mathf.FloorToInt(z/SiteSpacing);
+            for(int dz=-1;dz<=1;dz++)for(int dx=-1;dx<=1;dx++)
+            {
+                var site=Site(new Vector2Int(cx+dx,cz+dz));
+                if(site.radius<=0||!IsExterior(site.position.x,site.position.z))continue;
+                float d=Vector2.Distance(new Vector2(x,z),new Vector2(site.position.x,site.position.z));
+                if(site.kind==WorldSiteKind.Village)continue;
+                y=Mathf.Lerp(y,site.position.y,1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(site.radius,site.radius+16,d)));
+                reserved|=d<site.radius+3;
+            }
+            y=Plan.ApplyRoute(x,z,y,out distance);reserved|=distance<10;
+            // Village foundations have the final say, including the arrival outside the walls.
+            for(int dz=-1;dz<=1;dz++)for(int dx=-1;dx<=1;dx++)
+            {
+                var site=Site(new Vector2Int(cx+dx,cz+dz));if(site.kind!=WorldSiteKind.Village)continue;
+                float d=Mathf.Max(Mathf.Abs(x-site.position.x),Mathf.Abs(z-site.position.z));
+                y=Mathf.Lerp(y,site.position.y,1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(VillageHalfExtent+12,VillageHalfExtent+28,d)));
+                reserved|=d<VillageHalfExtent+16;
+            }
+            return Plan.ApplyCoast(x,z,Plan.ApplyBarriers(x,z,y));
+        }
         float Pass(float x,float z,out float distance,out bool reserved)
         {
+            if(Plan!=null)return FinitePass(x,z,out distance,out reserved);
             float y=Natural(x,z);distance=float.MaxValue;reserved=false;
             int spacing=Mathf.Max(64,settings.siteSpacing),cx=Mathf.FloorToInt(x/spacing),cz=Mathf.FloorToInt(z/spacing);
             for(int dz=-1;dz<=1;dz++)for(int dx=-1;dx<=1;dx++)
@@ -124,6 +166,7 @@ namespace Mismo.Gameplay.Player.World
         }
         public override float Height(float x,float z)
         {
+            if(Plan!=null&&!Plan.Contains(x,z,-28))return -8;
             if(!settings.preserveAuthoredCenter)
             {float stepSize=Mathf.Max(.05f,settings.stepHeight);return Mathf.Round(Pass(x,z,out _,out _)/stepSize)*stepSize;}
             float edge=Mathf.Max(Mathf.Abs(x),Mathf.Abs(z))-settings.authoredSize*.5f;
@@ -142,6 +185,11 @@ namespace Mismo.Gameplay.Player.World
         }
         public override bool Reserved(float x,float z,float margin=0)
         {
+            if(Plan!=null)
+            {
+                if(!Plan.Contains(x,z,80+margin))return true;
+                FinitePass(x,z,out float road,out bool occupied);return occupied||road<10+margin;
+            }
             if(settings.content!=null)
             {
                 int arrivalSpacing=Mathf.Max(64,settings.siteSpacing);
@@ -160,9 +208,18 @@ namespace Mismo.Gameplay.Player.World
             if(!IsExterior(x,z))return base.Reserved(x,z,margin);Pass(x,z,out float d,out bool reserved);return reserved||d<7+margin;
         }
         public override float PathDistance(float x,float z)
-        {if(!IsExterior(x,z))return base.PathDistance(x,z);Pass(x,z,out float d,out _);return d;}
+        {if(Plan!=null)return Plan.RouteDistance(x,z,out _);if(!IsExterior(x,z))return base.PathDistance(x,z);Pass(x,z,out float d,out _);return d;}
         public override Color Top(float x,float z,float height)
         {
+            if(Plan!=null)
+            {
+                var tint=Plan.GroundColor(x,z);
+                if(Plan.Contains(x,z)&&PathDistance(x,z)<5)tint=Color.Lerp(tint,new Color(.66f,.58f,.43f),.65f);
+                float snowStart=Plan.Layout!=null?205:62,snowEnd=Plan.Layout!=null?255:86;
+                if(Biome(x,z)==WorldBiome.Mountains&&height>snowStart)tint=Color.Lerp(tint,new Color(.88f,.92f,.94f),Mathf.InverseLerp(snowStart,snowEnd,height));
+                // Alpha marks literal biome colors for the terrain shader (legacy uses alpha 1).
+                tint*=Mathf.Lerp(.94f,1.06f,Noise(x,z,2,4));tint.a=0;return tint;
+            }
             if(!IsExterior(x,z))return base.Top(x,z,height);
             Color color=Biome(x,z)==WorldBiome.Forest?new Color(.24f,.43f,.18f):Biome(x,z)==WorldBiome.Highlands?new Color(.46f,.51f,.29f):new Color(.43f,.63f,.24f);
             if(PathDistance(x,z)<2.7f)color=new Color(.64f,.53f,.35f);

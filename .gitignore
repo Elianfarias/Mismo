@@ -51,6 +51,9 @@ Thumbs.db
 /.validation/
 /.human-animation-bake/
 
+# Generated Unity validation builds (keep reports and screenshots versioned).
+/output/**/*-build/
+
 # Unity project configuration and package manifests must remain versioned.
 # Keep Assets/, Packages/, and ProjectSettings/ out of the ignore rules.
 # Local source material, notes, and validation tools.

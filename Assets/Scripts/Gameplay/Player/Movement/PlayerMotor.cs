@@ -21,7 +21,8 @@ namespace Mismo.Gameplay.Player.Movement
         private float airborneSoundTime;
         private GameSoundCatalog soundCatalog;
         private ControlledMovementRequest? pendingControlledMovement;
-        public bool IsGrounded => body != null && body.isGrounded && verticalVelocity <= 0f;
+        public bool IsFlying { get; private set; }
+        public bool IsGrounded => !IsFlying && body != null && body.isGrounded && verticalVelocity <= 0f;
         public float Speed => body != null ? Vector3.ProjectOnPlane(body.velocity, Vector3.up).magnitude : 0f;
         public Vector3 Facing => visual != null ? visual.forward : transform.forward;
         public Transform Visual => visual;
@@ -30,6 +31,7 @@ namespace Mismo.Gameplay.Player.Movement
         public bool LastMovementWasControlled { get; private set; }
         public event System.Action Jumped;
         public event System.Action Landed;
+        public System.Func<Vector3,Vector3,Vector3> MovementConstraint { private get; set; }
 
         /// <summary>Conecta los datos y la presentación del motor.</summary>
         public void Configure(MovementSettings configuration, Transform visualRoot)
@@ -45,6 +47,26 @@ namespace Mismo.Gameplay.Player.Movement
             soundCatalog = Mismo.Core.ProjectAssets.Load<GameSoundCatalog>(GameSoundCatalog.ResourcePath);
         }
         public void ClearControlledMovement() => pendingControlledMovement = null;
+        public void SetFlight(bool active)
+        {
+            IsFlying = active;
+            horizontalVelocity = Vector3.zero;
+            verticalVelocity = coyoteRemaining = jumpBufferRemaining = 0f;
+            pendingControlledMovement = null;
+            hasGroundState = false;
+            footstepDistance = airborneSoundTime = 0f;
+        }
+
+        /// <summary>Vuelo de pruebas: conserva colisiones, omite gravedad y barreras de progresión.</summary>
+        public void TickFlight(Vector3 direction, bool fast, float dt)
+        {
+            if (!IsFlying || body == null || !body.enabled || dt <= 0) return;
+            pendingControlledMovement = null;
+            verticalVelocity = 0;
+            LastMovementWasControlled = false;
+            LastCollisionFlags = body.Move(Vector3.ClampMagnitude(direction, 1) * (fast ? 50f : 18f) * dt);
+            Face(direction);
+        }
         public void Face(Vector3 direction)
         {
             direction = Vector3.ProjectOnPlane(direction, Vector3.up);
@@ -75,6 +97,7 @@ namespace Mismo.Gameplay.Player.Movement
             pendingControlledMovement = null;
             LastMovementWasControlled = controlledMovement.HasValue;
             LastCollisionFlags = CollisionFlags.None;
+            if (IsFlying) return CollisionFlags.None;
             if (settings == null || dt <= 0f) return CollisionFlags.None;
 
             bool specialMovement = controlledMovement.HasValue;
@@ -118,7 +141,9 @@ namespace Mismo.Gameplay.Player.Movement
                 visual.rotation = Quaternion.RotateTowards(visual.rotation, Quaternion.LookRotation(facing), settings.RotationSpeed * dt);
             Vector3 horizontalStep = specialMovement ? specialDisplacement : horizontalVelocity * dt;
             Vector3 positionBeforeMove = transform.position;
-            CollisionFlags flags = body.Move(horizontalStep + Vector3.up * verticalVelocity * dt);
+            Vector3 destination=positionBeforeMove+horizontalStep+Vector3.up*verticalVelocity*dt;
+            if(MovementConstraint!=null)destination=MovementConstraint(positionBeforeMove,destination);
+            CollisionFlags flags = body.Move(destination-positionBeforeMove);
             if ((flags & CollisionFlags.Above) != 0 && verticalVelocity > 0f) verticalVelocity = 0f;
             if ((flags & CollisionFlags.Below) != 0 && verticalVelocity < 0f) verticalVelocity = settings.GroundedVerticalSpeed;
             bool groundedAfterMove = IsGrounded;
@@ -166,6 +191,7 @@ namespace Mismo.Gameplay.Player.Movement
         /// <summary>Reubica al personaje y reinicia sus velocidades para recuperar una caída del playground.</summary>
         public void ResetPosition(Vector3 position)
         {
+            IsFlying = false;
             body.enabled = false;
             transform.position = position;
             body.enabled = true;

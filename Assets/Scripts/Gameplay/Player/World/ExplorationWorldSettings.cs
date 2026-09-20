@@ -7,6 +7,12 @@ namespace Mismo.Gameplay.Player.World
         public bool streamingEnabled=true;
         public bool preserveAuthoredCenter=true;
         public int seed=7319;
+        [Header("Finite world (new games only)")]
+        [Tooltip("0: original. 1: finite strips. 2: continent with guided passages.")]
+        public int generationVersion;
+        [Range(4096,16384)] public int worldLength=4096;
+        [Range(512,4096)] public int worldHalfWidth=768;
+        public bool UsesFiniteWorld=>(generationVersion==1||generationVersion==2)&&!preserveAuthoredCenter;
         public int authoredSize=256;
         public float relief=14,stepHeight=.25f;
         [Range(2,5)] public int loadRadius=3;

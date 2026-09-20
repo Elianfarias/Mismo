@@ -49,6 +49,7 @@ namespace Mismo.Gameplay.Player.World
             string id=Guid.NewGuid().ToString("N");
             int seed=legacy?template.seed:WorldSaveData.FreshSeed(previousSeed);
             settings.seed=seed;settings.preserveAuthoredCenter=legacy;settings.streamingEnabled=true;
+            settings.generationVersion=legacy?0:2;
             Vector3 spawn=new Vector3(-50,4.25f,-70);float spawnYaw=0;
             if(!legacy)
             {
@@ -114,6 +115,8 @@ namespace Mismo.Gameplay.Player.World
         {
             if(Current==null)return template;
             var result=UnityEngine.Object.Instantiate(template);
+            // Missing fields in old JSON must not inherit a future template's generator.
+            result.generationVersion=0;
             JsonUtility.FromJsonOverwrite(Current.settingsJson,result);
             result.content=template.content;result.seed=Current.seed;result.preserveAuthoredCenter=Current.legacy;
             return result;

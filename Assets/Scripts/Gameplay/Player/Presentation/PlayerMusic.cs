@@ -77,6 +77,8 @@ namespace Mismo.Gameplay.Player.Presentation
                     {
                         case WorldBiome.Forest: regional = catalog.forestMusic; break;
                         case WorldBiome.Highlands: regional = catalog.highlandsMusic; break;
+                        case WorldBiome.Mountains: regional = catalog.highlandsMusic; break;
+                        case WorldBiome.Desert: case WorldBiome.Ice: case WorldBiome.Ocean: regional = desired; break;
                         default: regional = catalog.meadowMusic; break;
                     }
                 }
