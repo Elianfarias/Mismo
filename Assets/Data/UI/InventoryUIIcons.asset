@@ -13,8 +13,19 @@ MonoBehaviour:
   m_Name: InventoryUIIcons
   m_EditorClassIdentifier: 
   useOliveTheme: 0
+  menuBackgroundColor: {r: 0.12, g: 0.15, b: 0.17, a: 1}
+  menuCenterOpacity: 1
+  menuEdgeOpacity: 1
+  menuEdgeFade: 0.65
+  menuBackgroundBlur: 1
+  menuBlurRadius: 1.5
   panelOpacity: 0.8
+  inventoryBackgroundOpacity: 0.7
+  emptyInventorySlotOpacity: 0.16
   navigationIconOpacity: 1
+  navigationIconSize: 24
+  closeIconSize: 14
+  upgrades: {fileID: 2800000, guid: 104bc53c663d4e9f9bc47505faef3982, type: 3}
   oliveWeaponSlotBackground: {fileID: 2800000, guid: 3b686c6e64c84f05a6163ea3e32b71a9, type: 3}
   oliveConsumableSlotBackground: {fileID: 2800000, guid: fa210eeab66c47f3b13519caf4030282, type: 3}
   oliveWeaponSlotUV:
@@ -54,6 +65,8 @@ MonoBehaviour:
   radialMounts: {fileID: 2800000, guid: 891f4f2f404475547b86dc7e65aa809a, type: 3}
   radialBestiary: {fileID: 2800000, guid: 809767bb7541ac34ba0958f19686a08c, type: 3}
   radialSkills: {fileID: 2800000, guid: d4968ef72859d274b807a9043103c6bf, type: 3}
+  radialRecipes: {fileID: 2800000, guid: b4a1a58c5d3845eb85502c1c7d2c367b, type: 3}
+  radialQuests: {fileID: 2800000, guid: 33d3822866a626f4685c7dbfbb466d7b, type: 3}
   radialCancel: {fileID: 2800000, guid: c4db98a900cfdb942a8c9ba7e16cb56f, type: 3}
   radialHoverSound: {fileID: 0}
   radialHoverVolume: 0.7
@@ -133,3 +146,5 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 61df79d0d5a954e498041bccbe6ace57, type: 3}
   - {fileID: 2800000, guid: 891f4f2f404475547b86dc7e65aa809a, type: 3}
   - {fileID: 2800000, guid: 6f0eb6a23328f014999aef99833b2355, type: 3}
+  eye: {fileID: 2800000, guid: 4a90b9a3f721c964eaeab77a28d44e37, type: 3}
+  eyeCrossed: {fileID: 2800000, guid: 6c06a67c6ef9ec249b46522a80a56ac1, type: 3}

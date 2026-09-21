@@ -47,7 +47,7 @@ namespace Mismo.Gameplay.Player.World
     public sealed class WorldContentCatalog : ScriptableObject
     {
         [Header("Village arrival (new worlds)")]
-        [Min(1)] public float villageSizeMultiplier=2;
+        [Min(1)] public float villageSizeMultiplier=2.6f;
         public float villageGroundOffset=-.19670273f;
         public Vector3 VillageArrivalOffset=>villageSpawnOffset*Mathf.Max(1,villageSizeMultiplier);
         public Vector3 villageSpawnOffset=new Vector3(0,0,-29);

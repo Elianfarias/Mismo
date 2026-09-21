@@ -6,48 +6,109 @@ using Mismo.Gameplay.Player.Equipment.Inventory;
 
 namespace Mismo.Gameplay.Player.Presentation
 {
-    /// <summary>Shared Kenney Fantasy UI Borders theme for runtime IMGUI screens.</summary>
+    /// <summary>Shared pixel-stepped frames for IMGUI and canvas screens.</summary>
     public static class FantasyUI
     {
-        static Texture2D frame, panel;
+        public const int Slice = 9;
+        static Texture2D frame, panel, crosshair;
         static GUIStyle border, buttons;
-        public static Texture2D PanelTexture => Load(ref panel,"Panel");
+        static InventoryUIIcons menuTheme;
+        static Color lastPanelColor;
+        static Vector3 lastPanelGradient;
+        public static Texture2D PanelTexture
+        {
+            get
+            {
+                if(menuTheme==null)menuTheme=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");
+                var color=menuTheme!=null?menuTheme.menuBackgroundColor:new Color(.12f,.15f,.17f,1);
+                var gradient=menuTheme!=null?new Vector3(Mathf.Clamp01(menuTheme.menuCenterOpacity),Mathf.Clamp01(menuTheme.menuEdgeOpacity),Mathf.Clamp(menuTheme.menuEdgeFade,.05f,1)):new Vector3(.88f,.18f,.65f);
+                bool rebuild=panel==null;
+                if(rebuild)panel=new Texture2D(128,128,TextureFormat.RGBA32,false){name="Shared menu gradient",hideFlags=HideFlags.HideAndDontSave,filterMode=FilterMode.Bilinear,wrapMode=TextureWrapMode.Clamp};
+                if(rebuild||color!=lastPanelColor||gradient!=lastPanelGradient)
+                {
+                    var pixels=new Color32[128*128];
+                    for(int y=0;y<128;y++)for(int x=0;x<128;x++)
+                    {
+                        float edge=2*Mathf.Min(Mathf.Min(x,127-x),Mathf.Min(y,127-y))/127f;
+                        float blend=Mathf.SmoothStep(0,1,Mathf.Clamp01(edge/gradient.z));
+                        var pixel=color;pixel.a*=Mathf.Lerp(gradient.y,gradient.x,blend);pixels[y*128+x]=pixel;
+                    }
+                    panel.SetPixels32(pixels);panel.Apply(false,false);lastPanelColor=color;lastPanelGradient=gradient;
+                }
+                return panel;
+            }
+        }
         public static Texture2D FrameTexture => Load(ref frame,"Frame");
         static Texture2D Load(ref Texture2D texture,string name)
         {
-            if(texture==null)texture=Mismo.Core.ProjectAssets.Load<Texture2D>("UI/FantasyBorders/"+name);
+            if(texture==null)texture=Mismo.Core.ProjectAssets.Load<Texture2D>("UI/PixelFrames/"+name);
             if(texture!=null){texture.filterMode=FilterMode.Point;texture.wrapMode=TextureWrapMode.Clamp;}
             return texture;
         }
         public static void Frame(Rect rect,Color color)
         {
             if(Event.current.type!=EventType.Repaint||FrameTexture==null)return;
-            if(border==null)border=new GUIStyle {border=new RectOffset(12,12,12,12)};
+            if(border==null)border=new GUIStyle {border=new RectOffset(Slice,Slice,Slice,Slice)};
             border.normal.background=FrameTexture;
-            var old=GUI.color;var background=GUI.backgroundColor;GUI.color=color;GUI.backgroundColor=Color.white;
+            var old=GUI.color;var background=GUI.backgroundColor;GUI.color=old*color;GUI.backgroundColor=Color.white;
             border.Draw(rect,GUIContent.none,false,false,false,false);GUI.color=old;GUI.backgroundColor=background;
         }
-        public static void Panel(Rect rect)
+        public static void Panel(Rect rect,float opacity=1)
         {
-            PlayerHUD.Fill(rect,PlayerHUD.Panel);
-            Frame(rect,new Color(.57f,.53f,.39f));
+            Surface(rect,opacity);
+            Frame(rect,new Color(1,1,1,Mathf.Clamp01(opacity)));
+        }
+        public static void Surface(Rect rect,float opacity=1)
+        {
+            if(Event.current.type!=EventType.Repaint)return;
+            var old=GUI.color;GUI.color=old*new Color(1,1,1,Mathf.Clamp01(opacity));
+            DrawClippedSurface(rect,PanelTexture);GUI.color=old;
+        }
+        public static void FillSurface(Rect rect,Color color)
+        {
+            if(Event.current.type!=EventType.Repaint)return;
+            var old=GUI.color;GUI.color=old*color;
+            DrawClippedSurface(rect,Texture2D.whiteTexture);GUI.color=old;
+        }
+        static void DrawClippedSurface(Rect rect,Texture2D texture)
+        {
+            // Frame.png has a five-pixel inner outline and three-pixel corner steps.
+            // Clip in destination units so wide panels never stretch their corner cutouts.
+            float unit=Mathf.Min(1,Mathf.Min(rect.width,rect.height)/18f);
+            if(unit<=0)return;
+            float inset=5*unit,corner=8*unit,step=corner-inset;
+            DrawSurfaceStrip(rect,new Rect(rect.x+corner,rect.y+inset,rect.width-2*corner,step),texture);
+            DrawSurfaceStrip(rect,new Rect(rect.x+inset,rect.y+corner,rect.width-2*inset,rect.height-2*corner),texture);
+            DrawSurfaceStrip(rect,new Rect(rect.x+corner,rect.yMax-corner,rect.width-2*corner,step),texture);
+        }
+        static void DrawSurfaceStrip(Rect full,Rect strip,Texture2D texture)
+        {
+            if(strip.width<=0||strip.height<=0)return;
+            var uv=new Rect((strip.x-full.x)/full.width,1-(strip.yMax-full.y)/full.height,strip.width/full.width,strip.height/full.height);
+            GUI.DrawTextureWithTexCoords(strip,texture,uv,true);
+        }
+        public static void Crosshair(Vector2 center)
+        {
+            var texture=Load(ref crosshair,"Crosshair");if(texture==null)return;
+            GUI.DrawTexture(new Rect(Mathf.Round(center.x)-12,Mathf.Round(center.y)-12,25,25),texture);
         }
         public static bool Button(Rect rect,string title)
         {
             if(buttons==null)buttons=new GUIStyle(GUI.skin.button){fontSize=16,alignment=TextAnchor.MiddleCenter};
             StyleButton(buttons);
-            var old=GUI.backgroundColor;GUI.backgroundColor=new Color(.10f,.14f,.17f);
+            Surface(rect);
+            var old=GUI.backgroundColor;GUI.backgroundColor=Color.white;
             bool clicked=GameAudio.Button(rect,title,buttons);GUI.backgroundColor=old;
-            Frame(rect,rect.Contains(Event.current.mousePosition)?PlayerHUD.Gold:new Color(.64f,.59f,.44f));
+            Frame(rect,rect.Contains(Event.current.mousePosition)?PlayerHUD.Gold:Color.white);
             return clicked;
         }
         public static void StyleButton(GUIStyle style)
         {
             style.font=QuietFantasyUI.Body;
-            style.border=new RectOffset(12,12,12,12);
-            style.normal.background=PanelTexture;
-            style.hover.background=PanelTexture;style.active.background=PanelTexture;
-            style.focused.background=PanelTexture;
+            style.border=new RectOffset();
+            style.normal.background=null;
+            style.hover.background=null;style.active.background=null;
+            style.focused.background=null;
             style.normal.textColor=Color.white;style.hover.textColor=PlayerHUD.Gold;
             style.focused.textColor=PlayerHUD.Gold;style.active.textColor=Color.white;
         }
@@ -59,7 +120,7 @@ namespace Mismo.Gameplay.Player.Presentation
     {
         public static PlayerHUD Active {get;private set;}
         public static bool UIEditMode {get;private set;}
-        public static readonly Color Panel=new Color(.075f,.125f,.095f,.94f),Gold=new Color(.85f,.68f,.32f),Muted=new Color(.61f,.66f,.58f);
+        public static readonly Color Panel=new Color(.047f,.071f,.082f,.86f),Gold=new Color(.94f,.81f,.50f),Muted=new Color(.61f,.66f,.58f);
         private Health health;
         private InventoryUIIcons icons; private PlayerInventory inventory;
         private CombatState combat;
@@ -72,7 +133,7 @@ namespace Mismo.Gameplay.Player.Presentation
         private SwordLunge lunge;
         private SwordParry parry;
         private SwordSpinAttack spin;
-        enum EditTarget {None,Health,Stamina,Focus,Tab,Skills,Dash,Consumables}
+        enum EditTarget {None,Health,Stamina,Tab,Skills,Dash,Consumables}
         EditTarget editTarget;
         Vector2 editMouseStart,editValueStart;
 
@@ -118,7 +179,6 @@ namespace Mismo.Gameplay.Player.Presentation
             float vitalsWidth=icons!=null?Mathf.Max(1,icons.hudVitalsWidth):380;
             PaintedBar(0,vitalsPosition+(icons!=null?icons.hudHealthOffset:Vector2.zero),health.Normalized,new Color(.95f,.30f,.32f),vitalsWidth);
             PaintedBar(1,vitalsPosition+(icons!=null?icons.hudStaminaOffset:new Vector2(0,15)),stamina!=null?stamina.Normalized:0,new Color(.50f,.76f,.39f),vitalsWidth);
-            PaintedBar(2,vitalsPosition+(icons!=null?icons.hudFocusOffset:new Vector2(0,30)),combat!=null?combat.Focus/100:0,new Color(1f,.82f,.25f),vitalsWidth);
             DrawNavigation(height);
             if(Time.unscaledTime<rewardUntil)Label(new Rect(width/2-230,height/2+65,460,35),reward,23,Gold,TextAnchor.MiddleCenter);
             float left=(width-792)/2;
@@ -138,9 +198,7 @@ namespace Mismo.Gameplay.Player.Presentation
                 float tabOpacity=icons!=null?Mathf.Clamp01(icons.hudTabOpacity):1f;
                 var tabOffset=icons!=null?icons.hudTabOffset:Vector2.zero;
                 var switchRect=new Rect(left+99+tabOffset.x,height-162+skillsYOffset+tabOffset.y,142,36);
-                GUI.DrawTexture(switchRect,Texture2D.whiteTexture,ScaleMode.StretchToFill,true,0,new Color(.065f,.09f,.14f,.85f*tabOpacity),0,6);
-                GUI.DrawTexture(switchRect,Texture2D.whiteTexture,ScaleMode.StretchToFill,true,0,new Color(.60f,.65f,.70f,.9f*tabOpacity),1,6);
-                GUI.DrawTexture(new Rect(left+145+tabOffset.x,height-157+skillsYOffset+tabOffset.y,50,26),Texture2D.whiteTexture,ScaleMode.StretchToFill,true,0,new Color(.60f,.65f,.70f,.65f*tabOpacity),1,5);
+                FantasyUI.Panel(switchRect,tabOpacity);
                 // Opacity belongs to the Tab background/frame; keep its content fully readable.
                 QuietFantasyUI.DrawIcon(new Rect(left+108+tabOffset.x,height-158+skillsYOffset+tabOffset.y,28,28),WeaponHudIcon(equipment.ActiveDefinition));
                 Label(new Rect(left+140+tabOffset.x,height-158+skillsYOffset+tabOffset.y,60,28),"Tab",16,QuietFantasyUI.Ink,TextAnchor.MiddleCenter);
@@ -157,10 +215,14 @@ namespace Mismo.Gameplay.Player.Presentation
                     bool active=equipment.Runner.Current!=null&&equipment.Runner.Current.Definition==ability;
                     float skillX=left+skillsOffset.x+(skillsAsColumn?0:i*88);
                     float skillY=height-118+skillsYOffset+skillsOffset.y+(skillsAsColumn?i*88:0);
-                    Ability(skillX,skillY,ability.IsPassive?"PASIVA":keys[i],ability.DisplayName,ability.IsPassive?"EQUIPADA":combat!=null&&combat.Focus<ability.focusCost?"FOCUS "+ability.focusCost.ToString("0"):Status(remaining,active),ability.cooldown>0?remaining/ability.cooldown:0,ability.IsPassive||((stamina==null||stamina.Current>=ability.staminaCost)&&(combat==null||combat.Focus>=ability.focusCost)),QuietFantasyUI.AbilityIcon(ability));
+                    float focusProgress=AbilityFocusProgress(combat!=null?combat.Focus:0,ability.focusCost);
+                    bool showFocus=!ability.IsPassive&&ability.focusCost>0;
+                    bool hasStamina=ability.IsPassive||stamina==null||stamina.Current>=ability.staminaCost;
+                    Ability(skillX,skillY,ability.IsPassive?"PASIVA":keys[i],ability.DisplayName,ability.IsPassive?"EQUIPADA":Status(remaining,active),ability.cooldown>0?remaining/ability.cooldown:0,hasStamina&&(!showFocus||focusProgress>=1),QuietFantasyUI.AbilityIcon(ability),showFocus?focusProgress:-1,hasStamina);
                 }
-                if(equipment.ActiveDefinition.isBow) Label(new Rect(width*Equipment.WeaponAim.Viewport.x-12,height*(1-Equipment.WeaponAim.Viewport.y)-12,24,24),"+",22,Gold,TextAnchor.MiddleCenter);
             }
+            if(!health.IsDead&&!GameplayPause.BlocksInput&&!UIEditMode)
+                FantasyUI.Crosshair(new Vector2(width*Equipment.WeaponAim.Viewport.x,height*(1-Equipment.WeaponAim.Viewport.y)));
             float dashX=left+376+dashOffset.x;
             float dashY=height-118+skillsYOffset+dashOffset.y;
             Ability(dashX,dashY,"C",dash!=null?dash.DisplayName.ToUpperInvariant():"ESPECIAL",Status(dash!=null?dash.CooldownRemaining:0,dash!=null&&dash.IsActive),dash!=null&&dash.CooldownDuration>0?dash.CooldownRemaining/dash.CooldownDuration:0,true,dash!=null&&dash.Definition!=null&&dash.Definition.icon!=null?dash.Definition.icon:icons?.special!=null?icons.special:QuietFantasyUI.Icon("sprint"));
@@ -182,7 +244,6 @@ namespace Mismo.Gameplay.Player.Presentation
             HandleUIEditInput(width,height,left,skillsAsColumn,consumablesAsColumn);
             EditBox(UIRect(EditTarget.Health,width,height,left,skillsAsColumn,consumablesAsColumn),"VIDA",new Color(.95f,.30f,.32f,.9f));
             EditBox(UIRect(EditTarget.Stamina,width,height,left,skillsAsColumn,consumablesAsColumn),"STAMINA",new Color(.50f,.76f,.39f,.9f));
-            EditBox(UIRect(EditTarget.Focus,width,height,left,skillsAsColumn,consumablesAsColumn),"FOCUS",new Color(1f,.82f,.25f,.9f));
             EditBox(UIRect(EditTarget.Tab,width,height,left,skillsAsColumn,consumablesAsColumn),"TAB",new Color(.95f,.78f,.35f,.9f));
             EditBox(UIRect(EditTarget.Skills,width,height,left,skillsAsColumn,consumablesAsColumn),"HABILIDADES",new Color(.45f,.75f,.95f,.9f));
             EditBox(UIRect(EditTarget.Dash,width,height,left,skillsAsColumn,consumablesAsColumn),"DASH",new Color(.70f,.52f,.90f,.9f));
@@ -196,11 +257,11 @@ namespace Mismo.Gameplay.Player.Presentation
         }
         Rect UIRect(EditTarget target,float width,float height,float left,bool skillsAsColumn,bool consumablesAsColumn)
         {
-            if(target==EditTarget.Health||target==EditTarget.Stamina||target==EditTarget.Focus)
+            if(target==EditTarget.Health||target==EditTarget.Stamina)
             {
                 var basePosition=icons!=null?icons.hudVitalsPosition:new Vector2(16,18);
                 float barWidth=icons!=null?Mathf.Max(1,icons.hudVitalsWidth):380;
-                Vector2 offset=target==EditTarget.Health?(icons!=null?icons.hudHealthOffset:Vector2.zero):target==EditTarget.Stamina?(icons!=null?icons.hudStaminaOffset:new Vector2(0,15)):(icons!=null?icons.hudFocusOffset:new Vector2(0,30));
+                Vector2 offset=target==EditTarget.Health?(icons!=null?icons.hudHealthOffset:Vector2.zero):(icons!=null?icons.hudStaminaOffset:new Vector2(0,15));
                 // Keep each hitbox tight; the bars are intentionally close together and must remain individually selectable.
                 return ExpandRect(new Rect(basePosition+offset,new Vector2(barWidth,target==EditTarget.Health?28:21)),2);
             }
@@ -246,7 +307,7 @@ namespace Mismo.Gameplay.Player.Presentation
             var e=Event.current;
             if(e.type==EventType.MouseDown&&e.button==0)
             {
-                foreach(var target in new[]{EditTarget.Health,EditTarget.Stamina,EditTarget.Focus,EditTarget.Tab,EditTarget.Skills,EditTarget.Dash,EditTarget.Consumables})
+                foreach(var target in new[]{EditTarget.Health,EditTarget.Stamina,EditTarget.Tab,EditTarget.Skills,EditTarget.Dash,EditTarget.Consumables})
                     if(UIRect(target,width,height,left,skillsAsColumn,consumablesAsColumn).Contains(e.mousePosition))
                     {editTarget=target;editMouseStart=e.mousePosition;editValueStart=GetEditValue(target);e.Use();break;}
             }
@@ -260,12 +321,12 @@ namespace Mismo.Gameplay.Player.Presentation
         Vector2 GetEditValue(EditTarget target)
         {
             if(icons==null)return Vector2.zero;
-            switch(target){case EditTarget.Health:return icons.hudHealthOffset;case EditTarget.Stamina:return icons.hudStaminaOffset;case EditTarget.Focus:return icons.hudFocusOffset;case EditTarget.Tab:return icons.hudTabOffset;case EditTarget.Skills:return icons.hudSkillsOffset;case EditTarget.Dash:return icons.hudDashOffset;case EditTarget.Consumables:return icons.hudConsumablesOffset;default:return Vector2.zero;}
+            switch(target){case EditTarget.Health:return icons.hudHealthOffset;case EditTarget.Stamina:return icons.hudStaminaOffset;case EditTarget.Tab:return icons.hudTabOffset;case EditTarget.Skills:return icons.hudSkillsOffset;case EditTarget.Dash:return icons.hudDashOffset;case EditTarget.Consumables:return icons.hudConsumablesOffset;default:return Vector2.zero;}
         }
         void ApplyEditValue(EditTarget target,Vector2 value)
         {
             if(icons==null)return;
-            switch(target){case EditTarget.Health:icons.hudHealthOffset=value;break;case EditTarget.Stamina:icons.hudStaminaOffset=value;break;case EditTarget.Focus:icons.hudFocusOffset=value;break;case EditTarget.Tab:icons.hudTabOffset=value;break;case EditTarget.Skills:icons.hudSkillsOffset=value;break;case EditTarget.Dash:icons.hudDashOffset=value;break;case EditTarget.Consumables:icons.hudConsumablesOffset=value;break;}
+            switch(target){case EditTarget.Health:icons.hudHealthOffset=value;break;case EditTarget.Stamina:icons.hudStaminaOffset=value;break;case EditTarget.Tab:icons.hudTabOffset=value;break;case EditTarget.Skills:icons.hudSkillsOffset=value;break;case EditTarget.Dash:icons.hudDashOffset=value;break;case EditTarget.Consumables:icons.hudConsumablesOffset=value;break;}
         }
         void LoadRuntimeLayout()
         {
@@ -273,7 +334,6 @@ namespace Mismo.Gameplay.Player.Presentation
             icons.hudVitalsPosition=ReadVector("Mismo.HUD.Vitals.Position",icons.hudVitalsPosition);
             icons.hudHealthOffset=ReadVector("Mismo.HUD.Health.Offset",icons.hudHealthOffset);
             icons.hudStaminaOffset=ReadVector("Mismo.HUD.Stamina.Offset",icons.hudStaminaOffset);
-            icons.hudFocusOffset=ReadVector("Mismo.HUD.Focus.Offset",icons.hudFocusOffset);
             icons.hudSkillsOffset=ReadVector("Mismo.HUD.Skills.Offset",icons.hudSkillsOffset);
             icons.hudDashOffset=ReadVector("Mismo.HUD.Dash.Offset",icons.hudDashOffset);
             icons.hudTabOffset=ReadVector("Mismo.HUD.Tab.Offset",icons.hudTabOffset);
@@ -291,7 +351,6 @@ namespace Mismo.Gameplay.Player.Presentation
             WriteVector("Mismo.HUD.Vitals.Position",icons.hudVitalsPosition);
             WriteVector("Mismo.HUD.Health.Offset",icons.hudHealthOffset);
             WriteVector("Mismo.HUD.Stamina.Offset",icons.hudStaminaOffset);
-            WriteVector("Mismo.HUD.Focus.Offset",icons.hudFocusOffset);
             WriteVector("Mismo.HUD.Skills.Offset",icons.hudSkillsOffset);
             WriteVector("Mismo.HUD.Dash.Offset",icons.hudDashOffset);
             WriteVector("Mismo.HUD.Tab.Offset",icons.hudTabOffset);
@@ -313,46 +372,61 @@ namespace Mismo.Gameplay.Player.Presentation
             return MapIcons.Mask(weapon.hudIcon!=null?weapon.hudIcon:QuietFantasyUI.Icon(weapon.isBow?"target-arrows":"broadsword"));
         }
         private static string Status(float cooldown,bool active)=>active?"ACTIVO":cooldown>.01f?cooldown.ToString("0.0")+" s":"LISTO";
-        private void Ability(float x,float y,string key,string name,string status,float cooldown,bool affordable,Texture2D icon=null)
+        public static float AbilityFocusProgress(float available,float cost)=>cost<=0?1:Mathf.Clamp01(available/cost);
+
+        // The same 76px square and stepped corners as the approved mockup, starting at twelve o'clock.
+        static readonly Vector2[] focusOutline={
+            new Vector2(38,3),new Vector2(68,3),new Vector2(68,5),new Vector2(70,5),new Vector2(70,7),new Vector2(72,7),
+            new Vector2(72,68),new Vector2(70,68),new Vector2(70,70),new Vector2(68,70),new Vector2(68,72),
+            new Vector2(7,72),new Vector2(7,70),new Vector2(5,70),new Vector2(5,68),new Vector2(3,68),
+            new Vector2(3,7),new Vector2(5,7),new Vector2(5,5),new Vector2(7,5),new Vector2(7,3),new Vector2(38,3)
+        };
+        static void FocusContour(Rect rect,float progress,Color color)
+        {
+            if(Event.current.type!=EventType.Repaint)return;
+            float remaining=Mathf.Clamp01(progress)*276; // Manhattan perimeter, including corner steps.
+            for(int i=1;i<focusOutline.Length&&remaining>0;i++)
+            {
+                var start=focusOutline[i-1];var delta=focusOutline[i]-start;
+                float length=Mathf.Abs(delta.x)+Mathf.Abs(delta.y);
+                float amount=Mathf.Min(remaining,length);
+                var end=start+delta*(amount/length);
+                // Square caps meet at each step without diagonal joins or rounded corners.
+                Fill(new Rect(rect.x+Mathf.Min(start.x,end.x)-1,rect.y+Mathf.Min(start.y,end.y)-1,
+                    Mathf.Abs(end.x-start.x)+2,Mathf.Abs(end.y-start.y)+2),color);
+                remaining-=amount;
+            }
+        }
+        private void Ability(float x,float y,string key,string name,string status,float cooldown,bool affordable,Texture2D icon=null,float focusProgress=-1,bool hasStamina=true)
         {
             var rect=new Rect(x,y,76,76);HudFrame(rect,icons);
             // Center the visible silhouette, independent of transparent padding in the source PNG.
             QuietFantasyUI.DrawIcon(new Rect(rect.center.x-25,rect.center.y-25,50,50),MapIcons.Mask(icon),affordable?QuietFantasyUI.Ink:QuietFantasyUI.Muted*.65f);
-            if(cooldown>0)Fill(new Rect(x+3,y+3+70*(1-Mathf.Clamp01(cooldown)),70,70*Mathf.Clamp01(cooldown)),new Color(.06f,.08f,.12f,.78f));
+            if(cooldown>0)Fill(new Rect(x+6,y+6+64*(1-Mathf.Clamp01(cooldown)),64,64*Mathf.Clamp01(cooldown)),new Color(.06f,.08f,.12f,.78f));
             if(status=="ACTIVO")QuietFantasyUI.Border(rect,QuietFantasyUI.Amber);
-            if(cooldown>0||!affordable)Label(new Rect(x,y+24,76,28),cooldown>0?status:"!",17,QuietFantasyUI.Ink,TextAnchor.MiddleCenter);
+            if(focusProgress>=0)
+            {
+                FocusContour(rect,1,new Color(.275f,.353f,.376f));
+                FocusContour(rect,focusProgress,new Color(.463f,.89f,.859f));
+            }
+            // Focus is communicated by the perimeter; cooldown and stamina remain distinct.
+            if(cooldown>0||!hasStamina)Label(new Rect(x,y+24,76,28),cooldown>0?status:"!",17,QuietFantasyUI.Ink,TextAnchor.MiddleCenter);
             Label(new Rect(x,y+80,76,24),key,17,QuietFantasyUI.Ink,TextAnchor.MiddleCenter);
         }
         public static void HudFrame(Rect rect,InventoryUIIcons theme=null)
         {
-            Fill(rect,theme!=null&&theme.useOliveTheme?new Color(.12f,.17f,.12f,theme.hudBackgroundOpacity):new Color(.065f,.09f,.14f,theme!=null?theme.hudBackgroundOpacity:.65f));
-            var art=theme!=null&&theme.useOliveTheme?theme.oliveConsumableSlotBackground:theme?.consumableSlotBackground;
-            var uv=theme!=null&&theme.useOliveTheme?theme.oliveConsumableSlotUV:theme!=null?theme.consumableSlotUV:new Rect(0,0,1,1);
-            if(art!=null)GUI.DrawTextureWithTexCoords(rect,art,uv);
-            else QuietFantasyUI.Border(rect,new Color(.58f,.63f,.68f,.8f));
+            FantasyUI.Panel(rect,theme!=null?theme.hudBackgroundOpacity:.85f);
+            FantasyUI.Frame(rect,Color.white);
         }
         void PaintedBar(int row,Vector2 position,float value,Color tint,float width)
         {
-            bool healthRow=row==0;
-            float height=healthRow?28:21;
+            float height=row==0?28:21;
             var frame = new Rect(position.x, position.y, width, height);
             float opacity=icons!=null?Mathf.Clamp01(icons.hudVitalsOpacity):1f;
-            // Pixel regions in the generated atlas; Unity UVs start at the bottom.
-            float top=row==0?138:row==1?353:537;
-            float cropHeight=row==0?130:106;
-            float cropWidth=row==0?1928:1876;
-            var previousColor=GUI.color;
-            var frameColor=previousColor;frameColor.a*=opacity;GUI.color=frameColor;
-            if(icons?.PaintedFrames!=null)
-                GUI.DrawTextureWithTexCoords(frame,icons.PaintedFrames,new Rect(38f/1983,(793-top-cropHeight)/793,cropWidth/1983,cropHeight/793));
-            GUI.color=previousColor;
-            var well=new Rect(frame.x+15,frame.y+(healthRow?8:6),Mathf.Max(1,width-(healthRow?53:45)),healthRow?13:9);
-            if(icons?.PaintedFrames==null)Fill(well,new Color(.03f,.05f,.06f,.9f*opacity));
-            if(value<=0)return;
-            GUI.BeginGroup(new Rect(well.x,well.y,well.width*Mathf.Clamp01(value),well.height));
+            FantasyUI.Panel(frame,opacity);
+            var well=new Rect(frame.x+6,frame.y+6,Mathf.Max(0,width-12),height-12);
             tint.a*=opacity;
-            GUI.DrawTexture(new Rect(0,0,well.width,well.height),icons?.PaintedFill!=null?icons.PaintedFill:Texture2D.whiteTexture,ScaleMode.StretchToFill,true,0,tint,0,3);
-            GUI.EndGroup();
+            Fill(new Rect(well.x,well.y,well.width*Mathf.Clamp01(value),well.height),tint);
         }
         void DrawNavigation(float height)
         {

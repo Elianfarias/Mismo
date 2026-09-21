@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d12bbe4e3824f4c9b3b53b18bd3a3fd, type: 3}
+  m_Name: iria
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Quests.QuestNpcDefinition
+  id: iria
+  displayName: Iria
+  occupation: Guardiana del archivo
+  portrait: {fileID: 0}
+  noRequests: "Estoy reuniendo noticias de las ruinas. Todavía no tengo una pista segura para encargarte una expedición."
+  greeting: "Las ruinas todav\xEDa tienen algo que decir. Hay que saber escuchar."
+  offer: "Hay un trabajo que podr\xEDas hacer por el pueblo."
+  accepted: "Gracias. Prepar\xE1 tu equipo y volv\xE9 cuando termines."
+  inProgress: "No hace falta que te apures. Revis\xE1 lo que falta en tu diario."
+  readyToDeliver: "Veo que ya est\xE1 todo. \xBFCerramos el pedido?"
+  completed: "Cumpliste tu palabra. Ac\xE1 est\xE1 lo acordado."
+  cannotDeliver: "Todav\xEDa te falta algo. Revis\xE1 el pedido y volv\xE9 cuando est\xE9s listo."
+  inventoryFull: "Hac\xE9 un poco de lugar en la mochila; quiero entregarte lo que te promet\xED."

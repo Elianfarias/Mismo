@@ -14,6 +14,10 @@ namespace Mismo.Gameplay.Player.World
         public MaterialDefinition result;
         public WeaponDefinition weaponResult;
         public RecipeCategory category;
+        [Tooltip("Permite fabricar esta receta desde Recetas sin una mesa. Desactivado por defecto.")]
+        public bool craftInWorld;
+        [Tooltip("Requiere aprenderla mediante una recompensa de misión. Desactivado: conserva el acceso actual.")]
+        public bool requiresLearning;
         public RecipeCategory Category=>upgradeWeapon?RecipeCategory.Upgrades:weaponResult!=null?RecipeCategory.Equipment:category;
         [Min(1)] public int quantity=1;
         public bool upgradeWeapon;

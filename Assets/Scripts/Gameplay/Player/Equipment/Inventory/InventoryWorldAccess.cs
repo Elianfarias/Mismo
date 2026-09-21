@@ -85,7 +85,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         void OnGUI()
         {
             if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
-            if(inventory==null||!inventory.CanManage||InventoryPanel.AnyOpen||Presentation.WorldMapPanel.AnyOpen)return;
+            if(inventory==null||!inventory.CanManage||InventoryPanel.AnyOpen||Presentation.WorldMapPanel.AnyOpen||GetComponent<GatheringPlayer>()?.BlocksGameplay==true)return;
             string prompt=AtChest?"[F] Abrir cofre personal":null;
             if(prompt==null)foreach(var loot in inventory.PendingLoot)
                 if(Vector3.Distance(transform.position,new Vector3(loot.x,loot.y,loot.z))<=3){prompt="[F] Recoger botín";break;}

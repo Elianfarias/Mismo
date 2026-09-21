@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82fd8a3c18a546eb929f133a008bdf6a, type: 3}
+  m_Name: Q-ANOMALY
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Quests.QuestDefinition
+  id: Q-ANOMALY
+  title: Un eco entre las piedras
+  category: 2
+  description: "Iria te pide investigar una anomal\xEDa y estabilizar su n\xFAcleo."
+  location: "Origen de la anomal\xEDa"
+  icon: {fileID: 0}
+  npc: {fileID: 11400000, guid: 7ad2415d5495d594082cca2f91a14f39, type: 2}
+  prerequisites: []
+  offerInJournal: 0
+  objectives:
+  - id: find
+    label: "Investig\xE1 la anomal\xEDa"
+    kind: 3
+    quantity: 1
+    material: {fileID: 0}
+    species: {fileID: 0}
+    recipe: {fileID: 0}
+    signal: anomaly.found
+    consumeOnDelivery: 0
+    requirePrevious: 0
+    icon: {fileID: 0}
+  - id: close
+    label: "Estabiliz\xE1 el n\xFAcleo"
+    kind: 3
+    quantity: 1
+    material: {fileID: 0}
+    species: {fileID: 0}
+    recipe: {fileID: 0}
+    signal: anomaly.closed
+    consumeOnDelivery: 0
+    requirePrevious: 1
+    icon: {fileID: 0}
+  clue: 
+  clueAfterObjective: 
+  coins: 70
+  items:
+  - material: {fileID: 11400000, guid: 50b271ce6280fb849957ee980def5432, type: 2}
+    quantity: 2
+  recipes: []
+  offerText: "Algo est\xE1 alterando el lugar. Acercate con cuidado, observ\xE1 el n\xFAcleo y busc\xE1 c\xF3mo estabilizarlo."
+  acceptedText: 
+  progressText: "No intentes resolverlo a ciegas. Primero investig\xE1 la anomal\xEDa; despu\xE9s ocupate del n\xFAcleo."
+  readyText: "El ruido desapareci\xF3. Contame qu\xE9 encontraste."
+  completedText: "Anotar\xE9 lo ocurrido. Llevate estos cristales y el pago: tu observaci\xF3n puede ayudarnos con la pr\xF3xima anomal\xEDa."

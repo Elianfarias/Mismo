@@ -8,6 +8,30 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public int GridColumns(bool chest)=>Mathf.Clamp(chest?InventorySettings.Current.chestColumns:InventorySettings.Current.backpackColumns,2,12);
         public int GridRows(bool chest)=>Mathf.Clamp(chest?InventorySettings.Current.chestRows:InventorySettings.Current.backpackRows,1,12);
         public List<GridItem> GridItems(bool chest)=>BuildGridItems(profile,chest);
+        public GridItem EquipmentGridItem(int hand)
+        {
+            if(!IsReady||hand<0||hand>3)return null;
+            string id=hand%2==0?EquippedId(hand/2):OffhandId(hand/2);var definition=Definition(id);
+            return definition==null?null:new GridItem{key=id,id=id,width=Mathf.Clamp(definition.gridWidth,1,12),height=Mathf.Clamp(definition.gridHeight,1,12),canRotate=definition.canRotate};
+        }
+        bool PrepareUnequipToGrid(int hand,int x,int y,bool rotated,out InventoryProfile next)
+        {
+            next=null;var item=EquipmentGridItem(hand);
+            if(!CanManage||item==null)return false;
+            next=profile.Copy();
+            if(hand%2==0)next.TryEquip(hand/2,null);else next.TryEquipOffhand(hand/2,null);
+            NormalizeHands(next);
+            var placement=new GridPlacement{key=item.key,x=x,y=y,rotated=rotated};
+            var positions=GridPositions(false);
+            if(!InventoryGrid.CanMove(BuildGridItems(next,false),positions,placement,GridColumns(false),GridRows(false)))return false;
+            positions.RemoveAll(p=>p.key==item.key);positions.Add(placement);ReplaceGrid(next,false,positions);
+            return HasGridRoom(next,false);
+        }
+        public bool CanUnequipToGrid(int hand,int x,int y,bool rotated)=>PrepareUnequipToGrid(hand,x,y,rotated,out _);
+        public bool UnequipToGrid(int hand,int x,int y,bool rotated)
+        {
+            return PrepareUnequipToGrid(hand,x,y,rotated,out var next)&&Commit(next,"Equipo devuelto a la mochila.",true,GameSound.ItemEquipped);
+        }
         List<GridItem> BuildGridItems(InventoryProfile value,bool chest)
         {
             var items=new List<GridItem>();if(value==null)return items;

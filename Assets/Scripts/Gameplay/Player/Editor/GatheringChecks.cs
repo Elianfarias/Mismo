@@ -74,7 +74,7 @@ namespace Mismo.Gameplay.Player.Editor
             Check(!node.Available&&inventory.MaterialCount(MaterialCatalog.Herb)==1,"Completion grants material and exhausts node once");
             Check(!node.Complete(inventory)&&inventory.MaterialCount(MaterialCatalog.Herb)==1,"Repeated completion cannot duplicate harvest");
             var repository=new ProtectedProfileRepository(path);repository.Read(_=>true,out var json);var saved=JsonUtility.FromJson<InventoryProfile>(json);
-            Check(saved.version==5&&saved.harvestedNodes.Exists(n=>n.id=="test:herb"&&n.readyAt>saved.worldPlaySeconds),"Harvest and deadline persist in the same transaction");
+            Check(saved.version==6&&saved.harvestedNodes.Exists(n=>n.id=="test:herb"&&n.readyAt>saved.worldPlaySeconds),"Harvest and deadline persist in the same transaction");
             Object.Destroy(node.gameObject);yield return null;
             node=GatheringDistribution.Place(herb,"test:herb",new Vector3(0,0,1.5f),null);yield return null;yield return null;
             Check(!node.Available,"Reloading node preserves depletion");

@@ -5,6 +5,8 @@
     "Mismo.Gameplay.Player",
     "Unity.ugui",
     "Unity.InputSystem",
-    "Mismo.Core"
+    "Mismo.Core",
+    "Unity.RenderPipelines.Core.Runtime",
+    "Unity.RenderPipelines.Universal.Runtime"
   ]
 }

@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82fd8a3c18a546eb929f133a008bdf6a, type: 3}
+  m_Name: Q-ALTAR
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Quests.QuestDefinition
+  id: Q-ALTAR
+  title: El altar de los cuatro vientos
+  category: 1
+  description: "Encontr\xE1 el altar del bosque e investig\xE1 sus piedras. Las pistas encontradas quedar\xE1n anotadas en tu diario."
+  location: Ruinas del bosque
+  icon: {fileID: 0}
+  npc: {fileID: 11400000, guid: 7ad2415d5495d594082cca2f91a14f39, type: 2}
+  prerequisites: []
+  offerInJournal: 0
+  objectives:
+  - id: find
+    label: "Encontr\xE1 el altar"
+    kind: 3
+    quantity: 1
+    material: {fileID: 0}
+    species: {fileID: 0}
+    recipe: {fileID: 0}
+    signal: altar.found
+    consumeOnDelivery: 0
+    requirePrevious: 0
+    icon: {fileID: 0}
+  - id: solve
+    label: "Orient\xE1 los cuatro guardianes"
+    kind: 3
+    quantity: 1
+    material: {fileID: 0}
+    species: {fileID: 0}
+    recipe: {fileID: 0}
+    signal: altar.solved
+    consumeOnDelivery: 0
+    requirePrevious: 1
+    icon: {fileID: 0}
+  clue: "De izquierda a derecha: el primero mira al amanecer; el segundo, al ocaso. El tercero busca la estrella del norte; el \xFAltimo le vuelve la espalda."
+  clueAfterObjective: find
+  coins: 80
+  items:
+  - material: {fileID: 11400000, guid: 50b271ce6280fb849957ee980def5432, type: 2}
+    quantity: 3
+  recipes: []
+  offerText: "Hay cuatro guardianes de piedra en un altar olvidado. Cada uno mira hacia un punto cardinal. Encontr\xE1 su inscripci\xF3n: no necesito una respuesta apresurada, sino que entiendas qu\xE9 te pide."
+  acceptedText: 
+  progressText: "Busc\xE1 la inscripci\xF3n y observ\xE1 el orden de las piedras. El amanecer y el ocaso pueden orientarte."
+  readyText: "Entonces el altar respondi\xF3. Esos guardianes llevaban mucho tiempo esperando."
+  completedText: "Conserv\xE1 estos cristales. Quiz\xE1 alg\xFAn d\xEDa encuentres otra estructura que responda a su energ\xEDa."

@@ -158,7 +158,28 @@ namespace Mismo.Gameplay.Player.Editor
             player.GetComponent<Mismo.Gameplay.Combat.Health>().ApplyDamage(new Mismo.Gameplay.Combat.DamageInfo(1000, target, player.transform.position, Vector3.forward));
             yield return null;
             Capture(player.transform.position + Vector3.up, "player-death-cubes.png", new Vector3(3,1,3), 2);
-            Require(WeaponAim.Viewport.y > .5f, "Bow sight is above character center");
+            CheckAimRays();
+        }
+        public static void CheckAimRays()
+        {
+            Require(WeaponAim.Viewport.x==.5f&&WeaponAim.Viewport.y>.5f,"Sight is horizontally centered and above the character");
+            var go=new GameObject("Aim projection check"){hideFlags=HideFlags.HideAndDontSave};
+            try
+            {
+                var camera=go.AddComponent<UnityEngine.Camera>();camera.enabled=false;
+                camera.transform.position=new Vector3(4,3,-9);
+                foreach(float aspect in new[]{4f/3,16f/9,21f/9})
+                foreach(float pitch in new[]{-25f,25f,70f})
+                {
+                    camera.aspect=aspect;camera.transform.rotation=Quaternion.Euler(pitch,37,0);
+                    var ray=WeaponAim.RayFrom(camera.transform);
+                    var projected=camera.WorldToViewportPoint(ray.GetPoint(50));
+                    Require(projected.z>0&&Vector2.Distance(new Vector2(projected.x,projected.y),WeaponAim.Viewport)<.0001f,
+                        "Ability ray intersects the elevated sight at aspect "+aspect+" and pitch "+pitch);
+                }
+            }
+            finally{Object.DestroyImmediate(go);}
+            Debug.Log("AIM_RAY_CHECKS_OK");
         }
         static void Require(bool value, string message) { if (!value) throw new Exception(message); Debug.Log("BOW_CHECK " + message); }
         internal static void Capture(Vector3 center, string filename, Vector3 offset, float size = 1.5f)

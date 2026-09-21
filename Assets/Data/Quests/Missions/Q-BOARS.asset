@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82fd8a3c18a546eb929f133a008bdf6a, type: 3}
+  m_Name: Q-BOARS
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Quests.QuestDefinition
+  id: Q-BOARS
+  title: "Jabal\xEDes en el camino"
+  category: 0
+  description: "Elena pide ayuda para reducir la amenaza de los jabal\xEDes. Las derrotas cuentan desde que acept\xE1s el encargo."
+  location: "Zonas donde habitan jabal\xEDes"
+  icon: {fileID: 0}
+  npc: {fileID: 11400000, guid: 242abd4c1cb2b8f488c6c0493281e15c, type: 2}
+  prerequisites: []
+  offerInJournal: 1
+  objectives:
+  - id: boars
+    label: "Derrot\xE1 jabal\xEDes"
+    kind: 1
+    quantity: 4
+    material: {fileID: 0}
+    species: {fileID: 11400000, guid: c73b6500128d3274ca3f2b1349b6d808, type: 2}
+    recipe: {fileID: 0}
+    signal: 
+    consumeOnDelivery: 0
+    requirePrevious: 0
+    icon: {fileID: 0}
+  clue: 
+  clueAfterObjective: 
+  coins: 60
+  items:
+  - material: {fileID: 11400000, guid: 500a81d12328dc84880650c8be970aa4, type: 2}
+    quantity: 1
+  recipes: []
+  offerText: "Necesito que te ocupes de cuatro jabal\xEDes. No te rodees de varios a la vez: observ\xE1 c\xF3mo atacan y busc\xE1 una apertura. Te guardar\xE9 sesenta monedas y un ung\xFCento."
+  acceptedText: "Te anoto el encargo. Contaremos los jabal\xEDes que derrotes a partir de ahora."
+  progressText: "Todav\xEDa queda trabajo. En el diario pod\xE9s ver cu\xE1ntos jabal\xEDes llev\xE1s."
+  readyText: "Los viajeros ya empiezan a volver al camino. Ven\xED, te debo una recompensa."
+  completedText: "Gracias. Con el camino m\xE1s tranquilo, ma\xF1ana volveremos a llevar harina al pueblo."

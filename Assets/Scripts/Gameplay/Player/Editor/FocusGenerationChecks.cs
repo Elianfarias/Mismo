@@ -5,6 +5,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using Mismo.Gameplay.Combat;
 using Mismo.Gameplay.Player.Equipment;
+using Mismo.Gameplay.Player.Presentation;
 namespace Mismo.Gameplay.Player.Editor
 {
     public static class FocusGenerationChecks
@@ -46,7 +47,11 @@ namespace Mismo.Gameplay.Player.Editor
                     arrow.Step(.5f);
                     Check(focus.Focus == (i + 1) * 5, "Consumed projectile cannot reward twice");
                 }
+                Check(PlayerHUD.AbilityFocusProgress(focus.Focus,power.focusCost)==1, "Power shot perimeter is full after four hits");
+                Check(PlayerHUD.AbilityFocusProgress(focus.Focus,40)==.5f && PlayerHUD.AbilityFocusProgress(focus.Focus,80)==.25f, "Each ability normalizes against its own cost");
+                Check(PlayerHUD.AbilityFocusProgress(0,0)==1, "Free abilities never require Focus");
                 Check(power.focusCost == 20 && focus.Spend(power.focusCost) && focus.Focus == 0, "Four hits fund power shot");
+                Check(PlayerHUD.AbilityFocusProgress(focus.Focus,power.focusCost)==0, "Spending Focus empties the skill perimeter");
                 var miss = ProjectileInstance.Spawn(owner, Vector3.zero, Vector3.left, 8, 28, 22, .09f, null, focusGainOnHit:5);
                 miss.Step(1);
                 Check(focus.Focus == 0, "Miss gives no Focus");
@@ -60,7 +65,8 @@ namespace Mismo.Gameplay.Player.Editor
                 focus.Reward(90, "TEST");
                 receiver.Resolve(new DamageInfo(8, owner, target.transform.position, Vector3.forward, AttackIdentity.Next(), focusGainOnHit:7));
                 Check(focus.Focus == 100, "Focus caps at 100");
-                File.WriteAllText("focus-checks.txt", "PASS: frontal projectiles, no reward on cast/miss/parry, duplicate suppression, configurable gain, four basics fund power shot, cap 100, unchanged basic damage.");
+                Check(PlayerHUD.AbilityFocusProgress(focus.Focus,power.focusCost)==1, "Surplus Focus never overfills a skill perimeter");
+                File.WriteAllText("focus-checks.txt", "PASS: frontal projectiles, no reward on cast/miss/parry, duplicate suppression, configurable gain, four basics fund power shot, cap 100, unchanged basic damage; HUD per-ability costs, free skills, spend updates and capped perimeter.");
                 EditorApplication.Exit(0);
             }
             catch (Exception e) { File.WriteAllText("focus-checks.txt", "FAIL: " + e); Debug.LogException(e); EditorApplication.Exit(1); }

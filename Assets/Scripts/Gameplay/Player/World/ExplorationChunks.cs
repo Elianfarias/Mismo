@@ -108,6 +108,7 @@ namespace Mismo.Gameplay.Player.World
                     }
                     var settlement=Object.Instantiate(village.prefab,new Vector3(-50,field.Height(-50,-70)+settings.content.villageGroundOffset*Mathf.Max(1,settings.content.villageSizeMultiplier),-70),Quaternion.identity,geometry);
                     settlement.transform.localScale*=Mathf.Max(1,settings.content.villageSizeMultiplier);settlement.name="Medieval starting village";
+                    Quests.VillageNpcSpawner.Populate(settlement,field,true);
                     if(forest!=null)foreach(Transform tree in forest)
                         if(Mathf.Abs(tree.position.x+50)<field.VillageHalfExtent+4&&Mathf.Abs(tree.position.z+70)<field.VillageHalfExtent+4)tree.gameObject.SetActive(false);
                 }

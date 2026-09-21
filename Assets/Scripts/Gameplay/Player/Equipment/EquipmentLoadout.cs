@@ -17,9 +17,10 @@ namespace Mismo.Gameplay.Player.Equipment
         private Inventory.PlayerInventory inventory;
         public int ActiveSlot => activeSlot;
         public WeaponDefinition GetSlot(int slot) => slot >= 0 && slot < 2 ? slots[slot] : null;
-        public bool CanSwap => SecondaryDefinition != null && runner != null && !runner.IsBusy &&
+        bool CanOperateEquipment => runner != null && !runner.IsBusy &&
             (belt == null || !belt.IsActive) && (GetComponent<Mismo.Gameplay.Combat.Health>() == null || !GetComponent<Mismo.Gameplay.Combat.Health>().IsDead);
-        public bool CanChangeEquipment => CanSwap && !InCombat;
+        public bool CanSwap => SecondaryDefinition != null && CanOperateEquipment;
+        public bool CanChangeEquipment => CanOperateEquipment && !InCombat;
         public WeaponDefinition ActiveDefinition => slots[activeSlot];
         public WeaponDefinition SecondaryDefinition => slots[1 - activeSlot];
         public AbilityRunner Runner => runner;

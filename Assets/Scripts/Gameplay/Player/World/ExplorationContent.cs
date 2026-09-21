@@ -60,6 +60,7 @@ namespace Mismo.Gameplay.Player.World
                         var settlement=Object.Instantiate(village.prefab,p,Quaternion.identity,root);
                         settlement.transform.localScale*=Mathf.Max(1,settings.content.villageSizeMultiplier);
                         settlement.name="Village "+site.cell.x+", "+site.cell.y;
+                        Quests.VillageNpcSpawner.Populate(settlement,terrain,site.cell==Vector2Int.zero&&!settings.preserveAuthoredCenter);
                         continue;
                     }
                     for(int i=0;i<4;i++)Place(root,site,WorldAssetKind.House,new Vector3(i%2==0?-15:15,0,i<2?-14:14),i,material);
