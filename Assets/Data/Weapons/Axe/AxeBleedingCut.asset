@@ -86,7 +86,7 @@ MonoBehaviour:
   preparationSfxVolume: 1
   loopPreparationSfx: 0
   executionSfx: {fileID: 8300000, guid: 18ca010d0f9c10947ac77dd2edef6d22, type: 3}
-  executionSfxVolume: 0.554
+  executionSfxVolume: 0.412
   comboStepSfx: []
   pose: 4
   usesSwordCombo: 0

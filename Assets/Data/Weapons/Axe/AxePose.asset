@@ -16,8 +16,8 @@ MonoBehaviour:
   equipped:
     anchor: 1
     bonePath: Armature_Humanoid/Root/Hips/Spine/Chest/Clavicle.R/UpperArm.R/LowerArm.R/Hand.R
-    offset: {x: 0.37124735, y: 0.42183843, z: -0.013746208}
-    rotation: {x: 311.60645, y: 303.93655, z: 331.8612}
+    offset: {x: 0.3712644, y: 0.42187548, z: -0.013761995}
+    rotation: {x: 347.87448, y: 187.28917, z: 53.2095}
     scale: 1
   holstered:
     anchor: 0

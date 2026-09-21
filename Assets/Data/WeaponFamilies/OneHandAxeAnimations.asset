@@ -52,8 +52,8 @@ MonoBehaviour:
     comboClips: []
     activeStartsAt: 0.3
     recoveryStartsAt: 0.65
-    blendSeconds: 0.08
-    torsoUprightDegrees: 0
+    blendSeconds: 0.26
+    torsoUprightDegrees: 1.69
   - ability: {fileID: 11400000, guid: f138122e27574d65b2fa7bf43e4e1937, type: 2}
     clip: {fileID: 7400000, guid: 54f758c7e22466845abee53044d83684, type: 2}
     maskMode: 0

@@ -17,10 +17,10 @@ MonoBehaviour:
   abilityId: AxeArmorRend
   animationSource: {fileID: 0}
   passive: 0
-  description: Golpe que reduce un 20 % la armadura del objetivo durante 4 s. No acumulable.
+  description: "Golpe que inflige +25% de da\xF1o adicional y reduce un 30 % la armadura del objetivo durante 4s. No acumulable."
   localizationKey: ability.axe.axearmorrend
   preparation: 0.27
-  active: 1.34
+  active: 1.12
   recovery: 0
   cooldown: 0
   staminaCost: 0
@@ -83,12 +83,12 @@ MonoBehaviour:
   focusCost: 0
   focusGainOnHit: 0
   preparationSfx: {fileID: 0}
-  preparationSfxVolume: 0.595
+  preparationSfxVolume: 1
   loopPreparationSfx: 0
-  executionSfx: {fileID: 8300000, guid: c638f77d94f5b6e4c991f61a7581ce55, type: 3}
+  executionSfx: {fileID: 8300000, guid: afed6f8522aa1774b9f6adc6a3ac0dfe, type: 3}
   executionSfxVolume: 1
   comboStepSfx: []
-  pose: 0
+  pose: 1
   usesSwordCombo: 0
   targetsGround: 0
   aimFromCamera: 0
@@ -101,9 +101,9 @@ MonoBehaviour:
     - rid: 1
       type: {class: ArmorRendStrikeAction, ns: Mismo.Gameplay.Player.Equipment, asm: Mismo.Gameplay.Player}
       data:
-        damage: 12
+        damage: 12.5
         postureDamage: -1
         radius: 0.6
         forward: 0.8
-        armorMultiplier: 0.8
+        armorMultiplier: 0.7
         armorDuration: 4
