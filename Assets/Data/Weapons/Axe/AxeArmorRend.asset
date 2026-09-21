@@ -19,9 +19,9 @@ MonoBehaviour:
   passive: 0
   description: Golpe que reduce un 20 % la armadura del objetivo durante 4 s. No acumulable.
   localizationKey: ability.axe.axearmorrend
-  preparation: 0.4
-  active: 0.9
-  recovery: 0.33
+  preparation: 0.27
+  active: 1.34
+  recovery: 0
   cooldown: 0
   staminaCost: 0
   chargeable: 0
@@ -77,14 +77,15 @@ MonoBehaviour:
   preparationMobility: 1
   activeMobility: 1
   interruptible: 0
+  unstoppable: 0
   cancelPreparation: 0
   cancelRecovery: 0
   focusCost: 0
   focusGainOnHit: 0
   preparationSfx: {fileID: 0}
-  preparationSfxVolume: 1
+  preparationSfxVolume: 0.595
   loopPreparationSfx: 0
-  executionSfx: {fileID: 0}
+  executionSfx: {fileID: 8300000, guid: c638f77d94f5b6e4c991f61a7581ce55, type: 3}
   executionSfxVolume: 1
   comboStepSfx: []
   pose: 0
