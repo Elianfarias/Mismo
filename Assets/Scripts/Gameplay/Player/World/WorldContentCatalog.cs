@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace Mismo.Gameplay.Player.World
 {
-    public enum WorldBiome { Meadow, Forest, Highlands }
+    // Keep existing numeric values: catalogs and old saves serialize these as integers.
+    public enum WorldBiome { Meadow=0, Forest=1, Highlands=2, Desert=3, Ice=4, Mountains=5, Ocean=6 }
     public enum WorldSiteKind { Clearing, Village, Ruin, BossArena, Secret }
     public enum WorldAssetKind { House, Blacksmith, Tree, Rock, Ruin, Landmark, Well, Fence, Grass, Bush, Flower, Deadwood, Village }
     [Serializable] public sealed class TerrainBiome

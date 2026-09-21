@@ -1,0 +1,3 @@
+PASS: 320436 assertions; 24 seeds; ordered stages, inland connected route, reachable objectives, movement bounds, deterministic terrain and saves, legacy generators, real NavMesh paths, project organization.
+PASS: legacy baseline from git HEAD, 31080 height/color/biome samples and 2178 sites. Existing ProceduralWorldChecks raw-centre seam assertion also fails before these changes (enlarged village apron).
+PASS: Unity 6000.6.0f1 Windows development build; runtime catalog and project organization checks passed during build. Validated in isolated .validation/Organization project. Build output was temporary.

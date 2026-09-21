@@ -1,0 +1,5 @@
+LEGACY_BASELINE_PASS 31080 height/color/biome samples; 2178 sites; pre-existing raw-centre seam mismatch=True
+PROJECT_LAYOUT_CHECKS_OK: categorías, catálogo y eliminación de cargas Resources verificados.
+FINITE_WORLD_PASS 508929
+PROJECT_LAYOUT_CHECKS_OK: categorías, catálogo y eliminación de cargas Resources verificados.
+FINITE_WORLD_BUILD_PASS

@@ -10,7 +10,7 @@ namespace Mismo.Gameplay.Player.World
         public string RegionId {get;private set;}
         public string DisplayName {get;private set;}
         public bool PendingReward {get;set;}
-        public int Level=>inventory!=null?inventory.RegionLevel(RegionId):1;
+        public int Level=>inventory==null?1:settings!=null&&settings.UsesFiniteWorld?Mathf.Max(1,inventory.RegionMinimum(RegionId)):inventory.RegionLevel(RegionId);
         public float HealthMultiplier=>1+Mathf.Max(0,Level-1)*settings.healthPerLevel;
         public float DamageMultiplier=>1+Mathf.Max(0,Level-1)*settings.damagePerLevel;
         PlayerInventory inventory;

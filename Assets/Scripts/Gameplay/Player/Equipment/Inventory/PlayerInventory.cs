@@ -157,6 +157,14 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             next.regions.Add(new DiscoveredRegion{id=id,minimumLevel=Mathf.Clamp(Level+Mathf.Clamp(increment,0,100),1,1100)});
             return Commit(next,"Nueva región · Nivel mínimo "+next.regions[next.regions.Count-1].minimumLevel,false,GameSound.RegionDiscovered);
         }
+        public bool TryDiscoverPlannedRegion(string id,int minimumLevel)
+        {
+            if(!IsReady||string.IsNullOrEmpty(id))return false;
+            if(RegionMinimum(id)>0)return true;
+            var next=profile.Copy();next.EnsureWorldData();
+            next.regions.Add(new DiscoveredRegion{id=id,minimumLevel=Mathf.Clamp(minimumLevel,1,1100)});
+            return Commit(next,"Nueva región · Nivel mínimo "+minimumLevel,false,GameSound.RegionDiscovered);
+        }
         public OwnedWeapon Item(string instanceId) => profile?.Find(instanceId)?.Copy();
         public string ItemName(string id)
         {

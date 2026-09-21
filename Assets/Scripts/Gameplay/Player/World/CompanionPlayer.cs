@@ -112,7 +112,7 @@ namespace Mismo.Gameplay.Player.World
         }
         void Mount()
         {
-            if(species==null||!species.mountable||species.riderPose==null||companion==null||!inventory.CanManage)return;
+            if(species==null||!species.mountable||species.riderPose==null||companion==null||!inventory.CanManage||motor.IsFlying)return;
             agent.enabled=false;mountBody.enabled=true;controller.enabled=false;body.enabled=false;
             if(ridingTarget==null){ridingTarget=gameObject.AddComponent<CapsuleCollider>();ridingTarget.center=body.center;ridingTarget.radius=body.radius;ridingTarget.height=body.height;}
             ridingTarget.enabled=true;Physics.IgnoreCollision(ridingTarget,mountBody,true);
