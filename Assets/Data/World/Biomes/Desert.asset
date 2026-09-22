@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f15cc0f9b4e054eb7b1f2713879185, type: 3}
+  m_Name: Desert
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.WorldBiomeContent
+  biome: 3
+  trees: 0
+  grass: 0
+  bushes: 0
+  flowers: 0
+  rocks: 0.18
+  deadwood: 0
+  assets:
+  - id: Craftpix_Hill_desert_001
+    kind: 3
+    biomes: 03000000i
+    prefab: {fileID: 1424654196495402490, guid: 658deed401a6f9e4e97ca47a6bf90cd8, type: 3}
+    decorativeOnly: 1
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 5, y: 4.7916665}
+    maxSlope: 15
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Craftpix_Hill_desert_002
+    kind: 3
+    biomes: 03000000i
+    prefab: {fileID: 5348670984318575629, guid: 684ba43fbd7efd540b4d3ccdaa7b3672, type: 3}
+    decorativeOnly: 1
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 5, y: 3.3333333}
+    maxSlope: 15
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Craftpix_Hill_desert_003
+    kind: 3
+    biomes: 03000000i
+    prefab: {fileID: 3332964207230493974, guid: f9c20d8fafb00114e9681a301c864bf3, type: 3}
+    decorativeOnly: 1
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 5, y: 1.875}
+    maxSlope: 15
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}

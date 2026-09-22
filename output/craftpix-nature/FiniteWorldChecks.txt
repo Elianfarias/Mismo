@@ -1,0 +1,1 @@
+PASS: 508929 assertions; 24 seeds; ordered stages, inland connected route, reachable objectives, movement bounds, deterministic terrain and saves, legacy generators, real NavMesh paths, project organization.

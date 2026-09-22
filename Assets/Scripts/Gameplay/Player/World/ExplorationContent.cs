@@ -88,30 +88,50 @@ namespace Mismo.Gameplay.Player.World
         {
             var catalog=settings.content;if(catalog==null)return;
             var kinds=new[]{WorldAssetKind.Grass,WorldAssetKind.Bush,WorldAssetKind.Flower,WorldAssetKind.Rock,WorldAssetKind.Deadwood};
-            var densities=new[]{catalog.grassDensity,catalog.bushDensity,catalog.flowerDensity,catalog.rockDensity,catalog.deadwoodDensity};
             for(int k=0;k<kinds.Length;k++)
             {
                 int spacing=k==0?4:8;
                 for(int z=spacing/2;z<32;z+=spacing)for(int x=spacing/2;x<32;x+=spacing)
                 {
                     int seed=ExplorationTerrain.Hash(settings.seed,chunk.x*32+x,chunk.y*32+z,600+k);
-                    var rng=new System.Random(seed);if(rng.NextDouble()>densities[k])continue;
+                    var rng=new System.Random(seed);double densityRoll=rng.NextDouble();
                     float px=chunk.x*32+x+((float)rng.NextDouble()-.5f)*2,pz=chunk.y*32+z+((float)rng.NextDouble()-.5f)*2;
                     if(terrain.Reserved(px,pz,k==0?0:2))continue;
                     var biome=terrain.Biome(px,pz);
+                    if(densityRoll>=catalog.Density(kinds[k],biome))continue;
                     var asset=catalog.Asset(kinds[k],biome,ExplorationTerrain.Hash(seed,x,z,650));if(asset==null)continue;
                     // Generic meadow flowers/grass should not carpet the new desert or glacier.
-                    if(terrain.Plan!=null&&terrain.Plan.Stage(px,pz)>0&&kinds[k]!=WorldAssetKind.Rock&&(asset.biomes==null||asset.biomes.Length==0))continue;
-                    float y=terrain.Height(px,pz),r=Mathf.Max(.4f,Mathf.Max(asset.footprint.x,asset.footprint.y)*.5f);
-                    float delta=Mathf.Max(Mathf.Abs(y-terrain.Height(px+r,pz)),Mathf.Abs(y-terrain.Height(px,pz+r)));
-                    if(Mathf.Atan2(delta,r)*Mathf.Rad2Deg>asset.maxSlope)continue;
-                    float yaw=(float)rng.NextDouble()*360;
+                    if(catalog.BiomeContent(biome)==null&&terrain.Plan!=null&&terrain.Plan.Stage(px,pz)>0&&kinds[k]!=WorldAssetKind.Rock&&(asset.biomes==null||asset.biomes.Length==0))continue;
+                    float yaw=Rotation(asset,rng);
                     float scale=Mathf.Lerp(Mathf.Max(.1f,asset.scaleRange.x),Mathf.Max(.1f,asset.scaleRange.y),(float)rng.NextDouble());
+                    if(!TryPlaceNature(terrain,asset,new Vector2(px,pz),scale,yaw,out float y))continue;
                     if(kinds[k]==WorldAssetKind.Deadwood&&!TrySupport(terrain,new Vector2(px,pz),asset.footprint*scale,yaw,out y))continue;
                     var go=GatheringDistribution.PlaceAsset(asset,"gather-detail-v1:"+settings.seed+":"+chunk.x+":"+chunk.y+":"+k+":"+x+":"+z,new Vector3(px,y+.01f,pz),Quaternion.Euler(0,yaw,0),root);
                     go.transform.localScale*=scale;
                 }
             }
+        }
+        public static float Rotation(WorldAssetEntry asset,System.Random random) =>
+            asset.rotations!=null&&asset.rotations.Length>0?asset.rotations[random.Next(asset.rotations.Length)]:(float)random.NextDouble()*360;
+
+        public static bool TryPlaceNature(ExplorationTerrain terrain,WorldAssetEntry asset,Vector2 position,float scale,float yaw,out float height)
+        {
+            height=terrain.Height(position.x,position.y);
+            var half=asset.footprint*scale*.5f;
+            if(terrain.Reserved(position.x,position.y,Mathf.Max(half.x,half.y)))return false;
+            float angle=yaw*Mathf.Deg2Rad,c=Mathf.Cos(angle),s=Mathf.Sin(angle);
+            float low=height,high=height;
+            for(int z=-1;z<=1;z++)for(int x=-1;x<=1;x++)
+            {
+                float px=position.x+c*x*half.x-s*z*half.y,pz=position.y+s*x*half.x+c*z*half.y;
+                if(terrain.Plan!=null&&!terrain.Plan.Contains(px,pz))return false;
+                float y=terrain.Height(px,pz);low=Mathf.Min(low,y);high=Mathf.Max(high,y);
+            }
+            float radius=Mathf.Max(.25f,Mathf.Min(half.x,half.y));
+            if(Mathf.Atan2(high-low,radius*2)*Mathf.Rad2Deg>asset.maxSlope)return false;
+            // Base-centered models rest at the lowest supporting sample instead of floating above terraces.
+            height=low;
+            return true;
         }
         public static bool TrySupport(ExplorationTerrain terrain,Vector2 position,Vector2 footprint,float yaw,out float height)
         {
@@ -141,6 +161,9 @@ namespace Mismo.Gameplay.Player.World
                 float yaw=asset.rotations!=null&&asset.rotations.Length>0?asset.rotations[new System.Random(seed).Next(asset.rotations.Length)]:0;
                 Object.Instantiate(asset.prefab,p,Quaternion.Euler(0,yaw,0),root);return;
             }
+            // Ruins stay empty until an authored camp/ruin prefab is assigned.
+            // Do not substitute the old grey block arch when the catalog has none.
+            if(kind==WorldAssetKind.Ruin)return;
             // Visible provisional composition remains replaceable through the catalog.
             var g=new VoxelRegionGeometry();bool house=kind==WorldAssetKind.House||kind==WorldAssetKind.Blacksmith;
             if(house){g.Box(new Vector3(0,2,0),new Vector3(7,4,6),new Color(.58f,.43f,.26f));g.Box(new Vector3(0,4.4f,0),new Vector3(8,1,7),new Color(.32f,.26f,.23f));}

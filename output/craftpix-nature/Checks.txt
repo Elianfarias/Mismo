@@ -1,0 +1,1 @@
+PASS: biome selection, empty categories, weights, deterministic seeds, winter tree density, grounded voxel meshes, palette references, organization, finite-world regression checks and production chunk previews for five biomes.

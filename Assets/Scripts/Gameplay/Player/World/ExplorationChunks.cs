@@ -212,11 +212,19 @@ namespace Mismo.Gameplay.Player.World
             if(trees.Length>0||Settings.content!=null)for(int z=4;z<32;z+=8)for(int x=4;x<32;x+=8)
             {
                 float px=id.x*32+x+(float)random.NextDouble()*2,pz=id.y*32+z+(float)random.NextDouble()*2;
-                if(random.NextDouble()>Settings.treeDensity*field.TreeDensity(px,pz)||field.Reserved(px,pz,2))continue;
+                if(random.NextDouble()>=Settings.treeDensity*field.TreeDensity(px,pz)||field.Reserved(px,pz,2))continue;
                 float y=field.Height(Mathf.Floor(px)+.5f,Mathf.Floor(pz)+.5f);
-                if(Mathf.Abs(y-field.Height(px+2,pz+2))>1)continue;
+                if((Settings.content==null||Settings.content.BiomeContent(field.Biome(px,pz))==null)&&Mathf.Abs(y-field.Height(px+2,pz+2))>1)continue;
                 var asset=Settings.content!=null?Settings.content.Asset(WorldAssetKind.Tree,field.Biome(px,pz),ExplorationTerrain.Hash(Settings.seed,(int)px,(int)pz,300)):null;
-                if(asset!=null){var instance=GatheringDistribution.PlaceAsset(asset,"gather-tree-v1:"+Settings.seed+":"+id.x+":"+id.y+":"+x+":"+z,new Vector3(px,y,pz),Quaternion.Euler(0,random.Next(4)*90,0),root.transform);instance.transform.localScale*=Mathf.Lerp(Mathf.Max(.1f,asset.scaleRange.x),Mathf.Max(.1f,asset.scaleRange.y),(float)random.NextDouble());continue;}
+                if(asset!=null)
+                {
+                    float yaw=ExplorationContent.Rotation(asset,random);
+                    float scale=Mathf.Lerp(Mathf.Max(.1f,asset.scaleRange.x),Mathf.Max(.1f,asset.scaleRange.y),(float)random.NextDouble());
+                    if(!ExplorationContent.TryPlaceNature(field,asset,new Vector2(px,pz),scale,yaw,out y))continue;
+                    var instance=GatheringDistribution.PlaceAsset(asset,"gather-tree-v1:"+Settings.seed+":"+id.x+":"+id.y+":"+x+":"+z,new Vector3(px,y,pz),Quaternion.Euler(0,yaw,0),root.transform);
+                    instance.transform.localScale*=scale;continue;
+                }
+                if(Settings.content!=null&&Settings.content.BiomeContent(field.Biome(px,pz))!=null)continue;
                 if(trees.Length==0)continue;
                 var tree=new GameObject("Oak");tree.transform.SetParent(root.transform,false);tree.transform.position=new Vector3(px,y,pz);
                 tree.transform.localScale=Vector3.one*Mathf.Lerp(Settings.treeScale.x,Settings.treeScale.y,(float)random.NextDouble());
