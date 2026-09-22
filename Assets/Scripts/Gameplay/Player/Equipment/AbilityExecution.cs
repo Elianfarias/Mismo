@@ -23,6 +23,7 @@ namespace Mismo.Gameplay.Player.Equipment
         public float Elapsed;
         public bool Began;
         public bool Ended;
+        public bool MovementBlocked;
         public GameObject Owner => Runner.gameObject;
         public PlayerMotor Motor => Runner.Motor;
         public AbilityExecution(AbilityRunner runner, WeaponDefinition weapon, AbilityDefinition definition, Vector3 direction, Vector3 point)

@@ -31,9 +31,10 @@ MonoBehaviour:
   assets:
   - id: nature.bush_0
     kind: 9
-    decorativeOnly: 1
     biomes: 
     prefab: {fileID: 4687258967416778124, guid: ac8e91b284928344e8ee9abad5e2d17c, type: 3}
+    decorativeOnly: 1
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 3.2999992, y: 2.2499998}
     maxSlope: 28
@@ -45,9 +46,10 @@ MonoBehaviour:
     scaleRange: {x: 0.85, y: 1.15}
   - id: nature.bush_1
     kind: 9
-    decorativeOnly: 1
     biomes: 
     prefab: {fileID: 6774401615322452905, guid: 215b22fc1eba1ce479bc1793ecef4dd4, type: 3}
+    decorativeOnly: 1
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 2.6666658, y: 2.0666664}
     maxSlope: 28
@@ -61,6 +63,7 @@ MonoBehaviour:
     kind: 10
     biomes: 
     prefab: {fileID: 5382165887253409859, guid: 7ff6a3620eeda3046b2253872f1c75cf, type: 3}
+    decorativeOnly: 0
     gatheringNode: {fileID: 11400000, guid: a38d9b07b08945e2a699804dcd5a5379, type: 2}
     weight: 1
     footprint: {x: 0.36111107, y: 0.3611112}
@@ -75,6 +78,8 @@ MonoBehaviour:
     kind: 10
     biomes: 
     prefab: {fileID: 7603047166896856893, guid: 772b6d7d7fd100041998e640e19be361, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 0.17105262, y: 0.20526326}
     maxSlope: 28
@@ -88,6 +93,8 @@ MonoBehaviour:
     kind: 10
     biomes: 
     prefab: {fileID: 4707414635706685823, guid: e719a6e65c6a9fd4aa1c6c22f8ec2fe3, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 0.2954545, y: 0.29545462}
     maxSlope: 28
@@ -101,6 +108,8 @@ MonoBehaviour:
     kind: 8
     biomes: 
     prefab: {fileID: 1276030990360516977, guid: b1618f303e67b1a4491cc07e14b2109b, type: 3}
+    decorativeOnly: 1
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 0.5599999, y: 0.5599999}
     maxSlope: 28
@@ -114,6 +123,8 @@ MonoBehaviour:
     kind: 8
     biomes: 
     prefab: {fileID: 1230979671595596539, guid: bb972a25adab03a488c6e72030d99f82, type: 3}
+    decorativeOnly: 1
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 0.5599999, y: 0.55999994}
     maxSlope: 28
@@ -127,6 +138,8 @@ MonoBehaviour:
     kind: 8
     biomes: 
     prefab: {fileID: 1151869346666832839, guid: 29de58d8925f8b845bee0531619ae917, type: 3}
+    decorativeOnly: 1
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 0.5249999, y: 0.525}
     maxSlope: 28
@@ -140,6 +153,8 @@ MonoBehaviour:
     kind: 3
     biomes: 
     prefab: {fileID: 5709984830067587573, guid: 967250b646ec9cc4b8e674cdc02c6af0, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 4.714284, y: 4.285713}
     maxSlope: 20
@@ -153,6 +168,8 @@ MonoBehaviour:
     kind: 3
     biomes: 
     prefab: {fileID: 3524598761636118825, guid: bfd9c3c5f7f92d745b4d2df154807cdf, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 1.3593748, y: 1.0312501}
     maxSlope: 20
@@ -166,6 +183,8 @@ MonoBehaviour:
     kind: 3
     biomes: 
     prefab: {fileID: 9072863297025217950, guid: 9ca80596957bdac45883ad6ba32ba275, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 2.4374995, y: 2.6999998}
     maxSlope: 20
@@ -179,6 +198,8 @@ MonoBehaviour:
     kind: 3
     biomes: 
     prefab: {fileID: 1692853248870529507, guid: c3d102fcdca198943b0f236529d2c887, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 1.9615384, y: 1.6153847}
     maxSlope: 20
@@ -192,6 +213,8 @@ MonoBehaviour:
     kind: 2
     biomes: 
     prefab: {fileID: 7864429132016289571, guid: 7d1468246e6038a4088c4eb371252283, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 7.399997, y: 6.9999976}
     maxSlope: 20
@@ -205,6 +228,8 @@ MonoBehaviour:
     kind: 2
     biomes: 
     prefab: {fileID: 7625870588691557329, guid: c60cfd8f16fdf2a4992e79f3a2f8799b, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 7.5999966, y: 7.093331}
     maxSlope: 20
@@ -218,6 +243,8 @@ MonoBehaviour:
     kind: 2
     biomes: 
     prefab: {fileID: 1798770403600369926, guid: ba0712e4c205cc549b655de4040c6831, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 4.939999, y: 4.1799994}
     maxSlope: 20
@@ -231,6 +258,8 @@ MonoBehaviour:
     kind: 2
     biomes: 
     prefab: {fileID: 1986761503142841243, guid: d88368a996d6b9a448d3edddba45d3d7, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 4.7172403, y: 4.324137}
     maxSlope: 20
@@ -244,6 +273,8 @@ MonoBehaviour:
     kind: 2
     biomes: 
     prefab: {fileID: 415096960377529641, guid: f6c74aacee979834c9ac2a8f309dc19a, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 4.6636353, y: 4.3181815}
     maxSlope: 20
@@ -257,6 +288,8 @@ MonoBehaviour:
     kind: 2
     biomes: 
     prefab: {fileID: 7300595455889413974, guid: 07d4788484c97d34f82c9d55ea3365cf, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 4.939999, y: 4.18}
     maxSlope: 20
@@ -270,6 +303,8 @@ MonoBehaviour:
     kind: 2
     biomes: 
     prefab: {fileID: 3566406124003343310, guid: 79dd915950f147648bf012c9c4101779, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 7.399997, y: 6.9999976}
     maxSlope: 20
@@ -283,6 +318,8 @@ MonoBehaviour:
     kind: 2
     biomes: 
     prefab: {fileID: 5328014699978081471, guid: 2376dc27b252e104f8e23a5bc78881d8, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 7.5999966, y: 7.093331}
     maxSlope: 20
@@ -294,8 +331,10 @@ MonoBehaviour:
     scaleRange: {x: 0.85, y: 1.15}
   - id: nature.Deadwood_0
     kind: 11
-    biomes: 01000000
+    biomes: 01000000i
     prefab: {fileID: 2585235103327063938, guid: e59918a34ed2ab44bb80ab3602508ab0, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 2.5000007, y: 1.7500005}
     maxSlope: 20
@@ -307,8 +346,10 @@ MonoBehaviour:
     scaleRange: {x: 0.85, y: 1.15}
   - id: nature.Deadwood_1
     kind: 11
-    biomes: 01000000
+    biomes: 01000000i
     prefab: {fileID: 4408348371990055940, guid: c07a34a1bfddfdf4688c387bbd85dc55, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 2.5000007, y: 1.1388892}
     maxSlope: 20
@@ -320,8 +361,10 @@ MonoBehaviour:
     scaleRange: {x: 0.85, y: 1.15}
   - id: nature.Deadwood_2
     kind: 11
-    biomes: 01000000
+    biomes: 01000000i
     prefab: {fileID: 4121206536558519261, guid: 2d09efd326768f642b232e3769a253f4, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 2.5000005, y: 0.8630957}
     maxSlope: 20
@@ -333,8 +376,10 @@ MonoBehaviour:
     scaleRange: {x: 0.85, y: 1.15}
   - id: nature.Deadwood_3
     kind: 11
-    biomes: 01000000
+    biomes: 01000000i
     prefab: {fileID: 2872138260998632932, guid: d1b511a2a8ab89a408b50012163e94b0, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 2.5000005, y: 1.3095243}
     maxSlope: 20
@@ -346,8 +391,10 @@ MonoBehaviour:
     scaleRange: {x: 0.85, y: 1.15}
   - id: nature.Deadwood_4
     kind: 11
-    biomes: 01000000
+    biomes: 01000000i
     prefab: {fileID: 234581485523123788, guid: 191d867263051f44b85fd188f8e568f2, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 2.5000007, y: 1.7500005}
     maxSlope: 20
@@ -359,8 +406,10 @@ MonoBehaviour:
     scaleRange: {x: 0.85, y: 1.15}
   - id: nature.Deadwood_5
     kind: 11
-    biomes: 01000000
+    biomes: 01000000i
     prefab: {fileID: 9087135207247015924, guid: 6a06b5d2b2cb85b4cab7f1832996db75, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 2.5000005, y: 1.3095243}
     maxSlope: 20
@@ -372,8 +421,10 @@ MonoBehaviour:
     scaleRange: {x: 0.85, y: 1.15}
   - id: nature.Deadwood_6
     kind: 11
-    biomes: 01000000
+    biomes: 01000000i
     prefab: {fileID: 508086456275314510, guid: 8c6ec194c6c0a7e4f9d97cadbf20d618, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 2.5000007, y: 1.1388892}
     maxSlope: 20
@@ -385,8 +436,10 @@ MonoBehaviour:
     scaleRange: {x: 0.85, y: 1.15}
   - id: nature.Deadwood_7
     kind: 11
-    biomes: 01000000
+    biomes: 01000000i
     prefab: {fileID: 8930517422570024622, guid: 103d9f2c7911cfb44afe15e0c9467b54, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 2.5000005, y: 0.8630957}
     maxSlope: 20
@@ -400,6 +453,8 @@ MonoBehaviour:
     kind: 0
     biomes: 
     prefab: {fileID: 1814357796240465628, guid: 324dd61e7561d024491ba21405fa5199, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 7.2660556, y: 7.9999995}
     maxSlope: 12
@@ -413,6 +468,8 @@ MonoBehaviour:
     kind: 1
     biomes: 
     prefab: {fileID: 61561382352269827, guid: fc916fb8c05dd0345b4933d95c422fd7, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 7.2660556, y: 7.9999995}
     maxSlope: 20
@@ -426,6 +483,8 @@ MonoBehaviour:
     kind: 12
     biomes: 
     prefab: {fileID: 5930528802957061847, guid: 4914379aab4ea864b9af8a601db8c614, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 44, y: 44}
     maxSlope: 15
@@ -487,7 +546,7 @@ MonoBehaviour:
     minimumPlayerDistance: 18
   - id: forest.Boar_Standard
     site: 0
-    biomes: 01000000
+    biomes: 01000000i
     prefab: {fileID: 2902795995163769872, guid: 29539ada7f3f12a42914344a519c03a8, type: 3}
     elitePrefab: {fileID: 0}
     weight: 10
@@ -500,7 +559,7 @@ MonoBehaviour:
     minimumPlayerDistance: 18
   - id: forest.Boar_Dark_Fur
     site: 0
-    biomes: 01000000
+    biomes: 01000000i
     prefab: {fileID: 1716802908112928350, guid: 1f5c9d8b0560ac045889bc76de631138, type: 3}
     elitePrefab: {fileID: 0}
     weight: 10
@@ -513,7 +572,7 @@ MonoBehaviour:
     minimumPlayerDistance: 18
   - id: forest.Boar_Forest_Moss
     site: 0
-    biomes: 01000000
+    biomes: 01000000i
     prefab: {fileID: 5408172820500594365, guid: 0a504e7adefadcf46882ce08b2238139, type: 3}
     elitePrefab: {fileID: 0}
     weight: 10
@@ -526,7 +585,7 @@ MonoBehaviour:
     minimumPlayerDistance: 18
   - id: forest.Spider_Standard
     site: 0
-    biomes: 01000000
+    biomes: 01000000i
     prefab: {fileID: 8440093396559079988, guid: 1be7918643492c847ac2ba9cc2a78e9d, type: 3}
     elitePrefab: {fileID: 0}
     weight: 8
@@ -539,7 +598,7 @@ MonoBehaviour:
     minimumPlayerDistance: 18
   - id: forest.Spider_Forest_Moss
     site: 0
-    biomes: 01000000
+    biomes: 01000000i
     prefab: {fileID: 4906390869677408606, guid: 8e2503599fc92984ba27f47121e7c991, type: 3}
     elitePrefab: {fileID: 0}
     weight: 8
@@ -552,7 +611,7 @@ MonoBehaviour:
     minimumPlayerDistance: 18
   - id: forest.Spider_Dark_Cave
     site: 0
-    biomes: 01000000
+    biomes: 01000000i
     prefab: {fileID: 8718558843661333136, guid: df032e69fb37afc4a9f8f66b42e2a16a, type: 3}
     elitePrefab: {fileID: 0}
     weight: 8
@@ -565,7 +624,7 @@ MonoBehaviour:
     minimumPlayerDistance: 18
   - id: forest.Spider_Albino
     site: 0
-    biomes: 01000000
+    biomes: 01000000i
     prefab: {fileID: 4621593228312570532, guid: 1d54a32d0326d1a40a7aaebfa06def68, type: 3}
     elitePrefab: {fileID: 0}
     weight: 2
@@ -578,7 +637,7 @@ MonoBehaviour:
     minimumPlayerDistance: 18
   - id: forest.Forest_Golem_Stylized
     site: 3
-    biomes: 01000000
+    biomes: 01000000i
     prefab: {fileID: 5910821963392241888, guid: 9608a88dc9cc9d34c94fc4357b3228da, type: 3}
     elitePrefab: {fileID: 0}
     weight: 4

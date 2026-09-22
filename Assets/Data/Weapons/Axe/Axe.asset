@@ -25,7 +25,7 @@ MonoBehaviour:
   dualSwordFamily: {fileID: 0}
   swordShieldFamily: {fileID: 0}
   overrideFamilyAbilities: 0
-  visualPrefab: {fileID: 919132149155446097, guid: 611168c4d6c004b4abc7fca23db05f56, type: 3}
+  visualPrefab: {fileID: 6814919799624172018, guid: 4a87f0ac7b2895b41a99ee72b5075633, type: 3}
   isTwoHanded: 0
   dualWield: 0
   secondaryVisualPrefab: {fileID: 0}
@@ -49,6 +49,7 @@ MonoBehaviour:
   gridHeight: 2
   canRotate: 1
   inventoryIcon: {fileID: 21300000, guid: 3c2aaa1eb65602a49ae833af9e06ef8b, type: 3}
+  hudIcon: {fileID: 0}
   inventoryPreviewRotation: {x: 0, y: 0, z: 0}
   canSell: 1
   sellValue: 10

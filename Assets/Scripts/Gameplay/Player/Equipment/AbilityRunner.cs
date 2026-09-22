@@ -189,6 +189,13 @@ namespace Mismo.Gameplay.Player.Equipment
             if(Current==null||Current.Began||!Current.Definition.interruptible)return false;
             state.Reward(0,"INTERRUMPIDO");Cancel();return true;
         }
+        // Choque lateral: corta sólo el avance si la acción lo permite; si no, cancela la habilidad.
+        public void BlockMovement()
+        {
+            var c=Current;if(c==null)return;
+            if(!System.Array.Exists(c.Definition.actions,a=>a is MoveCasterAction m&&m.stopsMovementOnly)){Cancel();return;}
+            c.MovementBlocked=true;Motor?.ClearControlledMovement();
+        }
         public void Cancel()
         {
             StopPreparationSound();

@@ -9,6 +9,8 @@ namespace Mismo.Gameplay.Player.Equipment
     {
         public float distance = 3;
         public bool crossEnemies;
+        [Tooltip("Al chocar de lado, detiene sólo el avance; la habilidad sigue con su animación y sus golpes.")]
+        public bool stopsMovementOnly;
         public override void Begin(AbilityExecution c)
         {
             if(!crossEnemies)return;
@@ -27,6 +29,7 @@ namespace Mismo.Gameplay.Player.Equipment
         }
         public override void Tick(AbilityExecution c, float dt)
         {
+            if (c.MovementBlocked) return;
             Vector3 direction = Vector3.ProjectOnPlane(c.Direction, Vector3.up).normalized;
             c.Motor.RequestControlledDisplacement(direction * (distance * dt / Mathf.Max(.01f, c.Definition.active)), direction, 10);
         }

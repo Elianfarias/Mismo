@@ -104,6 +104,7 @@ MonoBehaviour:
       data:
         distance: 2.87
         crossEnemies: 0
+        stopsMovementOnly: 1
     - rid: 2
       type: {class: FuriousComboAction, ns: Mismo.Gameplay.Player.Equipment, asm: Mismo.Gameplay.Player}
       data:
@@ -111,7 +112,7 @@ MonoBehaviour:
         postureDamage: -1
         radius: 0.7
         forward: 1
-        stunSeconds: 0.8
+        stunSeconds: 3
         hits:
         - at: 0.105
           multiplier: 1
