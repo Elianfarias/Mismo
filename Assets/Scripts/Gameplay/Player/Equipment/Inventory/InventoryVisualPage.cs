@@ -14,8 +14,6 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         readonly Rect[] consumableTargets = new Rect[4];
         int dragFromConsumable=-1;
         bool showItemActions, compareOffhand;
-        Texture2D inventoryBackdrop;
-        bool inventoryBackdropOlive;
         bool OliveTheme=>inventoryIcons!=null&&inventoryIcons.useOliveTheme;
         InventoryUIIcons inventoryIcons;
         int dragFromHand = -1;
@@ -25,6 +23,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             Vector2.Distance(GUIUtility.GUIToScreenPoint(Event.current.mousePosition), inventoryDragOrigin) > 6;
 
         void CancelInventoryDrag() { draggedGrid = null; dragFromHand = -1; dragFromConsumable=-1; }
+        GridItem DraggedInventoryItem()=>draggedGrid==null?null:dragFromHand>=0?inventory.EquipmentGridItem(dragFromHand):inventory.GridItems(showChest).Find(item=>item.key==draggedGrid);
         string EquippedMarker(string id)
         {
             for(int i=0;i<2;i++)
@@ -57,10 +56,10 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             GUI.enabled=enabled&&!confirmDiscard&&!showItemActions;
             DrawBagGlyph(new Rect(66,45,30,34),U.Ink);
             U.Text(new Rect(113,49,290,34),inventory.UsedSlots(showChest)+" / "+(showChest?inventory.ChestCapacity:inventory.BackpackCapacity),23,U.Ink);
-            if(InventoryIconButton(new Rect(1090,38,52,47),inventoryIcons?.menu,"Menú [B]")) OpenPage(Page.Menu);
-            if(InventoryIconButton(new Rect(1162,38,52,47),inventoryIcons?.close,"Cerrar [ESC]")) Close();
+            if(InventoryIconButton(QuietFantasyUI.MenuBackButton,inventoryIcons?.menu,"Menú [B]")) OpenPage(Page.Menu);
+            if(InventoryIconButton(QuietFantasyUI.MenuCloseButton,inventoryIcons?.close,"Cerrar [ESC]")) Close();
             if(!IsOpen||page!=Page.Inventory){GUI.enabled=enabled;return;}
-            U.Border(new Rect(64,94,1150,1),new Color(.78f,.70f,.51f,.35f));
+            U.MenuDivider();
             if(inventory.AtChest)
             {
                 if(InventoryIconButton(new Rect(410,45,85,36),inventoryIcons?.backpack,"Mochila",!showChest)){showChest=false;selected=null;CancelInventoryDrag();}
@@ -99,41 +98,22 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         void DrawInventoryBackdrop()
         {
             if(inventoryIcons==null)inventoryIcons=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");
-            // Rebuild only when the inspector's live theme switch changes.
-            if(inventoryBackdrop==null||inventoryBackdropOlive!=OliveTheme)
-            {
-                if(inventoryBackdrop!=null)Destroy(inventoryBackdrop);
-                inventoryBackdropOlive=OliveTheme;
-                inventoryBackdrop=new Texture2D(128,80,TextureFormat.RGBA32,false)
-                    {name="Inventory slate gradient",wrapMode=TextureWrapMode.Clamp,filterMode=FilterMode.Bilinear};
-                var colors=new Color[128*80];
-                for(int y=0;y<80;y++)for(int x=0;x<128;x++)
-                {
-                    float u=x/127f,v=y/79f;
-                    float glow=Mathf.Exp(-((u-.742f)*(u-.742f)/.10f+(v-.68f)*(v-.68f)/.23f));
-                    colors[y*128+x]=OliveTheme?
-                        Color.Lerp(Color.Lerp(new Color(.27f,.23f,.16f),new Color(.20f,.28f,.19f),v),new Color(.34f,.39f,.25f),glow*.60f):
-                        Color.Lerp(new Color(.063f,.090f,.133f),new Color(.157f,.208f,.278f),.28f+.72f*glow);
-                }
-                inventoryBackdrop.SetPixels(colors);inventoryBackdrop.Apply(false,true);
-            }
-            var previous=GUI.color;var tint=previous;tint.a*=PanelOpacity;GUI.color=tint;
-            GUI.DrawTexture(new Rect(30,24,1220,752),inventoryBackdrop,ScaleMode.StretchToFill);
-            if(inventoryIcons?.background!=null){var customTint=inventoryIcons.backgroundTint;customTint.a*=tint.a;DrawInventoryTexture(new Rect(30,24,1220,752),inventoryIcons.background,inventoryIcons.backgroundBorder,customTint);}
-            GUI.color=previous;
+            U.MenuBackground(inventoryIcons);
         }
         float PanelOpacity=>inventoryIcons!=null?Mathf.Clamp01(inventoryIcons.panelOpacity):1f;
         Color NavigationTint(Color color){color.a*=inventoryIcons!=null?Mathf.Clamp01(inventoryIcons.navigationIconOpacity):1f;return color;}
         int radialSelected=-1,radialOpenedFrame;
         bool radialHeld;
         float radialHoverReadyAt;
-        Texture2D[] radialWedges,radialEdges; Texture2D radialCenter;
+        RecipeUITheme radialTheme;
         static readonly Vector2 RadialCenter=new Vector2(640,400);
-        static readonly string[] RadialNames={"Personaje","Inventario","Mapa","Monturas","Bestiario","Habilidades"};
+        static readonly Rect RadialHub=new Rect(576,336,128,128);
+        static readonly string[] RadialNames={"Personaje","Inventario","Recetas","Mapa","Monturas","Bestiario","Habilidades","Misiones"};
         static int RadialIndex(Vector2 offset)
         {
-            if(offset.sqrMagnitude<76*76)return -1;
-            return Mathf.FloorToInt(Mathf.Repeat(Mathf.Atan2(offset.y,offset.x)*Mathf.Rad2Deg+120,360)/60);
+            if(offset.sqrMagnitude<76*76||RadialHub.Contains(RadialCenter+offset))return -1;
+            float sector=360f/RadialNames.Length;
+            return Mathf.FloorToInt(Mathf.Repeat(Mathf.Atan2(offset.y,offset.x)*Mathf.Rad2Deg+90+sector*.5f,360)/sector);
         }
         void UpdateRadialSelection()
         {
@@ -156,69 +136,47 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             int index=radialSelected;radialHeld=false;
             if(index<0){Close();return;}
-            if(index==2){var map=GetComponent<WorldMapPanel>();Close();if(map!=null)map.Open();return;}
-            Page[] targets={Page.Character,Page.Inventory,Page.Menu,Page.Mounts,Page.Bestiary,Page.Skills};
+            if(index>=RadialNames.Length){Close();return;}
+            if(index==3){var map=GetComponent<WorldMapPanel>();Close();if(map!=null)map.Open();return;}
+            Page[] targets={Page.Character,Page.Inventory,Page.Recipes,Page.Menu,Page.Mounts,Page.Bestiary,Page.Skills,Page.Quests};
             OpenPage(targets[index]);
         }
-        void EnsureRadialTextures()
-        {
-            if(radialWedges!=null)return;
-            const int size=512;
-            radialWedges=new Texture2D[6];radialEdges=new Texture2D[6];
-            for(int sector=0;sector<6;sector++){
-            var fill=new Color32[size*size];var border=new Color32[fill.Length];var center=new Color32[fill.Length];
-            for(int y=0;y<size;y++)for(int x=0;x<size;x++)
-            {
-                float dx=x+.5f-size*.5f,dy=y+.5f-size*.5f,r=Mathf.Sqrt(dx*dx+dy*dy);
-                float angle=Mathf.Abs(Mathf.DeltaAngle(Mathf.Atan2(dx,dy)*Mathf.Rad2Deg,sector*60));
-                float side=(28-angle)*Mathf.Deg2Rad*r;
-                float distance=Mathf.Min(Mathf.Min(r-92,248-r),side);
-                byte alpha=(byte)(255*Mathf.Clamp01(distance+.5f));
-                fill[y*size+x]=new Color32(255,255,255,alpha);
-                border[y*size+x]=new Color32(255,255,255,(byte)(alpha*Mathf.Clamp01(2-distance)));
-                center[y*size+x]=new Color32(255,255,255,(byte)(255*Mathf.Clamp01(80-r)));
-            }
-            radialWedges[sector]=MakeRadialTexture(fill,size);radialEdges[sector]=MakeRadialTexture(border,size);if(sector==0)radialCenter=MakeRadialTexture(center,size);
-            }
-        }
-        static Texture2D MakeRadialTexture(Color32[] pixels,int size)
-        {
-            var texture=new Texture2D(size,size,TextureFormat.RGBA32,false){name="Radial menu mask",hideFlags=HideFlags.DontSave,filterMode=FilterMode.Bilinear,wrapMode=TextureWrapMode.Clamp};
-            texture.SetPixels32(pixels);texture.Apply(false,true);return texture;
-        }
-        void DisposeRadialTextures(){if(radialWedges!=null)foreach(var texture in radialWedges)Destroy(texture);if(radialEdges!=null)foreach(var texture in radialEdges)Destroy(texture);if(radialCenter!=null)Destroy(radialCenter);}
         void DrawMenu()
         {
             if(inventoryIcons==null)inventoryIcons=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");
-            EnsureRadialTextures();
-            var oldColor=GUI.color;var oldMatrix=GUI.matrix;
-            var rect=new Rect(400,160,480,480);
-            for(int i=0;i<6;i++)
+            if(radialTheme==null)radialTheme=RecipeUITheme.Load();
+            var oldColor=GUI.color;
+            var questTheme=inventory.Quests;
+            // Share the exact nine-sliced HUD frame instead of stretching raster wedges.
+            FantasyUI.Panel(RadialHub,PanelOpacity);
+            var recipesIcon=inventoryIcons!=null?inventoryIcons.radialRecipes:null;
+            if(recipesIcon==null&&radialTheme!=null)recipesIcon=radialTheme.Texture("IconRecipes");
+            Texture2D[] icons={inventoryIcons?.radialCharacter,inventoryIcons?.radialInventory??inventoryIcons?.backpack,recipesIcon,inventoryIcons?.radialMap,
+                inventoryIcons?.radialMounts,inventoryIcons?.radialBestiary,inventoryIcons?.radialSkills,inventoryIcons?.radialQuests??questTheme?.journalIcon};
+            string[] fallback={"heart-inside","locked-chest","locked-chest","target-arrows","wingfoot","wolf-trap","crossed-swords","open-book"};
+            for(int i=0;i<RadialNames.Length;i++)
             {
-
-                GUI.color=i==radialSelected?(OliveTheme?new Color(.32f,.38f,.25f):new Color(.25f,.31f,.38f)):
-                    (OliveTheme?new Color(.19f,.25f,.17f):new Color(.10f,.15f,.21f));
-                GUI.DrawTexture(rect,radialWedges[i]);
-                GUI.color=i==radialSelected?U.Amber:new Color(.46f,.51f,.54f);GUI.DrawTexture(rect,radialEdges[i]);
-                GUI.matrix=oldMatrix;
-            }
-            GUI.color=OliveTheme?new Color(.14f,.19f,.12f):new Color(.075f,.11f,.15f);GUI.DrawTexture(rect,radialCenter);GUI.color=oldColor;
-            Texture2D[] icons={inventoryIcons?.radialCharacter,inventoryIcons?.radialInventory??inventoryIcons?.backpack,inventoryIcons?.radialMap,
-                inventoryIcons?.radialMounts,inventoryIcons?.radialBestiary,inventoryIcons?.radialSkills};
-            string[] fallback={"heart-inside","locked-chest","target-arrows","wingfoot","wolf-trap","crossed-swords"};
-            for(int i=0;i<6;i++)
-            {
-                float angle=(-90+i*60)*Mathf.Deg2Rad;
-                var position=RadialCenter+new Vector2(Mathf.Cos(angle),Mathf.Sin(angle))*157;
-                var iconRect=new Rect(position.x-25,position.y-30,50,50);
+                float angle=(-90+i*(360f/RadialNames.Length))*Mathf.Deg2Rad;
+                var position=RadialCenter+new Vector2(Mathf.Cos(angle),Mathf.Sin(angle))*176;
+                position=new Vector2(Mathf.Round(position.x),Mathf.Round(position.y));
+                var slot=new Rect(position.x-44,position.y-44,88,88);
+                FantasyUI.Panel(slot,PanelOpacity);
+                if(i==radialSelected)FantasyUI.Frame(slot,new Color(U.Amber.r,U.Amber.g,U.Amber.b,PanelOpacity));
+                var iconRect=new Rect(position.x-25,position.y-25,50,50);
                 var tint=NavigationTint(i==radialSelected?U.Amber:U.Ink);
                 if(icons[i]!=null){GUI.color=tint;GUI.DrawTexture(iconRect,MapIcons.Mask(icons[i]),ScaleMode.ScaleToFit);GUI.color=oldColor;}
                 else U.DrawIcon(iconRect,fallback[i],tint);
-                if(i==radialSelected)U.Text(new Rect(position.x-76,position.y+29,152,27),RadialNames[i],18,U.Amber,false,TextAnchor.MiddleCenter);
             }
             var cancel=inventoryIcons?.radialCancel??inventoryIcons?.close;
             if(cancel!=null){GUI.color=NavigationTint(radialSelected<0?U.Amber:U.Ink);GUI.DrawTexture(new Rect(620,380,40,40),MapIcons.Mask(cancel),ScaleMode.ScaleToFit);GUI.color=oldColor;}
             else U.Text(new Rect(614,375,52,50),"×",36,U.Ink,false,TextAnchor.MiddleCenter);
+            if(radialSelected>=0&&radialSelected<RadialNames.Length)
+            {
+                // A fixed label inside the hub fits every sector, including diagonal ones.
+                GUI.BeginGroup(new Rect(584,421,112,24));
+                U.Text(new Rect(0,0,112,24),RadialNames[radialSelected],16,U.Amber,false,TextAnchor.MiddleCenter);
+                GUI.EndGroup();
+            }
             var e=Event.current;
             if(e.type==EventType.MouseDown&&e.button==0&&Time.frameCount!=radialOpenedFrame)
             {radialSelected=RadialIndex(e.mousePosition-RadialCenter);e.Use();ConfirmRadialSelection();}
@@ -226,14 +184,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
 
         bool InventoryIconButton(Rect rect,Texture2D icon,string caption,bool chosen=false)
         {
-            if(icon==null)return U.Button(rect,caption,chosen);
-            bool clicked=U.Button(rect,"",chosen);
-            var color=GUI.color;GUI.color=NavigationTint(chosen?U.Amber:U.Ink);
-            float size=Mathf.Min(34,rect.height-8);
-            GUI.DrawTexture(new Rect(rect.center.x-size/2,rect.center.y-size/2,size,size),MapIcons.Mask(icon),ScaleMode.ScaleToFit);
-            GUI.color=color;
-            GUI.Label(rect,new GUIContent("",L.Text(caption)),GUIStyle.none);
-            return clicked;
+            return U.NavigationButton(rect,icon,caption,inventoryIcons,chosen,caption.StartsWith("Cerrar"));
         }
 
         void DrawBagGlyph(Rect rect,Color color)
@@ -251,33 +202,10 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             U.Border(new Rect(rect.x+6,rect.y+21,rect.width-12,8),color,1);
         }
 
-        static void DrawInventoryTexture(Rect rect,Texture2D texture,RectOffset border,Color tint)
-        {
-            if(Event.current.type!=EventType.Repaint)return;
-            var style=new GUIStyle {border=border??new RectOffset()};style.normal.background=texture;
-            var previous=GUI.color;GUI.color=tint;
-            style.Draw(rect,GUIContent.none,false,false,false,false);GUI.color=previous;
-        }
         void DrawEquipmentSlotBackground(Rect rect,bool valid,bool hovering,bool weapon=false)
         {
-            var artwork=weapon?inventoryIcons?.weaponSlotBackground:inventoryIcons?.consumableSlotBackground;
-            var uv=weapon?inventoryIcons?.weaponSlotUV??new Rect(0,0,1,1):inventoryIcons?.consumableSlotUV??new Rect(0,0,1,1);
-            var oliveArtwork=weapon?inventoryIcons?.oliveWeaponSlotBackground:inventoryIcons?.oliveConsumableSlotBackground;
-            if(OliveTheme&&oliveArtwork!=null)
-            {artwork=oliveArtwork;uv=weapon?inventoryIcons.oliveWeaponSlotUV:inventoryIcons.oliveConsumableSlotUV;}
-            if(artwork!=null)
-            {
-                var previous=GUI.color;
-                GUI.color=inventoryIcons.slotTint*(valid?(hovering?new Color(1,.90f,.65f):new Color(1,.96f,.83f)):Color.white);
-                GUI.DrawTextureWithTexCoords(rect,artwork,uv);
-                GUI.color=previous;return;
-            }
-            if(inventoryIcons?.slotBackground!=null)
-                DrawInventoryTexture(rect,inventoryIcons.slotBackground,inventoryIcons.slotBorder,inventoryIcons.slotTint);
-            else PlayerHUD.Fill(rect,new Color(.075f,.110f,.165f,.94f));
-            if(valid&&hovering)PlayerHUD.Fill(rect,new Color(.65f,.60f,.30f,.25f));
-            if(valid||inventoryIcons?.slotBackground==null)
-                U.Border(rect,valid?Accent:new Color(.48f,.52f,.59f,.45f),valid?2:1);
+            FantasyUI.Panel(rect);
+            FantasyUI.Frame(rect,valid?Accent:hovering?Color.white:new Color(1,1,1,.9f));
         }
         static void DrawInventorySprite(Rect rect,Sprite icon)
         {
@@ -291,7 +219,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         void DrawConsumableSlots()
         {
             var e=Event.current;
-            var dragged=draggedGrid!=null?inventory.GridItems(showChest).Find(item=>item.key==draggedGrid):null;
+            var dragged=DraggedInventoryItem();
             string candidate=dragged!=null?(dragged.material?dragged.id:null):selectedMaterial?selected:null;
             bool valid=!showChest&&candidate!=null&&inventory.CanAssignConsumable(candidate);
             for(int slot=0;slot<4;slot++)
@@ -356,7 +284,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                     var rect=new Rect(x+side*104,184,96,172);handTargets[hand]=rect;
                     string id=HandItem(hand);
                     bool hovering=rect.Contains(e.mousePosition);
-                    var candidate=draggedGrid!=null?inventory.GridItems(showChest).Find(item=>item.key==draggedGrid):null;
+                    var candidate=DraggedInventoryItem();
                     string candidateId=candidate!=null&&!candidate.material?candidate.id:!selectedMaterial?selected:null;
                     bool valid=candidateId!=null&&CanDropWeapon(candidateId,hand);
                     DrawEquipmentSlotBackground(rect,valid,hovering,true);
@@ -374,7 +302,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                             {
                                 selected=id;selectedGrid=id;selectedMaterial=false;amount=1;
                                 if(inventory.CanManage&&!showChest)
-                                {draggedGrid=id;dragFromHand=hand;dragRotated=false;inventoryDragOrigin=GUIUtility.GUIToScreenPoint(e.mousePosition);}
+                                {draggedGrid=id;dragFromHand=hand;dragFromConsumable=-1;dragRotated=false;dragOffset=Vector2Int.zero;inventoryDragOrigin=GUIUtility.GUIToScreenPoint(e.mousePosition);}
                             }
                             else if(valid)EquipAtHand(candidateId,hand);
                             e.Use();
@@ -399,7 +327,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         void HandleEquipmentDrop()
         {
             if(draggedGrid==null||!GUI.enabled)return;
-            var e=Event.current;var item=inventory.GridItems(showChest).Find(value=>value.key==draggedGrid);
+            var e=Event.current;var item=DraggedInventoryItem();
             if(item==null){CancelInventoryDrag();return;}
             if(InventoryDragMoved)
             {
@@ -413,11 +341,6 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                     {handled=item.material&&!showChest&&inventory.AssignConsumable(slot,item.id);break;}
                     for(int hand=0;hand<4;hand++)if(handTargets[hand].Contains(e.mousePosition))
                     {handled=!item.material&&EquipAtHand(item.id,hand);break;}
-                    if(!handled&&dragFromHand>=0&&!showChest&&BagViewport.Contains(e.mousePosition))
-                    {
-                        if(dragFromHand%2==1)handled=inventory.TryEquipOffhand(dragFromHand/2,null);
-                        else {message="Arrastrá otra arma a la mano principal para reemplazarla.";messageUntil=Time.unscaledTime+4;handled=true;}
-                    }
                     if(!handled&&dragFromConsumable>=0&&!showChest&&BagViewport.Contains(e.mousePosition))
                         handled=inventory.AssignConsumable(dragFromConsumable,null);
                     if(!handled){message="El objeto permanece en su lugar.";messageUntil=Time.unscaledTime+3;}

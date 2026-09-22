@@ -1,0 +1,116 @@
+{
+  "package": "@flaticon/flaticon-uicons",
+  "version": "3.3.1",
+  "documentation": "https://www.flaticon.com/uicons/get-started",
+  "download": "https://registry.npmjs.org/@flaticon/flaticon-uicons/-/flaticon-uicons-3.3.1.tgz",
+  "archiveSha256": "2c7b6e3725241d3f00ad6345e6eed66b5b3625ff201fbb5bd14acbc057acc05f",
+  "font": "Assets/Art/Fonts/Flaticon/uicons-solid-rounded-3.3.1.woff",
+  "fontSha256": "db95d9916a1a339d981e9eb25e76a66a3d775b844ab2cfb49a0e0138abfb1bdb",
+  "attribution": "Uicons by Flaticon — https://www.flaticon.com/uicons",
+  "icons": [
+    {
+      "key": "IconHandcraft",
+      "name": "fi-sr-hand-paper",
+      "codepoint": 63322,
+      "path": "Assets/Art/UI/Flaticon/Recipes/fi-sr-hand-paper.png",
+      "source": "https://www.flaticon.com/uicons",
+      "style": "solid-rounded"
+    },
+    {
+      "key": "IconStation",
+      "name": "fi-sr-tools",
+      "codepoint": 64931,
+      "path": "Assets/Art/UI/Flaticon/Recipes/fi-sr-tools.png",
+      "source": "https://www.flaticon.com/uicons",
+      "style": "solid-rounded"
+    },
+    {
+      "key": "IconCraft",
+      "name": "fi-sr-hammer",
+      "codepoint": 63297,
+      "path": "Assets/Art/UI/Flaticon/Recipes/fi-sr-hammer.png",
+      "source": "https://www.flaticon.com/uicons",
+      "style": "solid-rounded"
+    },
+    {
+      "key": "IconRecipes",
+      "name": "fi-sr-book-bookmark",
+      "codepoint": 62070,
+      "path": "Assets/Art/UI/Flaticon/Recipes/fi-sr-book-bookmark.png",
+      "source": "https://www.flaticon.com/uicons",
+      "style": "solid-rounded"
+    },
+    {
+      "key": "IconLocation",
+      "name": "fi-sr-marker",
+      "codepoint": 63727,
+      "path": "Assets/Art/UI/Flaticon/Recipes/fi-sr-marker.png",
+      "source": "https://www.flaticon.com/uicons",
+      "style": "solid-rounded"
+    },
+    {
+      "key": "IconTree",
+      "name": "fi-sr-tree",
+      "codepoint": 64998,
+      "path": "Assets/Art/UI/Flaticon/Recipes/fi-sr-tree.png",
+      "source": "https://www.flaticon.com/uicons",
+      "style": "solid-rounded"
+    },
+    {
+      "key": "IconLock",
+      "name": "fi-sr-lock",
+      "codepoint": 63688,
+      "path": "Assets/Art/UI/Flaticon/Recipes/fi-sr-lock.png",
+      "source": "https://www.flaticon.com/uicons",
+      "style": "solid-rounded"
+    },
+    {
+      "key": "IconCheck",
+      "name": "fi-sr-check",
+      "codepoint": 62400,
+      "path": "Assets/Art/UI/Flaticon/Recipes/fi-sr-check.png",
+      "source": "https://www.flaticon.com/uicons",
+      "style": "solid-rounded"
+    },
+    {
+      "key": "IconAll",
+      "path": "Assets/Art/UI/WhiteAndBlackGUI/border-all.png",
+      "inventoryField": "all",
+      "guid": "16ce2053a6054ec45b2578e42d09e3bc"
+    },
+    {
+      "key": "IconWeapons",
+      "path": "Assets/Art/UI/WhiteAndBlackGUI/role-play.png",
+      "inventoryField": "weapons",
+      "guid": "5f7aefcce1e83e24b9ebce6ccb99c2e6"
+    },
+    {
+      "key": "IconConsumables",
+      "path": "Assets/Art/UI/WhiteAndBlackGUI/flask-potion.png",
+      "inventoryField": "consumables",
+      "guid": "8cd1e4b0063604a4199d4d484c0ee551"
+    },
+    {
+      "key": "IconMaterials",
+      "path": "Assets/Art/UI/WhiteAndBlackGUI/diamond.png",
+      "inventoryField": "materials",
+      "guid": "b1199be8d904fa44ba3303609035ea7e"
+    },
+    {
+      "key": "IconClose",
+      "path": "Assets/Art/UI/WhiteAndBlackGUI/cross.png",
+      "inventoryField": "close",
+      "guid": "c4db98a900cfdb942a8c9ba7e16cb56f"
+    },
+    {
+      "key": "IconArrowUp",
+      "path": "Assets/Art/UI/WhiteAndBlackGUI/arrow_up.png",
+      "reused": true
+    },
+    {
+      "key": "IconArrowDown",
+      "path": "Assets/Art/UI/WhiteAndBlackGUI/arrow_down.png",
+      "reused": true
+    }
+  ]
+}

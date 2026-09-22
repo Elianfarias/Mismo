@@ -13,58 +13,6 @@ MonoBehaviour:
   m_Name: RuntimeAssetCatalog
   m_EditorClassIdentifier: Mismo.Core::Mismo.Core.RuntimeAssetCatalog
   entries:
-  - key: BestiaryBook
-    assets:
-    - {fileID: 11400000, guid: 6b0c7006aad44564ca8df078039fc7e1, type: 2}
-  - key: BlendedSkybox
-    assets:
-    - {fileID: 4800000, guid: e9073833d88f8cc42bb6e99d72457d6b, type: 3}
-  - key: CombatParticles
-    assets:
-    - {fileID: 4800000, guid: 5ba77cf36709446d9f7fa7f3bc2d26b9, type: 3}
-  - key: CombatRules
-    assets:
-    - {fileID: 11400000, guid: dfd2e5a171e341c3a5ea3fe0f1349b5d, type: 2}
-  - key: DayNightSettings
-    assets:
-    - {fileID: 11400000, guid: 6937d8c92c41984488fc60230fed264f, type: 2}
-  - key: ExplorationWorldSettings
-    assets:
-    - {fileID: 11400000, guid: 340bb2530bec4a049ba13998db53088d, type: 2}
-  - key: GatheringSettings
-    assets:
-    - {fileID: 11400000, guid: f56ac9da4bcffc045b90e2e8c1318ad1, type: 2}
-  - key: InventorySettings
-    assets:
-    - {fileID: 11400000, guid: 6e4014a712454e3ea3a58c560977ebfc, type: 2}
-  - key: InventoryUIIcons
-    assets:
-    - {fileID: 11400000, guid: e3245260e0634f6d84c6094ad94ae854, type: 2}
-  - key: ItemCatalog
-    assets:
-    - {fileID: 11400000, guid: a4edb159c1a84cd48c551f10a5f32ede, type: 2}
-  - key: MapMarkerCatalog
-    assets:
-    - {fileID: 11400000, guid: 328ff820e9de4132b06773de1fba3a2e, type: 2}
-  - key: MapPortrait
-    assets:
-    - {fileID: 4800000, guid: 097c252697df4d31b02f1cc8d229e76f, type: 3}
-  - key: ProgressionRules
-    assets:
-    - {fileID: 11400000, guid: 7a33d622deef47479b040099364378c4, type: 2}
-  - key: StartingWeapons
-    assets:
-    - {fileID: 11400000, guid: b5628223188ddb04c932ee754962f437, type: 2}
-  - key: TerrainSurface
-    assets:
-    - {fileID: 2100000, guid: 2f882507da2a57744b183ac2b315783b, type: 2}
-    - {fileID: 4800000, guid: 2a0ebe2644ebc6546951a0197e6d1cb7, type: 3}
-  - key: WorldContentCatalog
-    assets:
-    - {fileID: 11400000, guid: 97a0247d62674696bdc8ce8dcff8a4ee, type: 2}
-  - key: WorldMap
-    assets:
-    - {fileID: 4800000, guid: 610e1cc189e3e5f41a85013cce302ee0, type: 3}
   - key: Audio/AudioMixer
     assets:
     - {fileID: 24100000, guid: 72c2b24dc67a4b589ca861a86cd37d88, type: 2}
@@ -78,6 +26,15 @@ MonoBehaviour:
   - key: Audio/GameSounds
     assets:
     - {fileID: 11400000, guid: 091588f73afb41039325fef8eec28b65, type: 2}
+  - key: Audio/Music/Combat
+    assets:
+    - {fileID: 8300000, guid: 6bd048ce52d645f2a4e426b51eb6e846, type: 3}
+  - key: Audio/Music/Exploration
+    assets:
+    - {fileID: 8300000, guid: 6a1a2392ab9d41dbaec48ca4220b577e, type: 3}
+  - key: Bestiary/BestiaryBook
+    assets:
+    - {fileID: 11400000, guid: 6b0c7006aad44564ca8df078039fc7e1, type: 2}
   - key: Bestiary/boar
     assets:
     - {fileID: 11400000, guid: c73b6500128d3274ca3f2b1349b6d808, type: 2}
@@ -93,6 +50,15 @@ MonoBehaviour:
   - key: Bestiary/spider
     assets:
     - {fileID: 11400000, guid: 03d9011e7c01644458bc64a389ffd9fa, type: 2}
+  - key: BestiaryBook
+    assets:
+    - {fileID: 11400000, guid: 6b0c7006aad44564ca8df078039fc7e1, type: 2}
+  - key: BlendedSkybox
+    assets:
+    - {fileID: 4800000, guid: e9073833d88f8cc42bb6e99d72457d6b, type: 3}
+  - key: CombatParticles
+    assets:
+    - {fileID: 4800000, guid: 5ba77cf36709446d9f7fa7f3bc2d26b9, type: 3}
   - key: CombatPresentation/GoblinUpperBody
     assets:
     - {fileID: 31900000, guid: c7033c4a5a614868a98f065a4fe71b6c, type: 2}
@@ -105,17 +71,217 @@ MonoBehaviour:
   - key: CombatPresentation/PlayerUpperBody
     assets:
     - {fileID: 31900000, guid: 8dad448f98cc494499aed1cd356e887a, type: 2}
+  - key: CombatRules
+    assets:
+    - {fileID: 11400000, guid: dfd2e5a171e341c3a5ea3fe0f1349b5d, type: 2}
+  - key: DayNightSettings
+    assets:
+    - {fileID: 11400000, guid: 6937d8c92c41984488fc60230fed264f, type: 2}
+  - key: ExplorationWorldSettings
+    assets:
+    - {fileID: 11400000, guid: 340bb2530bec4a049ba13998db53088d, type: 2}
+  - key: Fonts/Cagliostro-OFL
+    assets:
+    - {fileID: 4900000, guid: 3d0dd7d29df872e44b036bf3fdb7bda7, type: 3}
   - key: Fonts/Cagliostro-Regular
     assets:
     - {fileID: 12800000, guid: 96b5b3db842e4376adda8a338e916623, type: 3}
     - {fileID: 2100000, guid: 96b5b3db842e4376adda8a338e916623, type: 3}
     - {fileID: 2800000, guid: 96b5b3db842e4376adda8a338e916623, type: 3}
+  - key: Fonts/Crimson-Bold
+    assets:
+    - {fileID: 2100000, guid: feb885b141d08e34b950775a3338bf34, type: 3}
+    - {fileID: 2800000, guid: feb885b141d08e34b950775a3338bf34, type: 3}
+    - {fileID: 12800000, guid: feb885b141d08e34b950775a3338bf34, type: 3}
+  - key: Gathering/GatheringSettings
+    assets:
+    - {fileID: 11400000, guid: f56ac9da4bcffc045b90e2e8c1318ad1, type: 2}
   - key: Gathering/HerbLoot
     assets:
     - {fileID: 11400000, guid: 18e1011b76a74ed998756ca7fb9749a9, type: 2}
   - key: Gathering/HerbNode
     assets:
     - {fileID: 11400000, guid: a38d9b07b08945e2a699804dcd5a5379, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.007
+    assets:
+    - {fileID: 11400000, guid: 356263e288276b64aa09201deeb7e506, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.007-Loot
+    assets:
+    - {fileID: 11400000, guid: 68d18fa309aa0a34d8408c5b53e46be9, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.008
+    assets:
+    - {fileID: 11400000, guid: e30ef211e43c891418b9b0b792d5329f, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.008-Loot
+    assets:
+    - {fileID: 11400000, guid: dab317f659fe5784aa34c43f82495bc7, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.010
+    assets:
+    - {fileID: 11400000, guid: 82c9b409e811e4b46b85e5b98ded436f, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.010-Loot
+    assets:
+    - {fileID: 11400000, guid: 95877f16a517f5a43b9cbd39abb0d9ed, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.011
+    assets:
+    - {fileID: 11400000, guid: 56e512d22715a2b46a6c616d5fb5045d, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.011-Loot
+    assets:
+    - {fileID: 11400000, guid: b306c2e843e46674cad597b47c0545d6, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.013
+    assets:
+    - {fileID: 11400000, guid: c2d54521b2811cc4aa4dc025a24cd680, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.013-Loot
+    assets:
+    - {fileID: 11400000, guid: 2f0b8694a69e65e479527be29799efb2, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.014
+    assets:
+    - {fileID: 11400000, guid: 3f81e17947551ac4691eb2fe1eadb7d0, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.014-Loot
+    assets:
+    - {fileID: 11400000, guid: 96196426831adf7408567475f84fcb09, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.017
+    assets:
+    - {fileID: 11400000, guid: f7dc7b36936d25845bc7ede76e8d7fc7, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.017-Loot
+    assets:
+    - {fileID: 11400000, guid: 96c3397d41978984884d8b24b0291760, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.018
+    assets:
+    - {fileID: 11400000, guid: c4b24785fbae31f4681da711fbd0d1eb, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.018-Loot
+    assets:
+    - {fileID: 11400000, guid: b8dc7e47b256147439577ea4c71895a3, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.019
+    assets:
+    - {fileID: 11400000, guid: 52e8284c34f9d4442a972b8eff880632, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.019-Loot
+    assets:
+    - {fileID: 11400000, guid: 56b2a18ec947af34a92c5c0927edae33, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.020
+    assets:
+    - {fileID: 11400000, guid: a029c4936e1fb694cbd47df88903b3e4, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.020-Loot
+    assets:
+    - {fileID: 11400000, guid: 55a05bda450fad3418f54d52d1f9a90b, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.021
+    assets:
+    - {fileID: 11400000, guid: d2e18755d9b34774882808e2905192f3, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.021-Loot
+    assets:
+    - {fileID: 11400000, guid: 716d82cee07e2c542a96fe378fba5c52, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.023
+    assets:
+    - {fileID: 11400000, guid: 3492c0ba4eca5994cb7f42a76f98b8be, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.023-Loot
+    assets:
+    - {fileID: 11400000, guid: ba6f7bc0c224b0a478d15295b401a4b2, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.024
+    assets:
+    - {fileID: 11400000, guid: 780647ba24e8b984183537219bd98790, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.024-Loot
+    assets:
+    - {fileID: 11400000, guid: b7d5698c513b9ef45ae4587700fe65ab, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.027
+    assets:
+    - {fileID: 11400000, guid: 25173ba5efc7346449aab0555311d99d, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.027-Loot
+    assets:
+    - {fileID: 11400000, guid: 229ab0ffcaaf4e44fb27c53f310b8dc2, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.028
+    assets:
+    - {fileID: 11400000, guid: 92d5b6d4476546741b3ac5a1670be968, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.028-Loot
+    assets:
+    - {fileID: 11400000, guid: 00a3d7d79726393458e0584fb32fe1a5, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.029
+    assets:
+    - {fileID: 11400000, guid: fc6e353dc54d4704ea6c44ba38abd509, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.029-Loot
+    assets:
+    - {fileID: 11400000, guid: 60784863c44f95249bf34f0057263d39, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.030
+    assets:
+    - {fileID: 11400000, guid: 4541bd86cabaaa44795bba665e5aa49c, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.030-Loot
+    assets:
+    - {fileID: 11400000, guid: 778d1a0e0edbfdf4cab4459ea1e2fffd, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.031
+    assets:
+    - {fileID: 11400000, guid: 8978faf66991322478848d3878815fc5, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.031-Loot
+    assets:
+    - {fileID: 11400000, guid: b2c8448374fb0424bb433f59f03c53d0, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.032
+    assets:
+    - {fileID: 11400000, guid: f3436344dcce71c4ea90086986d7df72, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.032-Loot
+    assets:
+    - {fileID: 11400000, guid: cad78b34eeeafc643a9ab05f36f033a4, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.033
+    assets:
+    - {fileID: 11400000, guid: 8c0dc90c92bf9e740b99b6f01de2613f, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.033-Loot
+    assets:
+    - {fileID: 11400000, guid: e01b04ca8d972004d99ec55dd97053b3, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.034
+    assets:
+    - {fileID: 11400000, guid: 52249825e1f6b23469c22b183e3f1530, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.034-Loot
+    assets:
+    - {fileID: 11400000, guid: 7ac125fc72a130140b1eb61fe7b14606, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.035
+    assets:
+    - {fileID: 11400000, guid: ca040c612effcde40a6ac0b63324df69, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.035-Loot
+    assets:
+    - {fileID: 11400000, guid: 7f6d5dc2d1a86b14d9ddc2a25629e3e7, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.036
+    assets:
+    - {fileID: 11400000, guid: 3fd13fab5dffc714d80ede44620dd097, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.036-Loot
+    assets:
+    - {fileID: 11400000, guid: c37175f8ea72bd24a94c074bc31720d0, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.037
+    assets:
+    - {fileID: 11400000, guid: c2ebd308624936a4589c57e411eb0342, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.037-Loot
+    assets:
+    - {fileID: 11400000, guid: 38ebf9c90f453e54b8c0f64aa0489ec1, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.038
+    assets:
+    - {fileID: 11400000, guid: b6aab2511165398469fb69d01944831f, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.038-Loot
+    assets:
+    - {fileID: 11400000, guid: 273b292723ded7c4b859bd3cda303253, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.039
+    assets:
+    - {fileID: 11400000, guid: e590db9961eca3c439dccbd13ec4a2e0, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.039-Loot
+    assets:
+    - {fileID: 11400000, guid: 44a7d5ecac5d7834dbcfc7089cc905ea, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.040
+    assets:
+    - {fileID: 11400000, guid: 6126dd7414d2cef40902029a381607c2, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.040-Loot
+    assets:
+    - {fileID: 11400000, guid: ad9f51718d9b33543a5304381adb266c, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.041
+    assets:
+    - {fileID: 11400000, guid: 54b7505bdb9ec2846861c9a24a5bb8a3, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.041-Loot
+    assets:
+    - {fileID: 11400000, guid: 52b81c8b62c0d4445a4dd0f35bfa3dab, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.042
+    assets:
+    - {fileID: 11400000, guid: aca5aa93bd23c6540b826a8056b507eb, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.042-Loot
+    assets:
+    - {fileID: 11400000, guid: 708edbd18ee410f4c805ef04b59cac30, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.044
+    assets:
+    - {fileID: 11400000, guid: 8ecb55a4caabbd145be825f1f50fe591, type: 2}
+  - key: Gathering/Minerals/crystal_basalt_green.044-Loot
+    assets:
+    - {fileID: 11400000, guid: 5123fd385a1d21343aec2cd886518416, type: 2}
   - key: Gathering/MonsterComponentLoot
     assets:
     - {fileID: 11400000, guid: 582c0776621b425fbe268b43e8dbb274, type: 2}
@@ -131,6 +297,18 @@ MonoBehaviour:
   - key: Gathering/WoodNode
     assets:
     - {fileID: 11400000, guid: 69d22ffa01ac421897525b87954ab08b, type: 2}
+  - key: GatheringSettings
+    assets:
+    - {fileID: 11400000, guid: f56ac9da4bcffc045b90e2e8c1318ad1, type: 2}
+  - key: InventorySettings
+    assets:
+    - {fileID: 11400000, guid: 6e4014a712454e3ea3a58c560977ebfc, type: 2}
+  - key: InventoryUIIcons
+    assets:
+    - {fileID: 11400000, guid: e3245260e0634f6d84c6094ad94ae854, type: 2}
+  - key: ItemCatalog
+    assets:
+    - {fileID: 11400000, guid: a4edb159c1a84cd48c551f10a5f32ede, type: 2}
   - key: Localization/Game Shared Data
     assets:
     - {fileID: 11400000, guid: 251a87136e2e3c142b3d5f8a360cca0c, type: 2}
@@ -140,9 +318,24 @@ MonoBehaviour:
   - key: Localization/Game_es
     assets:
     - {fileID: 11400000, guid: 86744fe0ba80292498e654fb9e983077, type: 2}
+  - key: Localization/LocalizationSettings
+    assets:
+    - {fileID: 11400000, guid: d4ae4057a14dc6745a62c1fc2ee12d3d, type: 2}
   - key: Localization/Translations
     assets:
     - {fileID: 4900000, guid: 404df4d3a3218b94189ab391c78819ea, type: 3}
+  - key: Localization/en
+    assets:
+    - {fileID: 11400000, guid: 63efda0f8753d5c4f821cdc8f7d9eaa5, type: 2}
+  - key: Localization/es
+    assets:
+    - {fileID: 11400000, guid: 4eafeb58f8e88c1419084bcda6d21889, type: 2}
+  - key: MapMarkerCatalog
+    assets:
+    - {fileID: 11400000, guid: 328ff820e9de4132b06773de1fba3a2e, type: 2}
+  - key: MapPortrait
+    assets:
+    - {fileID: 4800000, guid: 097c252697df4d31b02f1cc8d229e76f, type: 3}
   - key: Materials/ArcaneCrystal
     assets:
     - {fileID: 11400000, guid: 50b271ce6280fb849957ee980def5432, type: 2}
@@ -170,6 +363,9 @@ MonoBehaviour:
   - key: Materials/Wood
     assets:
     - {fileID: 11400000, guid: bc76b6759a9645589f70766dbde4bd8f, type: 2}
+  - key: ProgressionRules
+    assets:
+    - {fileID: 11400000, guid: 7a33d622deef47479b040099364378c4, type: 2}
   - key: Recipes/ArcaneWeaponUpgrade
     assets:
     - {fileID: 11400000, guid: d04746c370d80c9408754d0482dd1cdd, type: 2}
@@ -197,192 +393,13 @@ MonoBehaviour:
   - key: Recipes/Whetstone
     assets:
     - {fileID: 11400000, guid: b89240d491efa39428abe5b73a17c119, type: 2}
-  - key: Audio/Music/Combat
+  - key: StartingWeapons
     assets:
-    - {fileID: 8300000, guid: 6bd048ce52d645f2a4e426b51eb6e846, type: 3}
-  - key: Audio/Music/Exploration
+    - {fileID: 11400000, guid: b5628223188ddb04c932ee754962f437, type: 2}
+  - key: TerrainSurface
     assets:
-    - {fileID: 8300000, guid: 6a1a2392ab9d41dbaec48ca4220b577e, type: 3}
-  - key: Gathering/Minerals/crystal_basalt_green.007-Loot
-    assets:
-    - {fileID: 11400000, guid: 68d18fa309aa0a34d8408c5b53e46be9, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.007
-    assets:
-    - {fileID: 11400000, guid: 356263e288276b64aa09201deeb7e506, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.008-Loot
-    assets:
-    - {fileID: 11400000, guid: dab317f659fe5784aa34c43f82495bc7, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.008
-    assets:
-    - {fileID: 11400000, guid: e30ef211e43c891418b9b0b792d5329f, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.010-Loot
-    assets:
-    - {fileID: 11400000, guid: 95877f16a517f5a43b9cbd39abb0d9ed, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.010
-    assets:
-    - {fileID: 11400000, guid: 82c9b409e811e4b46b85e5b98ded436f, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.011-Loot
-    assets:
-    - {fileID: 11400000, guid: b306c2e843e46674cad597b47c0545d6, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.011
-    assets:
-    - {fileID: 11400000, guid: 56e512d22715a2b46a6c616d5fb5045d, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.013-Loot
-    assets:
-    - {fileID: 11400000, guid: 2f0b8694a69e65e479527be29799efb2, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.013
-    assets:
-    - {fileID: 11400000, guid: c2d54521b2811cc4aa4dc025a24cd680, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.014-Loot
-    assets:
-    - {fileID: 11400000, guid: 96196426831adf7408567475f84fcb09, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.014
-    assets:
-    - {fileID: 11400000, guid: 3f81e17947551ac4691eb2fe1eadb7d0, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.017-Loot
-    assets:
-    - {fileID: 11400000, guid: 96c3397d41978984884d8b24b0291760, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.017
-    assets:
-    - {fileID: 11400000, guid: f7dc7b36936d25845bc7ede76e8d7fc7, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.018-Loot
-    assets:
-    - {fileID: 11400000, guid: b8dc7e47b256147439577ea4c71895a3, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.018
-    assets:
-    - {fileID: 11400000, guid: c4b24785fbae31f4681da711fbd0d1eb, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.019-Loot
-    assets:
-    - {fileID: 11400000, guid: 56b2a18ec947af34a92c5c0927edae33, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.019
-    assets:
-    - {fileID: 11400000, guid: 52e8284c34f9d4442a972b8eff880632, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.020-Loot
-    assets:
-    - {fileID: 11400000, guid: 55a05bda450fad3418f54d52d1f9a90b, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.020
-    assets:
-    - {fileID: 11400000, guid: a029c4936e1fb694cbd47df88903b3e4, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.021-Loot
-    assets:
-    - {fileID: 11400000, guid: 716d82cee07e2c542a96fe378fba5c52, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.021
-    assets:
-    - {fileID: 11400000, guid: d2e18755d9b34774882808e2905192f3, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.023-Loot
-    assets:
-    - {fileID: 11400000, guid: ba6f7bc0c224b0a478d15295b401a4b2, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.023
-    assets:
-    - {fileID: 11400000, guid: 3492c0ba4eca5994cb7f42a76f98b8be, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.024-Loot
-    assets:
-    - {fileID: 11400000, guid: b7d5698c513b9ef45ae4587700fe65ab, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.024
-    assets:
-    - {fileID: 11400000, guid: 780647ba24e8b984183537219bd98790, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.027-Loot
-    assets:
-    - {fileID: 11400000, guid: 229ab0ffcaaf4e44fb27c53f310b8dc2, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.027
-    assets:
-    - {fileID: 11400000, guid: 25173ba5efc7346449aab0555311d99d, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.028-Loot
-    assets:
-    - {fileID: 11400000, guid: 00a3d7d79726393458e0584fb32fe1a5, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.028
-    assets:
-    - {fileID: 11400000, guid: 92d5b6d4476546741b3ac5a1670be968, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.029-Loot
-    assets:
-    - {fileID: 11400000, guid: 60784863c44f95249bf34f0057263d39, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.029
-    assets:
-    - {fileID: 11400000, guid: fc6e353dc54d4704ea6c44ba38abd509, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.030-Loot
-    assets:
-    - {fileID: 11400000, guid: 778d1a0e0edbfdf4cab4459ea1e2fffd, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.030
-    assets:
-    - {fileID: 11400000, guid: 4541bd86cabaaa44795bba665e5aa49c, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.031-Loot
-    assets:
-    - {fileID: 11400000, guid: b2c8448374fb0424bb433f59f03c53d0, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.031
-    assets:
-    - {fileID: 11400000, guid: 8978faf66991322478848d3878815fc5, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.032-Loot
-    assets:
-    - {fileID: 11400000, guid: cad78b34eeeafc643a9ab05f36f033a4, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.032
-    assets:
-    - {fileID: 11400000, guid: f3436344dcce71c4ea90086986d7df72, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.033-Loot
-    assets:
-    - {fileID: 11400000, guid: e01b04ca8d972004d99ec55dd97053b3, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.033
-    assets:
-    - {fileID: 11400000, guid: 8c0dc90c92bf9e740b99b6f01de2613f, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.034-Loot
-    assets:
-    - {fileID: 11400000, guid: 7ac125fc72a130140b1eb61fe7b14606, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.034
-    assets:
-    - {fileID: 11400000, guid: 52249825e1f6b23469c22b183e3f1530, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.035-Loot
-    assets:
-    - {fileID: 11400000, guid: 7f6d5dc2d1a86b14d9ddc2a25629e3e7, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.035
-    assets:
-    - {fileID: 11400000, guid: ca040c612effcde40a6ac0b63324df69, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.036-Loot
-    assets:
-    - {fileID: 11400000, guid: c37175f8ea72bd24a94c074bc31720d0, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.036
-    assets:
-    - {fileID: 11400000, guid: 3fd13fab5dffc714d80ede44620dd097, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.037-Loot
-    assets:
-    - {fileID: 11400000, guid: 38ebf9c90f453e54b8c0f64aa0489ec1, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.037
-    assets:
-    - {fileID: 11400000, guid: c2ebd308624936a4589c57e411eb0342, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.038-Loot
-    assets:
-    - {fileID: 11400000, guid: 273b292723ded7c4b859bd3cda303253, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.038
-    assets:
-    - {fileID: 11400000, guid: b6aab2511165398469fb69d01944831f, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.039-Loot
-    assets:
-    - {fileID: 11400000, guid: 44a7d5ecac5d7834dbcfc7089cc905ea, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.039
-    assets:
-    - {fileID: 11400000, guid: e590db9961eca3c439dccbd13ec4a2e0, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.040-Loot
-    assets:
-    - {fileID: 11400000, guid: ad9f51718d9b33543a5304381adb266c, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.040
-    assets:
-    - {fileID: 11400000, guid: 6126dd7414d2cef40902029a381607c2, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.041-Loot
-    assets:
-    - {fileID: 11400000, guid: 52b81c8b62c0d4445a4dd0f35bfa3dab, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.041
-    assets:
-    - {fileID: 11400000, guid: 54b7505bdb9ec2846861c9a24a5bb8a3, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.042-Loot
-    assets:
-    - {fileID: 11400000, guid: 708edbd18ee410f4c805ef04b59cac30, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.042
-    assets:
-    - {fileID: 11400000, guid: aca5aa93bd23c6540b826a8056b507eb, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.044-Loot
-    assets:
-    - {fileID: 11400000, guid: 5123fd385a1d21343aec2cd886518416, type: 2}
-  - key: Gathering/Minerals/crystal_basalt_green.044
-    assets:
-    - {fileID: 11400000, guid: 8ecb55a4caabbd145be825f1f50fe591, type: 2}
+    - {fileID: 2100000, guid: 2f882507da2a57744b183ac2b315783b, type: 2}
+    - {fileID: 4800000, guid: 2a0ebe2644ebc6546951a0197e6d1cb7, type: 3}
   - key: UI/HUD/MinimapFrame-Silver
     assets:
     - {fileID: 2800000, guid: ba5d67f2049a422baa857c55a158ae39, type: 3}
@@ -401,6 +418,33 @@ MonoBehaviour:
   - key: UI/HUD/VitalsPaintedFrames
     assets:
     - {fileID: 2800000, guid: 3daf035317e14c0ca4d2bf3301654c88, type: 3}
+  - key: UI/PixelFrames/Crosshair
+    assets:
+    - {fileID: 2800000, guid: b772f220063149c89d6fa20a1811714e, type: 3}
+  - key: UI/PixelFrames/Frame
+    assets:
+    - {fileID: 2800000, guid: e7436df2956d49ca8a46fbf1170a3955, type: 3}
+  - key: UI/PixelFrames/Panel
+    assets:
+    - {fileID: 2800000, guid: 792af476f81e4541909558c6ee19c3b1, type: 3}
+  - key: WorldContentCatalog
+    assets:
+    - {fileID: 11400000, guid: 97a0247d62674696bdc8ce8dcff8a4ee, type: 2}
+  - key: WorldMap
+    assets:
+    - {fileID: 4800000, guid: 610e1cc189e3e5f41a85013cce302ee0, type: 3}
+  - key: UI/Recipes
+    assets:
+    - {fileID: 11400000, guid: 22a3138aa4816a943bf9b9001df80606, type: 2}
+  - key: QuestCatalog
+    assets:
+    - {fileID: 11400000, guid: 803ee22fde9bbd143af23017fbe4c456, type: 2}
+  - key: Recipes/QuestTravelSalve
+    assets:
+    - {fileID: 11400000, guid: e0db93e8a2d04194cac8509f3b9ec40f, type: 2}
+  - key: Recipes/QuestFieldWhetstone
+    assets:
+    - {fileID: 11400000, guid: 368b7643136a9484eb994efcf6c99ec0, type: 2}
   discoveryFolders:
   - path: Assets/Art/Audio
     keyPrefix: Audio

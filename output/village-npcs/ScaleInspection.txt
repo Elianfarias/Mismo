@@ -1,0 +1,47 @@
+Assets/Art/Prefabs/Player/Player.prefab visible bounds=Center: (0.00, 1.30, 0.00), Extents: (1.60, 1.60, 1.60)
+Hood crown y=-0,3..2,9
+Voxel_Base_GameReady y=-0,3..2,9
+Hood upper step y=1,771659..1,818052
+Hood back y=1,446096..1,729614
+Hood side y=1,438788..1,728197
+Hood side.001 y=1,438788..1,728197
+Face shadow y=1,46043..1,686486
+Eye violet y=1,559391..1,615436
+Eye violet.001 y=1,559391..1,615436
+Scarf upper y=1,383282..1,473295
+Scarf lower y=1,319723..1,407384
+Shoulder plate L y=1,288489..1,36329
+child Visual scale=(1.00, 1.00, 1.00)
+child Sword Combo Hitbox scale=(1.00, 1.00, 1.00)
+child VoxelAdventurer scale=(1.00, 1.00, 1.00)
+Assets/Art/Prefabs/Quests/Village/mara.prefab visible bounds=Center: (0.00, 0.88, 0.00), Extents: (0.46, 0.88, 0.30)
+NPC_peasant_4 y=-1,192093E-07..1,75
+child NPC_peasant_4 scale=(0.97, 0.97, 0.97)
+fbx\people_unity\city_dwellers_1.fbx clips=0 source takes=0 importAnimation=True
+fbx\people_unity\city_dwellers_2.fbx clips=0 source takes=0 importAnimation=True
+fbx\people_unity\king.fbx clips=0 source takes=0 importAnimation=True
+fbx\people_unity\peasant_1.fbx clips=0 source takes=0 importAnimation=True
+fbx\people_unity\peasant_2.fbx clips=0 source takes=0 importAnimation=True
+fbx\people_unity\peasant_3.fbx clips=0 source takes=0 importAnimation=True
+fbx\people_unity\peasant_4.fbx clips=0 source takes=0 importAnimation=True
+fbx\people_unity\peasant_5.fbx clips=0 source takes=0 importAnimation=True
+fbx\people_unity\peasant_6.fbx clips=0 source takes=0 importAnimation=True
+fbx\people_unity\queen.fbx clips=0 source takes=0 importAnimation=True
+fbx\people_unity\rich_citizzens_1.fbx clips=0 source takes=0 importAnimation=True
+fbx\people_unity\rich_citizzens_2.fbx clips=0 source takes=0 importAnimation=True
+fbx\people_unity\rich_citizzens_3.fbx clips=0 source takes=0 importAnimation=True
+fbx\people_unity\rich_citizzens_4.fbx clips=0 source takes=0 importAnimation=True
+fbx\unral_better_export\city_dwellers_1.fbx clips=0 source takes=0 importAnimation=True
+fbx\unral_better_export\city_dwellers_2.fbx clips=0 source takes=0 importAnimation=True
+fbx\unral_better_export\king.fbx clips=0 source takes=0 importAnimation=True
+fbx\unral_better_export\peasant_1.fbx clips=0 source takes=0 importAnimation=True
+fbx\unral_better_export\peasant_2.fbx clips=0 source takes=0 importAnimation=True
+fbx\unral_better_export\peasant_3.fbx clips=0 source takes=0 importAnimation=True
+fbx\unral_better_export\peasant_4.fbx clips=0 source takes=0 importAnimation=True
+fbx\unral_better_export\peasant_5.fbx clips=0 source takes=0 importAnimation=True
+fbx\unral_better_export\peasant_6.fbx clips=0 source takes=0 importAnimation=True
+fbx\unral_better_export\queen.fbx clips=0 source takes=0 importAnimation=True
+fbx\unral_better_export\rich_citizens_1.fbx clips=0 source takes=0 importAnimation=True
+fbx\unral_better_export\rich_citizens_2.fbx clips=0 source takes=0 importAnimation=True
+fbx\unral_better_export\rich_citizens_3.fbx clips=0 source takes=0 importAnimation=True
+fbx\unral_better_export\rich_citizens_4.fbx clips=0 source takes=0 importAnimation=True

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdfd1e8e6dfc4701afbb313e3ea4ac0e, type: 3}
   m_Name: WorldContentCatalog
   m_EditorClassIdentifier: 
-  villageSizeMultiplier: 2
+  villageSizeMultiplier: 2.6
   villageGroundOffset: -0.19670273
   villageSpawnOffset: {x: 7.5800934, y: 0, z: 27.347897}
   villageSpawnYaw: 180
@@ -23,6 +23,14 @@ MonoBehaviour:
   clearingChance: 0.85
   roamingChance: 0.75
   roamingSpacing: 64
+  biomeContents:
+  - {fileID: 11400000, guid: 7166268d8f05620458b6267cc5d585b0, type: 2}
+  - {fileID: 11400000, guid: b97632384016bd3489243d1e3e3ae89d, type: 2}
+  - {fileID: 11400000, guid: 952c86dd980faf34d85600797b1daed2, type: 2}
+  - {fileID: 11400000, guid: 5185c49d84c9a534fbc521097fffd920, type: 2}
+  - {fileID: 11400000, guid: d3cd3e47ae4db7c46811c02bfeb42e00, type: 2}
+  - {fileID: 11400000, guid: 3e74a81d795dffc479b857ffa5f1f24a, type: 2}
+  - {fileID: 11400000, guid: 728a670d2ebcc034bbea7fdf8d939ffa, type: 2}
   grassDensity: 0.55
   bushDensity: 0.14
   flowerDensity: 0.12
@@ -510,7 +518,7 @@ MonoBehaviour:
     biomes: 
     prefab: {fileID: 2759051942343419815, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
     elitePrefab: {fileID: 5851845409795526387, guid: 4fb226918136a60439158b7df7636df3, type: 3}
-    weight: 1
+    weight: 0
     minimumCount: 3
     maximumCount: 3
     eliteChance: 0.025

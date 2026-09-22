@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf91dcd72b1a42e6af398f957a12cb53, type: 3}
+  m_Name: QuestCatalog
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Quests.QuestCatalog
+  quests:
+  - {fileID: 11400000, guid: 65caf1d81a1e1714ba8ddc25606c14e6, type: 2}
+  - {fileID: 11400000, guid: 1221ee5f95fc82b478fbec8fdf6501b8, type: 2}
+  - {fileID: 11400000, guid: 92828774890b79c4a80f7245c6c27cf1, type: 2}
+  - {fileID: 11400000, guid: 51a0c19303ea63c429228c0923696d7e, type: 2}
+  - {fileID: 11400000, guid: fa4c4695a5aa2294f99dee852d457865, type: 2}
+  - {fileID: 11400000, guid: e7b35b3f692b0614cbd0469e82f406ca, type: 2}
+  - {fileID: 11400000, guid: 34f3e9d4e3d88e94696a6bf9abb9b289, type: 2}
+  journalContacts: 0
+  villageNpcs: {fileID: 11400000, guid: 4f1f9755544587b43af7e3011e33390f, type: 2}
+  journalKey: 24
+  interactKey: 34
+  interactionPromptOffset: {x: 0, y: 145}
+  showTracker: 1
+  trackerOffset: {x: 12, y: 80}
+  trackerWidth: 350
+  panelOpacity: 1
+  journalIcon: {fileID: 2800000, guid: 33d3822866a626f4685c7dbfbb466d7b, type: 3}
+  radialSurface: {fileID: 2800000, guid: 04cc9d93f9b47a2419b798aa45f74a76, type: 3}
+  radialOutline: {fileID: 2800000, guid: 2f51c904c8190f046b79bac8248fdd81, type: 3}
+  radialSelected:
+  - {fileID: 2800000, guid: c13e7cfa553bec04e86ddc4304168b86, type: 3}
+  - {fileID: 2800000, guid: c76695cf53bd1794eb185b4a9b473467, type: 3}
+  - {fileID: 2800000, guid: a9f0dce6ce40a77429d8daed9ef184de, type: 3}
+  - {fileID: 2800000, guid: d5168b5c41a47cd4bbcad9c9cdee71c3, type: 3}
+  - {fileID: 2800000, guid: b54f5dcc7d5eee548af3f9783a71cec2, type: 3}
+  - {fileID: 2800000, guid: bc412d43bbc789a4f8d6260eba8d1b34, type: 3}
+  - {fileID: 2800000, guid: c4ea1a5775e11c94ea59e9a49c36e73e, type: 3}
+  - {fileID: 2800000, guid: a9c4662b9645f414097f5ab19f929e3e, type: 3}

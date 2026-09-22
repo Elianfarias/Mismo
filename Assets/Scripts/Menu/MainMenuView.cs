@@ -27,9 +27,9 @@ namespace Mismo.Menu
         Button openCredits;
         [Header("Créditos de iconos")]
         [TextArea(2,5)] public string flaticonAttribution="Iconos de Flaticon · www.flaticon.com";
-        Sprite fantasyFrame;
+        Sprite fantasyFrame, pixelPanel;
         readonly System.Collections.Generic.Dictionary<Text,string> originalLabels=new System.Collections.Generic.Dictionary<Text,string>();
-        void OnDestroy(){L.Changed-=RefreshLanguage;if(fantasyFrame!=null)Destroy(fantasyFrame);}
+        void OnDestroy(){L.Changed-=RefreshLanguage;if(fantasyFrame!=null)Destroy(fantasyFrame);if(pixelPanel!=null)Destroy(pixelPanel);}
         void RefreshLanguage(){foreach(var pair in originalLabels)if(pair.Key!=null)pair.Key.text=L.Text(pair.Value);}
         void Awake()
         {
@@ -65,19 +65,24 @@ namespace Mismo.Menu
         void ApplyFantasyStyle()
         {
             var texture=FantasyUI.FrameTexture;if(texture==null)return;
-            fantasyFrame=Sprite.Create(texture,new Rect(0,0,texture.width,texture.height),new Vector2(.5f,.5f),100,0,SpriteMeshType.FullRect,new Vector4(12,12,12,12));
+            var slices=Vector4.one*FantasyUI.Slice;
+            fantasyFrame=Sprite.Create(texture,new Rect(0,0,texture.width,texture.height),new Vector2(.5f,.5f),100,0,SpriteMeshType.FullRect,slices);
+            var surface=FantasyUI.PanelTexture;
+            if(surface!=null)pixelPanel=Sprite.Create(surface,new Rect(0,0,surface.width,surface.height),new Vector2(.5f,.5f),100,0,SpriteMeshType.FullRect,slices);
             foreach(var control in GetComponentsInChildren<Button>(true))
             {
                 var image=control.targetGraphic as Image;if(image==null)continue;
-                image.color=new Color(.10f,.14f,.17f);
+                image.sprite=pixelPanel;image.type=Image.Type.Simple;image.color=Color.white;
+                AddFantasyFrame(control.transform,Color.white);
                 var label=control.GetComponentInChildren<Text>();if(label!=null)label.color=new Color(.94f,.90f,.79f);
-                AddFantasyFrame(control.transform,new Color(.72f,.65f,.46f));
+                var colors=control.colors;colors.normalColor=Color.white;colors.highlightedColor=PlayerHUD.Gold;colors.selectedColor=PlayerHUD.Gold;control.colors=colors;
             }
             var panel=transform.Find("Menu panel");
             if(panel!=null)
             {
                 var edge=panel.Find("Gold edge");if(edge!=null)edge.gameObject.SetActive(false);
-                AddFantasyFrame(panel,new Color(.72f,.65f,.46f));
+                var background=panel.GetComponent<Image>();if(background!=null){background.sprite=pixelPanel;background.type=Image.Type.Simple;background.color=Color.white;}
+                AddFantasyFrame(panel,Color.white);
             }
         }
         void AddFantasyFrame(Transform parent,Color tint)
@@ -88,6 +93,8 @@ namespace Mismo.Menu
         }
         void Update()
         {
+            // Update the shared texture in place so Inspector changes reach existing Canvas sprites.
+            _=FantasyUI.PanelTexture;
             if(!loading&&credits!=null&&credits.activeSelf&&Keyboard.current!=null&&Keyboard.current.escapeKey.wasPressedThisFrame){ShowOptions(false);return;}
             if(!loading && OptionsVisible && Keyboard.current!=null && Keyboard.current.escapeKey.wasPressedThisFrame)ShowOptions(false);
         }
@@ -104,7 +111,7 @@ namespace Mismo.Menu
         {
             credits=Box("Créditos",home.transform.parent,new Vector2(42,235),new Vector2(450,420),Color.clear).gameObject;
             Label(credits.transform,"CRÉDITOS",Vector2.zero,new Vector2(450,38),27,Color.white);
-            Label(credits.transform,"Lorc y Skoll · Game-icons.net\nCC BY 3.0 · Escala y tinte adaptados\ncreativecommons.org/licenses/by/3.0\n\nCagliostro · Matthew Desmond · SIL OFL 1.1\n\nFantasy UI Borders · Kenney · CC0\n\n"+flaticonAttribution,new Vector2(0,52),new Vector2(450,275),18,new Color(.85f,.87f,.81f));
+            Label(credits.transform,"Lorc y Skoll · Game-icons.net\nCC BY 3.0 · Escala y tinte adaptados\ncreativecommons.org/licenses/by/3.0\n\nCagliostro · Matthew Desmond · SIL OFL 1.1\n\nFantasy UI Borders · Kenney · CC0\n\nUicons · flaticon.com/uicons\n"+flaticonAttribution,new Vector2(0,52),new Vector2(450,275),18,new Color(.85f,.87f,.81f));
             var returnButton=ButtonAt(credits.transform,"Volver",340,false);
             returnButton.onClick.AddListener(()=>ShowOptions(false));
             credits.SetActive(false);

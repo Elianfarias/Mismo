@@ -8,11 +8,29 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         [Header("Live theme preview")]
         [Tooltip("On: olive/brown. Off: slate gray/blue. Updates while the inventory is open in Play mode.")]
         public bool useOliveTheme;
+        [Header("Fondo global de menús — cambios en vivo")]
+        [Tooltip("Color compartido por inventario, pausa, recetas, misiones y paneles FantasyUI. No tiñe textos, objetos ni marcos.")]
+        public Color menuBackgroundColor=new Color(.12f,.15f,.17f,1);
+        [Range(0,1)] public float menuCenterOpacity=.88f;
+        [Range(0,1)] public float menuEdgeOpacity=.18f;
+        [Tooltip("Ancho relativo del desvanecido hacia los bordes. Un valor alto produce una transición más amplia.")]
+        [Range(.05f,1)] public float menuEdgeFade=.65f;
+        [Tooltip("Desenfoca el escenario al abrir pausa o los menús del jugador. No afecta al texto ni a los iconos.")]
+        public bool menuBackgroundBlur=true;
+        [Range(.5f,1.5f)] public float menuBlurRadius=1.5f;
         [Header("Opacity — live preview")]
         [Tooltip("Fondo de inventario, personaje y sus pestañas. 0 transparente; 1 opaco.")]
         [Range(0,1)] public float panelOpacity=1f;
+        [Tooltip("Transparencia del fondo dentro del panel de mochila; no oscurece el mundo fuera del menú.")]
+        [Range(0,1)] public float inventoryBackgroundOpacity=.7f;
+        [Tooltip("Intensidad de los slots vacíos. Los ocupados conservan un único marco por objeto.")]
+        [Range(0,1)] public float emptyInventorySlotOpacity=.16f;
         [Tooltip("Iconos de navegación y del menú radial. No modifica los textos ni las imágenes de objetos.")]
         [Range(0,1)] public float navigationIconOpacity=1f;
+        [Range(12,36)] public float navigationIconSize=24;
+        [Range(8,28)] public float closeIconSize=14;
+        public Texture2D upgrades;
+        public Texture2D eye, eyeCrossed;
         public Texture2D oliveWeaponSlotBackground, oliveConsumableSlotBackground;
         public Rect oliveWeaponSlotUV=new Rect(0,0,1,1), oliveConsumableSlotUV=new Rect(0,0,1,1);
         public Texture2D close, menu, organize, all, weapons, materials, consumables, favorites, backpack;
@@ -23,7 +41,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         [Header("Bestiary navigation")]
         public Texture2D previousPage, nextPage;
         [Header("Radial menu — configurable icons")]
-        public Texture2D radialCharacter, radialInventory, radialMap, radialMounts, radialBestiary, radialSkills;
+        public Texture2D radialCharacter, radialInventory, radialMap, radialMounts, radialBestiary, radialSkills, radialRecipes, radialQuests;
         [Tooltip("Vacío utiliza Close (cross).")]
         public Texture2D radialCancel;
         [Header("Radial menu — hover sound")]
@@ -53,9 +71,9 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public Vector2 hudHealthOffset=Vector2.zero;
         [Tooltip("Desplazamiento independiente de stamina.")]
         public Vector2 hudStaminaOffset=new Vector2(0,15);
-        [Tooltip("Desplazamiento independiente de focus.")]
+        [HideInInspector] // Legacy serialized layout; Focus now lives on each ability's perimeter.
         public Vector2 hudFocusOffset=new Vector2(0,30);
-        [Min(1),Tooltip("Ancho compartido de las tres barras.")]
+        [Min(1),Tooltip("Ancho compartido de las barras de vida y stamina.")]
         public float hudVitalsWidth=380;
         [Header("HUD action bars layout — live")]
         [Tooltip("Desplazamiento vertical de las habilidades respecto a su posición inferior. Valores negativos las suben.")]

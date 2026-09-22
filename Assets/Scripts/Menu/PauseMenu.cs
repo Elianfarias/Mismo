@@ -16,6 +16,7 @@ namespace Mismo.Menu
         bool opened,options,confirmExit,vsync,uiEditor;
         int tab,mode,resolution,quality,fps;
         InventoryUIIcons icons;
+        readonly MenuBackgroundBlur backgroundBlur=new MenuBackgroundBlur();
         readonly List<Vector2Int> resolutions=new List<Vector2Int>();
         static readonly int[] FrameCaps={30,60,90,120,144,240,-1};
         static readonly FullScreenMode[] Modes={FullScreenMode.Windowed,FullScreenMode.FullScreenWindow,FullScreenMode.ExclusiveFullScreen};
@@ -46,6 +47,11 @@ namespace Mismo.Menu
             if(opened){if(uiEditor)EndUIEditor();else if(revertAt>0)RevertDisplay();else if(confirmExit)confirmExit=false;else if(options)options=false;else Resume();return;}
             if(!InventoryPanel.AnyOpen&&!WorldMapPanel.BlocksGameplay)Open();
         }
+        void LateUpdate()
+        {
+            backgroundBlur.Update(icons!=null&&icons.menuBackgroundBlur&&
+                (opened||InventoryPanel.AnyOpen||WorldMapPanel.AnyOpen),icons!=null?icons.menuBlurRadius:1.5f);
+        }
         public void Open()
         {
             if(GameplayPause.IsPaused||InventoryPanel.AnyOpen||WorldMapPanel.BlocksGameplay)return;
@@ -55,7 +61,7 @@ namespace Mismo.Menu
         {if(!opened)return;if(uiEditor)EndUIEditor();if(revertAt>0)RevertDisplay();opened=false;GameplayPause.Resume();PlayerPrefs.Save();GameAudio.Play(GameSound.MenuClose);}
         void BeginUIEditor(){uiEditor=true;options=false;PlayerHUD.SetUIEditMode(true);GameAudio.Play(GameSound.MenuOpen);}
         void EndUIEditor(){uiEditor=false;PlayerHUD.SetUIEditMode(false);options=true;PlayerPrefs.Save();GameAudio.Play(GameSound.MenuClose);}
-        void OnDisable(){Resume();}
+        void OnDisable(){Resume();backgroundBlur.Dispose();}
         void ReadSettings()
         {
             resolutions.Clear();foreach(var value in Screen.resolutions){var size=new Vector2Int(value.width,value.height);if(!resolutions.Contains(size))resolutions.Add(size);}
@@ -81,14 +87,12 @@ namespace Mismo.Menu
         {
             if(!opened)return;var matrix=GUI.matrix;int depth=GUI.depth;GUI.depth=-100;
             float opacity=icons!=null?Mathf.Clamp01(icons.panelOpacity):1;
-            PlayerHUD.Fill(new Rect(0,0,Screen.width,Screen.height),new Color(.015f,.022f,.03f,.3f*opacity));
             float scale=Mathf.Min(Screen.width/1280f,Screen.height/800f)*.9f;
             GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-1280*scale)/2,(Screen.height-800*scale)/2,0),Quaternion.identity,Vector3.one*scale);
             var panel=options?new Rect(155,80,970,640):new Rect(460,250,360,285);
             if(uiEditor)
             {
-                PlayerHUD.Fill(new Rect(320,20,640,290),icons!=null&&icons.useOliveTheme?new Color(.20f,.27f,.18f,.94f):new Color(.105f,.15f,.21f,.94f));
-                U.Border(new Rect(320,20,640,290),U.Rule);
+                FantasyUI.Panel(new Rect(320,20,640,290),opacity);
                 Text(390,40,250,"Modificar HUD",24);
                 Text(390,70,320,"Arrastrá cada bloque para moverlo",16);
                 if(icons!=null)
@@ -113,9 +117,9 @@ namespace Mismo.Menu
                 if(icons!=null&&Button(new Rect(390,255,220,30),icons.hudShowActionSeparators?"Pipes: visibles":"Pipes: ocultos")){icons.hudShowActionSeparators=!icons.hudShowActionSeparators;PlayerPrefs.SetInt("Mismo.HUD.ActionSeparators",icons.hudShowActionSeparators?1:0);}
                 GUI.matrix=matrix;GUI.depth=depth;return;
             }
-            PlayerHUD.Fill(panel,icons!=null&&icons.useOliveTheme?new Color(.20f,.27f,.18f,opacity):new Color(.105f,.15f,.21f,opacity));
+            FantasyUI.Panel(panel,opacity);
             U.Border(new Rect(panel.x+28,panel.y+75,panel.width-56,1),U.Rule);Text(panel.x+30,panel.y+23,350,options?"Opciones":"Pausa",27);
-            if(IconButton(new Rect(panel.xMax-68,panel.y+18,42,42),icons?.close,"×"))Resume();
+            if(U.CloseButton(new Rect(panel.xMax-68,panel.y+18,42,42)))Resume();
             if(revertAt>0)
             {
                 Text(panel.x+35,panel.y+115,panel.width-70,"¿Conservar la configuración de pantalla?",23);

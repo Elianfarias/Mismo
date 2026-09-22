@@ -67,7 +67,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 writable = result != ProfileReadResult.Invalid;
                 profile = payload != null ? JsonUtility.FromJson<InventoryProfile>(payload) : CreateStartingProfile();
                 if (!profile.IsValid(definitions, rewards)) throw new InvalidDataException("Invalid starting profile.");
-                bool migrated=profile.version<5;
+                bool migrated=profile.version<6;
                 profile.UpgradeToCurrent();profile.UpgradeMountCollection();NormalizeGrid(profile);
                 if (result == ProfileReadResult.Invalid)
                 { Notice = "No se pudo recuperar el guardado. Tus archivos se conservaron; no se guardarán cambios."; HasSaveProblem = true; }
@@ -91,6 +91,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 Debug.LogWarning("Inventory initialization: " + e.Message, this);
             }
             if(IsReady && GetComponent<InventoryWorldAccess>()==null)gameObject.AddComponent<InventoryWorldAccess>();
+            if(IsReady&&GetComponent<Quests.QuestInteraction>()==null)gameObject.AddComponent<Quests.QuestInteraction>();
             worldClock=profile.worldPlaySeconds;
             if(IsReady&&GetComponent<World.RegionRespawn>()!=null&&GetComponent<World.GatheringPlayer>()==null)gameObject.AddComponent<World.GatheringPlayer>();
             if(IsReady&&GetComponent<World.RegionRespawn>()!=null&&GetComponent<World.CompanionPlayer>()==null)gameObject.AddComponent<World.CompanionPlayer>();
@@ -116,8 +117,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 if(loaded?.IsValid(definitions,rewards)!=true)return false;
                 for(int i=0;i<2;i++)
                 {
-                    var main=catalog.Find(loaded.Find(loaded.equipped[i]).definitionId);
-                    if(main.isShield)return false;
+                    var main=catalog.Find(loaded.Find(loaded.equipped[i])?.definitionId);
+                    if(main!=null&&main.isShield)return false;
                     var off=loaded.Find(loaded.Offhand(i));
                     if(off!=null&&!Compatible(main,catalog.Find(off.definitionId)))return false;
                 }
@@ -181,9 +182,9 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(weapon==loadout.GetSlot(0))return profile.Find(profile.equipped[0]);
             if(weapon==loadout.GetSlot(1))return profile.Find(profile.equipped[1]);
             var active=profile.Find(profile.equipped[profile.activeSlot]);
-            if(active.definitionId==weapon.Id)return active;
+            if(active?.definitionId==weapon.Id)return active;
             var secondary=profile.Find(profile.equipped[1-profile.activeSlot]);
-            return secondary.definitionId==weapon.Id?secondary:null;
+            return secondary?.definitionId==weapon.Id?secondary:null;
         }
         public float DamageMultiplier(WeaponDefinition weapon)
         {
@@ -327,7 +328,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
 
         public bool TryEquip(int slot, string instanceId)
         {
-            if (!IsReady || !loadout.CanChangeEquipment || Definition(instanceId)==null || Definition(instanceId).isShield) return false;
+            if (!IsReady || !loadout.CanChangeEquipment || instanceId!=null&&(Definition(instanceId)==null || Definition(instanceId).isShield)) return false;
             var next = profile.Copy();
             if(!next.TryEquip(slot,instanceId))return false;
             NormalizeHands(next);

@@ -36,7 +36,11 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
     [Serializable]
     public sealed class InventoryProfile
     {
-        public int version = 5;
+        public int version = 6;
+        public List<Mismo.Gameplay.Player.Quests.QuestProgress> quests=new List<Mismo.Gameplay.Player.Quests.QuestProgress>();
+        public List<string> learnedRecipes=new List<string>();
+        public string trackedQuest;
+        public int questCoins;
         public string[] consumableSlots;
         public double worldPlaySeconds;
         public double potionReadyAt, weaponBuffUntil;
@@ -117,6 +121,9 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             copy.offhands=offhands==null?null:(string[])offhands.Clone();
             copy.consumableSlots=consumableSlots==null?null:(string[])consumableSlots.Clone();
             copy.worldPlaySeconds=worldPlaySeconds;
+            copy.questCoins=questCoins;copy.trackedQuest=trackedQuest;
+            copy.learnedRecipes=new List<string>(learnedRecipes??new List<string>());
+            if(quests!=null)foreach(var quest in quests)copy.quests.Add(quest.Copy());
             copy.potionReadyAt=potionReadyAt;copy.weaponBuffUntil=weaponBuffUntil;
             copy.buffedWeaponId=buffedWeaponId;copy.weaponBuffDamage=weaponBuffDamage;
             if(speciesDefeats!=null)foreach(var species in speciesDefeats)copy.speciesDefeats.Add(species.Copy());
@@ -141,9 +148,9 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
 
         public bool TryEquip(int slot, string id)
         {
-            if (slot < 0 || slot > 1 || Find(id) == null || Find(id).inChest || equipped[slot] == id) return false;
+            if (slot < 0 || slot > 1 || id!=null&&(Find(id) == null || Find(id).inChest) || equipped[slot] == id) return false;
             int other = 1 - slot;
-            if (equipped[other] == id) equipped[other] = equipped[slot];
+            if (id!=null&&equipped[other] == id) equipped[other] = equipped[slot];
             equipped[slot] = id;
             if(offhands!=null)for(int i=0;i<offhands.Length;i++)if(offhands[i]==id)offhands[i]=null;
             return true;
@@ -160,6 +167,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
 
         public bool IsValid(ISet<string> definitions, IDictionary<string, string> rewards)
         {
+            if(version>=6&&!Mismo.Gameplay.Player.Quests.QuestRules.ValidSave(this))return false;
             if(consumableSlots!=null&&consumableSlots.Length>0)
             {
                 if(consumableSlots.Length!=4)return false;
@@ -227,7 +235,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             worldIds.Clear();
             if(defeatedEnemies!=null){if(defeatedEnemies.Count>16384)return false;foreach(var id in defeatedEnemies)
                 if(string.IsNullOrEmpty(id)||id.Length>160||!worldIds.Add(id))return false;}
-            if ((version < 1 || version > 5) || weapons == null || weapons.Count < 2 || weapons.Count > 256 ||
+            if ((version < 1 || version > 6) || weapons == null || weapons.Count < 2 || weapons.Count > 256 ||
                 equipped == null || equipped.Length != 2 || activeSlot < 0 || activeSlot > 1 ||
                 claimedRewards == null || claimedRewards.Count > 256) return false;
             var ids = new HashSet<string>(StringComparer.Ordinal);
@@ -236,8 +244,9 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                     !ids.Add(item.instanceId) || item.definitionId == null || !definitions.Contains(item.definitionId) ||
                     version>=2 && (item.tier<1 || item.tier>5 || (int)item.variant<0 || (int)item.variant>3)) return false;
             if (version>=2 && (progression==null || !progression.IsValid())) return false;
-            if (equipped[0] == equipped[1] || !ids.Contains(equipped[0]) || !ids.Contains(equipped[1])) return false;
-            if(Find(equipped[0]).inChest||Find(equipped[1]).inChest||ids.Overlaps(pendingWeaponIds))return false;
+            var equippedIds=new HashSet<string>(StringComparer.Ordinal);
+            foreach(var id in equipped)if(!string.IsNullOrEmpty(id)&&(!ids.Contains(id)||Find(id).inChest||!equippedIds.Add(id)))return false;
+            if(ids.Overlaps(pendingWeaponIds))return false;
             if(offhands!=null&&offhands.Length>0)
             {
                 if(offhands.Length!=2)return false;
@@ -267,6 +276,12 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             foreach(var weapon in weapons) { weapon.tier=1; weapon.variant=WeaponVariant.Balanced; }
             version=2;
         }
-        public void UpgradeToCurrent(){UpgradeFromVersionOne();if(version>=2&&version<5)version=5;if(harvestedNodes==null)harvestedNodes=new List<HarvestState>();}
+        public void UpgradeToCurrent()
+        {
+            UpgradeFromVersionOne();if(version>=2&&version<6)version=6;
+            if(harvestedNodes==null)harvestedNodes=new List<HarvestState>();
+            if(quests==null)quests=new List<Mismo.Gameplay.Player.Quests.QuestProgress>();
+            if(learnedRecipes==null)learnedRecipes=new List<string>();
+        }
     }
 }

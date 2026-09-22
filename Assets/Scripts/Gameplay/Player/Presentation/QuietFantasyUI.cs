@@ -9,7 +9,21 @@ namespace Mismo.Gameplay.Player.Presentation
     public static class QuietFantasyUI
     {
         public static readonly Color Ink=new Color(.91f,.89f,.82f),Muted=new Color(.64f,.66f,.60f),Amber=new Color(.87f,.70f,.37f);
-        public static readonly Color Surface=new Color(.055f,.067f,.058f,.64f),Rule=new Color(.63f,.65f,.57f,.24f);
+        public static readonly Color Surface=new Color(.047f,.071f,.082f,.86f),Rule=new Color(.88f,.90f,.88f,.7f);
+        public static readonly Rect MenuWindow=new Rect(28,20,1224,760);
+        public static readonly Rect MenuBackButton=new Rect(1090,38,52,47);
+        public static readonly Rect MenuCloseButton=new Rect(1162,38,52,47);
+        public static void MenuBackground(Mismo.Gameplay.Player.Equipment.Inventory.InventoryUIIcons icons)
+        {
+            float opacity=icons!=null?Mathf.Clamp01(icons.panelOpacity)*Mathf.Clamp01(icons.inventoryBackgroundOpacity):.7f;
+            FantasyUI.Panel(MenuWindow,opacity);
+        }
+        public static void MenuDivider()=>Border(new Rect(64,94,1150,1),new Color(.78f,.70f,.51f,.35f));
+        public static void MenuHeading(Texture2D icon,string caption)
+        {
+            DrawIcon(new Rect(66,45,30,34),MapIcons.Mask(icon));
+            GUI.Label(new Rect(58,38,48,47),new GUIContent("",L.Text(caption)),GUIStyle.none);
+        }
         static Font heading,body;
         static GUIStyle words,action;
         static GUISkin scrollSkin,scrollSource;
@@ -63,20 +77,37 @@ namespace Mismo.Gameplay.Player.Presentation
             words.font=title?Heading:Body;words.fontSize=size;words.fontStyle=FontStyle.Normal;words.alignment=alignment;
             words.normal.textColor=color??Ink;GUI.Label(rect,L.Text(value??""),words);
         }
+        public static bool NavigationButton(Rect rect,Texture2D icon,string caption,Mismo.Gameplay.Player.Equipment.Inventory.InventoryUIIcons settings,bool selected=false,bool close=false)
+        {
+            bool clicked=Button(rect,icon==null?(close?"×":caption):"",selected);
+            if(icon!=null)
+            {
+                float size=Mathf.Min(Mathf.Min(rect.width,rect.height)-12,close?(settings!=null?settings.closeIconSize:14):(settings!=null?settings.navigationIconSize:24));
+                var tint=selected?Amber:Ink;tint.a*=settings!=null?Mathf.Clamp01(settings.navigationIconOpacity):1;
+                DrawIcon(new Rect(rect.center.x-size/2,rect.center.y-size/2,size,size),MapIcons.Mask(icon),tint);
+            }
+            GUI.Label(rect,new GUIContent("",L.Text(caption)),GUIStyle.none);return clicked;
+        }
+        public static bool CloseButton(Rect rect)
+        {
+            var settings=Mismo.Core.ProjectAssets.Load<Mismo.Gameplay.Player.Equipment.Inventory.InventoryUIIcons>("InventoryUIIcons");
+            return NavigationButton(rect,settings?.close,"Cerrar",settings,false,true);
+        }
         public static bool Button(Rect rect,string text,bool selected=false,bool title=false)
         {
             if(action==null)action=new GUIStyle(){fontSize=20,alignment=TextAnchor.MiddleCenter,padding=new RectOffset(5,5,2,2)};
             action.font=title?Heading:Body;action.fontSize=title?23:20;
             foreach(var state in new[]{action.normal,action.hover,action.active,action.focused}){state.background=null;state.textColor=Ink;}
             bool hover=rect.Contains(Event.current.mousePosition);
-            if(selected||hover)PlayerHUD.Fill(rect,new Color(.7f,.62f,.39f,GUI.enabled?.10f:.035f));
+            FantasyUI.Panel(rect,GUI.enabled?1:.45f);
             action.normal.textColor=selected?Amber:Ink;
             bool result=GameAudio.Button(rect,L.Text(text),action);
-            if(selected||hover)PlayerHUD.Fill(new Rect(rect.x,rect.yMax-2,rect.width,selected?2:1),GUI.enabled?Amber:Muted);
+            FantasyUI.Frame(rect,selected?Amber:hover?Color.white:new Color(1,1,1,GUI.enabled?1:.45f));
             return result;
         }
         public static void Border(Rect rect,Color color,float thickness=1)
         {
+            if(rect.width>=20&&rect.height>=20){FantasyUI.Frame(rect,color);return;}
             PlayerHUD.Fill(new Rect(rect.x,rect.y,rect.width,thickness),color);
             PlayerHUD.Fill(new Rect(rect.x,rect.yMax-thickness,rect.width,thickness),color);
             PlayerHUD.Fill(new Rect(rect.x,rect.y,thickness,rect.height),color);

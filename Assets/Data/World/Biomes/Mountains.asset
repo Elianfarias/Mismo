@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f15cc0f9b4e054eb7b1f2713879185, type: 3}
+  m_Name: Mountains
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.WorldBiomeContent
+  biome: 5
+  trees: 0.06
+  grass: 0
+  bushes: 0
+  flowers: 0
+  rocks: 0.18
+  deadwood: 0
+  assets:
+  - id: Craftpix_Tree_Winter_001
+    kind: 2
+    biomes: 0400000005000000i
+    prefab: {fileID: 161133380920796908, guid: cf0a0f15f82e40b409c26f6e6d6e5720, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 1.2, y: 1.2}
+    maxSlope: 22
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Craftpix_Tree_Winter_002
+    kind: 2
+    biomes: 0400000005000000i
+    prefab: {fileID: 1281062741357081825, guid: 6837875f888c3324db58f0ba7d2955ed, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 1.2, y: 1.2}
+    maxSlope: 22
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Craftpix_Tree_Winter_003
+    kind: 2
+    biomes: 0400000005000000i
+    prefab: {fileID: 2822779775322630421, guid: 009fb1ed509bffd4b89c0a5a8c12958c, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 1.2, y: 1.2}
+    maxSlope: 22
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Craftpix_Bush_winter_001
+    kind: 9
+    biomes: 0400000005000000i
+    prefab: {fileID: 2794047133083722677, guid: f69eb76bfc9bc9747bafdbfd1fb4b7e4, type: 3}
+    decorativeOnly: 1
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 1.2173914, y: 1.4608697}
+    maxSlope: 28
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Craftpix_Bush_winter_002
+    kind: 9
+    biomes: 0400000005000000i
+    prefab: {fileID: 6581253621930765843, guid: 90f64ee4b2242424a97ef4202e45d459, type: 3}
+    decorativeOnly: 1
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 1.5272726, y: 1.2727271}
+    maxSlope: 28
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Craftpix_Bush_winter_003
+    kind: 9
+    biomes: 0400000005000000i
+    prefab: {fileID: 7866246954416520207, guid: ba481103c5d93a04c8fcfa67f74b621e, type: 3}
+    decorativeOnly: 1
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 2.1, y: 1.4}
+    maxSlope: 28
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Craftpix_Hill_winter_001
+    kind: 3
+    biomes: 0400000005000000i
+    prefab: {fileID: 6122932044217331087, guid: a18f2bbebc055b14da190c811329e880, type: 3}
+    decorativeOnly: 1
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 5, y: 4.375}
+    maxSlope: 15
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Craftpix_Hill_winter_002
+    kind: 3
+    biomes: 0400000005000000i
+    prefab: {fileID: 7259898209039519714, guid: f03ff69818e7b6f4e9dc7a1d40887db4, type: 3}
+    decorativeOnly: 1
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 5, y: 4.791667}
+    maxSlope: 15
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Craftpix_Hill_winter_003
+    kind: 3
+    biomes: 0400000005000000i
+    prefab: {fileID: 7833112626349797496, guid: 9e215eeaf984db242afec47ce0269104, type: 3}
+    decorativeOnly: 1
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 5, y: 5}
+    maxSlope: 15
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Craftpix_Stone_mid_001
+    kind: 3
+    biomes: 00000000010000000200000005000000i
+    prefab: {fileID: 4373489433441870018, guid: ca2b8ae62c0732d418510570644c77b3, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 2.2, y: 2.2}
+    maxSlope: 28
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Craftpix_Stone_mid_002
+    kind: 3
+    biomes: 00000000010000000200000005000000i
+    prefab: {fileID: 2872240358976432427, guid: 0260b9ef98ac743439b33fe9ffaebf31, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 2.2, y: 1.65}
+    maxSlope: 28
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Craftpix_Stone_mid_003
+    kind: 3
+    biomes: 00000000010000000200000005000000i
+    prefab: {fileID: 7770718995446343363, guid: c05fe89d07dafc74dab312438eb249b0, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 2.2, y: 2.2}
+    maxSlope: 28
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}

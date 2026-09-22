@@ -1,0 +1,26 @@
+Latest voxel output (FBX axis corrections preserved):
+Craftpix_Bush_winter_001 | Bush | 8496 vertices | (1.22, 1.40, 1.46) | Ice,Mountains
+Craftpix_Bush_winter_002 | Bush | 8456 vertices | (1.53, 1.40, 1.27) | Ice,Mountains
+Craftpix_Bush_winter_003 | Bush | 6152 vertices | (2.10, 1.40, 1.40) | Ice,Mountains
+Craftpix_Hill_desert_001 | Rock | 6816 vertices | (5.00, 1.67, 4.79) | Desert
+Craftpix_Hill_desert_002 | Rock | 5208 vertices | (5.00, 1.46, 3.33) | Desert
+Craftpix_Hill_desert_003 | Rock | 2696 vertices | (5.00, 0.83, 1.88) | Desert
+Craftpix_Hill_winter_001 | Rock | 6072 vertices | (5.00, 1.25, 4.38) | Ice,Mountains
+Craftpix_Hill_winter_002 | Rock | 6640 vertices | (5.00, 1.25, 4.79) | Ice,Mountains
+Craftpix_Hill_winter_003 | Rock | 8712 vertices | (5.00, 1.88, 5.00) | Ice,Mountains
+Craftpix_Stone_mid_001 | Rock | 7408 vertices | (2.20, 1.28, 2.20) | Meadow,Forest,Highlands,Mountains
+Craftpix_Stone_mid_002 | Rock | 5280 vertices | (2.20, 1.19, 1.65) | Meadow,Forest,Highlands,Mountains
+Craftpix_Stone_mid_003 | Rock | 8496 vertices | (2.20, 1.28, 2.20) | Meadow,Forest,Highlands,Mountains
+Craftpix_Tree_temp_climate_001 | Tree | 11256 vertices | (6.13, 7.00, 4.81) | Meadow,Forest,Highlands,Mountains
+Craftpix_Tree_temp_climate_002 | Tree | 12864 vertices | (6.56, 7.00, 4.38) | Meadow,Forest,Highlands,Mountains
+Craftpix_Tree_temp_climate_003 | Tree | 7496 vertices | (3.94, 7.00, 3.72) | Meadow,Forest,Highlands,Mountains
+Craftpix_Tree_Winter_001 | Tree | 2656 vertices | (1.75, 7.00, 1.53) | Ice,Mountains
+Craftpix_Tree_Winter_002 | Tree | 2848 vertices | (1.75, 7.00, 1.75) | Ice,Mountains
+Craftpix_Tree_Winter_003 | Tree | 2216 vertices | (2.19, 7.00, 1.53) | Ice,Mountains
+Nature_bush_0 | Bush | 5248 vertices | (3.20, 1.20, 2.27)
+Nature_bush_1 | Bush | 7040 vertices | (2.62, 1.20, 2.07)
+Nature_flower_rose | Flower | 2400 vertices | (0.25, 0.45, 0.25)
+Nature_flower_white_tulip | Flower | 1664 vertices | (0.23, 0.45, 0.23)
+Nature_grass_0 | Grass | 4264 vertices | (0.60, 0.40, 0.60)
+Nature_grass_1 | Grass | 3256 vertices | (0.60, 0.40, 0.60)
+Nature_trunk_0 | Deadwood | 4512 vertices | (1.77, 2.50, 1.77)

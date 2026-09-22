@@ -37,7 +37,7 @@ namespace Mismo.Gameplay.Player.Editor
                 for(int z=-50;z<=50;z+=2)for(int x=-48;x<=48;x+=2)if(Mathf.Abs(field.Height(origin.position.x+x,origin.position.z+z)-ground)>.001f)throw new Exception("Unlevel town footprint");
                 var oldSave=new WorldSaveData{x=origin.position.x,y=ground+.3f,z=origin.position.z};WorldSession.MigrateVillageLayout(oldSave,settings);
                 var arrival=origin.position+settings.content.VillageArrivalOffset;arrival.y=field.Height(arrival.x,arrival.z)+.3f;
-                if(Vector3.Distance(new Vector3(oldSave.x,oldSave.y,oldSave.z),arrival)>.01f||oldSave.villageLayoutRevision!=1)throw new Exception("Old save relocation");
+                if(Vector3.Distance(new Vector3(oldSave.x,oldSave.y,oldSave.z),arrival)>.01f||oldSave.villageLayoutRevision!=WorldSession.CurrentVillageLayoutRevision)throw new Exception("Old save relocation");
                 var far=new WorldSaveData{x=9999,y=12,z=9999};WorldSession.MigrateVillageLayout(far,settings);if(far.x!=9999||far.y!=12||far.z!=9999)throw new Exception("Distant save moved");
                 var root=new GameObject("World");var center=ExplorationChunks.Coordinate(origin.position);var material=Mismo.Core.ProjectAssets.Load<Material>("TerrainSurface");
                 for(int z=-2;z<=2;z++)for(int x=-2;x<=2;x++)
@@ -66,7 +66,7 @@ namespace Mismo.Gameplay.Player.Editor
                 var camera=new GameObject("Camera").AddComponent<UnityEngine.Camera>();camera.tag="MainCamera";camera.transform.position=origin.position+new Vector3(80,45,105);camera.transform.LookAt(origin.position+Vector3.up*5);camera.farClipPlane=500;
                 var cycle=new GameObject("Lighting").AddComponent<DayNightCycle>();cycle.Initialize(Mismo.Core.ProjectAssets.Load<DayNightSettings>("DayNightSettings"));cycle.SetHour(10);RenderSettings.fog=false;
                 Directory.CreateDirectory("Docs/Validation/VillageSize");var rt=new RenderTexture(1260,850,24);camera.targetTexture=rt;camera.Render();RenderTexture.active=rt;var pixels=new Texture2D(1260,850,TextureFormat.RGB24,false);pixels.ReadPixels(new Rect(0,0,1260,850),0,0);pixels.Apply();File.WriteAllBytes("Docs/Validation/VillageSize/Town.png",pixels.EncodeToPNG());
-                notes.Add("PASS: 88m town, "+foundations+" structural bases touch ground, level full footprint, old-save migration, distant position preserved, 9m camera clearance, entrance-to-plaza navigation.");File.WriteAllLines("Docs/Validation/VillageSize/Checks.txt",notes);
+                notes.Add("PASS: village scale "+settings.content.villageSizeMultiplier+", "+foundations+" structural bases touch ground, level full footprint, old-save migration, distant position preserved, 9m camera clearance, entrance-to-plaza navigation.");File.WriteAllLines("Docs/Validation/VillageSize/Checks.txt",notes);
                 instance.Remove();Debug.Log("VILLAGE_SIZE_PASS "+total);EditorApplication.Exit(0);
             }catch(Exception e){Debug.LogException(e);EditorApplication.Exit(1);}
         }

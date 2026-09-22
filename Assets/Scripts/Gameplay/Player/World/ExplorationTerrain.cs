@@ -31,6 +31,8 @@ namespace Mismo.Gameplay.Player.World
         public float TreeDensity(float x,float z)
         {
             var biome=Biome(x,z);
+            var content=settings.content!=null?settings.content.BiomeContent(biome):null;
+            if(content!=null)return content.Density(WorldAssetKind.Tree);
             if(biome==WorldBiome.Desert||biome==WorldBiome.Ice||biome==WorldBiome.Mountains||biome==WorldBiome.Ocean)return 0;
             return Profile(biome).trees;
         }
