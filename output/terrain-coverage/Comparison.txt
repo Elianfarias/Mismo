@@ -1,0 +1,2 @@
+Pixels affected by overlapping horizon: 13943
+Pixels different after correction: 0

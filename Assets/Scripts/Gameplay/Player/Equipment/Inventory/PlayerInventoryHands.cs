@@ -25,7 +25,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(data.offhands==null)return;
             for(int i=0;i<2;i++)
             {
-                var main=catalog.Find(data.Find(data.equipped[i]).definitionId);
+                var main=catalog.Find(data.Find(data.equipped[i])?.definitionId);
                 var off=data.Find(data.Offhand(i));
                 if(off==null||!Compatible(main,catalog.Find(off.definitionId)))data.offhands[i]=null;
             }

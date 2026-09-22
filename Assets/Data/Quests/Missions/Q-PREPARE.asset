@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82fd8a3c18a546eb929f133a008bdf6a, type: 3}
+  m_Name: Q-PREPARE
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Quests.QuestDefinition
+  id: Q-PREPARE
+  title: Antes de volver a salir
+  category: 0
+  description: "Mara quiere que pongas en pr\xE1ctica su receta. Fabric\xE1 ung\xFCentos desde el libro de recetas."
+  location: Se fabrica a mano
+  icon: {fileID: 0}
+  npc: {fileID: 11400000, guid: a7bec10e6b0858444b2b7bf541889e64, type: 2}
+  prerequisites:
+  - {fileID: 11400000, guid: 65caf1d81a1e1714ba8ddc25606c14e6, type: 2}
+  offerInJournal: 1
+  objectives:
+  - id: craft
+    label: "Fabric\xE1 ung\xFCentos de viaje"
+    kind: 2
+    quantity: 1
+    material: {fileID: 0}
+    species: {fileID: 0}
+    recipe: {fileID: 11400000, guid: e0db93e8a2d04194cac8509f3b9ec40f, type: 2}
+    signal: 
+    consumeOnDelivery: 0
+    requirePrevious: 0
+    icon: {fileID: 0}
+  clue: 
+  clueAfterObjective: 
+  coins: 25
+  items: []
+  recipes: []
+  offerText: "Una receta en el papel no alcanza. Junt\xE1 tres hierbas y prepar\xE1 una tanda de ung\xFCentos de viaje desde Recetas. Despu\xE9s contame c\xF3mo sali\xF3."
+  acceptedText: 
+  progressText: "Abr\xED Recetas desde el men\xFA radial. Eleg\xED Ung\xFCentos de viaje y fabric\xE1 una tanda; no necesit\xE1s una mesa."
+  readyText: "Ese aroma me dice que seguiste bien los pasos. Los ung\xFCentos son tuyos; guardalos para el camino."
+  completedText: "Ahora pod\xE9s preparar tus propias provisiones. Descans\xE1 cuando haga falta y eleg\xED bien cu\xE1ndo regresar."

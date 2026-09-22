@@ -8,6 +8,7 @@ namespace Mismo.Gameplay.Player.World
     // One active save, with an independent inventory file per world. New games never delete old profiles.
     public static class WorldSession
     {
+        public const int CurrentVillageLayoutRevision=2;
         public static WorldSaveData Current {get;private set;}
         public static string LastError {get;private set;}
         static IProfileRepository repository;
@@ -60,8 +61,15 @@ namespace Mismo.Gameplay.Player.World
                 spawn.y=terrain.Height(spawn.x,spawn.z)+.3f;
                 spawnYaw=settings.content!=null?settings.content.villageSpawnYaw:0;
             }
+            else
+            {
+                var terrain=new ExplorationTerrain(settings);
+                spawn=new Vector3(-50,4,-70)+(settings.content!=null?settings.content.VillageArrivalOffset:new Vector3(0,0,-29));
+                spawn.y=terrain.Height(spawn.x,spawn.z)+.3f;
+                spawnYaw=settings.content!=null?settings.content.villageSpawnYaw:0;
+            }
             settings.content=null; // Runtime instance IDs are not portable save data.
-            var record=new WorldSaveData{villageLayoutRevision=1,id=legacy?"legacy":id,seed=seed,legacy=legacy,settingsJson=JsonUtility.ToJson(settings),
+            var record=new WorldSaveData{villageLayoutRevision=CurrentVillageLayoutRevision,id=legacy?"legacy":id,seed=seed,legacy=legacy,settingsJson=JsonUtility.ToJson(settings),
                 x=spawn.x,y=spawn.y,z=spawn.z,yaw=spawnYaw,spawnX=spawn.x,spawnY=spawn.y,spawnZ=spawn.z};
             UnityEngine.Object.Destroy(settings);return record;
         }
@@ -82,7 +90,7 @@ namespace Mismo.Gameplay.Player.World
             if(data!=null)
             {
                 Current=data;
-                if(data.villageLayoutRevision>=1)return true;
+                if(data.villageLayoutRevision>=CurrentVillageLayoutRevision)return true;
                 var settings=Settings(Template());var next=data.Copy();
                 MigrateVillageLayout(next,settings);UnityEngine.Object.Destroy(settings);
                 return Commit(next);
@@ -95,13 +103,14 @@ namespace Mismo.Gameplay.Player.World
         // Only relocate a saved player inside a surviving town; keep distant exploration intact.
         public static void MigrateVillageLayout(WorldSaveData data,ExplorationWorldSettings settings)
         {
+            if(data.villageLayoutRevision>=CurrentVillageLayoutRevision)return;
             var field=new ExplorationTerrain(settings);var offset=settings.content!=null?settings.content.VillageArrivalOffset:new Vector3(0,0,-55);
             var start=settings.preserveAuthoredCenter?new Vector3(-50,4,-70):field.Site(Vector2Int.zero).position;
             var spawn=start+offset;spawn.y=field.Height(spawn.x,spawn.z)+.3f;
             data.spawnX=spawn.x;data.spawnY=spawn.y;data.spawnZ=spawn.z;
             Vector3? town=null;
             if(settings.preserveAuthoredCenter&&Mathf.Abs(data.x+50)<field.VillageHalfExtent+4&&Mathf.Abs(data.z+70)<field.VillageHalfExtent+4)town=start;
-            int spacing=Mathf.Max(64,settings.siteSpacing),cx=Mathf.FloorToInt(data.x/spacing),cz=Mathf.FloorToInt(data.z/spacing);
+            int spacing=field.SiteSpacing,cx=Mathf.FloorToInt(data.x/spacing),cz=Mathf.FloorToInt(data.z/spacing);
             for(int dz=-1;dz<=1;dz++)for(int dx=-1;dx<=1;dx++)
             {
                 var site=field.Site(new Vector2Int(cx+dx,cz+dz));
@@ -109,7 +118,7 @@ namespace Mismo.Gameplay.Player.World
             }
             if(town.HasValue)
             {var arrival=town.Value+offset;data.x=arrival.x;data.z=arrival.z;data.y=field.Height(arrival.x,arrival.z)+.3f;data.yaw=settings.content!=null?settings.content.villageSpawnYaw:0;}
-            data.villageLayoutRevision=1;
+            data.villageLayoutRevision=CurrentVillageLayoutRevision;
         }
         public static ExplorationWorldSettings Settings(ExplorationWorldSettings template)
         {

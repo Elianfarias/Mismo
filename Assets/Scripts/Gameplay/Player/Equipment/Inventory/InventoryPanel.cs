@@ -11,7 +11,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
     [DefaultExecutionOrder(-100)]
     public sealed partial class InventoryPanel : MonoBehaviour
     {
-        enum Page { Menu, Inventory, Character, Skills, Bestiary, Mounts, Weapons }
+        enum Page { Menu, Inventory, Character, Skills, Bestiary, Mounts, Weapons, Recipes, Quests }
         int mountIndex;string mountPreviewId;Vector2 mountScroll;
         readonly BestiaryView bestiary=new BestiaryView();
 
@@ -35,6 +35,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         Page page=Page.Inventory;
         GUIStyle label,button,field;
         readonly InventoryPreview preview=new InventoryPreview();
+        readonly RecipeBookView recipeBook=new RecipeBookView();
+        readonly QuestJournalView questJournal=new QuestJournalView();
         CursorLockMode previousLock;
         bool previousVisible;
         int closedFrame=-1;
@@ -58,7 +60,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             bool typing=IsOpen&&searchFocused;
             if(k!=null)
             {
-                if(!IsOpen&&!WorldMapPanel.AnyOpen&&health!=null&&!health.IsDead)
+                if(!IsOpen&&!WorldMapPanel.AnyOpen&&GetComponent<World.GatheringPlayer>()?.BlocksGameplay!=true&&health!=null&&!health.IsDead)
                 {
                     for(int slot=0;slot<4;slot++)
                         if(k[(Key)((int)Key.Digit1+slot)].wasPressedThisFrame){inventory.TryUseConsumableSlot(slot);break;}
@@ -70,12 +72,14 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                     else if(showItemActions)showItemActions=false;
                     else if(confirmDiscard)confirmDiscard=false;
                     else if(selected!=null&&page==Page.Inventory){selected=null;previewDirty=true;}
+                    else if(page==Page.Quests&&questJournal.Back()){}
                     else Close();
                 }
                 else if(!typing&&k.iKey.wasPressedThisFrame){if(IsOpen&&page==Page.Inventory)Close();else OpenPage(Page.Inventory);}
                 else if(!typing&&k.bKey.wasPressedThisFrame){if(OpenPage(Page.Menu))radialHeld=true;}
                 else if(!typing&&k.pKey.wasPressedThisFrame)OpenPage(Page.Character);
                 else if(!typing&&k.kKey.wasPressedThisFrame)OpenPage(Page.Skills);
+                else if(!typing&&inventory.Quests!=null&&inventory.Quests.journalKey!=Key.None&&k[inventory.Quests.journalKey].wasPressedThisFrame){if(IsOpen&&page==Page.Quests)Close();else OpenQuests();}
             }
             if(IsOpen&&page==Page.Menu)
             {
@@ -84,13 +88,13 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             }
             if(IsOpen&&draggedGrid!=null&&k!=null&&k.rKey.wasPressedThisFrame)
             {
-                var item=inventory.GridItems(showChest).Find(i=>i.key==draggedGrid);
+                var item=DraggedInventoryItem();
                 if(item!=null&&item.canRotate){dragRotated=!dragRotated;dragOffset=Vector2Int.zero;}
             }
             if(IsOpen&&previewDirty)
             {
                 previewDirty=false;
-                if(page==Page.Menu){preview.Dispose();return;}
+                if(page==Page.Menu||page==Page.Recipes||page==Page.Quests){preview.Dispose();return;}
                 GameObject source=gameObject;
                 if(page==Page.Bestiary||page==Page.Mounts){source=null;mountPreviewId=null;}
                 // Keep the character visible while inspecting inventory objects.
@@ -100,8 +104,16 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 preview.Show(source,rotation,page==Page.Character||page==Page.Weapons||page==Page.Inventory);
             }
         }
-        void LateUpdate(){if(IsOpen&&page!=Page.Menu)preview.Render();}
+        void LateUpdate(){if(IsOpen&&page==Page.Recipes)recipeBook.Render();else if(IsOpen&&page!=Page.Menu)preview.Render();}
         public bool TryOpen()=>OpenPage(Page.Inventory);
+        public bool OpenRadialMenu()=>OpenPage(Page.Menu);
+        public bool OpenRecipes()=>OpenPage(Page.Recipes);
+        public bool OpenQuests()=>OpenPage(Page.Quests);
+        public bool OpenQuestContact(Quests.QuestDefinition quest,Quests.QuestGiver giver)
+        {
+            if(giver==null||!giver.CanTalk(inventory,quest)||!OpenQuests())return false;
+            questJournal.Contact(quest,giver);return true;
+        }
         bool OpenPage(Page target)
         {
             if(target==Page.Bestiary)bestiary.Reset();
@@ -119,6 +131,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(target==Page.Skills&&page!=Page.Skills){skillsWeapon=loadout.ActiveDefinition;skillsScroll=Vector2.zero;}
             CancelSkillDrag();CancelInventoryDrag();showItemActions=false;
             if(page!=target){System.Array.Clear(pendingAttributes,0,3);ResetMasteryDraft();}
+            if(page==Page.Recipes&&target!=Page.Recipes)recipeBook.Dispose();
+            if(page==Page.Quests&&target!=Page.Quests)questJournal.Back();
             page=target;confirmDiscard=false;previewDirty=true;searchFocused=false;
             radialHeld=false;
             if(target==Page.Menu)
@@ -136,20 +150,22 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public void Close()
         {
             if(!IsOpen)return;
+            questJournal.Back();
             GameAudio.Play(GameSound.MenuClose);
             IsOpen=false;System.Array.Clear(pendingAttributes,0,3);ResetMasteryDraft();radialHeld=false;closedFrame=Time.frameCount;if(active==this)active=null;
             Cursor.lockState=previousLock;Cursor.visible=previousVisible;confirmDiscard=false;showChest=false;draggedGrid=null;
-            CancelSkillDrag();CancelInventoryDrag();showItemActions=false;preview.Dispose();searchFocused=false;rotatingPreview=false;
+            CancelSkillDrag();CancelInventoryDrag();showItemActions=false;preview.Dispose();recipeBook.Dispose();searchFocused=false;rotatingPreview=false;
         }
         void OnDisable()=>Close();
-        void OnDestroy(){DisposeRadialTextures();if(inventory!=null)inventory.Changed-=OnChanged;preview.Dispose();foreach(var icon in rotatedIcons.Values)Destroy(icon);rotatedIcons.Clear();if(inventoryBackdrop!=null)Destroy(inventoryBackdrop);}
+        void OnDestroy(){recipeBook.Dispose();if(inventory!=null)inventory.Changed-=OnChanged;preview.Dispose();foreach(var icon in rotatedIcons.Values)Destroy(icon);rotatedIcons.Clear();}
         void Text(Rect rect,string value,int size=18,Color? color=null)
         {label.fontSize=size;label.normal.textColor=color??Color.white;GUI.Label(rect,L.Text(value),label);}
         bool Button(Rect rect,string value)
         {
+            FantasyUI.Surface(rect,GUI.enabled?1:.45f);
             var old=GUI.backgroundColor;if(old==Color.white)GUI.backgroundColor=new Color(.13f,.16f,.18f);
             bool pressed=GameAudio.Button(rect,L.Text(value),button);GUI.backgroundColor=old;
-            FantasyUI.Frame(rect,GUI.enabled?(rect.Contains(Event.current.mousePosition)?PlayerHUD.Gold:Accent):Muted*.55f);
+            FantasyUI.Frame(rect,GUI.enabled?(rect.Contains(Event.current.mousePosition)?PlayerHUD.Gold:Color.white):Muted*.55f);
             if(pressed){GUI.FocusControl(null);searchFocused=false;}return pressed;
         }
         bool Tab(Rect rect,string value,bool chosen)
@@ -162,7 +178,15 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         void Line(float x,float y,float width)=>PlayerHUD.Fill(new Rect(x,y,width,1),new Color(.55f,.56f,.53f,.4f));
         void OnGUI()
         {
+            if(!PlayerHUD.UIEditMode)questJournal.EndTrackerEdit();
+            if(PlayerHUD.UIEditMode)
+            {
+                int previousDepth=GUI.depth;GUI.depth=-40;
+                if(inventory!=null&&inventory.IsReady)questJournal.DrawTracker(inventory);
+                GUI.depth=previousDepth;return;
+            }
             if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
+            if(GetComponent<World.GatheringPlayer>()?.BlocksGameplay==true)return;
             if(inventory==null||health==null||health.IsDead)return;
             if(label==null)
             {
@@ -176,15 +200,21 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             }
             if(inventoryIcons==null)inventoryIcons=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");
             var matrix=GUI.matrix;int depth=GUI.depth;
-            if(IsOpen&&page!=Page.Menu){GUI.depth=-40;PlayerHUD.Fill(new Rect(0,0,Screen.width,Screen.height),IsQuietPage?new Color(.015f,.022f,.03f,.25f*PanelOpacity):new Color(.015f,.022f,.03f,.86f*PanelOpacity));}
             const float canvasWidth=1280f;
             float scale=Mathf.Min(Screen.width/canvasWidth,Screen.height/800f);
             if(IsQuietPage)scale*=.9f;
             GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-canvasWidth*scale)/2,(Screen.height-800*scale)/2,0),Quaternion.identity,Vector3.one*scale);
             GUI.depth=-40;
+            if(!IsOpen&&inventory.IsReady)questJournal.DrawTracker(inventory);
+            if(IsOpen&&page==Page.Quests)
+            {questJournal.Draw(inventory,Close,()=>OpenRadialMenu());GUI.matrix=matrix;GUI.depth=depth;return;}
             if(IsOpen&&page==Page.Menu)
             {
                 DrawMenu();GUI.matrix=matrix;GUI.depth=depth;return;
+            }
+            if(IsOpen&&page==Page.Recipes)
+            {
+                recipeBook.Draw(inventory,null,Close,()=>OpenRadialMenu());GUI.matrix=matrix;GUI.depth=depth;return;
             }
             if(IsOpen&&page==Page.Inventory)
             {
@@ -279,11 +309,18 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             bool pointerInGrid=viewport.Contains(Event.current.mousePosition);
             var items=inventory.GridItems(showChest);var positions=inventory.GridPositions(showChest);
             var unplaced=items.FindAll(i=>!positions.Exists(p=>p.key==i.key));
+            var occupied=new bool[columns,rows];
+            foreach(var placement in positions)
+            {
+                var item=items.Find(i=>i.key==placement.key);if(item==null)continue;
+                int width=placement.rotated?item.height:item.width,height=placement.rotated?item.width:item.height;
+                for(int y=Mathf.Max(0,placement.y);y<Mathf.Min(rows,placement.y+height);y++)
+                    for(int x=Mathf.Max(0,placement.x);x<Mathf.Min(columns,placement.x+width);x++)occupied[x,y]=true;
+            }
             scroll=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.BeginScrollView(viewport,scroll,new Rect(0,0,viewport.width-22,Mathf.Max(viewport.height-6,rows*cell+unplaced.Count*49+(unplaced.Count>0?38:0))));
             for(int y=0;y<rows;y++)for(int x=0;x<columns;x++)
             {
-                PlayerHUD.Fill(new Rect(x*cell,y*cell,cell-2,cell-2),OliveTheme?new Color(.43f,.41f,.28f,.65f):new Color(.36f,.39f,.44f,.55f));
-                PlayerHUD.Fill(new Rect(x*cell+2,y*cell+2,cell-6,cell-6),OliveTheme?new Color(.20f,.24f,.16f,.94f):new Color(.09f,.13f,.19f,.94f));
+                if(!occupied[x,y])FantasyUI.Panel(new Rect(x*cell,y*cell,cell-2,cell-2),inventoryIcons!=null?inventoryIcons.emptyInventorySlotOpacity:.16f);
             }
             foreach(var p in positions)
             {
@@ -306,17 +343,22 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             }
             if(draggedGrid!=null)
             {
-                var e=Event.current;var item=items.Find(i=>i.key==draggedGrid);
+                var e=Event.current;var item=DraggedInventoryItem();
                 if(item==null)draggedGrid=null;
                 else
                 {
                     int x=Mathf.FloorToInt(e.mousePosition.x/cell)-dragOffset.x,y=Mathf.FloorToInt(e.mousePosition.y/cell)-dragOffset.y;
-                    bool valid=inventory.CanMoveGrid(item.key,showChest,x,y,dragRotated);
+                    bool valid=dragFromHand>=0?!showChest&&inventory.CanUnequipToGrid(dragFromHand,x,y,dragRotated):inventory.CanMoveGrid(item.key,showChest,x,y,dragRotated);
                     var ghost=new Rect(x*cell+1,y*cell+1,(dragRotated?item.height:item.width)*cell-3,(dragRotated?item.width:item.height)*cell-3);
-                    if(pointerInGrid&&dragFromHand<0&&InventoryDragMoved)PlayerHUD.Fill(ghost,valid?new Color(.22f,.7f,.45f,.45f):new Color(.9f,.2f,.15f,.45f));
-                    if(e.type==EventType.MouseUp&&e.button==0&&pointerInGrid&&dragFromHand<0&&dragFromConsumable<0&&GUI.enabled)
+                    if(pointerInGrid&&InventoryDragMoved)PlayerHUD.Fill(ghost,valid?new Color(.22f,.7f,.45f,.45f):new Color(.9f,.2f,.15f,.45f));
+                    if(e.type==EventType.MouseUp&&e.button==0&&pointerInGrid&&dragFromConsumable<0&&GUI.enabled)
                     {
-                        if(valid&&(Vector2.Distance(e.mousePosition,dragStart)>3||positions.Find(p=>p.key==item.key)?.rotated!=dragRotated))inventory.MoveGrid(item.key,showChest,x,y,dragRotated);
+                        if(dragFromHand>=0)
+                        {
+                            if(valid&&InventoryDragMoved)inventory.UnequipToGrid(dragFromHand,x,y,dragRotated);
+                            else if(InventoryDragMoved){message="No hay espacio libre en esa posición.";messageUntil=Time.unscaledTime+3;}
+                        }
+                        else if(valid&&(Vector2.Distance(e.mousePosition,dragStart)>3||positions.Find(p=>p.key==item.key)?.rotated!=dragRotated))inventory.MoveGrid(item.key,showChest,x,y,dragRotated);
                         CancelInventoryDrag();e.Use();
                     }
                 }
@@ -357,10 +399,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             bool chosen=item.key==selectedGrid&&item.id==selected;
             var old=GUI.color;GUI.color=new Color(1,1,1,alpha);
-            PlayerHUD.Fill(rect,chosen?new Color(.42f,.37f,.23f,.96f):new Color(.22f,.27f,.34f,.96f));
-            var inset=new Rect(rect.x+2,rect.y+2,rect.width-4,rect.height-4);
-            PlayerHUD.Fill(inset,OliveTheme?new Color(.24f,.29f,.19f,.96f):new Color(.105f,.15f,.215f,.96f));
-            QuietFantasyUI.Border(rect,chosen?PlayerHUD.Gold:new Color(.48f,.52f,.59f,.55f),chosen?2:1);
+            FantasyUI.Panel(rect);
+            if(chosen)FantasyUI.Frame(rect,PlayerHUD.Gold);
             var icon=item.material?inventory.Material(item.id)?.icon:inventory.Definition(item.id).inventoryIcon;
             if(icon!=null)
             {

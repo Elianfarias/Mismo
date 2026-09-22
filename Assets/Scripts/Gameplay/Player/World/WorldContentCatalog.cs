@@ -47,7 +47,7 @@ namespace Mismo.Gameplay.Player.World
     public sealed class WorldContentCatalog : ScriptableObject
     {
         [Header("Village arrival (new worlds)")]
-        [Min(1)] public float villageSizeMultiplier=2;
+        [Min(1)] public float villageSizeMultiplier=2.6f;
         public float villageGroundOffset=-.19670273f;
         public Vector3 VillageArrivalOffset=>villageSpawnOffset*Mathf.Max(1,villageSizeMultiplier);
         public Vector3 villageSpawnOffset=new Vector3(0,0,-29);
@@ -68,16 +68,40 @@ namespace Mismo.Gameplay.Player.World
             RenderSettings.fogEndDistance=Mathf.Min(Mathf.Max(10,fogEnd),Mathf.Max(2,loadRadius)*32-8);
             RenderSettings.fogStartDistance=Mathf.Clamp(fogStart,0,RenderSettings.fogEndDistance-1);
         }
-        [Header("Ground vegetation density")]
+        [Header("Nature per biome")]
+        [Tooltip("Overrides nature assets and densities for each assigned biome. Buildings and encounters remain below.")]
+        public WorldBiomeContent[] biomeContents=Array.Empty<WorldBiomeContent>();
+        public WorldBiomeContent BiomeContent(WorldBiome biome)
+        {
+            if(biomeContents!=null)foreach(var profile in biomeContents)
+                if(profile!=null&&profile.biome==biome)return profile;
+            return null;
+        }
+        public float Density(WorldAssetKind kind,WorldBiome biome)
+        {
+            var profile=BiomeContent(biome);if(profile!=null)return profile.Density(kind);
+            switch(kind)
+            {
+                case WorldAssetKind.Grass:return grassDensity;
+                case WorldAssetKind.Bush:return bushDensity;
+                case WorldAssetKind.Flower:return flowerDensity;
+                case WorldAssetKind.Rock:return rockDensity;
+                case WorldAssetKind.Deadwood:return deadwoodDensity;
+                default:return 0;
+            }
+        }
+        [Header("Legacy ground density (biomes without a profile)")]
         [Range(0,1)] public float grassDensity=.55f,bushDensity=.14f,flowerDensity=.12f,rockDensity=.07f,deadwoodDensity=.035f;
         public WorldAssetEntry[] assets=Array.Empty<WorldAssetEntry>();
         public WorldEncounterEntry[] encounters=Array.Empty<WorldEncounterEntry>();
         public static bool Allows(WorldBiome[] allowed,WorldBiome biome)=>allowed==null||allowed.Length==0||Array.IndexOf(allowed,biome)>=0;
         public WorldAssetEntry Asset(WorldAssetKind kind,WorldBiome biome,int seed)
         {
-            double total=0;foreach(var a in assets)if(a!=null&&a.prefab!=null&&a.kind==kind&&Allows(a.biomes,biome))total+=Math.Max(0,a.weight);
+            var profile=WorldBiomeContent.IsNature(kind)?BiomeContent(biome):null;
+            var candidates=(profile!=null?profile.assets:assets)??Array.Empty<WorldAssetEntry>();
+            double total=0;foreach(var a in candidates)if(a!=null&&a.prefab!=null&&a.kind==kind&&Allows(a.biomes,biome))total+=Math.Max(0,a.weight);
             double roll=new System.Random(seed).NextDouble()*total;
-            foreach(var a in assets)if(a!=null&&a.prefab!=null&&a.kind==kind&&Allows(a.biomes,biome)&&a.weight>0){roll-=a.weight;if(roll<0)return a;}
+            foreach(var a in candidates)if(a!=null&&a.prefab!=null&&a.kind==kind&&Allows(a.biomes,biome)&&a.weight>0){roll-=a.weight;if(roll<0)return a;}
             return null;
         }
         public WorldEncounterEntry Encounter(WorldSiteKind site,WorldBiome biome,int level,float height,int seed)

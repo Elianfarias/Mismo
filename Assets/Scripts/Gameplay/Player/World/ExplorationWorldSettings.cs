@@ -31,6 +31,7 @@ namespace Mismo.Gameplay.Player.World
         [Min(128)] public int mountainSpacing=512;
         [Min(16)] public float mountainRadius=110;
         [Min(0)] public float mountainHeight=42;
+        [Tooltip("Perfiles del terreno original. Si el catálogo tiene un perfil de contenido para el bioma, su densidad de árboles reemplaza trees de esta lista. El relieve del mundo finito lo define FiniteWorldPlan.")]
         public TerrainBiome[] biomes={
             new TerrainBiome{kind=WorldBiome.Meadow,baseHeight=6,heightVariation=8,terrainRoughness=.3f,trees=.08f},
             new TerrainBiome{kind=WorldBiome.Forest,baseHeight=8,heightVariation=12,terrainRoughness=.6f,trees=.7f},

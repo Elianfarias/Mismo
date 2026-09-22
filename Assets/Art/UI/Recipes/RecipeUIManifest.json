@@ -1,0 +1,145 @@
+{
+  "entries": [
+    {
+      "key": "WindowFrame",
+      "path": "Assets/Art/UI/Recipes/WindowFrame.png",
+      "border": [
+        9,
+        9,
+        9,
+        9
+      ]
+    },
+    {
+      "key": "WindowSurface",
+      "path": "Assets/Art/UI/Recipes/WindowSurface.png",
+      "border": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "key": "ControlNormal",
+      "path": "Assets/Art/UI/Recipes/ControlNormal.png",
+      "border": [
+        9,
+        9,
+        9,
+        9
+      ]
+    },
+    {
+      "key": "ControlHover",
+      "path": "Assets/Art/UI/Recipes/ControlHover.png",
+      "border": [
+        9,
+        9,
+        9,
+        9
+      ]
+    },
+    {
+      "key": "ControlSelected",
+      "path": "Assets/Art/UI/Recipes/ControlSelected.png",
+      "border": [
+        9,
+        9,
+        9,
+        9
+      ]
+    },
+    {
+      "key": "ControlPressed",
+      "path": "Assets/Art/UI/Recipes/ControlPressed.png",
+      "border": [
+        9,
+        9,
+        9,
+        9
+      ]
+    },
+    {
+      "key": "ControlDisabled",
+      "path": "Assets/Art/UI/Recipes/ControlDisabled.png",
+      "border": [
+        9,
+        9,
+        9,
+        9
+      ]
+    },
+    {
+      "key": "RowHover",
+      "path": "Assets/Art/UI/Recipes/RowHover.png",
+      "border": [
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "key": "RowSelected",
+      "path": "Assets/Art/UI/Recipes/RowSelected.png",
+      "border": [
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "key": "RowSeparator",
+      "path": "Assets/Art/UI/Recipes/RowSeparator.png",
+      "border": [
+        2,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "key": "SectionDividerHorizontal",
+      "path": "Assets/Art/UI/Recipes/SectionDividerHorizontal.png",
+      "border": [
+        4,
+        0,
+        4,
+        0
+      ]
+    },
+    {
+      "key": "SectionDividerVertical",
+      "path": "Assets/Art/UI/Recipes/SectionDividerVertical.png",
+      "border": [
+        0,
+        4,
+        0,
+        4
+      ]
+    },
+    {
+      "key": "ScrollTrack",
+      "path": "Assets/Art/UI/Recipes/ScrollTrack.png",
+      "border": [
+        1,
+        3,
+        1,
+        3
+      ]
+    },
+    {
+      "key": "ScrollThumb",
+      "path": "Assets/Art/UI/Recipes/ScrollThumb.png",
+      "border": [
+        1,
+        3,
+        1,
+        3
+      ]
+    }
+  ],
+  "iconSources": "Assets/Art/UI/Flaticon/Recipes/Sources.json"
+}

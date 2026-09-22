@@ -22,5 +22,6 @@ MonoBehaviour:
   result: {fileID: 11400000, guid: 500a81d12328dc84880650c8be970aa4, type: 2}
   quantity: 1
   upgradeWeapon: 0
+  craftInWorld: 1
   fromTier: 1
   toTier: 2

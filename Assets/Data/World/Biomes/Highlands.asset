@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f15cc0f9b4e054eb7b1f2713879185, type: 3}
+  m_Name: Highlands
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.WorldBiomeContent
+  biome: 2
+  trees: 0.18
+  grass: 0.4
+  bushes: 0.1
+  flowers: 0.06
+  rocks: 0.18
+  deadwood: 0.015
+  assets:
+  - id: Craftpix_Stone_mid_001
+    kind: 3
+    biomes: 00000000010000000200000005000000i
+    prefab: {fileID: 4373489433441870018, guid: ca2b8ae62c0732d418510570644c77b3, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 2.2, y: 2.2}
+    maxSlope: 28
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Craftpix_Stone_mid_002
+    kind: 3
+    biomes: 00000000010000000200000005000000i
+    prefab: {fileID: 2872240358976432427, guid: 0260b9ef98ac743439b33fe9ffaebf31, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 2.2, y: 1.65}
+    maxSlope: 28
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Craftpix_Stone_mid_003
+    kind: 3
+    biomes: 00000000010000000200000005000000i
+    prefab: {fileID: 7770718995446343363, guid: c05fe89d07dafc74dab312438eb249b0, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 2.2, y: 2.2}
+    maxSlope: 28
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Craftpix_Tree_temp_climate_001
+    kind: 2
+    biomes: 00000000010000000200000005000000i
+    prefab: {fileID: 6967003316508531648, guid: 13e4c83c82ce9424fb55782750a607e6, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 1.2, y: 1.2}
+    maxSlope: 22
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Craftpix_Tree_temp_climate_002
+    kind: 2
+    biomes: 00000000010000000200000005000000i
+    prefab: {fileID: 5906673519444668976, guid: 36b9695a5a38f984f9461ca385de5be0, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 1.2, y: 1.2}
+    maxSlope: 22
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Craftpix_Tree_temp_climate_003
+    kind: 2
+    biomes: 00000000010000000200000005000000i
+    prefab: {fileID: 8808553444408325131, guid: 697938831f35d9b42abf9f1b75b7caa6, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 1.2, y: 1.2}
+    maxSlope: 22
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Nature_grass_0
+    kind: 8
+    biomes: 000000000100000002000000i
+    prefab: {fileID: 7311704831561613857, guid: 1ce6c879d1b0b3b4a909b9aeb99d1e94, type: 3}
+    decorativeOnly: 1
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 0.65, y: 0.65}
+    maxSlope: 28
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Nature_grass_1
+    kind: 8
+    biomes: 000000000100000002000000i
+    prefab: {fileID: 2880984574101773799, guid: 6223b086db0889341ba8eb2c4cb3e329, type: 3}
+    decorativeOnly: 1
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 0.65, y: 0.65}
+    maxSlope: 28
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Nature_bush_0
+    kind: 9
+    biomes: 000000000100000002000000i
+    prefab: {fileID: 605487061689331400, guid: 52da3192e32f330488b2657ad39078ae, type: 3}
+    decorativeOnly: 1
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 3.1999998, y: 2.2666667}
+    maxSlope: 28
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Nature_bush_1
+    kind: 9
+    biomes: 000000000100000002000000i
+    prefab: {fileID: 5925678496656115052, guid: 7dff99b61c4333c4dbc9f4260c464bd7, type: 3}
+    decorativeOnly: 1
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 2.618182, y: 2.0727277}
+    maxSlope: 28
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Nature_flower_rose
+    kind: 10
+    biomes: 000000000100000002000000i
+    prefab: {fileID: 7577943735754432837, guid: f6a9a779da23eb540b4ad0ce47eef489, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 0.65, y: 0.65}
+    maxSlope: 28
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Nature_flower_white_tulip
+    kind: 10
+    biomes: 000000000100000002000000i
+    prefab: {fileID: 1752290107509215103, guid: 62352bc1a22bf07408e21649b25e8a8a, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 0.65, y: 0.65}
+    maxSlope: 28
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}
+  - id: Nature_trunk_0
+    kind: 11
+    biomes: 000000000100000002000000i
+    prefab: {fileID: 1400741962011324118, guid: e5c437f7646903f4bb49996b8ec0abbf, type: 3}
+    decorativeOnly: 0
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 2.5, y: 2.5}
+    maxSlope: 28
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.15}

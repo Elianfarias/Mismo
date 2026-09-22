@@ -1,0 +1,1 @@
+PASS: 7 quests, 5 NPCs, material icons, 8 radial sectors, learned recipes and J/T controls load in Windows player.

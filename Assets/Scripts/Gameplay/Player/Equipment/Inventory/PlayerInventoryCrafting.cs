@@ -58,7 +58,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         bool CraftCandidate(CraftingRecipe recipe,string weaponId,out InventoryProfile next)
         {
             next=null;
-            if(!CanManage||!RecipeCost(recipe,out var cost))return false;
+            if(!CanManage||!KnowsRecipe(recipe)||!RecipeCost(recipe,out var cost))return false;
             next=profile.Copy();if(!next.TrySpendMaterials(cost))return false;
             if(recipe.upgradeWeapon)
             {
@@ -75,10 +75,36 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             return HasGridRoom(next,false);
         }
         public bool CanCraft(CraftingRecipe recipe,string weaponId)=>CraftCandidate(recipe,weaponId,out _);
-        public bool TryCraft(CraftingRecipe recipe,string weaponId,CraftingStation station)
+        public string CraftBlockReason(CraftingRecipe recipe,string weaponId,CraftingStation station,bool inWorld)
         {
-            if(station==null||station.recipes==null||Array.IndexOf(station.recipes,recipe)<0||!station.InRange(transform.position)||GetComponent<GatheringPlayer>()?.IsHarvesting==true||!CraftCandidate(recipe,weaponId,out var next))
+            if(recipe==null)return "Elegí una receta.";
+            if(!KnowsRecipe(recipe))return "Todavía no aprendiste esta receta.";
+            if(!CanManage||GetComponent<Health>()?.IsDead==true)return "Solo fuera de combate.";
+            if(GetComponent<GatheringPlayer>()?.IsHarvesting==true||CompanionPlayer.IsRiding(gameObject))return "Terminá la acción actual.";
+            if(inWorld)
+            {
+                if(!recipe.craftInWorld||recipe.upgradeWeapon)return "Requiere mesa de crafteo.";
+                if(Array.IndexOf(Mismo.Core.ProjectAssets.LoadAll<CraftingRecipe>("Recipes"),recipe)<0)return "Receta no disponible.";
+            }
+            else if(station==null||!station.InRange(transform.position)||station.recipes==null||Array.IndexOf(station.recipes,recipe)<0)
+                return "Receta no disponible en esta mesa.";
+            if(!RecipeCost(recipe,out var cost))return "Receta no disponible.";
+            if(recipe.upgradeWeapon)
+            {
+                var item=Item(weaponId);
+                if(item==null||item.inChest||item.tier!=recipe.fromTier)return "Elegí un arma de nivel T"+recipe.fromTier+".";
+            }
+            foreach(var entry in cost)if(MaterialCount(entry.Key)<entry.Value)return "Faltan materiales.";
+            return CraftCandidate(recipe,weaponId,out _)?null:"No hay espacio o el resultado no está disponible.";
+        }
+        public bool TryCraftInWorld(CraftingRecipe recipe)=>CompleteCraft(recipe,null,null,true);
+        public bool TryCraft(CraftingRecipe recipe,string weaponId,CraftingStation station)
+            =>CompleteCraft(recipe,weaponId,station,false);
+        bool CompleteCraft(CraftingRecipe recipe,string weaponId,CraftingStation station,bool inWorld)
+        {
+            if(CraftBlockReason(recipe,weaponId,station,inWorld)!=null||!CraftCandidate(recipe,weaponId,out var next))
             { GameAudio.Play(GameSound.CraftFailed); return false; }
+            RecordQuestCraft(next,recipe);
             bool saved = Commit(next,L.Format("Creado: {0}",L.Text(recipe.displayName)),recipe.upgradeWeapon,GameSound.CraftSuccess);
             if (!saved) GameAudio.Play(GameSound.CraftFailed);
             return saved;

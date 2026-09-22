@@ -89,9 +89,11 @@ namespace Mismo.Gameplay.Player.Editor
             Check(inventory.PotionCooldownRemaining==0,"Potion cooldown expires");
             var gathering=player.GetComponent<GatheringPlayer>()??player.gameObject.AddComponent<GatheringPlayer>();
             typeof(GatheringPlayer).GetField("station",BindingFlags.Instance|BindingFlags.NonPublic).SetValue(gathering,station);
+            typeof(GatheringPlayer).GetField("stationOpen",BindingFlags.Instance|BindingFlags.NonPublic).SetValue(gathering,true);
+            var recipeView=(Mismo.Gameplay.Player.Presentation.RecipeBookView)typeof(GatheringPlayer).GetField("recipeBook",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(gathering);
             for(int tab=0;tab<3;tab++)
             {
-                typeof(GatheringPlayer).GetField("category",BindingFlags.Instance|BindingFlags.NonPublic).SetValue(gathering,tab);
+                recipeView.Category=new[]{Mismo.Gameplay.Player.Presentation.RecipeBookView.Filter.Consumables,Mismo.Gameplay.Player.Presentation.RecipeBookView.Filter.Upgrades,Mismo.Gameplay.Player.Presentation.RecipeBookView.Filter.Weapons}[tab];
                 for(int f=0;f<5;f++)yield return null;
                 string screenshot=Path.Combine(Output,new[]{"preparation.png","upgrades.png","equipment.png"}[tab]);
                 ScreenCapture.CaptureScreenshot(screenshot);

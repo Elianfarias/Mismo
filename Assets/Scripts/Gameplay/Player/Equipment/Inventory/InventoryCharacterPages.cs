@@ -181,7 +181,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 int unlock=MenuUnlock(weapon,i);bool unlocked=level>=unlock;
                 var tile=new Rect(8+i%3*216,i/3*157+3,112,110);
                 bool selected=selectedAbilityIndex==i,hover=tile.Contains(e.mousePosition);
-                PlayerHUD.Fill(tile,U.Surface);U.Border(tile,selected?U.Amber:hover?U.Ink:U.Rule);
+                FantasyUI.FillSurface(tile,U.Surface);U.Border(tile,selected?U.Amber:hover?U.Ink:U.Rule);
                 float alpha=unlocked?1:.28f;if(skillDragging&&skillDragIndex==i)alpha=.25f;
                 U.DrawIcon(new Rect(tile.x+15,tile.y+15,82,80),U.AbilityIcon(ability),new Color(U.Ink.r,U.Ink.g,U.Ink.b,alpha));
                 if(!unlocked)U.DrawIcon(new Rect(tile.xMax-27,tile.yMax-27,22,22),"locked-chest",U.Muted);
@@ -214,7 +214,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 var target=new Rect(229+i*337,658,81,81);
                 bool hover=target.Contains(e.mousePosition),valid=skillDragging&&CanDragSkill(weapon,skillDragIndex);
                 U.Text(new Rect(target.x-56,target.y+18,43,42),new[]{"Q","E","R"}[i],25,U.Ink,true,TextAnchor.MiddleCenter);
-                PlayerHUD.Fill(target,valid&&hover?new Color(.63f,.50f,.25f,.25f):U.Surface);
+                FantasyUI.FillSurface(target,valid&&hover?new Color(.63f,.50f,.25f,.25f):U.Surface);
                 U.Border(target,valid?U.Amber:U.Rule,valid&&hover?2:1);
                 U.DrawIcon(new Rect(target.x+10,target.y+10,61,61),U.AbilityIcon(equipped),valid&&hover?U.Muted:U.Ink);
                 U.Text(new Rect(target.x+96,target.y+15,182,58),valid&&hover?"Soltar para equipar":equipped?.DisplayName??"Vacío",18,valid&&hover?U.Amber:U.Ink);
@@ -232,7 +232,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(skillDragging)
             {
                 var ghost=new Rect(e.mousePosition.x-31,e.mousePosition.y-31,62,62);
-                PlayerHUD.Fill(ghost,new Color(.1f,.12f,.1f,.96f));U.Border(ghost,U.Amber);
+                FantasyUI.FillSurface(ghost,new Color(.1f,.12f,.1f,.96f));U.Border(ghost,U.Amber);
                 U.DrawIcon(new Rect(ghost.x+5,ghost.y+5,52,52),U.AbilityIcon(MenuAbility(skillDragWeapon,skillDragIndex)),U.Ink);
             }
             if(skillDragIndex>=0&&e.rawType==EventType.MouseUp){CancelSkillDrag();if(e.type!=EventType.Used)e.Use();}

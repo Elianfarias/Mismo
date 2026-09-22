@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0455b1e8a7be409798c143a48292408c, type: 3}
+  m_Name: VillageNpcSettings
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Quests.VillageNpcSettings
+  enabled: 1
+  startingVillageOnly: 1
+  residentScale: 1.3
+  residents:
+  - prefab: {fileID: 4345791120890489247, guid: 852522e39cf862641a9a0459f3768ddc, type: 3}
+    localPosition: {x: -3, y: 0, z: -3}
+    yaw: 90
+  - prefab: {fileID: 1575482561919717776, guid: 096de73ebfba29a479f508bc0188b2ad, type: 3}
+    localPosition: {x: 3, y: 0, z: -3}
+    yaw: 270
+  - prefab: {fileID: 7438780989756513455, guid: 50c730d8712b53e4b8423da2702f2920, type: 3}
+    localPosition: {x: -4, y: 0, z: 2}
+    yaw: 90
+  - prefab: {fileID: 4232520121312857598, guid: 2490bad0e4b1d32408d0af5393e10015, type: 3}
+    localPosition: {x: 3, y: 0, z: 2}
+    yaw: 270
+  - prefab: {fileID: 7734569812882531198, guid: 72239258717b9234db332a91295cf2fa, type: 3}
+    localPosition: {x: 3, y: 0, z: -9}
+    yaw: 90
+  interactionRange: 3
+  requireLineOfSight: 1
+  markerDistance: 35
+  markerHeight: 2.15
+  markerSize: 36
+  availableColor: {r: 1, g: 0.79, b: 0.27, a: 1}
+  readyColor: {r: 0.48, g: 1, b: 0.66, a: 1}
+  showActiveMarker: 1
+  showNames: 1

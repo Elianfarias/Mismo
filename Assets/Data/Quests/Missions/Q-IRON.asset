@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82fd8a3c18a546eb929f133a008bdf6a, type: 3}
+  m_Name: Q-IRON
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Quests.QuestDefinition
+  id: Q-IRON
+  title: El primer encargo
+  category: 0
+  description: "Bruno necesita hierro para la fragua. Reun\xED el mineral y aprend\xE9 a preparar una piedra de afilar en el campo."
+  location: Yacimientos de hierro
+  icon: {fileID: 0}
+  npc: {fileID: 11400000, guid: 2c8be5bdd514d11409f38c22645950b1, type: 2}
+  prerequisites: []
+  offerInJournal: 1
+  objectives:
+  - id: iron
+    label: "Consegu\xED mineral de hierro"
+    kind: 0
+    quantity: 10
+    material: {fileID: 11400000, guid: 35b7d89200d184e469a4bcabd6415c67, type: 2}
+    species: {fileID: 0}
+    recipe: {fileID: 0}
+    signal: 
+    consumeOnDelivery: 1
+    requirePrevious: 0
+    icon: {fileID: 0}
+  clue: 
+  clueAfterObjective: 
+  coins: 40
+  items: []
+  recipes:
+  - {fileID: 11400000, guid: 368b7643136a9484eb994efcf6c99ec0, type: 2}
+  offerText: "Traeme diez minerales de hierro. Pod\xE9s quedarte explorando si la mochila da para m\xE1s, pero no hace falta arriesgar todo por una veta. Te pagar\xE9 y te ense\xF1ar\xE9 a afilar el arma fuera del taller."
+  acceptedText: 
+  progressText: Son diez minerales de hierro. Los necesito en la mochila para poder trabajar con ellos.
+  readyText: "Buen mineral. \xBFMe lo dej\xE1s? La receta y el pago est\xE1n preparados."
+  completedText: "Trato hecho. Ya pod\xE9s fabricar una piedra de afilar de campa\xF1a desde Recetas. Probala antes de una pelea dif\xEDcil."
