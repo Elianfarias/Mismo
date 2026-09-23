@@ -256,7 +256,7 @@ namespace Mismo.Gameplay.Player.World
             if(!wet)return;
             var water=new GameObject("Coastal sea");water.transform.SetParent(root,false);
             var owned=water.AddComponent<GeneratedWorldMesh>();owned.Value=sea.Mesh("Coastal sea");
-            water.AddComponent<MeshFilter>().sharedMesh=owned.Value;water.AddComponent<MeshRenderer>().sharedMaterial=material;
+            water.AddComponent<MeshFilter>().sharedMesh=owned.Value;water.AddComponent<MeshRenderer>().sharedMaterial=field.GroveStyle!=null&&field.GroveStyle.waterMaterial!=null?field.GroveStyle.waterMaterial:material;
         }
         public static Mesh BuildTerrain(VoxelRegionHeightfield field,Vector2Int id)
         {
@@ -266,7 +266,7 @@ namespace Mismo.Gameplay.Player.World
             for(int z=sz;z<sz+32;z++)for(int x=sx;x<sx+32;x++)
             {
                 float y=heights[x-sx+1,z-sz+1];Color side=new Color(.32f,.43f,.17f);
-                if(field is ExplorationTerrain terrain&&terrain.Plan!=null){side=terrain.Plan.GroundColor(x,z)*.7f;side.a=0;}
+                if(field is ExplorationTerrain terrain)side=terrain.Side(x,z,y);
                 mesh.Quad(new Vector3(x,y,z),new Vector3(x,y,z+1),new Vector3(x+1,y,z+1),new Vector3(x+1,y,z),field.Top(x,z,y));
                 float low=heights[x-sx+2,z-sz+1];if(y>low)mesh.Quad(new Vector3(x+1,low,z),new Vector3(x+1,y,z),new Vector3(x+1,y,z+1),new Vector3(x+1,low,z+1),side);
                 low=heights[x-sx,z-sz+1];if(y>low)mesh.Quad(new Vector3(x,low,z+1),new Vector3(x,y,z+1),new Vector3(x,y,z),new Vector3(x,low,z),side);

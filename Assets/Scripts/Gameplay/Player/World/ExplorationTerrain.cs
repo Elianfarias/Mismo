@@ -15,6 +15,7 @@ namespace Mismo.Gameplay.Player.World
     {
         readonly ExplorationWorldSettings settings;
         public FiniteWorldPlan Plan {get;}
+        public GroveWorldStyle GroveStyle=>settings.content!=null?settings.content.groveStyle:null;
         public int SiteSpacing=>Plan!=null?Plan.SiteSpacing:Mathf.Max(64,settings.siteSpacing);
         readonly System.Collections.Generic.Dictionary<Vector2Int,WorldSite> sites=new System.Collections.Generic.Dictionary<Vector2Int,WorldSite>();
         public ExplorationTerrain(ExplorationWorldSettings s):base(s.seed,s.authoredSize,s.relief,s.stepHeight)
@@ -213,6 +214,8 @@ namespace Mismo.Gameplay.Player.World
         {if(Plan!=null)return Plan.RouteDistance(x,z,out _);if(!IsExterior(x,z))return base.PathDistance(x,z);Pass(x,z,out float d,out _);return d;}
         public override Color Top(float x,float z,float height)
         {
+            if(settings.content!=null&&settings.content.groveStyle!=null&&GroveWorldStyle.Supports(Biome(x,z)))
+                return settings.content.groveStyle.Ground(Biome(x,z),x,z,PathDistance(x,z));
             if(Plan!=null)
             {
                 var tint=Plan.GroundColor(x,z);
@@ -227,6 +230,13 @@ namespace Mismo.Gameplay.Player.World
             if(PathDistance(x,z)<2.7f)color=new Color(.64f,.53f,.35f);
             if(height>40)color=new Color(.5f,.53f,.46f);
             return color*Mathf.Lerp(.94f,1.06f,Noise(x,z,2,4));
+        }
+        public Color Side(float x,float z,float height)
+        {
+            if(settings.content!=null&&settings.content.groveStyle!=null&&GroveWorldStyle.Supports(Biome(x,z)))
+                return settings.content.groveStyle.Stone(x,z,height);
+            if(Plan!=null){var color=Plan.GroundColor(x,z)*.7f;color.a=0;return color;}
+            return new Color(.32f,.43f,.17f);
         }
     }
 }

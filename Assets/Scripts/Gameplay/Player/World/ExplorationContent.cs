@@ -49,6 +49,7 @@ namespace Mismo.Gameplay.Player.World
         public void Decorate(Vector2Int chunk,Transform root,Material material)
         {
             Scatter(chunk,root);
+            settings.content?.groveStyle?.DecorateLedges(terrain,chunk,root,settings.seed);
             foreach(var site in Sites(chunk))
             {
                 if(site.kind==WorldSiteKind.Village)
@@ -70,11 +71,14 @@ namespace Mismo.Gameplay.Player.World
                     Place(root,site,WorldAssetKind.Ruin,new Vector3(0,0,site.radius-3),0,material);
                 if(site.kind==WorldSiteKind.Secret)
                 {
+                    var grove=settings.content!=null?settings.content.groveStyle:null;
+                    if(grove!=null&&grove.fireflies!=null&&GroveWorldStyle.Supports(terrain.Biome(site.position.x,site.position.z)))
+                        Object.Instantiate(grove.fireflies,new Vector3(site.position.x,terrain.Height(site.position.x,site.position.z)+.8f,site.position.z),Quaternion.identity,root);
                     var water=new GameObject("Spring");water.transform.SetParent(root,false);water.transform.position=site.position+Vector3.down*.25f;
                     var surface=water.AddComponent<WorldWaterSurface>();var waterGeometry=new VoxelRegionGeometry();
                     waterGeometry.Quad(new Vector3(-6,0,-6),new Vector3(-6,0,6),new Vector3(6,0,6),new Vector3(6,0,-6),surface.color);
                     var waterMesh=water.AddComponent<GeneratedWorldMesh>();waterMesh.Value=waterGeometry.Mesh("Spring water");
-                    water.AddComponent<MeshFilter>().sharedMesh=waterMesh.Value;water.AddComponent<MeshRenderer>().sharedMaterial=material;
+                    water.AddComponent<MeshFilter>().sharedMesh=waterMesh.Value;water.AddComponent<MeshRenderer>().sharedMaterial=grove!=null&&grove.waterMaterial!=null?grove.waterMaterial:material;
                     var pickup=GameObject.CreatePrimitive(PrimitiveType.Cube);pickup.name="Hidden healing crystal";pickup.transform.SetParent(root,false);
                     pickup.transform.position=new Vector3(site.position.x,terrain.Height(site.position.x,site.position.z)+1,site.position.z);
                     pickup.transform.localScale=Vector3.one*.7f;pickup.GetComponent<Collider>().isTrigger=true;
@@ -98,7 +102,8 @@ namespace Mismo.Gameplay.Player.World
                     float px=chunk.x*32+x+((float)rng.NextDouble()-.5f)*2,pz=chunk.y*32+z+((float)rng.NextDouble()-.5f)*2;
                     if(terrain.Reserved(px,pz,k==0?0:2))continue;
                     var biome=terrain.Biome(px,pz);
-                    if(densityRoll>=catalog.Density(kinds[k],biome))continue;
+                    float patches=catalog.groveStyle!=null&&GroveWorldStyle.Supports(biome)?catalog.groveStyle.PatchDensity(kinds[k],px,pz):1;
+                    if(densityRoll>=Mathf.Clamp01(catalog.Density(kinds[k],biome)*patches))continue;
                     var asset=catalog.Asset(kinds[k],biome,ExplorationTerrain.Hash(seed,x,z,650));if(asset==null)continue;
                     // Generic meadow flowers/grass should not carpet the new desert or glacier.
                     if(catalog.BiomeContent(biome)==null&&terrain.Plan!=null&&terrain.Plan.Stage(px,pz)>0&&kinds[k]!=WorldAssetKind.Rock&&(asset.biomes==null||asset.biomes.Length==0))continue;
@@ -153,6 +158,7 @@ namespace Mismo.Gameplay.Player.World
             var asset=settings.content!=null?settings.content.Asset(kind,terrain.Biome(p.x,p.z),seed):null;
             if(asset!=null)
             {
+                if(terrain.PathDistance(p.x,p.z)<8+Mathf.Max(asset.footprint.x,asset.footprint.y)*.5f)return;
                 if(asset.footprint.x>site.radius||asset.footprint.y>site.radius)return;
                 float spread=0;
                 foreach(float dx in new[]{-asset.footprint.x*.5f,asset.footprint.x*.5f})foreach(float dz in new[]{-asset.footprint.y*.5f,asset.footprint.y*.5f})

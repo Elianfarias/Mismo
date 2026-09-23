@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: node-Herb
   kind: 0
+  distributionWeight: 1
   displayName: Hierba medicinal
   actionName: Recolectar
   harvestSeconds: 1
   interactionRange: 2.5
   regenerationSeconds: 300
   restoreClearance: 8
-  availablePrefab: {fileID: 5382165887253409859, guid: 7ff6a3620eeda3046b2253872f1c75cf, type: 3}
+  availablePrefab: {fileID: 5125603686835900780, guid: 3a1134ae89a3f23468c42b3716352ecb, type: 3}
   depletedPrefab: {fileID: 5241461087070850331, guid: b486bab3c3cbc7f4f98df153353d5070, type: 3}
   toolPrefab: {fileID: 0}
   harvestSound: {fileID: 8300000, guid: c382dccfa9268ec42ac558e7260fd8f3, type: 3}

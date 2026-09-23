@@ -1,0 +1,1 @@
+PASS: forward, depth and normal coverage; negative chunk coordinates; loaded/unloaded transition; nearby terrain unaffected; production road with horizon matches terrain alone.

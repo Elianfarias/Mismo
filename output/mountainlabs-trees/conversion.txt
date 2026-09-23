@@ -1,0 +1,4 @@
+Meshing checks passed: internal-face removal, exact surface area, color boundaries, flat outward normals, scene rotation/translation.
+MountainLabs_LiveTree: models=2, instances=3, original occupied=768068, overlaps merged=36804, game reduction=6, game grid=(39, 43, 34), exposed unit faces=13776, merged quads=10940, triangles LOD0/1/2=21880/3514/828, bounds(m)=(7.26, 8.00, 6.33), pivot=(19.45, 0.00, 16.99)
+MountainLabs_FluffyPine: models=2, instances=2, original occupied=12038, overlaps merged=454, game reduction=2, game grid=(39, 64, 40), exposed unit faces=10784, merged quads=8324, triangles LOD0/1/2=16648/4620/1440, bounds(m)=(3.66, 6.00, 3.75), pivot=(21.80, 0.00, 21.44)
+Preview saved; prefab/material references, grounded pivots, requested heights, trunk-only colliders, original palette, wind binding and GPU shader checked. WorldContentCatalog and biome profiles untouched.

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932dd4f7d85d4722b8b8ca4f48405b52, type: 3}
+  m_Name: GroveWorldStyle
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.GroveWorldStyle
+  meadowLow: {r: 0.424, g: 0.506, b: 0.329, a: 1}
+  meadowHigh: {r: 0.525, g: 0.573, b: 0.369, a: 1}
+  forestLow: {r: 0.314, g: 0.412, b: 0.294, a: 1}
+  forestHigh: {r: 0.424, g: 0.506, b: 0.329, a: 1}
+  stoneLow: {r: 0.467, g: 0.494, b: 0.475, a: 1}
+  stoneHigh: {r: 0.698, g: 0.706, b: 0.627, a: 1}
+  path: {r: 0.66, g: 0.6, b: 0.46, a: 1}
+  shortVines: {fileID: 6185472815460152551, guid: 706431126ef633f4abfedeb40b00059f, type: 3}
+  longVines: {fileID: 6325077523902428767, guid: cbcd44676bb64ea4d928e3688f446c9e, type: 3}
+  fireflies: {fileID: 1336012370724184948, guid: ece0b305e60550a49bf1511dec92afc4, type: 3}
+  waterMaterial: {fileID: 2100000, guid: 53daf7dc18a9f5349be72cb6660bf177, type: 2}
+  distantWater: {r: 0.08, g: 0.32, b: 0.33, a: 1}
+  vinesPerChunk: 2

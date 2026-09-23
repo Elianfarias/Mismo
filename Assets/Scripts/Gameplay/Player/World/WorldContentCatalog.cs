@@ -55,6 +55,7 @@ namespace Mismo.Gameplay.Player.World
         public Vector3 villageSpawnOffset=new Vector3(0,0,-29);
         public float villageSpawnYaw=0;
         [Header("Atmosphere")]
+        public GroveWorldStyle groveStyle;
         public VegetationMotionSettings vegetationMotion = new VegetationMotionSettings();
         public bool fogEnabled=true;
         public Color fogColor=new Color(.62f,.72f,.73f);

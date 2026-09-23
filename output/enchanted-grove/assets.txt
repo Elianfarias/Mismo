@@ -1,0 +1,33 @@
+Tree_Sage | triangles 10488 / 2632 / 638 | vertices 20976 | bounds metres (5.40, 5.88, 5.40) | voxel step 0.120
+Tree_Blossom | triangles 10526 / 2562 / 626 | vertices 21052 | bounds metres (5.52, 5.88, 5.28) | voxel step 0.120
+Tree_Amber | triangles 10480 / 2556 / 638 | vertices 20960 | bounds metres (5.40, 5.88, 5.16) | voxel step 0.120
+Tree_Cypress | triangles 5406 / 1434 / 444 | vertices 10812 | bounds metres (2.70, 6.40, 2.70) | voxel step 0.100
+Shrub_Sage | triangles 1954 / 476 / 136 | vertices 3908 | bounds metres (1.92, 1.20, 1.92) | voxel step 0.080
+Shrub_Hydrangea | triangles 2134 / 562 / 162 | vertices 4268 | bounds metres (1.92, 1.28, 1.92) | voxel step 0.080
+Fern | triangles 2110 | vertices 4220 | bounds metres (1.80, 0.78, 1.80) | voxel step 0.060
+Grass_Tuft | triangles 1184 | vertices 2368 | bounds metres (1.00, 0.75, 0.85) | voxel step 0.050
+Flowers_Ivory | triangles 1238 | vertices 2476 | bounds metres (1.05, 1.10, 1.05) | voxel step 0.050
+Flowers_Coral | triangles 912 | vertices 1824 | bounds metres (1.15, 1.00, 1.00) | voxel step 0.050
+Flowers_Lavender | triangles 1250 | vertices 2500 | bounds metres (0.70, 1.20, 0.85) | voxel step 0.050
+Reeds | triangles 1142 | vertices 2284 | bounds metres (1.05, 1.80, 0.90) | voxel step 0.050
+Lily_Pads | triangles 322 | vertices 644 | bounds metres (1.40, 0.25, 0.90) | voxel step 0.050
+Mushrooms | triangles 370 | vertices 740 | bounds metres (0.95, 0.55, 0.55) | voxel step 0.050
+Rock_Moss_Large | triangles 1602 / 460 / 146 | vertices 3204 | bounds metres (2.64, 1.56, 2.16) | voxel step 0.120
+Rock_Moss_Small | triangles 372 | vertices 744 | bounds metres (1.44, 0.72, 1.20) | voxel step 0.120
+Cliff_Moss | triangles 4174 / 938 / 264 | vertices 8348 | bounds metres (4.48, 4.96, 1.76) | voxel step 0.160
+Vines_Long | triangles 2760 | vertices 5520 | bounds metres (1.82, 2.52, 0.35) | voxel step 0.070
+Vines_Short | triangles 1406 | vertices 2812 | bounds metres (1.82, 1.47, 0.35) | voxel step 0.070
+Ruin_Arch | triangles 534 | vertices 1068 | bounds metres (4.60, 4.20, 1.20) | voxel step 0.100
+Ruin_Pillar | triangles 152 | vertices 304 | bounds metres (1.40, 2.60, 1.40) | voxel step 0.100
+Ruin_Wall | triangles 236 | vertices 472 | bounds metres (3.70, 1.70, 0.80) | voxel step 0.100
+Stone_Steps | triangles 52 | vertices 104 | bounds metres (2.00, 1.00, 2.10) | voxel step 0.100
+Path_Stones | triangles 378 | vertices 756 | bounds metres (0.96, 0.16, 1.76) | voxel step 0.080
+Lantern_Post | triangles 144 | vertices 288 | bounds metres (0.95, 2.25, 0.50) | voxel step 0.050
+Lantern_Ground | triangles 102 | vertices 204 | bounds metres (0.50, 0.70, 0.50) | voxel step 0.050
+Footbridge | triangles 608 | vertices 1216 | bounds metres (2.00, 1.50, 4.20) | voxel step 0.100
+Cottage_Exterior | triangles 2474 | vertices 4948 | bounds metres (5.20, 5.60, 5.20) | voxel step 0.100
+Diorama_Terrain | triangles 4710 | vertices 9420 | bounds metres (19.80, 4.50, 16.80) | voxel step 0.300
+Pond_Water | triangles 1160 | decorative opaque surface, no water gameplay
+Fireflies | 12 triangles per particle | maximum 24 particles | no realtime lights
+Checks passed: greedy meshing area and winding, triangle limits, prefab mesh/material references, vegetation wind integration across every LOD.
+Preview and three contact sheets rendered. Water shader has no compile errors. No world catalog or build scene list modified.
