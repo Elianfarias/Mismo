@@ -142,7 +142,7 @@ namespace Mismo.Gameplay.Player.Presentation
             if(Time.unscaledTime>=nextDiscoverySave){SaveDiscovery();nextDiscoverySave=Time.unscaledTime+5;}
             var keyboard=Keyboard.current;
             if(keyboard!=null&&keyboard.mKey.wasPressedThisFrame&&draft==null){if(IsOpen)Close();else Open();}
-            else if(IsOpen&&keyboard!=null&&keyboard.escapeKey.wasPressedThisFrame){if(draft!=null)draft=null;else if(selectedVillage.HasValue)selectedVillage=null;else Close();}
+            else if(IsOpen&&keyboard!=null&&keyboard.escapeKey.wasPressedThisFrame)Close();
             if(IsOpen)
             {
                 var health=GetComponent<Mismo.Gameplay.Combat.Health>();if(health!=null&&health.IsDead){Close();return;}
