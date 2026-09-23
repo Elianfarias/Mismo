@@ -1,0 +1,1 @@
+Integrated; combat checks passed; workshop opened with Sword. Organization: Only pre-existing errors remain; see organization-after.txt

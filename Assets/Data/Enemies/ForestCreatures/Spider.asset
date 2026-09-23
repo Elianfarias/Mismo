@@ -21,12 +21,15 @@ MonoBehaviour:
   positioningSpeed: 2.6
   decisionPause: 0.4
   chargeCooldown: 5
+  interruptibleByCombos: 1
+  comboHitStun: 0.55
   staggerDamageThreshold: 15
   staggerDuration: 0.45
   staggerResistance: 0.75
   parryStaggerDuration: 1.25
   slash:
     label: Golpe
+    resistComboInterrupt: 0
     range: 1.9
     windup: 0.65
     active: 0.18
@@ -63,6 +66,7 @@ MonoBehaviour:
     projectileRadius: 0.6
   charge:
     label: Carga
+    resistComboInterrupt: 0
     range: 5
     windup: 1
     active: 0.4
@@ -105,9 +109,10 @@ MonoBehaviour:
   preferredRange: 1.8
   attacks:
   - label: Attack_Bite
+    resistComboInterrupt: 0
     range: 2.2
-    windup: 0.43333334
-    active: 0.13
+    windup: 0.5
+    active: 0.3
     recovery: 0.43666667
     damage: 11
     travel: 0
@@ -140,9 +145,10 @@ MonoBehaviour:
     projectileRange: 30
     projectileRadius: 0.6
   - label: Jump
+    resistComboInterrupt: 0
     range: 7
-    windup: 0.33333334
-    active: 0.7
+    windup: 0.2
+    active: 0.5
     recovery: 0.36666676
     damage: 18
     travel: 4.5
@@ -175,6 +181,7 @@ MonoBehaviour:
     projectileRange: 30
     projectileRadius: 0.6
   - label: Spit_Web
+    resistComboInterrupt: 0
     range: 10
     windup: 0.43333334
     active: 0.05

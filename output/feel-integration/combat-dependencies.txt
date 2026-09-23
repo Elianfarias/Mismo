@@ -1,0 +1,35 @@
+Assets/Art/Materials/Combat/WallCoeur/ImpactPixel.mat
+Assets/Art/Audio/Combat/PostureBreak.wav
+Assets/Art/Materials/Combat/WallCoeur/Impact 2.mat
+Assets/Art/Textures/Combat/WallCoeur/Zbam2.png
+Assets/Art/Shaders/CombatImpact.shader
+Assets/Art/Textures/Combat/WallCoeur/ImpactCircle.png
+Assets/Art/Prefabs/Feedback/Feel/CombatParry.prefab
+Assets/Art/Materials/Combat/WallCoeur/ImpactValo 1.mat
+Assets/Data/Combat/Feedback/SwordFeedback.asset
+Assets/Art/Textures/Combat/WallCoeur/ImpactValoPixel.png
+Assets/Art/Textures/Combat/WallCoeur/ImpactValo4.png
+Assets/Art/Prefabs/Combat/WallCoeur/VFX_Classic_01.prefab
+Assets/Art/Textures/Combat/WallCoeur/Flare2.png
+Assets/Art/Prefabs/Feedback/Feel/CombatPostureBreak.prefab
+Assets/Art/FBX/Combat/WallCoeur/ImpactPlane.fbx
+Assets/Art/Materials/Combat/WallCoeur/ImpactValo.mat
+Assets/Art/Materials/Combat/WallCoeur/ImpactPixel 1.mat
+Assets/Art/Prefabs/Feedback/Feel/CombatBlock.prefab
+Assets/Art/Materials/Combat/WallCoeur/Impact 7.mat
+Assets/Art/Materials/Combat/WallCoeur/Impact 4.mat
+Assets/Art/Prefabs/Combat/WallCoeur/VFX_Critical_01.prefab
+Assets/Scripts/ThirdParty/Feel/MMFeedbacks/MMFeedbacks/Core/MMF_Player/MMF_Player.cs
+Packages/com.unity.render-pipelines.universal/Editor/AssetVersion.cs
+Assets/Art/Audio/Combat/SwordBlock.wav
+Assets/Art/Textures/Combat/WallCoeur/ImpactValoPixel2.png
+Assets/Art/Audio/Combat/SwordHeavy.wav
+Assets/Art/Prefabs/Combat/WallCoeur/VFX_Arcade_01.prefab
+Assets/Art/Prefabs/Feedback/Feel/CombatHeavy.prefab
+Assets/Art/Audio/Combat/SwordFlesh.wav
+Assets/Scripts/Gameplay/Player/Presentation/CombatFeedbackProfile.cs
+Assets/Art/Prefabs/Feedback/Feel/CombatImpact.prefab
+Packages/com.unity.render-pipelines.universal/Runtime/Materials/Lit.mat
+Assets/Art/Textures/Combat/WallCoeur/ImpactValo.png
+Assets/Art/Audio/Combat/SwordParry.wav
+Packages/com.unity.render-pipelines.universal/Shaders/Lit.shader

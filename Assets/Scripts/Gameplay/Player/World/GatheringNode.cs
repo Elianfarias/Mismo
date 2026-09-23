@@ -10,6 +10,7 @@ namespace Mismo.Gameplay.Player.World
         public string persistentId;
         GameObject visual;
         GameObject worldPrefab;
+        Collider[] interactionColliders=System.Array.Empty<Collider>();
         bool usesWorldPrefab;
         bool depleted,initialized;
         PlayerInventory inventory;
@@ -17,7 +18,7 @@ namespace Mismo.Gameplay.Player.World
         public bool Available=>initialized&&!depleted;
         public void Configure(ResourceNodeDefinition data,string id){definition=data;persistentId=id;}
         public void UseWorldPrefab(GameObject prefab){worldPrefab=prefab;usesWorldPrefab=true;}
-        void OnEnable()=>Loaded.Add(this);
+        void OnEnable(){Loaded.Add(this);interactionColliders=GetComponentsInChildren<Collider>();}
         void OnDisable()=>Loaded.Remove(this);
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]static void Reset()=>Loaded.Clear();
         void Update()
@@ -35,13 +36,28 @@ namespace Mismo.Gameplay.Player.World
             if(visual!=null){visual.SetActive(false);Destroy(visual);}
             var prefab=usesWorldPrefab?(depleted?null:worldPrefab):(depleted?definition.depletedPrefab:definition.availablePrefab);
             if(prefab!=null){visual=Instantiate(prefab,transform);visual.transform.localPosition=Vector3.zero;visual.SetActive(true);}
+            interactionColliders=visual!=null?visual.GetComponentsInChildren<Collider>():GetComponents<Collider>();
             if(changedObstacle||visual!=null&&visual.GetComponentInChildren<Collider>()!=null)
                 FindFirstObjectByType<ExplorationChunks>()?.RefreshResourceNavigation();
         }
+        // Reach the visible obstacle from any side, rather than its potentially buried pivot.
+        public Vector3 InteractionPoint(Vector3 from)
+        {
+            var closest=transform.position+Vector3.up*.5f;
+            float best=float.MaxValue;
+            foreach(var collider in interactionColliders)
+            {
+                if(collider==null||!collider.enabled||collider.isTrigger||!collider.gameObject.activeInHierarchy)continue;
+                var point=collider is MeshCollider mesh&&!mesh.convex?collider.bounds.ClosestPoint(from):collider.ClosestPoint(from);
+                float distance=(point-from).sqrMagnitude;
+                if(distance<best){best=distance;closest=point;}
+            }
+            return closest;
+        }
         public bool InRange(Transform player)
         {
-            if(definition==null||Vector3.Distance(player.position,transform.position)>definition.interactionRange)return false;
-            var from=player.position+Vector3.up;var to=transform.position+Vector3.up*.5f;
+            if(definition==null||player==null||Vector3.Distance(player.position,InteractionPoint(player.position))>definition.interactionRange)return false;
+            var from=player.position+Vector3.up;var to=InteractionPoint(from);
             foreach(var hit in Physics.RaycastAll(from,(to-from).normalized,Vector3.Distance(from,to),~0,QueryTriggerInteraction.Ignore))
                 if(!hit.transform.IsChildOf(player)&&!hit.transform.IsChildOf(transform))return false;
             return true;

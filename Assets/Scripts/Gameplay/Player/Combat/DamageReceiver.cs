@@ -43,7 +43,13 @@ namespace Mismo.Gameplay.Combat
             if(outcome==HitOutcome.Parry||outcome==HitOutcome.PerfectParry)
             {
                 bool perfect=outcome==HitOutcome.PerfectParry;
+                bool attackerWasBroken = attacker != null && attacker.Broken;
                 attacker?.DamagePosture(perfect?rules.perfectParryPosture:rules.parryPosture);
+                if (Application.isPlaying && attacker != null && !attackerWasBroken && attacker.Broken)
+                {
+                    var profile = GetComponent<Mismo.Gameplay.Player.Equipment.EquipmentLoadout>()?.ActiveDefinition?.FeedbackProfile;
+                    if (profile != null) Mismo.Gameplay.Player.Presentation.CombatImpactPool.Instance.Play(profile.postureBreak, attacker.transform.position + Vector3.up, -damage.Direction);
+                }
                 if(perfect){state.Reward(rules.perfectFocus,"PARRY PERFECTO");CombatTimeFeedback.PerfectDefense();}
                 else state.Reward(0,"PARRY");
                 swordParry?.ResolveFeedback(damage);
@@ -79,13 +85,19 @@ namespace Mismo.Gameplay.Combat
             float previousHealth=health.Current;
             health.ApplyDamage(new DamageInfo(amount,damage.Source,damage.HitPoint,damage.Direction,damage.AttackId));
             float healthDamage=previousHealth-health.Current;
+            bool wasBroken = state.Broken;
             float posture=state.DamagePosture(damage.PostureDamage*(back?rules.backPosture:1)*(opening?rules.openingPosture:1));
             if(healthDamage>0 && damage.FocusGainOnHit>0)attacker?.Reward(damage.FocusGainOnHit,"IMPACTO");
             if(attacker!=null&&(back||opening))attacker.Reward(back?rules.backFocus:rules.openingFocus,back?"ESPALDA":"APERTURA");
             GetComponent<Mismo.Gameplay.Player.Equipment.AbilityRunner>()?.Interrupt();
             if(invulnerability!=null)invulnerability.StartWindow(invulnerabilityAfterHit);
-            return Publish(damage,new HitResult(HitOutcome.Hit,healthDamage,posture,back));
+            return Publish(damage,new HitResult(HitOutcome.Hit,healthDamage,posture,back,!wasBroken && state.Broken));
         }
-        HitResult Publish(DamageInfo damage,HitResult result){LastResult=result;Resolved?.Invoke(damage,result);return result;}
+        HitResult Publish(DamageInfo damage,HitResult result)
+        {
+            LastResult=result;
+            if (Application.isPlaying) Mismo.Gameplay.Player.Presentation.CombatImpactPool.Confirm(this, damage, result);
+            Resolved?.Invoke(damage,result);return result;
+        }
     }
 }

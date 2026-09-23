@@ -67,9 +67,9 @@ namespace Mismo.Gameplay.Player.Editor
             yield return null;yield return null;
             Check(node.Available&&node.InRange(player.transform),"Available node is reachable");
             var keyboard=InputSystem.AddDevice<Keyboard>();keyboard.MakeCurrent();
-            InputSystem.QueueStateEvent(keyboard,new KeyboardState(UnityEngine.InputSystem.Key.G));yield return null;yield return null;
+            InputSystem.QueueStateEvent(keyboard,new KeyboardState(UnityEngine.InputSystem.Key.F));yield return null;yield return null;
             InputSystem.QueueStateEvent(keyboard,new KeyboardState());
-            Check(gathering.IsHarvesting,"G starts gathering through the normal interaction");
+            Check(gathering.IsHarvesting,"F starts gathering through the normal interaction");
             for(int i=0;i<25;i++)yield return null;
             Check(!node.Available&&inventory.MaterialCount(MaterialCatalog.Herb)==1,"Completion grants material and exhausts node once");
             Check(!node.Complete(inventory)&&inventory.MaterialCount(MaterialCatalog.Herb)==1,"Repeated completion cannot duplicate harvest");
@@ -84,7 +84,7 @@ namespace Mismo.Gameplay.Player.Editor
             player.transform.position=Vector3.right*15;yield return null;yield return null;
             Check(node.Available,"Expired node restores when player is away");player.transform.position=Vector3.up*.2f;
             herb.harvestSeconds=3;
-            InputSystem.QueueStateEvent(keyboard,new KeyboardState(UnityEngine.InputSystem.Key.G));yield return null;yield return null;InputSystem.QueueStateEvent(keyboard,new KeyboardState());
+            InputSystem.QueueStateEvent(keyboard,new KeyboardState(UnityEngine.InputSystem.Key.F));yield return null;yield return null;InputSystem.QueueStateEvent(keyboard,new KeyboardState());
             Check(gathering.IsHarvesting,"Second harvest can begin after regeneration");
             health.ApplyDamage(new DamageInfo(5,null,player.transform.position,Vector3.forward));
             Check(!gathering.IsHarvesting&&node.Available&&inventory.MaterialCount(MaterialCatalog.Herb)==1,"Damage cancels gathering without granting or exhausting");
@@ -113,7 +113,7 @@ namespace Mismo.Gameplay.Player.Editor
             player.transform.position=Vector3.up*.2f;
             storageField.SetValue(inventory,new FailingStorage());Check(!inventory.TryCraft(settings.recipes[0],weaponId,station)&&inventory.MaterialCount(MaterialCatalog.Herb)==2,"Failed crafting save preserves ingredients");storageField.SetValue(inventory,workingStorage);
             Check(inventory.TryCraft(settings.recipes[0],weaponId,station),"Craft can retry successfully after storage recovers");
-            InputSystem.QueueStateEvent(keyboard,new KeyboardState(UnityEngine.InputSystem.Key.G));yield return null;yield return null;InputSystem.QueueStateEvent(keyboard,new KeyboardState());
+            InputSystem.QueueStateEvent(keyboard,new KeyboardState(UnityEngine.InputSystem.Key.F));yield return null;yield return null;InputSystem.QueueStateEvent(keyboard,new KeyboardState());
             Check(gathering.BlocksGameplay,"Workbench opens through G and blocks gameplay controls");
             for(int i=0;i<10;i++)yield return null;ScreenCapture.CaptureScreenshot(Path.Combine(Output,"crafting.png"));for(int i=0;i<10;i++)yield return null;
             InputSystem.RemoveDevice(keyboard);

@@ -1,0 +1,24 @@
+Running real Play Mode
+PASS Reproducción real MMF_Player 0
+PASS Evento CameraShake recibido 0
+PASS Reproducción real MMF_Player 1
+PASS Evento CameraShake recibido 1
+PASS Reproducción real MMF_Player 2
+PASS Evento CameraShake recibido 2
+PASS Reproducción real MMF_Player 3
+PASS Evento CameraShake recibido 3
+PASS Reproducción real MMF_Player 4
+PASS Evento CameraShake recibido 4
+PASS Cinco secuencias reutilizables
+PASS Combate lejano no sacude cámara
+PASS Reutilización de parry
+PASS No se crean instancias por golpe
+PASS Rotación visible durante render
+PASS Órbita y apuntado restaurados tras render
+PASS Pausa bloquea nuevo feedback
+PASS Pausa cancela sacudida
+PASS Feedback inicia durante hit stop
+PASS Feedback avanza con tiempo no escalado
+PASS Sacudida termina sin deriva
+PASS Flash termina y no captura clicks
+PASS: secuencias reales, distancia, reutilización, cámara, pausa e hit stop.

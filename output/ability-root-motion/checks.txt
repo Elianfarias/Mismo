@@ -1,0 +1,79 @@
+PASS Partial family mask refuses animation displacement
+PASS Full Body supports per-ability movement
+PASS Movement is opt-in
+Enabled clip 0 advance=2,02169
+PASS Enabled: real OnAnimatorMove callback executes
+PASS Enabled: no teleport on clip transition (max=0,134153m)
+PASS Enabled: visual stays attached to collider
+PASS Enabled: controlled dash/lunge overrides root movement
+PASS Enabled: pause rejects animation movement
+PASS Enabled: regular movement resumes after attack
+PASS Enabled attack follows clip distance: 2,02169m
+Half scale clip 0 advance=1,013504
+PASS Half scale: real OnAnimatorMove callback executes
+PASS Half scale: no teleport on clip transition (max=0,06707648m)
+PASS Half scale: visual stays attached to collider
+PASS Half scale: controlled dash/lunge overrides root movement
+PASS Half scale: pause rejects animation movement
+PASS Half scale: regular movement resumes after attack
+PASS Multiplier 0.5 halves the advance: 1,013504m
+Disabled clip 0 advance=0
+PASS Disabled: real OnAnimatorMove callback executes
+PASS Disabled: no teleport on clip transition (max=0m)
+PASS Disabled: visual stays attached to collider
+PASS Disabled: controlled dash/lunge overrides root movement
+PASS Disabled: pause rejects animation movement
+PASS Disabled: regular movement resumes after attack
+PASS Disabled attack stays in place
+Input clip 0 advance=2,02169
+PASS Input: real OnAnimatorMove callback executes
+PASS Input: no teleport on clip transition (max=0,134153m)
+PASS Input: visual stays attached to collider
+PASS Input: controlled dash/lunge overrides root movement
+PASS Input: pause rejects animation movement
+PASS Input: regular movement resumes after attack
+PASS Held movement keys do not double the clip's advance
+Wall clip 0 advance=0,7326545
+PASS Wall: real OnAnimatorMove callback executes
+PASS Wall: no teleport on clip transition (max=0,134153m)
+PASS Wall: visual stays attached to collider
+PASS Wall: controlled dash/lunge overrides root movement
+PASS Wall: pause rejects animation movement
+PASS Wall: regular movement resumes after attack
+PASS CharacterController stops the attack at a wall: 0,7326545m
+Constraint clip 0 advance=0,6385722
+PASS Constraint: real OnAnimatorMove callback executes
+PASS Constraint: no teleport on clip transition (max=0,1220618m)
+PASS Constraint: visual stays attached to collider
+PASS Constraint: controlled dash/lunge overrides root movement
+PASS Constraint: pause rejects animation movement
+PASS Constraint: regular movement resumes after attack
+PASS World movement constraint is respected: 0,6385722m
+Same clip recast clip 0 advance=2,02169
+Same clip recast clip 1 advance=2,021691
+PASS Same clip recast: real OnAnimatorMove callback executes
+PASS Same clip recast: no teleport on clip transition (max=0,134153m)
+PASS Same clip recast: visual stays attached to collider
+PASS Same clip recast: controlled dash/lunge overrides root movement
+PASS Same clip recast: pause rejects animation movement
+PASS Same clip recast: regular movement resumes after attack
+PASS Recasting the same clip has no backward reset: 4,043381m
+Cancelled clip 0 advance=1,660999
+PASS Cancelled: real OnAnimatorMove callback executes
+PASS Cancelled: no teleport on clip transition (max=0,134153m)
+PASS Cancelled: visual stays attached to collider
+PASS No residual movement after cancellation
+PASS Cancelled: controlled dash/lunge overrides root movement
+PASS Cancelled: pause rejects animation movement
+PASS Cancelled: regular movement resumes after attack
+PASS Cancellation stops animation movement immediately
+Three hit combo clip 0 advance=2,02169
+Three hit combo clip 1 advance=1,16518
+Three hit combo clip 2 advance=1,124453
+PASS Three hit combo: real OnAnimatorMove callback executes
+PASS Three hit combo: no teleport on clip transition (max=0,1565605m)
+PASS Three hit combo: visual stays attached to collider
+PASS Three hit combo: controlled dash/lunge overrides root movement
+PASS Three hit combo: pause rejects animation movement
+PASS Three hit combo: regular movement resumes after attack
+PASS Three actual sword clips advance without resetting actor position: 4,311324m

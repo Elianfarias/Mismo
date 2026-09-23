@@ -1,0 +1,8 @@
+PASS
+Traslados con AssetDatabase.MoveAsset y GUID conservados; licencias preservadas.
+Secuencia Impact: Assets/Art/Prefabs/Feedback/Feel/CombatImpact.prefab
+Secuencia Heavy: Assets/Art/Prefabs/Feedback/Feel/CombatHeavy.prefab
+Secuencia PostureBreak: Assets/Art/Prefabs/Feedback/Feel/CombatPostureBreak.prefab
+Secuencia Block: Assets/Art/Prefabs/Feedback/Feel/CombatBlock.prefab
+Secuencia Parry: Assets/Art/Prefabs/Feedback/Feel/CombatParry.prefab
+Sólo defaults de runtime registrados en catálogo; plantillas de editor resueltas por GUID.

@@ -27,6 +27,7 @@ namespace Mismo.Gameplay.Player.Equipment
             return -1;
         }
         public WeaponAnimationSet animations;
+        public CombatFeedbackProfile feedback;
         public AbilityDefinition GetAbility(AbilitySlot slot)
         {
             int index=(int)slot;

@@ -1,0 +1,5 @@
+PASS: interaction revision
+PASS: interaction selects nearest action and cannot activate two targets in the same frame.
+PASS: Tab swaps silently; ground drop has no notice and exposes its weapon name; pickup works during combat grace.
+PASS: enemy drops stay on ground, persist, resist duplicate victories and failed saves, and transfer only on explicit pickup.
+PASS: large resource reachable from four sides, walls block gathering, surface range enforced.

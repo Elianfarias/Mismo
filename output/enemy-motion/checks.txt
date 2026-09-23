@@ -1,0 +1,8 @@
+PASS Fixture clips available
+PASS Idle override selected without weapons
+PASS Walk override selected
+PASS Run override selected
+PASS Attack takes precedence over movement
+PASS Configured hit reaction takes precedence after damage
+PASS Death is not replaced by locomotion or hit
+PASS Empty movement slot preserves controller fallback

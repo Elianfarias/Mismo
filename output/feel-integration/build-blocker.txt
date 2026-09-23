@@ -1,0 +1,5 @@
+Build completa interrumpida antes de los callbacks normales por Addressables:
+Win32 IO returned 1224. Path: C:\Users\elian\Mismo\ProjectSettings\ScriptableBuildPipeline.json
+BuildFailedException: Failed to build Addressables content, content not included in Player Build.
+El BuildReport devolvió Unknown / Errors: 0; ver Logs/Editor.log para la excepción de PrepareForBuild.
+Además, ProjectOrganizationChecks.Run detecta incidencias anteriores en DoubleL y texturas del Imp (organization.txt).

@@ -51,6 +51,8 @@ namespace Mismo.Gameplay.Player.Editor
             {payload=json;return json==null?ProfileReadResult.Missing:validate(json)?ProfileReadResult.Loaded:ProfileReadResult.Invalid;}
             public void Write(string payload){if(fail)throw new IOException("Simulated write failure");json=payload;}
         }
+        static bool CollectDrop(PlayerInventory inventory)
+        { foreach(var loot in inventory.PendingLoot)return inventory.CollectPending(loot.id);return false; }
         static IEnumerator Run()
         {
             foreach(var g in Object.FindObjectsByType<GoblinController>())g.enabled=false;
@@ -79,10 +81,10 @@ namespace Mismo.Gameplay.Player.Editor
             Check(Near(inventory.DamageMultiplier(sword),1.045f)&&Near(inventory.AttackSpeed(sword),1.015f),"Character and family bonuses affect offense");
             Check(!inventory.TrySpendMastery(sword,MasteryAttribute.Speed),"Spent mastery points cannot be reused");
             var heavy=new OwnedWeapon{instanceId=Guid.NewGuid().ToString("N"),definitionId=sword.Id,tier=3,variant=WeaponVariant.Colossus};
-            Check(inventory.TryGrantVictory(0,null,heavy)&&inventory.TryEquip(0,heavy.instanceId),"Rolled exemplar can be saved and equipped");
+            Check(inventory.TryGrantVictory(0,null,heavy)&&CollectDrop(inventory)&&inventory.TryEquip(0,heavy.instanceId),"Rolled exemplar can be saved and equipped");
             Check(Near(health.Maximum,120)&&inventory.AttackSpeed(sword)<1&&inventory.DamageMultiplier(sword)>1.3f,"Tier and colossus positives and negatives apply");
             var guard=new OwnedWeapon{instanceId=Guid.NewGuid().ToString("N"),definitionId=bow.Id,tier=2,variant=WeaponVariant.Guardian};
-            Check(inventory.TryGrantVictory(0,null,guard)&&inventory.TryEquip(1,guard.instanceId),"Second equipped exemplar retains its roll");
+            Check(inventory.TryGrantVictory(0,null,guard)&&CollectDrop(inventory)&&inventory.TryEquip(1,guard.instanceId),"Second equipped exemplar retains its roll");
             float max=health.Maximum,armor=inventory.Armor,current=health.Current;
             Check(inventory.TrySwap()&&Near(max,health.Maximum)&&Near(armor,inventory.Armor)&&Near(current,health.Current),"Alternating preserves both weapons' life and armor");
             Check(Near(inventory.AttackSpeed(bow),1)&&Near(inventory.DamageMultiplier(bow),1.0375f),"Offensive modifiers apply only to corresponding weapon");

@@ -1,0 +1,163 @@
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Muzzle1 6.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Flare/Impact 3.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Classic_04.prefab debe estar en Assets/Art/Prefabs/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/ImpactValo 6.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/Circle.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/Akmul_VFX_Circle.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/CircleImpact04.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Muzzle1 2.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Impact_1.1.0/Impact08_1.1.0.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Pixel/LiquidPixel.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Flam_Alpha 8.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/GrifassAlpha.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/SlashAlpha 1.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/ImpactValo7.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/ImpactAdd 7.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Circle/Impact 12.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/FP_BasicsImpact.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/impact_1.1.0/Impact08.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/ImpactValo6.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/impact_1.1.0/Impact01.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Impact_1.1.0/Impact02_1.1.0.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/CrossImpact.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/VFX_Impactv1.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/SllashV2.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/GrifassAdd.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Muzzle1 8.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/CircleImpact03.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/impact_1.1.0/Impact02.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/MuzzleV7.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/CrossShoot.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Impact_1.1.0/Impact09_1.1.0.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/ImpactAlpha.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/SlashAdd.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/impact_1.1.0/Impact07.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/ImpactValo3.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Impact_1.1.0/Impact05_1.1.0.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Muzzle1 3.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Smoke.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/CarréAlpha.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Smoke 2.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Impact_1.1.0/Impact07_1.1.0.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/impact_1.1.0/Impact10.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/ImpactFrame.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/2_Impact_1.1.0/VFX_ImpactToon_1.1.0.prefab debe estar en Assets/Art/Prefabs/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/impact_1.1.0/Impact09.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/impact_1.1.0/Impact04.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/Muzzle2p2.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/2_Impact_1.1.0/VFX_ImpactClassic01_1.1.0.prefab debe estar en Assets/Art/Prefabs/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/CarréAdd.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/1_Critical/VFX_Critical_02.prefab debe estar en Assets/Art/Prefabs/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/ImpactValo 5.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/t_Add.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/SplashV2.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/Grid_01_Emissive.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/FP_BwImpact.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/ImpactAdd 6.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Impact_1.1.0/Impact03_1.1.0.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/VFX_Impactv6.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Muzzle1 12.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Flare/Impact 10.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/ImpactAdd 8.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/ImpactAdd 5.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Muzzle1 12Alpha 1.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/ImpactAdd 3.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/FP_CircleImpact.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/ImpactValo2.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Cross.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/CircleImpact02.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/Scripts/DropdownController.cs debe estar en Assets/Scripts/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/SlashV3.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/VFX_ImpactArcade.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Flare/Impact 1.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Flare/Impact 8.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Blood_01.prefab debe estar en Assets/Art/Prefabs/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/VFX_ImpactArcade2.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Flare/ImpactALPHA.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Impact 5.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Circle/Impact 11.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Impact_1.1.0/Impact04_1.1.0.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/04_Model/ImpactPlane.prefab debe estar en Assets/Art/Prefabs/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Muzzle1 5.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Muzzle1 10.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Circle/Impact 13.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/NoiseHack8_Paint.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/SlashOne.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/Zbam.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/Zbam3.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/ImpactValo 2.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/CircleDeep - Copy.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/Circle2.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Muzzle1 14.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Impact_1.1.0/Impact10_1.1.0.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/ImpactValo 8.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Arcade_02.prefab debe estar en Assets/Art/Prefabs/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/ImpactShotValo.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/Flare.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Muzzle1 12Alpha.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/ImpactValo7 1.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/Liquid.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/impact_1.1.0/Impact06.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/ImpactAdd.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Smoke 4.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Impact_1.1.0/Impact01_1.1.0.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/ImpactAdd 2.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Liquid/Liquid.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/SllashV3.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/ImpactValoAlpha.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Poison_01.prefab debe estar en Assets/Art/Prefabs/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/ImpactValo8.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/VFX_Impactv7.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/ImpatcValo8.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Muzzle1 11.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Impact 6.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/1024BLUR.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/TrailShot.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Impact_1.1.0/Impact06_1.1.0.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/impact_1.1.0/Impact05.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/impact_1.1.0/Impact03.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/SlashV5.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/VFXPlayerScene.unity debe estar en Assets/Scenes/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/GRIFFASS.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Classic_03.prefab debe estar en Assets/Art/Prefabs/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/2_Impact_1.1.0/VFX_ImpactCross_1.1.0.prefab debe estar en Assets/Art/Prefabs/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Poison_02.prefab debe estar en Assets/Art/Prefabs/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/SlashAlpha.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/2_Impact_1.1.0/VFX_ImpactCritical_1.1.0_Pink.prefab debe estar en Assets/Art/Prefabs/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/Zbam4.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Liquid/BLOOD.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Muzzle1 9.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/ImpactShotValo2.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/VFX_Impactv5.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/ImpactAdd 1.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/ImpactValo5.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/Triangle.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/Blood.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Muzzle1 4.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/VFX_Impactv2.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/A_ImpactCircle.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Arcade_03.prefab debe estar en Assets/Art/Prefabs/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Flam_Alpha 4.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Impact.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/MuzzleCanonNeo.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/Circle3.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Muzzle1 7.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/VFX_Impactv4.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Smoke 1.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Muzzle1 13.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Classic_02.prefab debe estar en Assets/Art/Prefabs/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/SlashV4.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/Scripts/VfxController.cs debe estar en Assets/Scripts/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Impact 3.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/VFX_Impactv3.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/ImpactAdd 4.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Impact 1.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/FP_SmkImpact.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Circle/Impact 9.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/Smoke 3.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/MuzzleV3.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/VFX_FP_SmokeCircleGround.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/ImpactValo 3.mat debe estar en Assets/Art/Materials/
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Blood_02.prefab debe estar en Assets/Art/Prefabs/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/03_Texture/LiquidPixel.png
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/ImpactValo 4.mat debe estar en Assets/Art/Materials/

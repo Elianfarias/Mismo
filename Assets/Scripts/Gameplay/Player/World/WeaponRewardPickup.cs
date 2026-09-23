@@ -10,7 +10,6 @@ namespace Mismo.Gameplay.Player.World
         Transform visual;
         string rewardId;
         float retryAt;
-        Material material;
 
         public static void Spawn(PlayerInventory owner, Vector3 position, string id)
         {
@@ -27,41 +26,25 @@ namespace Mismo.Gameplay.Player.World
                 pickup.visual = model.transform;
                 foreach (var c in model.GetComponentsInChildren<Collider>()) c.enabled = false;
             }
-            var marker = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-            marker.name = "Reward marker"; marker.transform.SetParent(go.transform, false);
-            marker.transform.localPosition = Vector3.down * .55f;
-            marker.transform.localScale = new Vector3(.8f, .025f, .8f);
-            marker.GetComponent<Collider>().enabled = false;
-            var shader = Shader.Find("Universal Render Pipeline/Lit") ?? Shader.Find("Standard");
-            if (shader != null)
-            {
-                pickup.material = new Material(shader) { color = new Color(.95f, .75f, .28f) };
-                marker.GetComponent<Renderer>().sharedMaterial = pickup.material;
-            }
+            var marker=new GameObject("Reward glow");marker.transform.SetParent(go.transform,false);
+            marker.transform.localPosition=Vector3.down*.7f;
+            marker.AddComponent<LootMarker>().Configure(InventorySettings.Current,0,2);
         }
 
         void Update()
         {
             if (inventory == null || inventory.HasClaimed(rewardId)) { Destroy(gameObject); return; }
+            OfferPickup();
             if (visual != null) visual.Rotate(Vector3.up, 45f * Time.deltaTime, Space.World);
         }
-        void OnTriggerEnter(Collider other) => Collect(other);
-        void OnTriggerStay(Collider other) => Collect(other);
-        void Collect(Collider other)
+        void OfferPickup()
         {
-            if (Time.unscaledTime < retryAt || inventory == null || other.GetComponentInParent<PlayerInventory>() != inventory) return;
-            retryAt = Time.unscaledTime + 2f;
-            if (inventory.TryClaimReward(rewardId)) Destroy(gameObject);
+            if(inventory==null||Time.unscaledTime<retryAt||Vector3.Distance(inventory.transform.position,transform.position)>2.4f)return;
+            Presentation.PlayerInteraction.Offer(inventory,this,transform.position,"Recoger recompensa","Espada del guardián",()=>
+            {
+                retryAt=Time.unscaledTime+1;
+                if(inventory.TryClaimReward(rewardId))Destroy(gameObject);
+            });
         }
-        void OnGUI()
-        {
-            if (InventoryPanel.AnyOpen) return;
-            if (inventory == null || UnityEngine.Camera.main == null) return;
-            var point = UnityEngine.Camera.main.WorldToScreenPoint(transform.position + Vector3.up);
-            if (point.z <= 0 || Vector3.Distance(inventory.transform.position, transform.position) > 15f) return;
-            var style = new GUIStyle(GUI.skin.box){font=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.Body, fontSize = 16, alignment = TextAnchor.MiddleCenter };
-            GUI.Box(new Rect(point.x - 145, Screen.height - point.y - 25, 290, 54), "ESPADA DEL GUARDIÁN\nAcercate para recoger", style);
-        }
-        void OnDestroy() { if (material != null) Destroy(material); }
     }
 }

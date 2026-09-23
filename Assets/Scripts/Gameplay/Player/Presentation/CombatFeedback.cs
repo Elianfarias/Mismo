@@ -50,13 +50,11 @@ namespace Mismo.Gameplay.Player.Presentation
 
         private void OnEnable()
         {
-            if (health != null) health.Damaged += OnDamaged;
             if (belt != null)
             {
                 belt.CooldownStarted += OnCooldownStarted;
                 belt.CooldownReady += OnCooldownReady;
             }
-            if (swordParry != null) swordParry.Parried += OnParried;
             if (swordCombo != null) swordCombo.AttackStarted += OnComboStarted;
             if (swordSpinAttack != null) swordSpinAttack.AttackStarted += OnSpinStarted;
             if (swordLunge != null) swordLunge.AttackStarted += OnLungeStarted;
@@ -64,13 +62,11 @@ namespace Mismo.Gameplay.Player.Presentation
 
         private void OnDisable()
         {
-            if (health != null) health.Damaged -= OnDamaged;
             if (belt != null)
             {
                 belt.CooldownStarted -= OnCooldownStarted;
                 belt.CooldownReady -= OnCooldownReady;
             }
-            if (swordParry != null) swordParry.Parried -= OnParried;
             if (swordCombo != null) swordCombo.AttackStarted -= OnComboStarted;
             if (swordSpinAttack != null) swordSpinAttack.AttackStarted -= OnSpinStarted;
             if (swordLunge != null) swordLunge.AttackStarted -= OnLungeStarted;

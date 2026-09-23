@@ -29,6 +29,7 @@ namespace Mismo.Gameplay.Player.Equipment
         private void Start()
         {
             loadout = GetComponent<EquipmentLoadout>(); motor = GetComponent<PlayerMotor>();
+            if(GetComponent<Presentation.WeaponTrailPresentation>()==null)gameObject.AddComponent<Presentation.WeaponTrailPresentation>();
             // Scenes may retain an invisible previous avatar with identically named bones.
             // Resolve only inside the rig actually driven by the character animator.
             var driver = GetComponent<Presentation.PlayerAnimationDriver>();

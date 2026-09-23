@@ -22,6 +22,7 @@ namespace Mismo.Gameplay.Player.Editor
             EditorGUILayout.HelpBox("La familia comparte habilidades y animaciones. El taller de poses mantiene el agarre y el modelo de cada arma. Los cambios en una familia afectan a todas sus armas.",MessageType.Info);
             weapon=(WeaponDefinition)EditorGUILayout.ObjectField("Arma",weapon,typeof(WeaponDefinition),false);
             if(weapon==null){EditorGUILayout.EndScrollView();return;}
+            if(GUILayout.Button("Editar / probar feedback de combate"))CombatFeedbackWindow.Open(weapon);
             EditorGUI.BeginChangeCheck();
             var family=(WeaponFamilyDefinition)EditorGUILayout.ObjectField("Familia",weapon.family,typeof(WeaponFamilyDefinition),false);
             if(EditorGUI.EndChangeCheck())Assign(family);
@@ -38,6 +39,9 @@ namespace Mismo.Gameplay.Player.Editor
             if(family!=null)
             {
                 UnityEditor.Editor.CreateCachedEditor(family,null,ref familyEditor);familyEditor.OnInspectorGUI();
+                var basicAbility = weapon.GetAbility(AbilitySlot.Basic);
+                if (basicAbility != null && GUILayout.Button("Editar habilidad básica: tiempos, combo e impactos"))
+                { Selection.activeObject = basicAbility; EditorGUIUtility.PingObject(basicAbility); }
                 if(family.animations==null && GUILayout.Button("Crear conjunto de animaciones"))
                 {
                     string path=EditorUtility.SaveFilePanelInProject("Animaciones",family.name+"Animations","asset","Guardar animaciones");
@@ -48,6 +52,9 @@ namespace Mismo.Gameplay.Player.Editor
                 {
                     EditorGUILayout.HelpBox("Actions: asociá una habilidad y sus clips. Mask Mode permite heredar la máscara de familia, usar Full Body o una Custom Mask. Se configura una vez por acción, sin editar los clips.",MessageType.Info);
                     UnityEditor.Editor.CreateCachedEditor(family.animations,null,ref animationEditor);animationEditor.OnInspectorGUI();
+                    EditorGUILayout.HelpBox("Usar desplazamiento de la animación permite avanzar con los pasos del clip, respetando colisiones. Requiere Full Body o una familia sin máscara. Multiplicador 1 conserva la distancia; los clips In Place no avanzan. Los movimientos especiales de habilidades y cinturones tienen prioridad.",MessageType.Info);
+                    if(family.animations.actions!=null && System.Array.Exists(family.animations.actions,a=>a!=null && a.useAnimationMovement && a.ResolveMask(family.animations.actionMask)!=null))
+                        EditorGUILayout.HelpBox("Hay una acción con desplazamiento activado y una máscara parcial. Seleccioná Full Body para que pueda mover al personaje.",MessageType.Warning);
                     if(family.animations.actions!=null && System.Array.Exists(family.animations.actions,a=>a!=null && a.maskMode==ActionMaskMode.Custom && a.customMask==null))
                         EditorGUILayout.HelpBox("Hay una acción en Custom sin máscara asignada. Mientras esté vacía heredará la máscara de la familia.",MessageType.Warning);
                 }

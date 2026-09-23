@@ -17,7 +17,7 @@ namespace Mismo.Gameplay.Player.Quests
             {
                 var catalog=QuestCatalog.Load();
                 if(catalog==null||catalog.quests.Length!=7||catalog.radialSelected.Length!=8||catalog.radialSelected.Any(t=>t==null)||catalog.radialSurface==null||catalog.radialOutline==null||catalog.journalIcon==null)throw new Exception("Quest catalog or radial dependencies missing from build");
-                if(catalog.journalKey!=UnityEngine.InputSystem.Key.J||catalog.interactKey!=UnityEngine.InputSystem.Key.T)throw new Exception("Unexpected default quest controls");
+                if(catalog.journalKey!=UnityEngine.InputSystem.Key.J||catalog.interactKey!=UnityEngine.InputSystem.Key.F)throw new Exception("Unexpected default quest controls");
                 if(catalog.journalContacts||catalog.villageNpcs==null||catalog.villageNpcs.residents.Length!=5)throw new Exception("Physical NPC contacts not configured");
                 foreach(var resident in catalog.villageNpcs.residents)
                 {

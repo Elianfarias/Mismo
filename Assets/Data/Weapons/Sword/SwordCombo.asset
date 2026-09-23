@@ -20,7 +20,7 @@ MonoBehaviour:
   description: Encadena ataques de espada contra los enemigos que tengas delante.
   localizationKey: ability.sword.swordcombo
   preparation: 0
-  active: 0.38
+  active: 1
   recovery: 0.16
   cooldown: 0.45
   staminaCost: 10
@@ -91,12 +91,41 @@ MonoBehaviour:
     volume: 0.5
   - clip: {fileID: 8300000, guid: 3856c6cb7f14b404585da8646e5bcbbc, type: 3}
     volume: 0.5
-  - clip: {fileID: 8300000, guid: dd4d0570e2e764940abc5e7d7d63b6be, type: 3}
-    volume: 0.5
   pose: 0
   usesSwordCombo: 1
+  comboSteps:
+  - id: slash_2
+    duration: 1
+    inputStartPercent: 60
+    inputEndPercent: 80
+    branchPercent: 65
+    transitionDuration: 0
+    recoveryDuration: 0
+    impactStartPercent: 0
+    impactEndPercent: 100
+    damage: 12
+    shape: 2
+    bladeRadius: 0.035
+    center: {x: 0, y: 1, z: 0.65}
+    size: {x: 0.9, y: 1.4, z: 1.4}
+    radius: 0.7
+  - id: heavy_slash
+    duration: 1
+    inputStartPercent: 35
+    inputEndPercent: 80
+    branchPercent: 65
+    transitionDuration: 0
+    recoveryDuration: 0
+    impactStartPercent: 0
+    impactEndPercent: 100
+    damage: 20
+    shape: 2
+    bladeRadius: 0.035
+    center: {x: 0, y: 1, z: 0.65}
+    size: {x: 0.9, y: 1.4, z: 1.4}
+    radius: 0.7
   targetsGround: 0
-  aimFromCamera: 0
+  aimFromCamera: 1
   range: 25
   actions: []
   references:

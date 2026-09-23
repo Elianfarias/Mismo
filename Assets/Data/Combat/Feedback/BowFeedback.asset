@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 698a3880f80842ae8ed9b152f31daec7, type: 3}
+  m_Name: BowFeedback
+  m_EditorClassIdentifier: 
+  heavyPostureThreshold: 15
+  impact:
+    prefab: {fileID: 500345726442012828, guid: 50a810bfd70577b41a2d43ae0241ea2d, type: 3}
+    scale: 1
+    rotation: {x: 0, y: 0, z: 0}
+    tint: {r: 0.48264506, g: 0.5471698, b: 0.5319992, a: 1}
+    sound: {fileID: 8300000, guid: 168c3532c8e8425d8eb34d19fa1f7e0e, type: 3}
+    volume: 0.65
+    hitStop: 0
+    maximumLifetime: 3
+  heavy:
+    prefab: {fileID: 500345726442012828, guid: 50a810bfd70577b41a2d43ae0241ea2d, type: 3}
+    scale: 1
+    rotation: {x: 0, y: 0, z: 0}
+    tint: {r: 1, g: 0.7, b: 0.4, a: 1}
+    sound: {fileID: 8300000, guid: 83faa6dab358437481af8a3f6de41ae3, type: 3}
+    volume: 0.65
+    hitStop: 0.035
+    maximumLifetime: 3
+  postureBreak:
+    prefab: {fileID: 85941164691198867, guid: bad3cf055489f0e4e9cd51bd9cdb7008, type: 3}
+    scale: 1
+    rotation: {x: 0, y: 0, z: 0}
+    tint: {r: 1, g: 0.8, b: 0.25, a: 1}
+    sound: {fileID: 8300000, guid: 8902436e2fd748b68a126a23d14bdf56, type: 3}
+    volume: 0.65
+    hitStop: 0.055
+    maximumLifetime: 3
+  block:
+    prefab: {fileID: 4364062416287365583, guid: fe2205740225ab04bb07d3c6308b7c8b, type: 3}
+    scale: 1
+    rotation: {x: 0, y: 0, z: 0}
+    tint: {r: 0.3, g: 0.7, b: 1, a: 1}
+    sound: {fileID: 8300000, guid: 38ad9673f24d4dd4b0ddfd63efb6b343, type: 3}
+    volume: 0.65
+    hitStop: 0
+    maximumLifetime: 3
+  parry:
+    prefab: {fileID: 85941164691198867, guid: bad3cf055489f0e4e9cd51bd9cdb7008, type: 3}
+    scale: 1
+    rotation: {x: 0, y: 0, z: 0}
+    tint: {r: 0.7, g: 0.95, b: 1, a: 1}
+    sound: {fileID: 8300000, guid: b346236de65a42b8a21ffea0f226a6be, type: 3}
+    volume: 0.65
+    hitStop: 0
+    maximumLifetime: 3

@@ -1,0 +1,8 @@
+PASS Two blade samples build one ribbon quad
+PASS Newest edge matches blade tip
+PASS Separate strokes are not bridged
+PASS Trail expires after lifetime
+PASS Scrubbing backwards clears history
+PASS Sample budget is bounded
+PASS Disabling trail clears geometry
+PASS Rendered ribbon is visible on camera (62920 pixels)

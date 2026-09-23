@@ -12,12 +12,14 @@ namespace Mismo.Gameplay.Player.World
     {
         PlayerInventory inventory;Health health;EquipmentLoadout loadout;PlayerInputReader input;
         GatheringNode target,harvesting;
-        CraftingStation nearby,station;
+        CraftingStation station;
         float progress,nextHit;Vector3 startPosition;GameObject tool;
         CursorLockMode oldLock;bool oldVisible;
         int closedFrame=-1;bool stationOpen;
         readonly Presentation.RecipeBookView recipeBook=new Presentation.RecipeBookView();
         public bool IsHarvesting=>harvesting!=null;
+        public string HarvestLabel=>IsHarvesting?L.Format("Recolectando {0}",L.Text(harvesting.definition.displayName)):null;
+        public float HarvestProgress=>IsHarvesting?Mathf.Clamp01(progress/Mathf.Max(.01f,harvesting.definition.harvestSeconds)):0;
         public bool BlocksGameplay=>stationOpen||closedFrame==Time.frameCount;
         public bool Busy=>IsHarvesting||BlocksGameplay;
         void Awake(){inventory=GetComponent<PlayerInventory>();health=GetComponent<Health>();loadout=GetComponent<EquipmentLoadout>();input=GetComponent<PlayerInputReader>();health.Damaged+=Damaged;}
@@ -50,7 +52,7 @@ namespace Mismo.Gameplay.Player.World
             }
             if(IsHarvesting)
             {
-                if(!harvesting.isActiveAndEnabled||!harvesting.Available||!harvesting.InRange(transform)||Vector3.Distance(transform.position,startPosition)>.3f||Interrupted())
+                if(Keyboard.current?[Presentation.PlayerInteraction.InteractionKey].wasPressedThisFrame==true||!harvesting.isActiveAndEnabled||!harvesting.Available||!harvesting.InRange(transform)||Vector3.Distance(transform.position,startPosition)>.3f||Interrupted())
                 {Cancel();return;}
                 progress+=Time.deltaTime;
                 if(progress>=nextHit){nextHit=progress+.55f;ResourceChips.Emit(harvesting.gameObject,transform.position);if(harvesting.definition.harvestSound!=null)AudioSource.PlayClipAtPoint(harvesting.definition.harvestSound,harvesting.transform.position,.5f);}
@@ -58,16 +60,20 @@ namespace Mismo.Gameplay.Player.World
                 if(progress>=harvesting.definition.harvestSeconds){harvesting.Complete(inventory);Cancel();}
                 return;
             }
-            target=null;nearby=null;
+            target=null;
             if(health.IsDead||InventoryPanel.AnyOpen||Presentation.WorldMapPanel.AnyOpen||loadout.Runner.IsBusy)return;
             float best=float.MaxValue;
             foreach(var node in GatheringNode.Loaded)if(node!=null&&node.Available&&node.InRange(transform))
-            {float distance=Vector3.SqrMagnitude(node.transform.position-transform.position);if(distance<best){target=node;best=distance;}}
-            foreach(var candidate in CraftingStation.Loaded)if(candidate!=null&&candidate.InRange(transform.position)){nearby=candidate;break;}
-            // G is independent from F (chest/loot) and Q/E/R (combat skills).
-            if(Keyboard.current?.gKey.wasPressedThisFrame!=true)return;
-            if(TryOpenStation(nearby))return;
-            if(target==null||Interrupted())return;
+            {float distance=Vector3.SqrMagnitude(node.InteractionPoint(transform.position)-transform.position);if(distance<best){target=node;best=distance;}}
+            foreach(var candidate in CraftingStation.Loaded)
+                if(inventory.CanManage&&candidate!=null&&candidate.InRange(transform.position))
+                { var selected=candidate; Presentation.PlayerInteraction.Offer(inventory,selected,selected.transform.position,"Fabricar","Banco de trabajo",()=>TryOpenStation(selected)); }
+            if(target!=null)
+                Presentation.PlayerInteraction.Offer(inventory,target,target.InteractionPoint(transform.position),target.definition.actionName,target.definition.displayName,BeginHarvest);
+        }
+        void BeginHarvest()
+        {
+            if(target==null||!target.Available||!target.InRange(transform)||Interrupted())return;
             harvesting=target;startPosition=transform.position;progress=0;nextHit=.55f;
             ResourceChips.Emit(harvesting.gameObject,transform.position);
             if(target.definition.toolPrefab!=null){tool=Instantiate(target.definition.toolPrefab,transform);tool.transform.localPosition=new Vector3(.45f,1,.6f);}
@@ -79,12 +85,7 @@ namespace Mismo.Gameplay.Player.World
             if(inventory==null||health==null||health.IsDead)return;
             if(stationOpen&&station!=null){int depth=GUI.depth;GUI.depth=-45;DrawStation();GUI.depth=depth;return;}
             if(InventoryPanel.AnyOpen||Presentation.WorldMapPanel.AnyOpen)return;
-            var style=new GUIStyle(GUI.skin.box){font=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.Body,fontSize=18,wordWrap=true};
-            if(IsHarvesting)
-            {
-                GUI.Box(new Rect(Screen.width/2-200,Screen.height-195,400,50),L.Format("Recolectando: {0} · {1:0}%",L.Text(harvesting.definition.displayName),Mathf.Clamp01(progress/harvesting.definition.harvestSeconds)*100),style);
-            }
-            else if(nearby!=null||target!=null)GUI.Box(new Rect(Screen.width/2-200,Screen.height-195,400,50),nearby!=null?L.Text("[G] Fabricar en el banco"):L.Format("[G] {0} · {1}",L.Text(target.definition.actionName),L.Text(target.definition.displayName)),style);
+
         }
         void DrawStation()
         {

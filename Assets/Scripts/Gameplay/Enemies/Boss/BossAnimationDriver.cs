@@ -40,6 +40,7 @@ namespace Mismo.Gameplay.Enemies
             if(animator==null||boss==null){playback.Dispose();return;}
             float speed=agent!=null&&agent.enabled&&agent.isOnNavMesh?agent.velocity.magnitude:0f;
             float time=0;int motion=0;
+            if(EnemyActionPlayback.IsPerformingAttack(this))hitAt=float.NegativeInfinity;
             switch(boss.State)
             {
                 case BossState.Telegraph:motion=3;time=.32f*boss.StateProgress;break;

@@ -510,7 +510,10 @@ namespace Mismo.Gameplay.Enemies
         public void OnAttackParried(DamageInfo damage)
         {
             if (settings != null && health != null && !health.IsDead && !combat.Broken && state == BossState.Attack)
+            {
                 StartStagger(.2f);
+                GetComponent<EnemyEquipment>()?.NotifyParried();
+            }
         }
 
         /// <summary>Herramienta de playtest para validar cada telegraph sin esperar al selector.</summary>

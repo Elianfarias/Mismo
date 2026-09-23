@@ -1,0 +1,2 @@
+PASS: five tier colors, component/consumable classification, mixed loot prioritizes weapon, shader renders without errors.
+PASS: Windows content bundle builds and reloads InventorySettings with material and shader dependencies.

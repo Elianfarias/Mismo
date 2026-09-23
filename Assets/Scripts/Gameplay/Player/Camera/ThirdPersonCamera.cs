@@ -28,6 +28,7 @@ namespace Mismo.Gameplay.Player.Camera
         private float currentDistance;
         private bool distanceInitialized;
         private UnityEngine.Camera view;
+        public Transform FollowTarget => target;
         private readonly List<Renderer> hiddenRenderers = new List<Renderer>();
 
         private void OnEnable()

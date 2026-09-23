@@ -21,6 +21,9 @@ namespace Mismo.Gameplay.Player.Presentation
         private bool requested;
         private float blend=.06f;
         private float actionBlend=1;
+        private long executionId;
+        private int segment;
+        private float lastNormalized;
         public WeaponActionPlayback(Animator animator,RuntimeAnimatorController baseController,AvatarMask mask=null)
         {
             graph=PlayableGraph.Create("Weapon family animation");
@@ -48,7 +51,7 @@ namespace Mismo.Gameplay.Player.Presentation
         {controller.SetInteger("Motion",motion);controller.SetFloat("ActionTime",actionTime);controller.SetFloat("PlaybackRate",playbackRate);}
         public void SetLocomotionSpeed(float speed) => controller.SetFloat("LocomotionSpeed",speed);
         public void SetAction(AnimationClip selected,float normalized,float transition) => SetAction(selected,normalized,transition,familyMask);
-        public void SetAction(AnimationClip selected,float normalized,float transition,AvatarMask mask)
+        public void SetAction(AnimationClip selected,float normalized,float transition,AvatarMask mask,long actionExecutionId=0,int actionSegment=0)
         {
             requested=selected!=null;blend=Mathf.Max(0,transition);
             if(!requested)return;
@@ -59,17 +62,19 @@ namespace Mismo.Gameplay.Player.Presentation
                 if(action.IsValid()){graph.Disconnect(mixer,0);graph.DestroyPlayable(action);action=default;}
                 clip=null;weight=0;actionBlend=1;ConfigureMask(mask);
             }
-            if(clip!=selected)
+            if(clip!=selected || executionId!=actionExecutionId || segment!=actionSegment || normalized+.00001f<lastNormalized)
             {
                 if(previous.IsValid()){graph.Disconnect(mixer,1);graph.DestroyPlayable(previous);}
                 if(action.IsValid())
                 {graph.Disconnect(mixer,0);previous=action;graph.Connect(previous,0,mixer,1);actionBlend=0;}
                 else actionBlend=1;
                 clip=selected;action=AnimationClipPlayable.Create(graph,clip);
+                executionId=actionExecutionId;segment=actionSegment;
                 action.SetApplyFootIK(false);action.SetApplyPlayableIK(false);action.SetSpeed(0);
                 graph.Connect(action,0,mixer,0);
             }
             action.SetTime(Mathf.Clamp01(normalized)*clip.length);
+            lastNormalized=normalized;
         }
         public void Tick(float dt)
         {

@@ -1,0 +1,19 @@
+PASS
+PASS Imp original: Avatar Humanoid válido
+PASS regresiones de geometría y rig Generic existentes
+PASS Importador original intacto
+PASS Clips exportados conservan curvas Humanoid
+PASS Avatar original referenciado en prefab guardado
+PASS Animator reconoce el Avatar en la instancia exportada
+PASS Huesos y bindposes válidos
+PASS Preview del taller: pierna 64,3°, deformación 1,225 m, error contra original 0,000°
+PASS Playable Humanoid: pierna 62,5°
+PASS Clips Humanoid sin Avatar rechazados antes de generar assets
+PASS Animator anidado conserva su raíz de animación
+PASS Controller original conservado en prefab guardado
+PASS Animator exportado en el hijo original, no en el contenedor
+PASS Animator reconoce el Avatar en la instancia exportada
+PASS Huesos y bindposes válidos
+PASS Preview del taller: pierna 64,3°, deformación 1,028 m, error contra original 0,000°
+PASS Playable Humanoid: pierna 62,5°
+Prefab de ejemplo: Assets/Art/Prefabs/Voxelized/Imp_Humanoid.prefab
