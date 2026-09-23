@@ -67,13 +67,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 }
                 if(k.escapeKey.wasPressedThisFrame&&IsOpen)
                 {
-                    if(skillDragIndex>=0)CancelSkillDrag();
-                    else if(draggedGrid!=null)CancelInventoryDrag();
-                    else if(showItemActions)showItemActions=false;
-                    else if(confirmDiscard)confirmDiscard=false;
-                    else if(selected!=null&&page==Page.Inventory){selected=null;previewDirty=true;}
-                    else if(page==Page.Quests&&questJournal.Back()){}
-                    else Close();
+                    Close();
                 }
                 else if(!typing&&k.iKey.wasPressedThisFrame){if(IsOpen&&page==Page.Inventory)Close();else OpenPage(Page.Inventory);}
                 else if(!typing&&k.bKey.wasPressedThisFrame){if(OpenPage(Page.Menu))radialHeld=true;}

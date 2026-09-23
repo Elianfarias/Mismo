@@ -109,9 +109,18 @@ public static class VillageHumanoidUpgrade
                 }
                 finally { Object.DestroyImmediate(root); }
             }
-            // Rebuild native vertex buffers as well as serialized data after an in-place mesh upgrade.
-            var savedMesh=AssetDatabase.LoadAssetAtPath<GameObject>(target).GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh;
-            ReplaceMesh(savedMesh,savedMesh);
+            // An Avatar keeps its asset identity when FBX axes or its reference pose change.
+            // Always refresh geometry and bind poses together; Avatar equality is not a cache key.
+            var refreshSource=Object.Instantiate(source);refreshSource.name=source.name;
+            var refreshTarget=PrefabUtility.LoadPrefabContents(target);Mesh refreshed=null;
+            try
+            {
+                refreshed=WeaponVoxelizerWindow.RebuildRigGeometry(refreshSource,refreshTarget);
+                var skin=refreshTarget.GetComponentInChildren<SkinnedMeshRenderer>();
+                ReplaceMesh(refreshed,skin.sharedMesh);skin.localBounds=refreshed.bounds;
+                PrefabUtility.SaveAsPrefabAsset(refreshTarget,target);
+            }
+            finally{Object.DestroyImmediate(refreshSource);if(refreshed!=null)Object.DestroyImmediate(refreshed);PrefabUtility.UnloadPrefabContents(refreshTarget);}
             report.Add(name+": valid source Humanoid avatar, original prefab GUID "+guid);
         }
         var settings=AssetDatabase.LoadAssetAtPath<VillageNpcSettings>(VillageNpcIntegration.SettingsPath);
@@ -135,6 +144,12 @@ public static class VillageHumanoidUpgrade
                 animator.runtimeAnimatorController=controller;animator.Rebind();animator.Update(0);
                 var mesh=new Mesh();visual.GetComponentInChildren<SkinnedMeshRenderer>().BakeMesh(mesh);
                 var bounds=mesh.bounds;Object.DestroyImmediate(mesh);
+                // Sampling is only for measuring: never serialize that animation pose as bone overrides.
+                foreach(var t in source.GetComponentsInChildren<Transform>())
+                {
+                    string bonePath=AnimationUtility.CalculateTransformPath(t,source.transform);if(bonePath.Length==0)continue;
+                    var bone=visual.transform.Find(bonePath);bone.localPosition=t.localPosition;bone.localRotation=t.localRotation;bone.localScale=t.localScale;
+                }
                 float scale=1.75f/bounds.size.y;visual.transform.localScale=Vector3.one*scale;
                 visual.transform.localPosition=-new Vector3(bounds.center.x,bounds.min.y,bounds.center.z)*scale;
                 var body=root.GetComponent<CapsuleCollider>();body.height=1.75f;body.radius=.3f;body.center=Vector3.up*.875f;
@@ -157,7 +172,7 @@ public static class VillageHumanoidUpgrade
         File.WriteAllLines(Output+"/upgrade.txt",report.Concat(new[]{"14 Humanoid visuals; 5 animated quest residents; 2.8m adults; village scale 3.25; workplace/plaza/entrance routes."}));
         Debug.Log("VILLAGE_HUMANOID_UPGRADE_OK");
     }
-    static void ReplaceMesh(Mesh source,Mesh target)
+    internal static void ReplaceMesh(Mesh source,Mesh target)
     {
         var vertices=source.vertices;var normals=source.normals;var uv=source.uv;var colors=source.colors32;
         var weights=source.boneWeights;var poses=source.bindposes;var bounds=source.bounds;var format=source.indexFormat;

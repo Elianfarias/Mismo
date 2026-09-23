@@ -103,6 +103,33 @@ namespace Mismo.Gameplay.Player.Editor
             finally { DestroyImmediate(window); }
         }
 
+        // Refresh geometry without changing the existing prefab, mesh asset or controller.
+        // The caller owns the returned transient mesh.
+        public static Mesh RebuildRigGeometry(GameObject source, GameObject target, int resolution=64)
+        {
+            var plan=VoxelRigExporter.Prepare(source,null);
+            if(plan.SourceAnimator==null || plan.AnimationRoot!=source.transform)
+                throw new System.InvalidOperationException("La actualización necesita el Animator en la raíz del modelo original.");
+            var sample=VoxelSurfaceSampler.Sample(source,resolution,true,true,true);
+            FillInterior(sample.Occupied,sample.Dimensions);
+            var animator=target.GetComponentInChildren<Animator>();var rig=animator.transform;
+            foreach(var t in source.GetComponentsInChildren<Transform>())
+            {
+                string path=AnimationUtility.CalculateTransformPath(t,source.transform);
+                var destination=path.Length==0?rig:rig.Find(path);
+                if(destination==null)throw new System.InvalidOperationException("Falta hueso: "+path);
+                destination.localPosition=t.localPosition;destination.localRotation=t.localRotation;destination.localScale=t.localScale;
+            }
+            rig.localPosition=-sample.Bounds.center;rig.localRotation=Quaternion.identity;rig.localScale=source.transform.lossyScale;
+            animator.avatar=plan.SourceAnimator.avatar;
+            var skin=target.GetComponentInChildren<SkinnedMeshRenderer>();
+            skin.bones=sample.Bones.Select(b=>{string path=AnimationUtility.CalculateTransformPath(b,source.transform);return path.Length==0?rig:rig.Find(path);}).ToArray();
+            skin.rootBone=rig;
+            var mesh=BuildMesh(sample.Occupied,sample.Dimensions,sample.VoxelSize,sample.Bounds.min,sample.Bounds.center,Color.white,target.name,true,sample.MaterialIndices,sample.UVs,sample.Materials.Count+1,sample.BoneWeights);
+            mesh.bindposes=skin.bones.Select(b=>b.worldToLocalMatrix*skin.transform.localToWorldMatrix).ToArray();
+            return mesh;
+        }
+
         private GameObject Generate()
         {
             if (sourceWeapon == null)

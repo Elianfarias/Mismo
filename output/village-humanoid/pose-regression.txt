@@ -1,0 +1,14 @@
+city_dwellers_1: PASS, pelvis mapped; 24 animation samples, max bone rotation error 0,000 degrees.
+city_dwellers_2: PASS, pelvis mapped; 24 animation samples, max bone rotation error 0,000 degrees.
+king: PASS, pelvis mapped; 24 animation samples, max bone rotation error 0,000 degrees.
+peasant_1: PASS, pelvis mapped; 24 animation samples, max bone rotation error 0,000 degrees.
+peasant_2: PASS, pelvis mapped; 24 animation samples, max bone rotation error 0,000 degrees.
+peasant_3: PASS, pelvis mapped; 24 animation samples, max bone rotation error 0,000 degrees.
+peasant_4: PASS, pelvis mapped; 24 animation samples, max bone rotation error 0,000 degrees.
+peasant_5: PASS, pelvis mapped; 24 animation samples, max bone rotation error 0,000 degrees.
+peasant_6: PASS, pelvis mapped; 24 animation samples, max bone rotation error 0,000 degrees.
+queen: PASS, pelvis mapped; 24 animation samples, max bone rotation error 0,000 degrees.
+rich_citizzens_1: PASS, pelvis mapped; 24 animation samples, max bone rotation error 0,000 degrees.
+rich_citizzens_2: PASS, pelvis mapped; 24 animation samples, max bone rotation error 0,000 degrees.
+rich_citizzens_3: PASS, pelvis mapped; 24 animation samples, max bone rotation error 0,000 degrees.
+rich_citizzens_4: PASS, pelvis mapped; 24 animation samples, max bone rotation error 0,000 degrees.
