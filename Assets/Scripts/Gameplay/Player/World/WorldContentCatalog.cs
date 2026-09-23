@@ -21,6 +21,8 @@ namespace Mismo.Gameplay.Player.World
         public GameObject prefab;
         [Tooltip("Solo decoracion: no permite recolectar este asset, incluso si su categoria o Gathering Node define un recurso.")]
         public bool decorativeOnly;
+        [Tooltip("Desactiva viento y respuesta al jugador para esta entrada vegetal. No cambia la recoleccion.")]
+        public bool disableVegetationMotion;
         [Tooltip("Optional harvestable replacement for this decoration.")]
         public ResourceNodeDefinition gatheringNode;
         [Min(0)] public float weight=1;
@@ -53,6 +55,7 @@ namespace Mismo.Gameplay.Player.World
         public Vector3 villageSpawnOffset=new Vector3(0,0,-29);
         public float villageSpawnYaw=0;
         [Header("Atmosphere")]
+        public VegetationMotionSettings vegetationMotion = new VegetationMotionSettings();
         public bool fogEnabled=true;
         public Color fogColor=new Color(.62f,.72f,.73f);
         [Min(0)] public float fogStart=28;

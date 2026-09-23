@@ -49,6 +49,8 @@ namespace Mismo.Gameplay.Player.World
         public void Initialize(ExplorationWorldSettings settings,Transform target)
         {
             Settings=settings;player=target;field=new ExplorationTerrain(settings);
+            var vegetation = GetComponent<VegetationMotionWorld>() ?? gameObject.AddComponent<VegetationMotionWorld>();
+            vegetation.Initialize(settings.content, target);
             var motor=target.GetComponent<Movement.PlayerMotor>();
             if(motor!=null&&field.Plan!=null)motor.MovementConstraint=field.Plan.ConstrainMovement;
             var music = target.GetComponent<Presentation.PlayerMusic>() ?? target.gameObject.AddComponent<Presentation.PlayerMusic>();
@@ -193,14 +195,20 @@ namespace Mismo.Gameplay.Player.World
                 if(dirty&&Time.time>=nextNav)
                 {
                     var sources=new List<NavMeshBuildSource>();
-                    if(Settings.preserveAuthoredCenter)NavMeshBuilder.CollectSources(geometry,~0,NavMeshCollectGeometry.PhysicsColliders,0,new List<NavMeshBuildMarkup>(),sources);
+                    if(Settings.preserveAuthoredCenter)NavMeshBuilder.CollectSources(geometry,~0,NavMeshCollectGeometry.PhysicsColliders,0,NavigationMarkup(geometry),sources);
                     foreach(var chunk in chunks.Values.Concat(authoredEncounters.Values))
-                    {var extra=new List<NavMeshBuildSource>();NavMeshBuilder.CollectSources(chunk.transform,~0,NavMeshCollectGeometry.PhysicsColliders,0,chunk.GetComponentsInChildren<WorldEnemyIdentity>().Select(e=>new NavMeshBuildMarkup{root=e.transform,ignoreFromBuild=true}).ToList(),extra);sources.AddRange(extra);}
+                    {var extra=new List<NavMeshBuildSource>();NavMeshBuilder.CollectSources(chunk.transform,~0,NavMeshCollectGeometry.PhysicsColliders,0,NavigationMarkup(chunk.transform),extra);sources.AddRange(extra);}
                     var bounds=new Bounds(new Vector3(player.position.x,field.Plan?.Layout!=null?160:30,player.position.z),new Vector3((radius+2)*64,field.Plan?.Layout!=null?500:140,(radius+2)*64));
                     if(Settings.preserveAuthoredCenter)bounds.Encapsulate(new Bounds(new Vector3(0,30,0),new Vector3(Settings.authoredSize,140,Settings.authoredSize)));
                     navOperation=NavMeshBuilder.UpdateNavMeshDataAsync(navigation,NavMesh.GetSettingsByID(0),sources,bounds);dirty=false;nextNav=Time.time+1;
                 }
             }
+        }
+        static List<NavMeshBuildMarkup> NavigationMarkup(Transform root)
+        {
+            return root.GetComponentsInChildren<WorldEnemyIdentity>().Select(e=>e.transform)
+                .Concat(root.GetComponentsInChildren<Quests.VillageNpcRoutine>().Select(n=>n.transform))
+                .Select(t=>new NavMeshBuildMarkup{root=t,ignoreFromBuild=true}).ToList();
         }
         public GameObject CreateChunk(Vector2Int id)
         {

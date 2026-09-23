@@ -12,10 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdfd1e8e6dfc4701afbb313e3ea4ac0e, type: 3}
   m_Name: WorldContentCatalog
   m_EditorClassIdentifier: 
-  villageSizeMultiplier: 2.6
+  villageSizeMultiplier: 3.25
   villageGroundOffset: -0.19670273
   villageSpawnOffset: {x: 7.5800934, y: 0, z: 27.347897}
   villageSpawnYaw: 180
+  vegetationMotion:
+    enabled: 1
+    shader: {fileID: 4800000, guid: 7b4c1d20aa674eab9e6ff58c924f32db, type: 3}
+    windStrength: 1
+    gustStrength: 0.65
+    directionDegrees: 35
+    windSpeed: 0.8
+    playerInteraction: 1
+    interactionRadius: 1.15
+    interactionStrength: 0.3
+    recoverySeconds: 0.7
   fogEnabled: 0
   fogColor: {r: 0.62, g: 0.72, b: 0.73, a: 1}
   fogStart: 28

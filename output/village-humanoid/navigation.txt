@@ -1,0 +1,16 @@
+PASS: complete entrance/workplace/walking routes, duplicate prevention, world scale, feet and animation.
+seed=7319 mara(Clone): 2.8m adult, all stops reachable
+seed=7319 bruno(Clone): 2.8m adult, all stops reachable
+seed=7319 elena(Clone): 2.8m adult, all stops reachable
+seed=7319 iria(Clone): 2.8m adult, all stops reachable
+seed=7319 tomas(Clone): 2.8m adult, all stops reachable
+seed=12 mara(Clone): 2.8m adult, all stops reachable
+seed=12 bruno(Clone): 2.8m adult, all stops reachable
+seed=12 elena(Clone): 2.8m adult, all stops reachable
+seed=12 iria(Clone): 2.8m adult, all stops reachable
+seed=12 tomas(Clone): 2.8m adult, all stops reachable
+seed=654321 mara(Clone): 2.8m adult, all stops reachable
+seed=654321 bruno(Clone): 2.8m adult, all stops reachable
+seed=654321 elena(Clone): 2.8m adult, all stops reachable
+seed=654321 iria(Clone): 2.8m adult, all stops reachable
+seed=654321 tomas(Clone): 2.8m adult, all stops reachable

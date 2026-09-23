@@ -1,0 +1,5 @@
+mara(Clone) scene= root=(53.68, 21.50, 50.46) renderer=Center: (53.68, 22.90, 50.46), Extents: (0.93, 1.40, 0.90) enabled=True
+bruno(Clone) scene= root=(73.18, 21.50, 50.46) renderer=Center: (73.18, 22.90, 50.46), Extents: (0.73, 1.40, 0.82) enabled=True
+elena(Clone) scene= root=(50.43, 21.50, 66.71) renderer=Center: (50.43, 22.90, 66.71), Extents: (0.80, 1.40, 0.76) enabled=True
+iria(Clone) scene= root=(73.18, 21.50, 66.71) renderer=Center: (73.18, 22.90, 66.71), Extents: (0.96, 1.40, 1.00) enabled=True
+tomas(Clone) scene= root=(73.18, 21.50, 30.96) renderer=Center: (73.18, 22.90, 30.96), Extents: (0.72, 1.40, 0.85) enabled=True

@@ -1,0 +1,6 @@
+PASS: 5 residents waited for delayed NavMesh, walked >2m with Speed animation, and rebound after navigation removal/rebuild.
+mara(Clone) distance=9,636541
+bruno(Clone) distance=9,651412
+elena(Clone) distance=9,666884
+iria(Clone) distance=9,679413
+tomas(Clone) distance=9,702855

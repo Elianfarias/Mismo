@@ -1,0 +1,1 @@
+PASS: elite aura and particles clear on death, remain hidden on subsequent frames, restore on revival and respect disable/re-enable.

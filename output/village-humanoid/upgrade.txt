@@ -1,0 +1,15 @@
+NPC_city_dwellers_1: valid source Humanoid avatar, original prefab GUID 5c8c69d082f5ff54185dda3b4b9607f6
+NPC_city_dwellers_2: valid source Humanoid avatar, original prefab GUID 85a558c00a20bc346ac4c8571ec8afcf
+NPC_king: valid source Humanoid avatar, original prefab GUID ab1ccffe85d24754daa5b71cb85887a5
+NPC_peasant_1: valid source Humanoid avatar, original prefab GUID 70fe490768a659d40b5624367c31a523
+NPC_peasant_2: valid source Humanoid avatar, original prefab GUID 992d92b67486dbe4bae5577b86a9aa6d
+NPC_peasant_3: valid source Humanoid avatar, original prefab GUID 390a8be4ae5bf4d4aa45f95973a06c45
+NPC_peasant_4: valid source Humanoid avatar, original prefab GUID 1444facf10edc3647bb3b6bf0e4ace71
+NPC_peasant_5: valid source Humanoid avatar, original prefab GUID e9c44a22efe47ba4ebbab1e124c5e8f4
+NPC_peasant_6: valid source Humanoid avatar, original prefab GUID d3c9ec46c12a02648b0ae5d5631bcac1
+NPC_queen: valid source Humanoid avatar, original prefab GUID b8d42fe29f351414a9f16a4bb295aca0
+NPC_rich_citizzens_1: valid source Humanoid avatar, original prefab GUID 185e5f8ba9ea5f64a8f2c327180e2e08
+NPC_rich_citizzens_2: valid source Humanoid avatar, original prefab GUID 9fc683f3e35efb441b80ab2e343ba9e0
+NPC_rich_citizzens_3: valid source Humanoid avatar, original prefab GUID 4fc93da80ced41f42ace8a3d44e307b2
+NPC_rich_citizzens_4: valid source Humanoid avatar, original prefab GUID a5cdaf91d6e10474e81d9316d29ab177
+14 Humanoid visuals; 5 animated quest residents; 2.8m adults; village scale 3.25; workplace/plaza/entrance routes.

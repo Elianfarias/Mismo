@@ -20,7 +20,7 @@ namespace Mismo.Gameplay.Player.World
         public void UseWorldPrefab(GameObject prefab){worldPrefab=prefab;usesWorldPrefab=true;}
         void OnEnable(){Loaded.Add(this);interactionColliders=GetComponentsInChildren<Collider>();}
         void OnDisable()=>Loaded.Remove(this);
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]static void Reset()=>Loaded.Clear();
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]static void ResetLoaded()=>Loaded.Clear();
         void Update()
         {
             if(definition==null)return;
@@ -36,6 +36,7 @@ namespace Mismo.Gameplay.Player.World
             if(visual!=null){visual.SetActive(false);Destroy(visual);}
             var prefab=usesWorldPrefab?(depleted?null:worldPrefab):(depleted?definition.depletedPrefab:definition.availablePrefab);
             if(prefab!=null){visual=Instantiate(prefab,transform);visual.transform.localPosition=Vector3.zero;visual.SetActive(true);}
+            GetComponent<VegetationMotionBinding>()?.Apply();
             interactionColliders=visual!=null?visual.GetComponentsInChildren<Collider>():GetComponents<Collider>();
             if(changedObstacle||visual!=null&&visual.GetComponentInChildren<Collider>()!=null)
                 FindFirstObjectByType<ExplorationChunks>()?.RefreshResourceNavigation();
@@ -70,6 +71,7 @@ namespace Mismo.Gameplay.Player.World
             if(definition.kind==ResourceNodeKind.Tree&&visual!=null)
             {
                 var falling=Instantiate(visual,visual.transform.position,visual.transform.rotation);
+                VegetationMotionBinding.FreezeVisual(falling);
                 foreach(var collider in falling.GetComponentsInChildren<Collider>())collider.enabled=false;
                 falling.AddComponent<HarvestFall>();
             }
