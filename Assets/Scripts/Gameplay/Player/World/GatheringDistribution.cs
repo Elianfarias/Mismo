@@ -13,7 +13,7 @@ namespace Mismo.Gameplay.Player.World
         }
         public static GameObject PlaceAsset(WorldAssetEntry asset,string id,Vector3 point,Quaternion rotation,Transform parent)
         {
-            if(asset.decorativeOnly)return Object.Instantiate(asset.prefab,point,rotation,parent);
+            if(asset.decorativeOnly)return VegetationMotionBinding.Attach(Object.Instantiate(asset.prefab,point,rotation,parent),asset);
             var settings=Mismo.Core.ProjectAssets.Load<GatheringSettings>("GatheringSettings");
             var definition=asset.gatheringNode;
             if(definition==null&&settings!=null)
@@ -22,9 +22,9 @@ namespace Mismo.Gameplay.Player.World
                 else if(asset.kind==WorldAssetKind.Rock)definition=settings.stone;
                 else if(asset.kind==WorldAssetKind.Flower||asset.kind==WorldAssetKind.Bush)definition=settings.herb;
             }
-            if(definition==null)return Object.Instantiate(asset.prefab,point,rotation,parent);
+            if(definition==null)return VegetationMotionBinding.Attach(Object.Instantiate(asset.prefab,point,rotation,parent),asset);
             var node=Place(definition,id,point,parent);node.UseWorldPrefab(asset.prefab);node.transform.rotation=rotation;
-            return node.gameObject;
+            return VegetationMotionBinding.Attach(node.gameObject,asset);
         }
         public static GatheringNode Place(ResourceNodeDefinition definition,string id,Vector3 point,Transform parent)
         {

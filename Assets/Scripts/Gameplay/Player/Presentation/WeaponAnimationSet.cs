@@ -27,8 +27,15 @@ namespace Mismo.Gameplay.Player.Presentation
         public ActionMaskMode maskMode;
         [Tooltip("Sólo se usa en modo Custom. Si falta, se hereda la máscara de la familia.")]
         public AvatarMask customMask;
+        [InspectorName("Usar desplazamiento de la animación")]
+        [Tooltip("El clip mueve al personaje horizontalmente, respetando colisiones. Requiere Full Body o una familia sin máscara. Durante el ataque sustituye el movimiento con las teclas; la gravedad sigue a cargo del motor.")]
+        public bool useAnimationMovement;
+        [InspectorName("Multiplicador del desplazamiento"), Min(0)]
+        [Tooltip("1 conserva la distancia del clip; 0.5 recorre la mitad. Un clip In Place no contiene avance que aplicar.")]
+        public float animationMovementScale = 1;
         public AvatarMask ResolveMask(AvatarMask familyMask) => maskMode==ActionMaskMode.FullBody ? null
             : maskMode==ActionMaskMode.Custom && customMask!=null ? customMask : familyMask;
+        public bool UsesAnimationMovement(AvatarMask familyMask) => useAnimationMovement && ResolveMask(familyMask)==null;
         [Tooltip("Clips por etapa del combo; no están limitados a tres.")]
         public AnimationClip[] comboClips = Array.Empty<AnimationClip>();
         [Range(0,1)] public float activeStartsAt=.35f;

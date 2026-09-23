@@ -1,0 +1,15 @@
+PASS Start blade stroke -1
+PASS No damage before window
+PASS Sideways sword sweep connects -1
+PASS Forward enemy outside blade path is not damaged
+PASS VFX contact lies on entry surface -1
+PASS One hit per target per stroke
+PASS Start blade stroke 1
+PASS No damage before window
+PASS Sideways sword sweep connects 1
+PASS Forward enemy outside blade path is not damaged
+PASS VFX contact lies on entry surface 1
+PASS One hit per target per stroke
+PASS Cancelled sweep cannot damage
+PASS Hit-stop does not append duplicate-time geometry
+PASS Direction reversal starts a new ribbon instead of a folded quad

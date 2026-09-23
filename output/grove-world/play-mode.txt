@@ -1,0 +1,1 @@
+PASS: Live streamer loaded 25 chunks; new tree LODs and wind rendered; harvested a tree; stable resource IDs and depletion survived chunk unload/reload. In-memory inventory only.

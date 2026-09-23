@@ -29,6 +29,7 @@ namespace Mismo.Gameplay.Player.Equipment
         [Min(.01f)] public float active = .15f;
         [Min(0)] public float recovery = .2f;
         [Min(0)] public float cooldown = .5f;
+        [Tooltip("Coste de estamina por ejecución; en combos se cobra por cada golpe que comienza, no al encolarlo.")]
         [Min(0)] public float staminaCost;
         [Header("Commitment")]
         public bool chargeable;
@@ -57,6 +58,9 @@ namespace Mismo.Gameplay.Player.Equipment
         [Header("Presentación y acciones")]
         public AbilityPose pose;
         public bool usesSwordCombo;
+        [InspectorName("Golpes del combo")]
+        [Tooltip("La duración controla la velocidad del clip; las ventanas se expresan de 0 a 100 %. El estado de ejecución pertenece a cada personaje.")]
+        public Mismo.Gameplay.Combat.ComboStep[] comboSteps = Array.Empty<Mismo.Gameplay.Combat.ComboStep>();
         public bool targetsGround;
         public bool aimFromCamera;
         [Min(1)] public float range = 22;

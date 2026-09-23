@@ -1,0 +1,28 @@
+PASS Start configured combo shape 0
+PASS No hit during preparation
+PASS Swept impact catches enemy between endpoints after movement
+PASS No duplicate hit on another evaluation
+PASS Cancellation closes impact immediately
+PASS Same ability can restart
+PASS New execution can damage same enemy again
+PASS Start configured combo shape 1
+PASS No hit during preparation
+PASS Swept impact catches enemy between endpoints after movement
+PASS No duplicate hit on another evaluation
+PASS Cancellation closes impact immediately
+PASS Same ability can restart
+PASS New execution can damage same enemy again
+PASS One frame crossing whole window clips sweep to 35–65 percent
+PASS Final pending impact is processed then closed
+PASS Longer duration delays impact and queue together
+PASS Impact and queue retain normalized timing
+PASS Shared asset keeps independent character state
+PASS Queue next step inside percentage window
+PASS Transition holds final pose without rewinding animation
+PASS Next step starts its own clock
+PASS Empty combo refused
+PASS Null step refused
+PASS Parry-style cancellation inside damage callback is safe
+PASS Multiple colliders on one actor receive one hit
+PASS Real sword clip moves the character during configured combo
+PASS Enemy initially out of reach receives one hit after animated advance (progress=0,3541667)

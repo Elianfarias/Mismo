@@ -23,9 +23,13 @@ namespace Mismo.Gameplay.Player.Editor {
  string sp=probe?"Assets/Quaternius.fbx":"Assets/Art/Animations/Quaternius/Source/Quaternius.fbx";
  string tp=probe?"Assets/Voxel_Adventurer_Animated.fbx":"Assets/Art/FBX/Characters/Voxel_Adventurer_Animated.fbx";
  string cp=probe?"Assets/VoxelLocomotion.controller":"Assets/Art/Animations/VoxelLocomotion.controller";
- // These baked clips contain Transform curves, not Humanoid muscle curves.
- // A Humanoid Animator overrides the mapped bones and sinks/freezes this rig.
+ // Preserve the selected Humanoid rig and its combat animations. Convert the
+ // existing reference poses instead of silently reverting the model to Generic.
  var targetImporter=(ModelImporter)AssetImporter.GetAtPath(tp);
+ if(targetImporter.animationType==ModelImporterAnimationType.Human){
+ QuaterniusHumanoidLocomotion.Apply();
+ return;
+ }
  if(targetImporter.animationType!=ModelImporterAnimationType.Generic){
  targetImporter.animationType=ModelImporterAnimationType.Generic;
  targetImporter.SaveAndReimport();

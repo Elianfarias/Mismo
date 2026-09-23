@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Mismo.Gameplay.Player.Editor
 {
-    public sealed class WeaponPoseWindow : EditorWindow
+    public sealed partial class WeaponPoseWindow : EditorWindow
     {
         [SerializeField] private GameObject characterPrefab;
         private GameObject character, visual, secondVisual;
@@ -38,6 +38,7 @@ namespace Mismo.Gameplay.Player.Editor
         public static void Open() => GetWindow<WeaponPoseWindow>("Taller de armas");
         private void OnEnable()
         {
+            EditorApplication.update += UpdateTrailPlayback;
             SceneView.duringSceneGui += DrawHandles; Undo.undoRedoPerformed += Refresh;
             if(characterPrefab==null)characterPrefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/PlayerVoxelSwordE.prefab");
             if(characterPrefab==null)characterPrefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Player/Player.prefab");
@@ -45,12 +46,14 @@ namespace Mismo.Gameplay.Player.Editor
         }
         private void OnDisable()
         {
+            EditorApplication.update -= UpdateTrailPlayback;
             SceneView.duringSceneGui -= DrawHandles; Undo.undoRedoPerformed -= Refresh;
             ClosePreview(); if (profileEditor != null) DestroyImmediate(profileEditor);
             if (animationEditor != null) DestroyImmediate(animationEditor);
         }
         private void ClosePreview()
         {
+            playingTrail=false; DisposeTrailPreview();
             if (stage != null && StageUtility.GetCurrentStage() == stage) StageUtility.GoToMainStage();
             stage = null; character = null; visual = null; secondVisual = null; animator = null;
         }
@@ -64,6 +67,7 @@ namespace Mismo.Gameplay.Player.Editor
                 weapon = (WeaponDefinition)EditorGUILayout.ObjectField("Arma", weapon, typeof(WeaponDefinition), false);
             }
             if (weapon == null) { EditorGUILayout.EndScrollView(); return; }
+            if (GUILayout.Button("Editar / probar feedback de combate")) CombatFeedbackWindow.Open(weapon);
             if (!weapon.dualWield) editSecond = false;
             var weaponData = new SerializedObject(weapon);
             weaponData.Update();
@@ -159,9 +163,20 @@ namespace Mismo.Gameplay.Player.Editor
                 : (holstered ? "holstered" : "equipped")), true);
             if (EditorGUI.EndChangeCheck()) { poseData.ApplyModifiedProperties(); Refresh(); }
             UnityEditor.Editor.CreateCachedEditor(profile,null,ref profileEditor);
-            editTrailTip=EditorGUILayout.Toggle("Ajustar punta de estela en Scene",editTrailTip);
+            DrawTrailGUI();
+            if(!profile.proceduralTrail)editTrailTip=EditorGUILayout.Toggle("Ajustar punta de estela simple",editTrailTip);
             if(editTrailTip)EditorGUILayout.HelpBox("Mové el punto naranja hasta la punta de la hoja. Edita Trail Tip del perfil compartido; no mueve el arma. Desactivá esta opción para volver a ajustar el agarre.",MessageType.Info);
-            EditorGUI.BeginChangeCheck(); profileEditor.OnInspectorGUI(); if(EditorGUI.EndChangeCheck()) Refresh();
+            EditorGUI.BeginChangeCheck();
+            profileEditor.serializedObject.Update();
+            var excludedTrailFields=new[]{"meleeTrail","proceduralTrail","trailBase","trailTip","trailTaper","secondaryTrail","secondaryTrailBase","secondaryTrailTip","trailDuration","trailStartColor","trailEndColor","trailMaterial"};
+            var profileProperty=profileEditor.serializedObject.GetIterator();bool enterChildren=true;
+            while(profileProperty.NextVisible(enterChildren))
+            {
+                enterChildren=false;if(excludedTrailFields.Contains(profileProperty.name))continue;
+                using(new EditorGUI.DisabledScope(profileProperty.name=="m_Script"))EditorGUILayout.PropertyField(profileProperty,true);
+            }
+            profileEditor.serializedObject.ApplyModifiedProperties();
+            if(EditorGUI.EndChangeCheck()) Refresh();
             if(profile.animations==null && characterPrefab!=null && GUILayout.Button(weapon.family!=null?"Crear variantes de movimiento del perfil":"Crear conjunto de animaciones para este perfil"))
             {
                 var sourceDriver=characterPrefab.GetComponent<Presentation.PlayerAnimationDriver>();
@@ -225,6 +240,7 @@ namespace Mismo.Gameplay.Player.Editor
             profile.HideEmbeddedVisuals(animator);
             ApplyPreviewPose(visual, holstered ? profile.holstered : profile.equipped);
             if (secondVisual != null) ApplyPreviewPose(secondVisual, holstered ? weapon.secondaryHolstered : weapon.secondaryEquipped);
+            RefreshTrailPreview();
             SceneView.RepaintAll(); Repaint();
         }
         private void ApplyPreviewPose(GameObject target, WeaponAttachmentPose pose)
@@ -236,6 +252,7 @@ namespace Mismo.Gameplay.Player.Editor
         private void DrawHandles(SceneView view)
         {
             if(stage==null || StageUtility.GetCurrentStage()!=stage || SelectedVisual==null || profile==null)return;
+            if(editTrailEndpoints){DrawTrailEndpoints();return;}
             if(editTrailTip && visual!=null)
             {
                 var root=visual.transform;

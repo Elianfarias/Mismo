@@ -103,7 +103,7 @@ public static class VillageNpcChecks
             {
                 var p=npc.transform.position;Require(Mathf.Abs(p.y-terrain.Height(p.x,p.z))<.03f,"NPC feet on terrain: "+npc.name);
                 Require(Mathf.Abs(npc.transform.lossyScale.y-QuestCatalog.Load().villageNpcs.residentScale)<.01f,"Configured NPC scale independent of village multiplier");
-                var capsule=npc.GetComponent<CapsuleCollider>();Require(capsule.bounds.size.y>2.2f&&capsule.bounds.size.y<2.4f,"Resident body matches the enlarged character scale");
+                var capsule=npc.GetComponent<CapsuleCollider>();Require(capsule.bounds.size.y>2.7f&&capsule.bounds.size.y<2.9f,"Resident body matches the enlarged character scale");
                 bool reached=false;int sampled=0,visible=0;var blockers=new HashSet<string>();
                 foreach(float approachRadius in new[]{1.25f,2f,2.6f})for(int i=0;i<24;i++)
                 {

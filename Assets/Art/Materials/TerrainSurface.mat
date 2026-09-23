@@ -22,13 +22,20 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - _TerrainCoverage:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DetailStrength: 0.45
-    - _TextureScale: 10
+    - _Cull: 2
+    - _DetailStrength: 0.28
+    - _DistantTerrain: 0
+    - _TextureScale: 3
     m_Colors:
-    - _DirtColor: {r: 0.38999996, g: 0.26999995, b: 0.13999996, a: 1}
-    - _GrassColor: {r: 0.23999995, g: 0.37999994, b: 0.11999995, a: 1}
+    - _CoverageGrid: {r: 0, g: 0, b: 1, a: 1}
+    - _DirtColor: {r: 0.66, g: 0.6, b: 0.46, a: 1}
+    - _GrassColor: {r: 0.424, g: 0.506, b: 0.329, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

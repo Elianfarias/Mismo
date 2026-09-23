@@ -23,7 +23,7 @@ MonoBehaviour:
   journalContacts: 0
   villageNpcs: {fileID: 11400000, guid: 4f1f9755544587b43af7e3011e33390f, type: 2}
   journalKey: 24
-  interactKey: 34
+  interactKey: 20
   interactionPromptOffset: {x: 0, y: 145}
   showTracker: 1
   trackerOffset: {x: 12, y: 80}

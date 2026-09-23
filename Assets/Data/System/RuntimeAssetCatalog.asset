@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: RuntimeAssetCatalog
   m_EditorClassIdentifier: Mismo.Core::Mismo.Core.RuntimeAssetCatalog
   entries:
+  - key: UI/TextSettings
+    assets:
+    - {fileID: 11400000, guid: 110b79cc700e31649bd74b5a2b2cbefd, type: 2}
+  - key: UI/AdventureFont
+    assets:
+    - {fileID: 11400000, guid: 53130ed3134319c468d2be632de56da6, type: 2}
   - key: Audio/AudioMixer
     assets:
     - {fileID: 24100000, guid: 72c2b24dc67a4b589ca861a86cd37d88, type: 2}
@@ -445,6 +451,18 @@ MonoBehaviour:
   - key: Recipes/QuestFieldWhetstone
     assets:
     - {fileID: 11400000, guid: 368b7643136a9484eb994efcf6c99ec0, type: 2}
+  - key: Feel/nv-pattern-template
+    assets:
+    - {fileID: 4900000, guid: db8a2f512b50d437b8268f17384f58c8, type: 3}
+  - key: Feel/nv-emphasis-template
+    assets:
+    - {fileID: 4900000, guid: 5f7cb0ced88db4af08a2dd3945067cd7, type: 3}
+  - key: Feel/nv-constant-template
+    assets:
+    - {fileID: 4900000, guid: 28f1ec0b82fdf434b8efa0ef0f9a9d37, type: 3}
+  - key: Feel/MMDebugOnScreenConsole
+    assets:
+    - {fileID: 8263837694839971385, guid: dbdbfb7cee2876a42980b6bcd9bc441a, type: 3}
   discoveryFolders:
   - path: Assets/Art/Audio
     keyPrefix: Audio

@@ -63,6 +63,13 @@ namespace Mismo.Gameplay.Player.Equipment
         public AnimatorOverrideController animations;
         [Header("Estela del arma (VFX)")]
         public bool meleeTrail;
+        [Tooltip("Cinta entre base y punta de la hoja. Se ajusta en el taller de armas.")]
+        public bool proceduralTrail;
+        public Vector3 trailBase = Vector3.zero;
+        [Range(0,1)] public float trailTaper = .5f;
+        public bool secondaryTrail;
+        public Vector3 secondaryTrailBase = Vector3.zero;
+        public Vector3 secondaryTrailTip = Vector3.forward;
         [Tooltip("Punta de la estela, en coordenadas locales del prefab visual del arma.")]
         public Vector3 trailTip = Vector3.forward;
         [Min(.01f)] public float trailDuration = .10f;

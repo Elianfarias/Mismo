@@ -11,7 +11,21 @@ namespace Mismo.Gameplay.Player.Editor
     {
         public override void OnInspectorGUI()
         {
-            DrawDefaultInspector();
+            serializedObject.Update();
+            var definition = (AbilityDefinition)target;
+            if (definition.usesSwordCombo)
+            {
+                EditorGUILayout.HelpBox("Golpes del combo: duración en segundos; ventanas de impacto y encadenado en porcentajes (0–100). Mayor duración reproduce el clip más lento. El volumen sigue al personaje durante el avance. Los clips y su desplazamiento se configuran en las animaciones de la familia. Cambiar este asset afecta a todas las armas que lo comparten.", MessageType.Info);
+                DrawPropertiesExcluding(serializedObject, "preparation", "active", "recovery", "actions");
+                if (definition.comboSteps == null || definition.comboSteps.Length == 0)
+                    EditorGUILayout.HelpBox("Agregá al menos un golpe para poder ejecutar este combo.", MessageType.Warning);
+                else foreach (var step in definition.comboSteps)
+                    if (step != null && step.ImpactEnd <= step.ImpactStart)
+                        EditorGUILayout.HelpBox("Un golpe tiene una ventana de impacto vacía: no hará daño.", MessageType.Warning);
+            }
+            else DrawPropertiesExcluding(serializedObject, "comboSteps");
+            serializedObject.ApplyModifiedProperties();
+            if (definition.usesSwordCombo) return;
             if (GUILayout.Button("Agregar comportamiento"))
             {
                 var menu = new GenericMenu();
@@ -20,10 +34,10 @@ namespace Mismo.Gameplay.Player.Editor
                     Type selected = type;
                     menu.AddItem(new GUIContent(type.Name), false, () =>
                     {
-                        var definition = (AbilityDefinition)target;
-                        Undo.RecordObject(definition, "Agregar comportamiento");
-                        definition.actions = (definition.actions ?? Array.Empty<AbilityAction>()).Concat(new[] { (AbilityAction)Activator.CreateInstance(selected) }).ToArray();
-                        EditorUtility.SetDirty(definition);
+                        var selectedDefinition = (AbilityDefinition)target;
+                        Undo.RecordObject(selectedDefinition, "Agregar comportamiento");
+                        selectedDefinition.actions = (selectedDefinition.actions ?? Array.Empty<AbilityAction>()).Concat(new[] { (AbilityAction)Activator.CreateInstance(selected) }).ToArray();
+                        EditorUtility.SetDirty(selectedDefinition);
                     });
                 }
                 menu.ShowAsContext();

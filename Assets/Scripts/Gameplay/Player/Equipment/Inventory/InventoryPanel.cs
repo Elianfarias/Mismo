@@ -227,7 +227,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(!IsOpen)
             {
 
-                if(Time.unscaledTime<messageUntil){PlayerHUD.Fill(new Rect(265,25,750,65),PlayerHUD.Panel);Text(new Rect(285,37,710,48),message,18,Accent);}
+                if(GetComponent<Presentation.AdventureFeedback>()?.isActiveAndEnabled!=true&&Time.unscaledTime<messageUntil){PlayerHUD.Fill(new Rect(265,25,750,65),PlayerHUD.Panel);Text(new Rect(285,37,710,48),message,18,Accent);}
             }
             else
             {

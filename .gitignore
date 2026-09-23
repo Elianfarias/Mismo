@@ -53,6 +53,7 @@ Thumbs.db
 
 # Generated Unity validation builds (keep reports and screenshots versioned).
 /output/**/*-build/
+/output/village-humanoid/Build/
 
 # Unity project configuration and package manifests must remain versioned.
 # Keep Assets/, Packages/, and ProjectSettings/ out of the ignore rules.

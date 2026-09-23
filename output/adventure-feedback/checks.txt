@@ -1,0 +1,3 @@
+PASS: XP across multiple levels, unchanged state, unified F and serialized font dependencies.
+PASS: interaction selects nearest action and cannot activate two targets in the same frame.
+PASS: enemy drops stay on ground, persist, resist duplicate victories and failed saves, and transfer only on explicit pickup.

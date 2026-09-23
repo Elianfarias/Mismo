@@ -1,0 +1,1 @@
+PASS: Feel animates EXP and level cards, pause hides/suspends them, resume restores playback, and cards expire.

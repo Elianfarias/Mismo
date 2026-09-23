@@ -19,6 +19,7 @@ namespace Mismo.Gameplay.Player.Equipment
         public WeaponDefinition GetSlot(int slot) => slot >= 0 && slot < 2 ? slots[slot] : null;
         bool CanOperateEquipment => runner != null && !runner.IsBusy &&
             (belt == null || !belt.IsActive) && (GetComponent<Mismo.Gameplay.Combat.Health>() == null || !GetComponent<Mismo.Gameplay.Combat.Health>().IsDead);
+        public bool CanInteract => CanOperateEquipment;
         public bool CanSwap => SecondaryDefinition != null && CanOperateEquipment;
         public bool CanChangeEquipment => CanOperateEquipment && !InCombat;
         public WeaponDefinition ActiveDefinition => slots[activeSlot];

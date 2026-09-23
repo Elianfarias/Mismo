@@ -1,0 +1,2 @@
+System.Exception: Cannot move asset from Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/01_Material/ImpactValo 1.mat to Assets/Art/Materials/Combat/WallCoeur/ImpactValo 1.mat: Parent directory is not in asset database
+  at CodexCombatFeedbackIntegration.Tick () [0x002c9] in C:\Users\elian\Mismo\Assets\Scripts\Editor\CodexCombatFeedbackIntegration.cs:73 

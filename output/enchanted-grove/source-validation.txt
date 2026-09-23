@@ -1,0 +1,1 @@
+PASS: 29 VOX sources: chunk sizes, unique cells, palette indices, axes/bounds and scale metadata.

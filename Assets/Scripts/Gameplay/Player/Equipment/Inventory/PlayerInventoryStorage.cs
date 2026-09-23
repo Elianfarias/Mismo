@@ -14,6 +14,20 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public int StoredMaterialCount(string id)=>profile?.chestMaterials?.Find(s=>s.id==id)?.quantity??0;
         public IEnumerable<PendingInventoryLoot> PendingLoot
         { get { if(profile?.pendingLoot!=null)foreach(var loot in profile.pendingLoot)yield return loot.Copy(); } }
+        public string PendingLootName(PendingInventoryLoot loot)
+        {
+            if(loot==null)return "";
+            var names=new List<string>();
+            if(loot.HasWeapon)
+            {
+                var definition=catalog?.Find(loot.weapon.definitionId);
+                names.Add(Mismo.Gameplay.Player.Localization.GameLanguage.Text(definition!=null?definition.DisplayName:loot.weapon.definitionId)+" · T"+loot.weapon.tier);
+            }
+            foreach(var stack in loot.materials)
+                names.Add(Mismo.Gameplay.Player.Localization.GameLanguage.Text(Material(stack.id)?.displayName??stack.id)+" x"+stack.quantity);
+            return string.Join(" · ",names);
+        }
+        public bool CanInteract=>IsReady&&loadout!=null&&loadout.CanInteract;
         public bool CanManage=>IsReady&&loadout.CanChangeEquipment;
         public bool AtChest=>GetComponent<InventoryWorldAccess>()?.AtChest==true;
         public bool IsEquipped(string id)=>IsReady&&profile.IsEquipped(id);
@@ -70,7 +84,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         }
         public bool CollectPending(string id)
         {
-            if(!CanManage)return false;
+            if(!CanInteract)return false;
             var next=profile.Copy();var loot=next.pendingLoot.Find(l=>l.id==id);
             if(loot==null||Vector3.Distance(transform.position,new Vector3(loot.x,loot.y,loot.z))>4)return false;
             if(loot.HasWeapon){if(next.weapons.Count>=256)return false;next.weapons.Add(loot.weapon.Copy());}

@@ -92,7 +92,12 @@ namespace Mismo.Gameplay.Player.Editor
             Check(!System.Text.Encoding.UTF8.GetString(File.ReadAllBytes(path)).Contains("sword.basic"), "Saved payload does not expose weapon identifiers as plaintext");
             Mismo.Gameplay.Player.World.WeaponRewardPickup.Spawn(inventory, player.transform.position, ItemCatalog.BossRewardId);
             for (int i = 0; i < 12; i++) yield return null;
-            Check(inventory.Count == 3, "Physical reward pickup enters inventory and saves it");
+            Check(inventory.Count == 2, "Touching a reward does not auto-loot it");
+            var pickupKeyboard = UnityEngine.InputSystem.Keyboard.current ?? UnityEngine.InputSystem.InputSystem.AddDevice<UnityEngine.InputSystem.Keyboard>();
+            UnityEngine.InputSystem.InputSystem.QueueStateEvent(pickupKeyboard,new UnityEngine.InputSystem.LowLevel.KeyboardState(UnityEngine.InputSystem.Key.F));
+            yield return null; yield return null;
+            UnityEngine.InputSystem.InputSystem.QueueStateEvent(pickupKeyboard,new UnityEngine.InputSystem.LowLevel.KeyboardState());
+            Check(inventory.Count == 3, "F collects and saves the physical reward");
             Check(!inventory.TryClaimReward(ItemCatalog.BossRewardId) && inventory.Count == 3, "Repeated reward cannot duplicate an item");
             Check(!inventory.TryClaimReward("unknown.reward"), "Unknown reward rejected");
             string trophy = inventory.ItemId(2), original = inventory.EquippedId(0);

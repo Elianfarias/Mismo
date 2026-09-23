@@ -20,19 +20,41 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ce744cb14261acd4a92c927ed4ad58ab, type: 2}
   - {fileID: 11400000, guid: e7555c6d155e93448b2c9f2f131ceec1, type: 2}
   - {fileID: 11400000, guid: c21a4fd366079564f9927dda16544232, type: 2}
-  visualPrefab: {fileID: 959409833555118617, guid: 258e7211b4df96f42970cc83ef563973, type: 3}
+  family: {fileID: 11400000, guid: d75a568fa95abb44595d508a05bccc66, type: 2}
+  feedbackOverride: {fileID: 11400000, guid: c2aa63ae5ff44c87980ff3ea94bf40ba, type: 2}
+  isShield: 0
+  dualSwordFamily: {fileID: 11400000, guid: c477298292785fe0bb39efdefaee4d12, type: 2}
+  swordShieldFamily: {fileID: 11400000, guid: a28917d9ca82556f80ee1e1de28bf0bd, type: 2}
+  overrideFamilyAbilities: 0
+  visualPrefab: {fileID: 8645204569604834416, guid: 9b664b809b3452f439b77f4654391891, type: 3}
+  isTwoHanded: 0
+  dualWield: 0
+  secondaryVisualPrefab: {fileID: 0}
+  secondaryEquipped:
+    anchor: 2
+    bonePath: 
+    offset: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: 1
+  secondaryHolstered:
+    anchor: 0
+    bonePath: 
+    offset: {x: -0.2, y: 1.2, z: -0.25}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: 1
   poseProfile: {fileID: 11400000, guid: c6fe7109cd0509d46956bf5bc3d8fa78, type: 2}
   isBow: 0
-  inventoryDescription: "Recuerdo de tu victoria sobre el guardi\xE1n. Conserva el
-    modelo y el kit de la espada; no aumenta sus estad\xEDsticas."
-  handRotation: {x: 0, y: 0, z: 0}
-  backRotation: {x: 0, y: 0, z: 35}
-  handOffset: {x: 0, y: 0, z: 0}
-  backOffset: {x: 0, y: 1.2, z: -0.25}
-  family: {fileID: 11400000, guid: d75a568fa95abb44595d508a05bccc66, type: 2}
+  inventoryDescription: "Recuerdo de tu victoria sobre el guardi\xE1n. Conserva el modelo y el kit de la espada; no aumenta sus estad\xEDsticas."
+  canDiscard: 1
   gridWidth: 1
   gridHeight: 3
   canRotate: 1
   inventoryIcon: {fileID: 21300000, guid: 62eb35d6682904046866d4cb8935b2a2, type: 3}
-  dualSwordFamily: {fileID: 11400000, guid: c477298292785fe0bb39efdefaee4d12, type: 2}
-  swordShieldFamily: {fileID: 11400000, guid: a28917d9ca82556f80ee1e1de28bf0bd, type: 2}
+  hudIcon: {fileID: 0}
+  inventoryPreviewRotation: {x: 0, y: 0, z: 0}
+  canSell: 1
+  sellValue: 10
+  handRotation: {x: 0, y: 0, z: 0}
+  backRotation: {x: 0, y: 0, z: 35}
+  handOffset: {x: 0, y: 0, z: 0}
+  backOffset: {x: 0, y: 1.2, z: -0.25}

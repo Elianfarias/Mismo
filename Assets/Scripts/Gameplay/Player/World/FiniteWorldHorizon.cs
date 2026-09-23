@@ -25,6 +25,7 @@ namespace Mismo.Gameplay.Player.World
             {
                 float px=(x0+x)*32,pz=(z0+z)*32,cy=field.Height(px+16,pz+16);
                 var color=cy<0?new Color(.12f,.35f,.46f,0):field.Top(px+16,pz+16,cy);
+                if(cy<0&&field.GroveStyle!=null){color=field.GroveStyle.distantWater.linear;color.a=0;}
                 geometry.Quad(new Vector3(px,elevations[x,z],pz),new Vector3(px,elevations[x,z+1],pz+32),
                     new Vector3(px+32,elevations[x+1,z+1],pz+32),new Vector3(px+32,elevations[x+1,z],pz),color);
             }

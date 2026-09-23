@@ -30,6 +30,9 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public string Notice { get; private set; }
         public bool HasSaveProblem { get; private set; }
         public event Action Changed;
+        public event Action<ProgressionData,ProgressionData,string> Committed;
+        public string MasteryDisplayName(string id) => FindFamily(id)?.DisplayName ?? (catalog?.weapons == null ? "Maestría" : MasteryWeaponName(id));
+        string MasteryWeaponName(string id) { foreach(var weapon in catalog.weapons) if(weapon.MasteryId==id)return weapon.DisplayName; return "Maestría"; }
         public string SavePath => World.WorldSession.ProfilePath;
         public WeaponDefinition BossReward => catalog != null ? catalog.bossReward : null;
         public int MaterialCount(string id) => profile?.MaterialCount(id) ?? 0;
@@ -95,6 +98,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             worldClock=profile.worldPlaySeconds;
             if(IsReady&&GetComponent<World.RegionRespawn>()!=null&&GetComponent<World.GatheringPlayer>()==null)gameObject.AddComponent<World.GatheringPlayer>();
             if(IsReady&&GetComponent<World.RegionRespawn>()!=null&&GetComponent<World.CompanionPlayer>()==null)gameObject.AddComponent<World.CompanionPlayer>();
+            if(IsReady&&GetComponent<Presentation.PlayerInteraction>()==null)gameObject.AddComponent<Presentation.PlayerInteraction>();
+            if(IsReady&&GetComponent<Presentation.AdventureFeedback>()==null)gameObject.AddComponent<Presentation.AdventureFeedback>();
             Changed?.Invoke();
         }
 
@@ -255,7 +260,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             mastery.damagePoints+=damage;mastery.speedPoints+=speed;
             return Commit(next,"Maestría guardada.",false);
         }
-        // A kill's experience and rolled item are committed together. Failed writes apply neither.
+        // Experience and ground loot are saved together. Items enter the backpack only through interaction.
         public bool TryGrantVictory(int experience,IDictionary<string,int> mastery,OwnedWeapon drop,string worldEnemyId=null, IDictionary<string,int> materialLoot=null, Vector3? lootPosition=null,string speciesId=null,bool recognized=false,string creaturePrefab=null)
         {
             if(!IsReady||experience<0||experience>1000000)return false;
@@ -291,22 +296,13 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(materialLoot!=null)foreach(var entry in materialLoot)
             {
                 if(!materialDefinitions.ContainsKey(entry.Key)||entry.Value<=0)return false;
-                var candidate=next.Copy();
-                if(candidate.TryAddMaterial(entry.Key,entry.Value)&&HasGridRoom(candidate,false))next=candidate;
-                else pending.materials.Add(new MaterialStack{id=entry.Key,quantity=entry.Value});
+                pending.materials.Add(new MaterialStack{id=entry.Key,quantity=entry.Value});
             }
             Rules.Grant(next.progression,experience,mastery);
-            bool added=false;
-            if(drop!=null)
-            {
-                var candidate=next.Copy();candidate.weapons.Add(drop.Copy());
-                added=next.weapons.Count<256&&HasGridRoom(candidate,false);
-                if(added)next=candidate;else pending.weapon=drop.Copy();
-            }
+            if(drop!=null)pending.weapon=drop.Copy();
             bool waiting=pending.weapon!=null||pending.materials.Count>0;
             if(waiting)next.pendingLoot.Add(pending);
-            string notice="+"+experience+" EXP"+(next.progression.level>previous?" · Nivel "+next.progression.level:"")+
-                (added?" · Arma T"+drop.tier+" obtenida":"")+(waiting?" · Mochila llena: botín guardado en el suelo.":"");
+            string notice="";
             if(newMount)notice+=" · "+Localization.GameLanguage.Text("La criatura te reconoce como su amo.");
             if (!Commit(next,notice,false)) return false;
             if (next.progression.level > previous) GameAudio.Play(GameSound.LevelUp);
@@ -346,7 +342,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             if (!IsReady || !loadout.CanSwap) return false;
             var next = profile.Copy(); next.activeSlot = 1 - next.activeSlot;
-            return Commit(next, "Equipamiento guardado.",true,GameSound.ItemEquipped);
+            return Commit(next, "",true,GameSound.ItemEquipped);
         }
 
         public bool TryClaimReward(string rewardId)
@@ -381,10 +377,12 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 GameAudio.Play(GameSound.SaveFailed);
                 return false;
             }
+            var previousProgression = profile.progression.Copy();
             profile = next; Notice = notice; HasSaveProblem = false;
             if (updateEquipment) ApplyEquipment();
             ApplyStats();
             Changed?.Invoke();
+            Committed?.Invoke(previousProgression, profile.progression.Copy(), notice);
             if (sound.HasValue) GameAudio.Play(sound.Value);
             return true;
         }

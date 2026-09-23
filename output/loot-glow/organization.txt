@@ -1,0 +1,21 @@
+Isolated project omits existing art dependencies.
+System.InvalidOperationException: Referencia rota en catálogo: Audio/AudioMixer
+Referencia rota en catálogo: Audio/Music/Combat
+Referencia rota en catálogo: Audio/Music/Exploration
+Referencia rota en catálogo: CombatPresentation/GoblinUpperBody
+Referencia rota en catálogo: CombatPresentation/Human_Goblin_CombatDamage01
+Referencia rota en catálogo: CombatPresentation/Human_Player_CombatDamage01
+Referencia rota en catálogo: CombatPresentation/PlayerUpperBody
+Referencia rota en catálogo: TerrainSurface
+Referencia rota en catálogo: UI/HUD/MinimapFrame-Silver
+Referencia rota en catálogo: UI/HUD/VitalsBackground-Slate
+Referencia rota en catálogo: UI/HUD/VitalsContainer-Clean-v3
+Referencia rota en catálogo: UI/HUD/VitalsContainer-Silver-v2
+Referencia rota en catálogo: UI/HUD/VitalsPaintedFill
+Referencia rota en catálogo: UI/HUD/VitalsPaintedFrames
+Referencia rota en catálogo: UI/PixelFrames/Crosshair
+Referencia rota en catálogo: UI/PixelFrames/Frame
+Referencia rota en catálogo: UI/PixelFrames/Panel
+Referencia rota en catálogo: Feel/MMDebugOnScreenConsole
+  at ProjectOrganizationChecks.Run () [0x008e3] in C:\Users\elian\Mismo\.validation\AdventureCheck\Assets\Scripts\Editor\ProjectOrganizationChecks.cs:59 
+  at LootGlowChecks.RunBatch () [0x0019c] in C:\Users\elian\Mismo\.validation\AdventureCheck\Assets\Scripts\Editor\LootGlowChecks.cs:31 

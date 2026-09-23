@@ -1,0 +1,17 @@
+PASS Confirmed combo cancels Telegraph and discards its action
+PASS Cancelled Telegraph cannot apply pending damage
+PASS Confirmed combo cancels Attack and discards its action
+PASS Cancelled Attack cannot apply pending damage
+PASS Confirmed combo cancels Recovery and discards its action
+PASS Cancelled Recovery cannot apply pending damage
+PASS Next combo hit renews stun despite old stagger resistance/posture recovery
+PASS Combo never shortens an existing longer stun
+PASS Posture-break state remains protected
+PASS boss does not trigger combo interruption
+PASS disabled does not trigger combo interruption
+PASS armored does not trigger combo interruption
+PASS blocked does not trigger combo interruption
+PASS zero does not trigger combo interruption
+PASS ranged does not trigger combo interruption
+PASS Armored attack becomes vulnerable during recovery
+PASS Parry still cancels an armored attack

@@ -71,7 +71,7 @@ namespace Mismo.Gameplay.Player.Editor
                 if (preserveRig)
                 {
                     animationFolder = (DefaultAsset)EditorGUILayout.ObjectField("Carpeta de animaciones", animationFolder, typeof(DefaultAsset), false);
-                    EditorGUILayout.HelpBox("Seleccioná la raíz completa del modelo original con sus huesos. Detecta la carpeta Animation/Animations junto al modelo; también podés elegirla. Exporta rig, pesos, clips y Animator. Usa más geometría para cerrar los voxeles al animarlos.", MessageType.Info);
+                    EditorGUILayout.HelpBox("Seleccioná la raíz completa del modelo original con sus huesos. Conserva rig y pesos; en Humanoid conserva también el Avatar y el Controller asignado. Usá clips del mismo tipo de rig. Sin clips, podés asignarlos después en el taller de enemigos. Usa más geometría para cerrar los voxeles al animarlos.", MessageType.Info);
                 }
             }
 
@@ -120,6 +120,8 @@ namespace Mismo.Gameplay.Player.Editor
             try
             {
                 bool animated = genericModelMode && preserveRig;
+                string animationsPath = animationFolder != null ? AssetDatabase.GetAssetPath(animationFolder) : null;
+                var rigPlan = animated ? VoxelRigExporter.Prepare(sourceWeapon, animationsPath) : null;
                 VoxelSurfaceSampler.Result sample = VoxelSurfaceSampler.Sample(sourceWeapon, resolution, preserveSourceMaterials, true, animated);
                 Bounds bounds = sample.Bounds;
                 Vector3Int dimensions = sample.Dimensions;
@@ -145,7 +147,7 @@ namespace Mismo.Gameplay.Player.Editor
                 string prefabPath = AssetDatabase.GenerateUniqueAssetPath($"{outputFolder}/{safeName}.prefab");
                 GameObject prefab = animated
                     ? VoxelRigExporter.Create(sourceWeapon, sample, mesh, materials, prefabPath, addCollider,
-                        animationFolder != null ? AssetDatabase.GetAssetPath(animationFolder) : null)
+                        animationsPath, rigPlan)
                     : CreatePrefab(mesh, materials, prefabPath, safeName, addCollider, convexCollider);
 
                 AssetDatabase.SaveAssets();

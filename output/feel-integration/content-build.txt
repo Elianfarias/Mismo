@@ -1,0 +1,6 @@
+PASS: perfil cargado desde build; 5 secuencias Feel y sus tipos serializados resueltos
+CombatImpact
+CombatHeavy
+CombatPostureBreak
+CombatBlock
+CombatParry

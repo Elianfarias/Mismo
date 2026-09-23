@@ -9,6 +9,7 @@ namespace Mismo.Gameplay.Player.Quests
             var settings=QuestCatalog.Load()?.villageNpcs;
             if(settings==null||!settings.enabled||settings.startingVillageOnly&&!startingVillage||village.transform.Find("Quest residents")!=null)return;
             var group=new GameObject("Quest residents");group.transform.SetParent(village.transform,false);
+            int index=0;
             foreach(var resident in settings.residents)
             {
                 if(resident==null||resident.prefab==null)continue;
@@ -19,6 +20,14 @@ namespace Mismo.Gameplay.Player.Quests
                 npc.transform.localScale*=Mathf.Max(.1f,settings.residentScale);
                 npc.transform.SetParent(group.transform,true);
                 if(npc.TryGetComponent<QuestGiver>(out var giver)){giver.interactionRange=settings.interactionRange;giver.markerSettings=settings;}
+                if(npc.TryGetComponent<VillageNpcRoutine>(out var routine))
+                {
+                    var route=resident.route ?? System.Array.Empty<Vector3>();
+                    var stops=new Vector3[route.Length+1];stops[0]=position;
+                    for(int i=0;i<route.Length;i++)
+                    {stops[i+1]=village.transform.TransformPoint(route[i]);stops[i+1].y=terrain.Height(stops[i+1].x,stops[i+1].z)+route[i].y;}
+                    routine.Initialize(stops,index++);
+                }
             }
         }
     }

@@ -1,0 +1,9 @@
+{
+    "voxelSizeMetres": 0.10000000149011612,
+    "minimumUnityMetres": {
+        "x": -1.0,
+        "y": 0.0,
+        "z": -2.0
+    },
+    "axisMapping": "VOX X,Y,Z = Unity X,Z,Y"
+}

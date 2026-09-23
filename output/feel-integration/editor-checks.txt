@@ -1,0 +1,1 @@
+PASS CombatFeedbackChecks.RunBatch y 5 secuencias serializadas

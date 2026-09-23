@@ -16,15 +16,26 @@ MonoBehaviour:
   equipped:
     anchor: 3
     bonePath: Armature_Humanoid/Root/Hips/Spine/Chest/Clavicle.L/UpperArm.L/LowerArm.L/Hand.L
-    offset: {x: -0.022220045, y: 0.06481111, z: 0.042852517}
-    rotation: {x: 322.11267, y: 342.1407, z: 205.15344}
+    offset: {x: -0.035268866, y: 0.117690995, z: 0.0056074983}
+    rotation: {x: 295.8874, y: 66.52717, z: 168.03105}
     scale: 1
   holstered:
     anchor: 0
     bonePath: 
-    offset: {x: 0, y: 1.2, z: -0.1991491}
-    rotation: {x: 314.0295, y: 277.44104, z: 87.92601}
+    offset: {x: -0.102412194, y: 1.2, z: -0.1991491}
+    rotation: {x: 357.49466, y: 314.12244, z: 172.13708}
     scale: 1
   animations: {fileID: 22100000, guid: cdb09e6c27e46914ea3c24757b9c5d54, type: 2}
   meleeTrail: 0
+  proceduralTrail: 0
+  trailBase: {x: 0, y: 0, z: 0}
+  trailTaper: 0.5
+  secondaryTrail: 0
+  secondaryTrailBase: {x: 0, y: 0, z: 0}
+  secondaryTrailTip: {x: 0, y: 0, z: 1}
   trailTip: {x: 0, y: 0, z: 1}
+  trailDuration: 0.1
+  trailWidth: 0.28
+  trailStartColor: {r: 1, g: 0.88, b: 0.5, a: 0.8}
+  trailEndColor: {r: 1, g: 0.7, b: 0.2, a: 0}
+  trailMaterial: {fileID: 0}
