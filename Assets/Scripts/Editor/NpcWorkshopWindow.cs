@@ -20,7 +20,11 @@ public sealed class NpcWorkshopWindow : EditorWindow
     Vector2 scroll;
     [MenuItem("Mismo/NPCs/Taller de NPCs")]
     static void Open() => GetWindow<NpcWorkshopWindow>("Taller de NPCs");
-    public static void OpenResident()
+    public static void RefreshOpenPreview()
+    {
+        if(HasOpenInstances<NpcWorkshopWindow>())GetWindow<NpcWorkshopWindow>().Load();
+    }
+public static void OpenResident()
     {
         var window=GetWindow<NpcWorkshopWindow>("Taller de NPCs");
         window.prefab=AssetDatabase.LoadAssetAtPath<GameObject>(VillageNpcIntegration.Residents+"/mara.prefab");
