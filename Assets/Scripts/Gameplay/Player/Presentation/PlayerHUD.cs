@@ -124,9 +124,6 @@ namespace Mismo.Gameplay.Player.Presentation
         private Health health;
         private InventoryUIIcons icons; private PlayerInventory inventory;
         private CombatState combat;
-        private string reward;
-        private float rewardUntil;
-        private void OnReward(string value){reward=value;rewardUntil=Time.unscaledTime+1.2f;}
         private Stamina stamina;
         private BeltDash dash;
         private BasicSwordCombo combo;
@@ -143,7 +140,7 @@ namespace Mismo.Gameplay.Player.Presentation
         public RenderTexture Minimap => GetComponent<WorldMapPanel>()?.Preview;
         private void Start()
         {
-            combat=GetComponent<CombatState>();if(combat!=null)combat.Rewarded+=OnReward;
+            combat=GetComponent<CombatState>();
             icons=Mismo.Core.ProjectAssets.Load<InventoryUIIcons>("InventoryUIIcons");inventory=GetComponent<PlayerInventory>();
             Active=this;health=GetComponent<Health>();stamina=GetComponent<Stamina>();dash=GetComponent<BeltDash>();
             combo=GetComponentInChildren<BasicSwordCombo>();lunge=GetComponentInChildren<SwordLunge>();parry=GetComponentInChildren<SwordParry>();spin=GetComponentInChildren<SwordSpinAttack>();
@@ -180,7 +177,6 @@ namespace Mismo.Gameplay.Player.Presentation
             PaintedBar(0,vitalsPosition+(icons!=null?icons.hudHealthOffset:Vector2.zero),health.Normalized,new Color(.95f,.30f,.32f),vitalsWidth);
             PaintedBar(1,vitalsPosition+(icons!=null?icons.hudStaminaOffset:new Vector2(0,15)),stamina!=null?stamina.Normalized:0,new Color(.50f,.76f,.39f),vitalsWidth);
             DrawNavigation(height);
-            if(Time.unscaledTime<rewardUntil)Label(new Rect(width/2-230,height/2+65,460,35),reward,23,Gold,TextAnchor.MiddleCenter);
             float left=(width-792)/2;
             var climbing=GetComponent<TreeClimbing>();
             if(climbing!=null&&climbing.IsClimbing)Label(new Rect(left,height-190,528,28),"TREPAR · W/S subir/bajar · Soltá ESPACIO para soltar",15,Gold,TextAnchor.MiddleCenter);
@@ -203,9 +199,6 @@ namespace Mismo.Gameplay.Player.Presentation
                 QuietFantasyUI.DrawIcon(new Rect(left+108+tabOffset.x,height-158+skillsYOffset+tabOffset.y,28,28),WeaponHudIcon(equipment.ActiveDefinition));
                 Label(new Rect(left+140+tabOffset.x,height-158+skillsYOffset+tabOffset.y,60,28),"Tab",16,QuietFantasyUI.Ink,TextAnchor.MiddleCenter);
                 if(equipment.SecondaryDefinition!=null)QuietFantasyUI.DrawIcon(new Rect(left+204+tabOffset.x,height-158+skillsYOffset+tabOffset.y,28,28),WeaponHudIcon(equipment.SecondaryDefinition));
-                var cast=equipment.Runner.Current;
-                if(cast!=null&&!cast.Began&&cast.Definition.aimFromCamera)
-                    Label(new Rect(left,height-190+skillsYOffset,528,28),cast.Definition.chargeable?"TENSANDO  "+Mathf.RoundToInt(cast.Charge*100)+" %":"PREPARANDO",17,Gold,TextAnchor.MiddleCenter);
                 string[] keys={"M1","Q","E","R"};
                 for(int i=0;i<4;i++)
                 {
@@ -468,7 +461,6 @@ namespace Mismo.Gameplay.Player.Presentation
             }
         }
         private void OnDisable(){if(Active==this){Active=null;UIEditMode=false;}}
-        private void OnDestroy(){if(combat!=null)combat.Rewarded-=OnReward;}
     }
 }
 

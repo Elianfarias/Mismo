@@ -110,15 +110,7 @@ namespace Mismo.Gameplay.Enemies
 
             if (healthFill != null) healthFill.localScale = new Vector3(health.Normalized, 1f, 1f);
             if (billboard != null && Camera.main != null) billboard.rotation = Camera.main.transform.rotation;
-            if (label != null)
-            {
-                string patternLabel = boss.CurrentPattern != null && !string.IsNullOrEmpty(boss.CurrentPattern.chainSignal)
-                    ? " " + boss.CurrentPattern.chainSignal : string.Empty;
-                label.text = currentState == BossState.Telegraph && currentAttack != null ?
-                    "BOSS " + currentAttack.label + patternLabel :
-                    currentState == BossState.Stagger ? "BOSS ATURDIDO" :
-                    currentState == BossState.Dead ? "BOSS DERROTADO" : "BOSS";
-            }
+            if (label != null) label.text = "BOSS";
 
         }
     }
