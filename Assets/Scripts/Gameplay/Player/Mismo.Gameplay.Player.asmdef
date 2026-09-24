@@ -5,7 +5,9 @@
     "Unity.Localization",
     "Unity.InputSystem",
     "Mismo.Audio",
-    "Mismo.Core"
+    "Mismo.Core",
+    "MoreMountains.Tools",
+    "Unity.TextMeshPro"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

@@ -16,7 +16,8 @@ namespace Mismo.Gameplay.Player.Presentation
         void OnEnable() { health.Damaged += Hit; health.Died += Die; health.Changed += Changed; }
         void OnDisable() { health.Damaged -= Hit; health.Died -= Die; health.Changed -= Changed; CancelPendingDeath(); }
         void Hit(DamageInfo damage) => DamageNumbers.Show(transform.position + Vector3.up * 1.8f,
-            health.LastDamageApplied, GetComponent<PlayerController>() != null);
+            health.LastDamageApplied, GetComponent<PlayerController>() != null,
+            Mathf.InverseLerp(.06f,.22f,health.LastDamageApplied/Mathf.Max(1,health.Maximum)));
         void Changed(float value, float maximum)
         {
             if (value <= 0) return;

@@ -179,6 +179,7 @@ namespace Mismo.Gameplay.Player.Presentation
                 // Authored profiles own the attachment and body pose; legacy procedural
                 // offsets and the embedded sword mesh must not drive this weapon.
                 var profile = equipment.ActiveDefinition.poseProfile;
+                if(profile.proceduralTrail){if(trail!=null){trail.emitting=false;trail.Clear();}return;}
                 var presentation = GetComponent<Equipment.WeaponPresentation>();
                 if (trail != null)
                 {
@@ -248,9 +249,9 @@ namespace Mismo.Gameplay.Player.Presentation
         {
             if(motion == Motion.Slash || motion == Motion.HeavySlash)
             {
-                var window=hitbox != null ? hitbox.GetWindow(comboStep) : null;
-                float start=window != null ? window.ActiveStart : .06f;
-                float active=window != null ? window.ActiveDuration : .14f;
+                var window=combo != null ? combo.CurrentStep : null;
+                float start=window != null ? window.ImpactStart * window.Duration : .06f;
+                float active=window != null ? Mathf.Max(.001f,(window.ImpactEnd-window.ImpactStart) * window.Duration) : .14f;
                 float t=combo != null ? combo.CurrentStepElapsed : elapsed;
                 float sweep=Mathf.Clamp01((t-start)/active);
                 float direction=comboStep==1 ? -1f : 1f;

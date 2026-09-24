@@ -67,13 +67,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 }
                 if(k.escapeKey.wasPressedThisFrame&&IsOpen)
                 {
-                    if(skillDragIndex>=0)CancelSkillDrag();
-                    else if(draggedGrid!=null)CancelInventoryDrag();
-                    else if(showItemActions)showItemActions=false;
-                    else if(confirmDiscard)confirmDiscard=false;
-                    else if(selected!=null&&page==Page.Inventory){selected=null;previewDirty=true;}
-                    else if(page==Page.Quests&&questJournal.Back()){}
-                    else Close();
+                    Close();
                 }
                 else if(!typing&&k.iKey.wasPressedThisFrame){if(IsOpen&&page==Page.Inventory)Close();else OpenPage(Page.Inventory);}
                 else if(!typing&&k.bKey.wasPressedThisFrame){if(OpenPage(Page.Menu))radialHeld=true;}
@@ -227,7 +221,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(!IsOpen)
             {
 
-                if(Time.unscaledTime<messageUntil){PlayerHUD.Fill(new Rect(265,25,750,65),PlayerHUD.Panel);Text(new Rect(285,37,710,48),message,18,Accent);}
+                if(GetComponent<Presentation.AdventureFeedback>()?.isActiveAndEnabled!=true&&Time.unscaledTime<messageUntil){PlayerHUD.Fill(new Rect(265,25,750,65),PlayerHUD.Panel);Text(new Rect(285,37,710,48),message,18,Accent);}
             }
             else
             {

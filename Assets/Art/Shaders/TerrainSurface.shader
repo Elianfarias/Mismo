@@ -101,6 +101,9 @@ Shader "Mismo/Textured Terrain"
             float slope=1-step(.6,IN.worldNormal.y);
             float3 color=lerp(original,_DirtColor.rgb,earth);
             color=lerp(color,lerp(_GrassColor.rgb,_DirtColor.rgb*.8,slope),grass);
+            // Alpha zero is the existing literal-biome-color marker used by the heightfield.
+            // Preserve those authored palette colors instead of classifying every green as legacy grass.
+            color=lerp(original,color,saturate(IN.tint.a));
             // World-aligned pixel detail has no seams between streamed chunks.
             float2 uv=IN.worldPos.xz;
             if(slope>.5)uv=float2(IN.worldPos.x+IN.worldPos.z,IN.worldPos.y);

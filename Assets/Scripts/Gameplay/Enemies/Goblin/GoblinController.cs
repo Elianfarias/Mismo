@@ -60,6 +60,7 @@ namespace Mismo.Gameplay.Enemies
             health = GetComponent<Health>();
             combat=GetComponent<CombatState>()??gameObject.AddComponent<CombatState>();
             combat.ConfigurePosture(70);
+            if(!(settings is CreatureSettings) && GetComponent<GoblinHitReaction>()==null)gameObject.AddComponent<GoblinHitReaction>();
             if(GetComponent<EnemyNameplate>()==null)gameObject.AddComponent<EnemyNameplate>();
         }
 
@@ -68,6 +69,7 @@ namespace Mismo.Gameplay.Enemies
             combat.PostureBroken += Stagger;
             health.Damaged += OnDamaged;
             health.Died += OnDied;
+            GetComponent<DamageReceiver>().Resolved += OnResolved;
             if (started) ResetLife();
         }
 
@@ -77,6 +79,7 @@ namespace Mismo.Gameplay.Enemies
             { Debug.LogError("Goblin necesita Settings y DamageDealer.", this); enabled = false; return; }
             started = true;
             combat.ConfigurePosture(settings.posture);
+            combat.ConfigureBreakRecovery(settings is CreatureSettings || settings.isBoss ? 0 : 1.5f);
             home = transform.position;
             health.ConfigureMaximum(settings.health*(GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>()?.HealthMultiplier??1));
             (GetComponent<CombatAilment>()??gameObject.AddComponent<CombatAilment>()).ConfigureArmor(settings.armor);
@@ -108,6 +111,7 @@ namespace Mismo.Gameplay.Enemies
             combat.PostureBroken -= Stagger;
             health.Damaged -= OnDamaged;
             health.Died -= OnDied;
+            GetComponent<DamageReceiver>().Resolved -= OnResolved;
             Stop();
             hitTargets.Clear();
         }
@@ -140,7 +144,7 @@ namespace Mismo.Gameplay.Enemies
             if (State == GoblinState.Stagger)
             {
                 timer -= dt;
-                if (timer <= 0f) { decision = settings.decisionPause; Enter(GoblinState.Position); }
+                if (timer <= 0f && !combat.Broken) { decision = Mathf.Max(.35f, settings.decisionPause); Enter(GoblinState.Position); }
                 return;
             }
             if (target == null && State != GoblinState.Return && search <= 0f)
@@ -352,13 +356,43 @@ namespace Mismo.Gameplay.Enemies
         }
         private void Stagger(float seconds)
         {
+            if (health.IsDead || settings == null) return;
+            // Discard the action: returning from stun must never resume its hit or charge.
+            attack = null;
+            projectileReleased = true;
             hitTargets.Clear();
             staggerResistance = seconds + settings.staggerResistance;
             Enter(GoblinState.Stagger, seconds);
         }
+        private void OnResolved(DamageInfo damage, HitResult result)
+        {
+            if (settings == null || health.IsDead || result.Outcome != HitOutcome.Hit || result.HealthDamage <= 0 || combat.Broken) return;
+            bool comboHit = !damage.Ranged && !damage.Area && damage.Source != null &&
+                damage.Source.GetComponent<AttackHitbox>() != null;
+            bool armoredAttack = attack != null && attack.resistComboInterrupt &&
+                (State == GoblinState.Telegraph || State == GoblinState.Attack);
+            if (comboHit && settings.interruptibleByCombos && !settings.isBoss && !armoredAttack)
+            {
+                // Consecutive hits renew hitstun independently of posture-break immunity.
+                // Preserve any longer punish/stun window already in progress.
+                float remaining = State == GoblinState.Stagger || State == GoblinState.Recovery ? timer : 0;
+                Stagger(Mathf.Max(remaining, Mathf.Max(.05f, settings.comboHitStun)));
+                return;
+            }
+            // Other damage retains the existing heavy-hit recovery interruption.
+            if (settings == null || settings is CreatureSettings || settings.isBoss || health.IsDead || combat.Broken || combat.RecoveringFromBreak || staggerResistance > 0 ||
+                State != GoblinState.Recovery || result.Outcome != HitOutcome.Hit || result.HealthDamage <= 0 ||
+                damage.FeedbackProfile == null || !damage.FeedbackProfile.IsHeavy(damage)) return;
+            // Never shorten the punish window by replacing a longer recovery with a flinch.
+            Stagger(Mathf.Max(timer, .22f));
+        }
         public void OnAttackParried(DamageInfo damage)
         {
-            if (!health.IsDead && !combat.Broken && State == GoblinState.Attack) Stagger(.2f);
+            if (!health.IsDead && !combat.Broken && State == GoblinState.Attack)
+            {
+                Stagger(.2f);
+                GetComponent<EnemyEquipment>()?.NotifyParried();
+            }
         }
         private void OnDied(DamageInfo damage)
         {

@@ -1,0 +1,12 @@
+PASS First step costs once
+PASS Queue does not spend
+PASS Repeated input does not double-charge
+PASS Following step costs once
+PASS Queue does not spend
+PASS Repeated input does not double-charge
+PASS Following step costs once
+PASS Cancelled queued step is free
+PASS Insufficient stamina at transition ends chain without a free attack
+PASS Failed transition does not leave combo stuck
+PASS Unaffordable first step refused
+PASS Zero-cost combo remains supported

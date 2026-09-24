@@ -28,7 +28,7 @@ namespace Mismo.Gameplay.Player.Equipment
             var definition=cast.Definition;
             if(definition.usesSwordCombo)
             {
-                if(combo==null || !combo.IsActive)return false;
+                if(combo==null || !combo.IsActive && !combo.IsRecovering)return false;
                 var effects=GetComponent<WeaponSkillEffects>();
                 if(effects!=null&&effects.BucklerAnimating)
                     for(int i=1;i<=3;i++)
@@ -82,8 +82,10 @@ namespace Mismo.Gameplay.Player.Equipment
                 }
                 Cancel();
             }
-            if(definition.usesSwordCombo&&(combo==null||!combo.RequestAttack()))return false;
-            stamina?.TrySpend(definition.staminaCost);state.Spend(definition.focusCost);
+            if(definition.usesSwordCombo&&(combo==null||!combo.RequestAttack(definition)))return false;
+            // Combos pay at the start of each actual step, including the first.
+            if(!definition.usesSwordCombo)stamina?.TrySpend(definition.staminaCost);
+            state.Spend(definition.focusCost);
             Current=new AbilityExecution(this,weapon,definition,direction.sqrMagnitude>.001f?direction.normalized:Motor.Facing,groundPoint){AimPoint=aimPoint,Held=held};
             if(definition.usesSwordCombo)PlayExecutionSound(definition,combo.CurrentStepIndex);
             else StartPreparationSound(definition);

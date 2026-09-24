@@ -1,0 +1,13 @@
+PASS Unarmed enemy remains unarmed
+PASS One optional weapon attaches without requiring a second
+PASS Enemy-specific offset places weapon at chosen bone
+PASS Visual weapon does not add unintended physical damage
+PASS Integrated old weapon can be hidden
+PASS Weapon follows animated bone position
+PASS Source weapon prefab/model is not edited
+PASS Second weapon is independently optional
+PASS Unresolved anchor hides weapon safely
+PASS Optional controller is applied
+PASS Changing override back to empty restores original controller
+PASS Release restores original visibility and clears equipment
+PASS Returning to unarmed state is supported

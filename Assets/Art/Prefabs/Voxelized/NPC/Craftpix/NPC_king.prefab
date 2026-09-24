@@ -96,6 +96,37 @@ Transform:
   - {fileID: 1976784487449635700}
   m_Father: {fileID: 4253960399627673059}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1146274057944624311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8958836432979788359}
+  m_Layer: 0
+  m_Name: king
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8958836432979788359
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146274057944624311}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.0000000058487046, y: 0.0000000056624407, z: -0.0000000013996766}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1649964717376576652}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1309974705194030106
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,37 +672,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6465522149648047472}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4771526862283596855
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9205242642024959202}
-  m_Layer: 0
-  m_Name: king
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9205242642024959202
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4771526862283596855}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0000000058487046, y: 0.0000000056624407, z: -0.0000000013996766}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1649964717376576652}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5100833373260063141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1022,7 +1022,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6677048795515462611}
-  - {fileID: 9205242642024959202}
+  - {fileID: 8958836432979788359}
   m_Father: {fileID: 4900924187892607379}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7229003854695490381
@@ -1034,8 +1034,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6058174275858335700}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0c66156e5fffcbd4fb6b7da27760e95f, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 0cdcadd9c12a97748af668937700a8b6, type: 3}
+  m_Controller: {fileID: 9100000, guid: a0183ecb06238674db3da508ae074958, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1377,7 +1377,6 @@ GameObject:
   - component: {fileID: 4900924187892607379}
   - component: {fileID: 4291745458097459125}
   - component: {fileID: 3473428791425812337}
-  - component: {fileID: 8141575595554156627}
   m_Layer: 0
   m_Name: NPC_king
   m_TagString: Untagged
@@ -1426,7 +1425,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f8caab2df7683c6478e430a3dab69ef0, type: 2}
+  - {fileID: 2100000, guid: eab8ca1432d1174418315d20e3fb6edd, type: 2}
   - {fileID: 2100000, guid: ba70db2d13818974a81b751ad1f0d636, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -1517,31 +1516,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Voxels.VoxelRigInstance
   animator: {fileID: 7229003854695490381}
   surface: {fileID: 4291745458097459125}
-  clips: []
-  stateNames: []
---- !u!136 &8141575595554156627
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8966016827588419661}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.088906564
-  m_Height: 1.756179
-  m_Direction: 1
-  m_Center: {x: 0.011925757, y: 0, z: 0.0023406893}
+  clips:
+  - {fileID: 7400000, guid: ba0f3fc2d54e37849b323a9c4b45d1a5, type: 2}
+  - {fileID: 7400000, guid: 5044813c8499305439abfc351f3beeb8, type: 2}
+  stateNames:
+  - Quaternius_Idle
+  - Quaternius_Walk
 --- !u!1 &9052976333565243267
 GameObject:
   m_ObjectHideFlags: 0

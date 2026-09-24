@@ -22,6 +22,8 @@ namespace Mismo.Gameplay.Player.Editor
             var swordVisual = Visual("sword_E", 1.1f, false);
             var basic = Ability("SwordCombo", "COMBO", 0, .38f, .16f, .45f, 0, AbilityPose.None);
             basic.usesSwordCombo = true;
+            if (basic.comboSteps == null || basic.comboSteps.Length == 0)
+                basic.comboSteps = new[] { new Mismo.Gameplay.Combat.ComboStep("slash_1", .8f, 10), new Mismo.Gameplay.Combat.ComboStep("slash_2", .8f, 12), new Mismo.Gameplay.Combat.ComboStep("heavy_slash", 1, 20, .22f) };
             var lunge = Ability("SwordLunge", "ESTOCADA", .02f, .24f, .14f, .8f, 12, AbilityPose.Lunge,
                 new MoveCasterAction { distance = 3.2f }, new MeleeAction { damage = 18, radius = .6f, forward = .7f });
             var parry = Ability("SwordParry", "PARRY", 0, .16f, .12f, .45f, 0, AbilityPose.Parry, new ParryAction());

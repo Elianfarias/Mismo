@@ -107,8 +107,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 191074983377444375}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fa40f4eb97c8a6740a7d51c30256b1d9, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 83b08aeb424c71449a9f5d2153166e85, type: 3}
+  m_Controller: {fileID: 9100000, guid: a0183ecb06238674db3da508ae074958, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1284,7 +1284,6 @@ GameObject:
   - component: {fileID: 6701113092690958564}
   - component: {fileID: 2438740999282304878}
   - component: {fileID: 3759149347433809779}
-  - component: {fileID: 5145342355436731977}
   m_Layer: 0
   m_Name: NPC_rich_citizzens_3
   m_TagString: Untagged
@@ -1333,7 +1332,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 74c05f696473e3c42bec1103fc152de2, type: 2}
+  - {fileID: 2100000, guid: 5e545ffc38ae7a9419d8de5baa9a12ce, type: 2}
   - {fileID: 2100000, guid: ba70db2d13818974a81b751ad1f0d636, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -1424,31 +1423,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Voxels.VoxelRigInstance
   animator: {fileID: 7057277901843499859}
   surface: {fileID: 2438740999282304878}
-  clips: []
-  stateNames: []
---- !u!136 &5145342355436731977
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7339359164895711835}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.06479355
-  m_Height: 1.7721313
-  m_Direction: 1
-  m_Center: {x: 0.004675001, y: 0.000000059604645, z: 0.0025388375}
+  clips:
+  - {fileID: 7400000, guid: 557f4815c5219c14a846b00378583a64, type: 2}
+  - {fileID: 7400000, guid: aa17c4fadffc6db419f8954de4771481, type: 2}
+  stateNames:
+  - Quaternius_Idle
+  - Quaternius_Walk
 --- !u!1 &8100829460815566388
 GameObject:
   m_ObjectHideFlags: 0

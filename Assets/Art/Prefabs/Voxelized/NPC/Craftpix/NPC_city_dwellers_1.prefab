@@ -139,7 +139,6 @@ GameObject:
   - component: {fileID: 1605387947795761526}
   - component: {fileID: 6439169977722189757}
   - component: {fileID: 3407516227026048402}
-  - component: {fileID: 6562418615641829494}
   m_Layer: 0
   m_Name: NPC_city_dwellers_1
   m_TagString: Untagged
@@ -188,7 +187,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 68b69567f88009744a8a6b53828c8d49, type: 2}
+  - {fileID: 2100000, guid: 8244de05979d54146b33e15f2cbf3073, type: 2}
   - {fileID: 2100000, guid: ba70db2d13818974a81b751ad1f0d636, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -279,31 +278,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Voxels.VoxelRigInstance
   animator: {fileID: 852993386246363175}
   surface: {fileID: 6439169977722189757}
-  clips: []
-  stateNames: []
---- !u!136 &6562418615641829494
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 467697738658328636}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.069630146
-  m_Height: 1.7683847
-  m_Direction: 1
-  m_Center: {x: 0.008585453, y: 0.000000029802322, z: 0.012533791}
+  clips:
+  - {fileID: 7400000, guid: 926ea985f4e64cb49899d08d254461f2, type: 2}
+  - {fileID: 7400000, guid: 9ba1a6ae273764b41a7086320522283f, type: 2}
+  stateNames:
+  - Quaternius_Idle
+  - Quaternius_Walk
 --- !u!1 &824958270010723134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,8 +1035,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6123661119897189008}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 46e8902751d6ec248b52535bd7f6465c, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 05abcacb477aa1c409b625f866940ae6, type: 3}
+  m_Controller: {fileID: 9100000, guid: a0183ecb06238674db3da508ae074958, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

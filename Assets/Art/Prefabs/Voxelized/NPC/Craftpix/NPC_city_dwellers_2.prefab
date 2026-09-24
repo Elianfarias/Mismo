@@ -139,7 +139,6 @@ GameObject:
   - component: {fileID: 6880073017419811029}
   - component: {fileID: 1523078108146120542}
   - component: {fileID: 5306489173108219464}
-  - component: {fileID: 4235599222345075916}
   m_Layer: 0
   m_Name: NPC_city_dwellers_2
   m_TagString: Untagged
@@ -188,7 +187,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1ce416a0ef311464abfed80b4f98d447, type: 2}
+  - {fileID: 2100000, guid: c4a3bdb2c582c39459cdc9dd8e72898a, type: 2}
   - {fileID: 2100000, guid: ba70db2d13818974a81b751ad1f0d636, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -279,31 +278,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Voxels.VoxelRigInstance
   animator: {fileID: 1477779998078110004}
   surface: {fileID: 1523078108146120542}
-  clips: []
-  stateNames: []
---- !u!136 &4235599222345075916
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 865296246840607990}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.08998094
-  m_Height: 1.6838536
-  m_Direction: 1
-  m_Center: {x: 0.0031083822, y: 0.000000029802322, z: 0.0047779754}
+  clips:
+  - {fileID: 7400000, guid: 5798adee12b6bba429dfa38db4b6ba1f, type: 2}
+  - {fileID: 7400000, guid: bc1ec28bd6afebb4faf377bc6d0440ff, type: 2}
+  stateNames:
+  - Quaternius_Idle
+  - Quaternius_Walk
 --- !u!1 &1310717675771162091
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,37 +604,6 @@ Transform:
   m_Children:
   - {fileID: 7562444774760487744}
   m_Father: {fileID: 3682218110451897396}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3053636995037366765
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2086375580566529531}
-  m_Layer: 0
-  m_Name: city_dwellers_2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2086375580566529531
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3053636995037366765}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000003106892, y: -0.01917026, z: -0.000000006115919}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8719678334977363007}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3327444387992917880
 GameObject:
@@ -1136,7 +1085,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1157531702321188332}
-  - {fileID: 2086375580566529531}
+  - {fileID: 7623961729800445442}
   m_Father: {fileID: 6880073017419811029}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1477779998078110004
@@ -1148,8 +1097,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6412131343890190898}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 538b9e243633c164e83e71e37ea2d8d9, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 5f0e7c1a27063804a818f223c0003d5a, type: 3}
+  m_Controller: {fileID: 9100000, guid: a0183ecb06238674db3da508ae074958, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1477,6 +1426,37 @@ Transform:
   m_Children:
   - {fileID: 2762396189352565149}
   m_Father: {fileID: 6947041955197060480}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8635799745908526834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7623961729800445442}
+  m_Layer: 0
+  m_Name: city_dwellers_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7623961729800445442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8635799745908526834}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.00000003106892, y: -0.01917026, z: -0.000000006115919}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8719678334977363007}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8658024041845835002
 GameObject:

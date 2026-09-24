@@ -1623,25 +1623,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Mismo.Gameplay.Combat::Mismo.Gameplay.Combat.BasicSwordCombo
   hitbox: {fileID: 0}
-  steps:
-  - id: slash
-    duration: 0.38
-    inputWindowStart: 0.14
-    inputWindowEnd: 0.3
-    transitionDuration: 0.06
-    recoveryDuration: 0.16
-  - id: slash
-    duration: 0.38
-    inputWindowStart: 0.14
-    inputWindowEnd: 0.3
-    transitionDuration: 0.06
-    recoveryDuration: 0.16
-  - id: heavy_slash
-    duration: 0.52
-    inputWindowStart: 0.2
-    inputWindowEnd: 0.42
-    transitionDuration: 0.06
-    recoveryDuration: 0.22
 --- !u!114 &8533537562741366807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4496,19 +4477,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a3eb4d8aa1a47898ed47b850eeac8c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Mismo.Gameplay.Combat::Mismo.Gameplay.Combat.AttackHitbox
-  windows:
-  - id: slash_1
-    activeStart: 0.06
-    activeDuration: 0.14
-    damage: 10
-  - id: slash_2
-    activeStart: 0.06
-    activeDuration: 0.14
-    damage: 12
-  - id: heavy_slash
-    activeStart: 0.12
-    activeDuration: 0.2
-    damage: 20
 --- !u!1 &7408077834256671700
 GameObject:
   m_ObjectHideFlags: 0

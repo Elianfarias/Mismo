@@ -1,0 +1,101 @@
+System.InvalidOperationException: Assets/DoubleL/FBX Unity/Actions/Ladder/InPlace/Ladder_Up_Play_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/NPC/Dialogue/Dialogue_5.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/Actions/Ladder/Ladder_Down_Start.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Sprint/Base/InPlace/1Hand_Up_Sprint_A_F_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/NPC/Dialogue/Dialogue_1.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Imp_Emissive.png
+Assets/DoubleL/Model/SM_Wep_Sword_03.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Walk/Base/InPlace/1Hand_Up_Walk_A_F_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Attack_A/1Hand_Up_Attack_A_1.anim debe estar en Assets/Art/Animations/
+Assets/DoubleL/FBX Unity/One Hand Up/Attack_B/InPlace/1Hand_Up_Attack_B_1_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Run/Base/1Hand_Up_Run_A_F_R90_A.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Jump/InPlace/1Hand_Up_Jump_B_InPlace.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Imp_BaseColor_1.png
+Assets/DoubleL/FBX Unity/One Hand Up/Attack_A/InPlace/1Hand_Up_Attack_A_3_InPlace.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Preview.jpg
+Assets/DoubleL/FBX Unity/One Hand Up/Attack_A/1Hand_Up_Attack_A_2.anim debe estar en Assets/Art/Animations/
+Assets/DoubleL/FBX Unity/Actions/Ladder/InPlace/Ladder_Up_End_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/Actions/Ladder/Ladder_Up_Start.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/Bow/Attack A/Bow_Attack_A_1_All.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/Enemy Attack/InPlace/Enemy_Attack_1_Run_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/Model/Floor.mat debe estar en Assets/Art/Materials/
+Assets/DoubleL/FBX Unity/One Hand Up/Attack_B/1Hand_Up_Attack_B_2.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/NPC/Dialogue/Dialogue_2.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/Hit/InPlace/Hit_B_5_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Sheild/Idle/1Hand_Up_Shield_Block_Idle_1.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Puglin_Emissive.png
+Assets/DoubleL/FBX Unity/Enemy Attack/Enemy_Attack_1_Run.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Walk/Base/InPlace/1Hand_Up_Walk_A_B_InPlace.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Importing_UnrealUnity.png
+Assets/DoubleL/FBX Unity/One Hand Up/Sheild/Hit/1Hand_Up_Shield_Block_Hit_1.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/Model/Armature (1).prefab debe estar en Assets/Art/Prefabs/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Imp_ORM.png
+Assets/DoubleL/FBX Unity/One Hand Up/Jump/1Hand_Up_Jump_B.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Attack_A/1Hand_Up_Attack_A_3.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Attack_A/1Hand_Up_Attack_A_2.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Imp_BaseColor_2.png
+Assets/DoubleL/FBX Unity/Actions/Ladder/InPlace/Ladder_Down_Start_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Run/Base/1Hand_Up_Run_A_F_L90_A.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/Bow/Attack B/Bow_Attack_B_1_All.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/Unreal Normals/T_Puglin_Normal_Unreal.png
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Walk/Base/InPlace/1Hand_Up_Walk_A_F_R90_A_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/Actions/Ladder/InPlace/Ladder_Up_Start_InPlace.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Puglin_BaseColor_3.png
+Assets/DoubleL/FBX Unity/Actions/Action/Action_A_4_1.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Run/Base/InPlace/1Hand_Up_Run_A_F_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/Model/Armature.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/Bow/Movement/Idle/Idle/Bow_Idle_B.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Walk/Base/1Hand_Up_Walk_A_F.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Walk/Base/InPlace/1Hand_Up_Walk_A_F_L90_A_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/Model/SM_Wep_Shield_01.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/Model/Unreal_Base.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Attack_A/1Hand_Up_Attack_A_1.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/Actions/Ladder/Ladder_Down_Play.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Attack_B/InPlace/1Hand_Up_Attack_B_2_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/Model/T-Pose.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Run/Base/InPlace/1Hand_Up_Run_A_B_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/Actions/Ladder/Ladder_Idle.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Puglin_Normal.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Puglin_BaseColor_1.png
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Idle/Idle/1Hand_Up_Stand_Idle_A_2.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Attack_B/1Hand_Up_Attack_B_1.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/Actions/Ladder/Ladder_Up_End.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Puglin_BaseColor_2.png
+Assets/DoubleL/FBX Unity/Hit/Hit_B_5.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Sheild/Hit/InPlace/1Hand_Up_Shield_Block_Hit_1_InPlace.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/DoubleL/Model/Grid_01_BaseMap.png
+Assets/DoubleL/FBX Unity/Actions/Ladder/Ladder_Down_End.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Walk/Base/1Hand_Up_Walk_A_F_R90_A.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Crouch/Idle/Idle/1Hand_Up_Crouch_Idle_1.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Run/Base/InPlace/1Hand_Up_Run_A_F_R90_A_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Crouch/Base/InPlace/1Hand_Up_Crouch_F_InPlace.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Imp_BaseColor_3.png
+Assets/DoubleL/FBX Unity/NPC/Dialogue/Dialogue_4.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Run/Base/InPlace/1Hand_Up_Run_A_F_L90_A_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Walk/Base/1Hand_Up_Walk_A_F_L90_A.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Attack_A/1Hand_Up_Attack_A_3.anim debe estar en Assets/Art/Animations/
+Assets/DoubleL/FBX Unity/Actions/Ladder/InPlace/Ladder_Down_Play_InPlace.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Puglin_ORM.png
+Assets/DoubleL/FBX Unity/One Hand Up/Attack_B/InPlace/1Hand_Up_Attack_B_3_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/Art/FBX/Weapons/Sword/Rapier.prefab debe estar en Assets/Art/Prefabs/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Crouch/Base/1Hand_Up_Crouch_F.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/Actions/Ladder/InPlace/Ladder_Down_End_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/Hit/Hit_B_4.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/Actions/Action/Action_A_5_1.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Run/Base/1Hand_Up_Run_A_B.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Run/Base/1Hand_Up_Run_A_F.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/NPC/Dialogue/Dialogue_3.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/Enemy Attack/InPlace/Enemy_Attack_1_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Attack_B/1Hand_Up_Attack_B_3.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Attack_A/InPlace/1Hand_Up_Attack_A_1_InPlace.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Imp_Normal.png
+Assets/DoubleL/FBX Unity/Hit/InPlace/Hit_B_4_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Attack_A/InPlace/1Hand_Up_Attack_A_2_InPlace.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Sprint/Base/1Hand_Up_Sprint_A_F.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/Actions/Ladder/Ladder_Up_Play.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/Actions/Action/Action_A_5_2.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/Enemy Attack/Enemy_Attack_1.fbx debe estar en Assets/Art/FBX/
+Assets/DoubleL/FBX Unity/One Hand Up/Movement/Walk/Base/1Hand_Up_Walk_A_B.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/Unreal Normals/T_Imp_Normal_Unreal.png
+  at ProjectOrganizationChecks.Run () [0x008e3] in C:\Users\elian\Mismo\Assets\Scripts\Editor\ProjectOrganizationChecks.cs:59 
+  at VillageHumanoidUpgrade.Apply () [0x00771] in C:\Users\elian\Mismo\Assets\Scripts\Editor\VillageHumanoidUpgrade.cs:155 

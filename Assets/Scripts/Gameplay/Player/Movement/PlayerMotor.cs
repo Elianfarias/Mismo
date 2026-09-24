@@ -32,6 +32,8 @@ namespace Mismo.Gameplay.Player.Movement
         public event System.Action Jumped;
         public event System.Action Landed;
         public System.Func<Vector3,Vector3,Vector3> MovementConstraint { private get; set; }
+        public System.Func<bool> AnimationMovementRequested { private get; set; }
+        public bool AnimationMovementActive { get; private set; }
 
         /// <summary>Conecta los datos y la presentación del motor.</summary>
         public void Configure(MovementSettings configuration, Transform visualRoot)
@@ -50,6 +52,7 @@ namespace Mismo.Gameplay.Player.Movement
         public void SetFlight(bool active)
         {
             IsFlying = active;
+            AnimationMovementActive = false;
             horizontalVelocity = Vector3.zero;
             verticalVelocity = coyoteRemaining = jumpBufferRemaining = 0f;
             pendingControlledMovement = null;
@@ -96,13 +99,14 @@ namespace Mismo.Gameplay.Player.Movement
             ControlledMovementRequest? controlledMovement = pendingControlledMovement;
             pendingControlledMovement = null;
             LastMovementWasControlled = controlledMovement.HasValue;
+            AnimationMovementActive = !IsFlying && dt > 0f && !controlledMovement.HasValue && AnimationMovementRequested != null && AnimationMovementRequested();
             LastCollisionFlags = CollisionFlags.None;
             if (IsFlying) return CollisionFlags.None;
             if (settings == null || dt <= 0f) return CollisionFlags.None;
 
             bool specialMovement = controlledMovement.HasValue;
             Vector3 specialDisplacement = specialMovement ? controlledMovement.Value.Displacement : Vector3.zero;
-            bool allowJump = !specialMovement || !controlledMovement.Value.BlocksJump;
+            bool allowJump = !AnimationMovementActive && (!specialMovement || !controlledMovement.Value.BlocksJump);
             bool grounded = IsGrounded;
             coyoteRemaining = grounded ? settings.CoyoteTime : Mathf.Max(0f, coyoteRemaining - dt);
             jumpBufferRemaining = jumpPressed ? Mathf.Max(dt, settings.JumpBufferTime) : Mathf.Max(0f, jumpBufferRemaining - dt);
@@ -134,9 +138,10 @@ namespace Mismo.Gameplay.Player.Movement
             Vector3 target = direction * speed;
             float rate = direction.sqrMagnitude > 0f ? settings.Acceleration : settings.Deceleration;
             horizontalVelocity = Vector3.MoveTowards(horizontalVelocity, target, rate * (grounded ? 1f : settings.AirControl) * dt);
+            if (AnimationMovementActive) horizontalVelocity = Vector3.zero;
             Vector3 facing = specialMovement
                 ? (controlledMovement.Value.Facing.sqrMagnitude > 0.0001f ? controlledMovement.Value.Facing : specialDisplacement)
-                : direction;
+                : AnimationMovementActive ? Vector3.zero : direction;
             if (visual != null && facing.sqrMagnitude > 0.0001f)
                 visual.rotation = Quaternion.RotateTowards(visual.rotation, Quaternion.LookRotation(facing), settings.RotationSpeed * dt);
             Vector3 horizontalStep = specialMovement ? specialDisplacement : horizontalVelocity * dt;
@@ -147,11 +152,29 @@ namespace Mismo.Gameplay.Player.Movement
             if ((flags & CollisionFlags.Above) != 0 && verticalVelocity > 0f) verticalVelocity = 0f;
             if ((flags & CollisionFlags.Below) != 0 && verticalVelocity < 0f) verticalVelocity = settings.GroundedVerticalSpeed;
             bool groundedAfterMove = IsGrounded;
-            UpdateMovementSounds(groundedAfterMove, specialMovement, positionBeforeMove, dt);
+            UpdateMovementSounds(groundedAfterMove, specialMovement || AnimationMovementActive, positionBeforeMove, dt);
             if (hasGroundState && groundedAfterMove && !wasGrounded) Landed?.Invoke();
             wasGrounded = groundedAfterMove;
             hasGroundState = true;
             LastCollisionFlags = flags;
+            return flags;
+        }
+
+        /// <summary>Applies this frame's animation advance after animation evaluation.
+        /// Gravity was handled by Tick; dashes and other controlled moves take priority.</summary>
+        public CollisionFlags ApplyAnimationDisplacement(Vector3 displacement)
+        {
+            if (!isActiveAndEnabled || !AnimationMovementActive || IsFlying || LastMovementWasControlled ||
+                body == null || !body.enabled || Time.timeScale <= 0) return CollisionFlags.None;
+            displacement.y = 0;
+            if (float.IsNaN(displacement.x) || float.IsNaN(displacement.z) ||
+                float.IsInfinity(displacement.x) || float.IsInfinity(displacement.z) || displacement.sqrMagnitude < .0000000001f)
+                return CollisionFlags.None;
+            Vector3 position = transform.position;
+            Vector3 destination = position + displacement;
+            if (MovementConstraint != null) destination = MovementConstraint(position, destination);
+            var flags = body.Move(destination - position);
+            LastCollisionFlags |= flags;
             return flags;
         }
 
@@ -192,6 +215,7 @@ namespace Mismo.Gameplay.Player.Movement
         public void ResetPosition(Vector3 position)
         {
             IsFlying = false;
+            AnimationMovementActive = false;
             body.enabled = false;
             transform.position = position;
             body.enabled = true;

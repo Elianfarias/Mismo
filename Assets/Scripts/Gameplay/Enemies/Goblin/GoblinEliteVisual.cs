@@ -54,12 +54,22 @@ namespace Mismo.Gameplay.Enemies
         private void OnEnable()
         {
             if (health == null) health = GetComponent<Health>();
-            if (health != null) health.Damaged += OnDamaged;
+            if (health != null)
+            {
+                health.Damaged += OnDamaged;
+                health.Changed += OnHealthChanged;
+            }
+            SetAuraVisible(health == null || !health.IsDead);
         }
 
         private void OnDisable()
         {
-            if (health != null) health.Damaged -= OnDamaged;
+            if (health != null)
+            {
+                health.Damaged -= OnDamaged;
+                health.Changed -= OnHealthChanged;
+            }
+            SetAuraVisible(false);
         }
 
         private void OnDestroy()
@@ -67,10 +77,22 @@ namespace Mismo.Gameplay.Enemies
             if (auraMaterial != null) Destroy(auraMaterial);
         }
 
-        private void OnDamaged(DamageInfo _) => hitRemaining = Mathf.Max(0f, hitFeedbackDuration);
+        private void OnDamaged(DamageInfo _) => hitRemaining = health != null && health.IsDead ? 0 : Mathf.Max(0f, hitFeedbackDuration);
+
+        private void OnHealthChanged(float current, float maximum) => SetAuraVisible(current > 0);
+
+        private void SetAuraVisible(bool visible)
+        {
+            if (aura != null) aura.enabled = visible;
+            if (!visible) hitRemaining = 0;
+            if (burst == null) return;
+            if (!visible) burst.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            else if (!burst.isPlaying) burst.Play(true);
+        }
 
         private void LateUpdate()
         {
+            if (health != null && health.IsDead) { SetAuraVisible(false); return; }
             hitRemaining = Mathf.Max(0f, hitRemaining - Time.deltaTime);
             if (aura == null) return;
             float pulse = 1f + Mathf.Sin(Time.time * auraPulseSpeed * Mathf.PI * 2f) * 0.09f;

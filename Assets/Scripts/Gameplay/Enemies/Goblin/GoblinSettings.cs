@@ -8,6 +8,8 @@ namespace Mismo.Gameplay.Enemies
     public sealed class GoblinAttack
     {
         public string label = "Golpe";
+        [Tooltip("Este ataque resiste la interrupción de combos durante preparación y ejecución. La rotura de postura y el parry siguen funcionando.")]
+        public bool resistComboInterrupt;
         [Min(0.1f)] public float range = 1.9f;
         [Min(0.05f)] public float windup = 0.65f;
         [Min(0.02f)] public float active = 0.18f;
@@ -46,6 +48,12 @@ namespace Mismo.Gameplay.Enemies
         [Min(0.1f)] public float positioningSpeed = 1.6f;
         [Min(0f)] public float decisionPause = 0.65f;
         [Min(0f)] public float chargeCooldown = 5f;
+        [Header("Interrupción por combos")]
+        [Tooltip("Los impactos confirmados de un combo cancelan el ataque y renuevan el aturdimiento. No se aplica a jefes.")]
+        public bool interruptibleByCombos = true;
+        [Min(.05f), Tooltip("Segundos sin actuar después de cada impacto del combo.")]
+        public float comboHitStun = .55f;
+        [Header("Aturdimiento general")]
         [Min(0f)] public float staggerDamageThreshold = 15f;
         [Min(0.05f)] public float staggerDuration = 0.45f;
         [Min(0f)] public float staggerResistance = 0.75f;

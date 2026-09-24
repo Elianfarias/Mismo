@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 698a3880f80842ae8ed9b152f31daec7, type: 3}
+  m_Name: SwordFeedback
+  m_EditorClassIdentifier: 
+  heavyPostureThreshold: 15
+  impact:
+    feel: {fileID: 4945029766659161255, guid: 7ebb56daf74bec0459280985fc44b620, type: 3}
+    prefab: {fileID: 500345726442012828, guid: 50a810bfd70577b41a2d43ae0241ea2d, type: 3}
+    scale: 1
+    rotation: {x: 0, y: 0, z: 0}
+    tint: {r: 0.48264506, g: 0.5471698, b: 0.5319992, a: 1}
+    sound: {fileID: 8300000, guid: 168c3532c8e8425d8eb34d19fa1f7e0e, type: 3}
+    volume: 0.65
+    hitStop: 0
+    maximumLifetime: 3
+  heavy:
+    feel: {fileID: 4932900643062827389, guid: 771a7bd829e4c9242a6ecf9563098e67, type: 3}
+    prefab: {fileID: 500345726442012828, guid: 50a810bfd70577b41a2d43ae0241ea2d, type: 3}
+    scale: 1
+    rotation: {x: 0, y: 0, z: 0}
+    tint: {r: 1, g: 0.7, b: 0.4, a: 1}
+    sound: {fileID: 8300000, guid: 83faa6dab358437481af8a3f6de41ae3, type: 3}
+    volume: 0.65
+    hitStop: 0.035
+    maximumLifetime: 3
+  postureBreak:
+    feel: {fileID: 4089923963967772167, guid: de130314c335afa41a94beba567dae4b, type: 3}
+    prefab: {fileID: 85941164691198867, guid: bad3cf055489f0e4e9cd51bd9cdb7008, type: 3}
+    scale: 1
+    rotation: {x: 0, y: 0, z: 0}
+    tint: {r: 1, g: 0.8, b: 0.25, a: 1}
+    sound: {fileID: 8300000, guid: 8902436e2fd748b68a126a23d14bdf56, type: 3}
+    volume: 0.65
+    hitStop: 0.055
+    maximumLifetime: 3
+  block:
+    feel: {fileID: 8695584256811444452, guid: a08c8e96b3864d44187cc8eed1d20881, type: 3}
+    prefab: {fileID: 4364062416287365583, guid: fe2205740225ab04bb07d3c6308b7c8b, type: 3}
+    scale: 1
+    rotation: {x: 0, y: 0, z: 0}
+    tint: {r: 0.3, g: 0.7, b: 1, a: 1}
+    sound: {fileID: 8300000, guid: 38ad9673f24d4dd4b0ddfd63efb6b343, type: 3}
+    volume: 0.65
+    hitStop: 0
+    maximumLifetime: 3
+  parry:
+    feel: {fileID: 4304006149318040493, guid: a1c0fb7b8f83ba746b532f9cb4fdf9f6, type: 3}
+    prefab: {fileID: 85941164691198867, guid: bad3cf055489f0e4e9cd51bd9cdb7008, type: 3}
+    scale: 1
+    rotation: {x: 0, y: 0, z: 0}
+    tint: {r: 0.7, g: 0.95, b: 1, a: 1}
+    sound: {fileID: 8300000, guid: b346236de65a42b8a21ffea0f226a6be, type: 3}
+    volume: 0.65
+    hitStop: 0
+    maximumLifetime: 3

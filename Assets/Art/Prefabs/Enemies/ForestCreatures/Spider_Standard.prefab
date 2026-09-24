@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 5204240135070937705}
   - component: {fileID: 5465778126950301108}
   - component: {fileID: 6676064539847539732}
+  - component: {fileID: 8089269057014905351}
   m_Layer: 0
   m_Name: Spider_Standard
   m_TagString: Untagged
@@ -65,8 +66,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8249468636352151711}
   m_Father: {fileID: 0}
@@ -188,6 +189,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Mismo.Gameplay.Enemies::Mismo.Gameplay.Enemies.CreatureAnimationDriver
   animator: {fileID: 64324348842257595}
+  groundSupport:
+    probeDistance: 0.8
+    soleClearance: 0.0325
+--- !u!114 &8089269057014905351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8440093396559079988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3f56276d2fdf498c7692e919622c79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Mismo.Gameplay.Enemies::Mismo.Gameplay.Enemies.EnemyEquipment
+  animator: {fileID: 64324348842257595}
+  controllerOverride: {fileID: 9100000, guid: dbec92f2b8da9e0499df8c515ee7ad39, type: 2}
+  idleClip: {fileID: 1982851300945606977, guid: ad64ab1b7f2190f429978de082f89036, type: 3}
+  walkClip: {fileID: 7829387118931131490, guid: ad64ab1b7f2190f429978de082f89036, type: 3}
+  runClip: {fileID: -1565870005156594403, guid: ad64ab1b7f2190f429978de082f89036, type: 3}
+  hitClip: {fileID: 0}
+  postureBreakClip: {fileID: 0}
+  parryClip: {fileID: 0}
+  parryDuration: 0.36
+  hitDuration: 0.36
+  hitMask: {fileID: 0}
+  walkReferenceSpeed: 1.6
+  runReferenceSpeed: 3.2
+  primary:
+    weapon: {fileID: 0}
+    visualPrefab: {fileID: 0}
+    pose:
+      anchor: 1
+      bonePath: 
+      offset: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      scale: 1
+  secondary:
+    weapon: {fileID: 0}
+    visualPrefab: {fileID: 0}
+    pose:
+      anchor: 2
+      bonePath: 
+      offset: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      scale: 1
+  hiddenRendererPaths: []
 --- !u!1001 &5876655516509671722
 PrefabInstance:
   m_ObjectHideFlags: 0

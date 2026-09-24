@@ -1,0 +1,1 @@
+PASS Player Avatar and all six controller locomotion clips are Humanoid.

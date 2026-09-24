@@ -17,6 +17,7 @@ namespace Mismo.Gameplay.Player.Presentation
         public static void Pause()
         {
             if (IsPaused) return;
+            Mismo.Gameplay.Combat.CombatTimeFeedback.CancelForPause();
             previousScale = Time.timeScale;
             previousLock = Cursor.lockState;
             previousVisible = Cursor.visible;

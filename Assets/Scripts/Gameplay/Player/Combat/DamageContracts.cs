@@ -15,12 +15,14 @@ namespace Mismo.Gameplay.Combat
         public readonly Vector3 HitPoint;
         public readonly Vector3 Direction;
         public readonly string WeaponFamilyId;
+        public readonly Mismo.Gameplay.Player.Presentation.CombatFeedbackProfile FeedbackProfile;
 
-        public DamageInfo(float amount, GameObject source, Vector3 hitPoint, Vector3 direction, long attackId = 0, float postureDamage = -1, bool ranged = false, bool area = false, Vector3? origin = null, bool parryable = true, string weaponFamilyId = null, float focusGainOnHit = 0)
+        public DamageInfo(float amount, GameObject source, Vector3 hitPoint, Vector3 direction, long attackId = 0, float postureDamage = -1, bool ranged = false, bool area = false, Vector3? origin = null, bool parryable = true, string weaponFamilyId = null, float focusGainOnHit = 0, Mismo.Gameplay.Player.Presentation.CombatFeedbackProfile feedbackProfile = null)
         {
             Amount = Mathf.Max(0f, amount);
             FocusGainOnHit = Mathf.Max(0f, focusGainOnHit);
             WeaponFamilyId=weaponFamilyId;
+            FeedbackProfile = feedbackProfile != null ? feedbackProfile : source != null ? source.GetComponentInParent<Mismo.Gameplay.Player.Equipment.EquipmentLoadout>()?.ActiveDefinition?.FeedbackProfile : null;
             PostureDamage = postureDamage < 0 ? amount * .65f : postureDamage;
             AttackId = attackId; Ranged = ranged; Area = area; Parryable = parryable;
             Origin = origin ?? (source != null ? source.transform.position : hitPoint);
@@ -36,8 +38,9 @@ namespace Mismo.Gameplay.Combat
         public readonly HitOutcome Outcome;
         public readonly float HealthDamage, PostureDamage;
         public readonly bool BackHit;
-        public HitResult(HitOutcome outcome, float health = 0, float posture = 0, bool back = false)
-        { Outcome=outcome; HealthDamage=health; PostureDamage=posture; BackHit=back; }
+        public readonly bool PostureBroken;
+        public HitResult(HitOutcome outcome, float health = 0, float posture = 0, bool back = false, bool postureBroken = false)
+        { Outcome=outcome; HealthDamage=health; PostureDamage=posture; BackHit=back; PostureBroken=postureBroken; }
     }
     public static class AttackIdentity
     {

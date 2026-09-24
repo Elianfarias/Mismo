@@ -65,8 +65,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5796539218314409904}
   m_Father: {fileID: 0}
@@ -188,6 +188,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Mismo.Gameplay.Enemies::Mismo.Gameplay.Enemies.CreatureAnimationDriver
   animator: {fileID: 5985958075695549348}
+  groundSupport:
+    probeDistance: 0.8
+    soleClearance: 0.0325
 --- !u!1001 &178156679533590069
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,0 +1,1 @@
+PASS: actual damage, invalid inputs ignored, bounded simultaneous entries, ivory normal color, animation survives pause and expires after resume.

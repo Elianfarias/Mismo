@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2601266280563070276}
   - component: {fileID: 3503914305653471149}
   - component: {fileID: 9222455088622782276}
-  - component: {fileID: 7634385249008977251}
   m_Layer: 0
   m_Name: NPC_rich_citizzens_1
   m_TagString: Untagged
@@ -60,7 +59,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 99c48fd60e6d9d349bc3ca90757f68d0, type: 2}
+  - {fileID: 2100000, guid: f3917f6099774d2469b43a0a9661f95e, type: 2}
   - {fileID: 2100000, guid: ba70db2d13818974a81b751ad1f0d636, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -151,31 +150,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Voxels.VoxelRigInstance
   animator: {fileID: 2979261245077874767}
   surface: {fileID: 3503914305653471149}
-  clips: []
-  stateNames: []
---- !u!136 &7634385249008977251
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 323121401466248117}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.05926465
-  m_Height: 1.7559896
-  m_Direction: 1
-  m_Center: {x: 0.010775119, y: -0.000000029802322, z: 0.007150382}
+  clips:
+  - {fileID: 7400000, guid: 6b3bd162a5078d348a78c0a5ed4c4e43, type: 2}
+  - {fileID: 7400000, guid: 4b4515e7e8979a54e9b5419bb8dd1428, type: 2}
+  stateNames:
+  - Quaternius_Idle
+  - Quaternius_Walk
 --- !u!1 &498865757662600742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1498,8 +1478,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8592703379104592758}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1238c6007aace3849a08f8898cb39c6b, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 3c015900300ae1349a3abdc597ebefdf, type: 3}
+  m_Controller: {fileID: 9100000, guid: a0183ecb06238674db3da508ae074958, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

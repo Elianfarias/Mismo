@@ -28,6 +28,9 @@ namespace Mismo.Gameplay.Player.Presentation
         private WeaponAnimationSet appliedSet;
         private AvatarMask appliedMask;
         private WeaponActionPlayback playback;
+        private PlayerAnimationMotion animationMotion;
+        private bool applyActionMovement;
+        private float actionMovementScale;
         private Equipment.EquipmentLoadout loadout;
         private float jumpedAt = -10f;
         private float hitAt = -10f;
@@ -54,14 +57,35 @@ namespace Mismo.Gameplay.Player.Presentation
             legacy = new LegacyCombatAnimationAdapter(gameObject);
             if (animator == null) animator = GetComponentInChildren<Animator>();
             abilityRunner = GetComponent<Equipment.AbilityRunner>();
-            if (animator != null) animator.applyRootMotion = false;
+            if (animator != null)
+            {
+                animationMotion = animator.GetComponent<PlayerAnimationMotion>() ?? animator.gameObject.AddComponent<PlayerAnimationMotion>();
+                animationMotion.Move = ApplyActionMovement;
+                // Extract motion once; the callback applies only opted-in actions.
+                animator.applyRootMotion = true;
+            }
             if (animator != null) baseController = animator.runtimeAnimatorController;
             loadout = GetComponent<Equipment.EquipmentLoadout>();
             hitClip = Mismo.Core.ProjectAssets.Load<AnimationClip>("CombatPresentation/Human_Player_CombatDamage01");
             hitMask = Mismo.Core.ProjectAssets.Load<AvatarMask>("CombatPresentation/PlayerUpperBody");
         }
-        private void OnEnable() { if(motor != null) { motor.Jumped += OnJump; motor.Landed += OnLand; } if(health!=null)health.Damaged+=OnHit; }
-        private void OnDisable() { RestoreTorso();torsoCorrection=targetTorsoCorrection=0;if(motor != null) { motor.Jumped -= OnJump; motor.Landed -= OnLand; } if(health!=null)health.Damaged-=OnHit;hitAt=-10f;playback?.Dispose();playback=null;ActionClip=null; }
+        private void OnEnable() { if(motor != null) { motor.Jumped += OnJump; motor.Landed += OnLand; motor.AnimationMovementRequested=WantsAnimationMovement; } if(animationMotion!=null)animationMotion.Move=ApplyActionMovement;if(health!=null)health.Damaged+=OnHit; }
+        private void OnDisable() { RestoreTorso();torsoCorrection=targetTorsoCorrection=0;applyActionMovement=false;if(animationMotion!=null)animationMotion.Move=null;if(motor != null) { motor.Jumped -= OnJump; motor.Landed -= OnLand; motor.AnimationMovementRequested=null; } if(health!=null)health.Damaged-=OnHit;hitAt=-10f;playback?.Dispose();playback=null;ActionClip=null; }
+        private bool WantsAnimationMovement()
+        {
+            if (!isActiveAndEnabled || animator == null || !animator.enabled || GameplayPause.BlocksInput || Time.timeScale<=0 ||
+                health!=null&&health.IsDead || abilityRunner==null || abilityRunner.IsMoving || Time.time-hitAt<HitDuration)
+                return false;
+            var set=loadout!=null&&loadout.ActiveDefinition!=null&&loadout.ActiveDefinition.family!=null ? loadout.ActiveDefinition.family.animations : null;
+            if(set==null || !abilityRunner.TryGetAnimationFrame(out var frame))return false;
+            var binding=set.Find(frame.Ability);
+            return binding!=null && binding.UsesAnimationMovement(set.actionMask) && binding.TrySample(frame,out _,out _);
+        }
+        private void ApplyActionMovement(Vector3 displacement)
+        {
+            if(applyActionMovement && playback!=null && motor!=null && WantsAnimationMovement())
+                motor.ApplyAnimationDisplacement(displacement*Mathf.Max(0,actionMovementScale));
+        }
         private void RestoreTorso()
         {
             if(torsoCorrectionApplied&&torsoBone!=null)torsoBone.localRotation=torsoBeforeCorrection;
@@ -90,6 +114,7 @@ namespace Mismo.Gameplay.Player.Presentation
         private void Update()
         {
             RestoreTorso();
+            applyActionMovement=false;
             targetTorsoCorrection=0;
             var profile = loadout != null && loadout.ActiveDefinition != null ? loadout.ActiveDefinition.poseProfile : null;
             var family = loadout != null && loadout.ActiveDefinition != null ? loadout.ActiveDefinition.family : null;
@@ -127,20 +152,26 @@ namespace Mismo.Gameplay.Player.Presentation
             else if (!moving && Time.time-landedAt<.18f) Motion=CharacterMotion.Land;
             else if (moving) Motion=running ? CharacterMotion.Run : CharacterMotion.Walk;
             else Motion=CharacterMotion.Idle;
-            ActionClip=null;float clipTime=0,blend=.06f;AvatarMask resolvedMask=actionMask;bool unstoppable=false;
+            ActionClip=null;float clipTime=0,blend=.06f;AvatarMask resolvedMask=actionMask;
+            long actionExecutionId=0;int actionSegment=0;
             if((health==null || !health.IsDead) && animationSet!=null && abilityRunner!=null && abilityRunner.TryGetAnimationFrame(out var actionFrame))
             {
                 var binding=animationSet.Find(actionFrame.Ability);
                 if(binding!=null && binding.TrySample(actionFrame,out var actionClip,out clipTime))
-                {ActionClip=actionClip;blend=binding.blendSeconds;resolvedMask=binding.ResolveMask(actionMask);targetTorsoCorrection=binding.torsoUprightDegrees;unstoppable=actionFrame.Ability!=null&&actionFrame.Ability.unstoppable;}
+                {
+                    ActionClip=actionClip;blend=binding.blendSeconds;resolvedMask=binding.ResolveMask(actionMask);targetTorsoCorrection=binding.torsoUprightDegrees;
+                    applyActionMovement=binding.UsesAnimationMovement(actionMask);actionMovementScale=binding.animationMovementScale;
+                    actionExecutionId=actionFrame.ExecutionId;actionSegment=actionFrame.ComboIndex;
+                }
             }
             if(ActionClip==null && (health==null || !health.IsDead))
             {var motion=Motion;legacy.Resolve(abilityRunner,ref motion,ref actionTime);Motion=motion;}
-            if (hitClip != null && !unstoppable && health != null && !health.IsDead && Time.time - hitAt < HitDuration)
+            if (hitClip != null && health != null && !health.IsDead && Time.time - hitAt < HitDuration)
             {
                 ActionClip = hitClip; clipTime = Mathf.Clamp01((Time.time - hitAt) / HitDuration);
                 blend = .045f; resolvedMask = hitMask;
                 targetTorsoCorrection=0;
+                applyActionMovement=false;
             }
             float reference=Motion==CharacterMotion.Run?referenceRunSpeed:referenceWalkSpeed;
             float blendTarget=speed<=referenceWalkSpeed ? speed/referenceWalkSpeed : 1f+(speed-referenceWalkSpeed)/Mathf.Max(.1f,referenceRunSpeed-referenceWalkSpeed);
@@ -155,7 +186,7 @@ namespace Mismo.Gameplay.Player.Presentation
             {
                 playback.SetParameters(stateMotion,Mathf.Clamp01(actionTime),smoothedPlaybackRate);
                 if(hasLocomotionBlend) playback.SetLocomotionSpeed(locomotionSpeed);
-                playback.SetAction(ActionClip,clipTime,blend,resolvedMask);playback.Tick(Time.deltaTime);
+                playback.SetAction(ActionClip,clipTime,blend,resolvedMask,actionExecutionId,actionSegment);playback.Tick(Time.deltaTime);
                 return;
             }
             animator.SetFloat("PlaybackRate",smoothedPlaybackRate);

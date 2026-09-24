@@ -1,0 +1,6 @@
+PASS verified clip matches installed file: Quaternius_Fall.anim
+PASS verified clip matches installed file: Quaternius_Idle.anim
+PASS verified clip matches installed file: Quaternius_Jump.anim
+PASS verified clip matches installed file: Quaternius_Land.anim
+PASS verified clip matches installed file: Quaternius_Run.anim
+PASS verified clip matches installed file: Quaternius_Walk.anim

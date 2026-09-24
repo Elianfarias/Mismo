@@ -12,10 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdfd1e8e6dfc4701afbb313e3ea4ac0e, type: 3}
   m_Name: WorldContentCatalog
   m_EditorClassIdentifier: 
-  villageSizeMultiplier: 2.6
+  villageSizeMultiplier: 3.25
   villageGroundOffset: -0.19670273
   villageSpawnOffset: {x: 7.5800934, y: 0, z: 27.347897}
   villageSpawnYaw: 180
+  groveStyle: {fileID: 11400000, guid: f4d7b966c71c2994ab361ee34ae1c31a, type: 2}
+  vegetationMotion:
+    enabled: 1
+    shader: {fileID: 4800000, guid: 7b4c1d20aa674eab9e6ff58c924f32db, type: 3}
+    windStrength: 1
+    gustStrength: 0.65
+    directionDegrees: 35
+    windSpeed: 0.8
+    playerInteraction: 1
+    interactionRadius: 1.15
+    interactionStrength: 0.3
+    recoverySeconds: 0.7
   fogEnabled: 0
   fogColor: {r: 0.62, g: 0.72, b: 0.73, a: 1}
   fogStart: 28
@@ -460,11 +472,12 @@ MonoBehaviour:
   - id: nature.MedievalHouse
     kind: 0
     biomes: 
-    prefab: {fileID: 1814357796240465628, guid: 324dd61e7561d024491ba21405fa5199, type: 3}
+    prefab: {fileID: 885995619891867558, guid: 3fc4c1e82f0848341bb40a23e1e9a322, type: 3}
     decorativeOnly: 0
+    disableVegetationMotion: 0
     gatheringNode: {fileID: 0}
     weight: 1
-    footprint: {x: 7.2660556, y: 7.9999995}
+    footprint: {x: 5.3, y: 5.3}
     maxSlope: 12
     rotations:
     - 0
@@ -477,6 +490,7 @@ MonoBehaviour:
     biomes: 
     prefab: {fileID: 61561382352269827, guid: fc916fb8c05dd0345b4933d95c422fd7, type: 3}
     decorativeOnly: 0
+    disableVegetationMotion: 0
     gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 7.2660556, y: 7.9999995}
@@ -492,6 +506,7 @@ MonoBehaviour:
     biomes: 
     prefab: {fileID: 5930528802957061847, guid: 4914379aab4ea864b9af8a601db8c614, type: 3}
     decorativeOnly: 0
+    disableVegetationMotion: 0
     gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 44, y: 44}
@@ -499,6 +514,22 @@ MonoBehaviour:
     rotations:
     - 0
     scaleRange: {x: 1, y: 1}
+  - id: grove.ruins
+    kind: 4
+    biomes: 000000000100000002000000i
+    prefab: {fileID: 5619461625372304739, guid: ba3c4b12f6fdac1409ef9fffee062892, type: 3}
+    decorativeOnly: 1
+    disableVegetationMotion: 0
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 7, y: 4}
+    maxSlope: 8
+    rotations:
+    - 0
+    - 90
+    - 180
+    - 270
+    scaleRange: {x: 0.85, y: 1.15}
   encounters:
   - id: Goblin patrol
     site: 0

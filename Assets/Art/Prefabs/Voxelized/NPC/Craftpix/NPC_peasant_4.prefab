@@ -127,37 +127,6 @@ Transform:
   - {fileID: 4300651465089495300}
   m_Father: {fileID: 7915494801028646703}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &806463324555736225
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4210714914214937917}
-  m_Layer: 0
-  m_Name: peasant_4
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4210714914214937917
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 806463324555736225}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000000008037314, y: -0.000000005587936, z: 7.916334e-11}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3810300165215857844}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &838785525967459596
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,7 +222,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 470650237201358911}
-  - {fileID: 4210714914214937917}
+  - {fileID: 7049122232307414881}
   m_Father: {fileID: 1308922630992807282}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1052426485330781534
@@ -265,8 +234,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1778273121589082282}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 854711e73670abc4794c4e07e84f5bd1, type: 2}
+  m_Avatar: {fileID: 9000000, guid: f8fbfabc55676d24f8e75c3ec74a7eb0, type: 3}
+  m_Controller: {fileID: 9100000, guid: a0183ecb06238674db3da508ae074958, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -289,7 +258,6 @@ GameObject:
   - component: {fileID: 1308922630992807282}
   - component: {fileID: 2062095960498956223}
   - component: {fileID: 105463432876268391}
-  - component: {fileID: 1862819345279512520}
   m_Layer: 0
   m_Name: NPC_peasant_4
   m_TagString: Untagged
@@ -338,7 +306,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b0d1e136f70323141a607009f6ab9f0f, type: 2}
+  - {fileID: 2100000, guid: 55c3e3719d3e7b249b06f97c170af029, type: 2}
   - {fileID: 2100000, guid: ba70db2d13818974a81b751ad1f0d636, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -429,31 +397,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Voxels.VoxelRigInstance
   animator: {fileID: 1052426485330781534}
   surface: {fileID: 2062095960498956223}
-  clips: []
-  stateNames: []
---- !u!136 &1862819345279512520
-CapsuleCollider:
+  clips:
+  - {fileID: 7400000, guid: 92cb2ead80c7dea4c8f69707c5075bac, type: 2}
+  - {fileID: 7400000, guid: 629e534caeb81904dbdf78431fa83be7, type: 2}
+  stateNames:
+  - Quaternius_Idle
+  - Quaternius_Walk
+--- !u!1 &1956530639245601430
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1852662562602500870}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7049122232307414881}
+  m_Layer: 0
+  m_Name: peasant_4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7049122232307414881
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956530639245601430}
   serializedVersion: 2
-  m_Radius: 0.056970455
-  m_Height: 1.6880132
-  m_Direction: 1
-  m_Center: {x: 0.011614352, y: -0.000000059604645, z: 0.0042433217}
+  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.000000008037314, y: -0.000000005587936, z: 7.916334e-11}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3810300165215857844}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2248309302236522573
 GameObject:
   m_ObjectHideFlags: 0

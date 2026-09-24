@@ -8,6 +8,8 @@ namespace Mismo.Gameplay.Player.Quests
         [Tooltip("X/Z: posición local del pueblo antes de escalarlo. Y: desplazamiento en metros sobre el terreno.")]
         public Vector3 localPosition;
         public float yaw;
+        [Tooltip("Paradas locales: puesto de trabajo, plaza y paseo. Se proyectan sobre el terreno y NavMesh.")]
+        public Vector3[] route=Array.Empty<Vector3>();
     }
     [CreateAssetMenu(menuName="Mismo/Quests/Village residents")]
     public sealed class VillageNpcSettings:ScriptableObject

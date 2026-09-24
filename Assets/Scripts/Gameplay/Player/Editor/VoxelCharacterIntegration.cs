@@ -21,7 +21,8 @@ namespace Mismo.Gameplay.Player.Editor
         {
             if(!Application.isBatchMode && !EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
             var importer = (ModelImporter)AssetImporter.GetAtPath(ModelPath);
-            importer.animationType = ModelImporterAnimationType.Generic;
+            if (importer.animationType != ModelImporterAnimationType.Human)
+                importer.animationType = ModelImporterAnimationType.Generic;
             importer.avatarSetup = ModelImporterAvatarSetup.CreateFromThisModel;
             importer.importAnimation = true;
             importer.optimizeGameObjects = false;
@@ -35,6 +36,8 @@ namespace Mismo.Gameplay.Player.Editor
             importer.clipAnimations = clips;
             importer.SaveAndReimport();
             var all = AssetDatabase.LoadAllAssetsAtPath(ModelPath).OfType<AnimationClip>().Where(c=>!c.name.StartsWith("__preview__",StringComparison.Ordinal)).ToArray();
+            string locomotionFolder = importer.animationType == ModelImporterAnimationType.Human
+                ? QuaterniusHumanoidLocomotion.OutputFolder : QuaterniusHumanoidLocomotion.SourceFolder;
             var controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(ControllerPath);
             if (controller == null) controller = AnimatorController.CreateAnimatorControllerAtPath(ControllerPath);
             var sm=controller.layers[0].stateMachine;
@@ -49,7 +52,7 @@ namespace Mismo.Gameplay.Player.Editor
             foreach(CharacterMotion motion in Enum.GetValues(typeof(CharacterMotion)))
             {
                 string name=motion.ToString();
-                var clip=AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/Art/Animations/Quaternius/Retargeted/Quaternius_"+name+".anim") ?? all.First(c=>c.name.Split('|').Last()==name);
+                var clip=AssetDatabase.LoadAssetAtPath<AnimationClip>(locomotionFolder+"/Quaternius_"+name+".anim") ?? all.First(c=>c.name.Split('|').Last()==name);
                 var state=sm.AddState(name,new Vector3(260+((int)motion%4)*210,80+((int)motion/4)*100,0));state.motion=clip;
                 state.writeDefaultValues=true;
                 if(motion==CharacterMotion.Land && clip.name.StartsWith("Quaternius_"))state.speed=clip.length/.18f;
@@ -67,10 +70,12 @@ namespace Mismo.Gameplay.Player.Editor
             for(int i=0;i<3;i++)
             {
                 string motionName=((CharacterMotion)i).ToString();
-                locomotion.AddChild(AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/Art/Animations/Quaternius/Retargeted/Quaternius_"+motionName+".anim") ?? all.First(c=>c.name.Split('|').Last()==motionName),i);
+                locomotion.AddChild(AssetDatabase.LoadAssetAtPath<AnimationClip>(locomotionFolder+"/Quaternius_"+motionName+".anim") ?? all.First(c=>c.name.Split('|').Last()==motionName),i);
             }
             var idle=sm.states.First(s=>s.state.name=="Idle").state;
             idle.motion=locomotion;idle.speedParameter="PlaybackRate";idle.speedParameterActive=true;
+            if (importer.animationType == ModelImporterAnimationType.Human)
+                QuaterniusHumanoidLocomotion.EnsureHumanoidMaskSupport(controller);
             EditorUtility.SetDirty(controller); AssetDatabase.SaveAssets();
             var prefab = PrefabUtility.LoadPrefabContents("Assets/Art/Prefabs/Player/Player.prefab");
             try { Configure(prefab,controller); PrefabUtility.SaveAsPrefabAsset(prefab,PrefabPath); }

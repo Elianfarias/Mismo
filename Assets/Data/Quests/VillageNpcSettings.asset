@@ -14,24 +14,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Quests.VillageNpcSettings
   enabled: 1
   startingVillageOnly: 1
-  residentScale: 1.3
   residents:
   - prefab: {fileID: 4345791120890489247, guid: 852522e39cf862641a9a0459f3768ddc, type: 3}
     localPosition: {x: -3, y: 0, z: -3}
     yaw: 90
+    route:
+    - {x: -3, y: 0, z: -3}
+    - {x: -4, y: 0, z: 2}
+    - {x: 3, y: 0, z: -8}
   - prefab: {fileID: 1575482561919717776, guid: 096de73ebfba29a479f508bc0188b2ad, type: 3}
     localPosition: {x: 3, y: 0, z: -3}
     yaw: 270
+    route:
+    - {x: 3, y: 0, z: -3}
+    - {x: 3, y: 0, z: 2}
+    - {x: 3, y: 0, z: -8}
   - prefab: {fileID: 7438780989756513455, guid: 50c730d8712b53e4b8423da2702f2920, type: 3}
     localPosition: {x: -4, y: 0, z: 2}
     yaw: 90
+    route:
+    - {x: -4, y: 0, z: -3}
+    - {x: -4, y: 0, z: 2}
+    - {x: 3, y: 0, z: -8}
   - prefab: {fileID: 4232520121312857598, guid: 2490bad0e4b1d32408d0af5393e10015, type: 3}
     localPosition: {x: 3, y: 0, z: 2}
     yaw: 270
+    route:
+    - {x: 3, y: 0, z: -3}
+    - {x: 3, y: 0, z: 2}
+    - {x: 3, y: 0, z: -8}
   - prefab: {fileID: 7734569812882531198, guid: 72239258717b9234db332a91295cf2fa, type: 3}
     localPosition: {x: 3, y: 0, z: -9}
     yaw: 90
-  interactionRange: 3
+    route:
+    - {x: 3, y: 0, z: -3}
+    - {x: -4, y: 0, z: 2}
+    - {x: 3, y: 0, z: -8}
+  residentScale: 1.6
+  interactionRange: 3.6
   requireLineOfSight: 1
   markerDistance: 35
   markerHeight: 2.15

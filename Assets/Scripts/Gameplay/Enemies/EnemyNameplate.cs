@@ -38,12 +38,9 @@ namespace Mismo.Gameplay.Enemies
             float y=isBoss?26:(Screen.height-screen.y)/scale-40;
             string name=boss!=null?"GUARDIÁN DEL SANTUARIO":elite?"GOBLIN ÉLITE":"GOBLIN";
             if(goblin?.Settings is CreatureSettings)name=goblin.Settings.displayName;
-            if(dragon!=null&&dragon.Settings!=null)name=dragon.Settings.displayName+(dragon.Enraged?" · FURIA":"");
+            if(dragon!=null&&dragon.Settings!=null)name=dragon.Settings.displayName;
             var identity=GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>();
             if(identity!=null)name=(goblin?.Settings is CreatureSettings?goblin.Settings.displayName:identity.DisplayName)+" · Nv "+identity.Level;
-            bool warning=boss!=null?boss.State==BossState.Telegraph:goblin!=null&&goblin.State==GoblinState.Telegraph;
-            bool attack=boss!=null?boss.State==BossState.Attack:goblin!=null&&goblin.State==GoblinState.Attack;
-            if(dragon!=null){warning=dragon.Telegraphing;attack=dragon.State==DragonBossState.Attacking&&!warning;}
             Color accent=boss!=null?new Color(.85f,.35f,.32f):elite?new Color(.72f,.48f,.93f):new Color(.85f,.35f,.32f);
             if(dragon!=null&&dragon.Settings!=null)accent=dragon.Settings.accent;
             PlayerHUD.Fill(new Rect(x-6,y-4,width+12,isBoss?65:49),PlayerHUD.Panel);
@@ -55,10 +52,8 @@ namespace Mismo.Gameplay.Enemies
             {
                 PlayerHUD.Fill(new Rect(x,y+35,width,5),new Color(.18f,.2f,.23f));
                 PlayerHUD.Fill(new Rect(x,y+35,width*posture.PostureNormalized,5),PlayerHUD.Gold);
-                if(posture.Broken)hud.Label(new Rect(x-20,y+72,width+40,20),"¡POSTURA ROTA!",13,PlayerHUD.Gold,TextAnchor.MiddleCenter);
             }
             if(isBoss)hud.Label(new Rect(x,y+43,width,20),health.Current.ToString("0")+" / "+health.Maximum.ToString("0"),12,Color.white,TextAnchor.MiddleCenter);
-            if(warning||attack)hud.Label(new Rect(x-20,y+52,width+40,20),attack?"¡ATAQUE!":"PREPARANDO ATAQUE",12,attack?new Color(1,.4f,.3f):PlayerHUD.Gold,TextAnchor.MiddleCenter);
             GUI.matrix=old;
         }
     }

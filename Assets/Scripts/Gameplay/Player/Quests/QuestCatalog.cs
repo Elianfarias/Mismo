@@ -11,7 +11,7 @@ namespace Mismo.Gameplay.Player.Quests
         public bool journalContacts=false;
         public VillageNpcSettings villageNpcs;
         public UnityEngine.InputSystem.Key journalKey=UnityEngine.InputSystem.Key.J;
-        public UnityEngine.InputSystem.Key interactKey=UnityEngine.InputSystem.Key.T;
+        [HideInInspector] public UnityEngine.InputSystem.Key interactKey=UnityEngine.InputSystem.Key.F;
         [Tooltip("Desplazamiento del aviso de interacción desde el centro inferior de la pantalla. Y deja espacio para cofre, botín y habilidades.")]
         public Vector2 interactionPromptOffset=new Vector2(0,145);
         public bool showTracker=true;

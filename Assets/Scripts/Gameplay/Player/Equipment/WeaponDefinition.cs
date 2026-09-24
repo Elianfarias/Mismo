@@ -11,6 +11,9 @@ namespace Mismo.Gameplay.Player.Equipment
         [SerializeField, Min(0.01f)] private float basicAttackCooldown = 0.45f;
         public AbilityDefinition[] abilities = new AbilityDefinition[4];
         public WeaponFamilyDefinition family;
+        [Tooltip("Vacío hereda el feedback de la familia. Asignar una copia para editar sólo esta arma.")]
+        public Presentation.CombatFeedbackProfile feedbackOverride;
+        public Presentation.CombatFeedbackProfile FeedbackProfile => feedbackOverride != null ? feedbackOverride : family != null ? family.feedback : null;
         public bool isShield;
         public WeaponFamilyDefinition dualSwordFamily;
         public WeaponFamilyDefinition swordShieldFamily;

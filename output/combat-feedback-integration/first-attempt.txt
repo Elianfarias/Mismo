@@ -1,0 +1,2 @@
+System.Exception: Cannot move asset from Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/1_Critical/VFX_Critical_01.prefab to Assets/Art/Prefabs/Combat/WallCoeur/VFX_Critical_01.prefab: Parent directory is not in asset database
+  at CodexCombatFeedbackIntegration.Tick () [0x002c9] in C:\Users\elian\Mismo\Assets\Scripts\Editor\CodexCombatFeedbackIntegration.cs:73 

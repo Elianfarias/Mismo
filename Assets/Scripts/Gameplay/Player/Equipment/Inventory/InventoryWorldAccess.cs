@@ -17,10 +17,12 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         void Start()
         {
             inventory=GetComponent<PlayerInventory>();
+            if(inventory!=null)inventory.Changed+=RefreshLoot;
             var world=WorldSession.Current;
             arrival=world!=null?new Vector3(world.spawnX,world.spawnY,world.spawnZ):transform.position;
             wood=MakeMaterial(new Color(.24f,.115f,.055f));metal=MakeMaterial(new Color(.68f,.52f,.26f));
         }
+        void RefreshLoot()=>nextRefresh=0;
         static Material MakeMaterial(Color color)
         {
             var shader=Shader.Find("Universal Render Pipeline/Lit")??Shader.Find("Standard");
@@ -40,10 +42,12 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                     ids.Add(loot.id);
                     if(!lootMarkers.ContainsKey(loot.id))
                     {
-                        var marker=GameObject.CreatePrimitive(PrimitiveType.Cube);marker.name="Botín pendiente";
-                        marker.transform.position=new Vector3(loot.x,loot.y+.35f,loot.z);
-                        marker.transform.localScale=new Vector3(.45f,.45f,.45f);
-                        marker.GetComponent<Collider>().enabled=false;marker.GetComponent<Renderer>().sharedMaterial=metal;
+                        var settings=InventorySettings.Current;
+                        var prefab=settings.lootMarkerPrefab;
+                        var marker=prefab!=null?Instantiate(prefab):new GameObject("Botín pendiente");
+                        marker.transform.position=new Vector3(loot.x,loot.y,loot.z);
+                        if(prefab==null)marker.AddComponent<LootMarker>().Configure(settings,LootMarker.Kind(inventory,loot),loot.HasWeapon?loot.weapon.tier:1);
+                        foreach(var collider in marker.GetComponentsInChildren<Collider>())collider.enabled=false;
                         lootMarkers.Add(loot.id,marker);
                     }
                 }
@@ -51,10 +55,15 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 foreach(var pair in lootMarkers)if(!ids.Contains(pair.Key)){Destroy(pair.Value);removed.Add(pair.Key);}
                 foreach(var id in removed)lootMarkers.Remove(id);
             }
-            if(GetComponent<GatheringPlayer>()?.Busy==true||InventoryPanel.AnyOpen||Presentation.WorldMapPanel.BlocksGameplay||Keyboard.current==null||!Keyboard.current.fKey.wasPressedThisFrame)return;
-            if(AtChest){GetComponent<InventoryPanel>()?.OpenChest();return;}
+            if(!inventory.CanInteract)return;
+            if(inventory.CanManage&&AtChest)Presentation.PlayerInteraction.Offer(inventory,chest,chest.transform.position,"Abrir cofre","Cofre personal",()=>GetComponent<InventoryPanel>()?.OpenChest());
             foreach(var loot in inventory.PendingLoot)
-                if(Vector3.Distance(transform.position,new Vector3(loot.x,loot.y,loot.z))<=3){inventory.CollectPending(loot.id);break;}
+            {
+                var position=new Vector3(loot.x,loot.y,loot.z);
+                if(Vector3.Distance(transform.position,position)>3)continue;
+                var id=loot.id;
+                Presentation.PlayerInteraction.Offer(inventory,this,position,"Recoger",inventory.PendingLootName(loot),()=>inventory.CollectPending(id));
+            }
         }
         void CreateChest()
         {
@@ -82,17 +91,9 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             var part=GameObject.CreatePrimitive(PrimitiveType.Cube);part.name=name;part.transform.SetParent(chest.transform,false);
             part.transform.localPosition=position;part.transform.localScale=scale;part.GetComponent<Renderer>().sharedMaterial=material;
         }
-        void OnGUI()
-        {
-            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
-            if(inventory==null||!inventory.CanManage||InventoryPanel.AnyOpen||Presentation.WorldMapPanel.AnyOpen||GetComponent<GatheringPlayer>()?.BlocksGameplay==true)return;
-            string prompt=AtChest?"[F] Abrir cofre personal":null;
-            if(prompt==null)foreach(var loot in inventory.PendingLoot)
-                if(Vector3.Distance(transform.position,new Vector3(loot.x,loot.y,loot.z))<=3){prompt="[F] Recoger botín";break;}
-            if(prompt!=null)GUI.Box(new Rect(Screen.width/2-170,Screen.height-130,340,40),prompt,new GUIStyle(GUI.skin.box){font=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.Body,fontSize=20});
-        }
         void OnDestroy()
         {
+            if(inventory!=null)inventory.Changed-=RefreshLoot;
             if(chest!=null)Destroy(chest);if(wood!=null)Destroy(wood);if(metal!=null)Destroy(metal);
             foreach(var marker in lootMarkers.Values)if(marker!=null)Destroy(marker);
         }

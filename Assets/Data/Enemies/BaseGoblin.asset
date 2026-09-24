@@ -21,22 +21,25 @@ MonoBehaviour:
   positioningSpeed: 1.6
   decisionPause: 0.35
   chargeCooldown: 5
+  interruptibleByCombos: 1
+  comboHitStun: 0.55
   staggerDamageThreshold: 15
   staggerDuration: 0.45
   staggerResistance: 0.75
   parryStaggerDuration: 1.25
   slash:
     label: Golpe
+    resistComboInterrupt: 0
     range: 2
     windup: 0.5
-    active: 0.18
-    recovery: 0.85
+    active: 0.7
+    recovery: 0.5
     damage: 12
     travel: 0
-    halfExtents: {x: 0.65, y: 0.65, z: 0.8}
-    forwardOffset: 0.9
+    halfExtents: {x: 0.65, y: 0.5, z: 0.8}
+    forwardOffset: 1
     animation:
-      clip: {fileID: 7400000, guid: feb29d260c08404fa806bf900215bfb9, type: 2}
+      clip: {fileID: -2752935217625242881, guid: 7214e71ba135aa7428378b5ee5eea8d9, type: 3}
       compatibleClip: {fileID: 0}
       compatibleSource: {fileID: 0}
       mask: {fileID: 0}
@@ -63,6 +66,7 @@ MonoBehaviour:
     projectileRadius: 0.6
   charge:
     label: Carga
+    resistComboInterrupt: 0
     range: 7
     windup: 0.5
     active: 0.4
@@ -72,7 +76,7 @@ MonoBehaviour:
     halfExtents: {x: 0.5, y: 0.65, z: 0.65}
     forwardOffset: 0.7
     animation:
-      clip: {fileID: 7400000, guid: feb29d260c08404fa806bf900215bfb9, type: 2}
+      clip: {fileID: -1102444477664238647, guid: b372444bca46fee4f845fcc1e3f1a218, type: 3}
       compatibleClip: {fileID: 0}
       compatibleSource: {fileID: 0}
       mask: {fileID: 0}

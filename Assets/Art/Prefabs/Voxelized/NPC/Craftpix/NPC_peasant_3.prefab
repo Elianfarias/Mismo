@@ -493,7 +493,6 @@ GameObject:
   - component: {fileID: 2392939543166410551}
   - component: {fileID: 7002960306286752702}
   - component: {fileID: 1346689234537746751}
-  - component: {fileID: 6548224243068572583}
   m_Layer: 0
   m_Name: NPC_peasant_3
   m_TagString: Untagged
@@ -542,7 +541,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2125b2b377c51d04c92125b88f994abd, type: 2}
+  - {fileID: 2100000, guid: 8ffb687dd038419418e561a60a4a7890, type: 2}
   - {fileID: 2100000, guid: ba70db2d13818974a81b751ad1f0d636, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -633,31 +632,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Voxels.VoxelRigInstance
   animator: {fileID: 3949821512666694974}
   surface: {fileID: 7002960306286752702}
-  clips: []
-  stateNames: []
---- !u!136 &6548224243068572583
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4941935219833504651}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.06473318
-  m_Height: 1.77048
-  m_Direction: 1
-  m_Center: {x: 0.011576772, y: 0, z: 0.012625463}
+  clips:
+  - {fileID: 7400000, guid: 41549c8fbf0d59f42ba3d0dbdb7d6729, type: 2}
+  - {fileID: 7400000, guid: d42a812f6e6665845ab8944aa782cd60, type: 2}
+  stateNames:
+  - Quaternius_Idle
+  - Quaternius_Walk
 --- !u!1 &5194747981067738979
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,8 +998,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6674388550200409412}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f45d9ce9d0739014da3a69d0d874e0ba, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 1a5383784269c9046878cd3e1f794316, type: 3}
+  m_Controller: {fileID: 9100000, guid: a0183ecb06238674db3da508ae074958, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

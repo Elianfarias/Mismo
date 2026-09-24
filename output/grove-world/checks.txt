@@ -1,0 +1,1 @@
+PASS: 2898 height/reservation comparisons across generation versions 0/1/2 and two seeds; deterministic catalog selection; serialized palette and LOD dependencies.

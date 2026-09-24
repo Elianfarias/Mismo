@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: node-Stone
   kind: 2
+  distributionWeight: 1
   displayName: Piedra
   actionName: Recolectar
   harvestSeconds: 1
   interactionRange: 2.5
   regenerationSeconds: 900
   restoreClearance: 8
-  availablePrefab: {fileID: 8479108702764624946, guid: 076a1170d255bb845927db542c3de756, type: 3}
+  availablePrefab: {fileID: 4378811520822948133, guid: 51ddae224ab6d834eb1f2edc4cd2e11f, type: 3}
   depletedPrefab: {fileID: 406855579409189848, guid: 455dec393f9d13741a27f33df9e7357a, type: 3}
   toolPrefab: {fileID: 1140483725738298627, guid: a3395171d8c9ebe4ea2bb7fc35345bd5, type: 3}
   harvestSound: {fileID: 8300000, guid: 88c40b0eb798416438223d8cea6b5aa3, type: 3}

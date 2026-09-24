@@ -78,8 +78,7 @@ namespace Mismo.Gameplay.Enemies
             if (label != null)
             {
                 string prefix = style != null && !string.IsNullOrEmpty(style.LabelPrefix) ? style.LabelPrefix + " " : string.Empty;
-                label.text = prefix + (state == GoblinState.Telegraph ? (charge ? "CARGA" : "GOLPE") :
-                    state == GoblinState.Stagger ? "ATURDIDO" : state == GoblinState.Dead ? "DERROTADO" : "GOBLIN");
+                label.text = prefix + "GOBLIN";
             }
             
         }

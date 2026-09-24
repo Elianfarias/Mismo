@@ -1,0 +1,35 @@
+PASS DoubleL sword attack remains Humanoid
+PASS Speed 0: body stays upright, head min=1,423247
+PASS Speed 0: continuous leg movement=47,14008
+PASS Speed 0: sword layer preserves legs, drift=0
+PASS Speed 0: DoubleL sword moves the arm
+PASS Speed 0: locomotion pose returns after sword attack
+PASS Speed 0,5: body stays upright, head min=1,292189
+PASS Speed 0,5: continuous leg movement=207,0338
+PASS Speed 0,5: sword layer preserves legs, drift=0
+PASS Speed 0,5: DoubleL sword moves the arm
+PASS Speed 0,5: locomotion pose returns after sword attack
+PASS Speed 1: body stays upright, head min=1,119952
+PASS Speed 1: continuous leg movement=713,702
+PASS Speed 1: sword layer preserves legs, drift=0
+PASS Speed 1: DoubleL sword moves the arm
+PASS Speed 1: locomotion pose returns after sword attack
+PASS Speed 1,5: body stays upright, head min=1,103003
+PASS Speed 1,5: continuous leg movement=676,1049
+PASS Speed 1,5: sword layer preserves legs, drift=0
+PASS Speed 1,5: DoubleL sword moves the arm
+PASS Speed 1,5: locomotion pose returns after sword attack
+PASS Speed 2: body stays upright, head min=1,075762
+PASS Speed 2: continuous leg movement=834,1552
+PASS Speed 2: sword layer preserves legs, drift=0
+PASS Speed 2: DoubleL sword moves the arm
+PASS Speed 2: locomotion pose returns after sword attack
+PASS Windows animation asset bundle builds successfully
+PASS Built animation bundle loads
+PASS Built locomotion controller loads
+PASS Idle Humanoid clip is included in build dependencies
+PASS Walk Humanoid clip is included in build dependencies
+PASS Run Humanoid clip is included in build dependencies
+PASS Jump Humanoid clip is included in build dependencies
+PASS Fall Humanoid clip is included in build dependencies
+PASS Land Humanoid clip is included in build dependencies

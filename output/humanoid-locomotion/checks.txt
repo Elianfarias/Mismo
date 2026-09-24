@@ -1,0 +1,6 @@
+PASS Quaternius_Idle: humanMotion=True, max pose error=0,0030m, min head height=1,423m, leg travel=24,8deg
+PASS Quaternius_Walk: humanMotion=True, max pose error=0,0061m, min head height=1,121m, leg travel=284,3deg
+PASS Quaternius_Run: humanMotion=True, max pose error=0,0083m, min head height=1,087m, leg travel=256,9deg
+PASS Quaternius_Jump: humanMotion=True, max pose error=0,0194m, min head height=0,986m, leg travel=236,1deg
+PASS Quaternius_Fall: humanMotion=True, max pose error=0,0000m, min head height=1,392m, leg travel=36,9deg
+PASS Quaternius_Land: humanMotion=True, max pose error=0,0032m, min head height=0,878m, leg travel=160,8deg

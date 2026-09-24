@@ -21,6 +21,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f897c3e3e29be294bac01266c17aebad, type: 2}
   - {fileID: 11400000, guid: 1937ac5ccc63f954f8d731a2d584f377, type: 2}
   family: {fileID: 11400000, guid: f805c3fe49bcda74981a71dec2327dbe, type: 2}
+  feedbackOverride: {fileID: 11400000, guid: 6e6b2f915d3b39b4286032d665b7350d, type: 2}
   isShield: 0
   dualSwordFamily: {fileID: 0}
   swordShieldFamily: {fileID: 0}

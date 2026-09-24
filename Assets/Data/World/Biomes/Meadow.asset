@@ -13,150 +13,187 @@ MonoBehaviour:
   m_Name: Meadow
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.WorldBiomeContent
   biome: 0
-  trees: 0.08
-  grass: 0.4
-  bushes: 0.1
-  flowers: 0.06
-  rocks: 0.06
+  trees: 0.18
+  grass: 0.34
+  bushes: 0.16
+  flowers: 0.28
+  rocks: 0.1
   deadwood: 0.015
   assets:
-  - id: Craftpix_Stone_mid_001
-    kind: 3
-    biomes: 00000000010000000200000005000000i
-    prefab: {fileID: 4373489433441870018, guid: ca2b8ae62c0732d418510570644c77b3, type: 3}
-    decorativeOnly: 0
-    gatheringNode: {fileID: 0}
-    weight: 1
-    footprint: {x: 2.2, y: 2.2}
-    maxSlope: 28
-    rotations: []
-    scaleRange: {x: 0.85, y: 1.15}
-  - id: Craftpix_Stone_mid_002
-    kind: 3
-    biomes: 00000000010000000200000005000000i
-    prefab: {fileID: 2872240358976432427, guid: 0260b9ef98ac743439b33fe9ffaebf31, type: 3}
-    decorativeOnly: 0
-    gatheringNode: {fileID: 0}
-    weight: 1
-    footprint: {x: 2.2, y: 1.65}
-    maxSlope: 28
-    rotations: []
-    scaleRange: {x: 0.85, y: 1.15}
-  - id: Craftpix_Stone_mid_003
-    kind: 3
-    biomes: 00000000010000000200000005000000i
-    prefab: {fileID: 7770718995446343363, guid: c05fe89d07dafc74dab312438eb249b0, type: 3}
-    decorativeOnly: 0
-    gatheringNode: {fileID: 0}
-    weight: 1
-    footprint: {x: 2.2, y: 2.2}
-    maxSlope: 28
-    rotations: []
-    scaleRange: {x: 0.85, y: 1.15}
-  - id: Craftpix_Tree_temp_climate_001
+  - id: grove.Tree_Sage
     kind: 2
-    biomes: 00000000010000000200000005000000i
-    prefab: {fileID: 6967003316508531648, guid: 13e4c83c82ce9424fb55782750a607e6, type: 3}
+    biomes:
+    prefab: {fileID: 6212402327121402298, guid: b92e6d27a82547548bd7fabcb4a06f53, type: 3}
     decorativeOnly: 0
+    disableVegetationMotion: 0
     gatheringNode: {fileID: 0}
-    weight: 1
-    footprint: {x: 1.2, y: 1.2}
-    maxSlope: 22
+    weight: 3
+    footprint: {x: 1.3, y: 1.3}
+    maxSlope: 18
     rotations: []
-    scaleRange: {x: 0.85, y: 1.15}
-  - id: Craftpix_Tree_temp_climate_002
+    scaleRange: {x: 0.88, y: 1.25}
+  - id: grove.Tree_Blossom
     kind: 2
-    biomes: 00000000010000000200000005000000i
-    prefab: {fileID: 5906673519444668976, guid: 36b9695a5a38f984f9461ca385de5be0, type: 3}
+    biomes:
+    prefab: {fileID: 8570164802887054633, guid: c9064555f414c454f8f171c202033e18, type: 3}
     decorativeOnly: 0
+    disableVegetationMotion: 0
     gatheringNode: {fileID: 0}
-    weight: 1
-    footprint: {x: 1.2, y: 1.2}
-    maxSlope: 22
+    weight: 2
+    footprint: {x: 1.3, y: 1.3}
+    maxSlope: 18
     rotations: []
-    scaleRange: {x: 0.85, y: 1.15}
-  - id: Craftpix_Tree_temp_climate_003
+    scaleRange: {x: 0.8, y: 1.1}
+  - id: grove.Tree_Amber
     kind: 2
-    biomes: 00000000010000000200000005000000i
-    prefab: {fileID: 8808553444408325131, guid: 697938831f35d9b42abf9f1b75b7caa6, type: 3}
+    biomes:
+    prefab: {fileID: 543536749015932545, guid: 4ba4867b0091a3043b3947575c001319, type: 3}
     decorativeOnly: 0
+    disableVegetationMotion: 0
     gatheringNode: {fileID: 0}
     weight: 1
-    footprint: {x: 1.2, y: 1.2}
-    maxSlope: 22
+    footprint: {x: 1.3, y: 1.3}
+    maxSlope: 18
     rotations: []
-    scaleRange: {x: 0.85, y: 1.15}
-  - id: Nature_grass_0
+    scaleRange: {x: 0.85, y: 1.2}
+  - id: grove.Tree_Cypress
+    kind: 2
+    biomes:
+    prefab: {fileID: 7325808145153349640, guid: 80c7ee2e9f7dc3f41a24d3b04c494580, type: 3}
+    decorativeOnly: 0
+    disableVegetationMotion: 0
+    gatheringNode: {fileID: 0}
+    weight: 0.5
+    footprint: {x: 1.1, y: 1.1}
+    maxSlope: 18
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.2}
+  - id: grove.Grass_Tuft
     kind: 8
-    biomes: 000000000100000002000000i
-    prefab: {fileID: 7311704831561613857, guid: 1ce6c879d1b0b3b4a909b9aeb99d1e94, type: 3}
+    biomes:
+    prefab: {fileID: 3219358637847604694, guid: a6e6395ed5cd60745ab7a12ff9e135fc, type: 3}
     decorativeOnly: 1
+    disableVegetationMotion: 0
     gatheringNode: {fileID: 0}
-    weight: 1
-    footprint: {x: 0.65, y: 0.65}
-    maxSlope: 28
+    weight: 2
+    footprint: {x: 0.8, y: 0.8}
+    maxSlope: 15
     rotations: []
-    scaleRange: {x: 0.85, y: 1.15}
-  - id: Nature_grass_1
+    scaleRange: {x: 0.7, y: 1}
+  - id: grove.Fern
     kind: 8
-    biomes: 000000000100000002000000i
-    prefab: {fileID: 2880984574101773799, guid: 6223b086db0889341ba8eb2c4cb3e329, type: 3}
+    biomes:
+    prefab: {fileID: 5905387344700278635, guid: ffed91ed7b7118248a14056f7cdcc577, type: 3}
     decorativeOnly: 1
+    disableVegetationMotion: 0
     gatheringNode: {fileID: 0}
     weight: 1
-    footprint: {x: 0.65, y: 0.65}
-    maxSlope: 28
+    footprint: {x: 1.3, y: 1.3}
+    maxSlope: 15
     rotations: []
-    scaleRange: {x: 0.85, y: 1.15}
-  - id: Nature_bush_0
+    scaleRange: {x: 0.65, y: 0.95}
+  - id: grove.Shrub_Sage
     kind: 9
-    biomes: 000000000100000002000000i
-    prefab: {fileID: 605487061689331400, guid: 52da3192e32f330488b2657ad39078ae, type: 3}
+    biomes:
+    prefab: {fileID: 6400469505786357004, guid: 464edd419246af241ac7c30648286ced, type: 3}
     decorativeOnly: 1
+    disableVegetationMotion: 0
     gatheringNode: {fileID: 0}
-    weight: 1
-    footprint: {x: 3.1999998, y: 2.2666667}
-    maxSlope: 28
+    weight: 3
+    footprint: {x: 1.5, y: 1.5}
+    maxSlope: 15
     rotations: []
-    scaleRange: {x: 0.85, y: 1.15}
-  - id: Nature_bush_1
+    scaleRange: {x: 0.65, y: 1}
+  - id: grove.Shrub_Hydrangea
     kind: 9
-    biomes: 000000000100000002000000i
-    prefab: {fileID: 5925678496656115052, guid: 7dff99b61c4333c4dbc9f4260c464bd7, type: 3}
+    biomes:
+    prefab: {fileID: 1588511539555881311, guid: da8bc42c41971eb47a787953b37fa625, type: 3}
     decorativeOnly: 1
+    disableVegetationMotion: 0
     gatheringNode: {fileID: 0}
-    weight: 1
-    footprint: {x: 2.618182, y: 2.0727277}
-    maxSlope: 28
+    weight: 2
+    footprint: {x: 1.5, y: 1.5}
+    maxSlope: 15
     rotations: []
-    scaleRange: {x: 0.85, y: 1.15}
-  - id: Nature_flower_rose
+    scaleRange: {x: 0.65, y: 0.95}
+  - id: grove.Flowers_Ivory
     kind: 10
-    biomes: 000000000100000002000000i
-    prefab: {fileID: 7577943735754432837, guid: f6a9a779da23eb540b4ad0ce47eef489, type: 3}
+    biomes:
+    prefab: {fileID: 5125603686835900780, guid: 3a1134ae89a3f23468c42b3716352ecb, type: 3}
     decorativeOnly: 0
+    disableVegetationMotion: 0
     gatheringNode: {fileID: 0}
-    weight: 1
-    footprint: {x: 0.65, y: 0.65}
-    maxSlope: 28
+    weight: 3
+    footprint: {x: 0.8, y: 0.8}
+    maxSlope: 15
     rotations: []
-    scaleRange: {x: 0.85, y: 1.15}
-  - id: Nature_flower_white_tulip
+    scaleRange: {x: 0.65, y: 0.95}
+  - id: grove.Flowers_Lavender
     kind: 10
-    biomes: 000000000100000002000000i
-    prefab: {fileID: 1752290107509215103, guid: 62352bc1a22bf07408e21649b25e8a8a, type: 3}
+    biomes:
+    prefab: {fileID: 5962284305717134737, guid: 87f3f29077df69143af3f8c570eed706, type: 3}
     decorativeOnly: 0
+    disableVegetationMotion: 0
+    gatheringNode: {fileID: 0}
+    weight: 2
+    footprint: {x: 0.8, y: 0.8}
+    maxSlope: 15
+    rotations: []
+    scaleRange: {x: 0.65, y: 0.9}
+  - id: grove.Flowers_Coral
+    kind: 10
+    biomes:
+    prefab: {fileID: 8632019734288133290, guid: 3f7dbd2546cd2644982c9684d01d5382, type: 3}
+    decorativeOnly: 0
+    disableVegetationMotion: 0
     gatheringNode: {fileID: 0}
     weight: 1
-    footprint: {x: 0.65, y: 0.65}
-    maxSlope: 28
+    footprint: {x: 0.8, y: 0.8}
+    maxSlope: 15
     rotations: []
-    scaleRange: {x: 0.85, y: 1.15}
+    scaleRange: {x: 0.65, y: 0.9}
+  - id: grove.Mushrooms
+    kind: 10
+    biomes:
+    prefab: {fileID: 1854221110911226562, guid: 0552506ad5aef7c4d856e84393260338, type: 3}
+    decorativeOnly: 0
+    disableVegetationMotion: 0
+    gatheringNode: {fileID: 0}
+    weight: 0.5
+    footprint: {x: 0.65, y: 0.65}
+    maxSlope: 15
+    rotations: []
+    scaleRange: {x: 0.85, y: 1.1}
+  - id: grove.Rock_Moss_Small
+    kind: 3
+    biomes:
+    prefab: {fileID: 4378811520822948133, guid: 51ddae224ab6d834eb1f2edc4cd2e11f, type: 3}
+    decorativeOnly: 0
+    disableVegetationMotion: 0
+    gatheringNode: {fileID: 0}
+    weight: 3
+    footprint: {x: 1.1, y: 1.1}
+    maxSlope: 26
+    rotations: []
+    scaleRange: {x: 0.8, y: 1.2}
+  - id: grove.Rock_Moss_Large
+    kind: 3
+    biomes:
+    prefab: {fileID: 624476211088998070, guid: 95b85245f34956440a6d144445de13b5, type: 3}
+    decorativeOnly: 0
+    disableVegetationMotion: 0
+    gatheringNode: {fileID: 0}
+    weight: 1
+    footprint: {x: 2, y: 2}
+    maxSlope: 26
+    rotations: []
+    scaleRange: {x: 0.8, y: 1.1}
   - id: Nature_trunk_0
     kind: 11
     biomes: 000000000100000002000000i
     prefab: {fileID: 1400741962011324118, guid: e5c437f7646903f4bb49996b8ec0abbf, type: 3}
     decorativeOnly: 0
+    disableVegetationMotion: 0
     gatheringNode: {fileID: 0}
     weight: 1
     footprint: {x: 2.5, y: 2.5}

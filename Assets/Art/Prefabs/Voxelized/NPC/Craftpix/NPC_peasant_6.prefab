@@ -670,7 +670,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8075198294256344551}
-  - {fileID: 1661456269388912842}
+  - {fileID: 1399385660307262681}
   m_Father: {fileID: 6408547037457001727}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6190033343031970574
@@ -682,8 +682,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4410189779941351613}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2aa3972274f9eef479f0aefc94f37332, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 41123d8db41c72042bfe0ca3c0242363, type: 3}
+  m_Controller: {fileID: 9100000, guid: a0183ecb06238674db3da508ae074958, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -738,7 +738,6 @@ GameObject:
   - component: {fileID: 6408547037457001727}
   - component: {fileID: 8999379825527950122}
   - component: {fileID: 7385643869608226195}
-  - component: {fileID: 2914116443136748296}
   m_Layer: 0
   m_Name: NPC_peasant_6
   m_TagString: Untagged
@@ -787,7 +786,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 37759519611999d4989b5175140918ee, type: 2}
+  - {fileID: 2100000, guid: 024374dec7c03ea4fb9c7451fd41815b, type: 2}
   - {fileID: 2100000, guid: ba70db2d13818974a81b751ad1f0d636, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -878,31 +877,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Voxels.VoxelRigInstance
   animator: {fileID: 6190033343031970574}
   surface: {fileID: 8999379825527950122}
-  clips: []
-  stateNames: []
---- !u!136 &2914116443136748296
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4901271519382304493}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.08585535
-  m_Height: 1.6959081
-  m_Direction: 1
-  m_Center: {x: 0.0064851046, y: 0.000000029802322, z: 0.00041502714}
+  clips:
+  - {fileID: 7400000, guid: 5b876e5f9bb792a45a5b283f286f562b, type: 2}
+  - {fileID: 7400000, guid: 2752ae30d910f664c93af9b787ee313c, type: 2}
+  stateNames:
+  - Quaternius_Idle
+  - Quaternius_Walk
 --- !u!1 &5135171621733470508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1480,37 +1460,6 @@ Transform:
   - {fileID: 2467658683461236151}
   m_Father: {fileID: 6305248340519038327}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8409018113833111489
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1661456269388912842}
-  m_Layer: 0
-  m_Name: peasant_6
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1661456269388912842
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8409018113833111489}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000000022390447, y: -0.0000000014243401, z: 0.000000007863273}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4146834878076201547}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8579122383356188169
 GameObject:
   m_ObjectHideFlags: 0
@@ -1605,4 +1554,35 @@ Transform:
   m_Children:
   - {fileID: 6761975597608059382}
   m_Father: {fileID: 9163502884134974053}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8816190461689824310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1399385660307262681}
+  m_Layer: 0
+  m_Name: peasant_6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1399385660307262681
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8816190461689824310}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.000000022390447, y: -0.0000000014243401, z: 0.000000007863273}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4146834878076201547}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -55,6 +55,9 @@ namespace Mismo.Menu
         public void Open()
         {
             if(GameplayPause.IsPaused||InventoryPanel.AnyOpen||WorldMapPanel.BlocksGameplay)return;
+            // Let the crafting window handle Escape before opening pause.
+            foreach(var gathering in Object.FindObjectsByType<Mismo.Gameplay.Player.World.GatheringPlayer>())
+                if(gathering.BlocksGameplay)return;
             GameplayPause.Pause();opened=true;options=false;confirmExit=false;ReadSettings();GameAudio.Play(GameSound.MenuOpen);
         }
         public void Resume()

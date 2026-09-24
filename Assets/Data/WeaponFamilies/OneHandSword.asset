@@ -11,16 +11,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1f07bb650d4d1f46b500b560d8847c4, type: 3}
   m_Name: OneHandSword
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.WeaponFamilyDefinition
   progressionId: sword.onehand
   displayName: Espada sola
-  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.WeaponFamilyDefinition
   abilities:
   - {fileID: 11400000, guid: e2e0ba6f12d861e4a918f20a0ca3d45b, type: 2}
   - {fileID: 11400000, guid: ce744cb14261acd4a92c927ed4ad58ab, type: 2}
   - {fileID: 11400000, guid: e7555c6d155e93448b2c9f2f131ceec1, type: 2}
   - {fileID: 11400000, guid: 99a87b5a63da526f9201ed93faf31c23, type: 2}
-  animations: {fileID: 11400000, guid: 402f7cc637875cb49005735684d1f2bb, type: 2}
-  masteryLevelsPerUnlock: 3
   repertoire:
   - {fileID: 11400000, guid: ce744cb14261acd4a92c927ed4ad58ab, type: 2}
   - {fileID: 11400000, guid: e7555c6d155e93448b2c9f2f131ceec1, type: 2}
@@ -28,3 +26,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 70e5207d373d5e6098e1ab54e04da3be, type: 2}
   - {fileID: 11400000, guid: 7e4da6df4b3e5b969eb93cbdf5cf8d60, type: 2}
   - {fileID: 11400000, guid: be4d56531c79501a9e22e887369c2270, type: 2}
+  masteryLevelsPerUnlock: 3
+  animations: {fileID: 11400000, guid: 402f7cc637875cb49005735684d1f2bb, type: 2}
+  feedback: {fileID: 0}

@@ -8,7 +8,7 @@ namespace Mismo.Gameplay.Player.World
     // One active save, with an independent inventory file per world. New games never delete old profiles.
     public static class WorldSession
     {
-        public const int CurrentVillageLayoutRevision=2;
+        public const int CurrentVillageLayoutRevision=3;
         public static WorldSaveData Current {get;private set;}
         public static string LastError {get;private set;}
         static IProfileRepository repository;
@@ -158,5 +158,3 @@ namespace Mismo.Gameplay.Player.World
         }
     }
 }
-
-
