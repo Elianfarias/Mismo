@@ -60,9 +60,9 @@ namespace Mismo.Gameplay.Player.Equipment
             if (backSecondVisual != null) { backSecondVisual.SetActive(false); Destroy(backSecondVisual); }
             var weapon = loadout.ActiveDefinition;
             bool hasEmbedded = embeddedSword.Any(r => r is SkinnedMeshRenderer);
-            foreach (var renderer in embeddedSword) renderer.enabled = weapon != null && !weapon.dualWield && weapon.poseProfile == null && !weapon.isBow && (renderer is SkinnedMeshRenderer || !hasEmbedded);
+            foreach (var renderer in embeddedSword) renderer.enabled = weapon != null && weapon.visualPrefab == null && !weapon.dualWield && weapon.poseProfile == null && !weapon.isBow && (renderer is SkinnedMeshRenderer || !hasEmbedded);
             if(weapon!=null && weapon.poseProfile!=null)weapon.poseProfile.HideEmbeddedVisuals(animator);
-            if (weapon != null && weapon.visualPrefab != null && (weapon.dualWield || weapon.poseProfile != null || weapon.isBow || !hasEmbedded)) activeVisual = Instantiate(weapon.visualPrefab, transform);
+            if (weapon != null && weapon.visualPrefab != null) activeVisual = Instantiate(weapon.visualPrefab, transform);
             if (loadout.SecondaryDefinition != null && loadout.SecondaryDefinition.visualPrefab != null) backVisual = Instantiate(loadout.SecondaryDefinition.visualPrefab, transform);
             if (weapon != null && weapon.SecondaryVisualPrefab != null) activeSecondVisual = Instantiate(weapon.SecondaryVisualPrefab, transform);
             if (loadout.SecondaryDefinition != null && loadout.SecondaryDefinition.SecondaryVisualPrefab != null)

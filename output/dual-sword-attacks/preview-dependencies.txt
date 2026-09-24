@@ -1,0 +1,10 @@
+Assets/Art/Prefabs/Weapons/sword/Sword.prefab
+Assets/Art/Prefabs/Weapons/sword_E.prefab
+Assets\Art\Prefabs\Weapons\sword\Sword.prefab
+Assets\Art\Meshes\Weapons\Voxelized\Rapier 2.asset
+Assets\Art\Materials\Rapier_Voxel.mat
+Assets\Art\FBX\Weapons\Sword\sword_B.fbx
+Assets\Art\Prefabs\Weapons\sword_E.prefab
+Assets\Art\FBX\Weapons\Sword\sword_E.fbx
+Assets\Art\Materials\Weapons\Weapons.mat
+Assets\Art\Textures\Weapons\weapons_bits_texture.png

@@ -20,6 +20,7 @@ namespace Mismo.Gameplay.Player.Editor
         {
             scroll=EditorGUILayout.BeginScrollView(scroll);
             EditorGUILayout.HelpBox("La familia comparte habilidades y animaciones. El taller de poses mantiene el agarre y el modelo de cada arma. Los cambios en una familia afectan a todas sus armas.",MessageType.Info);
+            if(GUILayout.Button("Crear un clip de ataque Humanoid"))HumanoidAttackWindow.Open();
             weapon=(WeaponDefinition)EditorGUILayout.ObjectField("Arma",weapon,typeof(WeaponDefinition),false);
             if(weapon==null){EditorGUILayout.EndScrollView();return;}
             if(GUILayout.Button("Editar / probar feedback de combate"))CombatFeedbackWindow.Open(weapon);

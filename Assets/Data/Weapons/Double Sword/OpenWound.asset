@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: OpenWound
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: Herida abierta
+  icon: {fileID: 0}
   abilityId: OpenWound
   animationSource: {fileID: 11400000, guid: ce744cb14261acd4a92c927ed4ad58ab, type: 2}
   passive: 0
   description: "Un corte cercano aplica sangrado durante 5 s. Reaplicarlo renueva su duraci\xF3n."
   localizationKey: 
   preparation: 0.1
-  active: 0.2
+  active: 0.5
   recovery: 0.2
   cooldown: 7
   staminaCost: 0
@@ -88,6 +89,7 @@ MonoBehaviour:
   comboStepSfx: []
   pose: 1
   usesSwordCombo: 0
+  comboSteps: []
   targetsGround: 0
   aimFromCamera: 0
   range: 15
