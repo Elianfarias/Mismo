@@ -55,7 +55,16 @@ namespace Mismo.Gameplay.Player.World
             if(Mathf.Abs(x-DesertPassX)>64*sx)
             {
                 float d=Mathf.Abs(z-NorthBorder(x));
-                height=Mathf.Max(height,116*(1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(4,40,d))));
+                if(z<NorthBorder(x))
+                {
+                    // Broken ledges and projecting buttresses replace the uniform curtain wall.
+                    float reach=48+Noise(x/sx*5,0,880)*24;
+                    float q=Mathf.Clamp01((reach-d)/(reach-3));
+                    float bands=q*7;float ledges=(Mathf.Floor(bands)+Mathf.SmoothStep(0,1,Mathf.InverseLerp(.72f,1,bands%1)))/7;
+                    float crown=110+Noise(x/sx*3,0,881)*12;
+                    height=Mathf.Max(height,crown*ledges);
+                }
+                else height=Mathf.Max(height,116*(1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(4,40,d))));
             }
             if(z>=NorthBorder(x)-32&&Mathf.Abs(z-MountainPassZ)>64*sz)
             {

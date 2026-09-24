@@ -30,15 +30,16 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             catch(Exception e)when(e is System.IO.IOException||e is UnauthorizedAccessException||e is System.Security.Cryptography.CryptographicException)
             {Debug.LogWarning("World clock save: "+e.Message,this);}
         }
-        public bool TryHarvest(string nodeId,ResourceNodeDefinition node,IDictionary<string,int> loot)
+        public bool TryHarvest(string nodeId,ResourceNodeDefinition node,IDictionary<string,int> loot,bool oneTime=false)
         {
             var health=GetComponent<Health>();
-            if(!IsReady||health==null||health.IsDead||node==null||string.IsNullOrWhiteSpace(nodeId)||loot==null||NodeReadyAt(nodeId)>WorldPlaySeconds)return false;
+            if(!IsReady||health==null||health.IsDead||node==null||string.IsNullOrWhiteSpace(nodeId)||loot==null||NodeReadyAt(nodeId)>WorldPlaySeconds||oneTime&&IsWorldEnemyDefeated(nodeId))return false;
             var next=profile.Copy();
             foreach(var entry in loot)if(!materialDefinitions.ContainsKey(entry.Key)||!next.TryAddMaterial(entry.Key,entry.Value))return false;
             if(!Fits(next,false))return false;
             next.harvestedNodes.RemoveAll(n=>n.id==nodeId||n.readyAt<=WorldPlaySeconds);
-            next.harvestedNodes.Add(new HarvestState{id=nodeId,readyAt=WorldPlaySeconds+Math.Max(0,node.regenerationSeconds)});
+            if(oneTime){next.EnsureWorldData();next.defeatedEnemies.Add(nodeId);}
+            else next.harvestedNodes.Add(new HarvestState{id=nodeId,readyAt=WorldPlaySeconds+Math.Max(0,node.regenerationSeconds)});
             var items=new List<string>();foreach(var entry in loot)items.Add("+"+entry.Value+" "+L.Text(Material(entry.Key).displayName));
             return Commit(next,string.Join(" · ",items),false,GameSound.ResourceCollected);
         }

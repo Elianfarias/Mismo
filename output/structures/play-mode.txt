@@ -1,0 +1,1 @@
+PASS: World streamer loaded both the woodland temple and ice cave; the real character crossed the temple bridge and walked from outside to each final room; both rewards persisted once in memory and stayed consumed after chunk unload/reload. No player save used.

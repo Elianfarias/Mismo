@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03bbd7adb3144e9fb629c747d67942c9, type: 3}
+  m_Name: ArcaneVein
+  m_EditorClassIdentifier: 
+  id: structure-arcane-vein
+  kind: 2
+  distributionWeight: 0.45
+  displayName: Veta de cristal arcano
+  actionName: Extraer
+  harvestSeconds: 3
+  interactionRange: 2.5
+  regenerationSeconds: 1200
+  restoreClearance: 8
+  availablePrefab: {fileID: 5393329014415423802, guid: f0b3032e4750dc14c94a747c4c7daa28, type: 3}
+  depletedPrefab: {fileID: 4229347833953768392, guid: 9cabf656b7397614795b181f5c463f9a, type: 3}
+  toolPrefab: {fileID: 1140483725738298627, guid: a3395171d8c9ebe4ea2bb7fc35345bd5, type: 3}
+  harvestSound: {fileID: 8300000, guid: 88c40b0eb798416438223d8cea6b5aa3, type: 3}
+  completionSound: {fileID: 8300000, guid: 6d9c832d86c45ef40b352bb28be12433, type: 3}
+  rewards: {fileID: 11400000, guid: ba6f7bc0c224b0a478d15295b401a4b2, type: 2}

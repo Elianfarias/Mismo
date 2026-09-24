@@ -132,6 +132,14 @@ namespace Mismo.Gameplay.Player.World
             {
                 var saved=WorldSession.Current;var position=new Vector3(saved.x,saved.y,saved.z);
                 var coordinate=Coordinate(position);
+                // An interior can cross chunk borders; restore its owner before resolving saved ground.
+                int sx=Mathf.FloorToInt(position.x/field.SiteSpacing),sz=Mathf.FloorToInt(position.z/field.SiteSpacing);
+                for(int z=-1;z<=1;z++)for(int x=-1;x<=1;x++)
+                {
+                    var site=field.Site(new Vector2Int(sx+x,sz+z));
+                    if(site.structure!=null&&Vector2.Distance(new Vector2(position.x,position.z),new Vector2(site.position.x,site.position.z))<site.radius+4)
+                    {var owner=Coordinate(site.position);if(!IsAuthored(owner))CreateChunk(owner);}
+                }
                 // Materialize the landing neighbourhood before allowing the motor to update.
                 for(int z=-1;z<=1;z++)for(int x=-1;x<=1;x++)
                 {var id=coordinate+new Vector2Int(x,z);if(!IsAuthored(id))CreateChunk(id);}

@@ -1,0 +1,4 @@
+authored centre | structure.Temple_Grove | seed 7319 | (-701.38, 44.88, -2237.12) | radius 34
+authored centre | structure.Temple_Grove | seed 7319 | (324.58, 10.32, -2250.99) | radius 34
+authored centre | structure.Temple_Grove | seed 7319 | (4550.64, 10.59, -2230.54) | radius 34
+authored centre | structure.Cave_Moss | seed 7319 | (5052.76, 18.31, -2237.14) | radius 27

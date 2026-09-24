@@ -52,6 +52,15 @@ namespace Mismo.Gameplay.Player.World
             settings.content?.groveStyle?.DecorateLedges(terrain,chunk,root,settings.seed);
             foreach(var site in Sites(chunk))
             {
+                if(site.structure!=null)
+                {
+                    var p=site.position;p.y=terrain.Height(p.x,p.z)+.05f;
+                    var structure=Object.Instantiate(site.structure.prefab,p,Quaternion.identity,root);
+                    structure.name=site.structure.id+" "+site.cell;
+                    // Reuse the site's persistent reward identity, including previously consumed springs.
+                    structure.ConfigureWorld("world-v1:"+settings.seed+":"+site.cell.x+":"+site.cell.y+":secret");
+                    continue;
+                }
                 if(site.kind==WorldSiteKind.Village)
                 {
                     var village=settings.content!=null?settings.content.Asset(WorldAssetKind.Village,terrain.Biome(site.position.x,site.position.z),ExplorationTerrain.Hash(settings.seed,site.cell.x,site.cell.y,710)):null;
@@ -181,6 +190,8 @@ namespace Mismo.Gameplay.Player.World
         public void Populate(Vector2Int chunk,Transform root,PlayerInventory inventory)
         {
             if(settings.content==null||inventory==null||!inventory.IsReady||populated.Contains(chunk))return;
+            foreach(var structure in root.GetComponentsInChildren<Structures.StructureInstance>())
+                structure.ActivateContent(inventory,settings,terrain.RegionId(structure.transform.position.x,structure.transform.position.z));
             foreach(var site in Encounters(chunk))
             {
                 string region=terrain.RegionId(site.position.x,site.position.z);

@@ -50,7 +50,7 @@ internal sealed class EnchantedGroveVoxels
         foreach (var pair in groups) output.Cells[pair.Key] = pair.Value.OrderByDescending(c=>c.Value).ThenBy(c=>c.Key).First().Key;
         return output;
     }
-    internal Mesh Mesh(string name)
+    internal Mesh Mesh(string name,int maxQuadSize=int.MaxValue)
     {
         if (Cells.Count == 0) throw new InvalidOperationException("Empty voxel asset: " + name);
         var low = Cells.Keys.Aggregate(Vector3Int.Min); var high = Cells.Keys.Aggregate(Vector3Int.Max);
@@ -73,9 +73,9 @@ internal sealed class EnchantedGroveVoxels
                 for(int j=0;j<rows;j++)for(int i=0;i<width;)
                 {
                     int color=mask[i+j*width];if(color==0){i++;continue;}
-                    int w=1;while(i+w<width&&mask[i+w+j*width]==color)w++;
+                    int w=1;while(w<maxQuadSize&&i+w<width&&mask[i+w+j*width]==color)w++;
                     int h=1;bool extend=true;
-                    while(j+h<rows&&extend){for(int k=0;k<w;k++)if(mask[i+k+(j+h)*width]!=color){extend=false;break;}if(extend)h++;}
+                    while(h<maxQuadSize&&j+h<rows&&extend){for(int k=0;k<w;k++)if(mask[i+k+(j+h)*width]!=color){extend=false;break;}if(extend)h++;}
                     Vector3 origin=low;origin[d]+=slice+1;origin[u]+=i;origin[v]+=j;
                     var du=Vector3.zero;du[u]=w;var dv=Vector3.zero;dv[v]=h;int first=vertices.Count;
                     vertices.Add(origin*Step);vertices.Add((origin+du)*Step);vertices.Add((origin+du+dv)*Step);vertices.Add((origin+dv)*Step);
