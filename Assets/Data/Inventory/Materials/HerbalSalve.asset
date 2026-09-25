@@ -15,9 +15,9 @@ MonoBehaviour:
   id: MAT-05
   displayName: "Ung\xFCento de hierbas"
   description: "Recupera vida gradualmente fuera de combate. El da\xF1o interrumpe el efecto."
-  icon: {fileID: 21300000, guid: 9270f1ae3d49a7d48a6247e01f7573fb, type: 3}
+  icon: {fileID: 21300000, guid: ce1e53543984dcc44b070911dba43ca6, type: 3}
   inventoryPreviewRotation: {x: 0, y: 0, z: 0}
-  pickupPrefab: {fileID: 7172199799069011660, guid: 7445d84b6f666f341bf2580086ebb341, type: 3}
+  pickupPrefab: {fileID: 8111846857385218820, guid: e8add8799a4556a45925b5c3047d6c3e, type: 3}
   stackSize: 5
   gridWidth: 1
   gridHeight: 1

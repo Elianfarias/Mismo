@@ -15,9 +15,9 @@ MonoBehaviour:
   id: MAT-01
   displayName: Hierba medicinal
   description: 
-  icon: {fileID: 21300000, guid: 69e65d50180cdf949a4b095ccbd2169f, type: 3}
+  icon: {fileID: 21300000, guid: 32997f3ca7c4eb649b7d66321e12ecad, type: 3}
   inventoryPreviewRotation: {x: 0, y: 0, z: 0}
-  pickupPrefab: {fileID: 5962284305717134737, guid: 87f3f29077df69143af3f8c570eed706, type: 3}
+  pickupPrefab: {fileID: 5125603686835900780, guid: 3a1134ae89a3f23468c42b3716352ecb, type: 3}
   stackSize: 20
   gridWidth: 1
   gridHeight: 1

@@ -17,7 +17,7 @@ MonoBehaviour:
   description: 
   icon: {fileID: 21300000, guid: e1744b16ae5131d4984e701d29b43fb9, type: 3}
   inventoryPreviewRotation: {x: 0, y: 0, z: 0}
-  pickupPrefab: {fileID: 2625084553209209101, guid: d94bf2a880393a6408b6036f2990e1a6, type: 3}
+  pickupPrefab: {fileID: 6721958888891336053, guid: cecc2871afb48d64d9c21c8a610d0d74, type: 3}
   stackSize: 20
   gridWidth: 2
   gridHeight: 1

@@ -15,11 +15,6 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 2fddf480e3c15b244a0569cb54c0f1e6
   m_SerializeEntries:
-  - m_GUID: 17610838d29393a46b1bd18c45537be4
-    m_Address: HerbMix/Materials/HerbMix_Green
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4eafeb58f8e88c1419084bcda6d21889
     m_Address: Assets/Localization/es.asset
     m_ReadOnly: 0
