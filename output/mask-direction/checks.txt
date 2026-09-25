@@ -1,0 +1,60 @@
+PASS
+PASS Modelo, controlador, máscara y tres clips reales disponibles
+PASS Bow_Attack_A_1_All, giro 0°, locomoción 0: orientación de torso, cabeza y manos coincide con el clip (0,0000°)
+PASS Bow_Attack_A_1_All, giro 0°, locomoción 0: cadera y piernas conservan locomoción (0,000000 m, 0,0000°)
+PASS Bow_Attack_A_1_All, giro 0°, locomoción 0: la corrección no gira ni desplaza la raíz del personaje
+PASS Bow_Attack_A_1_All, giro 0°, locomoción 1: orientación de torso, cabeza y manos coincide con el clip (0,0000°)
+PASS Bow_Attack_A_1_All, giro 0°, locomoción 1: cadera y piernas conservan locomoción (0,000000 m, 0,0000°)
+PASS Bow_Attack_A_1_All, giro 0°, locomoción 1: la corrección no gira ni desplaza la raíz del personaje
+PASS Bow_Attack_A_1_All, giro 0°, locomoción 1: las piernas siguen caminando durante el ataque
+PASS Bow_Attack_A_1_All, giro 90°, locomoción 0: orientación de torso, cabeza y manos coincide con el clip (0,0000°)
+PASS Bow_Attack_A_1_All, giro 90°, locomoción 0: cadera y piernas conservan locomoción (0,000001 m, 0,0000°)
+PASS Bow_Attack_A_1_All, giro 90°, locomoción 0: la corrección no gira ni desplaza la raíz del personaje
+PASS Bow_Attack_A_1_All, giro 90°, locomoción 1: orientación de torso, cabeza y manos coincide con el clip (0,0000°)
+PASS Bow_Attack_A_1_All, giro 90°, locomoción 1: cadera y piernas conservan locomoción (0,000000 m, 0,0000°)
+PASS Bow_Attack_A_1_All, giro 90°, locomoción 1: la corrección no gira ni desplaza la raíz del personaje
+PASS Bow_Attack_A_1_All, giro 90°, locomoción 1: las piernas siguen caminando durante el ataque
+PASS 1Hand_Up_Attack_A_1, giro 0°, locomoción 0: orientación de torso, cabeza y manos coincide con el clip (0,0000°)
+PASS 1Hand_Up_Attack_A_1, giro 0°, locomoción 0: cadera y piernas conservan locomoción (0,000000 m, 0,0000°)
+PASS 1Hand_Up_Attack_A_1, giro 0°, locomoción 0: la corrección no gira ni desplaza la raíz del personaje
+PASS 1Hand_Up_Attack_A_1, giro 0°, locomoción 1: orientación de torso, cabeza y manos coincide con el clip (0,0000°)
+PASS 1Hand_Up_Attack_A_1, giro 0°, locomoción 1: cadera y piernas conservan locomoción (0,000000 m, 0,0000°)
+PASS 1Hand_Up_Attack_A_1, giro 0°, locomoción 1: la corrección no gira ni desplaza la raíz del personaje
+PASS 1Hand_Up_Attack_A_1, giro 0°, locomoción 1: las piernas siguen caminando durante el ataque
+PASS 1Hand_Up_Attack_A_1, giro 90°, locomoción 0: orientación de torso, cabeza y manos coincide con el clip (0,0000°)
+PASS 1Hand_Up_Attack_A_1, giro 90°, locomoción 0: cadera y piernas conservan locomoción (0,000000 m, 0,0000°)
+PASS 1Hand_Up_Attack_A_1, giro 90°, locomoción 0: la corrección no gira ni desplaza la raíz del personaje
+PASS 1Hand_Up_Attack_A_1, giro 90°, locomoción 1: orientación de torso, cabeza y manos coincide con el clip (0,0000°)
+PASS 1Hand_Up_Attack_A_1, giro 90°, locomoción 1: cadera y piernas conservan locomoción (0,000000 m, 0,0000°)
+PASS 1Hand_Up_Attack_A_1, giro 90°, locomoción 1: la corrección no gira ni desplaza la raíz del personaje
+PASS 1Hand_Up_Attack_A_1, giro 90°, locomoción 1: las piernas siguen caminando durante el ataque
+PASS Lunge, giro 0°, locomoción 0: orientación de torso, cabeza y manos coincide con el clip (0,0000°)
+PASS Lunge, giro 0°, locomoción 0: cadera y piernas conservan locomoción (0,000000 m, 0,0000°)
+PASS Lunge, giro 0°, locomoción 0: la corrección no gira ni desplaza la raíz del personaje
+PASS Lunge, giro 0°, locomoción 1: orientación de torso, cabeza y manos coincide con el clip (0,0000°)
+PASS Lunge, giro 0°, locomoción 1: cadera y piernas conservan locomoción (0,000000 m, 0,0000°)
+PASS Lunge, giro 0°, locomoción 1: la corrección no gira ni desplaza la raíz del personaje
+PASS Lunge, giro 0°, locomoción 1: las piernas siguen caminando durante el ataque
+PASS Lunge, giro 90°, locomoción 0: orientación de torso, cabeza y manos coincide con el clip (0,0000°)
+PASS Lunge, giro 90°, locomoción 0: cadera y piernas conservan locomoción (0,000000 m, 0,0000°)
+PASS Lunge, giro 90°, locomoción 0: la corrección no gira ni desplaza la raíz del personaje
+PASS Lunge, giro 90°, locomoción 1: orientación de torso, cabeza y manos coincide con el clip (0,0000°)
+PASS Lunge, giro 90°, locomoción 1: cadera y piernas conservan locomoción (0,000000 m, 0,0000°)
+PASS Lunge, giro 90°, locomoción 1: la corrección no gira ni desplaza la raíz del personaje
+PASS Lunge, giro 90°, locomoción 1: las piernas siguen caminando durante el ataque
+PASS Entrada con mezcla parcial válida: 0
+PASS Entrada completa conserva la dirección: 0
+PASS Cambio de clip conserva dirección sin acumular corrección: 0
+PASS Full Body sigue reproduciendo el clip sin corrección: 0
+PASS Cancelar devuelve la orientación de reposo: 0
+PASS Entrada con mezcla parcial válida: 1
+PASS Entrada completa conserva la dirección: 1
+PASS Cambio de clip conserva dirección sin acumular corrección: 1
+PASS Full Body sigue reproduciendo el clip sin corrección: 1
+PASS Cancelar devuelve la orientación de reposo: 1
+PASS Entrada con mezcla parcial válida: 2
+PASS Entrada completa conserva la dirección: 2
+PASS Cambio de clip conserva dirección sin acumular corrección: 2
+PASS Full Body sigue reproduciendo el clip sin corrección: 2
+PASS Cancelar devuelve la orientación de reposo: 2
+PASS Máscara compartida original intacta

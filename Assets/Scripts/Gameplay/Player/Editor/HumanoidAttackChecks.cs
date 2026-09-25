@@ -61,6 +61,7 @@ namespace Mismo.Gameplay.Player.Editor
                             finally { Object.DestroyImmediate(clip); }
                         }
                         CheckAuthoring(recipe, rig);
+                        CheckClipImport(model, rig);
                         CheckIK(recipe, rig, "aventurero");
                         CheckIK(recipe, target, "Imp");
                         CheckWeapons(recipe, rig);
@@ -141,6 +142,7 @@ namespace Mismo.Gameplay.Player.Editor
                 Check(EditorJsonUtility.ToJson(draft) == beforeDrag, "Deshacer arrastre IK restaura la pose anterior");
                 Undo.PerformRedo();
                 Check(draft.poses[poseIndex].muscles.SequenceEqual(authored.muscles), "Rehacer arrastre IK recupera la pose");
+                CheckWindowImport(window, draft);
                 draft.poses.Clear();
                 type.GetMethod("OnUndo", flags).Invoke(window, null);
                 Check(type.GetField("rig", flags).GetValue(window) == null, "Deshacer hasta un proyecto vacío cierra la vista sin índices inválidos");
@@ -150,6 +152,47 @@ namespace Mismo.Gameplay.Player.Editor
                 CheckDocumentLoad(window, model);
             }
             finally { window.DiscardChanges(); Object.DestroyImmediate(window); }
+        }
+
+        static void CheckWindowImport(HumanoidAttackWindow window, HumanoidAttackRecipe draft)
+        {
+            const System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+            var type = typeof(HumanoidAttackWindow);
+            var clip = HumanoidAttackAuthoring.Bake(draft);
+            try
+            {
+                string before = EditorJsonUtility.ToJson(draft);
+                type.GetField("referenceClip", flags).SetValue(window, clip);
+                type.GetField("importFrameRate", flags).SetValue(window, 30);
+                Undo.IncrementCurrentGroup();
+                type.GetMethod("ImportReferenceClip", flags).Invoke(window, null);
+                Undo.FlushUndoRecordObjects();
+                string imported = EditorJsonUtility.ToJson(draft);
+                Check(draft.poses.Count > 12 && window.hasUnsavedChanges, "Ventana importa el clip completo como documento editable");
+                Undo.PerformUndo();
+                if (EditorJsonUtility.ToJson(draft) != before)
+                {
+                    File.WriteAllText(Output + "/import-before.json", before);
+                    File.WriteAllText(Output + "/import-after-undo.json", EditorJsonUtility.ToJson(draft));
+                }
+                Check(EditorJsonUtility.ToJson(draft) == before, "Deshacer importación restaura todas las poses y ajustes anteriores");
+                Undo.PerformRedo();
+                if (EditorJsonUtility.ToJson(draft) != imported)
+                {
+                    File.WriteAllText(Output + "/import-expected-redo.json", imported);
+                    File.WriteAllText(Output + "/import-after-redo.json", EditorJsonUtility.ToJson(draft));
+                }
+                Check(EditorJsonUtility.ToJson(draft) == imported, "Rehacer importación recupera todos los fotogramas");
+                type.GetMethod("SelectNearestPose", flags).Invoke(window, new object[] { .45f });
+                int index = (int)type.GetField("selectedPose", flags).GetValue(window);
+                Check(index > 0 && Mathf.Abs(draft.poses[index].time - .45f) < .03f, "Línea de tiempo selecciona un fotograma importado para editar");
+                var originalPoses = draft.poses.Select(p => JsonUtility.ToJson(p)).ToArray();
+                type.GetField("referenceTime", flags).SetValue(window, 0f);
+                type.GetMethod("CopyReferenceFrame", flags).Invoke(window, null);
+                Check(draft.poses.Select((p, i) => i == index || JsonUtility.ToJson(p) == originalPoses[i]).All(v => v) &&
+                    JsonUtility.ToJson(draft.poses[index]) != originalPoses[index], "Copiar un fotograma sigue cambiando sólo la pose seleccionada");
+            }
+            finally { Object.DestroyImmediate(clip); }
         }
 
         static void CheckDocumentLoad(HumanoidAttackWindow window, GameObject model)
@@ -239,6 +282,83 @@ namespace Mismo.Gameplay.Player.Editor
                 }
             }
             Check(template == HumanoidAttackTemplate.Blank || travel > 15, template + $": reproducción en Imp, brazo recorre {travel:F1}°");
+        }
+
+        static void CheckClipImport(GameObject model, HumanoidAttackRig rig)
+        {
+            var sourceRecipe = ScriptableObject.CreateInstance<HumanoidAttackRecipe>();
+            var imported = ScriptableObject.CreateInstance<HumanoidAttackRecipe>();
+            AnimationClip source = null, reference = null, exported = null;
+            var generic = new AnimationClip();
+            try
+            {
+                sourceRecipe.model = imported.model = model;
+                sourceRecipe.duration = 1.137f;
+                HumanoidAttackAuthoring.CreateTemplate(sourceRecipe, rig.Neutral, HumanoidAttackTemplate.Thrust, false);
+                sourceRecipe.poses[4] = sourceRecipe.poses[2].Copy(1, "Final distinto del inicio");
+                foreach (var pose in sourceRecipe.poses)
+                {
+                    pose.bodyPosition += new Vector3(.3f, .08f, 1.2f) * pose.time;
+                    pose.bodyRotation = Quaternion.Euler(0, 40 * pose.time, 0);
+                }
+                source = HumanoidAttackAuthoring.Bake(sourceRecipe);
+                reference = Object.Instantiate(source);
+                var settings = AnimationUtility.GetAnimationClipSettings(source);
+                settings.loopTime = true; settings.loopBlend = false;
+                settings.loopBlendOrientation = settings.loopBlendPositionY = settings.loopBlendPositionXZ = false;
+                AnimationUtility.SetAnimationClipSettings(source, settings);
+                string sourceBefore = EditorJsonUtility.ToJson(source);
+                imported.previewWeapon = AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Data/Weapons/Sword/Sword.asset");
+                imported.previewPair = true; imported.activeStartsAt = .2f; imported.recoveryStartsAt = .7f;
+                HumanoidAttackAuthoring.ImportClip(imported, source, 30);
+                Check(imported.duration == source.length && imported.frameRate == 30 && imported.poses.Count == 36 &&
+                    imported.poses[0].time == 0 && imported.poses.Last().time == 1, "Importación conserva duración no entera y todos los fotogramas, incluido el final");
+                Check(imported.previewWeapon != null && imported.previewPair && imported.activeStartsAt == .2f && imported.recoveryStartsAt == .7f,
+                    "Importación conserva armas y fases del proyecto");
+                Check(imported.poses.Last().bodyPosition.z - imported.poses[0].bodyPosition.z > 1 &&
+                    Quaternion.Angle(imported.poses.Last().bodyRotation, imported.poses[0].bodyRotation) > 35,
+                    "Importación retiene desplazamiento y giro del cuerpo, aunque el original extraiga root motion");
+                Check(sourceBefore == EditorJsonUtility.ToJson(source), "Importación no modifica el clip original ni sus ajustes de bucle");
+                exported = HumanoidAttackAuthoring.Bake(imported);
+                float maxDistance = 0;
+                var bones = new[] { HumanBodyBones.Hips, HumanBodyBones.Head, HumanBodyBones.LeftHand, HumanBodyBones.RightHand, HumanBodyBones.LeftFoot, HumanBodyBones.RightFoot };
+                foreach (var pose in imported.poses)
+                {
+                    float seconds = pose.time * imported.duration;
+                    rig.Sample(reference, seconds);
+                    var expected = bones.Select(b => rig.Animator.GetBoneTransform(b).position).ToArray();
+                    rig.Sample(exported, seconds);
+                    for (int i = 0; i < bones.Length; i++)
+                        maxDistance = Mathf.Max(maxDistance, Vector3.Distance(expected[i], rig.Animator.GetBoneTransform(bones[i]).position));
+                }
+                Check(maxDistance < .025f, $"Importar y exportar conserva cuerpo, manos y pies (error máximo {maxDistance:F5} m)");
+                CheckPersistence(imported, exported, rig);
+                string beforeInvalid = EditorJsonUtility.ToJson(imported);
+                bool rejected = false;
+                try { HumanoidAttackAuthoring.ImportClip(imported, generic, 30); }
+                catch (InvalidOperationException) { rejected = true; }
+                Check(rejected && beforeInvalid == EditorJsonUtility.ToJson(imported), "Importación rechaza Generic sin perder las poses actuales");
+                imported.model = null;
+                beforeInvalid = EditorJsonUtility.ToJson(imported); rejected = false;
+                try { HumanoidAttackAuthoring.ImportClip(imported, source, 30); }
+                catch (InvalidOperationException) { rejected = true; }
+                Check(rejected && beforeInvalid == EditorJsonUtility.ToJson(imported), "Fallo al muestrear conserva intacto el documento");
+                imported.model = model;
+                string fbxPath = AssetDatabase.GUIDToAssetPath("981e926b82dcefb4bbe6507cef4ca850");
+                var fbxClip = AssetDatabase.LoadAllAssetsAtPath(fbxPath).OfType<AnimationClip>().First(c => !c.name.StartsWith("__preview", StringComparison.Ordinal));
+                string fbxBefore = File.ReadAllText(fbxPath + ".meta");
+                HumanoidAttackAuthoring.ImportClip(imported, fbxClip, 60);
+                Check(imported.duration == fbxClip.length && imported.poses.Count > 30 &&
+                    imported.poses.Any(p => p.muscles.Where((m, i) => Mathf.Abs(m - imported.poses[0].muscles[i]) > .1f).Any()),
+                    "Clip de ataque dentro de un FBX se convierte en poses animadas editables");
+                Check(fbxBefore == File.ReadAllText(fbxPath + ".meta"), "Importación desde FBX conserva el importador original");
+            }
+            finally
+            {
+                rig.StopSampling();
+                Object.DestroyImmediate(source); Object.DestroyImmediate(reference); Object.DestroyImmediate(exported);
+                Object.DestroyImmediate(generic); Object.DestroyImmediate(sourceRecipe); Object.DestroyImmediate(imported);
+            }
         }
 
         static void CheckIK(HumanoidAttackRecipe recipe, HumanoidAttackRig rig, string label)
@@ -421,7 +541,8 @@ namespace Mismo.Gameplay.Player.Editor
                 AssetDatabase.ImportAsset(recipePath, ImportAssetOptions.ForceUpdate);
                 var reloaded = AssetDatabase.LoadAssetAtPath<AnimationClip>(clipPath);
                 var document = AssetDatabase.LoadAssetAtPath<HumanoidAttackRecipe>(recipePath);
-                Check(reloaded.humanMotion && document.poses.Count == 5 && document.model == recipe.model, "Clip y proyecto sobreviven a guardado y reimportación");
+                Check(reloaded.humanMotion && document.poses.Count == recipe.poses.Count && document.model == recipe.model &&
+                    document.poses.Zip(recipe.poses, (a, b) => a.time == b.time && a.muscles.SequenceEqual(b.muscles)).All(v => v), "Clip y proyecto sobreviven a guardado y reimportación");
                 Check(document.previewWeapon == savedRecipe.previewWeapon && document.previewOffhand == document.previewWeapon && document.previewPair && !document.showPreviewWeapons,
                     "Armas: selección de ambas manos y visibilidad sobreviven al guardado");
                 target.Sample(reloaded, recipe.duration * .46f); target.StopSampling();

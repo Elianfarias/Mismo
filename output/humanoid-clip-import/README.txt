@@ -1,0 +1,9 @@
+Importar un clip completo en el taller de ataques Humanoid
+
+Abrir el personaje y elegir un clip en Importar clip o copiar un fotograma. Importar clip completo convierte el movimiento en poses editables entre el primer y último fotograma, conserva la duración y usa los FPS elegidos (15-120). El taller admite duraciones de 0,05 a 30 segundos. El desplazamiento y giro del cuerpo quedan capturados en las poses. No se copian eventos ni curvas de objetos o blendshapes; el exportador existente produce un ataque sin bucle. El original no se modifica.
+
+La importación reemplaza las poses del borrador y conserva el personaje, las armas y las fases normalizadas del ataque. Se puede deshacer y rehacer. El historial se registra después del muestreo en la escena temporal para que ese ciclo no interrumpa la captura del cambio. Las poses importadas admiten edición de huesos, arrastre IK, copiar/pegar, guardado de proyecto y exportación habitual. Usar este fotograma en la pose seleccionada sigue disponible por separado.
+
+Navegación: selección numérica y botones Anterior/Siguiente; línea de tiempo compacta para más de doce poses; Editar pose más cercana convierte la posición de reproducción en selección de una pose editable. Se amplió el rango de duración mostrado para no truncar los clips importados de más de cinco segundos.
+
+Validación en Unity 6000.6.0f1: 177 comprobaciones correctas en el proyecto aislado. Incluye FBX real, primer/último fotograma de un clip con bucle, duración no entera, desplazamiento y giro, comparación de cuerpo/manos/pies tras importar y exportar, guardado y reimportación, conservación del original, errores sin pérdida del borrador, deshacer/rehacer, selección de fotograma y copia individual. Compilación del assembly completo de editor sin errores; advertencias existentes en otras herramientas. No se ejecutó una build del juego ni se alteró la escena principal abierta. El proceso aislado registró avisos JobTempAlloc al cerrar.

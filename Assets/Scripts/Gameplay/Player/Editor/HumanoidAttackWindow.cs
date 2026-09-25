@@ -31,6 +31,8 @@ namespace Mismo.Gameplay.Player.Editor
         bool playing, previewing, showFingers, showMuscles;
         int handleMode;
         [SerializeField] bool keepIkRotation = true;
+        [SerializeField] bool showPoseGuides = true;
+        [SerializeField] int importFrameRate = 60;
         bool updatingIk, ikManipulating;
         int ikControlBone = -1;
         Vector3 ikTarget, ikHint;
@@ -152,10 +154,33 @@ namespace Mismo.Gameplay.Player.Editor
                     Record("Crear ataque"); HumanoidAttackAuthoring.CreateTemplate(draft, rig.Neutral, template, leftHanded); Changed();
                 }
                 ApplySelected();
-                var view = SceneView.lastActiveSceneView ?? GetWindow<SceneView>();
-                view.Frame(new Bounds(Vector3.up * rig.Animator.humanScale, Vector3.one * rig.Animator.humanScale * 2.5f), false);
+                CenterView(false);
             }
             catch { ClosePreview(); throw; }
+        }
+
+        void CenterView(bool profile)
+        {
+            if (rig == null || StageUtility.GetCurrentStage() != stage) return;
+            var view = SceneView.lastActiveSceneView ?? GetWindow<SceneView>();
+            float scale = rig.Animator.humanScale;
+            // The rig's neutral forward is +Z. Keep the camera independent of the
+            // edited hips, so leaning or moving the body stays visible against the guides.
+            view.in2DMode = false;
+            view.LookAt(Vector3.up * scale, Quaternion.LookRotation(profile ? Vector3.left : Vector3.back, Vector3.up), scale * 2.2f, true, true);
+            view.Repaint();
+        }
+
+        void DrawViewControls()
+        {
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                if (GUILayout.Button(new GUIContent("Centrar de frente", "Restablece el encuadre frontal, sin perspectiva, tomando como referencia el origen del personaje."))) Run(() => CenterView(false));
+                if (GUILayout.Button(new GUIContent("Ver de perfil", "Vista lateral para comprobar cuánto se inclina o avanza el cuerpo."))) Run(() => CenterView(true));
+            }
+            EditorGUI.BeginChangeCheck();
+            showPoseGuides = EditorGUILayout.ToggleLeft("Mostrar vertical y suelo de referencia", showPoseGuides);
+            if (EditorGUI.EndChangeCheck()) SceneView.RepaintAll();
         }
 
         void ApplySelected()
@@ -217,10 +242,11 @@ namespace Mismo.Gameplay.Player.Editor
                 using (new EditorGUI.DisabledScope(rig == null))
                     if (GUILayout.Button("Cerrar vista", GUILayout.Width(95), GUILayout.Height(28))) ClosePreview();
             }
+            if (rig != null) DrawViewControls();
             DrawWeapons();
             if (rig != null)
             {
-                DrawTemplate(); DrawTiming(); DrawPlayback(); DrawPoses(); DrawBone(); DrawReference();
+                DrawReference(); DrawTemplate(); DrawTiming(); DrawPlayback(); DrawPoses(); DrawBone();
             }
             EditorGUILayout.Space();
             using (new EditorGUI.DisabledScope(draft.poses.Count < 2 || validation != null))
@@ -300,7 +326,7 @@ namespace Mismo.Gameplay.Player.Editor
         {
             EditorGUILayout.Space(); EditorGUILayout.LabelField("Duración y fases", EditorStyles.boldLabel);
             EditorGUI.BeginChangeCheck();
-            float duration = EditorGUILayout.Slider("Duración (segundos)", draft.duration, .1f, 5);
+            float duration = EditorGUILayout.Slider("Duración (segundos)", draft.duration, .05f, 30);
             float active = EditorGUILayout.Slider("Inicio activo", draft.activeStartsAt, .01f, draft.recoveryStartsAt - .01f);
             float recovery = EditorGUILayout.Slider("Inicio recuperación", draft.recoveryStartsAt, active + .01f, .99f);
             int fps = EditorGUILayout.IntSlider("FPS de exportación", draft.frameRate, 15, 120);
@@ -317,7 +343,7 @@ namespace Mismo.Gameplay.Player.Editor
             using (new EditorGUILayout.HorizontalScope())
             {
                 if (GUILayout.Button(playing ? "Pausar" : "▶ Reproducir")) Run(() => { if (playing) playing = false; else { Preview(time); playing = true; lastTick = EditorApplication.timeSinceStartup; } });
-                if (GUILayout.Button("Editar pose seleccionada")) ApplySelected();
+                if (GUILayout.Button("Editar pose más cercana")) SelectNearestPose(time);
             }
             speed = EditorGUILayout.Slider("Velocidad de vista", speed, .1f, 2);
             EditorGUI.BeginChangeCheck();
@@ -327,10 +353,22 @@ namespace Mismo.Gameplay.Player.Editor
             EditorGUI.DrawRect(new Rect(rect.x, rect.y, rect.width * draft.activeStartsAt, 13), new Color(.22f, .42f, .65f));
             EditorGUI.DrawRect(new Rect(rect.x + rect.width * draft.activeStartsAt, rect.y, rect.width * (draft.recoveryStartsAt - draft.activeStartsAt), 13), new Color(.85f, .34f, .16f));
             EditorGUI.DrawRect(new Rect(rect.x + rect.width * draft.recoveryStartsAt, rect.y, rect.width * (1 - draft.recoveryStartsAt), 13), new Color(.25f, .55f, .36f));
-            for (int i = 0; i < draft.poses.Count; i++)
+            if (draft.poses.Count <= 12)
             {
-                float x = Mathf.Lerp(rect.x + 10, rect.xMax - 10, draft.poses[i].time);
-                if (GUI.Button(new Rect(x - 11, rect.y + 14, 22, 22), (i + 1).ToString())) SelectPose(i);
+                for (int i = 0; i < draft.poses.Count; i++)
+                {
+                    float x = Mathf.Lerp(rect.x + 10, rect.xMax - 10, draft.poses[i].time);
+                    if (GUI.Button(new Rect(x - 11, rect.y + 14, 22, 22), (i + 1).ToString())) SelectPose(i);
+                }
+            }
+            else
+            {
+                var strip = new Rect(rect.x, rect.y + 15, rect.width, 22);
+                if (GUI.Button(strip, GUIContent.none)) SelectNearestPose(Mathf.InverseLerp(strip.x, strip.xMax, Event.current.mousePosition.x));
+                int step = Mathf.Max(1, Mathf.CeilToInt(draft.poses.Count * 3 / Mathf.Max(1, strip.width)));
+                for (int i = 0; i < draft.poses.Count; i += step)
+                    EditorGUI.DrawRect(new Rect(Mathf.Lerp(strip.x, strip.xMax - 1, draft.poses[i].time), strip.y + 5, 1, 12), Color.gray);
+                EditorGUI.DrawRect(new Rect(Mathf.Lerp(strip.x, strip.xMax - 3, draft.poses[selectedPose].time), strip.y + 2, 3, 18), new Color(1, .7f, .1f));
             }
             EditorGUI.DrawRect(new Rect(Mathf.Lerp(rect.x, rect.xMax - 2, time), rect.y, 2, 13), Color.white);
         }
@@ -338,21 +376,33 @@ namespace Mismo.Gameplay.Player.Editor
         void DrawPoses()
         {
             EditorGUILayout.LabelField("Poses clave", EditorStyles.boldLabel);
-            int selection = EditorGUILayout.Popup("Pose a editar", selectedPose, draft.poses.Select((p, i) => $"{i + 1}. {p.label} ({p.time * draft.duration:F2}s)").ToArray());
+            int selection;
+            if (draft.poses.Count <= 12)
+                selection = EditorGUILayout.Popup("Pose a editar", selectedPose, draft.poses.Select((p, i) => $"{i + 1}. {p.label} ({p.time * draft.duration:F2}s)").ToArray());
+            else
+                selection = EditorGUILayout.IntSlider("Pose a editar", selectedPose + 1, 1, draft.poses.Count) - 1;
             if (selection != selectedPose) SelectPose(selection);
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                using (new EditorGUI.DisabledScope(selectedPose == 0))
+                    if (GUILayout.Button("◀ Anterior")) SelectPose(selectedPose - 1);
+                EditorGUILayout.LabelField($"{selectedPose + 1} / {draft.poses.Count} · {draft.poses[selectedPose].time * draft.duration:F3}s", GUILayout.Width(145));
+                using (new EditorGUI.DisabledScope(selectedPose == draft.poses.Count - 1))
+                    if (GUILayout.Button("Siguiente ▶")) SelectPose(selectedPose + 1);
+            }
             var pose = draft.poses[selectedPose];
             EditorGUI.BeginChangeCheck();
             string label = EditorGUILayout.TextField("Nombre de la pose", pose.label);
             float at = pose.time;
             using (new EditorGUI.DisabledScope(selectedPose == 0 || selectedPose == draft.poses.Count - 1))
                 at = EditorGUILayout.Slider("Momento (normalizado)", pose.time,
-                    selectedPose > 0 ? draft.poses[selectedPose - 1].time + .001f : 0,
-                    selectedPose + 1 < draft.poses.Count ? draft.poses[selectedPose + 1].time - .001f : 1);
+                    selectedPose > 0 ? draft.poses[selectedPose - 1].time + .000001f : 0,
+                    selectedPose + 1 < draft.poses.Count ? draft.poses[selectedPose + 1].time - .000001f : 1);
             var blend = (AttackPoseBlend)EditorGUILayout.Popup("Hacia la próxima pose", (int)pose.blend, new[] { "Suave", "Lineal (golpe rápido)" });
             if (EditorGUI.EndChangeCheck()) { Record("Editar pose clave"); pose.label = label; pose.time = at; pose.blend = blend; Changed(); ApplySelected(); }
             using (new EditorGUILayout.HorizontalScope())
             {
-                bool canInsert = draft.poses.All(p => Mathf.Abs(p.time - time) > .002f);
+                bool canInsert = draft.poses.All(p => Mathf.Abs(p.time - time) > .00001f);
                 using (new EditorGUI.DisabledScope(!canInsert))
                     if (GUILayout.Button("Añadir pose en este tiempo")) Run(() =>
                     {
@@ -374,7 +424,7 @@ namespace Mismo.Gameplay.Player.Editor
         void DrawBone()
         {
             EditorGUILayout.Space(); EditorGUILayout.LabelField("Editar huesos", EditorStyles.boldLabel);
-            if (previewing) EditorGUILayout.HelpBox("La vista muestra el clip. Pulsá Editar pose seleccionada para volver a mover los huesos.", MessageType.Info);
+            if (previewing) EditorGUILayout.HelpBox("La vista muestra el clip. Pulsá Editar pose más cercana para volver a mover los huesos.", MessageType.Info);
             using (new EditorGUI.DisabledScope(previewing))
             {
                 int index = Mathf.Max(0, Array.IndexOf(boneIds, selectedBone));
@@ -469,15 +519,48 @@ namespace Mismo.Gameplay.Player.Editor
 
         void DrawReference()
         {
-            EditorGUILayout.Space(); EditorGUILayout.LabelField("Tomar una pose de otro clip (opcional)", EditorStyles.boldLabel);
+            EditorGUILayout.Space(); EditorGUILayout.LabelField("Importar clip o copiar un fotograma", EditorStyles.boldLabel);
+            EditorGUI.BeginChangeCheck();
             referenceClip = (AnimationClip)EditorGUILayout.ObjectField("Clip Humanoid", referenceClip, typeof(AnimationClip), false);
+            if (EditorGUI.EndChangeCheck() && referenceClip != null)
+            {
+                importFrameRate = Mathf.Clamp(Mathf.RoundToInt(referenceClip.frameRate), 15, 120);
+                referenceTime = 0;
+            }
             if (referenceClip == null) return;
             if (!referenceClip.humanMotion) { EditorGUILayout.HelpBox("Ese clip es Generic. Elegí una animación Humanoid.", MessageType.Warning); return; }
-            referenceTime = EditorGUILayout.Slider("Segundo del clip", referenceTime, 0, referenceClip.length);
-            if (GUILayout.Button("Usar este fotograma en la pose seleccionada")) Run(() =>
+            string invalid = HumanoidAttackAuthoring.ValidateImportClip(referenceClip);
+            using (new EditorGUI.DisabledScope(invalid != null))
             {
-                Record("Tomar pose Humanoid"); rig.Sample(referenceClip, referenceTime); CaptureSelected();
-            });
+                importFrameRate = EditorGUILayout.IntSlider("FPS de importación", importFrameRate, 15, 120);
+                if (invalid == null)
+                    EditorGUILayout.LabelField($"Clip completo: {referenceClip.length:F3}s · {Mathf.CeilToInt(referenceClip.length * importFrameRate) + 1} poses editables", EditorStyles.miniLabel);
+                if (GUILayout.Button("Importar clip completo (se puede deshacer)")) Run(ImportReferenceClip);
+            }
+            if (invalid != null) EditorGUILayout.HelpBox(invalid, MessageType.Warning);
+            EditorGUILayout.HelpBox("Importar reemplaza las poses y la duración actuales. Conserva las armas y las fases del ataque. El movimiento del cuerpo queda en las poses; los eventos y las curvas de objetos o blendshapes no se copian.", MessageType.None);
+            referenceTime = EditorGUILayout.Slider("Segundo del clip", referenceTime, 0, referenceClip.length);
+            if (GUILayout.Button("Usar este fotograma en la pose seleccionada")) Run(CopyReferenceFrame);
+        }
+
+        void ImportReferenceClip()
+        {
+            HumanoidAttackAuthoring.ImportClip(draft, referenceClip, importFrameRate);
+            selectedPose = 0; Changed();
+            notice = $"Clip importado: {draft.poses.Count} poses editables. Recorré los fotogramas con Anterior / Siguiente o la línea de tiempo. Ctrl+Z deshace la importación.";
+        }
+
+        void CopyReferenceFrame()
+        {
+            Record("Tomar pose Humanoid"); rig.Sample(referenceClip, referenceTime); CaptureSelected();
+        }
+
+        void SelectNearestPose(float at)
+        {
+            int nearest = 0;
+            for (int i = 1; i < draft.poses.Count; i++)
+                if (Mathf.Abs(draft.poses[i].time - at) < Mathf.Abs(draft.poses[nearest].time - at)) nearest = i;
+            SelectPose(nearest);
         }
 
         void DrawScene(SceneView view)
@@ -494,6 +577,7 @@ namespace Mismo.Gameplay.Player.Editor
             Handles.zTest = UnityEngine.Rendering.CompareFunction.Always;
             try
             {
+                if (showPoseGuides && input.type == EventType.Repaint) DrawPoseGuides();
                 for (int i = 0; i < mappedBones.Length; i++)
                 {
                     var bone = mappedBones[i];
@@ -522,6 +606,17 @@ namespace Mismo.Gameplay.Player.Editor
                 }
             }
             finally { Handles.color = previousColor; Handles.zTest = previousDepth; }
+        }
+
+        void DrawPoseGuides()
+        {
+            float scale = rig.Animator.humanScale;
+            Handles.color = new Color(1, .85f, .35f, .65f);
+            Handles.DrawDottedLine(Vector3.zero, Vector3.up * scale * 2.2f, 5);
+            Handles.Label(Vector3.up * scale * 2.25f, "Vertical de referencia");
+            Handles.color = new Color(.7f, .7f, .7f, .65f);
+            Handles.DrawLine(Vector3.left * scale * 1.5f, Vector3.right * scale * 1.5f);
+            Handles.DrawLine(Vector3.back * scale * 1.5f, Vector3.forward * scale * 1.5f);
         }
 
         void DrawIkHandles()

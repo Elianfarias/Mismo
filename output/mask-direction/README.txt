@@ -1,0 +1,11 @@
+Corrección de orientación al heredar máscara de familia
+
+Causa confirmada: BowUpperBody y PlayerUpperBody descartan Humanoid Root. Los músculos superiores de los clips están definidos en relación con la orientación del cuerpo del propio clip. Al sustituirla por la locomoción, la pose superior puede apuntar de lado aunque el clip completo se vea recto en el taller. La prueba aislada del arco al 60 % midió -6,671 grados entre las manos con Full Body y -74,250 grados con la máscara heredada.
+
+Solución en WeaponActionPlayback: un job captura la orientación global de Spine a la salida del mezclador de ataques, antes de la máscara. Otro la restituye en la pose final respetando el peso de entrada/salida. Se conserva la cadera y las piernas de locomoción. Ambos jobs forman una única cadena; no se duplican muestras ni se evalúa de nuevo el controlador. El búfer nativo se libera tras destruir el grafo.
+
+Se activa en rigs Humanoid con máscara completa de cuerpo superior que excluye Root y ambas piernas. Full Body y máscaras parciales de otras regiones mantienen su recorrido anterior. No se modifican los clips, las máscaras compartidas, el apuntado de proyectiles ni las reglas de desplazamiento de las habilidades.
+
+Validación: 59 comprobaciones correctas en Unity 6000.6.0f1, con el arco real, una espada del proyecto y el Lunge creado por el usuario. Se comparan cuatro fotogramas, reposo/caminata y orientación global de 0/90 grados. Torso, cabeza y manos coinciden con el clip completo; cadera y piernas conservan posición y rotación de locomoción; la raíz visual permanece intacta y las piernas siguen animándose. Incluye mezcla de entrada, cambio de clip, cambio a Full Body, regreso a máscara y cancelación repetidos tres veces. Las máscaras originales conservan su serialización.
+
+Compilación completa de runtime y editor: sin errores. Prueba ejecutada en proyecto aislado, sin operar sobre la escena abierta. No se ejecutó una build del juego. probe.csv conserva las medidas anteriores y after.csv las posteriores. checks.txt contiene las verificaciones de regresión. El desplazamiento corporal excluido por la máscara sigue excluido: la corrección conserva la orientación del gesto superior, no convierte una máscara parcial en Full Body.

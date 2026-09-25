@@ -10,6 +10,7 @@ namespace Mismo.Gameplay.Player.Equipment
         [SerializeField] private string displayName = "Espada básica";
         [SerializeField, Min(0.01f)] private float basicAttackCooldown = 0.45f;
         public AbilityDefinition[] abilities = new AbilityDefinition[4];
+        [Tooltip("Familia base al usar este objeto solo. Las combinaciones con otra arma o escudo usan Dual Sword Family o Sword Shield Family.")]
         public WeaponFamilyDefinition family;
         [Tooltip("Vacío hereda el feedback de la familia. Asignar una copia para editar sólo esta arma.")]
         public Presentation.CombatFeedbackProfile feedbackOverride;

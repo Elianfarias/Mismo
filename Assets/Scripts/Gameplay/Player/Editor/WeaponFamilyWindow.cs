@@ -25,8 +25,10 @@ namespace Mismo.Gameplay.Player.Editor
             if(weapon==null){EditorGUILayout.EndScrollView();return;}
             if(GUILayout.Button("Editar / probar feedback de combate"))CombatFeedbackWindow.Open(weapon);
             EditorGUI.BeginChangeCheck();
-            var family=(WeaponFamilyDefinition)EditorGUILayout.ObjectField("Familia",weapon.family,typeof(WeaponFamilyDefinition),false);
+            var family=(WeaponFamilyDefinition)EditorGUILayout.ObjectField("Familia base (arma sola)",weapon.family,typeof(WeaponFamilyDefinition),false);
             if(EditorGUI.EndChangeCheck())Assign(family);
+            if(weapon.family!=null && (weapon.family==weapon.dualSwordFamily || weapon.family==weapon.swordShieldFamily))
+                EditorGUILayout.HelpBox("La familia base coincide con una combinación: también se usarán esas habilidades con la mano secundaria vacía. Para editar una combinación, abrí su asset de familia sin cambiar la familia base del arma.",MessageType.Warning);
             source=(WeaponDefinition)EditorGUILayout.ObjectField("Tomar familia de",source,typeof(WeaponDefinition),false);
             using(new EditorGUI.DisabledScope(source==null || source.family==null))
                 if(GUILayout.Button("Compartir familia de esa arma"))Assign(source.family);

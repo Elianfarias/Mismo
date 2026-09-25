@@ -84,11 +84,12 @@ MonoBehaviour:
   preparationSfx: {fileID: 0}
   preparationSfxVolume: 1
   loopPreparationSfx: 0
-  executionSfx: {fileID: 8300000, guid: e39633a1316149344bf539d298d34863, type: 3}
+  executionSfx: {fileID: 8300000, guid: eec22285c386e884791b851e07691afe, type: 3}
   executionSfxVolume: 0.5
   comboStepSfx: []
   pose: 1
   usesSwordCombo: 0
+  comboSteps: []
   targetsGround: 0
   aimFromCamera: 0
   range: 25

@@ -162,6 +162,58 @@ namespace Mismo.Gameplay.Player.Editor
 
         static bool Finite(float value) => !float.IsNaN(value) && !float.IsInfinity(value);
 
+        public static string ValidateImportClip(AnimationClip clip)
+        {
+            if (clip == null) return "Elegí un clip Humanoid para importar.";
+            if (!clip.humanMotion) return "Ese clip es Generic. Elegí una animación Humanoid.";
+            if (!Finite(clip.length) || clip.length < .05f || clip.length > 30)
+                return "El taller admite clips completos de 0,05 a 30 segundos.";
+            return null;
+        }
+
+        public static void ImportClip(HumanoidAttackRecipe recipe, AnimationClip source, int frameRate)
+        {
+            string invalid = ValidateImportClip(source);
+            if (invalid != null) throw new InvalidOperationException(invalid);
+            if (recipe == null) throw new ArgumentNullException(nameof(recipe));
+            if (frameRate < 15 || frameRate > 120) throw new InvalidOperationException("Usá entre 15 y 120 fotogramas por segundo.");
+            var sampled = Object.Instantiate(source);
+            var imported = Object.Instantiate(recipe);
+            sampled.hideFlags = imported.hideFlags = HideFlags.HideAndDontSave;
+            try
+            {
+                // Sample a disposable copy: retain body displacement in the poses and
+                // read the last frame without wrapping back to the start of a loop.
+                var settings = AnimationUtility.GetAnimationClipSettings(sampled);
+                settings.loopTime = false;
+                settings.loopBlendOrientation = settings.loopBlendPositionY = settings.loopBlendPositionXZ = true;
+                AnimationUtility.SetAnimationClipSettings(sampled, settings);
+                sampled.wrapMode = WrapMode.ClampForever;
+                imported.clipName = source.name + "_Editable";
+                imported.duration = source.length;
+                imported.frameRate = frameRate;
+                imported.poses = new List<HumanoidAttackPose>();
+                int frames = Mathf.CeilToInt(source.length * frameRate);
+                using (var rig = new HumanoidAttackRig(recipe.model))
+                {
+                    for (int frame = 0; frame <= frames; frame++)
+                    {
+                        float seconds = frame == frames ? source.length : frame / (float)frameRate;
+                        rig.Sample(sampled, seconds);
+                        var pose = rig.Capture("Fotograma " + frame, seconds / source.length);
+                        pose.blend = AttackPoseBlend.Linear;
+                        imported.poses.Add(pose);
+                    }
+                }
+                Validate(imported);
+                // Commit only once all frames are valid. A failed import leaves the draft intact.
+                Undo.RegisterCompleteObjectUndo(recipe, "Importar clip Humanoid completo");
+                recipe.clipName = imported.clipName; recipe.duration = imported.duration;
+                recipe.frameRate = imported.frameRate; recipe.poses = imported.poses;
+            }
+            finally { Object.DestroyImmediate(sampled); Object.DestroyImmediate(imported); }
+        }
+
         public static HumanoidAttackPose Evaluate(HumanoidAttackRecipe recipe, float time)
         {
             time = Mathf.Clamp01(time);

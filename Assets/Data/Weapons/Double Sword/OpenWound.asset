@@ -19,10 +19,10 @@ MonoBehaviour:
   passive: 0
   description: "Un corte cercano aplica sangrado durante 5 s. Reaplicarlo renueva su duraci\xF3n."
   localizationKey: 
-  preparation: 0.1
+  preparation: 0
   active: 0.5
   recovery: 0.2
-  cooldown: 7
+  cooldown: 6
   staminaCost: 0
   chargeable: 0
   maximumCharge: 0.9
@@ -84,7 +84,7 @@ MonoBehaviour:
   preparationSfx: {fileID: 0}
   preparationSfxVolume: 1
   loopPreparationSfx: 0
-  executionSfx: {fileID: 8300000, guid: 15a3635dd2390204bb497f47a3566567, type: 3}
+  executionSfx: {fileID: 8300000, guid: 81d854a5d807c2e41a8623357cdb72e0, type: 3}
   executionSfxVolume: 1
   comboStepSfx: []
   pose: 1

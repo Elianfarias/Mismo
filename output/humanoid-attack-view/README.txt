@@ -1,0 +1,5 @@
+Vista del taller de ataques Humanoid
+
+Agrega Centrar de frente y Ver de perfil debajo de Abrir personaje en Scene. Ambas vistas son ortográficas y usan el origen fijo del rig; el encuadre se restablece de frente al abrirlo. La opción Mostrar vertical y suelo de referencia dibuja una vertical punteada y dos ejes en el suelo. Los controles modifican únicamente la cámara de Scene y una preferencia de la ventana; no editan las poses ni el proyecto del ataque.
+
+Validación: compilación completa del assembly de editor sin errores (advertencias existentes en otras herramientas). La suite existente HumanoidAttackChecks.RunIsolatedBatch terminó con 159 comprobaciones correctas en Unity 6000.6.0f1, incluyendo apertura y cierre de la vista, reproducción, arrastre IK, deshacer/rehacer y recarga de proyectos. Se ejecutó en el proyecto aislado; no se alteró la escena de trabajo del usuario. Unity registró avisos de JobTempAlloc al salir. No se hizo verificación visual interactiva del editor principal.
