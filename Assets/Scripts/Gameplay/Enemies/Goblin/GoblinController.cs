@@ -368,11 +368,9 @@ namespace Mismo.Gameplay.Enemies
             if (settings == null || health.IsDead || result.Outcome != HitOutcome.Hit || result.HealthDamage <= 0 || combat.Broken) return;
             bool comboHit = !damage.Ranged && !damage.Area && damage.Source != null &&
                 damage.Source.GetComponent<AttackHitbox>() != null;
-            bool armoredAttack = attack != null && attack.resistComboInterrupt &&
-                (State == GoblinState.Telegraph || State == GoblinState.Attack);
-            if (comboHit && settings.interruptibleByCombos && !settings.isBoss && !armoredAttack)
+            if (comboHit && settings.interruptibleByCombos && !settings.isBoss)
             {
-                // Consecutive hits renew hitstun independently of posture-break immunity.
+                if (!TryMiniInterrupt()) return;
                 // Preserve any longer punish/stun window already in progress.
                 float remaining = State == GoblinState.Stagger || State == GoblinState.Recovery ? timer : 0;
                 Stagger(Mathf.Max(remaining, Mathf.Max(.05f, settings.comboHitStun)));
@@ -383,7 +381,13 @@ namespace Mismo.Gameplay.Enemies
                 State != GoblinState.Recovery || result.Outcome != HitOutcome.Hit || result.HealthDamage <= 0 ||
                 damage.FeedbackProfile == null || !damage.FeedbackProfile.IsHeavy(damage)) return;
             // Never shorten the punish window by replacing a longer recovery with a flinch.
-            Stagger(Mathf.Max(timer, .22f));
+            if (TryMiniInterrupt()) Stagger(Mathf.Max(timer, .22f));
+        }
+        private bool TryMiniInterrupt()
+        {
+            if (attack != null && !attack.CanBeInterrupted &&
+                (State == GoblinState.Telegraph || State == GoblinState.Attack)) return false;
+            return combat.TryInterrupt(settings.maxConsecutiveInterrupts, settings.interruptImmunityDuration);
         }
         public void OnAttackParried(DamageInfo damage)
         {
