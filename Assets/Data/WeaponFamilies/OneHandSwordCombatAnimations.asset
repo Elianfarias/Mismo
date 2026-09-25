@@ -22,8 +22,8 @@ MonoBehaviour:
     useAnimationMovement: 0
     animationMovementScale: 1
     comboClips:
-    - {fileID: 7400000, guid: c951a7a633a77ae4ba129cbdd11ca625, type: 2}
-    - {fileID: 7400000, guid: d10724e1e5f65ec47ad70614ad323f34, type: 2}
+    - {fileID: 7400000, guid: 85d1a3ca145c8094084e27a87783edfd, type: 2}
+    - {fileID: 7400000, guid: d597072f663e50f4cadf5ab906393693, type: 2}
     activeStartsAt: 0.3
     recoveryStartsAt: 0.65
     blendSeconds: 0.08
