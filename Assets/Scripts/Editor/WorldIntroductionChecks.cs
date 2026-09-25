@@ -40,6 +40,11 @@ public static class WorldIntroductionChecks
     public static void Run()
     {
         Directory.CreateDirectory(Output);WorldIntroductionBuilder.Build();WorldIntroductionBuilder.RefreshNarrator();
+        RunExisting();
+    }
+    public static void RunExisting()
+    {
+        Directory.CreateDirectory(Output);
         EditorSceneManager.OpenScene("Assets/Scenes/MainMenu.unity");
         EditorWindow.GetWindow(typeof(EditorWindow).Assembly.GetType("UnityEditor.GameView")).Focus();
         SessionState.SetBool(Pending,true);EditorApplication.EnterPlaymode();
@@ -76,6 +81,16 @@ public static class WorldIntroductionChecks
     static void Require(bool test,string label){if(!test)throw new Exception(label);results.Add("PASS: "+label);Debug.Log("INTRO_CHECK: "+label);}
     static IEnumerator Checks()
     {
+        foreach(var resolution in new[]{new Vector2(800,600),new Vector2(1280,720),new Vector2(1920,1080),new Vector2(2560,1080),new Vector2(720,1280)})
+        foreach(float miniWidth in new[]{220f,330f,600f,900f})
+        {
+            float scale=Mathf.Max(.1f,Mathf.Min(resolution.x/1600,resolution.y/900));
+            var screen=new Rect(Vector2.zero,resolution/scale);
+            float width=Mathf.Min(miniWidth,screen.width-40,(screen.height-48)*330/280);
+            var mini=new Rect(screen.width-20-width,18,width,width*280/330);
+            var objective=WorldIntroduction.PlaceObjective(screen,mini);
+            Require(!objective.Overlaps(mini)&&screen.Contains(objective.min)&&screen.Contains(objective.max),"Objective avoids minimap and stays on screen: "+resolution+" / map "+miniWidth);
+        }
         string directory=Path.GetFullPath(Output+"/Profiles/"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(directory);
         typeof(WorldSession).GetField("VerificationDirectory",BindingFlags.Static|BindingFlags.NonPublic).SetValue(null,directory);
         var template=AssetDatabase.LoadAssetAtPath<ExplorationWorldSettings>("Assets/Data/World/ExplorationWorldSettings.asset");
@@ -103,6 +118,7 @@ public static class WorldIntroductionChecks
         Require(Vector3.Distance(player.transform.position,intro.Layout.Spawn)<2,"Nueva partida spawns inside the long cave");
         Require(inventory.IsReady&&!inventory.HasSaveProblem&&WorldSession.ProfilePath.StartsWith(directory),"Persistent inventory is isolated to the test save");
         Require(Time.timeScale==0&&guide.Current==definition.arrival,"Arrival pauses with the existing spotlight guide");
+        while(guide.Opacity<1)yield return null;
         ScreenCapture.CaptureScreenshot(Output+"/arrival.png");for(int i=0;i<6;i++)yield return null;
         guide.Skip();for(int i=0;i<8;i++)yield return null;
         Require(intro.Stage==1&&WorldSession.Current.introductionStage==1,"Skipped lesson and stage persist");
@@ -121,12 +137,37 @@ public static class WorldIntroductionChecks
             {
                 for(int i=0;i<10;i++)yield return null;
                 var npc=Object.FindAnyObjectByType<WorldIntroductionNarrator>();
+                var map=player.GetComponent<WorldMapPanel>();float hudScale=PlayerHUD.Scale;
+                Require(!intro.ObjectiveRect.Overlaps(new Rect(map.MiniRect.position/hudScale,map.MiniRect.size/hudScale)),"Live objective bounds avoid the real minimap");
+                ScreenCapture.CaptureScreenshot(Output+"/objective-before-talk.png");for(int i=0;i<6;i++)yield return null;
+                var pauseOwner=new object();Require(GameplayPause.TryPause(pauseOwner),"Other pause can temporarily block dialogue");
+                Require(!npc.Interact(inventory)&&intro.Stage==3&&WorldSession.Current.introductionStage==3,"Failed interaction cannot complete or save the conversation objective");
+                GameplayPause.Resume(pauseOwner);yield return null;yield return null;
                 Require(npc.Interact(inventory),"F interaction opens Liria's dialogue");
-                guide.Skip();for(int i=0;i<3;i++)yield return null;
-                Require(intro.Stage==3,"Skipping dialogue does not accept Liria's request");
-                Require(npc.Interact(inventory),"Liria can be approached again after declining");
+                Require(intro.Stage==4&&WorldSession.Current.introductionStage==4,"Talking to Liria immediately completes and saves the conversation objective");
+                Require(guide.Opacity==0&&guide.PageOpacity==0&&Time.timeScale==0,"Tutorial opens transparent and owns the pause");
+                Require(WorldSession.Continue()&&WorldSession.Current.introductionStage==4&&guide.IsOpen,"Conversation checkpoint survives a save reload before dialogue closes");
+                guide.Skip();
+                Require(!guide.IsOpen&&!GameplayPause.IsPaused&&GameplayPause.BlocksInput,"Skip during the opening transition releases pause and blocks the dismissal frame");
+                for(int i=0;i<3;i++)yield return null;
+                Require(intro.Stage==4,"Skipping dialogue does not restore the conversation objective");
+                ScreenCapture.CaptureScreenshot(Output+"/objective-after-talk.png");for(int i=0;i<6;i++)yield return null;
+                Require(npc.Interact(inventory),"Liria's conversation can be replayed without repeating its objective");
+                float pausedTime=Time.time;bool intermediate=false;
+                while(guide.Opacity<1)
+                {
+                    if(guide.Opacity>0&&guide.Opacity<.95f&&!intermediate)
+                    {intermediate=true;ScreenCapture.CaptureScreenshot(Output+"/dialogue-transition.png");}
+                    yield return null;
+                }
+                Require(intermediate&&Time.time==pausedTime&&Time.timeScale==0,"Fade advances through intermediate opacity while gameplay time is paused");
+                guide.Next();Require(guide.PageIndex==1&&guide.PageOpacity==0&&guide.Opacity==1,"Page change fades the card without flashing the darkened background");
+                while(guide.PageOpacity<1)yield return null;
+                guide.Previous();Require(guide.PageIndex==0,"Previous still works with animated pages");
+                while(guide.PageOpacity<1)yield return null;
                 ScreenCapture.CaptureScreenshot(Output+"/liria.png");for(int i=0;i<6;i++)yield return null;
                 while(guide.IsOpen)guide.Next();
+                Require(intro.Stage==4&&WorldSession.Current.introductionStage==4,"Finishing a replay cannot complete the following combat objective");
             }
             int safety=0;
             while(intro.Stage==stage)

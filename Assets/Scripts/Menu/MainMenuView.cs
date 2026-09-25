@@ -72,17 +72,17 @@ namespace Mismo.Menu
             foreach(var control in GetComponentsInChildren<Button>(true))
             {
                 var image=control.targetGraphic as Image;if(image==null)continue;
-                image.sprite=pixelPanel;image.type=Image.Type.Simple;image.color=Color.white;
-                AddFantasyFrame(control.transform,Color.white);
+                image.sprite=pixelPanel;image.type=Image.Type.Simple;image.color=new Color(1, 1, 1, 0.6f);
+                AddFantasyFrame(control.transform, new Color(1, 1, 1, 0.2f));
                 var label=control.GetComponentInChildren<Text>();if(label!=null)label.color=new Color(.94f,.90f,.79f);
-                var colors=control.colors;colors.normalColor=Color.white;colors.highlightedColor=PlayerHUD.Gold;colors.selectedColor=PlayerHUD.Gold;control.colors=colors;
+                var colors=control.colors;colors.normalColor=new Color(1, 1, 1, 0.6f);colors.highlightedColor=PlayerHUD.Gold;colors.selectedColor=PlayerHUD.Gold;control.colors=colors;
             }
             var panel=transform.Find("Menu panel");
             if(panel!=null)
             {
                 var edge=panel.Find("Gold edge");if(edge!=null)edge.gameObject.SetActive(false);
-                var background=panel.GetComponent<Image>();if(background!=null){background.sprite=pixelPanel;background.type=Image.Type.Simple;background.color=Color.white;}
-                AddFantasyFrame(panel,Color.white);
+                var background=panel.GetComponent<Image>();if(background!=null){background.sprite=pixelPanel;background.type=Image.Type.Simple;background.color=new Color(1,1,1,0.2f);}
+                AddFantasyFrame(panel,new Color(1, 1, 1, 0.6f)); 
             }
         }
         void AddFantasyFrame(Transform parent,Color tint)
@@ -110,7 +110,7 @@ namespace Mismo.Menu
         void CreateCredits()
         {
             credits=Box("Créditos",home.transform.parent,new Vector2(42,235),new Vector2(450,420),Color.clear).gameObject;
-            Label(credits.transform,"CRÉDITOS",Vector2.zero,new Vector2(450,38),27,Color.white);
+            Label(credits.transform,"CRÉDITOS",Vector2.zero,new Vector2(450,38),27,new Color(1, 1, 1, 0.6f));
             Label(credits.transform,"Lorc y Skoll · Game-icons.net\nCC BY 3.0 · Escala y tinte adaptados\ncreativecommons.org/licenses/by/3.0\n\nCagliostro · Matthew Desmond · SIL OFL 1.1\n\nFantasy UI Borders · Kenney · CC0\n\nUicons · flaticon.com/uicons\n"+flaticonAttribution,new Vector2(0,52),new Vector2(450,275),18,new Color(.85f,.87f,.81f));
             var returnButton=ButtonAt(credits.transform,"Volver",340,false);
             returnButton.onClick.AddListener(()=>ShowOptions(false));
@@ -189,9 +189,9 @@ namespace Mismo.Menu
         }
         internal static Button ButtonAt(Transform parent,string title,float y,bool primary)
         {
-            var image=Box(title,parent,new Vector2(0,y),new Vector2(450,66),primary?new Color(.83f,.7f,.43f):new Color(.12f,.17f,.19f));image.raycastTarget=true;
+            var image=Box(title,parent,new Vector2(0,y),new Vector2(450,66),primary?new Color(.83f,.7f,.43f, 0.6f):new Color(.12f,.17f,.19f,0.6f));image.raycastTarget=true;
             var button=image.gameObject.AddComponent<Button>();button.targetGraphic=image;
-            var colors=button.colors;colors.highlightedColor=new Color(1,.91f,.72f);colors.selectedColor=colors.highlightedColor;colors.pressedColor=new Color(.7f,.73f,.7f);button.colors=colors;
+            var colors=button.colors;colors.highlightedColor=new Color(1,.91f,.72f, 0.6f);colors.selectedColor=colors.highlightedColor;colors.pressedColor=new Color(.7f,.73f,.7f);button.colors=colors;
             var text=Label(image.transform,title,new Vector2(24,17),new Vector2(400,36),25,primary?new Color(.07f,.09f,.1f):Color.white);
             return button;
         }

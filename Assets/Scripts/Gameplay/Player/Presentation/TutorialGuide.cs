@@ -19,11 +19,15 @@ namespace Mismo.Gameplay.Player.Presentation
         EquipmentLoadout equipment;
         int page, changedFrame;
         bool startPending;
+        float openedAt,pageChangedAt;
+        const float OpenSeconds=.28f,PageSeconds=.16f;
         GUIStyle bodyStyle;
         Vector2 scroll;
         public bool IsOpen => current != null;
         public int PageIndex => page;
         public TutorialSequence Current => current;
+        public float Opacity=>IsOpen?Mathf.SmoothStep(0,1,(Time.unscaledTime-openedAt)/OpenSeconds):0;
+        public float PageOpacity=>Mathf.Min(Opacity,Mathf.SmoothStep(0,1,(Time.unscaledTime-pageChangedAt)/PageSeconds));
         // Dismissed means read OR skipped; it never claims the player mastered a mechanic.
         public event Action<TutorialSequence, bool> Closed;
         public bool WasDismissed(TutorialSequence sequence) => sequence != null && dismissed.Contains(sequence.id);
@@ -44,6 +48,7 @@ namespace Mismo.Gameplay.Player.Presentation
                 InventoryPanel.AnyOpen||WorldMapPanel.BlocksGameplay||GetComponent<World.GatheringPlayer>()?.BlocksGameplay==true)return false;
             if(!GameplayPause.TryPause(this))return false;
             current=sequence;page=0;changedFrame=Time.frameCount;scroll=Vector2.zero;
+            openedAt=pageChangedAt=Time.unscaledTime;
             return true;
         }
 
@@ -60,12 +65,13 @@ namespace Mismo.Gameplay.Player.Presentation
             else if(keyboard.enterKey.wasPressedThisFrame||keyboard.rightArrowKey.wasPressedThisFrame)Next();
         }
 
-        public void Previous(){if(!IsOpen||page==0)return;page--;changedFrame=Time.frameCount;scroll=Vector2.zero;}
+        void PageChanged(){changedFrame=Time.frameCount;scroll=Vector2.zero;pageChangedAt=Time.unscaledTime;}
+        public void Previous(){if(!IsOpen||page==0)return;page--;PageChanged();}
         public void Next()
         {
             if(!IsOpen)return;
             if(page+1>=current.pages.Length){Close(false);return;}
-            page++;changedFrame=Time.frameCount;scroll=Vector2.zero;
+            page++;PageChanged();
         }
         public void Skip()=>Close(true);
         void Close(bool skipped,bool remember=true)
@@ -112,14 +118,16 @@ namespace Mismo.Gameplay.Player.Presentation
             var matrix=GUI.matrix;var color=GUI.color;bool enabled=GUI.enabled;
             try
             {
-                GUI.depth=-500;GUI.enabled=true;GUI.color=Color.white;
+                GUI.depth=-500;GUI.enabled=true;
+                float opacity=Opacity,pageOpacity=PageOpacity;
+                GUI.color=new Color(1,1,1,opacity);
                 float scale=PlayerHUD.Scale;
                 GUI.matrix=Matrix4x4.Scale(Vector3.one*scale);
                 var screen=new Rect(0,0,Screen.width/scale,Screen.height/scale);
                 var step=current.pages[page];
                 bool highlight=hud.TryGetTutorialRect(step.highlight,out var pixels);
                 var hole=ClampHighlight(new Rect(pixels.position/scale,pixels.size/scale),screen);
-                var shade=new Color(.008f,.015f,.024f,.82f);
+                var shade=new Color(.008f,.015f,.024f,.82f*opacity);
                 if(highlight)
                 {
                     PlayerHUD.Fill(new Rect(0,0,screen.width,hole.yMin),shade);
@@ -134,7 +142,9 @@ namespace Mismo.Gameplay.Player.Presentation
                 string body=ResolveText(step.body);
                 float textHeight=bodyStyle.CalcHeight(new GUIContent(body),Mathf.Min(540,screen.width-48)-74);
                 var card=CardRect(screen,hole,highlight,Mathf.Max(306,textHeight+188));
-                PlayerHUD.Fill(card,new Color(.043f,.059f,.071f,.99f));
+                card.y+=(1-pageOpacity)*14;
+                GUI.color=new Color(1,1,1,pageOpacity);
+                PlayerHUD.Fill(card,new Color(.043f,.059f,.071f,.99f*pageOpacity));
                 QuietFantasyUI.Border(card,new Color(.64f,.52f,.30f),1);
                 QuietFantasyUI.Text(new Rect(card.x+28,card.y+22,card.width-56,24),"GUÍA · "+(page+1)+" / "+current.pages.Length+" · EN PAUSA",14,PlayerHUD.Gold);
                 QuietFantasyUI.Text(new Rect(card.x+28,card.y+57,card.width-56,40),step.title,28,QuietFantasyUI.Ink,true);
@@ -142,10 +152,11 @@ namespace Mismo.Gameplay.Player.Presentation
                 scroll=GUI.BeginScrollView(viewport,scroll,new Rect(0,0,viewport.width-18,textHeight));
                 GUI.Label(new Rect(0,0,viewport.width-18,textHeight),body,bodyStyle);GUI.EndScrollView();
                 float y=card.yMax-58;
+                bool interactive=pageOpacity>=.65f;GUI.enabled=interactive;
                 if(FantasyUI.Button(new Rect(card.x+24,y,110,36),"Omitir · Esc")){Skip();return;}
-                GUI.enabled=page>0;
+                GUI.enabled=interactive&&page>0;
                 if(FantasyUI.Button(new Rect(card.xMax-290,y,115,36),"Anterior")){Previous();return;}
-                GUI.enabled=true;
+                GUI.enabled=interactive;
                 if(FantasyUI.Button(new Rect(card.xMax-163,y,139,36),page+1==current.pages.Length?current.completionLabel:"Siguiente →")){Next();return;}
                 // The transparent hole is visual only. Never send its clicks to the HUD below.
                 if(Event.current.isMouse||Event.current.type==EventType.ScrollWheel)Event.current.Use();

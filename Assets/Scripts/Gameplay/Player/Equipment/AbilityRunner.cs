@@ -86,7 +86,15 @@ namespace Mismo.Gameplay.Player.Equipment
             // Combos pay at the start of each actual step, including the first.
             if(!definition.usesSwordCombo)stamina?.TrySpend(definition.staminaCost);
             state.Spend(definition.focusCost);
-            Current=new AbilityExecution(this,weapon,definition,direction.sqrMagnitude>.001f?direction.normalized:Motor.Facing,groundPoint){AimPoint=aimPoint,Held=held};
+            // A sword combo enters its active phase immediately. Keeping Began false would make
+            // PlayerController refresh the camera aim every frame while the animated weapon moves,
+            // which can rotate the character unpredictably at close range.
+            Current=new AbilityExecution(this,weapon,definition,direction.sqrMagnitude>.001f?direction.normalized:Motor.Facing,groundPoint)
+            {
+                AimPoint=aimPoint,
+                Held=held,
+                Began=definition.usesSwordCombo
+            };
             if(definition.usesSwordCombo)PlayExecutionSound(definition,combo.CurrentStepIndex);
             else StartPreparationSound(definition);
             readyAt[definition]=Time.time+definition.cooldown/(slot==AbilitySlot.Basic?Current.AttackSpeed:1);loadout.MarkCombat();Started?.Invoke(definition);return true;
