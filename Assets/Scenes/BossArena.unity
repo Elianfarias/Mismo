@@ -144,7 +144,7 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 59090047}
   m_Enabled: 1
-  serializedVersion: 12
+  serializedVersion: 13
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1.1
@@ -196,7 +196,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShadowRadius: 0
+  m_ShapeRadius: 0
   m_ShadowAngle: 0
   m_LightUnit: 1
   m_LuxAtDistance: 1
@@ -312,6 +312,10 @@ PrefabInstance:
     - target: {fileID: 2759051942343419815, guid: 19d7b8c1ce4a44e5a7f93d0f2281b61c, type: 3}
       propertyPath: m_Name
       value: FirstBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621690126304658684, guid: 19d7b8c1ce4a44e5a7f93d0f2281b61c, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are already bound by a Humanoid avatar. These transforms can only be changed by Humanoid clips.\n\tTransform 'Hips'\n\tTransform 'UpperArm.L'\n\tTransform 'Head'\n\tTransform 'UpperLeg.L'\n\tTransform 'LowerLeg.R'\n\tTransform 'LowerLeg.L'\n\tTransform 'LowerArm.R'\n\tTransform 'LowerArm.L'\n\tTransform 'Chest'\n\tTransform 'UpperLeg.R'\n\tand more ...\n\tFrom animation clip 'Human_Goblin_CombatDamage01'"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

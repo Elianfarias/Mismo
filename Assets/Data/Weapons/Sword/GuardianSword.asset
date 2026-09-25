@@ -20,7 +20,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ce744cb14261acd4a92c927ed4ad58ab, type: 2}
   - {fileID: 11400000, guid: e7555c6d155e93448b2c9f2f131ceec1, type: 2}
   - {fileID: 11400000, guid: c21a4fd366079564f9927dda16544232, type: 2}
-  family: {fileID: 11400000, guid: d75a568fa95abb44595d508a05bccc66, type: 2}
+  family: {fileID: 11400000, guid: c477298292785fe0bb39efdefaee4d12, type: 2}
   feedbackOverride: {fileID: 11400000, guid: c2aa63ae5ff44c87980ff3ea94bf40ba, type: 2}
   isShield: 0
   dualSwordFamily: {fileID: 11400000, guid: c477298292785fe0bb39efdefaee4d12, type: 2}
@@ -29,12 +29,12 @@ MonoBehaviour:
   visualPrefab: {fileID: 8645204569604834416, guid: 9b664b809b3452f439b77f4654391891, type: 3}
   isTwoHanded: 0
   dualWield: 0
-  secondaryVisualPrefab: {fileID: 0}
+  secondaryVisualPrefab: {fileID: 8645204569604834416, guid: 9b664b809b3452f439b77f4654391891, type: 3}
   secondaryEquipped:
     anchor: 2
     bonePath: 
-    offset: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
+    offset: {x: -0.37248495, y: 0.59441686, z: -0.024280652}
+    rotation: {x: 0.0000041628396, y: -0.000010971817, z: 41.191383}
     scale: 1
   secondaryHolstered:
     anchor: 0
