@@ -20,7 +20,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ce744cb14261acd4a92c927ed4ad58ab, type: 2}
   - {fileID: 11400000, guid: e7555c6d155e93448b2c9f2f131ceec1, type: 2}
   - {fileID: 11400000, guid: c21a4fd366079564f9927dda16544232, type: 2}
-  family: {fileID: 11400000, guid: c477298292785fe0bb39efdefaee4d12, type: 2}
+  family: {fileID: 11400000, guid: d75a568fa95abb44595d508a05bccc66, type: 2}
   feedbackOverride: {fileID: 11400000, guid: c2aa63ae5ff44c87980ff3ea94bf40ba, type: 2}
   isShield: 0
   dualSwordFamily: {fileID: 11400000, guid: c477298292785fe0bb39efdefaee4d12, type: 2}

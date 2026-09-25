@@ -28,4 +28,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: be4d56531c79501a9e22e887369c2270, type: 2}
   masteryLevelsPerUnlock: 3
   animations: {fileID: 11400000, guid: 402f7cc637875cb49005735684d1f2bb, type: 2}
-  feedback: {fileID: 0}
+  feedback: {fileID: 11400000, guid: c2aa63ae5ff44c87980ff3ea94bf40ba, type: 2}
