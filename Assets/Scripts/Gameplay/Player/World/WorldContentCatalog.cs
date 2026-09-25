@@ -48,6 +48,7 @@ namespace Mismo.Gameplay.Player.World
     [CreateAssetMenu(menuName="Mismo/World/Content catalog")]
     public sealed class WorldContentCatalog : ScriptableObject
     {
+        public WorldIntroductionDefinition introduction;
         [Header("Village arrival (new worlds)")]
         [Min(1)] public float villageSizeMultiplier=2.6f;
         public float villageGroundOffset=-.19670273f;
@@ -56,6 +57,18 @@ namespace Mismo.Gameplay.Player.World
         public float villageSpawnYaw=0;
         [Header("Atmosphere")]
         public GroveWorldStyle groveStyle;
+        [Header("Reusable structures (baked in the structure workshop)")]
+        [Range(0,1)] public float structureChance=.7f;
+        public WorldStructureEntry[] structures=Array.Empty<WorldStructureEntry>();
+        public WorldStructureEntry Structure(WorldSiteKind kind,WorldBiome biome,int seed)
+        {
+            var random=new System.Random(seed);if(structureChance<=0||random.NextDouble()>=structureChance)return null;
+            var candidates=structures??Array.Empty<WorldStructureEntry>();double total=0;
+            foreach(var e in candidates)if(e!=null&&e.prefab!=null&&e.placement==Structures.StructurePlacement.CompatibleSites&&e.site==kind&&Allows(e.biomes,biome))total+=Math.Max(0,e.weight);
+            double roll=random.NextDouble()*total;
+            foreach(var e in candidates)if(e!=null&&e.prefab!=null&&e.placement==Structures.StructurePlacement.CompatibleSites&&e.site==kind&&Allows(e.biomes,biome)&&e.weight>0){roll-=e.weight;if(roll<0)return e;}
+            return null;
+        }
         public VegetationMotionSettings vegetationMotion = new VegetationMotionSettings();
         public bool fogEnabled=true;
         public Color fogColor=new Color(.62f,.72f,.73f);
@@ -117,5 +130,14 @@ namespace Mismo.Gameplay.Player.World
         }
         static bool Eligible(WorldEncounterEntry e,WorldSiteKind site,WorldBiome biome,int level,float height)=>
             e!=null&&e.prefab!=null&&e.weight>0&&e.site==site&&Allows(e.biomes,biome)&&level>=e.minimumLevel&&height>=e.altitude.x&&height<=e.altitude.y;
+    }
+    [Serializable] public sealed class WorldStructureEntry
+    {
+        public string id;
+        public WorldSiteKind site=WorldSiteKind.Secret;
+        public Structures.StructurePlacement placement;
+        public WorldBiome[] biomes=Array.Empty<WorldBiome>();
+        public Structures.StructureInstance prefab;
+        [Min(0)] public float weight=1;
     }
 }

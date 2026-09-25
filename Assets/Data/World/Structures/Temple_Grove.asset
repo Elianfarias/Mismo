@@ -1,0 +1,161 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5719412954d42db8f7c0f49cb04759b, type: 3}
+  m_Name: Temple_Grove
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.Structures.StructureDefinition
+  displayName: Templo del estanque olvidado
+  style: 3
+  placement: 0
+  worldBiomes: 0000000001000000i
+  worldStoneSurface: 1
+  stoneStyle: {fileID: 11400000, guid: f4d7b966c71c2994ab361ee34ae1c31a, type: 2}
+  waterMaterial: {fileID: 2100000, guid: abd5b8d8a49677c4db46292241d7ec38, type: 2}
+  moatRadius: 31
+  exteriorDetails:
+  - {fileID: 6212402327121402298, guid: b92e6d27a82547548bd7fabcb4a06f53, type: 3}
+  - {fileID: 7325808145153349640, guid: 80c7ee2e9f7dc3f41a24d3b04c494580, type: 3}
+  - {fileID: 8570164802887054633, guid: c9064555f414c454f8f171c202033e18, type: 3}
+  - {fileID: 1588511539555881311, guid: da8bc42c41971eb47a787953b37fa625, type: 3}
+  - {fileID: 6815683996901886151, guid: 7a7a87061a3642c4a8edccfdf85b301c, type: 3}
+  - {fileID: 2126895233553580467, guid: b172455766a01ab4a9de723174f3f434, type: 3}
+  layoutSeed: 2451
+  decorationSeed: 2602
+  mainRooms: 3
+  branches: 1
+  voxelSize: 0.5
+  mountainHeight: 17
+  decorationDensity: 0.85
+  interiorAmbient: 0.25
+  lightIntensity: 1.4
+  lightColor: {r: 0.8, g: 0.68, b: 0.35, a: 1}
+  finalExperience: 100
+  finalRequirement: 2
+  shellMaterial: {fileID: 2100000, guid: 2f882507da2a57744b183ac2b315783b, type: 2}
+  entranceArch: {fileID: 5607084892534544550, guid: 2ea6fb038931235468bfb1fc5359ee72, type: 3}
+  finalLandmark: {fileID: 5607084892534544550, guid: 2ea6fb038931235468bfb1fc5359ee72, type: 3}
+  rewardVisual: {fileID: 6415321252520051679, guid: caf9c36c8e991b746aaba5aa9ae6898d, type: 3}
+  floorDetails:
+  - {fileID: 868908525972708264, guid: 27c56842e29dea649b92df52137879e7, type: 3}
+  - {fileID: 2513223966158952295, guid: 31a6d8870a01def47b242107fc187713, type: 3}
+  - {fileID: 4455042962645893767, guid: 2f416f3ec33706942912f0e648b7b385, type: 3}
+  - {fileID: 1854221110911226562, guid: 0552506ad5aef7c4d856e84393260338, type: 3}
+  - {fileID: 5905387344700278635, guid: ffed91ed7b7118248a14056f7cdcc577, type: 3}
+  - {fileID: 4229347833953768392, guid: 9cabf656b7397614795b181f5c463f9a, type: 3}
+  ceilingDetails:
+  - {fileID: 4988741387208245964, guid: f151e65e859c96f4991cf5fcc45a6b0a, type: 3}
+  - {fileID: 9193324023605388388, guid: af35b002377b7f44cb694e17f8b80342, type: 3}
+  wallDetails:
+  - {fileID: 6325077523902428767, guid: cbcd44676bb64ea4d928e3688f446c9e, type: 3}
+  - {fileID: 6185472815460152551, guid: 706431126ef633f4abfedeb40b00059f, type: 3}
+  rooms:
+  - id: be799a5a3f0f4098a76d4399bd7b7323
+    contents: []
+    name: Entrada
+    role: 0
+    center: {x: 0, y: -11}
+    radius: 4
+    height: 6
+  - id: aeebba491e3d4469877a6a4b0263c9b9
+    contents:
+    - id: 9b94f8fcd5a545159a071131748c06f2
+      label: Guardian
+      kind: 0
+      offset: {x: 1.5, y: 0}
+      yaw: 0
+      scale: 1
+      prefab: {fileID: 2759051942343419815, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+      enemyLevel: 2
+      requiredForClear: 1
+      resource: {fileID: 0}
+      resourceOneTime: 1
+      loot: {fileID: 0}
+      weapon: {fileID: 0}
+      weaponTier: 1
+      experience: 0
+      requirement: 0
+    name: Camara 1
+    role: 1
+    center: {x: -2.1651816, y: -0.5}
+    radius: 4
+    height: 6
+  - id: a549612f6bb247e68f40de05e6eb1f2f
+    contents:
+    - id: 6430a0c0ff5a4674a5b3adeeb67e9091
+      label: Guardian de la sala final
+      kind: 0
+      offset: {x: -2, y: 0}
+      yaw: 0
+      scale: 1
+      prefab: {fileID: 2759051942343419815, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+      enemyLevel: 3
+      requiredForClear: 1
+      resource: {fileID: 0}
+      resourceOneTime: 1
+      loot: {fileID: 0}
+      weapon: {fileID: 0}
+      weaponTier: 1
+      experience: 0
+      requirement: 0
+    - id: ebcb7509850248e8bb8929c39fe2f6e4
+      label: Cofre antiguo
+      kind: 1
+      offset: {x: 2, y: 1}
+      yaw: 180
+      scale: 1
+      prefab: {fileID: 6201630413953572033, guid: c8efe7fb487c6f749a577e5e111621eb, type: 3}
+      enemyLevel: 0
+      requiredForClear: 1
+      resource: {fileID: 0}
+      resourceOneTime: 1
+      loot: {fileID: 11400000, guid: c04ffe6d67c36284199b85c3354192b7, type: 2}
+      weapon: {fileID: 0}
+      weaponTier: 1
+      experience: 25
+      requirement: 2
+    name: Sala final
+    role: 3
+    center: {x: 0, y: 10}
+    radius: 6
+    height: 7
+  - id: ea361132e7d6463297a986dbd66f66e8
+    contents:
+    - id: 4413da8f9cf14fd48357af40b221d7b4
+      label: Veta arcana
+      kind: 2
+      offset: {x: -1.5, y: 1}
+      yaw: 0
+      scale: 1
+      prefab: {fileID: 0}
+      enemyLevel: 0
+      requiredForClear: 1
+      resource: {fileID: 11400000, guid: aa5491aa71d27d1419821b23a3c2346c, type: 2}
+      resourceOneTime: 1
+      loot: {fileID: 0}
+      weapon: {fileID: 0}
+      weaponTier: 1
+      experience: 0
+      requirement: 0
+    name: Ramal 1
+    role: 2
+    center: {x: -12.165182, y: 0.5}
+    radius: 3.5
+    height: 5
+  connections:
+  - from: 0
+    to: 1
+    width: 5
+  - from: 1
+    to: 2
+    width: 5
+  - from: 1
+    to: 3
+    width: 4.5

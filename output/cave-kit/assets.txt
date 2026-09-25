@@ -1,0 +1,32 @@
+R01_Roca_redondeada | LOD0 triangles=8184 | body metres=(3.78, 2.61, 2.61) | voxel=0.090 | pivot=ground | collider=True
+R02_Laja_inclinada | LOD0 triangles=5692 | body metres=(3.51, 2.79, 2.25) | voxel=0.090 | pivot=ground | collider=True
+R03_Saliente_pared | LOD0 triangles=2968 | body metres=(3.80, 1.70, 2.00) | voxel=0.100 | pivot=attachment | collider=True
+R04_Pilar_rocoso | LOD0 triangles=3614 | body metres=(2.10, 4.00, 1.60) | voxel=0.100 | pivot=ground | collider=True
+R05_Arco_entrada | LOD0 triangles=10794 | body metres=(7.68, 5.64, 2.16) | voxel=0.120 | pivot=ground | collider=True
+P01_Piedra_plana | LOD0 triangles=792 | body metres=(0.92, 0.24, 0.72) | voxel=0.040 | pivot=ground | collider=False
+P02_Fragmento_angular | LOD0 triangles=746 | body metres=(0.64, 0.68, 0.56) | voxel=0.040 | pivot=ground | collider=False
+P03_Grupo_grava | LOD0 triangles=942 | body metres=(1.02, 0.15, 0.78) | voxel=0.030 | pivot=ground | collider=False
+P04_Roca_partida | LOD0 triangles=1954 | body metres=(1.31, 0.77, 0.99) | voxel=0.045 | pivot=ground | collider=False
+E01_Cono_bajo | LOD0 triangles=884 | body metres=(0.99, 1.16, 0.83) | voxel=0.055 | pivot=ground | collider=True
+E02_Aguja_alta | LOD0 triangles=2062 | body metres=(1.21, 2.53, 0.99) | voxel=0.055 | pivot=ground | collider=True
+E03_Racimo_escalonado | LOD0 triangles=2402 | body metres=(1.76, 3.45, 0.91) | voxel=0.065 | pivot=ground | collider=True
+T01_Aguja_corta | LOD0 triangles=1006 | body metres=(0.99, 1.16, 0.77) | voxel=0.055 | pivot=attachment | collider=True
+T02_Racimo_tres_puntas | LOD0 triangles=2854 | body metres=(1.82, 2.53, 0.88) | voxel=0.055 | pivot=attachment | collider=True
+T03_Estalactita_larga | LOD0 triangles=1722 | body metres=(1.17, 3.45, 0.98) | voxel=0.065 | pivot=attachment | collider=True
+Z01_Raiz_colgante | LOD0 triangles=2786 | body metres=(1.36, 1.52, 0.60) | voxel=0.040 | pivot=attachment | collider=False
+Z02_Cortina_raices | LOD0 triangles=6362 | body metres=(1.64, 3.24, 0.64) | voxel=0.040 | pivot=attachment | collider=False
+Z03_Raices_pared | LOD0 triangles=6380 | body metres=(2.68, 3.00, 0.72) | voxel=0.040 | pivot=attachment | collider=False
+Z04_Raiz_suelo | LOD0 triangles=3684 | body metres=(2.32, 0.60, 1.72) | voxel=0.040 | pivot=ground | collider=False
+H01_Sombrero_pequeno | LOD0 triangles=588 | body metres=(0.40, 0.30, 0.35) | voxel=0.025 | pivot=ground | collider=False
+H02_Sombrero_ancho | LOD0 triangles=2176 | body metres=(0.93, 0.58, 0.85) | voxel=0.025 | pivot=ground | collider=False
+H03_Hongo_alto | LOD0 triangles=1738 | body metres=(0.55, 1.05, 0.50) | voxel=0.025 | pivot=ground | collider=False
+H04_Colonia | LOD0 triangles=4378 | body metres=(1.00, 0.83, 0.88) | voxel=0.025 | pivot=ground | collider=False
+V01_Placa_musgo | LOD0 triangles=752 | body metres=(1.44, 0.12, 1.12) | voxel=0.040 | pivot=ground | collider=False
+V02_Helecho_compacto | LOD0 triangles=6320 | body metres=(1.82, 0.60, 1.72) | voxel=0.035 | pivot=ground | collider=False
+V03_Helecho_colgante | LOD0 triangles=7712 | body metres=(1.12, 1.72, 1.05) | voxel=0.035 | pivot=attachment | collider=False
+C01_Cristal_solitario | LOD0 triangles=956 | body metres=(0.52, 1.36, 0.40) | voxel=0.040 | pivot=ground | collider=False
+C02_Racimo_bajo | LOD0 triangles=2390 | body metres=(1.12, 0.80, 0.84) | voxel=0.040 | pivot=ground | collider=False
+C03_Racimo_alto | LOD0 triangles=2848 | body metres=(1.12, 2.08, 0.84) | voxel=0.040 | pivot=ground | collider=False
+PASS: all mesh/material references, triangle budgets, greedy mesh winding/area and open arch collider.
+29 individual Unity renders + physical-scale gallery saved; no automatic lights in asset prefabs.
+Project organization has existing issues outside CaveKit; see organization.txt.

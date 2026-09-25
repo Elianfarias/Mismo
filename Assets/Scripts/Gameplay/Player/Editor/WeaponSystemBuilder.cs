@@ -52,6 +52,8 @@ namespace Mismo.Gameplay.Player.Editor
             var set = AssetDatabase.LoadAssetAtPath<WeaponSetDefinition>("Assets/Data/Weapons/StartingWeapons.asset");
             if (set == null) { set = ScriptableObject.CreateInstance<WeaponSetDefinition>(); AssetDatabase.CreateAsset(set, "Assets/Data/Weapons/StartingWeapons.asset"); }
             set.primary = sword; set.secondary = bow;
+            InventoryPresentationAssets.RegenerateWeaponIcon(sword);
+            InventoryPresentationAssets.RegenerateWeaponIcon(bow);
             foreach (var asset in new Object[] { basic, lunge, parry, spin, shot, power, retreat, rain, sword, bow, set }) EditorUtility.SetDirty(asset);
             AssetDatabase.SaveAssets();
             Debug.Log("WEAPON_ASSETS_READY");
@@ -102,4 +104,3 @@ namespace Mismo.Gameplay.Player.Editor
         { try { Apply(); EditorApplication.Exit(0); } catch (Exception e) { Debug.LogException(e); EditorApplication.Exit(1); } }
     }
 }
-

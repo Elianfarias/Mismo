@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DualWhirlwind
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: Torbellino
+  icon: {fileID: 0}
   abilityId: DualWhirlwind
   animationSource: {fileID: 11400000, guid: c21a4fd366079564f9927dda16544232, type: 2}
   passive: 0
@@ -88,6 +89,7 @@ MonoBehaviour:
   comboStepSfx: []
   pose: 3
   usesSwordCombo: 0
+  comboSteps: []
   targetsGround: 0
   aimFromCamera: 0
   range: 15

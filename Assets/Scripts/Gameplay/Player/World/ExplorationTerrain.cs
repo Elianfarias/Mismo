@@ -9,17 +9,67 @@ namespace Mismo.Gameplay.Player.World
         public WorldSiteKind kind;
         public float radius;
         public bool roaming;
+        public WorldStructureEntry structure;
     }
     // Pure global queries: loading order and presentation catalogs never affect geography.
     public sealed class ExplorationTerrain : VoxelRegionHeightfield
     {
         readonly ExplorationWorldSettings settings;
         public FiniteWorldPlan Plan {get;}
+        public WorldIntroductionLayout Introduction {get;}
         public GroveWorldStyle GroveStyle=>settings.content!=null?settings.content.groveStyle:null;
         public int SiteSpacing=>Plan!=null?Plan.SiteSpacing:Mathf.Max(64,settings.siteSpacing);
         readonly System.Collections.Generic.Dictionary<Vector2Int,WorldSite> sites=new System.Collections.Generic.Dictionary<Vector2Int,WorldSite>();
+        readonly WorldSite? iceStructure;
+        public WorldSite? IceStructure=>iceStructure;
+        readonly WorldSite? woodlandStructure;
+        public WorldSite? WoodlandStructure=>woodlandStructure;
         public ExplorationTerrain(ExplorationWorldSettings s):base(s.seed,s.authoredSize,s.relief,s.stepHeight)
-        {settings=s;Plan=s.UsesFiniteWorld?new FiniteWorldPlan(s):null;}
+        {
+            settings=s;Plan=s.UsesFiniteWorld?new FiniteWorldPlan(s):null;
+            if(s.introductionVersion==1&&Plan!=null&&s.content?.introduction!=null)
+                Introduction=new WorldIntroductionLayout(Plan.Start,s.content.introduction,s.content.VillageArrivalOffset);
+            iceStructure=FindIceStructure();woodlandStructure=FindWoodlandStructure();
+        }
+        WorldSite? FindWoodlandStructure()
+        {
+            if(Plan?.Layout==null||settings.content?.structures==null||settings.content.structureChance<=0)return null;
+            WorldStructureEntry entry=null;
+            foreach(var candidate in settings.content.structures)if(candidate!=null&&candidate.prefab!=null&&candidate.weight>0&&candidate.prefab.style==Structures.StructureStyle.Temple&&candidate.placement==Structures.StructurePlacement.CompatibleSites){entry=candidate;break;}
+            if(entry==null)return null;float radius=entry.prefab.footprintRadius;
+            for(int preference=0;preference<2;preference++)for(int z=-3;z<5;z++)for(int x=-3;x<7;x++)
+            {
+                var cell=new Vector2Int(x,z);var p=Plan.SitePosition(cell);var biome=Plan.Biome(p.x,p.y);
+                if(Introduction?.Reserved(p.x,p.y,radius+30)==true)continue;
+                if(preference==0?biome!=WorldBiome.Forest:biome!=WorldBiome.Meadow)continue;
+                float roll=Unit(Hash(settings.seed,x,z,20));
+                if(IsVillageCell(cell)||Plan.ObjectiveStage(cell)>=0||roll>=.12f&&roll<.18f||iceStructure.HasValue&&iceStructure.Value.cell==cell||!Plan.Contains(p.x,p.y,radius+75)||Plan.BarrierDistance(p.x,p.y)<radius+75||Plan.RouteDistance(p.x,p.y,out _) <radius+30)continue;
+                bool nearVillage=false;
+                for(int dz=-1;dz<=1;dz++)for(int dx=-1;dx<=1;dx++)if(IsVillageCell(cell+new Vector2Int(dx,dz)))
+                {var v=Plan.SitePosition(cell+new Vector2Int(dx,dz));nearVillage|=Mathf.Max(Mathf.Abs(v.x-p.x),Mathf.Abs(v.y-p.y))<VillageHalfExtent+radius+40;}
+                if(nearVillage)continue;
+                return new WorldSite{cell=cell,position=new Vector3(p.x,Plan.NaturalHeight(p.x,p.y),p.y),kind=WorldSiteKind.Secret,radius=radius+3,structure=entry};
+            }
+            return null;
+        }
+        WorldSite? FindIceStructure()
+        {
+            if(Plan?.Layout==null||settings.content?.structures==null||settings.content.structureChance<=0)return null;
+            WorldStructureEntry entry=null;
+            foreach(var candidate in settings.content.structures)if(candidate!=null&&candidate.prefab!=null&&candidate.weight>0&&candidate.placement==Structures.StructurePlacement.IceEscarpment){entry=candidate;break;}
+            if(entry==null)return null;
+            float radius=entry.prefab.footprintRadius;
+            for(int i=0;i<24;i++)
+            {
+                float x=120+Unit(Hash(settings.seed,i,0,1981))*480;
+                float z=Plan.Layout.NorthBorder(x)-radius-60;
+                var cell=new Vector2Int(Mathf.FloorToInt(x/SiteSpacing),Mathf.FloorToInt(z/SiteSpacing));
+                float roll=Unit(Hash(settings.seed,cell.x,cell.y,20));
+                if(IsVillageCell(cell)||Plan.ObjectiveStage(cell)>=0||roll>=.12f&&roll<.18f||!Plan.Contains(x,z,radius+50)||Plan.RouteDistance(x,z,out _) <radius+35)continue;
+                return new WorldSite{cell=cell,position=new Vector3(x,Plan.NaturalHeight(x,z),z),kind=WorldSiteKind.Secret,radius=radius+3,structure=entry};
+            }
+            return null;
+        }
         public static int Hash(int seed,int x,int z,int stream)
         {unchecked{uint h=(uint)seed^(uint)x*73856093u^(uint)z*19349663u^(uint)stream*83492791u;h^=h>>16;h*=0x7feb352du;h^=h>>15;h*=0x846ca68bu;return (int)(h^(h>>16));}}
         static float Unit(int hash)=>(uint)hash/(float)uint.MaxValue;
@@ -91,6 +141,8 @@ namespace Mismo.Gameplay.Player.World
         }
         public WorldSite Site(Vector2Int cell)
         {
+            if(iceStructure.HasValue&&iceStructure.Value.cell==cell)return iceStructure.Value;
+            if(woodlandStructure.HasValue&&woodlandStructure.Value.cell==cell)return woodlandStructure.Value;
             if(sites.TryGetValue(cell,out var cached))return cached;
             int spacing=SiteSpacing;int h=Hash(settings.seed,cell.x,cell.y,20);
             float x=(cell.x+.5f)*spacing+(Unit(Hash(h,0,0,21))-.5f)*24,z=(cell.y+.5f)*spacing+(Unit(Hash(h,0,0,22))-.5f)*24;
@@ -99,6 +151,7 @@ namespace Mismo.Gameplay.Player.World
             int objective=Plan!=null?Plan.ObjectiveStage(cell):-1;
             float roadClearance=kind==WorldSiteKind.Village?VillageHalfExtent*1.415f+32:64;
             bool suppressed=Plan!=null&&(!Plan.Contains(x,z,VillageHalfExtent+40)||Plan.RouteDistance(x,z,out _) < roadClearance||Plan.BarrierDistance(x,z)<VillageHalfExtent+40);
+            suppressed|=cell!=Vector2Int.zero&&Introduction?.Reserved(x,z,VillageHalfExtent+30)==true;
             if(suppressed)kind=WorldSiteKind.Clearing;
             if(Plan!=null&&cell==Vector2Int.zero)kind=WorldSiteKind.Village;
             if(objective>=0)kind=WorldSiteKind.BossArena;
@@ -106,6 +159,18 @@ namespace Mismo.Gameplay.Player.World
             if(Plan!=null&&cell==Vector2Int.zero)y=12;
             if(objective>=0)Plan.RouteDistance(x,z,out y);
             var result=new WorldSite{cell=cell,position=new Vector3(x,y,z),kind=kind,radius=kind==WorldSiteKind.Village?VillageHalfExtent:kind==WorldSiteKind.BossArena?(Plan==null?20:24):suppressed?0:12};
+            if(!suppressed&&settings.content!=null&&kind!=WorldSiteKind.Village&&kind!=WorldSiteKind.BossArena&&kind!=WorldSiteKind.Clearing&&IsExterior(x,z))
+            {
+                result.structure=settings.content.Structure(kind,Biome(x,z),Hash(settings.seed,cell.x,cell.y,961));
+                if(result.structure!=null&&Plan==null)
+                {
+                    // Legacy roads join villages to adjacent sites; do not build over their arrival.
+                    bool villageRoad=IsVillageCell(cell+Vector2Int.right)||IsVillageCell(cell+Vector2Int.left)||IsVillageCell(cell+Vector2Int.up)||IsVillageCell(cell+Vector2Int.down);
+                    float authoredEdge=settings.authoredSize*.5f+Mathf.Max(64,settings.transitionWidth);
+                    if(villageRoad||settings.preserveAuthoredCenter&&Mathf.Max(Mathf.Abs(x),Mathf.Abs(z))-result.structure.prefab.footprintRadius-3<=authoredEdge)result.structure=null;
+                }
+                if(result.structure!=null)result.radius=Mathf.Clamp(result.structure.prefab.footprintRadius+3,12,36);
+            }
             if(sites.Count>=4096)sites.Clear();sites[cell]=result;return result;
         }
         public bool IsExterior(float x,float z)=>Plan!=null?Plan.Contains(x,z,80):!settings.preserveAuthoredCenter||Mathf.Max(Mathf.Abs(x),Mathf.Abs(z))>settings.authoredSize*.5f+Mathf.Max(64,settings.transitionWidth);
@@ -119,7 +184,8 @@ namespace Mismo.Gameplay.Player.World
                 if(site.radius<=0||!IsExterior(site.position.x,site.position.z))continue;
                 float d=Vector2.Distance(new Vector2(x,z),new Vector2(site.position.x,site.position.z));
                 if(site.kind==WorldSiteKind.Village)continue;
-                y=Mathf.Lerp(y,site.position.y,1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(site.radius,site.radius+16,d)));
+                float foundation=site.position.y+(site.structure!=null?site.structure.prefab.FoundationOffset(new Vector2(x-site.position.x,z-site.position.z)):0);
+                y=Mathf.Lerp(y,foundation,1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(site.radius,site.radius+16,d)));
                 reserved|=d<site.radius+3;
             }
             y=Plan.ApplyRoute(x,z,y,out distance);reserved|=distance<10;
@@ -131,6 +197,7 @@ namespace Mismo.Gameplay.Player.World
                 y=Mathf.Lerp(y,site.position.y,1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(VillageHalfExtent+12,VillageHalfExtent+28,d)));
                 reserved|=d<VillageHalfExtent+16;
             }
+            if(Introduction!=null){y=Introduction.Flatten(x,z,y);reserved|=Introduction.Reserved(x,z);distance=Mathf.Min(distance,Introduction.RoadDistance(x,z));}
             return Plan.ApplyCoast(x,z,Plan.ApplyBarriers(x,z,y));
         }
         float Pass(float x,float z,out float distance,out bool reserved)
@@ -143,9 +210,10 @@ namespace Mismo.Gameplay.Player.World
                 var s=Site(new Vector2Int(cx+dx,cz+dz));
                 if(!IsExterior(s.position.x,s.position.z))continue;
                 float d=Vector2.Distance(new Vector2(x,z),new Vector2(s.position.x,s.position.z));
-                y=Mathf.Lerp(y,s.position.y,1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(s.radius,s.radius+16,d)));
+                float foundation=s.position.y+(s.structure!=null?s.structure.prefab.FoundationOffset(new Vector2(x-s.position.x,z-s.position.z)):0);
+                y=Mathf.Lerp(y,foundation,1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(s.radius,s.radius+16,d)));
                 reserved|=d<s.radius+3;
-                if(s.kind==WorldSiteKind.Secret)y-=1.3f*(1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(4,8,d)));
+                if(s.kind==WorldSiteKind.Secret&&s.structure==null)y-=1.3f*(1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(4,8,d)));
                 for(int axis=0;axis<2;axis++)
                 {
                     var other=Site(s.cell+(axis==0?Vector2Int.right:Vector2Int.up));
@@ -188,6 +256,7 @@ namespace Mismo.Gameplay.Player.World
         }
         public override bool Reserved(float x,float z,float margin=0)
         {
+            if(Introduction?.Reserved(x,z,margin)==true)return true;
             if(Plan!=null)
             {
                 if(!Plan.Contains(x,z,80+margin))return true;
@@ -211,7 +280,7 @@ namespace Mismo.Gameplay.Player.World
             if(!IsExterior(x,z))return base.Reserved(x,z,margin);Pass(x,z,out float d,out bool reserved);return reserved||d<7+margin;
         }
         public override float PathDistance(float x,float z)
-        {if(Plan!=null)return Plan.RouteDistance(x,z,out _);if(!IsExterior(x,z))return base.PathDistance(x,z);Pass(x,z,out float d,out _);return d;}
+        {if(Plan!=null)return Mathf.Min(Plan.RouteDistance(x,z,out _),Introduction?.RoadDistance(x,z)??float.MaxValue);if(!IsExterior(x,z))return base.PathDistance(x,z);Pass(x,z,out float d,out _);return d;}
         public override Color Top(float x,float z,float height)
         {
             if(settings.content!=null&&settings.content.groveStyle!=null&&GroveWorldStyle.Supports(Biome(x,z)))

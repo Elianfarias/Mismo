@@ -1,0 +1,34 @@
+PASS: Authored demo scene loads
+PASS: Fresh in-memory inventory initializes
+PASS: Arrival opens paused guide
+PASS: Health spotlight follows real HUD
+PASS: Next advances one page
+PASS: Previous returns to prior page
+PASS: Other pause owner cannot acquire active guide pause
+PASS: Legacy resume cannot release guide pause
+PASS: Skip restores game and blocks same-frame input
+PASS: Game resumes on following frame
+PASS: Dismissed sequence does not repeat automatically
+PASS: Invalid sequence cannot freeze the game
+PASS: Guide defers to an existing menu pause
+PASS: Guide can be replayed explicitly
+PASS: Disabling guide releases only its pause and restores prior time scale
+PASS: Encounter 1 spawns on navigation
+PASS: Encounter 1 can reach player
+PASS: Encounter 2 spawns on navigation
+PASS: Encounter 2 can reach player
+PASS: Encounter 3 spawns on navigation
+PASS: Encounter 3 can reach player
+PASS: Q spotlight resolves after switching to bow
+PASS: Copy uses equipped ability and current costs
+PASS: Encounter 5 spawns on navigation
+PASS: Encounter 5 can reach player
+PASS: Encounter 6 spawns on navigation
+PASS: Encounter 6 can reach player
+PASS: Encounter 6 spawns on navigation
+PASS: Encounter 6 can reach player
+PASS: All eight stages reach village
+PASS: Village contains actual quest giver
+PASS: Village NPC dialogue is accessible
+PASS: First village mission can be accepted in temporary inventory
+PASS: No runtime errors in tutorial flow

@@ -1,0 +1,7 @@
+PASS: seis clips Humanoid y sus proyectos editables
+PASS Dual_01_Corte_Derecho: 1,00s, movimiento derecha 1,98m / izquierda 0,99m, error de pose 0,00000m
+PASS Dual_02_Cruce_Izquierdo: 1,00s, movimiento derecha 1,60m / izquierda 3,43m, error de pose 0,00000m
+PASS Dual_Rafaga: 1,10s, movimiento derecha 4,38m / izquierda 4,28m, error de pose 0,00000m
+PASS Dual_Torbellino: 0,65s, movimiento derecha 4,53m / izquierda 4,96m, error de pose 0,00000m
+PASS Dual_Herida_Abierta: 0,50s, movimiento derecha 2,01m / izquierda 0,72m, error de pose 0,00000m
+PASS Dual_Cruce: 0,60s, movimiento derecha 1,60m / izquierda 1,98m, error de pose 0,00000m

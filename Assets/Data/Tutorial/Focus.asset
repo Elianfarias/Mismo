@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f02186b7da44ef9071f3f198480278, type: 3}
+  m_Name: Focus
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Presentation.TutorialSequence
+  id: demo.focus
+  pages:
+  - title: Generar Focus con el arco
+    body: "Acertar un disparo b\xE1sico del arco genera {basicGain} Focus. Los disparos fallidos no lo generan. El borde de las habilidades que consumen Focus muestra cu\xE1nto te falta para poder usarlas."
+    highlight: 5
+  - title: Tu habilidad Q
+    body: "Ahora ten\xE9s {q} en Q. Cuesta {focusCost} Focus: acert\xE1 disparos b\xE1sicos para reunirlo y despu\xE9s presion\xE1 Q. La habilidad consume ese recurso."
+    highlight: 6

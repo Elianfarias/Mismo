@@ -1,0 +1,34 @@
+PASS Regenerating layout preserves slot identities
+PASS Duplicating an object gives it a new identity
+PASS Duplicate persistent IDs rejected
+PASS Content outside its room rejected
+PASS Reducing populated rooms cannot silently erase content
+PASS World streamer loads populated temple
+PASS Both authored enemies spawn once after navigation is ready
+PASS Enemy agents stand on the interior NavMesh
+PASS Per-slot enemy levels applied without changing shared prefabs
+PASS Chest and special ore are instantiated
+PASS Final reward and chest remain locked while guardians survive
+PASS Guardian can navigate inside its chamber
+PASS Guardian can navigate inside its chamber
+PASS Combat rewards persist authored kills through the existing enemy system
+PASS Clearing guardians unlocks the chest
+PASS Failed save leaves chest closed without partial loot
+PASS F opens the chest and creates persistent collectible loot
+PASS Example chest faces the room entrance
+PASS Repeated chest interaction cannot duplicate rewards
+PASS Opened state and chest loot share one saved transaction
+PASS Chest materials can be picked up through normal inventory storage
+PASS Failed save leaves ore available without awarding materials
+PASS F starts mining through GatheringPlayer
+PASS Special ore grants material and persists permanent depletion
+PASS Depleted ore cannot be harvested twice
+PASS Final discovery can be collected after guardians are cleared
+PASS Serialized profile retains chest, ore and enemy identities
+PASS Populated structure unloads with its owner chunk
+PASS Defeated guardians stay absent after world streaming reload
+PASS Opened chest and exhausted ore survive streaming reload
+PASS Final reward does not reset on reload
+PASS Optional regenerating ore saves a cooldown instead of a permanent removal
+PASS Regenerating ore becomes available again after its configured cooldown
+PASS All authored content checks passed; no player save used.

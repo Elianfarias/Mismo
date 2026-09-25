@@ -1,0 +1,1 @@
+PASS: 30 assets moved with AssetDatabase.MoveAsset; all GUIDs preserved; dependency GUID sets unchanged for 8 affected assets; ProjectOrganizationChecks.Run passed.

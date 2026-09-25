@@ -1,0 +1,28 @@
+System.InvalidOperationException: Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Source/Concepts/Caves/2026-09-23/02-piedras.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Imp_Emissive.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Source/Concepts/Caves/2026-09-23/03-estalactitas.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Imp_BaseColor_1.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Preview.jpg
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Puglin_Emissive.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Importing_UnrealUnity.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Imp_ORM.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Imp_BaseColor_2.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/Unreal Normals/T_Puglin_Normal_Unreal.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Source/Concepts/Caves/2026-09-23/05-raices.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Puglin_BaseColor_3.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Source/Concepts/Caves/2026-09-23/04-estalagmitas.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Source/Concepts/Caves/2026-09-23/08-cristales.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Puglin_Normal.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Puglin_BaseColor_1.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Source/Concepts/Caves/2026-09-23/01-rocas-grandes.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Puglin_BaseColor_2.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Source/Concepts/Caves/2026-09-23/09-materiales-efectos.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Imp_BaseColor_3.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Puglin_ORM.png
+Assets/Art/FBX/Weapons/Sword/Rapier.prefab debe estar en Assets/Art/Prefabs/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Source/Concepts/Caves/2026-09-23/07-vegetacion.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Imp_Normal.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/Unreal Normals/T_Imp_Normal_Unreal.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Source/Concepts/Caves/2026-09-23/06-hongos.png
+  at ProjectOrganizationChecks.Run () [0x008e3] in C:\Users\elian\Mismo\.validation\Organization\Assets\Scripts\Editor\ProjectOrganizationChecks.cs:59 
+  at DemoIntroductionChecks.RunBatch () [0x00013] in C:\Users\elian\Mismo\.validation\Organization\Assets\Scripts\Editor\DemoIntroductionChecks.cs:33 

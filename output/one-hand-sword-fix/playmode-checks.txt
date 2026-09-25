@@ -1,0 +1,13 @@
+WEAPON_HAND_CHECK Empty hand ignores legacy pair
+WEAPON_HAND_CHECK Empty hand selects the one-handed skill set and mastery
+WEAPON_HAND_CHECK A + B uses distinct equipped visuals
+WEAPON_HAND_CHECK Pair selects dual family and retains item identity
+WEAPON_HAND_CHECK Equipping a second sword changes the selected skill
+WEAPON_HAND_CHECK Both secondary poses belong to B
+WEAPON_HAND_CHECK Replacing B with shield changes model and family
+WEAPON_HAND_CHECK Equipping a shield selects its skill set
+WEAPON_HAND_CHECK Other loadout independently composes B + A
+WEAPON_HAND_CHECK Unequipping removes the second visual
+WEAPON_HAND_CHECK Unequipping restores all three one-handed skills
+WEAPON_HAND_CHECK Shared definition remains unchanged
+WEAPON_HAND_CHECKS_PASS: 12 checks

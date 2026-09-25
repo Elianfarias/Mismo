@@ -13,12 +13,6 @@ MonoBehaviour:
   m_Name: RuntimeAssetCatalog
   m_EditorClassIdentifier: Mismo.Core::Mismo.Core.RuntimeAssetCatalog
   entries:
-  - key: UI/TextSettings
-    assets:
-    - {fileID: 11400000, guid: 110b79cc700e31649bd74b5a2b2cbefd, type: 2}
-  - key: UI/AdventureFont
-    assets:
-    - {fileID: 11400000, guid: 53130ed3134319c468d2be632de56da6, type: 2}
   - key: Audio/AudioMixer
     assets:
     - {fileID: 24100000, guid: 72c2b24dc67a4b589ca861a86cd37d88, type: 2}
@@ -86,6 +80,18 @@ MonoBehaviour:
   - key: ExplorationWorldSettings
     assets:
     - {fileID: 11400000, guid: 340bb2530bec4a049ba13998db53088d, type: 2}
+  - key: Feel/MMDebugOnScreenConsole
+    assets:
+    - {fileID: 8263837694839971385, guid: dbdbfb7cee2876a42980b6bcd9bc441a, type: 3}
+  - key: Feel/nv-constant-template
+    assets:
+    - {fileID: 4900000, guid: 28f1ec0b82fdf434b8efa0ef0f9a9d37, type: 3}
+  - key: Feel/nv-emphasis-template
+    assets:
+    - {fileID: 4900000, guid: 5f7cb0ced88db4af08a2dd3945067cd7, type: 3}
+  - key: Feel/nv-pattern-template
+    assets:
+    - {fileID: 4900000, guid: db8a2f512b50d437b8268f17384f58c8, type: 3}
   - key: Fonts/Cagliostro-OFL
     assets:
     - {fileID: 4900000, guid: 3d0dd7d29df872e44b036bf3fdb7bda7, type: 3}
@@ -372,6 +378,9 @@ MonoBehaviour:
   - key: ProgressionRules
     assets:
     - {fileID: 11400000, guid: 7a33d622deef47479b040099364378c4, type: 2}
+  - key: QuestCatalog
+    assets:
+    - {fileID: 11400000, guid: 803ee22fde9bbd143af23017fbe4c456, type: 2}
   - key: Recipes/ArcaneWeaponUpgrade
     assets:
     - {fileID: 11400000, guid: d04746c370d80c9408754d0482dd1cdd, type: 2}
@@ -396,6 +405,12 @@ MonoBehaviour:
   - key: Recipes/IronWeaponUpgrade
     assets:
     - {fileID: 11400000, guid: 4b02559098f3c7746862e08b612046fa, type: 2}
+  - key: Recipes/QuestFieldWhetstone
+    assets:
+    - {fileID: 11400000, guid: 368b7643136a9484eb994efcf6c99ec0, type: 2}
+  - key: Recipes/QuestTravelSalve
+    assets:
+    - {fileID: 11400000, guid: e0db93e8a2d04194cac8509f3b9ec40f, type: 2}
   - key: Recipes/Whetstone
     assets:
     - {fileID: 11400000, guid: b89240d491efa39428abe5b73a17c119, type: 2}
@@ -406,6 +421,9 @@ MonoBehaviour:
     assets:
     - {fileID: 2100000, guid: 2f882507da2a57744b183ac2b315783b, type: 2}
     - {fileID: 4800000, guid: 2a0ebe2644ebc6546951a0197e6d1cb7, type: 3}
+  - key: UI/AdventureFont
+    assets:
+    - {fileID: 11400000, guid: 53130ed3134319c468d2be632de56da6, type: 2}
   - key: UI/HUD/MinimapFrame-Silver
     assets:
     - {fileID: 2800000, guid: ba5d67f2049a422baa857c55a158ae39, type: 3}
@@ -433,36 +451,18 @@ MonoBehaviour:
   - key: UI/PixelFrames/Panel
     assets:
     - {fileID: 2800000, guid: 792af476f81e4541909558c6ee19c3b1, type: 3}
+  - key: UI/Recipes
+    assets:
+    - {fileID: 11400000, guid: 22a3138aa4816a943bf9b9001df80606, type: 2}
+  - key: UI/TextSettings
+    assets:
+    - {fileID: 11400000, guid: 110b79cc700e31649bd74b5a2b2cbefd, type: 2}
   - key: WorldContentCatalog
     assets:
     - {fileID: 11400000, guid: 97a0247d62674696bdc8ce8dcff8a4ee, type: 2}
   - key: WorldMap
     assets:
     - {fileID: 4800000, guid: 610e1cc189e3e5f41a85013cce302ee0, type: 3}
-  - key: UI/Recipes
-    assets:
-    - {fileID: 11400000, guid: 22a3138aa4816a943bf9b9001df80606, type: 2}
-  - key: QuestCatalog
-    assets:
-    - {fileID: 11400000, guid: 803ee22fde9bbd143af23017fbe4c456, type: 2}
-  - key: Recipes/QuestTravelSalve
-    assets:
-    - {fileID: 11400000, guid: e0db93e8a2d04194cac8509f3b9ec40f, type: 2}
-  - key: Recipes/QuestFieldWhetstone
-    assets:
-    - {fileID: 11400000, guid: 368b7643136a9484eb994efcf6c99ec0, type: 2}
-  - key: Feel/nv-pattern-template
-    assets:
-    - {fileID: 4900000, guid: db8a2f512b50d437b8268f17384f58c8, type: 3}
-  - key: Feel/nv-emphasis-template
-    assets:
-    - {fileID: 4900000, guid: 5f7cb0ced88db4af08a2dd3945067cd7, type: 3}
-  - key: Feel/nv-constant-template
-    assets:
-    - {fileID: 4900000, guid: 28f1ec0b82fdf434b8efa0ef0f9a9d37, type: 3}
-  - key: Feel/MMDebugOnScreenConsole
-    assets:
-    - {fileID: 8263837694839971385, guid: dbdbfb7cee2876a42980b6bcd9bc441a, type: 3}
   discoveryFolders:
   - path: Assets/Art/Audio
     keyPrefix: Audio

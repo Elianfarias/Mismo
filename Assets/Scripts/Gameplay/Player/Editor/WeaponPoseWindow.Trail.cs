@@ -11,16 +11,17 @@ namespace Mismo.Gameplay.Player.Editor
         double playbackClock;
         WeaponTrailRibbon previewRibbon;
         Material previewTrailMaterial;
+        WeaponPoseProfile TrailProfile => editSecond ? Offhand.poseProfile : profile;
         void DrawTrailGUI()
         {
+            if(TrailProfile==null){EditorGUILayout.HelpBox("Asigná un perfil al arma secundaria para editar su hoja.",MessageType.Info);return;}
             EditorGUILayout.Space();EditorGUILayout.LabelField("Trail procedural · melee",EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("Marcá la base y la punta de la zona de hoja que deja estela. Los puntos pertenecen al visual del arma. Los golpes con Shape = Blade también los usan para detectar el contacto de la hoja. Los cambios se guardan en el perfil compartido.",MessageType.Info);
-            var data=new SerializedObject(profile);data.Update();EditorGUI.BeginChangeCheck();
+            var data=new SerializedObject(TrailProfile);data.Update();EditorGUI.BeginChangeCheck();
             EditorGUILayout.PropertyField(data.FindProperty("meleeTrail"),new GUIContent("Activar estela"));
             EditorGUILayout.PropertyField(data.FindProperty("proceduralTrail"),new GUIContent("Cinta procedural"));
-            if(editSecond)EditorGUILayout.PropertyField(data.FindProperty("secondaryTrail"),new GUIContent("Estela en segunda pieza"));
-            EditorGUILayout.PropertyField(data.FindProperty(editSecond?"secondaryTrailBase":"trailBase"),new GUIContent("Base de la hoja"));
-            EditorGUILayout.PropertyField(data.FindProperty(editSecond?"secondaryTrailTip":"trailTip"),new GUIContent("Punta de la hoja"));
+            EditorGUILayout.PropertyField(data.FindProperty("trailBase"),new GUIContent("Base de la hoja"));
+            EditorGUILayout.PropertyField(data.FindProperty("trailTip"),new GUIContent("Punta de la hoja"));
             EditorGUILayout.PropertyField(data.FindProperty("trailDuration"),new GUIContent("Persistencia (segundos)"));
             EditorGUILayout.PropertyField(data.FindProperty("trailTaper"),new GUIContent("Estrechar la cola"));
             EditorGUILayout.PropertyField(data.FindProperty("trailStartColor"),new GUIContent("Color nuevo"));
@@ -32,7 +33,7 @@ namespace Mismo.Gameplay.Player.Editor
             using(new EditorGUI.DisabledScope(SelectedVisual==null))
                 if(GUILayout.Button("Ajustar puntos a los límites de la pieza"))FitTrailEndpoints();
             EditorGUI.BeginChangeCheck();previewTrail=EditorGUILayout.Toggle("Mostrar previsualización",previewTrail);impactOnly=EditorGUILayout.Toggle("Solo ventana de impacto",impactOnly);
-            var ability=weapon.GetAbility(AbilitySlot.Basic);
+            var ability=PreviewAbility;
             if(ability!=null&&ability.comboSteps!=null&&ability.comboSteps.Length>0)
                 previewComboStep=EditorGUILayout.IntSlider("Golpe del combo",previewComboStep+1,1,ability.comboSteps.Length)-1;
             if(EditorGUI.EndChangeCheck())Refresh();
@@ -63,12 +64,12 @@ namespace Mismo.Gameplay.Player.Editor
             }
             if(GUILayout.Button("Usar clip del golpe seleccionado"))
             {
-                var binding=weapon.family!=null&&weapon.family.animations!=null?weapon.family.animations.Find(ability):null;
+                var binding=PreviewFamily!=null&&PreviewFamily.animations!=null?PreviewFamily.animations.Find(ability):null;
                 if(binding!=null&&binding.comboClips!=null&&previewComboStep<binding.comboClips.Length){clip=binding.comboClips[previewComboStep];time=0;Refresh();}
             }
             using(new EditorGUI.DisabledScope(stage==null||clip==null))
                 if(GUILayout.Button(playingTrail?"Pausar previsualización":"Reproducir golpe en bucle")){playingTrail=!playingTrail;playbackClock=EditorApplication.timeSinceStartup;}
-            if(GUILayout.Button("Guardar trail del perfil"))AssetDatabase.SaveAssetIfDirty(profile);
+            if(GUILayout.Button("Guardar trail del perfil"))AssetDatabase.SaveAssetIfDirty(TrailProfile);
         }
         void UpdateTrailPlayback()
         {
@@ -78,7 +79,7 @@ namespace Mismo.Gameplay.Player.Editor
         }
         float PreviewDuration()
         {
-            var ability=weapon!=null?weapon.GetAbility(AbilitySlot.Basic):null;
+            var ability=weapon!=null?PreviewAbility:null;
             return ability!=null&&ability.comboSteps!=null&&previewComboStep<ability.comboSteps.Length&&ability.comboSteps[previewComboStep]!=null?ability.comboSteps[previewComboStep].Duration:Mathf.Max(.001f,clip!=null?clip.length:1);
         }
         void SampleTrailPose(float at)
@@ -86,11 +87,11 @@ namespace Mismo.Gameplay.Player.Editor
             for(int i=0;i<previewBones.Length;i++){previewBones[i].localPosition=bonePositions[i];previewBones[i].localRotation=boneRotations[i];previewBones[i].localScale=boneScales[i];}
             if(clip!=null&&animator!=null)clip.SampleAnimation(animator.gameObject,at);
             ApplyPreviewPose(visual,holstered?profile.holstered:profile.equipped);
-            if(secondVisual!=null)ApplyPreviewPose(secondVisual,holstered?weapon.secondaryHolstered:weapon.secondaryEquipped);
+            if(secondVisual!=null)ApplyPreviewPose(secondVisual,holstered?Offhand.secondaryHolstered:Offhand.secondaryEquipped);
         }
         void RefreshTrailPreview()
         {
-            if(!previewTrail||!profile.proceduralTrail||!profile.meleeTrail||clip==null||holstered||SelectedVisual==null||editSecond&&!profile.secondaryTrail){previewRibbon?.Clear();return;}
+            if(TrailProfile==null||!previewTrail||!TrailProfile.proceduralTrail||!TrailProfile.meleeTrail||clip==null||holstered||SelectedVisual==null){previewRibbon?.Clear();return;}
             if(previewRibbon==null)
             {
                 var shader=AssetDatabase.LoadAssetAtPath<Shader>("Assets/Art/Shaders/CombatParticles.shader");
@@ -99,22 +100,23 @@ namespace Mismo.Gameplay.Player.Editor
                 previewRibbon=new WeaponTrailRibbon(character.transform,previewTrailMaterial);
             }
             previewRibbon.Clear();float duration=PreviewDuration();float now=time/Mathf.Max(.001f,clip.length)*duration;
-            float first=Mathf.Max(0,now-Mathf.Max(.01f,profile.trailDuration));
-            var ability=weapon.GetAbility(AbilitySlot.Basic);
+            float first=Mathf.Max(0,now-Mathf.Max(.01f,TrailProfile.trailDuration));
+            var ability=PreviewAbility;
             var step=ability!=null&&ability.comboSteps!=null&&previewComboStep<ability.comboSteps.Length?ability.comboSteps[previewComboStep]:null;
             int count=Mathf.Clamp(Mathf.CeilToInt((now-first)*90),1,190);
             for(int i=0;i<=count;i++)
             {
                 float t=Mathf.Lerp(first,now,(float)i/count);SampleTrailPose(t/duration*clip.length);
                 bool emit=!impactOnly||step==null||t/duration>=step.ImpactStart&&t/duration<step.ImpactEnd;
-                previewRibbon.SampleBlade(SelectedVisual.transform,profile,t,emit,editSecond);
+                previewRibbon.SampleBlade(SelectedVisual.transform,TrailProfile,t,emit);
             }
             SampleTrailPose(time);
         }
         void DisposeTrailPreview(){previewRibbon?.Dispose();previewRibbon=null;if(previewTrailMaterial!=null)DestroyImmediate(previewTrailMaterial);previewTrailMaterial=null;}
         void DrawTrailEndpoints()
         {
-            var root=SelectedVisual.transform;Vector3 a=root.TransformPoint(editSecond?profile.secondaryTrailBase:profile.trailBase),b=root.TransformPoint(editSecond?profile.secondaryTrailTip:profile.trailTip);
+            if(TrailProfile==null)return;
+            var root=SelectedVisual.transform;Vector3 a=root.TransformPoint(TrailProfile.trailBase),b=root.TransformPoint(TrailProfile.trailTip);
             Handles.color=Color.cyan;Handles.DrawAAPolyLine(4,a,b);
             Handles.Label(a,"Base del trail");Handles.Label(b,"Punta del trail");
             if(Handles.Button(a,Quaternion.identity,HandleUtility.GetHandleSize(a)*.06f,HandleUtility.GetHandleSize(a)*.08f,Handles.SphereHandleCap))trailEndpoint=0;
@@ -122,14 +124,15 @@ namespace Mismo.Gameplay.Player.Editor
             EditorGUI.BeginChangeCheck();Vector3 point=Handles.PositionHandle(trailEndpoint==0?a:b,root.rotation);
             if(EditorGUI.EndChangeCheck())
             {
-                Undo.RecordObject(profile,"Mover extremo de trail");Vector3 local=root.InverseTransformPoint(point);
-                if(editSecond){if(trailEndpoint==0)profile.secondaryTrailBase=local;else profile.secondaryTrailTip=local;}
-                else{if(trailEndpoint==0)profile.trailBase=local;else profile.trailTip=local;}
-                EditorUtility.SetDirty(profile);Refresh();
+                Undo.RecordObject(TrailProfile,"Mover extremo de trail");Vector3 local=root.InverseTransformPoint(point);
+
+                if(trailEndpoint==0)TrailProfile.trailBase=local;else TrailProfile.trailTip=local;
+                EditorUtility.SetDirty(TrailProfile);Refresh();
             }
         }
         void FitTrailEndpoints()
         {
+            if(TrailProfile==null)return;
             var root=SelectedVisual.transform;Bounds bounds=new Bounds();bool has=false;
             foreach(var renderer in SelectedVisual.GetComponentsInChildren<Renderer>())
             {
@@ -138,9 +141,9 @@ namespace Mismo.Gameplay.Player.Editor
             }
             if(!has)return;int axis=bounds.size.x>bounds.size.y?0:1;if(bounds.size.z>bounds.size[axis])axis=2;
             Vector3 a=bounds.center,bTip=bounds.center;a[axis]=bounds.min[axis];bTip[axis]=bounds.max[axis];
-            Undo.RecordObject(profile,"Ajustar trail a la pieza");profile.meleeTrail=profile.proceduralTrail=true;
-            if(editSecond){profile.secondaryTrail=true;profile.secondaryTrailBase=a;profile.secondaryTrailTip=bTip;}else{profile.trailBase=a;profile.trailTip=bTip;}
-            editTrailEndpoints=true;EditorUtility.SetDirty(profile);Refresh();
+            Undo.RecordObject(TrailProfile,"Ajustar trail a la pieza");TrailProfile.meleeTrail=TrailProfile.proceduralTrail=true;
+            TrailProfile.trailBase=a;TrailProfile.trailTip=bTip;
+            editTrailEndpoints=true;EditorUtility.SetDirty(TrailProfile);Refresh();
         }
     }
 }

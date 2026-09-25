@@ -1,0 +1,4 @@
+PASS sin cambios: C:\Users\elian\Mismo\Assets\Data\Weapons\Sword\Sword.asset
+PASS sin cambios: C:\Users\elian\Mismo\Assets\Data\Weapons\Sword\SwordCombo.asset
+PASS sin cambios: C:\Users\elian\Mismo\Assets\Data\AnimationAuthoring\HumanoidAttacks\Ataque_Humanoid_Dual.asset
+PASS campos de la familia ajenos a los clips, máscara y fases conservados

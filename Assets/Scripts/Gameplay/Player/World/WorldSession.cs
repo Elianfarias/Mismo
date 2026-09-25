@@ -15,7 +15,7 @@ namespace Mismo.Gameplay.Player.World
         internal static string VerificationDirectory;
         public static string LegacyProfilePath=>Path.Combine(Application.persistentDataPath,"Profiles","single-player.mismo");
         public static string ProfilePath=>Current==null||Current.legacy?LegacyProfilePath:
-            Path.Combine(Application.persistentDataPath,"Profiles","Worlds",Current.id+".mismo");
+            Path.Combine(VerificationDirectory??Path.Combine(Application.persistentDataPath,"Profiles"),"Worlds",Current.id+".mismo");
         static string SessionPath=>VerificationDirectory!=null?Path.Combine(VerificationDirectory,"active-world.mismo"):Path.Combine(Application.persistentDataPath,"Profiles","active-world.mismo");
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void Reset(){Current=null;repository=null;LastError=null;VerificationDirectory=null;}
@@ -51,6 +51,7 @@ namespace Mismo.Gameplay.Player.World
             int seed=legacy?template.seed:WorldSaveData.FreshSeed(previousSeed);
             settings.seed=seed;settings.preserveAuthoredCenter=legacy;settings.streamingEnabled=true;
             settings.generationVersion=legacy?0:2;
+            settings.introductionVersion=!legacy&&settings.content?.introduction!=null?1:0;
             Vector3 spawn=new Vector3(-50,4.25f,-70);float spawnYaw=0;
             if(!legacy)
             {
@@ -60,6 +61,7 @@ namespace Mismo.Gameplay.Player.World
                 spawn=site.position+(settings.content!=null?settings.content.VillageArrivalOffset:new Vector3(0,0,-29));
                 spawn.y=terrain.Height(spawn.x,spawn.z)+.3f;
                 spawnYaw=settings.content!=null?settings.content.villageSpawnYaw:0;
+                if(terrain.Introduction!=null){spawn=terrain.Introduction.Spawn;spawnYaw=terrain.Introduction.Facing.eulerAngles.y;}
             }
             else
             {
@@ -126,6 +128,7 @@ namespace Mismo.Gameplay.Player.World
             var result=UnityEngine.Object.Instantiate(template);
             // Missing fields in old JSON must not inherit a future template's generator.
             result.generationVersion=0;
+            result.introductionVersion=0;
             JsonUtility.FromJsonOverwrite(Current.settingsJson,result);
             result.content=template.content;result.seed=Current.seed;result.preserveAuthoredCenter=Current.legacy;
             return result;
@@ -134,6 +137,14 @@ namespace Mismo.Gameplay.Player.World
         {
             if(Current==null)return false;var next=Current.Copy();next.x=position.x;next.y=position.y;next.z=position.z;next.yaw=yaw;
             if(DayNightCycle.Current!=null){next.hasTimeOfDay=true;next.timeOfDay=DayNightCycle.Current.hour;}
+            return Commit(next);
+        }
+        public static bool SaveIntroduction(int stage,int lessons,Vector3? respawn=null,Vector3? position=null,float yaw=0)
+        {
+            if(Current==null)return false;
+            var next=Current.Copy();next.introductionStage=stage;next.introductionLessons=lessons;
+            if(respawn.HasValue){next.spawnX=respawn.Value.x;next.spawnY=respawn.Value.y;next.spawnZ=respawn.Value.z;}
+            if(position.HasValue){next.x=position.Value.x;next.y=position.Value.y;next.z=position.Value.z;next.yaw=yaw;}
             return Commit(next);
         }
         public static bool SaveMapPins(System.Collections.Generic.List<Mismo.Gameplay.Player.Presentation.MapPin> pins)

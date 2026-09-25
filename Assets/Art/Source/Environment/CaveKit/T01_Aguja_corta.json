@@ -1,0 +1,10 @@
+{
+    "voxelSizeMetres": 0.054999999701976776,
+    "minimumUnityMetres": {
+        "x": -0.4950000047683716,
+        "y": -1.1549999713897705,
+        "z": -0.38499999046325684
+    },
+    "axisMapping": "VOX X,Y,Z = Unity X,Z,Y",
+    "pivot": "Attachment at local origin"
+}

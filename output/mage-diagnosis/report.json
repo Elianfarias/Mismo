@@ -1,0 +1,2130 @@
+{
+  "ArtSource/VoxelAdventurer/ReferenceMage/Voxel_Reference_Mage.blend": [
+    {
+      "name": "Armature_Humanoid",
+      "type": "ARMATURE",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": null
+    },
+    {
+      "name": "Belt back",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Hips"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Belt front",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Hips"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Boot cuff L",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerLeg.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Boot cuff R",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerLeg.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Boot strap L",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerLeg.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Boot strap R",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerLeg.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Bracer band L",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerArm.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Bracer band L.001",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerArm.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Bracer band R",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerArm.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Bracer band R.001",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerArm.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Bracer L",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerArm.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Bracer R",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerArm.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Buckle",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Hips"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Buckle center",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Hips"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Chest clasp",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 120,
+      "groups": [
+        "Chest"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Chest tabard",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Chest"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Eye violet",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 16,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Eye violet.001",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 16,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Face shadow",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Hood back",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 496,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Hood crown",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 18416,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Hood side",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Hood side.001",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Hood side.002",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Hood upper step",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 184,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Pouch flap",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Hips"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Scarf lower",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Neck"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Scarf upper",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Shoulder edge L",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "UpperArm.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Shoulder edge R",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "UpperArm.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Shoulder plate L",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 120,
+      "groups": [
+        "UpperArm.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Shoulder plate R",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 120,
+      "groups": [
+        "UpperArm.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Tabard trim",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Chest"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Tabard trim.001",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Chest"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Utility pouch",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Hips"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Voxel_Base_GameReady",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 25420,
+      "groups": [
+        "Hips",
+        "Spine",
+        "Chest",
+        "Neck",
+        "Head",
+        "Clavicle.L",
+        "UpperArm.L",
+        "LowerArm.L",
+        "Hand.L",
+        "UpperLeg.L",
+        "LowerLeg.L",
+        "Foot.L",
+        "Toes.L",
+        "Clavicle.R",
+        "UpperArm.R",
+        "LowerArm.R",
+        "Hand.R",
+        "UpperLeg.R",
+        "LowerLeg.R",
+        "Foot.R",
+        "Toes.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    }
+  ],
+  "Assets/Art/FBX/Characters/Voxel_Adventurer_Animated.fbx": [
+    {
+      "name": "Armature_Humanoid",
+      "type": "ARMATURE",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": null
+    },
+    {
+      "name": "Belt back",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Hips"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Belt front",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Hips"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Boot cuff L",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerLeg.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Boot cuff R",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerLeg.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Boot strap L",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerLeg.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Boot strap R",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerLeg.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Bracer band L",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerArm.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Bracer band L.001",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerArm.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Bracer band R",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerArm.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Bracer band R.001",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerArm.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Bracer L",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerArm.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Bracer R",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerArm.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Buckle",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Hips"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Buckle center",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Hips"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Chest clasp",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 120,
+      "groups": [
+        "Chest"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Chest tabard",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Chest"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Eye violet",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 16,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Eye violet.001",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 16,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Face shadow",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Hood back",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 496,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Hood crown",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 18416,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Hood side",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Hood side.001",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Hood upper step",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 184,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Pouch flap",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Hips"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Scarf hanging end",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Chest"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Scarf lower",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Neck"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Scarf upper",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Shoulder edge L",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "UpperArm.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Shoulder edge R",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "UpperArm.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Shoulder plate L",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 120,
+      "groups": [
+        "UpperArm.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Shoulder plate R",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 120,
+      "groups": [
+        "UpperArm.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Sword_E_RightHand",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 319,
+      "groups": [
+        "Hand.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Tabard trim",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Chest"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Tabard trim.001",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Chest"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Utility pouch",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Hips"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Voxel_Base_GameReady",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 25420,
+      "groups": [
+        "Hips",
+        "Spine",
+        "Chest",
+        "Neck",
+        "Head",
+        "Clavicle.L",
+        "UpperArm.L",
+        "LowerArm.L",
+        "Hand.L",
+        "Clavicle.R",
+        "UpperArm.R",
+        "LowerArm.R",
+        "Hand.R",
+        "UpperLeg.L",
+        "LowerLeg.L",
+        "Foot.L",
+        "Toes.L",
+        "UpperLeg.R",
+        "LowerLeg.R",
+        "Foot.R",
+        "Toes.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    }
+  ],
+  "Assets/Art/FBX/Characters/Voxel_Reference_Mage.fbx": [
+    {
+      "name": "Armature_Humanoid",
+      "type": "ARMATURE",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": null
+    },
+    {
+      "name": "Belt back",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Hips"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Belt front",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Hips"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Boot cuff L",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerLeg.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Boot cuff R",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerLeg.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Boot strap L",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerLeg.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Boot strap R",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerLeg.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Bracer band L",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerArm.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Bracer band L.001",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerArm.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Bracer band R",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerArm.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Bracer band R.001",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerArm.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Bracer L",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerArm.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Bracer R",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "LowerArm.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Buckle",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Hips"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Buckle center",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Hips"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Camera",
+      "type": "CAMERA",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": null
+    },
+    {
+      "name": "Chest clasp",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 120,
+      "groups": [
+        "Chest"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Chest tabard",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Chest"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Eye violet",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 16,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Eye violet.001",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 16,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Face shadow",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Hood back",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 496,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Hood crown",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 18416,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Hood side",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Hood side.001",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Hood side.002",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Hood upper step",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 184,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Light",
+      "type": "LIGHT",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": null
+    },
+    {
+      "name": "Original_Base",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": null,
+      "vertices": 9774,
+      "groups": [],
+      "unweighted": 9774,
+      "modifiers": []
+    },
+    {
+      "name": "Pouch flap",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Hips"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Scarf lower",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Neck"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Scarf upper",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Head"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Shoulder edge L",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "UpperArm.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Shoulder edge R",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "UpperArm.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Shoulder plate L",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 120,
+      "groups": [
+        "UpperArm.L"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Shoulder plate R",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 120,
+      "groups": [
+        "UpperArm.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "SwordPreview_Fill",
+      "type": "LIGHT",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": null
+    },
+    {
+      "name": "SwordPreview_Key",
+      "type": "LIGHT",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": null
+    },
+    {
+      "name": "SwordPreview_Rim",
+      "type": "LIGHT",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": null
+    },
+    {
+      "name": "Tabard trim",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Chest"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Tabard trim.001",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Chest"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Utility pouch",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 8,
+      "groups": [
+        "Hips"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Voxel_Base_Coarse",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": null,
+      "vertices": 2164,
+      "groups": [],
+      "unweighted": 2164,
+      "modifiers": []
+    },
+    {
+      "name": "Voxel_Base_Detailed",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": null,
+      "vertices": 9046,
+      "groups": [],
+      "unweighted": 9046,
+      "modifiers": []
+    },
+    {
+      "name": "Voxel_Base_GameReady",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": "Armature_Humanoid",
+      "vertices": 25420,
+      "groups": [
+        "Hips",
+        "Spine",
+        "Chest",
+        "Neck",
+        "Head",
+        "Clavicle.L",
+        "UpperArm.L",
+        "LowerArm.L",
+        "Hand.L",
+        "Clavicle.R",
+        "UpperArm.R",
+        "LowerArm.R",
+        "Hand.R",
+        "UpperLeg.L",
+        "LowerLeg.L",
+        "Foot.L",
+        "Toes.L",
+        "UpperLeg.R",
+        "LowerLeg.R",
+        "Foot.R",
+        "Toes.R"
+      ],
+      "unweighted": 0,
+      "modifiers": [
+        {
+          "type": "ARMATURE",
+          "target": "Armature_Humanoid"
+        }
+      ]
+    },
+    {
+      "name": "Voxel_Base_Medium",
+      "type": "MESH",
+      "hidden": false,
+      "render_hidden": false,
+      "parent": null,
+      "vertices": 3932,
+      "groups": [],
+      "unweighted": 3932,
+      "modifiers": []
+    }
+  ]
+}

@@ -10,19 +10,20 @@ namespace Mismo.Gameplay.Player.World
         public string RegionId {get;private set;}
         public string DisplayName {get;private set;}
         public bool PendingReward {get;set;}
-        public int Level=>inventory==null?1:settings!=null&&settings.UsesFiniteWorld?Mathf.Max(1,inventory.RegionMinimum(RegionId)):inventory.RegionLevel(RegionId);
-        public float HealthMultiplier=>1+Mathf.Max(0,Level-1)*settings.healthPerLevel;
-        public float DamageMultiplier=>1+Mathf.Max(0,Level-1)*settings.damagePerLevel;
+        public int Level=>fixedLevel>0?fixedLevel:inventory==null?1:settings!=null&&settings.UsesFiniteWorld?Mathf.Max(1,inventory.RegionMinimum(RegionId)):inventory.RegionLevel(RegionId);
+        public float HealthMultiplier=>1+Mathf.Max(0,Level-1)*(settings!=null?settings.healthPerLevel:.025f);
+        public float DamageMultiplier=>1+Mathf.Max(0,Level-1)*(settings!=null?settings.damagePerLevel:.015f);
         PlayerInventory inventory;
         ExplorationWorldSettings settings;
         int appliedLevel;
+        int fixedLevel;
         float baseHealth;
         float nextSave;
-        public void Configure(string id,string region,string displayName,PlayerInventory player,ExplorationWorldSettings world)
-        {Id=id;RegionId=region;DisplayName=displayName;inventory=player;settings=world;}
+        public void Configure(string id,string region,string displayName,PlayerInventory player,ExplorationWorldSettings world,int level=0)
+        {Id=id;RegionId=region;DisplayName=displayName;inventory=player;settings=world;fixedLevel=Mathf.Max(0,level);}
         void LateUpdate()
         {
-            var health=GetComponent<Mismo.Gameplay.Combat.Health>();if(settings==null||health==null)return;
+            var health=GetComponent<Mismo.Gameplay.Combat.Health>();if(health==null)return;
             if(health.IsDead)
             {
                 // Non-player/environment deaths have no contribution reward but still persist.

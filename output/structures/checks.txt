@@ -1,0 +1,171 @@
+PASS valid connected layout seed 1
+PASS valid connected layout seed 2
+PASS valid connected layout seed 3
+PASS valid connected layout seed 4
+PASS valid connected layout seed 5
+PASS valid connected layout seed 6
+PASS valid connected layout seed 7
+PASS valid connected layout seed 8
+PASS valid connected layout seed 9
+PASS valid connected layout seed 10
+PASS valid connected layout seed 11
+PASS valid connected layout seed 12
+PASS valid connected layout seed 13
+PASS valid connected layout seed 14
+PASS valid connected layout seed 15
+PASS valid connected layout seed 16
+PASS valid connected layout seed 17
+PASS valid connected layout seed 18
+PASS valid connected layout seed 19
+PASS valid connected layout seed 20
+PASS layout deterministic
+PASS disconnected graph rejected
+PASS Cave_Moss clear corridor 0-1
+PASS Cave_Moss clear corridor 1-2
+PASS Cave_Moss clear corridor 2-3
+PASS Cave_Moss clear corridor 1-4
+PASS Cave_Moss floor Entrada
+PASS Cave_Moss closed roof Entrada
+PASS Cave_Moss floor Camara 1
+PASS Cave_Moss closed roof Camara 1
+PASS Cave_Moss floor Camara 2
+PASS Cave_Moss closed roof Camara 2
+PASS Cave_Moss floor Sala final
+PASS Cave_Moss closed roof Sala final
+PASS Cave_Moss floor Ramal 1
+PASS Cave_Moss closed roof Ramal 1
+PASS Cave_Moss navigation entrance to final
+PASS Cave_Moss nonempty navigation route
+PASS Cave_Moss final room ambient zone
+PASS Cave_Moss exterior roof keeps daylight
+PASS Cave_Crystal clear corridor 0-1
+PASS Cave_Crystal clear corridor 1-2
+PASS Cave_Crystal clear corridor 2-3
+PASS Cave_Crystal clear corridor 1-4
+PASS Cave_Crystal floor Entrada
+PASS Cave_Crystal closed roof Entrada
+PASS Cave_Crystal floor Camara 1
+PASS Cave_Crystal closed roof Camara 1
+PASS Cave_Crystal floor Camara 2
+PASS Cave_Crystal closed roof Camara 2
+PASS Cave_Crystal floor Sala final
+PASS Cave_Crystal closed roof Sala final
+PASS Cave_Crystal floor Ramal 1
+PASS Cave_Crystal closed roof Ramal 1
+PASS Cave_Crystal navigation entrance to final
+PASS Cave_Crystal nonempty navigation route
+PASS Cave_Crystal final room ambient zone
+PASS Cave_Crystal exterior roof keeps daylight
+PASS Ruin_Grove clear corridor 0-1
+PASS Ruin_Grove clear corridor 1-2
+PASS Ruin_Grove clear corridor 2-3
+PASS Ruin_Grove clear corridor 1-4
+PASS Ruin_Grove floor Entrada
+PASS Ruin_Grove floor Camara 1
+PASS Ruin_Grove floor Camara 2
+PASS Ruin_Grove floor Sala final
+PASS Ruin_Grove floor Ramal 1
+PASS Ruin_Grove navigation entrance to final
+PASS Ruin_Grove nonempty navigation route
+PASS Ruin_Grove final room ambient zone
+PASS Ruin_Grove exterior roof keeps daylight
+PASS Temple lateral room has a closed outer wall
+PASS Temple_Grove clear corridor 0-1
+PASS Temple_Grove clear corridor 1-2
+PASS Temple_Grove clear corridor 1-3
+PASS Temple_Grove floor Entrada
+PASS Temple_Grove closed roof Entrada
+PASS Temple_Grove floor Camara 1
+PASS Temple_Grove closed roof Camara 1
+PASS Temple_Grove floor Sala final
+PASS Temple_Grove closed roof Sala final
+PASS Temple_Grove floor Ramal 1
+PASS Temple_Grove closed roof Ramal 1
+PASS Temple_Grove navigation entrance to final
+PASS Temple_Grove nonempty navigation route
+PASS Temple_Grove final room ambient zone
+PASS Temple_Grove exterior roof keeps daylight
+PASS dedicated ice escarpment cave exists
+PASS woodland temple landmark exists
+PASS ice landmark placement deterministic
+PASS ice boundary still blocks progression
+PASS ice final room stays on accessible side
+PASS deterministic world structure (5, -3)
+PASS temple basin carved below water
+PASS temple water excludes vegetation
+PASS flat foundation (5, -3)
+PASS vegetation reservation (5, -3)
+PASS flat foundation (5, -3)
+PASS vegetation reservation (5, -3)
+PASS flat foundation (5, -3)
+PASS vegetation reservation (5, -3)
+PASS flat foundation (5, -3)
+PASS vegetation reservation (5, -3)
+PASS deterministic world structure (1, 4)
+PASS flat foundation (1, 4)
+PASS vegetation reservation (1, 4)
+PASS flat foundation (1, 4)
+PASS vegetation reservation (1, 4)
+PASS flat foundation (1, 4)
+PASS vegetation reservation (1, 4)
+PASS flat foundation (1, 4)
+PASS vegetation reservation (1, 4)
+PASS flat foundation (1, 4)
+PASS vegetation reservation (1, 4)
+PASS deterministic world structure (14, 8)
+PASS flat foundation (14, 8)
+PASS vegetation reservation (14, 8)
+PASS flat foundation (14, 8)
+PASS vegetation reservation (14, 8)
+PASS flat foundation (14, 8)
+PASS vegetation reservation (14, 8)
+PASS flat foundation (14, 8)
+PASS vegetation reservation (14, 8)
+PASS flat foundation (14, 8)
+PASS vegetation reservation (14, 8)
+PASS structures present in finite world
+PASS deterministic world structure (-6, -18)
+PASS temple basin carved below water
+PASS temple water excludes vegetation
+PASS flat foundation (-6, -18)
+PASS vegetation reservation (-6, -18)
+PASS flat foundation (-6, -18)
+PASS vegetation reservation (-6, -18)
+PASS flat foundation (-6, -18)
+PASS vegetation reservation (-6, -18)
+PASS flat foundation (-6, -18)
+PASS vegetation reservation (-6, -18)
+PASS deterministic world structure (2, -18)
+PASS temple basin carved below water
+PASS temple water excludes vegetation
+PASS flat foundation (2, -18)
+PASS vegetation reservation (2, -18)
+PASS flat foundation (2, -18)
+PASS vegetation reservation (2, -18)
+PASS flat foundation (2, -18)
+PASS vegetation reservation (2, -18)
+PASS flat foundation (2, -18)
+PASS vegetation reservation (2, -18)
+PASS deterministic world structure (35, -18)
+PASS temple basin carved below water
+PASS temple water excludes vegetation
+PASS flat foundation (35, -18)
+PASS vegetation reservation (35, -18)
+PASS flat foundation (35, -18)
+PASS vegetation reservation (35, -18)
+PASS flat foundation (35, -18)
+PASS vegetation reservation (35, -18)
+PASS flat foundation (35, -18)
+PASS vegetation reservation (35, -18)
+PASS deterministic world structure (39, -18)
+PASS flat foundation (39, -18)
+PASS vegetation reservation (39, -18)
+PASS flat foundation (39, -18)
+PASS vegetation reservation (39, -18)
+PASS flat foundation (39, -18)
+PASS vegetation reservation (39, -18)
+PASS flat foundation (39, -18)
+PASS vegetation reservation (39, -18)
+PASS flat foundation (39, -18)
+PASS vegetation reservation (39, -18)
+PASS structures present in legacy world

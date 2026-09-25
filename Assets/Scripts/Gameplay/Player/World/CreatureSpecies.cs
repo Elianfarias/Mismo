@@ -13,6 +13,8 @@ namespace Mismo.Gameplay.Player.World
         [Min(1)]public float ridingSpeed=8,followingSpeed=5.5f;
         [Min(1)]public float turnSpeed=180;
         [Range(.3f,1)]public float bookZoom=1;
+        [Tooltip("Orientación inicial del modelo en el bestiario. No cambia su orientación en el mundo.")]
+        public Vector3 bookPreviewRotation=new Vector3(0,-30,0);
         public static bool Visible(Transform creature,Transform observer)
         {
             var camera=UnityEngine.Camera.main;if(camera==null)return false;var point=creature.position+Vector3.up*.7f;var viewport=camera.WorldToViewportPoint(point);

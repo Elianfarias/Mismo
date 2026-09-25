@@ -1,0 +1,1 @@
+structure.Cave_Moss | seed 7319 | (1848.45, 210.33, 1091.76) | radius 27

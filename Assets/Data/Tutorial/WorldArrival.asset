@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f02186b7da44ef9071f3f198480278, type: 3}
+  m_Name: WorldArrival
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Presentation.TutorialSequence
+  id: world.introduction.worldarrival
+  completionLabel: "Jugar \xB7 Enter"
+  pages:
+  - title: Tu vida
+    body: "Despertaste en las galer\xEDas de cristal. Esta barra muestra tu vida. Si ca\xE9s, reaparec\xE9s en el \xFAltimo tramo completado de esta introducci\xF3n."
+    highlight: 1
+  - title: Tu estamina
+    body: "Correr con Shift, esquivar y algunas acciones gastan estamina. Dej\xE1 de gastarla un momento para recuperarla y reserv\xE1 un poco para defenderte."
+    highlight: 2
+  - title: Un camino hacia la superficie
+    body: "Movete con WASD y mir\xE1 con el mouse. Segu\xED las salas iluminadas por cristales hasta encontrar la salida."
+    highlight: 0
