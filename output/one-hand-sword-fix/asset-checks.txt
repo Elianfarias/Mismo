@@ -1,0 +1,3 @@
+PASS Sword.family = OneHandSword
+PASS Sword.dualSwordFamily = DualSwords
+PASS Sword.swordShieldFamily = SwordShield

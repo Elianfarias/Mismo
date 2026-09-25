@@ -63,6 +63,7 @@ namespace Mismo.Gameplay.Player.Equipment
         public Mismo.Gameplay.Combat.ComboStep[] comboSteps = Array.Empty<Mismo.Gameplay.Combat.ComboStep>();
         public bool targetsGround;
         public bool aimFromCamera;
+        [Tooltip("Alcance de apuntado y proyectiles. Los golpes cuerpo a cuerpo configuran su área en Actions (Radius y Forward), o en Golpes del combo.")]
         [Min(1)] public float range = 22;
         [SerializeReference] public AbilityAction[] actions = Array.Empty<AbilityAction>();
         public float Duration => Mathf.Max(0, preparation) + Mathf.Max(.01f, active) + Mathf.Max(0, recovery);

@@ -13,7 +13,12 @@ namespace Mismo.Gameplay.Player.Equipment
     [Serializable]
     public sealed class RepeatedStrikeAction : AbilityAction
     {
-        public float damage=7,interval=.2f,radius=.7f,forward=1,slow=1,slowSeconds,stunSeconds,bleedDamage,bleedSeconds,pushDistance;
+        public float damage=7,interval=.2f;
+        [Tooltip("Radio de la esfera de impacto, en metros. Aumentarlo amplía el golpe hacia delante, atrás y los lados. Se combina con Forward; no usa el Range de la habilidad.")]
+        public float radius=.7f;
+        [Tooltip("Distancia desde el personaje hasta el centro de la esfera de impacto, en metros hacia delante. El borde frontal está a Forward + Radius. No cambia el tamaño del área.")]
+        public float forward=1;
+        public float slow=1,slowSeconds,stunSeconds,bleedDamage,bleedSeconds,pushDistance;
         public override void Begin(AbilityExecution c){c.ActionTimes[this]=0;Strike(c);}
         public override void Tick(AbilityExecution c,float dt)
         {

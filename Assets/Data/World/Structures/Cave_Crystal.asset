@@ -1,0 +1,168 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5719412954d42db8f7c0f49cb04759b, type: 3}
+  m_Name: Cave_Crystal
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.Structures.StructureDefinition
+  displayName: Santuario de la escarpa helada
+  style: 0
+  placement: 1
+  worldBiomes: 0200000005000000i
+  worldStoneSurface: 1
+  stoneStyle: {fileID: 11400000, guid: f4d7b966c71c2994ab361ee34ae1c31a, type: 2}
+  waterMaterial: {fileID: 2100000, guid: abd5b8d8a49677c4db46292241d7ec38, type: 2}
+  moatRadius: 31
+  exteriorDetails:
+  - {fileID: 624476211088998070, guid: 95b85245f34956440a6d144445de13b5, type: 3}
+  - {fileID: 4378811520822948133, guid: 51ddae224ab6d834eb1f2edc4cd2e11f, type: 3}
+  - {fileID: 505843682104795114, guid: 11fae030c335e6c4087f628fc91594c8, type: 3}
+  layoutSeed: 9281
+  decorationSeed: 9432
+  mainRooms: 4
+  branches: 1
+  voxelSize: 0.5
+  mountainHeight: 22
+  decorationDensity: 0.85
+  interiorAmbient: 0.14
+  lightIntensity: 1.4
+  lightColor: {r: 0.28, g: 0.55, b: 1, a: 1}
+  finalExperience: 100
+  finalRequirement: 2
+  shellMaterial: {fileID: 2100000, guid: 2f882507da2a57744b183ac2b315783b, type: 2}
+  entranceArch: {fileID: 5706260461448695165, guid: e104364e9f0a37c42938686eda96e4e0, type: 3}
+  finalLandmark: {fileID: 5607084892534544550, guid: 2ea6fb038931235468bfb1fc5359ee72, type: 3}
+  rewardVisual: {fileID: 6415321252520051679, guid: caf9c36c8e991b746aaba5aa9ae6898d, type: 3}
+  floorDetails:
+  - {fileID: 868908525972708264, guid: 27c56842e29dea649b92df52137879e7, type: 3}
+  - {fileID: 2513223966158952295, guid: 31a6d8870a01def47b242107fc187713, type: 3}
+  - {fileID: 4455042962645893767, guid: 2f416f3ec33706942912f0e648b7b385, type: 3}
+  - {fileID: 1854221110911226562, guid: 0552506ad5aef7c4d856e84393260338, type: 3}
+  - {fileID: 5905387344700278635, guid: ffed91ed7b7118248a14056f7cdcc577, type: 3}
+  - {fileID: 4229347833953768392, guid: 9cabf656b7397614795b181f5c463f9a, type: 3}
+  ceilingDetails:
+  - {fileID: 4988741387208245964, guid: f151e65e859c96f4991cf5fcc45a6b0a, type: 3}
+  - {fileID: 9193324023605388388, guid: af35b002377b7f44cb694e17f8b80342, type: 3}
+  wallDetails:
+  - {fileID: 4515851526927354461, guid: 5261c618844c0bb47972b6fe655dc5ee, type: 3}
+  - {fileID: 6325077523902428767, guid: cbcd44676bb64ea4d928e3688f446c9e, type: 3}
+  rooms:
+  - id: d991a1b75e12465497089fb55d03c660
+    contents: []
+    name: Entrada
+    role: 0
+    center: {x: 0, y: -15}
+    radius: 4
+    height: 6
+  - id: 00b1c004fbcd470488a89b6a5ae80ef1
+    contents:
+    - id: 92a363e3ed7e4de99e13e4c205180e55
+      label: Guardian
+      kind: 0
+      offset: {x: 1.5, y: 0}
+      yaw: 0
+      scale: 1
+      prefab: {fileID: 2759051942343419815, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+      enemyLevel: 2
+      requiredForClear: 1
+      resource: {fileID: 0}
+      resourceOneTime: 1
+      loot: {fileID: 0}
+      weapon: {fileID: 0}
+      weaponTier: 1
+      experience: 0
+      requirement: 0
+    name: Camara 1
+    role: 1
+    center: {x: -1.5885731, y: -5.6666665}
+    radius: 4
+    height: 6
+  - id: 57823d0956d24875ab43cf447a07fc63
+    contents: []
+    name: Camara 2
+    role: 1
+    center: {x: -5.1093326, y: 3.6666672}
+    radius: 4
+    height: 6
+  - id: 5bea0018cb0b4246bb7a961a13098b7c
+    contents:
+    - id: 614a8ede783849da888f420581521135
+      label: Guardian de la sala final
+      kind: 0
+      offset: {x: -2, y: 0}
+      yaw: 0
+      scale: 1
+      prefab: {fileID: 2759051942343419815, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
+      enemyLevel: 3
+      requiredForClear: 1
+      resource: {fileID: 0}
+      resourceOneTime: 1
+      loot: {fileID: 0}
+      weapon: {fileID: 0}
+      weaponTier: 1
+      experience: 0
+      requirement: 0
+    - id: de24cad10d5a464aa688707724225e8f
+      label: Cofre antiguo
+      kind: 1
+      offset: {x: 2, y: 1}
+      yaw: 180
+      scale: 1
+      prefab: {fileID: 6201630413953572033, guid: c8efe7fb487c6f749a577e5e111621eb, type: 3}
+      enemyLevel: 0
+      requiredForClear: 1
+      resource: {fileID: 0}
+      resourceOneTime: 1
+      loot: {fileID: 11400000, guid: c04ffe6d67c36284199b85c3354192b7, type: 2}
+      weapon: {fileID: 0}
+      weaponTier: 1
+      experience: 25
+      requirement: 2
+    name: Sala final
+    role: 3
+    center: {x: 0, y: 13}
+    radius: 6
+    height: 7
+  - id: 52deb198194a4b5c85f8f65262f3491b
+    contents:
+    - id: ecf16c61a7af49b6b5a6b0bde0507d11
+      label: Veta arcana
+      kind: 2
+      offset: {x: -1.5, y: 1}
+      yaw: 0
+      scale: 1
+      prefab: {fileID: 0}
+      enemyLevel: 0
+      requiredForClear: 1
+      resource: {fileID: 11400000, guid: aa5491aa71d27d1419821b23a3c2346c, type: 2}
+      resourceOneTime: 1
+      loot: {fileID: 0}
+      weapon: {fileID: 0}
+      weaponTier: 1
+      experience: 0
+      requirement: 0
+    name: Ramal 1
+    role: 2
+    center: {x: -11.588573, y: -4.6666665}
+    radius: 3.5
+    height: 5
+  connections:
+  - from: 0
+    to: 1
+    width: 5
+  - from: 1
+    to: 2
+    width: 5
+  - from: 2
+    to: 3
+    width: 5
+  - from: 1
+    to: 4
+    width: 4.5

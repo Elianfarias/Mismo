@@ -25,6 +25,9 @@ namespace Mismo.Gameplay.Player.Presentation
         private bool wasDashing;
         private float squashRemaining;
         private float sprintPulseRemaining;
+        private Mesh sampledGroundMesh;
+        private Color[] groundColors;
+        private int[] groundTriangles;
 
         private void Awake()
         {
@@ -60,7 +63,7 @@ namespace Mismo.Gameplay.Player.Presentation
             if (motor == null || dash == null || visual == null) return;
             bool sprinting = controller != null && controller.IsSprinting;
             bool dashing = dash.IsActive;
-            if (sprinting)
+            if (sprinting && motor.IsGrounded)
             {
                 sprintPulseRemaining -= Time.deltaTime;
                 if (sprintPulseRemaining <= 0f)
@@ -150,12 +153,45 @@ namespace Mismo.Gameplay.Player.Presentation
             if (material == null) return sprintColor;
 
             Color sampled;
-            if (material.HasProperty("_BaseColor")) sampled = material.GetColor("_BaseColor");
-            else if (material.HasProperty("_Color")) sampled = material.GetColor("_Color");
-            else return sprintColor;
+            if (material.shader == null || material.shader.name != "Mismo/Textured Terrain" ||
+                !TrySampleTerrain(hit, material, out sampled))
+            {
+                if (material.HasProperty("_BaseColor")) sampled = material.GetColor("_BaseColor");
+                else if (material.HasProperty("_Color")) sampled = material.GetColor("_Color");
+                else return sprintColor;
+            }
 
             sampled.a = sprintColor.a;
             return sampled;
+        }
+
+        private bool TrySampleTerrain(RaycastHit hit, Material material, out Color color)
+        {
+            color = default;
+            var collider = hit.collider as MeshCollider;
+            var mesh = collider != null ? collider.sharedMesh : null;
+            if (mesh == null || !mesh.isReadable || hit.triangleIndex < 0) return false;
+            // Keep only the current chunk cached; do not allocate mesh arrays on every footstep.
+            if (sampledGroundMesh != mesh)
+            {
+                sampledGroundMesh = mesh;
+                groundColors = mesh.colors;
+                groundTriangles = mesh.triangles;
+            }
+            int triangle = hit.triangleIndex * 3;
+            if (groundColors.Length != mesh.vertexCount || triangle + 2 >= groundTriangles.Length) return false;
+            Vector3 weights = hit.barycentricCoordinate;
+            color = groundColors[groundTriangles[triangle]] * weights.x +
+                    groundColors[groundTriangles[triangle + 1]] * weights.y +
+                    groundColors[groundTriangles[triangle + 2]] * weights.z;
+            // Match TerrainSurface's palette mapping. Alpha zero preserves literal biome colors.
+            Color mapped = color;
+            if (color.r >= color.b * 1.3f && color.r >= color.g)
+                mapped = material.GetColor("_DirtColor");
+            if (color.g >= color.r * 1.08f && color.g >= color.b * 1.3f)
+                mapped = hit.normal.y < .6f ? material.GetColor("_DirtColor") * .8f : material.GetColor("_GrassColor");
+            color = Color.Lerp(color, mapped, Mathf.Clamp01(color.a));
+            return true;
         }
 
     }

@@ -129,14 +129,17 @@ namespace Mismo.Gameplay.Combat
         {
             var presentation=GetComponentInParent<WeaponPresentation>();
             var weapon=GetComponentInParent<EquipmentLoadout>()?.ActiveDefinition;
-            var profile=weapon!=null?weapon.poseProfile:null;
+            var mainProfile=weapon!=null?weapon.poseProfile:null;
             for(int hand=0;hand<2&&step!=null;hand++)
             {
                 var history=blades[hand];
+                var off=weapon!=null?weapon.equippedOffhand:null;
+                var profile=hand==1&&off!=null?off.poseProfile:mainProfile;
+                bool legacySecond=hand==1&&off==null;
                 var visual=presentation!=null?(hand==0?presentation.ActiveVisual:weapon!=null&&weapon.dualWield?presentation.ActiveSecondVisual:null):null;
                 if(visual==null||profile==null||!visual.gameObject.activeInHierarchy){history.valid=false;continue;}
-                Vector3 a=visual.TransformPoint(hand==0?profile.trailBase:profile.secondaryTrailBase);
-                Vector3 b=visual.TransformPoint(hand==0?profile.trailTip:profile.secondaryTrailTip);
+                Vector3 a=visual.TransformPoint(legacySecond?profile.secondaryTrailBase:profile.trailBase);
+                Vector3 b=visual.TransformPoint(legacySecond?profile.secondaryTrailTip:profile.trailTip);
                 bool same=history.valid&&history.visual==visual;
                 Vector3 oldA=same?history.a:a,oldB=same?history.b:b;
                 if(detect)

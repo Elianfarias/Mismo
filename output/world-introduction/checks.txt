@@ -1,0 +1,119 @@
+PASS: World settings exist
+PASS: Extended crystal cave validates independently of streamed structures
+PASS: Cave room-to-room route exceeds 90 metres
+PASS: Safe intro ground seed 1 at (144.06, 12.05, 334.54)
+PASS: Safe intro ground seed 1 at (111.26, 12.05, 313.54)
+PASS: Safe intro ground seed 1 at (139.33, 12.20, 272.55)
+PASS: Safe intro ground seed 1 at (107.33, 12.20, 254.44)
+PASS: Safe intro ground seed 1 at (125.44, 12.20, 222.44)
+PASS: Safe intro ground seed 1 at (102.69, 12.20, 215.26)
+PASS: Safe intro ground seed 1 at (95.37, 12.20, 203.80)
+PASS: Safe intro ground seed 1 at (100.25, 12.20, 176.50)
+PASS: Safe intro ground seed 1 at (94.44, 12.30, 155.52)
+PASS: Safe intro ground seed 1 at (167.56, 12.40, 419.34)
+PASS: Safe intro ground seed 1 at (157.95, 12.05, 384.65)
+PASS: No random resources or enemies in cave: 1
+PASS: Safe intro ground seed 17 at (127.56, 12.05, 323.39)
+PASS: Safe intro ground seed 17 at (94.76, 12.05, 302.38)
+PASS: Safe intro ground seed 17 at (122.84, 12.20, 261.40)
+PASS: Safe intro ground seed 17 at (90.84, 12.20, 243.29)
+PASS: Safe intro ground seed 17 at (108.95, 12.20, 211.29)
+PASS: Safe intro ground seed 17 at (86.20, 12.20, 204.10)
+PASS: Safe intro ground seed 17 at (78.87, 12.20, 192.64)
+PASS: Safe intro ground seed 17 at (83.76, 12.20, 165.34)
+PASS: Safe intro ground seed 17 at (77.95, 12.30, 144.37)
+PASS: Safe intro ground seed 17 at (151.07, 12.40, 408.19)
+PASS: Safe intro ground seed 17 at (141.45, 12.05, 373.50)
+PASS: No random resources or enemies in cave: 17
+PASS: Safe intro ground seed 7319 at (137.68, 12.05, 328.11)
+PASS: Safe intro ground seed 7319 at (104.88, 12.05, 307.11)
+PASS: Safe intro ground seed 7319 at (132.95, 12.20, 266.12)
+PASS: Safe intro ground seed 7319 at (100.95, 12.20, 248.01)
+PASS: Safe intro ground seed 7319 at (119.06, 12.20, 216.01)
+PASS: Safe intro ground seed 7319 at (96.32, 12.20, 208.83)
+PASS: Safe intro ground seed 7319 at (88.99, 12.20, 197.37)
+PASS: Safe intro ground seed 7319 at (93.88, 12.20, 170.07)
+PASS: Safe intro ground seed 7319 at (88.06, 12.30, 149.09)
+PASS: Safe intro ground seed 7319 at (161.19, 12.40, 412.91)
+PASS: Safe intro ground seed 7319 at (151.57, 12.05, 378.22)
+PASS: No random resources or enemies in cave: 7319
+PASS: Safe intro ground seed 51923 at (147.21, 12.05, 341.85)
+PASS: Safe intro ground seed 51923 at (114.41, 12.05, 320.85)
+PASS: Safe intro ground seed 51923 at (142.48, 12.20, 279.86)
+PASS: Safe intro ground seed 51923 at (110.48, 12.20, 261.75)
+PASS: Safe intro ground seed 51923 at (128.59, 12.20, 229.75)
+PASS: Safe intro ground seed 51923 at (105.84, 12.20, 222.56)
+PASS: Safe intro ground seed 51923 at (98.52, 12.20, 211.10)
+PASS: Safe intro ground seed 51923 at (103.40, 12.20, 183.81)
+PASS: Safe intro ground seed 51923 at (97.59, 12.30, 162.83)
+PASS: Safe intro ground seed 51923 at (170.71, 12.40, 426.65)
+PASS: Safe intro ground seed 51923 at (161.10, 12.05, 391.96)
+PASS: No random resources or enemies in cave: 51923
+PASS: Safe intro ground seed 999999 at (142.17, 12.05, 320.61)
+PASS: Safe intro ground seed 999999 at (109.37, 12.05, 299.61)
+PASS: Safe intro ground seed 999999 at (137.44, 12.20, 258.62)
+PASS: Safe intro ground seed 999999 at (105.44, 12.20, 240.51)
+PASS: Safe intro ground seed 999999 at (123.55, 12.20, 208.51)
+PASS: Safe intro ground seed 999999 at (100.80, 12.20, 201.33)
+PASS: Safe intro ground seed 999999 at (93.48, 12.20, 189.87)
+PASS: Safe intro ground seed 999999 at (98.36, 12.20, 162.57)
+PASS: Safe intro ground seed 999999 at (92.55, 12.30, 141.59)
+PASS: Safe intro ground seed 999999 at (165.67, 12.40, 405.42)
+PASS: Safe intro ground seed 999999 at (156.06, 12.05, 370.72)
+PASS: No random resources or enemies in cave: 999999
+PASS: Safe intro ground seed 2147483647 at (132.12, 12.05, 322.27)
+PASS: Safe intro ground seed 2147483647 at (99.32, 12.05, 301.27)
+PASS: Safe intro ground seed 2147483647 at (127.39, 12.20, 260.28)
+PASS: Safe intro ground seed 2147483647 at (95.39, 12.20, 242.17)
+PASS: Safe intro ground seed 2147483647 at (113.50, 12.20, 210.17)
+PASS: Safe intro ground seed 2147483647 at (90.76, 12.20, 202.98)
+PASS: Safe intro ground seed 2147483647 at (83.43, 12.20, 191.52)
+PASS: Safe intro ground seed 2147483647 at (88.32, 12.20, 164.23)
+PASS: Safe intro ground seed 2147483647 at (82.50, 12.30, 143.25)
+PASS: Safe intro ground seed 2147483647 at (155.63, 12.40, 407.07)
+PASS: Safe intro ground seed 2147483647 at (146.01, 12.05, 372.38)
+PASS: No random resources or enemies in cave: 2147483647
+PASS: Existing generator settings do not acquire introduction terrain
+PASS: Real MainMenu scene loaded
+PASS: Nueva partida loads real procedural continent
+PASS: Nueva partida spawns inside the long cave
+PASS: Persistent inventory is isolated to the test save
+PASS: Arrival pauses with the existing spotlight guide
+PASS: Skipped lesson and stage persist
+PASS: Navigation traverses all cave galleries to the exterior
+PASS: Cave navigation stays inside the galleries, below the roof
+PASS: World lesson does not describe a temporary save: 1
+PASS: Stage checkpoint persisted: 1
+PASS: Stage checkpoint persisted: 2
+PASS: F interaction opens Liria's dialogue
+PASS: Skipping dialogue does not accept Liria's request
+PASS: Liria can be approached again after declining
+PASS: Stage checkpoint persisted: 3
+PASS: Continue retains an unfinished tutorial and accepted dialogue
+PASS: Reload resumes after Liria without replaying arrival or conversation
+PASS: World lesson does not describe a temporary save: 4
+PASS: Tutorial enemy starts on navigation: 4
+PASS: Stage checkpoint persisted: 4
+PASS: World lesson does not describe a temporary save: 5
+PASS: Tutorial enemy starts on navigation: 5
+PASS: Stage checkpoint persisted: 5
+PASS: World lesson does not describe a temporary save: 6
+PASS: Tutorial enemy starts on navigation: 6
+PASS: Stage checkpoint persisted: 6
+PASS: World lesson does not describe a temporary save: 7
+PASS: Stage checkpoint persisted: 7
+PASS: World lesson does not describe a temporary save: 8
+PASS: Tutorial enemy starts on navigation: 8
+PASS: Stage checkpoint persisted: 8
+PASS: World lesson does not describe a temporary save: 9
+PASS: Tutorial enemy starts on navigation: 9
+PASS: Tutorial enemy starts on navigation: 9
+PASS: Stage checkpoint persisted: 9
+PASS: World lesson does not describe a temporary save: 10
+PASS: Stage checkpoint persisted: 10
+PASS: Procedural village contains its real quest NPCs
+PASS: Tutorial ends in the same persistent world
+PASS: Continue retains completed introduction
+PASS: Reload does not restart completed tutorials
+PASS: Continue retains actual world position
+PASS: No runtime errors

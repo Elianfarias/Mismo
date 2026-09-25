@@ -13,6 +13,8 @@ namespace Mismo.Gameplay.Player.World
         public const int ChunkSize=32;
         public ExplorationWorldSettings Settings { get; private set; }
         public int LoadedCount=>chunks.Count;
+        public bool NavigationReady=>navigationReady;
+        WorldIntroduction introduction;
         public void RefreshResourceNavigation()=>dirty=true;
         readonly Dictionary<Vector2Int,GameObject> chunks=new Dictionary<Vector2Int,GameObject>();
         readonly Dictionary<Vector2Int,GameObject> authoredEncounters=new Dictionary<Vector2Int,GameObject>();
@@ -128,10 +130,23 @@ namespace Mismo.Gameplay.Player.World
                 finiteHorizon=distant.AddComponent<FiniteWorldHorizon>();finiteHorizon.Initialize(field,material);
             }
             navigation=new NavMeshData(0);navInstance=NavMesh.AddNavMeshData(navigation);dirty=true;
+            if(field.Introduction!=null&&WorldSession.Current!=null)
+            {
+                var root=new GameObject("World introduction");root.transform.SetParent(transform,false);
+                introduction=root.AddComponent<WorldIntroduction>();introduction.Initialize(this,field.Introduction,target.GetComponent<PlayerController>());
+            }
             if(WorldSession.Current!=null)
             {
                 var saved=WorldSession.Current;var position=new Vector3(saved.x,saved.y,saved.z);
                 var coordinate=Coordinate(position);
+                // An interior can cross chunk borders; restore its owner before resolving saved ground.
+                int sx=Mathf.FloorToInt(position.x/field.SiteSpacing),sz=Mathf.FloorToInt(position.z/field.SiteSpacing);
+                for(int z=-1;z<=1;z++)for(int x=-1;x<=1;x++)
+                {
+                    var site=field.Site(new Vector2Int(sx+x,sz+z));
+                    if(site.structure!=null&&Vector2.Distance(new Vector2(position.x,position.z),new Vector2(site.position.x,site.position.z))<site.radius+4)
+                    {var owner=Coordinate(site.position);if(!IsAuthored(owner))CreateChunk(owner);}
+                }
                 // Materialize the landing neighbourhood before allowing the motor to update.
                 for(int z=-1;z<=1;z++)for(int x=-1;x<=1;x++)
                 {var id=coordinate+new Vector2Int(x,z);if(!IsAuthored(id))CreateChunk(id);}
@@ -195,6 +210,7 @@ namespace Mismo.Gameplay.Player.World
                 if(dirty&&Time.time>=nextNav)
                 {
                     var sources=new List<NavMeshBuildSource>();
+                    if(introduction!=null)NavMeshBuilder.CollectSources(introduction.Geometry,~0,NavMeshCollectGeometry.PhysicsColliders,0,new List<NavMeshBuildMarkup>(),sources);
                     if(Settings.preserveAuthoredCenter)NavMeshBuilder.CollectSources(geometry,~0,NavMeshCollectGeometry.PhysicsColliders,0,NavigationMarkup(geometry),sources);
                     foreach(var chunk in chunks.Values.Concat(authoredEncounters.Values))
                     {var extra=new List<NavMeshBuildSource>();NavMeshBuilder.CollectSources(chunk.transform,~0,NavMeshCollectGeometry.PhysicsColliders,0,NavigationMarkup(chunk.transform),extra);sources.AddRange(extra);}

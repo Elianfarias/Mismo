@@ -1,0 +1,161 @@
+PASS
+PASS Dos rigs de prueba disponibles: aventurero e Imp
+PASS HorizontalSlash: clip Humanoid y duración exacta
+PASS HorizontalSlash: músculos, cuerpo y cuatro objetivos IK sin rutas de huesos
+PASS HorizontalSlash: sin bucle ni eventos de daño
+PASS HorizontalSlash: poses conservadas al reproducir (error máximo 0,0000m)
+PASS HorizontalSlash: reproducción en Imp, brazo recorre 79,7°
+PASS Armas: definición disponible para comprobar persistencia
+PASS Clip y proyecto sobreviven a guardado y reimportación
+PASS Armas: selección de ambas manos y visibilidad sobreviven al guardado
+PASS Exportación no sobrescribe clips existentes
+PASS Overhead: clip Humanoid y duración exacta
+PASS Overhead: músculos, cuerpo y cuatro objetivos IK sin rutas de huesos
+PASS Overhead: sin bucle ni eventos de daño
+PASS Overhead: poses conservadas al reproducir (error máximo 0,0000m)
+PASS Overhead: reproducción en Imp, brazo recorre 102,2°
+PASS Thrust: clip Humanoid y duración exacta
+PASS Thrust: músculos, cuerpo y cuatro objetivos IK sin rutas de huesos
+PASS Thrust: sin bucle ni eventos de daño
+PASS Thrust: poses conservadas al reproducir (error máximo 0,0000m)
+PASS Thrust: reproducción en Imp, brazo recorre 73,9°
+PASS Punch: clip Humanoid y duración exacta
+PASS Punch: músculos, cuerpo y cuatro objetivos IK sin rutas de huesos
+PASS Punch: sin bucle ni eventos de daño
+PASS Punch: poses conservadas al reproducir (error máximo 0,0000m)
+PASS Punch: reproducción en Imp, brazo recorre 73,9°
+PASS Blank: clip Humanoid y duración exacta
+PASS Blank: músculos, cuerpo y cuatro objetivos IK sin rutas de huesos
+PASS Blank: sin bucle ni eventos de daño
+PASS Blank: poses conservadas al reproducir (error máximo 0,0000m)
+PASS Blank: reproducción en Imp, brazo recorre 0,0°
+PASS Espejar dos veces restaura la pose
+PASS Interpolación produce poses intermedias
+PASS Rotar hueso cambia músculos capturados
+PASS Mover cadera se conserva en el cuerpo Humanoid
+PASS Rechaza tiempos duplicados
+PASS Rechaza poses no finitas
+PASS Rechaza modelos sin Avatar Humanoid
+PASS aventurero: cadena IK de LeftHand
+PASS aventurero LeftHand: solver acepta destino alcanzable
+PASS aventurero LeftHand: alcanza destino y conserva orientación
+PASS aventurero LeftHand: control de codo/rodilla cambia el plano sin desplazar el extremo
+PASS aventurero LeftHand: huesos conservan longitud y no desplazan torso
+PASS aventurero LeftHand: arrastre sobrevive a captura muscular
+PASS aventurero LeftHand: clip exportado conserva el destino IK
+PASS aventurero LeftHand: destino extremo se limita sin estirar ni valores inválidos
+PASS aventurero LeftHand: destino extremo se limita sin estirar ni valores inválidos
+PASS aventurero LeftHand: destino extremo se limita sin estirar ni valores inválidos
+PASS aventurero: cadena IK de RightHand
+PASS aventurero RightHand: solver acepta destino alcanzable
+PASS aventurero RightHand: alcanza destino y conserva orientación
+PASS aventurero RightHand: control de codo/rodilla cambia el plano sin desplazar el extremo
+PASS aventurero RightHand: huesos conservan longitud y no desplazan torso
+PASS aventurero RightHand: arrastre sobrevive a captura muscular
+PASS aventurero RightHand: clip exportado conserva el destino IK
+PASS aventurero RightHand: destino extremo se limita sin estirar ni valores inválidos
+PASS aventurero RightHand: destino extremo se limita sin estirar ni valores inválidos
+PASS aventurero RightHand: destino extremo se limita sin estirar ni valores inválidos
+PASS aventurero: cadena IK de LeftFoot
+PASS aventurero LeftFoot: solver acepta destino alcanzable
+PASS aventurero LeftFoot: alcanza destino y conserva orientación
+PASS aventurero LeftFoot: control de codo/rodilla cambia el plano sin desplazar el extremo
+PASS aventurero LeftFoot: huesos conservan longitud y no desplazan torso
+PASS aventurero LeftFoot: arrastre sobrevive a captura muscular
+PASS aventurero LeftFoot: clip exportado conserva el destino IK
+PASS aventurero LeftFoot: destino extremo se limita sin estirar ni valores inválidos
+PASS aventurero LeftFoot: destino extremo se limita sin estirar ni valores inválidos
+PASS aventurero LeftFoot: destino extremo se limita sin estirar ni valores inválidos
+PASS aventurero: cadena IK de RightFoot
+PASS aventurero RightFoot: solver acepta destino alcanzable
+PASS aventurero RightFoot: alcanza destino y conserva orientación
+PASS aventurero RightFoot: control de codo/rodilla cambia el plano sin desplazar el extremo
+PASS aventurero RightFoot: huesos conservan longitud y no desplazan torso
+PASS aventurero RightFoot: arrastre sobrevive a captura muscular
+PASS aventurero RightFoot: clip exportado conserva el destino IK
+PASS aventurero RightFoot: destino extremo se limita sin estirar ni valores inválidos
+PASS aventurero RightFoot: destino extremo se limita sin estirar ni valores inválidos
+PASS aventurero RightFoot: destino extremo se limita sin estirar ni valores inválidos
+PASS Imp: cadena IK de LeftHand
+PASS Imp LeftHand: solver acepta destino alcanzable
+PASS Imp LeftHand: alcanza destino y conserva orientación
+PASS Imp LeftHand: control de codo/rodilla cambia el plano sin desplazar el extremo
+PASS Imp LeftHand: huesos conservan longitud y no desplazan torso
+PASS Imp LeftHand: arrastre sobrevive a captura muscular
+PASS Imp LeftHand: clip exportado conserva el destino IK
+PASS Imp LeftHand: destino extremo se limita sin estirar ni valores inválidos
+PASS Imp LeftHand: destino extremo se limita sin estirar ni valores inválidos
+PASS Imp LeftHand: destino extremo se limita sin estirar ni valores inválidos
+PASS Imp: cadena IK de RightHand
+PASS Imp RightHand: solver acepta destino alcanzable
+PASS Imp RightHand: alcanza destino y conserva orientación
+PASS Imp RightHand: control de codo/rodilla cambia el plano sin desplazar el extremo
+PASS Imp RightHand: huesos conservan longitud y no desplazan torso
+PASS Imp RightHand: arrastre sobrevive a captura muscular
+PASS Imp RightHand: clip exportado conserva el destino IK
+PASS Imp RightHand: destino extremo se limita sin estirar ni valores inválidos
+PASS Imp RightHand: destino extremo se limita sin estirar ni valores inválidos
+PASS Imp RightHand: destino extremo se limita sin estirar ni valores inválidos
+PASS Imp: cadena IK de LeftFoot
+PASS Imp LeftFoot: solver acepta destino alcanzable
+PASS Imp LeftFoot: alcanza destino y conserva orientación
+PASS Imp LeftFoot: control de codo/rodilla cambia el plano sin desplazar el extremo
+PASS Imp LeftFoot: huesos conservan longitud y no desplazan torso
+PASS Imp LeftFoot: arrastre sobrevive a captura muscular
+PASS Imp LeftFoot: clip exportado conserva el destino IK
+PASS Imp LeftFoot: destino extremo se limita sin estirar ni valores inválidos
+PASS Imp LeftFoot: destino extremo se limita sin estirar ni valores inválidos
+PASS Imp LeftFoot: destino extremo se limita sin estirar ni valores inválidos
+PASS Imp: cadena IK de RightFoot
+PASS Imp RightFoot: solver acepta destino alcanzable
+PASS Imp RightFoot: alcanza destino y conserva orientación
+PASS Imp RightFoot: control de codo/rodilla cambia el plano sin desplazar el extremo
+PASS Imp RightFoot: huesos conservan longitud y no desplazan torso
+PASS Imp RightFoot: arrastre sobrevive a captura muscular
+PASS Imp RightFoot: clip exportado conserva el destino IK
+PASS Imp RightFoot: destino extremo se limita sin estirar ni valores inválidos
+PASS Imp RightFoot: destino extremo se limita sin estirar ni valores inválidos
+PASS Imp RightFoot: destino extremo se limita sin estirar ni valores inválidos
+PASS Armas: dos copias independientes en la vista
+PASS Armas: agarre principal del taller
+PASS Armas: agarre propio de la secundaria
+PASS Armas: desactiva componentes sólo en las copias
+PASS Armas: reproducción principal 0
+PASS Armas: reproducción secundaria 0
+PASS Armas: reproducción principal 0,3
+PASS Armas: reproducción secundaria 0,3
+PASS Armas: reproducción principal 0,46
+PASS Armas: reproducción secundaria 0,46
+PASS Armas: reproducción principal 0,8
+PASS Armas: reproducción secundaria 0,8
+PASS Armas: reproducción principal 1
+PASS Armas: reproducción secundaria 1
+PASS Armas: sigue el arrastre IK
+PASS Armas: no modifica definición ni perfil de agarre
+PASS Armas: oculta el visual integrado del personaje según el perfil
+PASS Armas: ocultar restaura el personaje y esconde ambas piezas
+PASS Armas: segunda copia con agarre secundario de la principal
+PASS Armas: a dos manos muestra una sola pieza y libera la segunda
+PASS Armas: anclaje incompatible avisa y oculta el visual
+PASS Armas: quitar selección limpia copias y restaura visibilidad
+PASS Animator anidado: offset y escala del contenedor normalizados
+PASS Importador y Avatar originales intactos
+PASS Escenas abiertas conservadas
+PASS Ventana: definición de arma disponible para la vista
+PASS Ventana abre el personaje y genera cinco poses editables
+PASS Ventana reproduce el clip exportable
+PASS Ventana vuelve de reproducción a edición de huesos
+PASS Ventana: muestra el arma del proyecto
+PASS Armas: ventana después de reproducir y editar
+PASS Ventana arrastra la mano y captura la pose Humanoid
+PASS Armas: ventana actualiza el arma al arrastrar
+PASS Deshacer arrastre IK restaura la pose anterior
+PASS Rehacer arrastre IK recupera la pose
+PASS Deshacer hasta un proyecto vacío cierra la vista sin índices inválidos
+PASS Cerrar la vista libera la copia del personaje
+PASS Abrir proyecto desde la vista conserva poses, duración y ambas armas
+PASS Guardar cambios tras cargar desde la vista
+PASS Reabrir recupera la última configuración guardada sin duplicar el asset
+PASS Referencia destruida se rechaza sin perder la configuración actual
+PASS Borrador descargado se recupera desde el proyecto guardado
+INFO Organización global no evaluada: proyecto aislado con fixtures de animación.

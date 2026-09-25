@@ -20,7 +20,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ce744cb14261acd4a92c927ed4ad58ab, type: 2}
   - {fileID: 11400000, guid: e7555c6d155e93448b2c9f2f131ceec1, type: 2}
   - {fileID: 11400000, guid: c21a4fd366079564f9927dda16544232, type: 2}
-  family: {fileID: 0}
+  family: {fileID: 11400000, guid: a28917d9ca82556f80ee1e1de28bf0bd, type: 2}
   feedbackOverride: {fileID: 0}
   isShield: 1
   dualSwordFamily: {fileID: 0}
@@ -33,8 +33,8 @@ MonoBehaviour:
   secondaryEquipped:
     anchor: 2
     bonePath: 
-    offset: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
+    offset: {x: 0.0000028488362, y: -0.00000073317824, z: 0.116910815}
+    rotation: {x: 338.08667, y: 17.912628, z: 137.93715}
     scale: 1
   secondaryHolstered:
     anchor: 0

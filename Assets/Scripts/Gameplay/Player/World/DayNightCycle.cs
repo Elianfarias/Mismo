@@ -51,9 +51,12 @@ namespace Mismo.Gameplay.Player.World
             moon.transform.rotation=Quaternion.Euler(hour*15+90,settings.sunAzimuth,0);
             moon.color=settings.moonColor;moon.intensity=settings.moonIntensity*Mathf.SmoothStep(0,1,Mathf.InverseLerp(.12f,-.18f,elevation));
             var ambient=Color.Lerp(a.ambientColor,b.ambientColor,blend);
+            var camera=UnityEngine.Camera.main;
+            float interior=camera!=null?Structures.StructureInstance.AmbientAt(camera.transform.position):1;
+            ambient*=interior;
             RenderSettings.ambientMode=AmbientMode.Trilight;RenderSettings.ambientSkyColor=ambient;RenderSettings.ambientEquatorColor=ambient*.75f;RenderSettings.ambientGroundColor=ambient*.4f;
             RenderSettings.fogColor=Color.Lerp(a.fogColor,b.fogColor,blend);
-            RenderSettings.reflectionIntensity=Mathf.Lerp(.2f,1,Mathf.Clamp01(sun.intensity));
+            RenderSettings.reflectionIntensity=Mathf.Lerp(.2f,1,Mathf.Clamp01(sun.intensity))*interior;
         }
         void OnDestroy(){if(Current==this)Current=null;if(sky!=null){if(RenderSettings.skybox==sky)RenderSettings.skybox=null;Destroy(sky);}}
     }

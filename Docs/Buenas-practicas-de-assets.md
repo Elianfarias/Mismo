@@ -28,6 +28,8 @@ Esta es la estructura de trabajo del proyecto Mismo. Se aplica tanto a archivos 
 
 **La extensión `.asset` no determina la carpeta.** Un `DragonBossSettings` es un ScriptableObject y va en `Data`; una `Mesh` también puede ser `.asset`, pero va en `Art/Meshes`. Un AudioMixer es audio, y un material `.mat` pertenece a `Art/Materials`.
 
+Las imágenes de referencia y concept art también van en `Art/Textures/Concepts`, agrupadas por tema o personaje. `Art/Source` conserva los archivos de trabajo auxiliares y paquetes originales. Al mover texturas usadas por un FBX que las busca por carpeta, registrar primero sus referencias en el importador y comprobar que sus dependencias mantienen los mismos GUID.
+
 Los archivos de fuente `.ttf`/`.otf` van en `Art/Fonts`; un `TMP_FontAsset` generado es un ScriptableObject y va en `Data/UI/Fonts`, junto con sus subassets internos.
 
 Dentro de cada categoría, agrupar por sistema, familia o proveedor. Mantener nombres estables y descriptivos; evitar `New Material`, `New Prefab`, `cosas`, `varios` o carpetas que mezclen materiales, mallas y configuraciones. No crear carpetas sueltas en la raíz de `Assets` al importar paquetes.
@@ -83,6 +85,12 @@ Las configuraciones de bosses Firyx están en `Data/Enemies/DragonBosses`; sus p
 Los originales del paquete de dragones se distribuyen bajo `Monsters/FourEvilDragonsPBR` en las categorías de `Art`. La antigua carpeta `Assets/FourEvilDragonsPBR` deja de ser necesaria. **Esto no significa que se puedan borrar los archivos reubicados**: algunos son dependencias del resultado y otros permiten volver a generarlo.
 
 Seleccionar la raíz completa del modelo con sus huesos y un material correctamente configurado. Al elegir una carpeta de animaciones, usar la subcarpeta de esa familia; no mezclar clips de rigs distintos. Conservar el original cuando se quiera cambiar resolución o volver a voxelizar.
+
+## Fotos de armas del inventario
+
+En **Mismo → Armas → Taller de iconos**, seleccionar la `WeaponDefinition`, arrastrar el modelo para girarlo (o editar la rotación XYZ) y pulsar **Guardar ángulo y actualizar icono**. El botón **Costado** permite mostrar la silueta de un arco. Se conserva `inventoryPreviewRotation` para futuras capturas; no modifica la postura del arma equipada.
+
+El voxelizador de armas permite elegir **Arma del inventario**: al generar, asigna el nuevo prefab y actualiza su foto usando el ángulo guardado. Sin un arma asignada, guarda la foto junto a los demás iconos en `Assets/Art/UI/Inventory`, identificada por el GUID del prefab. **Mismo → Inventory → Regenerate weapon grid icons** vuelve a fotografiar las armas del catálogo que tienen modelo, aunque ya tengan icono. Las fotos existentes del generador conservan su ruta y GUID; los atlas y otras imágenes importadas no se sobrescriben.
 
 ## Comprobaciones antes de entregar cambios
 

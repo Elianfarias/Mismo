@@ -30,9 +30,9 @@ MonoBehaviour:
   proceduralTrail: 1
   trailBase: {x: 0.0014486033, y: -0.2855152, z: 0.009646356}
   trailTaper: 0.5
-  secondaryTrail: 0
-  secondaryTrailBase: {x: 0, y: 0, z: 0}
-  secondaryTrailTip: {x: 0, y: 0, z: 1}
+  secondaryTrail: 1
+  secondaryTrailBase: {x: 0, y: -0.55, z: 0}
+  secondaryTrailTip: {x: 0, y: 0.55, z: 0}
   trailTip: {x: 0.0014486015, y: 0.89279366, z: 0.009646334}
   trailDuration: 0.1
   trailWidth: 0.28

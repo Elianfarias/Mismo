@@ -29,8 +29,8 @@ MonoBehaviour:
     blendSeconds: 0.08
     torsoUprightDegrees: 12
   - ability: {fileID: 11400000, guid: ce744cb14261acd4a92c927ed4ad58ab, type: 2}
-    clip: {fileID: 7400000, guid: 93274d37420cceb42b616d59e9be694e, type: 2}
-    maskMode: 0
+    clip: {fileID: 7400000, guid: a4c2d5831275bfa46828c2ae2e4c7558, type: 2}
+    maskMode: 1
     customMask: {fileID: 0}
     useAnimationMovement: 1
     animationMovementScale: 1

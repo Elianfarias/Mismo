@@ -95,6 +95,7 @@ namespace Mismo.Gameplay.Player.Editor
         }
         void DrawAnimations()
         {
+            if(GUILayout.Button("Crear un clip de ataque Humanoid"))HumanoidAttackWindow.Open();
             EditorGUILayout.Space();EditorGUILayout.LabelField("Movimiento y reacción al daño",EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("Clips opcionales por prefab enemigo, también sin armas. Vacío conserva las animaciones actuales. Hit es la reacción visual; el aturdimiento se configura en los datos de combate.",MessageType.Info);
             var baseData=new SerializedObject(equipment);baseData.Update();int playMotion=0;EditorGUI.BeginChangeCheck();

@@ -11,6 +11,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         RenderTexture texture;
         Vector3 orbitCenter;
         float orbitDistance, yaw, pitch;
+        bool keepInFrame;
         readonly List<Mesh> baked=new List<Mesh>();
         readonly List<Material> previewMaterials=new List<Material>();
         public Texture Texture=>texture;
@@ -76,17 +77,47 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             camera.Render();
         }
         public void Render(){if(camera!=null&&HasModel)camera.Render();}
+        // Fit in camera space, including off-centre meshes and the camera's elevation.
+        // Keep this opt-in so inventory icons and character portraits retain their framing.
+        public void FitToView()
+        {
+            if(camera==null||!HasModel)return;
+            keepInFrame=true;
+            Vector3 min=Vector3.positiveInfinity,max=Vector3.negativeInfinity;
+            foreach(var renderer in root.GetComponentsInChildren<MeshRenderer>())
+            {
+                var filter=renderer.GetComponent<MeshFilter>();
+                if(filter==null||filter.sharedMesh==null)continue;
+                var bounds=filter.sharedMesh.bounds;
+                for(int i=0;i<8;i++)
+                {
+                    var corner=bounds.center+Vector3.Scale(bounds.extents,new Vector3(
+                        (i&1)==0?-1:1,(i&2)==0?-1:1,(i&4)==0?-1:1));
+                    var point=camera.transform.InverseTransformPoint(renderer.transform.TransformPoint(corner));
+                    min=Vector3.Min(min,point);max=Vector3.Max(max,point);
+                }
+            }
+            if(float.IsInfinity(min.x))return;
+            var center=(min+max)*.5f;
+            var offset=camera.transform.right*center.x+camera.transform.up*center.y;
+            camera.transform.position+=offset;
+            // Keep the orbit pivot fixed; panning the framing must not accumulate drift.
+            float size=Mathf.Max((max.y-min.y)*.5f,(max.x-min.x)*.5f/camera.aspect)*1.12f;
+            camera.orthographicSize=Mathf.Max(camera.orthographicSize,Mathf.Max(.01f,size));
+            camera.Render();
+        }
         public void Rotate(Vector2 delta)
         {
             if(camera==null||!HasModel)return;
             yaw-=delta.x*.5f;pitch=Mathf.Clamp(pitch+delta.y*.4f,-70,70);
             camera.transform.position=orbitCenter+Quaternion.Euler(-pitch,yaw,0)*Vector3.forward*orbitDistance;
             camera.transform.LookAt(orbitCenter);
+            if(keepInFrame)FitToView();
         }
         static void Release(Object value){if(Application.isPlaying)Object.Destroy(value);else Object.DestroyImmediate(value);}
         public void Dispose()
         {
-            HasModel=false;
+            HasModel=false;keepInFrame=false;
             if(root!=null)Release(root);root=null;camera=null;
             if(texture!=null){texture.Release();Release(texture);}texture=null;
             foreach(var mesh in baked)Release(mesh);baked.Clear();

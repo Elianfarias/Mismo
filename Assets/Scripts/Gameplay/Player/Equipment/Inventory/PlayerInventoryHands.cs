@@ -35,14 +35,18 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(composedWeapons[slot]!=null)Destroy(composedWeapons[slot]);
             var main=Definition(profile.equipped[slot]);var off=Definition(profile.Offhand(slot));
             if(main==null)return null;
-            if(!Compatible(main,off)){composedWeapons[slot]=null;return main;}
+            if(!Compatible(main,off)&&!main.dualWield){composedWeapons[slot]=null;return main;}
             // Runtime copies keep per-loadout style data out of shared inventory assets.
             var result=Instantiate(main);result.hideFlags=HideFlags.DontSave;composedWeapons[slot]=result;
+            // Inventory hands override legacy workshop pairs, including an empty hand.
+            result.dualWield=false;result.secondaryVisualPrefab=null;result.equippedOffhand=null;
             if(Compatible(main,off))
             {
+                result.equippedOffhand=off;
                 result.family=off.isShield?main.swordShieldFamily:main.dualSwordFamily;
                 result.overrideFamilyAbilities=false;result.dualWield=true;result.secondaryVisualPrefab=off.visualPrefab;
-                result.secondaryEquipped=off.isShield?off.secondaryEquipped:main.secondaryEquipped;
+                result.secondaryEquipped=off.secondaryEquipped;
+                result.secondaryHolstered=off.secondaryHolstered;
                 result.styleSpeedBonus=off.isShield?0:.15f;
                 result.Configure(main.Id,off.isShield?"Espada y escudo":"Dos espadas",main.BasicAttackCooldown);
             }

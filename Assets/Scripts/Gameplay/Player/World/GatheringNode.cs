@@ -8,6 +8,7 @@ namespace Mismo.Gameplay.Player.World
         public static readonly HashSet<GatheringNode> Loaded=new HashSet<GatheringNode>();
         public ResourceNodeDefinition definition;
         public string persistentId;
+        public bool oneTime;
         GameObject visual;
         GameObject worldPrefab;
         Collider[] interactionColliders=System.Array.Empty<Collider>();
@@ -26,8 +27,8 @@ namespace Mismo.Gameplay.Player.World
             if(definition==null)return;
             if(inventory==null)inventory=FindFirstObjectByType<PlayerInventory>();
             if(inventory==null||!inventory.IsReady)return;
-            if(!initialized){initialized=true;depleted=inventory.NodeReadyAt(persistentId)>inventory.WorldPlaySeconds;Show();}
-            if(depleted&&inventory.NodeReadyAt(persistentId)<=inventory.WorldPlaySeconds&&Vector3.Distance(inventory.transform.position,transform.position)>definition.restoreClearance)
+            if(!initialized){initialized=true;depleted=oneTime&&inventory.IsWorldEnemyDefeated(persistentId)||inventory.NodeReadyAt(persistentId)>inventory.WorldPlaySeconds;Show();}
+            if(depleted&&!oneTime&&inventory.NodeReadyAt(persistentId)<=inventory.WorldPlaySeconds&&Vector3.Distance(inventory.transform.position,transform.position)>definition.restoreClearance)
             {depleted=false;loot=null;Show();}
         }
         void Show()
@@ -67,7 +68,7 @@ namespace Mismo.Gameplay.Player.World
         {
             if(!Available||!InRange(owner.transform)||definition.rewards==null)return false;
             if(loot==null)loot=definition.rewards.Roll();
-            if(!owner.TryHarvest(persistentId,definition,loot))return false;
+            if(!owner.TryHarvest(persistentId,definition,loot,oneTime))return false;
             if(definition.kind==ResourceNodeKind.Tree&&visual!=null)
             {
                 var falling=Instantiate(visual,visual.transform.position,visual.transform.rotation);

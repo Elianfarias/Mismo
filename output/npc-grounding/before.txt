@@ -1,0 +1,87 @@
+Liria · Guardiana del claro root=12,1500 sole=12,3086 ground=12,0000 gap=0,3086 bones=12,4038,12,3754 speed=0,00
+Liria · Guardiana del claro root=12,1500 sole=12,3071 ground=12,0000 gap=0,3071 bones=12,4018,12,3741 speed=0,00
+Liria · Guardiana del claro root=12,1500 sole=12,3088 ground=12,0000 gap=0,3088 bones=12,4007,12,3751 speed=0,00
+Liria · Guardiana del claro root=12,1500 sole=12,3089 ground=12,0000 gap=0,3089 bones=12,4025,12,3757 speed=0,00
+Liria · Guardiana del claro root=12,1500 sole=12,3091 ground=12,0000 gap=0,3091 bones=12,4035,12,3761 speed=0,00
+Liria · Guardiana del claro root=12,1500 sole=12,3074 ground=12,0000 gap=0,3074 bones=12,4027,12,3745 speed=0,00
+Liria · Guardiana del claro root=12,1500 sole=12,3075 ground=12,0000 gap=0,3075 bones=12,4017,12,3740 speed=0,00
+Liria · Guardiana del claro root=12,1500 sole=12,3081 ground=12,0000 gap=0,3081 bones=12,4022,12,3745 speed=0,00
+Liria · Guardiana del claro root=12,1500 sole=12,3086 ground=12,0000 gap=0,3086 bones=12,4038,12,3755 speed=0,00
+Liria · Guardiana del claro root=12,1500 sole=12,3092 ground=12,0000 gap=0,3092 bones=12,4049,12,3764 speed=0,00
+Liria · Guardiana del claro root=12,1500 sole=12,3092 ground=12,0000 gap=0,3092 bones=12,4054,12,3767 speed=0,00
+Liria · Guardiana del claro root=12,1500 sole=12,3082 ground=12,0000 gap=0,3082 bones=12,4048,12,3758 speed=0,00
+elena(Clone) root=12,0000 sole=11,4730 ground=12,0000 gap=-0,5270 bones=12,2499,12,2512 speed=0,00
+tomas(Clone): no ground
+bruno(Clone): no ground
+iria(Clone): no ground
+mara(Clone): no ground
+elena(Clone) root=12,0274 sole=11,4938 ground=12,0000 gap=-0,5062 bones=12,2731,12,2739 speed=0,00
+tomas(Clone) root=12,0000 sole=11,5413 ground=12,0000 gap=-0,4587 bones=12,2637,12,2598 speed=0,00
+bruno(Clone) root=12,0000 sole=11,6153 ground=12,0000 gap=-0,3847 bones=12,3301,12,3255 speed=0,00
+iria(Clone) root=12,0000 sole=11,7227 ground=12,0000 gap=-0,2773 bones=12,3219,12,3165 speed=0,00
+mara(Clone) root=12,0000 sole=11,4778 ground=12,0000 gap=-0,5222 bones=12,3058,12,3016 speed=0,00
+elena(Clone) root=12,0274 sole=11,5056 ground=12,0000 gap=-0,4944 bones=12,2808,12,2824 speed=0,00
+tomas(Clone) root=12,0274 sole=11,5951 ground=12,0000 gap=-0,4049 bones=12,3093,12,3047 speed=0,00
+bruno(Clone) root=12,0274 sole=11,6689 ground=12,0000 gap=-0,3311 bones=12,3751,12,3701 speed=0,00
+iria(Clone) root=12,0529 sole=11,8013 ground=12,0000 gap=-0,1987 bones=12,3930,12,3876 speed=0,00
+mara(Clone) root=12,2646 sole=11,7700 ground=12,0000 gap=-0,2301 bones=12,5872,12,5834 speed=0,00
+elena(Clone) root=12,0274 sole=11,5066 ground=12,0000 gap=-0,4934 bones=12,2813,12,2830 speed=0,00
+tomas(Clone) root=12,0274 sole=11,5970 ground=12,0000 gap=-0,4030 bones=12,3106,12,3060 speed=0,00
+bruno(Clone) root=12,0274 sole=11,6706 ground=12,0000 gap=-0,3294 bones=12,3765,12,3714 speed=0,00
+iria(Clone) root=12,0529 sole=11,8031 ground=12,0000 gap=-0,1969 bones=12,3944,12,3890 speed=0,00
+mara(Clone) root=12,2646 sole=11,7720 ground=12,0000 gap=-0,2280 bones=12,5884,12,5846 speed=0,00
+elena(Clone) root=12,0274 sole=11,4929 ground=12,0000 gap=-0,5071 bones=12,2724,12,2732 speed=0,00
+tomas(Clone) root=12,0274 sole=11,5664 ground=12,0000 gap=-0,4337 bones=12,2895,12,2857 speed=0,00
+bruno(Clone) root=12,0274 sole=11,6402 ground=12,0000 gap=-0,3598 bones=12,3560,12,3515 speed=0,00
+iria(Clone) root=12,0529 sole=11,7735 ground=12,0000 gap=-0,2266 bones=12,3734,12,3679 speed=0,00
+mara(Clone) root=12,2646 sole=11,7403 ground=12,0000 gap=-0,2597 bones=12,5691,12,5648 speed=0,00
+elena(Clone) root=12,0274 sole=11,5059 ground=12,0000 gap=-0,4941 bones=12,2809,12,2826 speed=0,00
+tomas(Clone) root=12,0274 sole=11,5958 ground=12,0000 gap=-0,4043 bones=12,3097,12,3051 speed=0,00
+bruno(Clone) root=12,0274 sole=11,6695 ground=12,0000 gap=-0,3305 bones=12,3756,12,3705 speed=0,00
+iria(Clone) root=12,0529 sole=11,8019 ground=12,0000 gap=-0,1981 bones=12,3935,12,3881 speed=0,00
+mara(Clone) root=12,2646 sole=11,7706 ground=12,0000 gap=-0,2294 bones=12,5876,12,5838 speed=0,00
+elena(Clone) root=12,0274 sole=11,5090 ground=12,0000 gap=-0,4910 bones=12,2829,12,2847 speed=0,00
+tomas(Clone) root=12,0274 sole=11,6019 ground=12,0000 gap=-0,3981 bones=12,3140,12,3093 speed=0,00
+bruno(Clone) root=12,0274 sole=11,6753 ground=12,0000 gap=-0,3247 bones=12,3798,12,3746 speed=0,00
+iria(Clone) root=12,0529 sole=11,8079 ground=12,0000 gap=-0,1921 bones=12,3978,12,3924 speed=0,00
+mara(Clone) root=12,2646 sole=11,7774 ground=12,0000 gap=-0,2226 bones=12,5916,12,5879 speed=0,00
+elena(Clone) root=12,0274 sole=11,5054 ground=12,0000 gap=-0,4946 bones=12,2806,12,2822 speed=0,00
+tomas(Clone) root=12,0274 sole=11,5945 ground=12,0000 gap=-0,4055 bones=12,3089,12,3043 speed=0,00
+bruno(Clone) root=12,0274 sole=11,6682 ground=12,0000 gap=-0,3318 bones=12,3748,12,3698 speed=0,00
+iria(Clone) root=12,0529 sole=11,8007 ground=12,0000 gap=-0,1993 bones=12,3927,12,3873 speed=0,00
+mara(Clone) root=12,2646 sole=11,7694 ground=12,0000 gap=-0,2306 bones=12,5869,12,5830 speed=0,00
+elena(Clone) root=12,0274 sole=11,5000 ground=12,0000 gap=-0,5000 bones=12,2771,12,2783 speed=0,00
+tomas(Clone) root=12,0274 sole=11,5828 ground=12,0000 gap=-0,4172 bones=12,3008,12,2966 speed=0,00
+bruno(Clone) root=12,0274 sole=11,6567 ground=12,0000 gap=-0,3433 bones=12,3670,12,3622 speed=0,00
+iria(Clone) root=12,0529 sole=11,7894 ground=12,0000 gap=-0,2106 bones=12,3846,12,3792 speed=0,00
+mara(Clone) root=12,2646 sole=11,7573 ground=12,0000 gap=-0,2428 bones=12,5794,12,5754 speed=0,00
+elena(Clone) root=12,0274 sole=11,4941 ground=12,0000 gap=-0,5059 bones=12,2732,12,2740 speed=0,00
+tomas(Clone) root=12,0274 sole=11,5692 ground=12,0000 gap=-0,4308 bones=12,2914,12,2876 speed=0,00
+bruno(Clone) root=12,0274 sole=11,6429 ground=12,0000 gap=-0,3571 bones=12,3579,12,3533 speed=0,00
+iria(Clone) root=12,0529 sole=11,7761 ground=12,0000 gap=-0,2239 bones=12,3752,12,3698 speed=0,00
+mara(Clone) root=12,2646 sole=11,7431 ground=12,0000 gap=-0,2569 bones=12,5708,12,5666 speed=0,00
+elena(Clone) root=12,0274 sole=11,4929 ground=12,0000 gap=-0,5071 bones=12,2724,12,2731 speed=0,00
+tomas(Clone) root=12,0274 sole=11,5661 ground=12,0000 gap=-0,4339 bones=12,2894,12,2855 speed=0,00
+bruno(Clone) root=12,0274 sole=11,6399 ground=12,0000 gap=-0,3601 bones=12,3559,12,3513 speed=0,00
+iria(Clone) root=12,0529 sole=11,7732 ground=12,0000 gap=-0,2268 bones=12,3732,12,3677 speed=0,00
+mara(Clone) root=12,2646 sole=11,7401 ground=12,0000 gap=-0,2599 bones=12,5689,12,5647 speed=0,00
+elena(Clone) root=12,0274 sole=11,4945 ground=12,0000 gap=-0,5055 bones=12,2735,12,2743 speed=0,00
+tomas(Clone) root=12,0274 sole=11,5702 ground=12,0000 gap=-0,4298 bones=12,2921,12,2882 speed=0,00
+bruno(Clone) root=12,0274 sole=11,6442 ground=12,0000 gap=-0,3559 bones=12,3585,12,3539 speed=0,00
+iria(Clone) root=12,0529 sole=11,7771 ground=12,0000 gap=-0,2229 bones=12,3759,12,3704 speed=0,00
+mara(Clone) root=12,2646 sole=11,7440 ground=12,0000 gap=-0,2560 bones=12,5714,12,5672 speed=0,00
+elena(Clone) root=12,0274 sole=11,4996 ground=12,0000 gap=-0,5004 bones=12,2768,12,2780 speed=0,00
+tomas(Clone) root=12,0274 sole=11,5818 ground=12,0000 gap=-0,4182 bones=12,3001,12,2959 speed=0,00
+bruno(Clone) root=12,0274 sole=11,6557 ground=12,0000 gap=-0,3443 bones=12,3663,12,3615 speed=0,00
+iria(Clone) root=12,0529 sole=11,7884 ground=12,0000 gap=-0,2116 bones=12,3839,12,3785 speed=0,00
+mara(Clone) root=12,2646 sole=11,7562 ground=12,0000 gap=-0,2438 bones=12,5788,12,5748 speed=0,00
+elena(Clone) root=12,0274 sole=11,5065 ground=12,0000 gap=-0,4935 bones=12,2813,12,2830 speed=0,00
+tomas(Clone) root=12,0274 sole=11,5970 ground=12,0000 gap=-0,4030 bones=12,3105,12,3059 speed=0,00
+bruno(Clone) root=12,0274 sole=11,6707 ground=12,0000 gap=-0,3293 bones=12,3764,12,3713 speed=0,00
+iria(Clone) root=12,0529 sole=11,8031 ground=12,0000 gap=-0,1969 bones=12,3943,12,3889 speed=0,00
+mara(Clone) root=12,2646 sole=11,7719 ground=12,0000 gap=-0,2281 bones=12,5883,12,5846 speed=0,00
+elena(Clone) root=12,0274 sole=11,5090 ground=12,0000 gap=-0,4910 bones=12,2829,12,2847 speed=0,00
+tomas(Clone) root=12,0274 sole=11,6019 ground=12,0000 gap=-0,3981 bones=12,3140,12,3093 speed=0,00
+bruno(Clone) root=12,0274 sole=11,6753 ground=12,0000 gap=-0,3247 bones=12,3797,12,3746 speed=0,00
+iria(Clone) root=12,0529 sole=11,8079 ground=12,0000 gap=-0,1921 bones=12,3977,12,3924 speed=0,00
+mara(Clone) root=12,2646 sole=11,7773 ground=12,0000 gap=-0,2227 bones=12,5915,12,5879 speed=0,00

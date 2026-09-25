@@ -10,6 +10,8 @@ namespace Mismo.Gameplay.Player.World
         [Header("Finite world (new games only)")]
         [Tooltip("0: original. 1: finite strips. 2: continent with guided passages.")]
         public int generationVersion;
+        // Opt-in is written into NEW save settings. Old worlds keep their terrain unchanged.
+        public int introductionVersion;
         [Range(4096,16384)] public int worldLength=4096;
         [Range(512,4096)] public int worldHalfWidth=768;
         public bool UsesFiniteWorld=>(generationVersion==1||generationVersion==2)&&!preserveAuthoredCenter;

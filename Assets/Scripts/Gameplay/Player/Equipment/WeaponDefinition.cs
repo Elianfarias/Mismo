@@ -10,6 +10,7 @@ namespace Mismo.Gameplay.Player.Equipment
         [SerializeField] private string displayName = "Espada básica";
         [SerializeField, Min(0.01f)] private float basicAttackCooldown = 0.45f;
         public AbilityDefinition[] abilities = new AbilityDefinition[4];
+        [Tooltip("Familia base al usar este objeto solo. Las combinaciones con otra arma o escudo usan Dual Sword Family o Sword Shield Family.")]
         public WeaponFamilyDefinition family;
         [Tooltip("Vacío hereda el feedback de la familia. Asignar una copia para editar sólo esta arma.")]
         public Presentation.CombatFeedbackProfile feedbackOverride;
@@ -24,11 +25,14 @@ namespace Mismo.Gameplay.Player.Equipment
         public GameObject visualPrefab;
         [Tooltip("Una sola pieza sostenida con ambas manos. La postura de manos la define la animación; no activa IK.")]
         public bool isTwoHanded;
-        [Tooltip("Muestra dos piezas visuales para esta única arma del inventario.")]
+        [Tooltip("Compatibilidad con pares visuales antiguos. El inventario determina las dos manos según los objetos equipados.")]
         public bool dualWield;
-        [Tooltip("Segunda pieza. Si está vacío, se reutiliza Visual Prefab.")]
+        [System.NonSerialized] public WeaponDefinition equippedOffhand;
+        [Tooltip("Visual de pares antiguos sin inventario. El taller usa una segunda WeaponDefinition para previsualizar.")]
         public GameObject secondaryVisualPrefab;
+        [Tooltip("Agarre de ESTE objeto cuando se equipa en la mano secundaria.")]
         public WeaponAttachmentPose secondaryEquipped = new WeaponAttachmentPose { anchor = WeaponAnchor.LeftHand };
+        [Tooltip("Posición guardada de ESTE objeto cuando ocupa la mano secundaria.")]
         public WeaponAttachmentPose secondaryHolstered = new WeaponAttachmentPose { anchor = WeaponAnchor.Character, offset = new Vector3(-.2f, 1.2f, -.25f) };
         public GameObject SecondaryVisualPrefab => dualWield ? (secondaryVisualPrefab != null ? secondaryVisualPrefab : visualPrefab) : null;
         public WeaponPoseProfile poseProfile;

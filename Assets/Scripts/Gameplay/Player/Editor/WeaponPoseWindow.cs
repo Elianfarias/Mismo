@@ -12,6 +12,14 @@ namespace Mismo.Gameplay.Player.Editor
         private GameObject character, visual, secondVisual;
         private GameObject previewMainPrefab, previewSecondPrefab;
         [SerializeField] private WeaponDefinition weapon;
+        [SerializeField] private WeaponDefinition previewOffhand;
+        private bool previewPair;
+        private WeaponDefinition Offhand => previewOffhand != null ? previewOffhand : weapon;
+        private GameObject OffhandPrefab => previewPair && Offhand != null ? Offhand.visualPrefab : null;
+        private WeaponFamilyDefinition PreviewFamily => previewPair && Offhand != null
+            ? (Offhand.isShield ? weapon.swordShieldFamily : weapon.dualSwordFamily) : weapon != null ? weapon.family : null;
+        private AbilityDefinition PreviewAbility => previewPair && PreviewFamily != null
+            ? PreviewFamily.GetAbility(AbilitySlot.Basic) : weapon != null ? weapon.GetAbility(AbilitySlot.Basic) : null;
         private WeaponPoseProfile profile;
         private WeaponPoseStage stage;
         private Animator animator;
@@ -28,11 +36,11 @@ namespace Mismo.Gameplay.Player.Editor
         private Vector2 scroll;
         private UnityEditor.Editor profileEditor;
         private UnityEditor.Editor animationEditor;
-        private WeaponAttachmentPose Pose => editSecond && weapon.dualWield
-            ? (holstered ? weapon.secondaryHolstered : weapon.secondaryEquipped)
+        private WeaponAttachmentPose Pose => editSecond && previewPair
+            ? (holstered ? Offhand.secondaryHolstered : Offhand.secondaryEquipped)
             : (holstered ? profile.holstered : profile.equipped);
-        private Object PoseOwner => editSecond && weapon.dualWield ? (Object)weapon : profile;
-        private GameObject SelectedVisual => editSecond && weapon.dualWield ? secondVisual : visual;
+        private Object PoseOwner => editSecond && previewPair ? (Object)Offhand : profile;
+        private GameObject SelectedVisual => editSecond && previewPair ? secondVisual : visual;
 
         [MenuItem("Mismo/Armas/Taller de poses")]
         public static void Open() => GetWindow<WeaponPoseWindow>("Taller de armas");
@@ -68,7 +76,7 @@ namespace Mismo.Gameplay.Player.Editor
             }
             if (weapon == null) { EditorGUILayout.EndScrollView(); return; }
             if (GUILayout.Button("Editar / probar feedback de combate")) CombatFeedbackWindow.Open(weapon);
-            if (!weapon.dualWield) editSecond = false;
+            if (!previewPair) editSecond = false;
             var weaponData = new SerializedObject(weapon);
             weaponData.Update();
             EditorGUI.BeginChangeCheck();
@@ -76,18 +84,22 @@ namespace Mismo.Gameplay.Player.Editor
             EditorGUILayout.PropertyField(weaponData.FindProperty("displayName"), new GUIContent("Nombre"));
             EditorGUILayout.PropertyField(weaponData.FindProperty("visualPrefab"), new GUIContent("Visual principal"));
             EditorGUILayout.PropertyField(weaponData.FindProperty("isTwoHanded"), new GUIContent("A dos manos"));
-            EditorGUILayout.PropertyField(weaponData.FindProperty("dualWield"), new GUIContent("Armas dobles"));
-            if (weaponData.FindProperty("dualWield").boolValue)
-            {
-                EditorGUILayout.PropertyField(weaponData.FindProperty("secondaryVisualPrefab"), new GUIContent("Segundo visual (opcional)"));
-                EditorGUILayout.HelpBox("Sin segundo prefab se usa otra copia del principal. Ambas piezas cuentan como una sola arma. Cada una tiene su propio anclaje equipado y guardado.", MessageType.Info);
-            }
+            EditorGUILayout.PropertyField(weaponData.FindProperty("dualSwordFamily"), new GUIContent("Familia: dos espadas"));
+            EditorGUILayout.PropertyField(weaponData.FindProperty("swordShieldFamily"), new GUIContent("Familia: espada y escudo"));
             if (EditorGUI.EndChangeCheck())
             {
                 weaponData.ApplyModifiedProperties();
-                if (!weapon.dualWield) editSecond = false;
+                if (!previewPair) editSecond = false;
                 if (stage != null) CreatePreview();
             }
+            EditorGUI.BeginChangeCheck();
+            previewPair = EditorGUILayout.Toggle("Previsualizar dos armas", previewPair);
+            if (previewPair)
+            {
+                previewOffhand = (WeaponDefinition)EditorGUILayout.ObjectField("Arma secundaria (vista)", previewOffhand, typeof(WeaponDefinition), false);
+                EditorGUILayout.HelpBox("Vacío muestra otra copia del arma seleccionada. Cada objeto usa su propio visual y agarre secundario. Esta combinación es sólo una vista previa: en el juego mandan los objetos equipados. Las habilidades y animaciones pertenecen a la familia.", MessageType.Info);
+            }
+            if (EditorGUI.EndChangeCheck()) { if (!previewPair) editSecond = false; if (stage != null) CreatePreview(); }
             if (GUILayout.Button("Guardar definición del arma")) AssetDatabase.SaveAssetIfDirty(weapon);
             if(GUILayout.Button("Editar familia y animaciones de combate…"))WeaponFamilyWindow.Open(weapon);
             if(weapon.family!=null)EditorGUILayout.HelpBox("Las animaciones de combate se editan en la familia. Este perfil conserva el agarre y sus variantes de movimiento.",MessageType.Info);
@@ -118,7 +130,7 @@ namespace Mismo.Gameplay.Player.Editor
             else if (GUILayout.Button("Cerrar vista de ajuste")) ClosePreview();
             EditorGUI.BeginChangeCheck();
             holstered = EditorGUILayout.Toggle("Editar arma guardada", holstered);
-            if (weapon.dualWield) editSecond = GUILayout.Toolbar(editSecond ? 1 : 0, new[] { "Pieza principal", "Segunda pieza" }) == 1;
+            if (previewPair) editSecond = GUILayout.Toolbar(editSecond ? 1 : 0, new[] { "Mano principal", "Mano secundaria" }) == 1;
             clip = (AnimationClip)EditorGUILayout.ObjectField("Clip de previsualización", clip, typeof(AnimationClip), false);
             time = EditorGUILayout.Slider("Tiempo del clip",time,0,clip != null ? clip.length : 1);
             if (EditorGUI.EndChangeCheck()) Refresh();
@@ -158,7 +170,7 @@ namespace Mismo.Gameplay.Player.Editor
             var poseData = new SerializedObject(PoseOwner);
             poseData.Update();
             EditorGUI.BeginChangeCheck();
-            EditorGUILayout.PropertyField(poseData.FindProperty(editSecond && weapon.dualWield
+            EditorGUILayout.PropertyField(poseData.FindProperty(editSecond && previewPair
                 ? (holstered ? "secondaryHolstered" : "secondaryEquipped")
                 : (holstered ? "holstered" : "equipped")), true);
             if (EditorGUI.EndChangeCheck()) { poseData.ApplyModifiedProperties(); Refresh(); }
@@ -200,7 +212,7 @@ namespace Mismo.Gameplay.Player.Editor
                 UnityEditor.Editor.CreateCachedEditor(profile.animations,null,ref animationEditor);
                 animationEditor.OnInspectorGUI();
             }
-            if (GUILayout.Button("Guardar arma y perfil")) { AssetDatabase.SaveAssetIfDirty(profile); AssetDatabase.SaveAssetIfDirty(weapon); if(profile.animations!=null)AssetDatabase.SaveAssetIfDirty(profile.animations); }
+            if (GUILayout.Button("Guardar arma y perfil")) { AssetDatabase.SaveAssetIfDirty(profile); AssetDatabase.SaveAssetIfDirty(weapon); if(previewPair){AssetDatabase.SaveAssetIfDirty(Offhand);if(Offhand.poseProfile!=null)AssetDatabase.SaveAssetIfDirty(Offhand.poseProfile);} if(profile.animations!=null)AssetDatabase.SaveAssetIfDirty(profile.animations); }
             EditorGUILayout.EndScrollView();
         }
         private void CreatePreview()
@@ -216,15 +228,15 @@ namespace Mismo.Gameplay.Player.Editor
             boneScales=previewBones.Select(t=>t.localScale).ToArray();
             previewRenderers=character.GetComponentsInChildren<Renderer>(true); previewVisibility=previewRenderers.Select(r=>r.enabled).ToArray();
             if (weapon.visualPrefab != null) visual=stage.Clone(weapon.visualPrefab);
-            if (weapon.SecondaryVisualPrefab != null) secondVisual=stage.Clone(weapon.SecondaryVisualPrefab);
+            if (OffhandPrefab != null) secondVisual=stage.Clone(OffhandPrefab);
             previewMainPrefab = weapon.visualPrefab;
-            previewSecondPrefab = weapon.SecondaryVisualPrefab;
+            previewSecondPrefab = OffhandPrefab;
             Refresh();
             if(SceneView.lastActiveSceneView!=null)SceneView.lastActiveSceneView.Frame(new Bounds(Vector3.up,Vector3.one*3),false);
         }
         private void Refresh()
         {
-            if (character != null && weapon != null && (previewMainPrefab != weapon.visualPrefab || previewSecondPrefab != weapon.SecondaryVisualPrefab))
+            if (character != null && weapon != null && (previewMainPrefab != weapon.visualPrefab || previewSecondPrefab != OffhandPrefab))
             {
                 CreatePreview();
                 return;
@@ -239,7 +251,7 @@ namespace Mismo.Gameplay.Player.Editor
             for(int i=0;i<previewRenderers.Length;i++)if(previewRenderers[i]!=null)previewRenderers[i].enabled=previewVisibility[i];
             profile.HideEmbeddedVisuals(animator);
             ApplyPreviewPose(visual, holstered ? profile.holstered : profile.equipped);
-            if (secondVisual != null) ApplyPreviewPose(secondVisual, holstered ? weapon.secondaryHolstered : weapon.secondaryEquipped);
+            if (secondVisual != null) ApplyPreviewPose(secondVisual, holstered ? Offhand.secondaryHolstered : Offhand.secondaryEquipped);
             RefreshTrailPreview();
             SceneView.RepaintAll(); Repaint();
         }

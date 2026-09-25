@@ -1,0 +1,9 @@
+PASS dos etapas de combo y cuatro habilidades asignadas a sus clips.
+PASS fases de reproducción coinciden con los proyectos editables.
+PASS máscara de cuerpo completo para Torbellino.
+Dual_01_Corte_Derecho
+Dual_02_Cruce_Izquierdo
+Dual_Rafaga
+Dual_Torbellino
+Dual_Herida_Abierta
+Dual_Cruce
