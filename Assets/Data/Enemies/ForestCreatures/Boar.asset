@@ -21,12 +21,17 @@ MonoBehaviour:
   positioningSpeed: 1.8
   decisionPause: 0.45
   chargeCooldown: 5
+  interruptibleByCombos: 1
+  comboHitStun: 0.55
+  maxConsecutiveInterrupts: 2
+  interruptImmunityDuration: 2
   staggerDamageThreshold: 15
   staggerDuration: 0.45
   staggerResistance: 0.75
   parryStaggerDuration: 1.25
   slash:
     label: Golpe
+    resistComboInterrupt: 0
     range: 1.9
     windup: 0.65
     active: 0.18
@@ -63,6 +68,7 @@ MonoBehaviour:
     projectileRadius: 0.6
   charge:
     label: Carga
+    resistComboInterrupt: 0
     range: 5
     windup: 1
     active: 0.4
@@ -105,6 +111,7 @@ MonoBehaviour:
   preferredRange: 1.8
   attacks:
   - label: Attack
+    resistComboInterrupt: 0
     range: 2.2
     windup: 0.4
     active: 0.16
@@ -140,6 +147,7 @@ MonoBehaviour:
     projectileRange: 30
     projectileRadius: 0.6
   - label: Charge
+    resistComboInterrupt: 0
     range: 9
     windup: 0.65
     active: 0.7

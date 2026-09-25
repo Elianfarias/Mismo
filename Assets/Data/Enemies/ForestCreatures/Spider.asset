@@ -23,6 +23,8 @@ MonoBehaviour:
   chargeCooldown: 5
   interruptibleByCombos: 1
   comboHitStun: 0.55
+  maxConsecutiveInterrupts: 2
+  interruptImmunityDuration: 2
   staggerDamageThreshold: 15
   staggerDuration: 0.45
   staggerResistance: 0.75

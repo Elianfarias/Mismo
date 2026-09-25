@@ -16,12 +16,20 @@ MonoBehaviour:
   displayName: Hierba medicinal
   description: 
   icon: {fileID: 21300000, guid: 69e65d50180cdf949a4b095ccbd2169f, type: 3}
-  pickupPrefab: {fileID: 5382165887253409859, guid: 7ff6a3620eeda3046b2253872f1c75cf, type: 3}
+  inventoryPreviewRotation: {x: 0, y: 0, z: 0}
+  pickupPrefab: {fileID: 5962284305717134737, guid: 87f3f29077df69143af3f8c570eed706, type: 3}
   stackSize: 20
-  category: 0
-  canDiscard: 1
-  canSell: 1
-  sellValue: 1
   gridWidth: 1
   gridHeight: 1
   canRotate: 1
+  category: 0
+  healingAmount: 0
+  healingSeconds: 5
+  usableInCombat: 0
+  instantHealing: 0
+  useCooldownSeconds: 0
+  damageBonus: 0
+  damageBonusSeconds: 180
+  canDiscard: 1
+  canSell: 1
+  sellValue: 1
