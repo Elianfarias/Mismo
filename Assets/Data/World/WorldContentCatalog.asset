@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdfd1e8e6dfc4701afbb313e3ea4ac0e, type: 3}
   m_Name: WorldContentCatalog
   m_EditorClassIdentifier: 
+  introduction: {fileID: 11400000, guid: bdd6c512eece8eb4eb440b3c31bb2075, type: 2}
   villageSizeMultiplier: 3.25
   villageGroundOffset: -0.19670273
   villageSpawnOffset: {x: 7.5800934, y: 0, z: 27.347897}

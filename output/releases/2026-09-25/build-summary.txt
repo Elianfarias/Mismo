@@ -1,0 +1,10 @@
+Date: 2026-09-25 01:12:58 -03:00
+Unity: 6000.6.0f1
+Target: Windows x64
+Development: false
+Scenes: Assets/Scenes/MainMenu.unity, Assets/Scenes/VoxelRegion_7319.unity
+Result: Succeeded
+Errors: 0
+Warnings: 499
+Bytes: 760477335
+Duration: 00:01:12.0041856

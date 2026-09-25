@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f02186b7da44ef9071f3f198480278, type: 3}
+  m_Name: Liria
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Presentation.TutorialSequence
+  id: world.introduction.liria
+  completionLabel: "Te ayudar\xE9"
+  pages:
+  - title: "Liria \xB7 Guardiana del claro"
+    body: "Al fin alguien sali\xF3 de las galer\xEDas. Soy Liria. Este claro todav\xEDa est\xE1 a salvo, pero los caminos ya no lo est\xE1n: los goblins han aislado nuestros pueblos."
+    highlight: 0
+  - title: El continente te necesita
+    body: "M\xE1s all\xE1 de este bosque hay desiertos, monta\xF1as y tierras heladas. La amenaza crece en todas ellas. Ayudanos a salvar a sus habitantes y a recuperar los caminos que unen el continente."
+    highlight: 0
+  - title: "Empez\xE1 por el pueblo"
+    body: "Segu\xED el sendero, despej\xE1 el paso de los goblins y habl\xE1 con los habitantes del primer pueblo. Sus encargos ser\xE1n el comienzo de tu viaje. Llev\xE1s espada y arco: aprender\xE1s a usarlos en el camino."
+    highlight: 0

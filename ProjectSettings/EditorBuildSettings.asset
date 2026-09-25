@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/VoxelRegion_7319.unity
     guid: 73ac5b363fe7c194b8a8d058515f6f36
+  - enabled: 1
+    path: Assets/Scenes/DemoIntroduction.unity
+    guid: 97331d023369c3e4ea6ae17832a2bf62
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: bf32e908004087a4daa83bb87606e57f, type: 2}
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}

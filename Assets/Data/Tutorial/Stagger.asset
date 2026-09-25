@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f02186b7da44ef9071f3f198480278, type: 3}
+  m_Name: Stagger
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Presentation.TutorialSequence
+  id: demo.stagger
+  pages:
+  - title: "Romp\xE9 su postura"
+    body: "Los golpes tambi\xE9n da\xF1an la postura del enemigo. Cuando se rompe, el goblin queda vulnerable durante un momento: ese es el stagger. Aprovech\xE1 esa apertura para atacar."
+    highlight: 0

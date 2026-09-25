@@ -13,6 +13,8 @@ namespace Mismo.Gameplay.Player.World
         public const int ChunkSize=32;
         public ExplorationWorldSettings Settings { get; private set; }
         public int LoadedCount=>chunks.Count;
+        public bool NavigationReady=>navigationReady;
+        WorldIntroduction introduction;
         public void RefreshResourceNavigation()=>dirty=true;
         readonly Dictionary<Vector2Int,GameObject> chunks=new Dictionary<Vector2Int,GameObject>();
         readonly Dictionary<Vector2Int,GameObject> authoredEncounters=new Dictionary<Vector2Int,GameObject>();
@@ -128,6 +130,11 @@ namespace Mismo.Gameplay.Player.World
                 finiteHorizon=distant.AddComponent<FiniteWorldHorizon>();finiteHorizon.Initialize(field,material);
             }
             navigation=new NavMeshData(0);navInstance=NavMesh.AddNavMeshData(navigation);dirty=true;
+            if(field.Introduction!=null&&WorldSession.Current!=null)
+            {
+                var root=new GameObject("World introduction");root.transform.SetParent(transform,false);
+                introduction=root.AddComponent<WorldIntroduction>();introduction.Initialize(this,field.Introduction,target.GetComponent<PlayerController>());
+            }
             if(WorldSession.Current!=null)
             {
                 var saved=WorldSession.Current;var position=new Vector3(saved.x,saved.y,saved.z);
@@ -203,6 +210,7 @@ namespace Mismo.Gameplay.Player.World
                 if(dirty&&Time.time>=nextNav)
                 {
                     var sources=new List<NavMeshBuildSource>();
+                    if(introduction!=null)NavMeshBuilder.CollectSources(introduction.Geometry,~0,NavMeshCollectGeometry.PhysicsColliders,0,new List<NavMeshBuildMarkup>(),sources);
                     if(Settings.preserveAuthoredCenter)NavMeshBuilder.CollectSources(geometry,~0,NavMeshCollectGeometry.PhysicsColliders,0,NavigationMarkup(geometry),sources);
                     foreach(var chunk in chunks.Values.Concat(authoredEncounters.Values))
                     {var extra=new List<NavMeshBuildSource>();NavMeshBuilder.CollectSources(chunk.transform,~0,NavMeshCollectGeometry.PhysicsColliders,0,NavigationMarkup(chunk.transform),extra);sources.AddRange(extra);}

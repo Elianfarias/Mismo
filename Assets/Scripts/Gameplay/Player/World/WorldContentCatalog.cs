@@ -48,6 +48,7 @@ namespace Mismo.Gameplay.Player.World
     [CreateAssetMenu(menuName="Mismo/World/Content catalog")]
     public sealed class WorldContentCatalog : ScriptableObject
     {
+        public WorldIntroductionDefinition introduction;
         [Header("Village arrival (new worlds)")]
         [Min(1)] public float villageSizeMultiplier=2.6f;
         public float villageGroundOffset=-.19670273f;

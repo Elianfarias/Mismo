@@ -1,0 +1,1 @@
+PASS: existing CombatFeedbackChecks, including pause and hit stop

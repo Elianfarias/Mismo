@@ -279,6 +279,46 @@ namespace Mismo.Gameplay.Player.Presentation
             float consumableW=consumablesAsColumn?56:4*76-20;float consumableH=consumablesAsColumn?4*70+80:95;
             return ExpandRect(new Rect(consumablePosition.x,consumablePosition.y,consumableW,consumableH),8);
         }
+        // Tutorial geometry uses the same coordinates as drawing and the HUD editor.
+        // Return screen pixels, so an overlay does not depend on the current GUI.matrix.
+        public bool TryGetTutorialRect(TutorialAnchor anchor,out Rect rect)
+        {
+            rect=default;
+            if(!isActiveAndEnabled||health==null||WorldMapPanel.AnyOpen||InventoryPanel.AnyOpen||
+                GetComponent<World.GatheringPlayer>()?.BlocksGameplay==true||anchor==TutorialAnchor.None)return false;
+            float scale=Scale,width=Screen.width/scale,height=Screen.height/scale,left=(width-792)/2;
+            bool column=icons!=null&&icons.hudSkillsAsColumn;
+            bool consumablesColumn=icons!=null&&icons.hudConsumablesAsColumn;
+            var equipment=GetComponent<Equipment.EquipmentLoadout>();
+            if(anchor>=TutorialAnchor.Weapons&&anchor<=TutorialAnchor.R&&(equipment==null||equipment.ActiveDefinition==null))return false;
+            if(anchor>=TutorialAnchor.Basic&&anchor<=TutorialAnchor.R)
+            {
+                int slot=(int)anchor-(int)TutorialAnchor.Basic;
+                if(equipment.GetAbility((Equipment.AbilitySlot)slot)==null)return false;
+                var offset=icons!=null?icons.hudSkillsOffset:Vector2.zero;
+                rect=ExpandRect(new Rect(left+offset.x+(column?0:slot*88),height-118+
+                    (icons!=null?icons.hudSkillsYOffset:0)+offset.y+(column?slot*88:0),76,100),6);
+            }
+            else
+            {
+                EditTarget target;
+                switch(anchor)
+                {
+                    case TutorialAnchor.Health:target=EditTarget.Health;break;
+                    case TutorialAnchor.Stamina:target=EditTarget.Stamina;break;
+                    case TutorialAnchor.Weapons:target=EditTarget.Tab;break;
+                    case TutorialAnchor.Skills:target=EditTarget.Skills;break;
+                    case TutorialAnchor.Dash:target=EditTarget.Dash;break;
+                    case TutorialAnchor.Consumables:target=EditTarget.Consumables;break;
+                    default:return false;
+                }
+                rect=UIRect(target,width,height,left,column,consumablesColumn);
+            }
+            rect=new Rect(rect.position*scale,rect.size*scale);
+            rect=Rect.MinMaxRect(Mathf.Clamp(rect.xMin,0,Screen.width),Mathf.Clamp(rect.yMin,0,Screen.height),
+                Mathf.Clamp(rect.xMax,0,Screen.width),Mathf.Clamp(rect.yMax,0,Screen.height));
+            return rect.width>0&&rect.height>0;
+        }
         Vector2 ConsumablesPosition(float width,float height,float left,bool asColumn)
         {
             var offset=icons!=null?icons.hudConsumablesOffset:Vector2.zero;

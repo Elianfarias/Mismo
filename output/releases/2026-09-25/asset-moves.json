@@ -1,0 +1,214 @@
+{
+  "items": [
+    {
+      "source": "Assets/Art/Source/Characters/CaballeroCarmesi/Concepts/Caballero-carmesi-reference-v1.png",
+      "destination": "Assets/Art/Textures/Concepts/Characters/CaballeroCarmesi/Caballero-carmesi-reference-v1.png",
+      "guid": "2b2f9cd2083534b4db268bf35d037279",
+      "sha256": "FA6BC5B6EF94B147C037903AB272EA39EF75232244216E4556188CC4447653D4",
+      "metaSha256": "5EE8536DFED4735B87F2466AE281C00D1F7074B574C3D55E5F2B7981A5B4EB53"
+    },
+    {
+      "source": "Assets/Art/Source/Characters/CaballeroCarmesi/Concepts/Caballero-carmesi-reference-v2.png",
+      "destination": "Assets/Art/Textures/Concepts/Characters/CaballeroCarmesi/Caballero-carmesi-reference-v2.png",
+      "guid": "270370e1944f75e4eacfba8ff50efef1",
+      "sha256": "8B6FA8BC4AC9C409675C552D1B1CCC90CA82D8D361DFC96871ED61525CF8D3B3",
+      "metaSha256": "6E027BD3DDEDF3E84CA82CC5FD9B06CA7669FEB16FAC4914614BDDE6A3CE8E86"
+    },
+    {
+      "source": "Assets/Art/Source/Characters/Mago/Concepts/Mago-reference-v1.png",
+      "destination": "Assets/Art/Textures/Concepts/Characters/Mago/Mago-reference-v1.png",
+      "guid": "397befbea7178d04ea40ac70acc666cb",
+      "sha256": "D42AB756A2A7FE01A8141F88319E4AE52426CD46200EAE5F7532DEA4D51F0155",
+      "metaSha256": "08D5A7E7C250CBDD01DDE3E4D6BE2ECB0E31A93D928318597EABEDB59F230450"
+    },
+    {
+      "source": "Assets/Art/Source/Characters/RanaErrante/Concepts/Rana-errante-reference-v1.png",
+      "destination": "Assets/Art/Textures/Concepts/Characters/RanaErrante/Rana-errante-reference-v1.png",
+      "guid": "0a4b8d47f5d548144a5bd998313e2cf0",
+      "sha256": "98D6B6A776BFF928BC8A66F1CB79659F8AC53A890BCEC546F9659B12B2907ABB",
+      "metaSha256": "DC0023541B8CFD40C1DCB1542E62BF033957FCC7D9B6783D0D1B58A61A810D47"
+    },
+    {
+      "source": "Assets/Art/Source/Concepts/Caves/2026-09-23/01-rocas-grandes.png",
+      "destination": "Assets/Art/Textures/Concepts/Caves/2026-09-23/01-rocas-grandes.png",
+      "guid": "e949b30a54b6d9f499ec59b0d7e7837b",
+      "sha256": "D7EEB03B25F85F21D411A29C383022D26763166D29EFE467155E49A7E02DB96B",
+      "metaSha256": "1492F4F3C5E8DCFE63A1499CBF56724833D012DCF3D783197993320DD1D4B78A"
+    },
+    {
+      "source": "Assets/Art/Source/Concepts/Caves/2026-09-23/02-piedras.png",
+      "destination": "Assets/Art/Textures/Concepts/Caves/2026-09-23/02-piedras.png",
+      "guid": "80f7d0b0b41726945a5745e86ffb6a29",
+      "sha256": "DCC1B75057B0F8EAD71093470965BFB6DCB2B58014987A31C914A40D5BDA7474",
+      "metaSha256": "972B5B15C65883C952CE511392DFCE13C05726BBBD6B048CA004003EF8A5635F"
+    },
+    {
+      "source": "Assets/Art/Source/Concepts/Caves/2026-09-23/03-estalactitas.png",
+      "destination": "Assets/Art/Textures/Concepts/Caves/2026-09-23/03-estalactitas.png",
+      "guid": "312e3ad8342621046825ab4c0b33ceac",
+      "sha256": "39A2EC26544295914C701D218FC4970DB71379D7D580AE9C5675124A5FEF0AF3",
+      "metaSha256": "2930B094BEDDF29530616462855B89CAB675630371F9178443EEFB83722EE2F3"
+    },
+    {
+      "source": "Assets/Art/Source/Concepts/Caves/2026-09-23/04-estalagmitas.png",
+      "destination": "Assets/Art/Textures/Concepts/Caves/2026-09-23/04-estalagmitas.png",
+      "guid": "18e65bd6e2eaf1e4aae5fabf6571f5ea",
+      "sha256": "0C976A4432EA29FC11AAED70F22C8150C6845C6120EDB5369E8FF743C17A90E8",
+      "metaSha256": "8C8640D2E8E84447EF7DFA28BFA41C814904E39F2E003ED1B634C4FE4A3BC661"
+    },
+    {
+      "source": "Assets/Art/Source/Concepts/Caves/2026-09-23/05-raices.png",
+      "destination": "Assets/Art/Textures/Concepts/Caves/2026-09-23/05-raices.png",
+      "guid": "1754cf75f1bdbfa42ba71ae06422a61e",
+      "sha256": "1BC5B47053B0F70B53F5F97ACB41D23B7AA1DEB31B3CB91007C4D0696BC01439",
+      "metaSha256": "DC1D16F8648ED88D29FC2BCD095A3F6769E74B3365B6ED47A1E8D569AF95B5E6"
+    },
+    {
+      "source": "Assets/Art/Source/Concepts/Caves/2026-09-23/06-hongos.png",
+      "destination": "Assets/Art/Textures/Concepts/Caves/2026-09-23/06-hongos.png",
+      "guid": "ef2d6e0d012b51a4c955c2ea66878df1",
+      "sha256": "C78907CF8DF4C0300E7FE97BAF58CBF937E1F2BDAD487FC23DEC0BBBE88CE304",
+      "metaSha256": "76F3E81A4836D661A9526041742D29D94D8A34A2118BC1243E4B30706D1CC25E"
+    },
+    {
+      "source": "Assets/Art/Source/Concepts/Caves/2026-09-23/07-vegetacion.png",
+      "destination": "Assets/Art/Textures/Concepts/Caves/2026-09-23/07-vegetacion.png",
+      "guid": "cd04493d25469dd49a26c9975ff3e5d5",
+      "sha256": "2E67BE37F8901027BF91EF087B3848C23E2F73D18CBD75A01A6077E6CA1ED8B2",
+      "metaSha256": "2B0FC4AD8BB1895AF6693766FF80790BFDA1071BE3EB6EC8CB6C90EC60DDE0EC"
+    },
+    {
+      "source": "Assets/Art/Source/Concepts/Caves/2026-09-23/08-cristales.png",
+      "destination": "Assets/Art/Textures/Concepts/Caves/2026-09-23/08-cristales.png",
+      "guid": "78c5703d69177dc49a8e37f209a7d911",
+      "sha256": "D535B4F17D8A51E32CA05AEEDDD3AD9908066481E64A6F1ECD244629F46F9807",
+      "metaSha256": "0658022BDA6D7937658C76807E9F9F7DBE154D0928C9A49BBFFDDA34780BA82E"
+    },
+    {
+      "source": "Assets/Art/Source/Concepts/Caves/2026-09-23/09-materiales-efectos.png",
+      "destination": "Assets/Art/Textures/Concepts/Caves/2026-09-23/09-materiales-efectos.png",
+      "guid": "3b1e172fe2b4fcd49ae7488ea6659c1b",
+      "sha256": "ACED185F75D423A78787BEB35E5452DC31D2AA0B5AD87ED01DDE2DAFBF721D80",
+      "metaSha256": "B77F9762B167EBFAEB5875D684C67DB3209D27E286F18E4241FED162B60D04A7"
+    },
+    {
+      "source": "Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Importing_UnrealUnity.png",
+      "destination": "Assets/Art/Textures/Monsters/BestiaryDungeonMonsters/Importing_UnrealUnity.png",
+      "guid": "0564dae75b89561409fc81d67be986c0",
+      "sha256": "9F52B25D4CC0D4221767CB3F441587E64365B7809A9855D022D76D341429D212",
+      "metaSha256": "7696E8EF5271BE2D6AA6AF3C13C82E9CBB26D03D3823316BCBD27F09C7459D09"
+    },
+    {
+      "source": "Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Preview.jpg",
+      "destination": "Assets/Art/Textures/Monsters/BestiaryDungeonMonsters/Preview.jpg",
+      "guid": "9213c403da3e4754db4e1bf9d8af5b15",
+      "sha256": "C6CBA0FBCFC293EF797936C2F45F49F1AEF1274481338DD5ABC186FEDAFE726D",
+      "metaSha256": "AF478DCF78013CDEBF9258656D03D1C7B8AC7DEB201671F8889D9F33E2D8BDBF"
+    },
+    {
+      "source": "Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Imp_BaseColor_1.png",
+      "destination": "Assets/Art/Textures/Monsters/BestiaryDungeonMonsters/Textures/T_Imp_BaseColor_1.png",
+      "guid": "527b4059e91f71842987a67045e87c1c",
+      "sha256": "F103514119FBB071ABDE8A62CC1FC1A1F05FC3BDAE8A78E1ABB9916A79664F7E",
+      "metaSha256": "0698331A93F7AE9EA3BA7A62DB716EE7BFCCC1DC6B7B67D040AEBAE8488F410C"
+    },
+    {
+      "source": "Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Imp_BaseColor_2.png",
+      "destination": "Assets/Art/Textures/Monsters/BestiaryDungeonMonsters/Textures/T_Imp_BaseColor_2.png",
+      "guid": "56df4f040e2634140bcc63200911b607",
+      "sha256": "95CF71AECD87086BE74122F5785DA8D082634C386CA0DDB2D19521EA5C67A247",
+      "metaSha256": "24DA210FADDE65E63944718B9FBB49CAADA5ABCD73C1539A4B74D58CA79DA848"
+    },
+    {
+      "source": "Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Imp_BaseColor_3.png",
+      "destination": "Assets/Art/Textures/Monsters/BestiaryDungeonMonsters/Textures/T_Imp_BaseColor_3.png",
+      "guid": "4bbbc92fba204ba4ebc596988ea10077",
+      "sha256": "6A2C6A416F09E4245D8ED3BB107C001FECA4C6AC12E6405844B0A77848DBA002",
+      "metaSha256": "22DDEAAF969484ABA038BBA428F0784490179C5C129192710B27F025CCCF5021"
+    },
+    {
+      "source": "Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Imp_Emissive.png",
+      "destination": "Assets/Art/Textures/Monsters/BestiaryDungeonMonsters/Textures/T_Imp_Emissive.png",
+      "guid": "a0a1de5fc7e097a4facabf2bc5ad042f",
+      "sha256": "C56921F3F092A186DC2E8069C187BD66310F7470FC6AEFB91E660F084F46B62D",
+      "metaSha256": "5081E99830020C2E1A548F44DCC31BDB151CB3CE98766924771992424327BBA8"
+    },
+    {
+      "source": "Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Imp_Normal.png",
+      "destination": "Assets/Art/Textures/Monsters/BestiaryDungeonMonsters/Textures/T_Imp_Normal.png",
+      "guid": "ee6760182ef60534088ec5d0af23e817",
+      "sha256": "5E2D5DC16C56607733C2B8F44B01142D09C620FDE08BF162F836BFF78F553985",
+      "metaSha256": "3DF479A8D733F5682A79105F3DDB0E50BD3203C0A27071A20CBB33FCAA721479"
+    },
+    {
+      "source": "Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Imp_ORM.png",
+      "destination": "Assets/Art/Textures/Monsters/BestiaryDungeonMonsters/Textures/T_Imp_ORM.png",
+      "guid": "d58091287658d044da16358b1ce64816",
+      "sha256": "16E164C50C2F2DBC7038AF9ED45EE8D074C6EB6D31EB965EA8FB523F806A3083",
+      "metaSha256": "00AC684DD53465D3661685467AF1BA3C025C4104CF05730CD75418ACAFB6F0AA"
+    },
+    {
+      "source": "Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Puglin_BaseColor_1.png",
+      "destination": "Assets/Art/Textures/Monsters/BestiaryDungeonMonsters/Textures/T_Puglin_BaseColor_1.png",
+      "guid": "7943141512984f340ba5c65a4cee2afc",
+      "sha256": "609A1DC35EF8E3B1C632843835B8B48AFB37A2E0925BB3631BA67292B970181D",
+      "metaSha256": "AF5258A294BC050E04B77F11B9F9E9C89B2A009A89E0D0BD4A111036F1589DBB"
+    },
+    {
+      "source": "Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Puglin_BaseColor_2.png",
+      "destination": "Assets/Art/Textures/Monsters/BestiaryDungeonMonsters/Textures/T_Puglin_BaseColor_2.png",
+      "guid": "e90cf375666f3ee49aeba40d46eb2c7b",
+      "sha256": "37729D358C248C7A43E4E07653C9978D4806D8875C0807E206B74C7AB503A0BC",
+      "metaSha256": "9E3D6847E9ACF9C828BE69339D049222759196D20556321CE3AFF02E01025DDC"
+    },
+    {
+      "source": "Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Puglin_BaseColor_3.png",
+      "destination": "Assets/Art/Textures/Monsters/BestiaryDungeonMonsters/Textures/T_Puglin_BaseColor_3.png",
+      "guid": "3736e7034194f7742a5bfe1158e1a209",
+      "sha256": "AD51676D10157C4A695F25612B3EC6DC2749A3234759698235F0526F80681BC3",
+      "metaSha256": "C1BF7FF8CC585A0E11B7E224D7FC477CBA6070DE3A930A9D0A59FEF7F66E148E"
+    },
+    {
+      "source": "Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Puglin_Emissive.png",
+      "destination": "Assets/Art/Textures/Monsters/BestiaryDungeonMonsters/Textures/T_Puglin_Emissive.png",
+      "guid": "d497b917b07195c47904d30a3f226dd7",
+      "sha256": "38FA700321BB27F7578197F37F1BB5D7AB2029B47722670B042B6549F7FD51BA",
+      "metaSha256": "5563FEB2BECD5A103C18D701B0032780C7310B66637187EEC04746CD08168A5B"
+    },
+    {
+      "source": "Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Puglin_Normal.png",
+      "destination": "Assets/Art/Textures/Monsters/BestiaryDungeonMonsters/Textures/T_Puglin_Normal.png",
+      "guid": "69ee9a8d13695dc48a491b3396c27286",
+      "sha256": "CFCD39F47D1E86830E2969B7FA5535876AD59A88C1B720C07AADE81D6634AC11",
+      "metaSha256": "E42CD245EFFC3A82B856D3E5968B0234BF63B3FC6239FF2B6F650A3A90DC231E"
+    },
+    {
+      "source": "Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/T_Puglin_ORM.png",
+      "destination": "Assets/Art/Textures/Monsters/BestiaryDungeonMonsters/Textures/T_Puglin_ORM.png",
+      "guid": "ac306c0070807fc49bf34272feda071d",
+      "sha256": "34A4DE1134F8833B5FD4A96044876E7FA78B63C02E35D90FD00F37B90A8D108F",
+      "metaSha256": "DA07A51641128DC90F2986B89715B99BAD83073555DABA265D397B8733DFC70B"
+    },
+    {
+      "source": "Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/Unreal Normals/T_Imp_Normal_Unreal.png",
+      "destination": "Assets/Art/Textures/Monsters/BestiaryDungeonMonsters/Textures/Unreal Normals/T_Imp_Normal_Unreal.png",
+      "guid": "df7fe9b3109c53748adb5850bd693ebe",
+      "sha256": "ED6CA1D71CF97686EADF3631CAB2E9F6BB54D80E42B0A0FBD7F0A12419837775",
+      "metaSha256": "538D36DA5B952523CE0E6CD4972CF953C3A7CD1F0EA1293423B15980935E6C24"
+    },
+    {
+      "source": "Assets/Art/FBX/Monsters/Bestiary - Dungeon Monsters Kit[Standard]/Bestiary - Dungeon Monsters Kit[Standard]/Textures/Unreal Normals/T_Puglin_Normal_Unreal.png",
+      "destination": "Assets/Art/Textures/Monsters/BestiaryDungeonMonsters/Textures/Unreal Normals/T_Puglin_Normal_Unreal.png",
+      "guid": "c6a9387904dc4e345b70f1f6930d938a",
+      "sha256": "37AA60B30CAD62C96B71892FF6AADF4A343293242D0E945F0550D465CC42916A",
+      "metaSha256": "907A6015ADCA4FAB2C4E8C52220957890CB15612B544B8FC1640375C4F496667"
+    },
+    {
+      "source": "Assets/Art/FBX/Weapons/Sword/Rapier.prefab",
+      "destination": "Assets/Art/Prefabs/Weapons/Source/Rapier.prefab",
+      "guid": "cc87fefd29a3af54e967a779677df3f5",
+      "sha256": "BB714197556C957BE2FEB60F189ADABADFA921939B2483246A647263C72B2E49",
+      "metaSha256": "AFF211E7DD28411F6CFBF32EA1AA21C9A4A929C2AD441CC53CBF2327BE6A2569"
+    }
+  ]
+}

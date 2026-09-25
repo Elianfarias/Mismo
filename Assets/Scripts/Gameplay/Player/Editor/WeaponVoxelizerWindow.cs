@@ -17,6 +17,7 @@ namespace Mismo.Gameplay.Player.Editor
         private const string MaterialFolder = "Assets/Art/Materials";
 
         private GameObject sourceWeapon;
+        [SerializeField] private Equipment.WeaponDefinition targetWeapon;
         private bool genericModelMode;
         private bool preserveRig = true;
         private DefaultAsset animationFolder;
@@ -55,6 +56,11 @@ namespace Mismo.Gameplay.Player.Editor
                 "El objeto fuente permanece intacto y no se crea un GameObject por voxel.", MessageType.Info);
 
             sourceWeapon = (GameObject)EditorGUILayout.ObjectField($"{(genericModelMode ? "Modelo" : "Arma")} fuente", sourceWeapon, typeof(GameObject), true);
+            if (!genericModelMode)
+            {
+                targetWeapon = (Equipment.WeaponDefinition)EditorGUILayout.ObjectField("Arma del inventario", targetWeapon, typeof(Equipment.WeaponDefinition), false);
+                EditorGUILayout.HelpBox("Al elegir un arma, el prefab generado reemplaza su modelo visual y actualiza su foto. Ajustá el ángulo en Mismo → Armas → Taller de iconos.", MessageType.Info);
+            }
             outputName = EditorGUILayout.TextField("Nombre de salida", outputName);
             resolution = Mathf.Clamp(EditorGUILayout.IntSlider("Resolución máxima", resolution, 8, 128), 8, 128);
             if (genericModelMode)
@@ -177,6 +183,12 @@ namespace Mismo.Gameplay.Player.Editor
                         animationsPath, rigPlan)
                     : CreatePrefab(mesh, materials, prefabPath, safeName, addCollider, convexCollider);
 
+                if (!genericModelMode)
+                {
+                    if (targetWeapon != null) InventoryPresentationAssets.RegenerateWeaponIcon(targetWeapon, prefab);
+                    else InventoryIconCapture.Capture(prefab,
+                        "Assets/Art/UI/Inventory/weapon-" + AssetDatabase.AssetPathToGUID(prefabPath) + ".png", Vector3.zero);
+                }
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
                 Selection.activeObject = prefab;

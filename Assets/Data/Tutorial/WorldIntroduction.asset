@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71754d864a53cf7419fe031480b97cf6, type: 3}
+  m_Name: WorldIntroduction
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.WorldIntroductionDefinition
+  cave: {fileID: 7212495703480491095, guid: 6e46bbf1ead86cd4bb98123daed32608, type: 3}
+  grove: {fileID: 5580239649051526273, guid: 364cf9b167836da44b0a690ea1d1057a, type: 3}
+  narrator: {fileID: 8677526581109785616, guid: 43d8486abbc7e534ca0fc707f7f929d3, type: 3}
+  caveSpawn: {x: 0, y: 0.35, z: 36}
+  caveRadius: 49
+  arrival: {fileID: 11400000, guid: 76a42205f4967ed44b3f7c3831d3e50b, type: 2}
+  sprint: {fileID: 11400000, guid: fcb335af00cbb0b479983a31ba8b794e, type: 2}
+  story: {fileID: 11400000, guid: 9d55ffa24d652f145bb1c92ae38da4ee, type: 2}
+  village: {fileID: 11400000, guid: 7bf78f8b915f4f44392abe86a89d8908, type: 2}
+  encounters:
+  - title: Primer combate
+    instruction: "M1 \xB7 Atacar    C \xB7 Esquivar\nDerrot\xE1 al goblin para despejar el camino."
+    offset: {x: -12, y: -217}
+    lesson: {fileID: 11400000, guid: 75aea8f1a0c3d8147a0ef183518ef3be, type: 2}
+    prefab: {fileID: 5343803746825739275, guid: 892008ce707cdaa4d9e91356a6b02a19, type: 3}
+    requiredWeapon: {fileID: 0}
+    lessonWeapon: {fileID: 0}
+    count: 1
+  - title: Romper postura
+    instruction: "Atac\xE1 al goblin y aprovech\xE1 su stagger."
+    offset: {x: 14, y: -191}
+    lesson: {fileID: 11400000, guid: 8a0fba9f2f312fc48b5830c7f0d1275d, type: 2}
+    prefab: {fileID: 4129169640332764418, guid: f346e0fae2e2d6b44b478124f2ee3b8b, type: 3}
+    requiredWeapon: {fileID: 0}
+    lessonWeapon: {fileID: 0}
+    count: 1
+  - title: Practicar parry
+    instruction: "Espada: E justo antes del impacto.\nDerrot\xE1 al goblin para seguir."
+    offset: {x: -12, y: -165}
+    lesson: {fileID: 11400000, guid: 1949c9db5b055b74abd516c1e593ab19, type: 2}
+    prefab: {fileID: 5335981839036757142, guid: 4c185bcb06948d34f8cbe1437ef73bdf, type: 3}
+    requiredWeapon: {fileID: 0}
+    lessonWeapon: {fileID: 0}
+    count: 1
+  - title: Equipar el arco
+    instruction: "Tab alterna tus armas. Equip\xE1 el arco; I permite revisar tus conjuntos."
+    offset: {x: 8, y: -152}
+    lesson: {fileID: 11400000, guid: b54f1a3e9d382944d916da82fe76714e, type: 2}
+    prefab: {fileID: 0}
+    requiredWeapon: {fileID: 11400000, guid: 835c07f02b4157f4ca9e69fe3d5490ad, type: 2}
+    lessonWeapon: {fileID: 0}
+    count: 1
+  - title: Arco y Focus
+    instruction: "Manten\xE9 M1 para tensar y solt\xE1 para disparar. Acert\xE1 para generar Focus y usar Q."
+    offset: {x: 12, y: -139}
+    lesson: {fileID: 11400000, guid: eb3a73a4a8e4b4c45b6775d6b323fe91, type: 2}
+    prefab: {fileID: 4371155951810911388, guid: 3da4a2fe569475b40ad9e8f150740a7a, type: 3}
+    requiredWeapon: {fileID: 0}
+    lessonWeapon: {fileID: 11400000, guid: 835c07f02b4157f4ca9e69fe3d5490ad, type: 2}
+    count: 1
+  - title: "El \xFAltimo tramo"
+    instruction: "Combin\xE1 espada, arco y habilidades. Despej\xE1 el camino hasta el pueblo."
+    offset: {x: 0, y: -114}
+    lesson: {fileID: 11400000, guid: 2fbf497bbd1fed54797b0567c2f35272, type: 2}
+    prefab: {fileID: 5530444665965415889, guid: 40a461b40c9649c408929736c1bfd305, type: 3}
+    requiredWeapon: {fileID: 0}
+    lessonWeapon: {fileID: 0}
+    count: 2

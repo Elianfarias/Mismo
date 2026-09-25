@@ -9,6 +9,8 @@ namespace Mismo.Gameplay.Player.World
         public System.Collections.Generic.List<Mismo.Gameplay.Player.Presentation.MapPin> mapPins = new System.Collections.Generic.List<Mismo.Gameplay.Player.Presentation.MapPin>();
         public System.Collections.Generic.List<MapDiscoveryBlock> mapDiscovery = new System.Collections.Generic.List<MapDiscoveryBlock>();
         public int villageLayoutRevision;
+        public int introductionStage;
+        public int introductionLessons;
         public string id;
         public int seed;
         public string settingsJson;

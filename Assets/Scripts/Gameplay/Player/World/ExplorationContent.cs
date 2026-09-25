@@ -43,6 +43,7 @@ namespace Mismo.Gameplay.Player.World
             for(int dz=-1;dz<=1;dz++)for(int dx=-1;dx<=1;dx++)
             {
                 var site=terrain.Site(new Vector2Int(x+dx,z+dz));
+                if(site.kind!=WorldSiteKind.Village&&terrain.Introduction?.Reserved(site.position.x,site.position.z,40)==true)continue;
                 if(ExplorationChunks.Coordinate(site.position)==chunk&&terrain.IsExterior(site.position.x,site.position.z))yield return site;
             }
         }

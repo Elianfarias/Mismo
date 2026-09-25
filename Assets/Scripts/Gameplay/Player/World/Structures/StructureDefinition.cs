@@ -54,6 +54,8 @@ namespace Mismo.Gameplay.Player.World.Structures
         {
             get{float r=0;foreach(var room in rooms)if(room!=null)r=Mathf.Max(r,room.center.magnitude+room.radius);return Mathf.Max(Mathf.Ceil(r+5),style==StructureStyle.Temple?moatRadius:0);}
         }
+        [Tooltip("Only for the introduction, whose geometry stays loaded independently of chunks.")]
+        public bool persistentIntroduction;
         public static bool IsMoat(Vector2 p,float radius)=>radius>0&&p.magnitude<radius-.7f&&(Mathf.Abs(p.x)>16||Mathf.Abs(p.y)>20);
         public static float MoatDepth(Vector2 p,float radius)=>IsMoat(p,radius)?-1.25f:0;
         public float FoundationOffset(Vector2 p)=>MoatDepth(p,style==StructureStyle.Temple?moatRadius:0);
@@ -111,7 +113,7 @@ namespace Mismo.Gameplay.Player.World.Structures
             if(rooms.Exists(r=>r==null))return "Hay una sala vacia.";
             if(rooms.FindAll(r=>r.role==StructureRoomRole.Entrance).Count!=1||rooms.FindAll(r=>r.role==StructureRoomRole.Final).Count!=1)return "Debe existir exactamente una entrada y una sala final.";
             foreach(var room in rooms)if(!Finite(room.center.x)||!Finite(room.center.y)||!Finite(room.radius)||!Finite(room.height)||room.radius<3||room.radius>9||room.height<4||room.height>10)return "Dimensiones de sala invalidas.";
-            if(Radius>32)return "La estructura debe caber en un radio de 32 m para el streaming y el terreno.";
+            if(Radius>(persistentIntroduction?64:32))return "La estructura excede el radio permitido: 32 m en streaming, 64 m en la introducción persistente.";
             if(style==StructureStyle.Temple&&(waterMaterial==null||moatRadius<27||moatRadius>32))return "Asignar material de agua y un estanque de 27 a 32 m.";
             if(!Finite(voxelSize)||!Finite(mountainHeight)||voxelSize<.3f||voxelSize>.8f||mountainHeight<12||mountainHeight>24||shellMaterial==null)return "Revisar resolucion, altura de montana y material.";
             if(connections==null)return "Faltan conexiones.";

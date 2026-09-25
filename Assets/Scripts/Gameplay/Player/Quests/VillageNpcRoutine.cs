@@ -31,6 +31,7 @@ namespace Mismo.Gameplay.Player.Quests
         {
             agent = GetComponent<NavMeshAgent>();
             giver = GetComponent<QuestGiver>();
+            if(GetComponent<NpcGrounding>()==null)gameObject.AddComponent<NpcGrounding>();
             // The world creates residents before its asynchronous navigation bake finishes.
             agent.enabled = false;
         }

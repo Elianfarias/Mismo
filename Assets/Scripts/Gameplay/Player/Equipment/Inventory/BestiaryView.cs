@@ -23,7 +23,9 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 try
                 {
                     var source=species.prefabs==null?null:System.Array.Find(species.prefabs,p=>p!=null);
-                    preview.Show(source,new Vector3(0,150,0));preview.Zoom(species.bookZoom);
+                    preview.Show(source,species.bookPreviewRotation);
+                    preview.Zoom(species.bookZoom);
+                    preview.FitToView();
                 }
                 catch(System.Exception exception)
                 {

@@ -16,6 +16,7 @@ namespace Mismo.Gameplay.Player.World
     {
         readonly ExplorationWorldSettings settings;
         public FiniteWorldPlan Plan {get;}
+        public WorldIntroductionLayout Introduction {get;}
         public GroveWorldStyle GroveStyle=>settings.content!=null?settings.content.groveStyle:null;
         public int SiteSpacing=>Plan!=null?Plan.SiteSpacing:Mathf.Max(64,settings.siteSpacing);
         readonly System.Collections.Generic.Dictionary<Vector2Int,WorldSite> sites=new System.Collections.Generic.Dictionary<Vector2Int,WorldSite>();
@@ -24,7 +25,12 @@ namespace Mismo.Gameplay.Player.World
         readonly WorldSite? woodlandStructure;
         public WorldSite? WoodlandStructure=>woodlandStructure;
         public ExplorationTerrain(ExplorationWorldSettings s):base(s.seed,s.authoredSize,s.relief,s.stepHeight)
-        {settings=s;Plan=s.UsesFiniteWorld?new FiniteWorldPlan(s):null;iceStructure=FindIceStructure();woodlandStructure=FindWoodlandStructure();}
+        {
+            settings=s;Plan=s.UsesFiniteWorld?new FiniteWorldPlan(s):null;
+            if(s.introductionVersion==1&&Plan!=null&&s.content?.introduction!=null)
+                Introduction=new WorldIntroductionLayout(Plan.Start,s.content.introduction,s.content.VillageArrivalOffset);
+            iceStructure=FindIceStructure();woodlandStructure=FindWoodlandStructure();
+        }
         WorldSite? FindWoodlandStructure()
         {
             if(Plan?.Layout==null||settings.content?.structures==null||settings.content.structureChance<=0)return null;
@@ -34,6 +40,7 @@ namespace Mismo.Gameplay.Player.World
             for(int preference=0;preference<2;preference++)for(int z=-3;z<5;z++)for(int x=-3;x<7;x++)
             {
                 var cell=new Vector2Int(x,z);var p=Plan.SitePosition(cell);var biome=Plan.Biome(p.x,p.y);
+                if(Introduction?.Reserved(p.x,p.y,radius+30)==true)continue;
                 if(preference==0?biome!=WorldBiome.Forest:biome!=WorldBiome.Meadow)continue;
                 float roll=Unit(Hash(settings.seed,x,z,20));
                 if(IsVillageCell(cell)||Plan.ObjectiveStage(cell)>=0||roll>=.12f&&roll<.18f||iceStructure.HasValue&&iceStructure.Value.cell==cell||!Plan.Contains(p.x,p.y,radius+75)||Plan.BarrierDistance(p.x,p.y)<radius+75||Plan.RouteDistance(p.x,p.y,out _) <radius+30)continue;
@@ -144,6 +151,7 @@ namespace Mismo.Gameplay.Player.World
             int objective=Plan!=null?Plan.ObjectiveStage(cell):-1;
             float roadClearance=kind==WorldSiteKind.Village?VillageHalfExtent*1.415f+32:64;
             bool suppressed=Plan!=null&&(!Plan.Contains(x,z,VillageHalfExtent+40)||Plan.RouteDistance(x,z,out _) < roadClearance||Plan.BarrierDistance(x,z)<VillageHalfExtent+40);
+            suppressed|=cell!=Vector2Int.zero&&Introduction?.Reserved(x,z,VillageHalfExtent+30)==true;
             if(suppressed)kind=WorldSiteKind.Clearing;
             if(Plan!=null&&cell==Vector2Int.zero)kind=WorldSiteKind.Village;
             if(objective>=0)kind=WorldSiteKind.BossArena;
@@ -189,6 +197,7 @@ namespace Mismo.Gameplay.Player.World
                 y=Mathf.Lerp(y,site.position.y,1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(VillageHalfExtent+12,VillageHalfExtent+28,d)));
                 reserved|=d<VillageHalfExtent+16;
             }
+            if(Introduction!=null){y=Introduction.Flatten(x,z,y);reserved|=Introduction.Reserved(x,z);distance=Mathf.Min(distance,Introduction.RoadDistance(x,z));}
             return Plan.ApplyCoast(x,z,Plan.ApplyBarriers(x,z,y));
         }
         float Pass(float x,float z,out float distance,out bool reserved)
@@ -247,6 +256,7 @@ namespace Mismo.Gameplay.Player.World
         }
         public override bool Reserved(float x,float z,float margin=0)
         {
+            if(Introduction?.Reserved(x,z,margin)==true)return true;
             if(Plan!=null)
             {
                 if(!Plan.Contains(x,z,80+margin))return true;
@@ -270,7 +280,7 @@ namespace Mismo.Gameplay.Player.World
             if(!IsExterior(x,z))return base.Reserved(x,z,margin);Pass(x,z,out float d,out bool reserved);return reserved||d<7+margin;
         }
         public override float PathDistance(float x,float z)
-        {if(Plan!=null)return Plan.RouteDistance(x,z,out _);if(!IsExterior(x,z))return base.PathDistance(x,z);Pass(x,z,out float d,out _);return d;}
+        {if(Plan!=null)return Mathf.Min(Plan.RouteDistance(x,z,out _),Introduction?.RoadDistance(x,z)??float.MaxValue);if(!IsExterior(x,z))return base.PathDistance(x,z);Pass(x,z,out float d,out _);return d;}
         public override Color Top(float x,float z,float height)
         {
             if(settings.content!=null&&settings.content.groveStyle!=null&&GroveWorldStyle.Supports(Biome(x,z)))

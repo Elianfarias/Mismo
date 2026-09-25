@@ -49,27 +49,36 @@ namespace Mismo.Gameplay.Player.Editor
                 if(weapon.inventoryIcon==null&&weapon.visualPrefab!=null){weapon.inventoryIcon=Icon(weapon.visualPrefab,"weapon-"+weapon.name,weapon.inventoryPreviewRotation);EditorUtility.SetDirty(weapon);}
             AssetDatabase.SaveAssets();
         }
-        static Sprite Icon(GameObject source,string name,Vector3 rotation)
+        [MenuItem("Mismo/Inventory/Regenerate weapon grid icons")]
+        public static void RegenerateWeaponIcons()
         {
-            using(var preview=new InventoryPreview())
-            {
-                preview.Show(source,rotation);preview.Render();
-                if(!preview.HasModel)return null;
-                var old=RenderTexture.active;RenderTexture.active=(RenderTexture)preview.Texture;
-                var texture=new Texture2D(preview.Texture.width,preview.Texture.height,TextureFormat.RGBA32,false);
-                texture.ReadPixels(new Rect(0,0,texture.width,texture.height),0,0);texture.Apply();RenderTexture.active=old;
-                var pixels=texture.GetPixels32();int minX=texture.width,minY=texture.height,maxX=0,maxY=0;
-                for(int y=0;y<texture.height;y++)for(int x=0;x<texture.width;x++)if(pixels[y*texture.width+x].a>16){minX=Mathf.Min(x,minX);maxX=Mathf.Max(x,maxX);minY=Mathf.Min(y,minY);maxY=Mathf.Max(y,maxY);}
-                if(minX>maxX){Object.DestroyImmediate(texture);return null;}
-                minX=Mathf.Max(0,minX-4);minY=Mathf.Max(0,minY-4);maxX=Mathf.Min(texture.width-1,maxX+4);maxY=Mathf.Min(texture.height-1,maxY+4);
-                var cropped=new Texture2D(maxX-minX+1,maxY-minY+1,TextureFormat.RGBA32,false);
-                cropped.SetPixels(texture.GetPixels(minX,minY,cropped.width,cropped.height));cropped.Apply();
-                string path="Assets/Art/UI/Inventory/"+name+".png";File.WriteAllBytes(path,cropped.EncodeToPNG());
-                Object.DestroyImmediate(texture);Object.DestroyImmediate(cropped);AssetDatabase.ImportAsset(path);
-                var importer=(TextureImporter)AssetImporter.GetAtPath(path);importer.textureType=TextureImporterType.Sprite;importer.spriteImportMode=SpriteImportMode.Single;importer.alphaIsTransparency=true;importer.mipmapEnabled=false;importer.SaveAndReimport();
-                return AssetDatabase.LoadAssetAtPath<Sprite>(path);
-            }
+            var catalog=Mismo.Core.ProjectAssets.Load<ItemCatalog>("ItemCatalog");
+            if(catalog==null)throw new System.InvalidOperationException("No se encontró ItemCatalog.");
+            foreach(var weapon in catalog.weapons)
+                if(weapon!=null&&weapon.visualPrefab!=null)RegenerateWeaponIcon(weapon);
+            AssetDatabase.SaveAssets();
         }
+
+        public static void RegenerateWeaponIcon(Equipment.WeaponDefinition weapon,GameObject source=null)
+        {
+            if(weapon==null)throw new System.ArgumentNullException(nameof(weapon));
+            source=source!=null?source:weapon.visualPrefab;
+            if(source==null)throw new System.InvalidOperationException("El arma no tiene modelo visual.");
+            string path=AssetDatabase.GetAssetPath(weapon.inventoryIcon);
+            // Only overwrite this generator's own standalone images, never an atlas or imported art.
+            if(!path.StartsWith("Assets/Art/UI/Inventory/")||!path.EndsWith(".png")||
+                !(AssetImporter.GetAtPath(path) is TextureImporter importer)||importer.spriteImportMode!=SpriteImportMode.Single)
+                path="Assets/Art/UI/Inventory/weapon-"+AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(weapon))+".png";
+            var icon=InventoryIconCapture.Capture(source,path,weapon.inventoryPreviewRotation);
+            if(icon==null)throw new System.InvalidOperationException("No se pudo fotografiar "+weapon.name);
+            Undo.RecordObject(weapon,"Actualizar modelo e icono del arma");
+            weapon.visualPrefab=source;
+            weapon.inventoryIcon=icon;
+            EditorUtility.SetDirty(weapon);
+        }
+
+        static Sprite Icon(GameObject source,string name,Vector3 rotation)
+            => InventoryIconCapture.Capture(source,"Assets/Art/UI/Inventory/"+name+".png",rotation);
         static void Part(GameObject parent,PrimitiveType type,Vector3 position,Vector3 scale,Vector3 rotation,Material material)
         {
             var piece=GameObject.CreatePrimitive(type);piece.transform.SetParent(parent.transform,false);piece.transform.localPosition=position;
