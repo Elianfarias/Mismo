@@ -37,10 +37,17 @@ namespace Mismo.Gameplay.Enemies
             float x=isBoss?(Screen.width/scale-width)/2:screen.x/scale-width/2;
             float y=isBoss?26:(Screen.height-screen.y)/scale-40;
             string name=boss!=null?"GUARDIÁN DEL SANTUARIO":elite?"GOBLIN ÉLITE":"GOBLIN";
-            if(goblin?.Settings is CreatureSettings)name=goblin.Settings.displayName;
+            if(goblin?.Settings != null && !string.IsNullOrWhiteSpace(goblin.Settings.displayName))
+                name=goblin.Settings.displayName;
             if(dragon!=null&&dragon.Settings!=null)name=dragon.Settings.displayName;
             var identity=GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>();
-            if(identity!=null)name=(goblin?.Settings is CreatureSettings?goblin.Settings.displayName:identity.DisplayName)+" · Nv "+identity.Level;
+            if(identity!=null)
+            {
+                string identityName = goblin?.Settings != null && !string.IsNullOrWhiteSpace(goblin.Settings.displayName)
+                    ? goblin.Settings.displayName
+                    : !string.IsNullOrWhiteSpace(identity.DisplayName) ? identity.DisplayName : name;
+                name=identityName+" · Nv "+identity.Level;
+            }
             Color accent=boss!=null?new Color(.85f,.35f,.32f):elite?new Color(.72f,.48f,.93f):new Color(.85f,.35f,.32f);
             if(dragon!=null&&dragon.Settings!=null)accent=dragon.Settings.accent;
             PlayerHUD.Fill(new Rect(x-6,y-4,width+12,isBoss?65:49),PlayerHUD.Panel);

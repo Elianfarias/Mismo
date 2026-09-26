@@ -288,3 +288,16 @@ MonoBehaviour:
     minimumLevel: 1
     altitude: {x: -100, y: 200}
     minimumPlayerDistance: 18
+  - id: forest.Imp
+    site: 0
+    biomes: 01000000i
+    prefab: {fileID: 6870553644002267613, guid: 8e68f2c1ebcb99248bf48bfe3b4d4b87, type: 3}
+    elitePrefab: {fileID: 0}
+    weight: 4
+    minimumCount: 1
+    maximumCount: 3
+    eliteChance: 0
+    guaranteedElite: 0
+    minimumLevel: 4
+    altitude: {x: -100, y: 200}
+    minimumPlayerDistance: 18

@@ -62,7 +62,7 @@ namespace Mismo.Gameplay.Player.Presentation
             celebration.title.fontSize = 33; celebration.title.fontSizeMax = 33; celebration.title.fontSizeMin = 26; celebration.title.rectTransform.anchoredPosition = new Vector2(0, 17);
             celebration.title.rectTransform.sizeDelta = new Vector2(478,44);
             celebration.body.rectTransform.anchoredPosition = new Vector2(0,-24);
-            notice = CreateCard("Rewards", new Vector2(1,.5f), new Vector2(-215, -30), new Vector2(380, 96), true, 3.5f);
+            notice = CreateCard("Rewards", new Vector2(1,.5f), new Vector2(-215, -105), new Vector2(380, 96), true, 3.5f);
             notice.title.gameObject.SetActive(false); notice.title.fontSize = 15; notice.title.fontSizeMax = 15; notice.title.fontSizeMin = 12;
             notice.body.rectTransform.sizeDelta = new Vector2(344,52); notice.body.rectTransform.anchoredPosition = Vector2.zero;
             lastNotice = inventory.Notice;

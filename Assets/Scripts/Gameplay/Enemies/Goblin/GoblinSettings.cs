@@ -35,6 +35,62 @@ namespace Mismo.Gameplay.Enemies
         public string projectileSocket="Rock_Carry";
         [Min(0)] public float grabAt=.833333f;
         [Min(.1f)] public float projectileSpeed=12,projectileRange=30,projectileRadius=.6f;
+        public AudioClip preparationSfx;
+        [Range(0f, 1f)] public float preparationSfxVolume = 1f;
+        public AudioClip executionSfx;
+        [Range(0f, 1f)] public float executionSfxVolume = 1f;
+        [Header("Projectile Impact")]
+
+        [Tooltip("VFX que se instancia cuando el proyectil impacta.")]
+        public GameObject projectileImpactVfx;
+
+        [Min(0f)]
+        [Tooltip("Tiempo antes de destruir automáticamente el VFX de impacto. 0 = no destruir automáticamente.")]
+        public float projectileImpactVfxLifetime = 3f;
+
+        [Tooltip("Sonido que se reproduce cuando impacta el proyectil.")]
+        public AudioClip projectileImpactSfx;
+
+        [Range(0f, 1f)]
+        public float projectileImpactSfxVolume = 1f;
+
+
+        [Header("Ground Pool")]
+
+        [Tooltip("Si está activo, el proyectil puede dejar un charco cuando impacta contra una superficie suficientemente horizontal.")]
+        public bool spawnGroundPool;
+
+        [Tooltip("Prefab visual/lógico del charco.")]
+        public GameObject groundPoolPrefab;
+
+        [Min(0.1f)]
+        [Tooltip("Tiempo que permanece el charco.")]
+        public float groundPoolLifetime = 5f;
+
+        [Min(0.01f)]
+        [Tooltip("Multiplicador de escala del prefab del charco.")]
+        public float groundPoolScale = 1f;
+
+        [Range(0f, 1f)]
+        [Tooltip("Qué tan horizontal debe ser la superficie para permitir el charco. 1 = completamente plana.")]
+        public float groundPoolMinUpDot = 0.7f;
+
+        [Header("Ground Pool Damage")]
+
+        [Tooltip("Si está activo, el charco aplica daño periódico a los objetivos dentro de su radio.")]
+        public bool groundPoolDealsDamage;
+
+        [Min(0f)]
+        [Tooltip("Daño de cada tick. 0 desactiva el daño aunque la opción esté activa.")]
+        public float groundPoolDamagePerTick;
+
+        [Min(0.05f)]
+        [Tooltip("Tiempo entre ticks de daño.")]
+        public float groundPoolDamageTickInterval = 0.5f;
+
+        [Min(0.01f)]
+        [Tooltip("Radio de búsqueda de objetivos para cada tick.")]
+        public float groundPoolDamageRadius = 1.25f;
     }
 
     [CreateAssetMenu(menuName = "Mismo/Enemies/Goblin Settings")]

@@ -22,7 +22,7 @@ MonoBehaviour:
   decisionPause: 0.4
   chargeCooldown: 5
   interruptibleByCombos: 1
-  comboHitStun: 0.55
+  comboHitStun: 1
   maxConsecutiveInterrupts: 2
   interruptImmunityDuration: 2
   staggerDamageThreshold: 15
