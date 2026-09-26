@@ -230,9 +230,9 @@ MonoBehaviour:
     projectileVisual: {fileID: 5712219488875869251, guid: 29f4c72f9a1d9d446945740c2819895b, type: 3}
     projectileSocket: hand_l
     grabAt: 0.2
-    projectileSpeed: 12
+    projectileSpeed: 15
     projectileRange: 20
-    projectileRadius: 0.32
+    projectileRadius: 0.5
     preparationSfx: {fileID: 0}
     preparationSfxVolume: 1
     executionSfx: {fileID: 0}
