@@ -138,6 +138,7 @@ MonoBehaviour:
     prefab: {fileID: 2759051942343419815, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
     elitePrefab: {fileID: 5851845409795526387, guid: 4fb226918136a60439158b7df7636df3, type: 3}
     weight: 8
+    appearanceChancePercent: 70
     minimumCount: 2
     maximumCount: 3
     eliteChance: 0.025
@@ -151,6 +152,7 @@ MonoBehaviour:
     prefab: {fileID: 2759051942343419815, guid: 57d418bf349fa274095d0ccf0a6b62a4, type: 3}
     elitePrefab: {fileID: 5851845409795526387, guid: 4fb226918136a60439158b7df7636df3, type: 3}
     weight: 0
+    appearanceChancePercent: 100
     minimumCount: 3
     maximumCount: 3
     eliteChance: 0.025
@@ -164,6 +166,7 @@ MonoBehaviour:
     prefab: {fileID: 5851845409795526387, guid: 4fb226918136a60439158b7df7636df3, type: 3}
     elitePrefab: {fileID: 0}
     weight: 1
+    appearanceChancePercent: 50
     minimumCount: 1
     maximumCount: 1
     eliteChance: 0.025
@@ -177,6 +180,7 @@ MonoBehaviour:
     prefab: {fileID: 2759051942343419815, guid: 19d7b8c1ce4a44e5a7f93d0f2281b61c, type: 3}
     elitePrefab: {fileID: 0}
     weight: 1
+    appearanceChancePercent: 0
     minimumCount: 1
     maximumCount: 1
     eliteChance: 0.025
@@ -190,6 +194,7 @@ MonoBehaviour:
     prefab: {fileID: 2902795995163769872, guid: 29539ada7f3f12a42914344a519c03a8, type: 3}
     elitePrefab: {fileID: 0}
     weight: 10
+    appearanceChancePercent: 50
     minimumCount: 2
     maximumCount: 3
     eliteChance: 0
@@ -203,6 +208,7 @@ MonoBehaviour:
     prefab: {fileID: 1716802908112928350, guid: 1f5c9d8b0560ac045889bc76de631138, type: 3}
     elitePrefab: {fileID: 0}
     weight: 10
+    appearanceChancePercent: 50
     minimumCount: 2
     maximumCount: 3
     eliteChance: 0
@@ -216,6 +222,7 @@ MonoBehaviour:
     prefab: {fileID: 5408172820500594365, guid: 0a504e7adefadcf46882ce08b2238139, type: 3}
     elitePrefab: {fileID: 0}
     weight: 10
+    appearanceChancePercent: 50
     minimumCount: 2
     maximumCount: 3
     eliteChance: 0
@@ -229,6 +236,7 @@ MonoBehaviour:
     prefab: {fileID: 8440093396559079988, guid: 1be7918643492c847ac2ba9cc2a78e9d, type: 3}
     elitePrefab: {fileID: 0}
     weight: 8
+    appearanceChancePercent: 50
     minimumCount: 2
     maximumCount: 3
     eliteChance: 0
@@ -242,6 +250,7 @@ MonoBehaviour:
     prefab: {fileID: 4906390869677408606, guid: 8e2503599fc92984ba27f47121e7c991, type: 3}
     elitePrefab: {fileID: 0}
     weight: 8
+    appearanceChancePercent: 50
     minimumCount: 2
     maximumCount: 3
     eliteChance: 0
@@ -255,6 +264,7 @@ MonoBehaviour:
     prefab: {fileID: 8718558843661333136, guid: df032e69fb37afc4a9f8f66b42e2a16a, type: 3}
     elitePrefab: {fileID: 0}
     weight: 8
+    appearanceChancePercent: 50
     minimumCount: 2
     maximumCount: 3
     eliteChance: 0
@@ -268,6 +278,7 @@ MonoBehaviour:
     prefab: {fileID: 4621593228312570532, guid: 1d54a32d0326d1a40a7aaebfa06def68, type: 3}
     elitePrefab: {fileID: 0}
     weight: 2
+    appearanceChancePercent: 50
     minimumCount: 2
     maximumCount: 3
     eliteChance: 0
@@ -281,6 +292,7 @@ MonoBehaviour:
     prefab: {fileID: 5910821963392241888, guid: 9608a88dc9cc9d34c94fc4357b3228da, type: 3}
     elitePrefab: {fileID: 0}
     weight: 4
+    appearanceChancePercent: 0
     minimumCount: 1
     maximumCount: 1
     eliteChance: 0
@@ -293,11 +305,12 @@ MonoBehaviour:
     biomes: 01000000i
     prefab: {fileID: 6870553644002267613, guid: 8e68f2c1ebcb99248bf48bfe3b4d4b87, type: 3}
     elitePrefab: {fileID: 0}
-    weight: 4
+    weight: 18
+    appearanceChancePercent: 100
     minimumCount: 1
     maximumCount: 3
     eliteChance: 0
     guaranteedElite: 0
-    minimumLevel: 4
+    minimumLevel: 1
     altitude: {x: -100, y: 200}
     minimumPlayerDistance: 18

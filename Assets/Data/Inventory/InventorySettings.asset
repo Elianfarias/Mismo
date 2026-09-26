@@ -18,6 +18,7 @@ MonoBehaviour:
   chestRows: 12
   defaultStackSize: 20
   chestRange: 3
+  groundLootLifetimeSeconds: 120
   chestOffset: {x: 3, y: 0, z: 0}
   chestPrefab: {fileID: 0}
   lootGlowMaterial: {fileID: 2100000, guid: 02e97ced002c423a9c093d06e11921b6, type: 2}

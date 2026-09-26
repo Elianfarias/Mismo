@@ -23,7 +23,7 @@ MonoBehaviour:
   active: 1
   recovery: 0.16
   cooldown: 0.45
-  staminaCost: 10
+  staminaCost: 25
   chargeable: 0
   maximumCharge: 0.9
   chargeDamageMultiplier:
@@ -105,10 +105,10 @@ MonoBehaviour:
     impactEndPercent: 100
     damage: 12
     shape: 2
-    bladeRadius: 0.035
     center: {x: 0, y: 1, z: 0.65}
     size: {x: 0.9, y: 1.4, z: 1.4}
     radius: 0.7
+    bladeRadius: 0.035
   - id: heavy_slash
     duration: 1
     inputStartPercent: 35
@@ -120,10 +120,10 @@ MonoBehaviour:
     impactEndPercent: 100
     damage: 20
     shape: 2
-    bladeRadius: 0.035
     center: {x: 0, y: 1, z: 0.65}
     size: {x: 0.9, y: 1.4, z: 1.4}
     radius: 0.7
+    bladeRadius: 0.035
   targetsGround: 0
   aimFromCamera: 1
   range: 25

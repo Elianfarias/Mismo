@@ -13,7 +13,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public MaterialDefinition Material(string id)=>id!=null&&materialDefinitions.TryGetValue(id,out var m)?m:null;
         public int StoredMaterialCount(string id)=>profile?.chestMaterials?.Find(s=>s.id==id)?.quantity??0;
         public IEnumerable<PendingInventoryLoot> PendingLoot
-        { get { if(profile?.pendingLoot!=null)foreach(var loot in profile.pendingLoot)yield return loot.Copy(); } }
+        { get { if(profile?.pendingLoot!=null)foreach(var loot in profile.pendingLoot)if(loot!=null&&!loot.IsExpired(WorldPlaySeconds))yield return loot.Copy(); } }
         public string PendingLootName(PendingInventoryLoot loot)
         {
             if(loot==null)return "";
@@ -86,7 +86,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             if(!CanInteract)return false;
             var next=profile.Copy();var loot=next.pendingLoot.Find(l=>l.id==id);
-            if(loot==null||Vector3.Distance(transform.position,new Vector3(loot.x,loot.y,loot.z))>4)return false;
+            if(loot==null||loot.IsExpired(WorldPlaySeconds)||Vector3.Distance(transform.position,new Vector3(loot.x,loot.y,loot.z))>4)return false;
             if(loot.HasWeapon){if(next.weapons.Count>=256)return false;next.weapons.Add(loot.weapon.Copy());}
             foreach(var stack in loot.materials)
                 if(!next.TryAddMaterial(stack.id,stack.quantity))return false;

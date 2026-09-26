@@ -9,13 +9,15 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public string id;
         public string rewardId;
         public float x,y,z;
+        public double expiresAt;
         public OwnedWeapon weapon;
         // Unity may deserialize a null inline serializable object as an empty object.
         public bool HasWeapon=>weapon!=null&&!string.IsNullOrEmpty(weapon.instanceId);
+        public bool IsExpired(double now)=>string.IsNullOrEmpty(rewardId)&&expiresAt>0&&expiresAt<=now;
         public List<MaterialStack> materials = new List<MaterialStack>();
         public PendingInventoryLoot Copy()
         {
-            var copy=new PendingInventoryLoot {id=id,rewardId=rewardId,x=x,y=y,z=z,weapon=HasWeapon?weapon.Copy():null};
+            var copy=new PendingInventoryLoot {id=id,rewardId=rewardId,x=x,y=y,z=z,expiresAt=expiresAt,weapon=HasWeapon?weapon.Copy():null};
             foreach(var stack in materials)copy.materials.Add(stack.Copy());
             return copy;
         }

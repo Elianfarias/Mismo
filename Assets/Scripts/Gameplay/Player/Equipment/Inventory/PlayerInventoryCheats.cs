@@ -33,7 +33,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                     {
                         item.inChest = false;
                         if (next.pendingLoot.Count >= 4096) return false;
-                        next.pendingLoot.Add(new PendingInventoryLoot { id = Guid.NewGuid().ToString("N"), weapon = item,
+                        next.pendingLoot.Add(new PendingInventoryLoot { id = Guid.NewGuid().ToString("N"), weapon = item, expiresAt = WorldPlaySeconds + GroundLootLifetimeSeconds,
                             x = dropPosition.x, y = dropPosition.y, z = dropPosition.z });
                         pending++;
                     }

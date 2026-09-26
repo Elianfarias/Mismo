@@ -11,6 +11,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         [Range(1,12)] public int chestRows = 12;
         [Min(1)] public int defaultStackSize = 20;
         [Min(1)] public float chestRange = 3;
+        [Min(1), Tooltip("Tiempo de permanencia del botín normal en el suelo, en segundos de juego.")]
+        public float groundLootLifetimeSeconds = 120f;
         public Vector3 chestOffset = new Vector3(3, 0, 0);
         public GameObject chestPrefab;
         [Tooltip("Indicador visual del botín en el suelo. Asignar aquí la futura luz/VFX de drop; no controla la recogida ni el guardado.")]

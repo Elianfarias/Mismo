@@ -207,7 +207,8 @@ namespace Mismo.Gameplay.Player.World
                 int selectionSeed=ExplorationTerrain.Hash(settings.seed,site.cell.x,site.cell.y,site.roaming?411:201);
                 var entry=settings.content.Encounter(site.kind,terrain.Biome(site.position.x,site.position.z),Mathf.Max(1,inventory.RegionMinimum(region)),site.position.y,selectionSeed);
                 if(entry==null)continue;
-                if(Vector3.Distance(inventory.transform.position,site.position)<entry.minimumPlayerDistance)return;
+                // A nearby encounter only blocks this site; it must not abort the rest of the chunk.
+                if(Vector3.Distance(inventory.transform.position,site.position)<entry.minimumPlayerDistance)continue;
                 int count=site.kind==WorldSiteKind.BossArena?1:rng.Next(Mathf.Clamp(entry.minimumCount,1,5),Mathf.Clamp(Mathf.Max(entry.minimumCount,entry.maximumCount),1,5)+1);
                 var positions=new Vector3[count];
                 for(int i=0;i<count;i++)

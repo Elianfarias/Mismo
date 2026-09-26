@@ -11,10 +11,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5f9c002219044a58c3db2e687ed64dd, type: 3}
   m_Name: ExplorationWorldSettings
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   streamingEnabled: 1
   preserveAuthoredCenter: 1
   seed: 7319
+  generationVersion: 0
+  introductionVersion: 0
+  worldLength: 4096
+  worldHalfWidth: 768
   authoredSize: 256
   relief: 14
   stepHeight: 0.25
@@ -49,7 +53,7 @@ MonoBehaviour:
     terrainRoughness: 0.9
     trees: 0.18
   content: {fileID: 11400000, guid: 97a0247d62674696bdc8ce8dcff8a4ee, type: 2}
-  encounterChance: 0.42
+  encounterChance: 0.5
   regionalLevelIncrement: 15
   healthPerLevel: 0.025
   damagePerLevel: 0.015

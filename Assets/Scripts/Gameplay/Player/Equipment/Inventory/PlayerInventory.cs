@@ -29,6 +29,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public int Count => profile != null ? profile.weapons.Count : 0;
         public string Notice { get; private set; }
         public bool HasSaveProblem { get; private set; }
+        internal double GroundLootLifetimeSeconds=>Math.Max(1,InventorySettings.Current.groundLootLifetimeSeconds);
         public event Action Changed;
         public event Action<ProgressionData,ProgressionData,string> Committed;
         public string MasteryDisplayName(string id) => FindFamily(id)?.DisplayName ?? (catalog?.weapons == null ? "Maestría" : MasteryWeaponName(id));
@@ -71,13 +72,13 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 profile = payload != null ? JsonUtility.FromJson<InventoryProfile>(payload) : CreateStartingProfile();
                 if (!profile.IsValid(definitions, rewards)) throw new InvalidDataException("Invalid starting profile.");
                 bool migrated=profile.version<6;
-                profile.UpgradeToCurrent();profile.UpgradeMountCollection();NormalizeGrid(profile);
+                profile.UpgradeToCurrent();bool migratedLoot=profile.NormalizePendingLootExpiry(GroundLootLifetimeSeconds);profile.UpgradeMountCollection();NormalizeGrid(profile);
                 if (result == ProfileReadResult.Invalid)
                 { Notice = "No se pudo recuperar el guardado. Tus archivos se conservaron; no se guardarán cambios."; HasSaveProblem = true; }
                 else if (result == ProfileReadResult.Recovered)
                 { Notice = "Se recuperó la copia de respaldo del inventario."; }
                 else Notice = "Inventario guardado automáticamente.";
-                if (result == ProfileReadResult.Missing || migrated && writable) repository.Write(JsonUtility.ToJson(profile));
+                if (result == ProfileReadResult.Missing || (migrated||migratedLoot) && writable) repository.Write(JsonUtility.ToJson(profile));
                 ApplyEquipment();
                 ApplyStats();
                 var startingHealth=GetComponent<Mismo.Gameplay.Combat.Health>();
@@ -291,7 +292,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                     }
                 }
             }
-            var pending=new PendingInventoryLoot{id=Guid.NewGuid().ToString("N")};
+            var pending=new PendingInventoryLoot{id=Guid.NewGuid().ToString("N"),expiresAt=WorldPlaySeconds+GroundLootLifetimeSeconds};
             var position=lootPosition??transform.position;pending.x=position.x;pending.y=position.y;pending.z=position.z;
             if(materialLoot!=null)foreach(var entry in materialLoot)
             {

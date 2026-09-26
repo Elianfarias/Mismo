@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 48959629869417035}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.225, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -560,7 +560,7 @@ Transform:
   m_GameObject: {fileID: 3528444472036062391}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.201, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -904,7 +904,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1.5
+  m_Height: 1.55
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -930,7 +930,7 @@ CapsuleCollider:
   m_Radius: 0.4
   m_Height: 1.6508021
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.84, z: 0}
 --- !u!114 &1341512825568568265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -995,8 +995,8 @@ MonoBehaviour:
   label: {fileID: 0}
   authoredAnimation: 1
   groundSupport:
-    probeDistance: 0.8
-    soleClearance: 0.0325
+    probeDistance: 0.4
+    soleClearance: 0
 --- !u!114 &3281511151885547571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1174,7 +1174,7 @@ Transform:
   m_GameObject: {fileID: 7803847350054285283}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.689, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1223,6 +1223,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3702739153468587163}
     m_Modifications:
+    - target: {fileID: 647911528340535385, guid: 2d6028e299068124cae4b21585e4e6a3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1308664917338121834, guid: 2d6028e299068124cae4b21585e4e6a3, type: 3}
       propertyPath: m_Name
       value: ImpVoxelized
@@ -1233,7 +1237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5406344914742194924, guid: 2d6028e299068124cae4b21585e4e6a3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.84
       objectReference: {fileID: 0}
     - target: {fileID: 5406344914742194924, guid: 2d6028e299068124cae4b21585e4e6a3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1269,6 +1273,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5406344914742194924, guid: 2d6028e299068124cae4b21585e4e6a3, type: 3}
       propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808290926530385015, guid: 2d6028e299068124cae4b21585e4e6a3, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
