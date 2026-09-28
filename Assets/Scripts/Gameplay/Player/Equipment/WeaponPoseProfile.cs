@@ -61,6 +61,11 @@ namespace Mismo.Gameplay.Player.Equipment
         public WeaponAttachmentPose holstered = new WeaponAttachmentPose { anchor = WeaponAnchor.Character, offset = new Vector3(0,1.2f,-.25f) };
         [Tooltip("Opcional. Mismo contrato de parámetros Motion, ActionTime y PlaybackRate del controlador base.")]
         public AnimatorOverrideController animations;
+        [Header("Agarre secundario durante mezclas")]
+        public bool maintainSupportGrip;
+        [Tooltip("Punto local del prefab al que se ajusta la mano izquierda después del blending Humanoid.")]
+        public Vector3 supportGrip;
+        public Vector3 supportElbowHint = new Vector3(-.85f,.9f,-.2f);
         [Header("Estela del arma (VFX)")]
         public bool meleeTrail;
         [Tooltip("Cinta entre base y punta de la hoja. Se ajusta en el taller de armas.")]
@@ -70,6 +75,8 @@ namespace Mismo.Gameplay.Player.Equipment
         public bool secondaryTrail;
         public Vector3 secondaryTrailBase = Vector3.zero;
         public Vector3 secondaryTrailTip = Vector3.forward;
+        [Tooltip("Fracción final de preparación que muestra la estela. Cero conserva la ventana activa original.")]
+        [Range(0,1)] public float trailPreparationFraction;
         [Tooltip("Punta de la estela, en coordenadas locales del prefab visual del arma.")]
         public Vector3 trailTip = Vector3.forward;
         [Min(.01f)] public float trailDuration = .10f;

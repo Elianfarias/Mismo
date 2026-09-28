@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1f07bb650d4d1f46b500b560d8847c4, type: 3}
+  m_Name: Hammer
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.WeaponFamilyDefinition
+  progressionId: hammer
+  displayName: Mazo de guerra
+  abilities:
+  - {fileID: 11400000, guid: e86c5549c0b231b4db624c1b44b96a1b, type: 2}
+  - {fileID: 11400000, guid: 26d7bc2d444ec99458cfbc9954e3183d, type: 2}
+  - {fileID: 11400000, guid: f8070a27db061654fb6ebbbdbab320ca, type: 2}
+  - {fileID: 11400000, guid: bd4545edcb3a14844ba1feae85fe21df, type: 2}
+  repertoire:
+  - {fileID: 11400000, guid: 26d7bc2d444ec99458cfbc9954e3183d, type: 2}
+  - {fileID: 11400000, guid: f8070a27db061654fb6ebbbdbab320ca, type: 2}
+  - {fileID: 11400000, guid: bd4545edcb3a14844ba1feae85fe21df, type: 2}
+  - {fileID: 11400000, guid: 515bd37e30775f447aff86b5d4c5f6d2, type: 2}
+  - {fileID: 11400000, guid: f57390aa23331ff498427e7d131b0a4a, type: 2}
+  masteryLevelsPerUnlock: 3
+  animations: {fileID: 11400000, guid: 40af267360322cb4689fdfed835dc5c6, type: 2}
+  feedback: {fileID: 11400000, guid: 38248c5b1fc41674f879ad7793aa3e58, type: 2}

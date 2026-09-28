@@ -147,6 +147,10 @@ namespace Mismo.Gameplay.Player.Presentation
             if(ability==null)return "locked-chest";
             switch(ability.Id)
             {
+                case "hammer.strike":return "hammer-strike";
+                case "hammer.heavy":return "hammer-heavy";
+                case "hammer.slam":return "hammer-slam";
+                case "hammer.double-spin":return "hammer-spin";
                 case "DualFlurry":return "blade-fall";
                 case "DualWhirlwind":case "SwordSpin":return "sword-spin";
                 case "OpenWound":return "bleeding-wound";
