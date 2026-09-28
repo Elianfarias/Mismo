@@ -75,7 +75,7 @@ namespace Mismo.Gameplay.Player.Equipment
             Quaternion facing = Quaternion.LookRotation(motor.Facing);
             if (activeSecondVisual != null && weapon != null)
             {
-                activeSecondVisual.SetActive(GetComponent<WeaponSkillEffects>()?.BucklerAbsent!=true);
+                activeSecondVisual.SetActive(GetComponent<WeaponSkillEffects>()?.OffhandAbsent!=true);
                 ApplyProfile(activeSecondVisual, weapon.secondaryEquipped);
             }
             if (backSecondVisual != null && loadout.SecondaryDefinition != null)

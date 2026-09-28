@@ -166,6 +166,12 @@ namespace Mismo.Gameplay.Player.Presentation
                 case "ThirdArrow":return "arrow-cluster";
                 case "PoisonArrow":return "poison-bottle";
                 case "HunterTrap":return "wolf-trap";
+                case "AxeBasic":return "broadsword";
+                case "AxeBleedingCut":return "bleeding-wound";
+                case "AxeArmorRend":return "checked-shield";
+                case "AxeForwardSwing":return "sword-clash";
+                case "AxeFuriousCombo":return "hatchets";
+                case "AxeCruelEdge":case "AxeExecutioner":return "dead-eye";
             }
             if(ability.pose==AbilityPose.Bow)return "target-arrows";
             if(ability.pose==AbilityPose.Spin)return "sword-spin";

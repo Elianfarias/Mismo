@@ -210,7 +210,7 @@ namespace Mismo.Gameplay.Player.Presentation
                     float skillY=height-118+skillsYOffset+skillsOffset.y+(skillsAsColumn?i*88:0);
                     float focusProgress=AbilityFocusProgress(combat!=null?combat.Focus:0,ability.focusCost);
                     bool showFocus=!ability.IsPassive&&ability.focusCost>0;
-                    bool hasStamina=ability.IsPassive||stamina==null||stamina.Current>=ability.staminaCost;
+                    bool hasStamina=ability.IsPassive||stamina==null||stamina.Current>=stamina.Cost(ability.staminaCost);
                     Ability(skillX,skillY,ability.IsPassive?"PASIVA":keys[i],ability.DisplayName,ability.IsPassive?"EQUIPADA":Status(remaining,active),ability.cooldown>0?remaining/ability.cooldown:0,hasStamina&&(!showFocus||focusProgress>=1),QuietFantasyUI.AbilityIcon(ability),showFocus?focusProgress:-1,hasStamina);
                 }
             }

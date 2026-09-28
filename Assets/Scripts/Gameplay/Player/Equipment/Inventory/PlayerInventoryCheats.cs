@@ -5,7 +5,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
 {
     public sealed partial class PlayerInventory
     {
-        /// <summary>Añade una copia de cada arma faltante, sin duplicar posesiones ni recompensas pendientes.</summary>
+        /// <summary>Añade las copias faltantes de cada arma (dos si puede ir en ambas manos), contando posesiones y recompensas pendientes.</summary>
         public bool TryGrantCheatWeapons()
         {
             if (!IsReady || catalog == null) return false;
@@ -20,25 +20,30 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 { dropPosition = hit.point; break; }
             foreach (var definition in catalog.weapons)
             {
-                if (next.weapons.Exists(w => w.definitionId == definition.Id) ||
-                    next.pendingLoot.Exists(p => p.HasWeapon && p.weapon.definitionId == definition.Id)) continue;
-                var item = new OwnedWeapon { instanceId = Guid.NewGuid().ToString("N"), definitionId = definition.Id };
-                var candidate = next.Copy(); candidate.weapons.Add(item);
-                if (candidate.weapons.Count <= 256 && HasGridRoom(candidate, false)) next = candidate;
-                else
+                // Dual styles need a second copy of the same weapon for the off hand.
+                int wanted = definition.dualAxeFamily != null || definition.dualSwordFamily != null ? 2 : 1;
+                int owned = next.weapons.FindAll(w => w.definitionId == definition.Id).Count +
+                    next.pendingLoot.FindAll(p => p.HasWeapon && p.weapon.definitionId == definition.Id).Count;
+                for (; owned < wanted; owned++)
                 {
-                    item.inChest = true;
-                    if (candidate.weapons.Count <= 256 && HasGridRoom(candidate, true)) { next = candidate; stored++; }
+                    var item = new OwnedWeapon { instanceId = Guid.NewGuid().ToString("N"), definitionId = definition.Id };
+                    var candidate = next.Copy(); candidate.weapons.Add(item);
+                    if (candidate.weapons.Count <= 256 && HasGridRoom(candidate, false)) next = candidate;
                     else
                     {
-                        item.inChest = false;
-                        if (next.pendingLoot.Count >= 4096) return false;
-                        next.pendingLoot.Add(new PendingInventoryLoot { id = Guid.NewGuid().ToString("N"), weapon = item,
-                            x = dropPosition.x, y = dropPosition.y, z = dropPosition.z });
-                        pending++;
+                        item.inChest = true;
+                        if (candidate.weapons.Count <= 256 && HasGridRoom(candidate, true)) { next = candidate; stored++; }
+                        else
+                        {
+                            item.inChest = false;
+                            if (next.pendingLoot.Count >= 4096) return false;
+                            next.pendingLoot.Add(new PendingInventoryLoot { id = Guid.NewGuid().ToString("N"), weapon = item,
+                                x = dropPosition.x, y = dropPosition.y, z = dropPosition.z });
+                            pending++;
+                        }
                     }
+                    added++;
                 }
-                added++;
             }
             if (added == 0) { Notice = "Ya tenés todas las armas del catálogo (incluye cofre y botín pendiente)."; return true; }
             return Commit(next, "Cheat: " + added + " armas guardadas. [I] Inventario." +

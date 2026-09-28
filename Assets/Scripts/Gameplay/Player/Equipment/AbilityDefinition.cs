@@ -5,7 +5,8 @@ namespace Mismo.Gameplay.Player.Equipment
 {
     public enum AbilitySlot { Basic, Q, E, R }
     public enum AbilityPose { None, Lunge, Parry, Spin, Bow }
-    public enum WeaponPassive { None, ThirdArrow, SwordTip, Rhythm, Finisher, Coverage, Buckler }
+    // Serialized by index: append new passives at the end.
+    public enum WeaponPassive { None, ThirdArrow, SwordTip, Rhythm, Finisher, Coverage, Buckler, FiloCruel, Verdugo, Bloodthirst, DoubleEdge }
 
     [CreateAssetMenu(menuName = "Mismo/Combat/Ability")]
     public sealed class AbilityDefinition : ScriptableObject
@@ -39,6 +40,8 @@ namespace Mismo.Gameplay.Player.Equipment
         [Range(0,1)] public float preparationMobility = 1;
         [Range(0,1)] public float activeMobility = 1;
         public bool interruptible;
+        [Tooltip("El daño recibido no corta la animación de esta habilidad. No afecta al daño ni a la postura.")]
+        public bool unstoppable;
         public bool cancelPreparation;
         public bool cancelRecovery;
         [Min(0)] public float focusCost;

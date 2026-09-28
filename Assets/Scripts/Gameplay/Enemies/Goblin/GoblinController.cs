@@ -82,6 +82,7 @@ namespace Mismo.Gameplay.Enemies
             combat.ConfigureBreakRecovery(settings is CreatureSettings || settings.isBoss ? 0 : 1.5f);
             home = transform.position;
             health.ConfigureMaximum(settings.health*(GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>()?.HealthMultiplier??1));
+            (GetComponent<CombatAilment>()??gameObject.AddComponent<CombatAilment>()).ConfigureArmor(settings.armor);
             health.Revive();
             ResetLife();
         }

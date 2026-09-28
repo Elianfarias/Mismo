@@ -13,7 +13,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             return Compatible(main,other)&&!profile.Find(id).inChest&&profile.equipped[0]!=id&&profile.equipped[1]!=id;
         }
         static bool Compatible(WeaponDefinition main,WeaponDefinition other)=>main!=null&&other!=null&&!main.isBow&&!main.isTwoHanded&&!main.isShield&&
-            (other.isShield?main.swordShieldFamily!=null:!other.isBow&&!other.isTwoHanded&&other.dualSwordFamily!=null&&main.dualSwordFamily!=null);
+            (other.isShield?main.swordShieldFamily!=null:!other.isBow&&!other.isTwoHanded&&
+            (main.dualAxeFamily!=null?other.dualAxeFamily==main.dualAxeFamily:other.dualSwordFamily!=null&&main.dualSwordFamily!=null));
         public bool TryEquipOffhand(int slot,string id)
         {
             if(!CanManage||slot<0||slot>1||id!=null&&!CanUseOffhand(slot,id))return false;
@@ -43,12 +44,15 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(Compatible(main,off))
             {
                 result.equippedOffhand=off;
-                result.family=off.isShield?main.swordShieldFamily:main.dualSwordFamily;
+                bool axes=!off.isShield&&main.dualAxeFamily!=null;
+                result.family=off.isShield?main.swordShieldFamily:axes?main.dualAxeFamily:main.dualSwordFamily;
                 result.overrideFamilyAbilities=false;result.dualWield=true;result.secondaryVisualPrefab=off.visualPrefab;
                 result.secondaryEquipped=off.secondaryEquipped;
                 result.secondaryHolstered=off.secondaryHolstered;
-                result.styleSpeedBonus=off.isShield?0:.15f;
-                result.Configure(main.Id,off.isShield?"Espada y escudo":"Dos espadas",main.BasicAttackCooldown);
+                result.styleSpeedBonus=off.isShield||axes?0:.15f;
+                // NonSerialized: Instantiate does not copy it, so every style sets its own value.
+                result.styleDamageMultiplier=axes?1.15f:1;
+                result.Configure(main.Id,off.isShield?"Espada y escudo":axes?"Dos hachas":"Dos espadas",main.BasicAttackCooldown);
             }
             return result;
         }
@@ -59,6 +63,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 if(weapon.family!=null&&weapon.family.progressionId==id)return weapon.family;
                 if(weapon.dualSwordFamily!=null&&weapon.dualSwordFamily.progressionId==id)return weapon.dualSwordFamily;
                 if(weapon.swordShieldFamily!=null&&weapon.swordShieldFamily.progressionId==id)return weapon.swordShieldFamily;
+                if(weapon.dualAxeFamily!=null&&weapon.dualAxeFamily.progressionId==id)return weapon.dualAxeFamily;
             }
             return null;
         }

@@ -80,6 +80,7 @@ namespace Mismo.Gameplay.Combat
             float amount=damage.Amount*multiplier;
             var inventory=GetComponent<Mismo.Gameplay.Player.Equipment.Inventory.PlayerInventory>();
             if(inventory!=null&&inventory.IsReady)amount*=inventory.IncomingDamageMultiplier;
+            else{var ailment=GetComponent<CombatAilment>();if(ailment!=null)amount*=ailment.IncomingDamageMultiplier;}
             var skillEffects=GetComponent<Mismo.Gameplay.Player.Equipment.WeaponSkillEffects>();
             if(skillEffects!=null)amount=skillEffects.Absorb(amount,damage.Direction);
             float previousHealth=health.Current;
@@ -87,6 +88,8 @@ namespace Mismo.Gameplay.Combat
             float healthDamage=previousHealth-health.Current;
             bool wasBroken = state.Broken;
             float posture=state.DamagePosture(damage.PostureDamage*(back?rules.backPosture:1)*(opening?rules.openingPosture:1));
+            // Notify the attacker only when this hit defeated the target or opened it.
+            if(health.IsDead||!opening&&state.Opening)damage.Source?.GetComponentInParent<Mismo.Gameplay.Player.Equipment.WeaponSkillEffects>()?.TargetDefeatedOrOpened();
             if(healthDamage>0 && damage.FocusGainOnHit>0)attacker?.Reward(damage.FocusGainOnHit,"IMPACTO");
             if(attacker!=null&&(back||opening))attacker.Reward(back?rules.backFocus:rules.openingFocus,back?"ESPALDA":"APERTURA");
             GetComponent<Mismo.Gameplay.Player.Equipment.AbilityRunner>()?.Interrupt();

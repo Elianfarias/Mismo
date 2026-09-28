@@ -72,7 +72,7 @@ namespace Mismo.Gameplay.Player.Equipment
             var weapon=loadout.ActiveDefinition;var definition=loadout.GetAbility(slot);
             if(definition==null||definition.IsPassive||health!=null&&health.IsDead||loadout.Belt!=null&&loadout.Belt.ControlsMovement)return false;
             if(Remaining(definition)>0&&!(Current!=null&&definition.usesSwordCombo&&Current.Definition==definition))return false;
-            if(stamina!=null&&stamina.Current<definition.staminaCost||state.Focus<definition.focusCost)return false;
+            if(stamina!=null&&stamina.Current<stamina.Cost(definition.staminaCost)||state.Focus<definition.focusCost)return false;
             if(Current!=null)
             {
                 if(definition.usesSwordCombo&&Current.Definition==definition&&combo!=null&&combo.RequestAttack())return true;
@@ -190,6 +190,13 @@ namespace Mismo.Gameplay.Player.Equipment
         {
             if(Current==null||Current.Began||!Current.Definition.interruptible)return false;
             state.Reward(0,"INTERRUMPIDO");Cancel();return true;
+        }
+        // Choque lateral: corta sólo el avance si la acción lo permite; si no, cancela la habilidad.
+        public void BlockMovement()
+        {
+            var c=Current;if(c==null)return;
+            if(!System.Array.Exists(c.Definition.actions,a=>a is MoveCasterAction m&&m.stopsMovementOnly)){Cancel();return;}
+            c.MovementBlocked=true;Motor?.ClearControlledMovement();
         }
         public void Cancel()
         {

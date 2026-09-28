@@ -6,6 +6,7 @@ namespace Mismo.Gameplay.Combat
     public sealed class CombatState : MonoBehaviour
     {
         [SerializeField] float maximumPosture=70, regeneration=9, regenerationDelay=3, breakDuration=2;
+        public const float MaximumFocus=100;
         public bool UsesPosture {get;private set;}
         public bool Recovering {get;set;}
         public float Focus {get;private set;}
@@ -38,7 +39,7 @@ namespace Mismo.Gameplay.Combat
             if(Posture<=0){brokenRemaining=breakDuration;PostureBroken?.Invoke(breakDuration);}
             return applied;
         }
-        public void Reward(float amount,string reason){if(health!=null&&health.IsDead)return;Focus=Mathf.Clamp(Focus+amount,0,100);Rewarded?.Invoke(reason);}
+        public void Reward(float amount,string reason){if(health!=null&&health.IsDead)return;Focus=Mathf.Clamp(Focus+amount,0,MaximumFocus);Rewarded?.Invoke(reason);}
         public bool Spend(float amount){if(Focus<amount)return false;Focus-=amount;return true;}
         void Update()=>Tick(Time.deltaTime);
         public void Tick(float dt)

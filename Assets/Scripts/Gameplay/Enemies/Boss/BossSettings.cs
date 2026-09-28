@@ -68,6 +68,7 @@ namespace Mismo.Gameplay.Enemies
     {
         [Header("Encounter")]
         [Min(1f)] public float health = 300f;
+        [Min(0f)] public float armor = 10f;
         [Min(1f)] public float detectionRange = 12f;
         [Min(1f)] public float loseRange = 18f;
         [Min(1f)] public float leashRange = 22f;
