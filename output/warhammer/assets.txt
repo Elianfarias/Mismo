@@ -1,1 +1,0 @@
-PASS: Hammer existente migrado; seis habilidades; GUIDs conservados; organización verificada.
