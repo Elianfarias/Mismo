@@ -1,0 +1,9 @@
+Assets/Data/Weapons/Hammer/HammerVisual.prefab -> Assets/Art/Prefabs/Weapons/Hammer/HammerVisual.prefab | aca8c65beab45cc458d2e64b3b824efe
+Assets/Resources/Recipes/StoneHammer.asset -> Assets/Data/Crafting/Recipes/StoneHammer.asset | dd82f4aa367c5c649a8918136c043dfd
+Assets/Resources/UI/QuietFantasy/Icons/hammer-strike.png -> Assets/Art/UI/Weapons/Hammer/hammer-strike.png | 2b5b3169ce3e8fc44b356a6faa496313
+Assets/Resources/UI/QuietFantasy/Icons/hammer-heavy.png -> Assets/Art/UI/Weapons/Hammer/hammer-heavy.png | 5a592ea34728b884ab6add0e15fee0b4
+Assets/Resources/UI/QuietFantasy/Icons/hammer-slam.png -> Assets/Art/UI/Weapons/Hammer/hammer-slam.png | 93456d7d848001d4da9b15ad8137bec7
+Assets/Resources/UI/QuietFantasy/Icons/hammer-spin.png -> Assets/Art/UI/Weapons/Hammer/hammer-spin.png | d4f576a1263f1bf46ab22d67b6493679
+Assets/Art/FBX/Weapons/Hammer/HammerWood.mat -> Assets/Art/Materials/Weapons/Hammer/HammerWood.mat | f6224b1dda939ba4a9ac63916c0e3884
+Assets/Art/FBX/Weapons/Hammer/HammerStone.mat -> Assets/Art/Materials/Weapons/Hammer/HammerStone.mat | c64996f5f19ed29458a0d6bb6092a17f
+Assets/Art/Inventory/weapon-Hammer.png -> Assets/Art/UI/Inventory/weapon-Hammer.png | 736bcdd6644576a4886ee1b0cdfe4302

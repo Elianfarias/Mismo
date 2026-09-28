@@ -1,0 +1,25 @@
+ ...8625edfe9b9d40b60bf3219d47a14_7400000.anim.meta |  2 +-
+ ...f9a282c1138d4fbf69d673cfd484b_7400000.anim.meta |  2 +-
+ ...34b55ca31533468e4969cd3a7c8cf_7400000.anim.meta |  2 +-
+ .../desert-stone-3d-low-poly-models.zip.meta       |  7 ----
+ .../HumanMeleeAnimationsFREE_BlenderFiles.zip.meta | 14 -------
+ Assets/Data/Addressables/link.xml                  | 24 -----------
+ Assets/Data/Addressables/link.xml.meta             |  7 ----
+ Assets/Data/Gathering/GatheringSettings.asset      |  1 +
+ Assets/Data/Inventory/ItemCatalog.asset            |  1 +
+ Assets/Data/System/RuntimeAssetCatalog.asset       |  3 ++
+ .../Scripts/Gameplay/Player/Combat/AttackHitbox.cs |  9 +++-
+ .../Gameplay/Player/Combat/BasicSwordCombo.cs      |  3 ++
+ .../Player/Editor/InventoryPresentationAssets.cs   |  2 +-
+ .../Editor/Mismo.Gameplay.Player.Editor.asmdef     | 49 +++++++++++-----------
+ .../Gameplay/Player/Equipment/AbilityDefinition.cs |  2 +
+ .../Gameplay/Player/Equipment/AbilityExecution.cs  |  2 +-
+ .../Gameplay/Player/Equipment/AbilityRunner.cs     |  2 +-
+ .../Player/Equipment/ExpandedAbilityActions.cs     |  9 +++-
+ .../Equipment/Inventory/PlayerInventoryHands.cs    |  3 +-
+ .../Gameplay/Player/Equipment/WeaponPoseProfile.cs |  7 ++++
+ .../Player/Equipment/WeaponPresentation.cs         | 18 +++++++-
+ .../Gameplay/Player/Presentation/CombatFeedback.cs | 45 ++++++++++++++++++++
+ .../Gameplay/Player/Presentation/QuietFantasyUI.cs |  4 ++
+ .../Player/Presentation/SwordAnimationFeedback.cs  |  2 +-
+ 24 files changed, 133 insertions(+), 87 deletions(-)

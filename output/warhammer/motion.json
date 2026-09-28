@@ -1,0 +1,1 @@
+{"params":{"title":"Warhammer real locomotion","code":"using Mismo.Gameplay.Player.Editor; internal class CommandScript : IRunCommand { public void Execute(ExecutionResult result) { HammerChecks.RunMotionInteractive(); result.Log(\"Motion validation started.\"); } }"},"requestId":"warhammer-motion-66a73f5b-32a0-4afa-8a4e-d07c502864c4","type":"Unity_RunCommand"}

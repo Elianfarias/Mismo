@@ -19,6 +19,10 @@ namespace Mismo.Gameplay.Player.Equipment
         [Tooltip("Distancia desde el personaje hasta el centro de la esfera de impacto, en metros hacia delante. El borde frontal está a Forward + Radius. No cambia el tamaño del área.")]
         public float forward=1;
         public float slow=1,slowSeconds,stunSeconds,bleedDamage,bleedSeconds,pushDistance;
+        // Optional contact feedback for authored weapon actions.
+        public int impactParticles;
+        public AudioClip impactSfx;
+        [Range(0,1)] public float impactVolume=.45f;
         public override void Begin(AbilityExecution c){c.ActionTimes[this]=0;Strike(c);}
         public override void Tick(AbilityExecution c,float dt)
         {
@@ -28,13 +32,16 @@ namespace Mismo.Gameplay.Player.Equipment
         void Strike(AbilityExecution c)
         {
             long id=AttackIdentity.Next();var seen=new System.Collections.Generic.HashSet<Component>();
-            var origin=c.Owner.transform.position+Vector3.up+c.Direction*forward;
+            var origin=c.Owner.transform.position+Vector3.up+c.Direction*forward;bool sounded=false;int effects=0;
             foreach(var collider in Physics.OverlapSphere(origin,radius,~0,QueryTriggerInteraction.Ignore))
             {
                 if(!(collider.GetComponentInParent<IDamageReceiver>() is Component target)||target.transform.IsChildOf(c.Owner.transform)||!seen.Add(target))continue;
                 Vector3 point=collider.ClosestPoint(origin);
                 if(Physics.Linecast(origin,point,out var wall,~0,QueryTriggerInteraction.Ignore)&&!wall.transform.IsChildOf(c.Owner.transform)&&wall.collider.GetComponentInParent<IDamageReceiver>()!=(target as IDamageReceiver))continue;
                 if(!((IDamageReceiver)target).ReceiveDamage(new DamageInfo(damage*c.DamageMultiplier,c.Owner,point,c.Direction,id,weaponFamilyId:c.WeaponFamilyId,focusGainOnHit:c.Definition.focusGainOnHit)))continue;
+                if(impactParticles>0 && effects++<4)
+                    c.Owner.GetComponent<Presentation.CombatFeedback>()?.NotifyWeaponImpact(point,impactParticles,!sounded?impactSfx:null,impactVolume);
+                if(impactSfx!=null)sounded=true;
                 if(slowSeconds>0)CombatAilment.Slow(target.gameObject,slow,slowSeconds);
                 if(stunSeconds>0)target.GetComponent<CombatState>()?.Stagger(stunSeconds);
                 if(bleedSeconds>0)CombatAilment.Poison(target.gameObject,c.Owner,c.WeaponFamilyId,bleedDamage*c.DamageMultiplier,bleedSeconds);

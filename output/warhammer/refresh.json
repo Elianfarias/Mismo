@@ -1,0 +1,1 @@
+{"type":"Unity_RunCommand","params":{"code":"using UnityEditor; internal class CommandScript : IRunCommand { public void Execute(ExecutionResult result) { AssetDatabase.Refresh(); result.Log(\"Refreshed.\"); } }","title":"Refresh Warhammer authoring"},"requestId":"warhammer-combo-7ba3d464-8a6a-4f8f-9b08-e977bbf89393"}

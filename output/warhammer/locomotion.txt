@@ -1,0 +1,20 @@
+PASS
+PASS Inventario aislado; ninguna escritura en partidas del usuario
+PASS Registro y receta descubiertos por catálogo actual
+PASS Material de receta disponible
+PASS Obtención por crafting actual
+PASS Equipar Warhammer fabricado
+PASS Save/load real del inventario conserva Warhammer equipado
+PASS Walk-before ambas manos permanecen en el mango: 2,384186E-07
+PASS Locomoción mediante PlayerController e input simulado
+PASS Ataque desde Walk
+PASS Walk-return ambas manos permanecen en el mango: 1,192093E-07
+PASS Recuperación vuelve a locomoción sin mantener el clip de ataque
+PASS Inclinación de locomoción estable después del ataque: 12,93605
+PASS Run-before ambas manos permanecen en el mango: 1,192093E-07
+PASS Locomoción mediante PlayerController e input simulado
+PASS Ataque desde Run
+PASS Run-return ambas manos permanecen en el mango: 1,192093E-07
+PASS Recuperación vuelve a locomoción sin mantener el clip de ataque
+PASS Inclinación de locomoción estable después del ataque: 20,2925
+Pruebas funcionales completas.
