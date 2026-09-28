@@ -19,9 +19,9 @@ MonoBehaviour:
   passive: 0
   description: "Ataque b\xE1sico del hacha."
   localizationKey: ability.axe.axebasic
-  preparation: 0.18
-  active: 0.483
-  recovery: 0.333
+  preparation: 0.5
+  active: 0.5
+  recovery: 0.2
   cooldown: 0.98
   staminaCost: 10
   chargeable: 0
@@ -90,8 +90,9 @@ MonoBehaviour:
   comboStepSfx: []
   pose: 1
   usesSwordCombo: 0
+  comboSteps: []
   targetsGround: 0
-  aimFromCamera: 0
+  aimFromCamera: 1
   range: 22
   actions:
   - rid: 1

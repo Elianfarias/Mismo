@@ -54,8 +54,9 @@ namespace Mismo.Gameplay.Player.Equipment
                 Vector3 point = other.ClosestPoint(origin);
                 if (Physics.Linecast(origin, point, out var wall, ~0, QueryTriggerInteraction.Ignore) && wall.transform.root != c.Owner.transform.root && wall.collider.GetComponentInParent<IDamageReceiver>() != receiver) continue;
                 float multiplier=effects!=null?effects.BasicMultiplier(c.AttackId,point,target):1;
-                bool hit=receiver.ReceiveDamage(new DamageInfo(damage*multiplier*c.DamageMultiplier, c.Owner, point, (target.transform.position-c.Owner.transform.position).normalized, c.AttackId, postureDamage, weaponFamilyId:c.WeaponFamilyId,focusGainOnHit:c.Definition.focusGainOnHit));
-                if(hit&&effects!=null)effects.BasicHit(c.AttackId,target);
+                var info=new DamageInfo(damage*multiplier*c.DamageMultiplier, c.Owner, point, (target.transform.position-c.Owner.transform.position).normalized, c.AttackId, postureDamage, weaponFamilyId:c.WeaponFamilyId,focusGainOnHit:c.Definition.focusGainOnHit);
+                bool hit=receiver.ReceiveDamage(info);
+                if(hit&&effects!=null){effects.BasicHit(c.AttackId,target);effects.TryDoubleEdge(target,info);}
             }
         }
     }

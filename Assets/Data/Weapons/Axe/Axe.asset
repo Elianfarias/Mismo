@@ -21,19 +21,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f138122e27574d65b2fa7bf43e4e1937, type: 2}
   - {fileID: 11400000, guid: b540621fe8f44537a590796373ad3190, type: 2}
   family: {fileID: 11400000, guid: d5214838f4d74ed0b4c183904d17598f, type: 2}
+  feedbackOverride: {fileID: 0}
   isShield: 0
   dualSwordFamily: {fileID: 0}
   swordShieldFamily: {fileID: 0}
+  dualAxeFamily: {fileID: 11400000, guid: 968dc628a5bb4e5f85b0cb08c89ca50b, type: 2}
   overrideFamilyAbilities: 0
-  visualPrefab: {fileID: 6814919799624172018, guid: 4a87f0ac7b2895b41a99ee72b5075633, type: 3}
+  visualPrefab: {fileID: 7552378546420474293, guid: 8e82efe0b4e7a4f49a58757f4f802c73, type: 3}
   isTwoHanded: 0
   dualWield: 0
   secondaryVisualPrefab: {fileID: 0}
   secondaryEquipped:
     anchor: 2
     bonePath: 
-    offset: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
+    offset: {x: -0.385101, y: 0.3266207, z: 0.000000018717582}
+    rotation: {x: 0.000004817386, y: 0.0000014160937, z: 66.68407}
     scale: 1
   secondaryHolstered:
     anchor: 0
@@ -49,7 +51,7 @@ MonoBehaviour:
   gridHeight: 2
   canRotate: 1
   inventoryIcon: {fileID: 21300000, guid: 3c2aaa1eb65602a49ae833af9e06ef8b, type: 3}
-  hudIcon: {fileID: 0}
+  hudIcon: {fileID: 2800000, guid: c851f4a0e48a4f11b70011a9453b5ef4, type: 3}
   inventoryPreviewRotation: {x: 0, y: 0, z: 0}
   canSell: 1
   sellValue: 10

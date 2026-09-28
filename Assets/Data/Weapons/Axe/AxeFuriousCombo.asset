@@ -17,13 +17,13 @@ MonoBehaviour:
   abilityId: AxeFuriousCombo
   animationSource: {fileID: 0}
   passive: 0
-  description: "Avanza mientras golpea tres veces con el hacha, con un 100 %, 120 % y 150 % del da\xF1o. Si los tres golpes impactan al mismo enemigo, lo aturde brevemente."
+  description: "Avanza mientras golpea tres veces con el hacha, haciendo un 100 %, 120 % y 150 % del da\xF1o en cada golpe. Si los tres golpes impactan al mismo enemigo, lo aturde brevemente. consume 40 de focus"
   localizationKey: ability.axe.axefuriouscombo
   preparation: 0.46
-  active: 1.1
+  active: 1.94
   recovery: 0.78
-  cooldown: 0
-  staminaCost: 0
+  cooldown: 7.1
+  staminaCost: 20
   chargeable: 0
   maximumCharge: 0.9
   chargeDamageMultiplier:
@@ -80,7 +80,7 @@ MonoBehaviour:
   unstoppable: 1
   cancelPreparation: 0
   cancelRecovery: 0
-  focusCost: 0
+  focusCost: 40
   focusGainOnHit: 0
   preparationSfx: {fileID: 0}
   preparationSfxVolume: 1
@@ -90,6 +90,7 @@ MonoBehaviour:
   comboStepSfx: []
   pose: 1
   usesSwordCombo: 0
+  comboSteps: []
   targetsGround: 0
   aimFromCamera: 0
   range: 22
@@ -109,7 +110,7 @@ MonoBehaviour:
       type: {class: FuriousComboAction, ns: Mismo.Gameplay.Player.Equipment, asm: Mismo.Gameplay.Player}
       data:
         damage: 15
-        postureDamage: -1
+        postureDamage: 2
         radius: 0.7
         forward: 1
         stunSeconds: 3

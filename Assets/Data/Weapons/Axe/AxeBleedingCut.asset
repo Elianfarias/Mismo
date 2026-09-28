@@ -17,13 +17,13 @@ MonoBehaviour:
   abilityId: AxeBleedingCut
   animationSource: {fileID: 0}
   passive: 0
-  description: "Marca tu pr\xF3ximo b\xE1sico impactado en los pr\xF3ximos 4 s; ese golpe aplica sangrado de 1 de da\xF1o por segundo durante 5 s. Reaplicar renueva la duraci\xF3n."
+  description: "Marca tu pr\xF3ximo ataque b\xE1sico durante 4s. Al impactar a un enemico aplica sangrado de 1 de da\xF1o por segundo durante 5s. Reaplicar renueva la duraci\xF3n. consume 30 focus"
   localizationKey: ability.axe.axebleedingcut
-  preparation: 0.18
-  active: 0.23
-  recovery: 0.23
-  cooldown: 0
-  staminaCost: 0
+  preparation: 0.25
+  active: 0.2
+  recovery: 0.25
+  cooldown: 7
+  staminaCost: 2.5
   chargeable: 0
   maximumCharge: 0.9
   chargeDamageMultiplier:
@@ -80,7 +80,7 @@ MonoBehaviour:
   unstoppable: 0
   cancelPreparation: 0
   cancelRecovery: 0
-  focusCost: 0
+  focusCost: 30
   focusGainOnHit: 0
   preparationSfx: {fileID: 0}
   preparationSfxVolume: 1
@@ -90,6 +90,7 @@ MonoBehaviour:
   comboStepSfx: []
   pose: 4
   usesSwordCombo: 0
+  comboSteps: []
   targetsGround: 0
   aimFromCamera: 0
   range: 22

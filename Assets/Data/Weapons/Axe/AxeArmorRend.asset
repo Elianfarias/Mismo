@@ -17,13 +17,13 @@ MonoBehaviour:
   abilityId: AxeArmorRend
   animationSource: {fileID: 0}
   passive: 0
-  description: "Golpe que inflige +25% de da\xF1o adicional y reduce un 30 % la armadura del objetivo durante 4s. No acumulable."
+  description: "Golpe que inflige +25% de da\xF1o adicional y reduce un 30 % la armadura del objetivo durante 4s No acumulable. consume 20 de focus"
   localizationKey: ability.axe.axearmorrend
-  preparation: 0.27
-  active: 1.12
-  recovery: 0
-  cooldown: 0
-  staminaCost: 0
+  preparation: 0.3
+  active: 0.3
+  recovery: 0.3
+  cooldown: 8
+  staminaCost: 15
   chargeable: 0
   maximumCharge: 0.9
   chargeDamageMultiplier:
@@ -80,7 +80,7 @@ MonoBehaviour:
   unstoppable: 0
   cancelPreparation: 0
   cancelRecovery: 0
-  focusCost: 0
+  focusCost: 20
   focusGainOnHit: 0
   preparationSfx: {fileID: 0}
   preparationSfxVolume: 1
@@ -90,6 +90,7 @@ MonoBehaviour:
   comboStepSfx: []
   pose: 1
   usesSwordCombo: 0
+  comboSteps: []
   targetsGround: 0
   aimFromCamera: 0
   range: 22
@@ -102,7 +103,7 @@ MonoBehaviour:
       type: {class: ArmorRendStrikeAction, ns: Mismo.Gameplay.Player.Equipment, asm: Mismo.Gameplay.Player}
       data:
         damage: 12.5
-        postureDamage: -1
+        postureDamage: 5
         radius: 0.6
         forward: 0.8
         armorMultiplier: 0.7

@@ -16,9 +16,11 @@ MonoBehaviour:
   actionMask: {fileID: 0}
   actions:
   - ability: {fileID: 11400000, guid: fbd691e815e943629523ca0591b2ce8a, type: 2}
-    clip: {fileID: 7400000, guid: ce9e7235bec51bb42b4ca7bdd57d5a9b, type: 2}
+    clip: {fileID: 7400000, guid: c250bbf1c5864694aae864b70487c373, type: 2}
     maskMode: 0
     customMask: {fileID: 0}
+    useAnimationMovement: 0
+    animationMovementScale: 1
     comboClips:
     - {fileID: 7400000, guid: 8386fa99223c4ec4ba2493c37bfe3409, type: 2}
     - {fileID: 7400000, guid: 8386fa99223c4ec4ba2493c37bfe3409, type: 2}
@@ -31,33 +33,41 @@ MonoBehaviour:
     clip: {fileID: 0}
     maskMode: 0
     customMask: {fileID: 0}
+    useAnimationMovement: 0
+    animationMovementScale: 1
     comboClips: []
     activeStartsAt: 0.3
     recoveryStartsAt: 0.65
     blendSeconds: 0.08
     torsoUprightDegrees: 0
   - ability: {fileID: 11400000, guid: b540621fe8f44537a590796373ad3190, type: 2}
-    clip: {fileID: 7400000, guid: b32de9b0d9dde7645871480c3c92237e, type: 2}
+    clip: {fileID: 7400000, guid: e3f37cc2b1146f4419c57aa429af5b14, type: 2}
     maskMode: 0
     customMask: {fileID: 0}
+    useAnimationMovement: 0
+    animationMovementScale: 1
     comboClips: []
     activeStartsAt: 0.3
     recoveryStartsAt: 0.65
     blendSeconds: 0
     torsoUprightDegrees: -20.2
   - ability: {fileID: 11400000, guid: f22be05e1dd3444f8d80b964dcc944fd, type: 2}
-    clip: {fileID: 7400000, guid: 9af018e62bcd2234a9feedde363e75a4, type: 2}
+    clip: {fileID: 7400000, guid: 25d83d0a58f3a964fbdfb282d27f538a, type: 2}
     maskMode: 0
     customMask: {fileID: 0}
+    useAnimationMovement: 0
+    animationMovementScale: 1
     comboClips: []
     activeStartsAt: 0.3
     recoveryStartsAt: 0.65
     blendSeconds: 0.26
     torsoUprightDegrees: 1.69
   - ability: {fileID: 11400000, guid: f138122e27574d65b2fa7bf43e4e1937, type: 2}
-    clip: {fileID: 7400000, guid: 54f758c7e22466845abee53044d83684, type: 2}
+    clip: {fileID: 7400000, guid: 80a4462c887126e4ba8b5bfab12ba47c, type: 2}
     maskMode: 0
     customMask: {fileID: 0}
+    useAnimationMovement: 0
+    animationMovementScale: 1
     comboClips: []
     activeStartsAt: 0.3
     recoveryStartsAt: 0.65
@@ -67,15 +77,19 @@ MonoBehaviour:
     clip: {fileID: 0}
     maskMode: 0
     customMask: {fileID: 0}
+    useAnimationMovement: 0
+    animationMovementScale: 1
     comboClips: []
     activeStartsAt: 0.3
     recoveryStartsAt: 0.65
     blendSeconds: 0.08
     torsoUprightDegrees: 0
   - ability: {fileID: 11400000, guid: 63fec9d0fa7d41b794bf0a90d4886400, type: 2}
-    clip: {fileID: 7400000, guid: adb9d4af4bb55be47abe0681990858bf, type: 2}
+    clip: {fileID: 7400000, guid: c84e841fd57031b4fa31f7f76d9c2a35, type: 2}
     maskMode: 0
     customMask: {fileID: 0}
+    useAnimationMovement: 0
+    animationMovementScale: 1
     comboClips: []
     activeStartsAt: 0.1966
     recoveryStartsAt: 0.6667

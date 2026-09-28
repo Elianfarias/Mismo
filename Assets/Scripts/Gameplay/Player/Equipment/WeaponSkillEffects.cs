@@ -11,20 +11,29 @@ namespace Mismo.Gameplay.Player.Equipment
     {
         EquipmentLoadout loadout;
         Health health;
+        Movement.Stamina stamina;
         readonly HashSet<long> basics = new HashSet<long>();
         readonly Queue<long> basicOrder = new Queue<long>();
         int hits, rhythm, sameTargetHits, twoTimes;
         UnityEngine.Object lastTarget;
         float rhythmUntil, empoweredUntil, twoTimesUntil, bucklerReady, bleedPrimedUntil;
-        float bucklerThrownAt=-100,bucklerAbsentUntil;
+        float bucklerThrownAt=-100,bucklerAbsentUntil,offhandAbsentUntil;
+        float berserkUntil,berserkDamage,berserkSpeed,berserkFocus,berserkStamina=1,berserkArmor=1;
+        struct DelayedHit {public Component target;public DamageInfo damage;public float at;}
+        readonly List<DelayedHit> delayedHits=new List<DelayedHit>();
         public bool BucklerAbsent=>Has(WeaponPassive.Buckler)&&Time.time<bucklerAbsentUntil;
+        // The off-hand piece is out of the hand (thrown buckler or thrown axe).
+        public bool OffhandAbsent=>BucklerAbsent||Time.time<offhandAbsentUntil;
+        public bool Berserking=>Time.time<berserkUntil;
+        public float DamageBonus=>Berserking?berserkDamage:0;
+        public float ArmorMultiplier=>Berserking?berserkArmor:1;
         public bool BucklerAnimating=>BucklerAbsent&&Time.time-bucklerThrownAt<.5f;
         public float BucklerAnimationProgress=>Mathf.Clamp01((Time.time-bucklerThrownAt)/.5f);
         public float Barrier {get;private set;}
         float barrierUntil;
         void Awake()
         {
-            loadout=GetComponent<EquipmentLoadout>();health=GetComponent<Health>();
+            loadout=GetComponent<EquipmentLoadout>();health=GetComponent<Health>();stamina=GetComponent<Movement.Stamina>();
             if(loadout!=null)loadout.Changed+=ResetEffects;
             if(health!=null)health.Died+=OnDeath;
         }
@@ -34,7 +43,8 @@ namespace Mismo.Gameplay.Player.Equipment
         {
             hits=rhythm=sameTargetHits=twoTimes=0;lastTarget=null;
             rhythmUntil=empoweredUntil=twoTimesUntil=bleedPrimedUntil=0;Barrier=0;basics.Clear();basicOrder.Clear();
-            bucklerAbsentUntil=0;
+            bucklerAbsentUntil=offhandAbsentUntil=berserkUntil=0;delayedHits.Clear();
+            if(stamina!=null)stamina.CostMultiplier=1;
             // Keep buckler cooldown across equipment changes.
         }
         public bool Has(WeaponPassive passive)
@@ -43,10 +53,43 @@ namespace Mismo.Gameplay.Player.Equipment
             for(int i=1;i<=3;i++)if(loadout.GetAbility((AbilitySlot)i)?.passive==passive)return true;
             return false;
         }
-        public float SpeedBonus => Has(WeaponPassive.Rhythm)&&Time.time<rhythmUntil?rhythm*.04f:0;
+        public float SpeedBonus => (Has(WeaponPassive.Rhythm)&&Time.time<rhythmUntil?rhythm*.04f:0)+(Berserking?berserkSpeed:0);
         public void Empower()=>empoweredUntil=Time.time+4;
         public void TwoTimes(){twoTimes=2;twoTimesUntil=Time.time+5;}
         public void PrimeBleed()=>bleedPrimedUntil=Time.time+4;
+        public void ThrowOffhand(float seconds)=>offhandAbsentUntil=Time.time+Mathf.Max(0,seconds);
+        public void ReturnOffhand()=>offhandAbsentUntil=0;
+        public void Berserk(BerserkAction mode)
+        {
+            berserkUntil=Time.time+mode.duration;
+            berserkDamage=mode.damageBonus;berserkSpeed=mode.attackSpeedBonus;berserkFocus=mode.focusPerBasic;
+            berserkStamina=mode.staminaCostMultiplier;berserkArmor=mode.armorMultiplier;
+            GetComponent<CombatState>()?.Reward(0,"MODO BERSERKER");
+        }
+        void Update()
+        {
+            if(stamina!=null)stamina.CostMultiplier=Berserking?berserkStamina:1;
+            for(int i=delayedHits.Count-1;i>=0;i--)
+            {
+                var pending=delayedHits[i];
+                if(Time.time<pending.at)continue;
+                delayedHits.RemoveAt(i);
+                if(pending.target!=null)((IDamageReceiver)pending.target).ReceiveDamage(pending.damage);
+            }
+        }
+        public void TargetDefeatedOrOpened()
+        {
+            if(!Has(WeaponPassive.Bloodthirst)||health!=null&&health.IsDead)return;
+            if(stamina!=null)stamina.Restore(stamina.Maximum*.2f);
+            GetComponent<CombatState>()?.Reward(CombatState.MaximumFocus*.2f,"SED DE SANGRE");
+        }
+        // Second hit with the other axe: new attack id so the receiver does not discard it, and no Focus so it never counts as another basic.
+        public void TryDoubleEdge(Component target,DamageInfo hit)
+        {
+            if(!Has(WeaponPassive.DoubleEdge)||OffhandAbsent||!(target is IDamageReceiver)||UnityEngine.Random.value>=.5f)return;
+            delayedHits.Add(new DelayedHit{target=target,at=Time.time+.15f,
+                damage=new DamageInfo(hit.Amount,gameObject,hit.HitPoint,hit.Direction,AttackIdentity.Next(),hit.PostureDamage,weaponFamilyId:hit.WeaponFamilyId)});
+        }
         public float BasicMultiplier(long attack,Vector3 target,Component receiver=null)
         {
             float value=1;
@@ -75,6 +118,7 @@ namespace Mismo.Gameplay.Player.Equipment
             }
             if(Has(WeaponPassive.FiloCruel)&&target.GetComponent<CombatAilment>()?.Poisoned==true)
                 GetComponent<CombatState>()?.Reward(1,"FILO CRUEL");
+            if(Berserking&&berserkFocus>0)GetComponent<CombatState>()?.Reward(berserkFocus,"BERSERKER");
             if(Time.time>=rhythmUntil)rhythm=0;
             rhythm=Mathf.Min(5,rhythm+1);rhythmUntil=Time.time+2;
             sameTargetHits=lastTarget==target?sameTargetHits+1:1;lastTarget=target;

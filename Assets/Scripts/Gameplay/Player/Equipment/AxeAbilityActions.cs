@@ -77,4 +77,49 @@ namespace Mismo.Gameplay.Player.Equipment
             }
         }
     }
+
+    // Lanza la pieza de la mano secundaria; vuelve a la mano al instante al impactar o al agotar el alcance (Range de la habilidad).
+    [Serializable]
+    public sealed class AxeThrowAction : AbilityAction
+    {
+        public float damage=14,postureDamage=-1,speed=20,radius=.25f;
+        [Tooltip("Vueltas por segundo del hacha en vuelo. 0 = sin giro.")]
+        public float spinsPerSecond=3;
+        public override void Begin(AbilityExecution c)
+        {
+            var effects=c.Owner.GetComponent<WeaponSkillEffects>();
+            Vector3 origin=c.Owner.transform.position+Vector3.up*1.2f;
+            Vector3 direction=c.AimPoint.HasValue?(c.AimPoint.Value-origin).normalized:c.Direction;
+            var projectile=ProjectileInstance.Spawn(c.Owner,origin,direction,damage*c.DamageMultiplier,speed,c.Definition.range,radius,c.Weapon.SecondaryVisualPrefab,c.AttackId,postureDamage,c.WeaponFamilyId,c.Definition.focusGainOnHit);
+            // Weapon prefabs carry colliders; the projectile would hit its own visual.
+            foreach(var collider in projectile.GetComponentsInChildren<Collider>())collider.enabled=false;
+            if(spinsPerSecond>0)projectile.gameObject.AddComponent<SpinningVisual>().turnsPerSecond=spinsPerSecond;
+            effects?.ThrowOffhand(c.Definition.range/Mathf.Max(.1f,speed)+.5f);
+            projectile.OnImpact=(target,point)=>effects?.ReturnOffhand();
+        }
+    }
+
+    public sealed class SpinningVisual : MonoBehaviour
+    {
+        public float turnsPerSecond=3;
+        void Update()=>transform.Rotate(Vector3.right,360*turnsPerSecond*Time.deltaTime,Space.Self);
+    }
+
+    // Bonificación temporal del jugador; el estado vive en WeaponSkillEffects y se limpia al morir o al cambiar de equipo.
+    [Serializable]
+    public sealed class BerserkAction : AbilityAction
+    {
+        public float duration=9;
+        [Tooltip("Daño de ataque adicional (0.11 = +11 %).")]
+        public float damageBonus=.11f;
+        [Tooltip("Velocidad de ataque adicional (0.22 = +22 %). Respeta el tope de las reglas de progresión.")]
+        public float attackSpeedBonus=.22f;
+        [Tooltip("Focus adicional por cada básico acertado.")]
+        public float focusPerBasic=1;
+        [Tooltip("Multiplica todo gasto de stamina (0.34 = 66 % menos).")]
+        public float staminaCostMultiplier=.34f;
+        [Tooltip("Multiplica la armadura positiva mientras dura (0.45 = -55 %).")]
+        public float armorMultiplier=.45f;
+        public override void Begin(AbilityExecution c)=>c.Owner.GetComponent<WeaponSkillEffects>()?.Berserk(this);
+    }
 }

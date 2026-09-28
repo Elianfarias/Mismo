@@ -27,9 +27,15 @@ MonoBehaviour:
     scale: 1
   animations: {fileID: 22100000, guid: 761316247099e594f894e862f12a1ac4, type: 2}
   meleeTrail: 1
+  proceduralTrail: 1
+  trailBase: {x: 0, y: 0, z: 0}
+  trailTaper: 0.5
+  secondaryTrail: 0
+  secondaryTrailBase: {x: 0, y: 0, z: 0}
+  secondaryTrailTip: {x: 0, y: 0, z: 1}
   trailTip: {x: 0, y: 0.55, z: 0}
   trailDuration: 0.1
   trailWidth: 0.28
-  trailStartColor: {r: 1, g: 0.88, b: 0.5, a: 0.8}
-  trailEndColor: {r: 1, g: 0.7, b: 0.2, a: 0}
+  trailStartColor: {r: 0.5137255, g: 0.5882353, b: 0.65882355, a: 0.8}
+  trailEndColor: {r: 0.38431373, g: 0.4627451, b: 0.5372549, a: 0}
   trailMaterial: {fileID: 0}
