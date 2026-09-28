@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbaed6838d1a4d369404166107b9bbf5, type: 3}
+  m_Name: HammerSweep
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
+  displayName: Barrido de guerra
+  icon: {fileID: 2800000, guid: 6cfff599999ffde4b86208c48bafb58d, type: 3}
+  abilityId: hammer.sweep
+  animationSource: {fileID: 0}
+  passive: 0
+  description: "Barr\xE9 un arco frontal amplio. Inflige 25 de da\xF1o a cada enemigo alcanzado."
+  localizationKey: 
+  preparation: 0.54
+  active: 0.42
+  recovery: 0.55
+  cooldown: 3.6
+  staminaCost: 0
+  chargeable: 0
+  maximumCharge: 0.9
+  chargeDamageMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0.70000005
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1.7
+      inSlope: 0.70000005
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  chargePostureMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 2
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  preparationMobility: 0
+  activeMobility: 0
+  recoveryMobility: 0
+  interruptible: 1
+  cancelPreparation: 0
+  cancelRecovery: 0
+  focusCost: 0
+  focusGainOnHit: 5
+  preparationSfx: {fileID: 0}
+  preparationSfxVolume: 1
+  loopPreparationSfx: 0
+  executionSfx: {fileID: 8300000, guid: f81d103a006b7934999b85e8be92da3f, type: 3}
+  executionSfxVolume: 0.3
+  comboStepSfx: []
+  pose: 1
+  usesSwordCombo: 0
+  comboSteps: []
+  targetsGround: 0
+  aimFromCamera: 0
+  range: 3
+  actions:
+  - rid: 7584478039265247351
+  references:
+    version: 2
+    RefIds:
+    - rid: 7584478039265247351
+      type: {class: HammerImpactAction, ns: Mismo.Gameplay.Player.Equipment, asm: Mismo.Gameplay.Player}
+      data:
+        damage: 25
+        radius: 1.75
+        forward: 0.4
+        height: 0.9
+        pushDistance: 0.3
+        stunSeconds: 0.12
+        arcDegrees: 75
+        postureDamage: 14
+        hitTimes:
+        - 0.04
+        - 0.12
+        - 0.24
+        hitYawAngles:
+        - -60
+        - 0
+        - 60
+        singleHitPerCast: 1
+        groundImpact: 0
+        impactSfx: {fileID: 8300000, guid: bfa2b825f1c714a4d98e18ef957740a1, type: 3}
+        impactVolume: 0.5

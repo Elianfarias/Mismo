@@ -8,7 +8,8 @@
     "Mismo.Gameplay.Enemies",
     "Unity.InputSystem",
     "Mismo.Core",
-    "MoreMountains.Tools"
+    "MoreMountains.Tools",
+    "Mismo.Audio"
   ],
   "includePlatforms": [
     "Editor"

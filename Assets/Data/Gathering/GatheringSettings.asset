@@ -56,6 +56,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d04746c370d80c9408754d0482dd1cdd, type: 2}
   - {fileID: 11400000, guid: 9886347e904f5a14294f2ef9ea04ab70, type: 2}
   - {fileID: 11400000, guid: 3c1c838cab2f94f4b87b03c1b60d1b25, type: 2}
+  - {fileID: 11400000, guid: dd82f4aa367c5c649a8918136c043dfd, type: 2}
   workbenchPrefab: {fileID: 324489609638104938, guid: dbc5f6574fb2cc14391f20a28923b281, type: 3}
   monsterLoot: {fileID: 11400000, guid: 582c0776621b425fbe268b43e8dbb274, type: 2}
   generationVersion: 1

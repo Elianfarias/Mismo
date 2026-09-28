@@ -411,6 +411,9 @@ MonoBehaviour:
   - key: Recipes/QuestTravelSalve
     assets:
     - {fileID: 11400000, guid: e0db93e8a2d04194cac8509f3b9ec40f, type: 2}
+  - key: Recipes/StoneHammer
+    assets:
+    - {fileID: 11400000, guid: dd82f4aa367c5c649a8918136c043dfd, type: 2}
   - key: Recipes/Whetstone
     assets:
     - {fileID: 11400000, guid: b89240d491efa39428abe5b73a17c119, type: 2}

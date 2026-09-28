@@ -42,6 +42,9 @@ namespace Mismo.Gameplay.Combat
         [SerializeField, InspectorName("Grosor de contacto de la hoja"), Min(.005f)] private float bladeRadius = .035f;
         public float BladeRadius => Mathf.Max(.005f,bladeRadius);
         public float Radius => Mathf.Max(.01f,radius);
+        [Tooltip("Sonido opcional al conectar esta etapa. Vacío conserva el feedback de la familia.")]
+        public AudioClip impactSfx;
+        [Range(0,1)] public float impactVolume = 1;
 
     }
 

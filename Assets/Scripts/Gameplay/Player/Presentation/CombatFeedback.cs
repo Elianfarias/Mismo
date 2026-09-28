@@ -18,6 +18,12 @@ namespace Mismo.Gameplay.Player.Presentation
         [SerializeField] private Color spinColor = new Color(0.55f, 0.9f, 1f, 0.95f);
         [SerializeField] private Color cooldownColor = new Color(0.75f, 0.35f, 1f, 0.9f);
 
+        private WorldSurfaceFeedback surfaceFeedback;
+        private readonly RaycastHit[] groundHits=new RaycastHit[16];
+        // Last cue values also make timing observable in the existing play-mode checks.
+        public int WeaponImpactCount { get; private set; }
+        public int GroundImpactCount { get; private set; }
+        public Vector3 LastGroundImpact { get; private set; }
         private Health health;
         private PlayerMotor motor;
         private Vector3 Facing => motor!=null?motor.Facing:transform.forward;
@@ -112,6 +118,42 @@ namespace Mismo.Gameplay.Player.Presentation
             PlayTone(125f, 0.1f, 0.48f);
         }
 
+        public void NotifyWeaponImpact(Vector3 point,int count,AudioClip clip,float volume)
+        {
+            WeaponImpactCount++;
+            Surface().Emit(point,new Color(.58f,.52f,.40f,.9f),.65f,Mathf.Clamp(count,1,12));
+            if(clip!=null)AudioEvents.RaisePlayAbilitySFX(clip,volume*masterVolume);
+        }
+
+        // The action's authored contact point shares the damage clock. Do not read last
+        // frame's animated head here: the playable graph evaluates after AbilityRunner.
+        public void NotifyGroundImpact(Vector3 contact,AudioClip clip,float volume,float radius=1)
+        {
+            int count=Physics.RaycastNonAlloc(contact+Vector3.up*1.5f,Vector3.down,groundHits,3,~0,QueryTriggerInteraction.Ignore);
+            float distance=float.PositiveInfinity;Vector3 point=default;Vector3 normal=Vector3.up;
+            for(int i=0;i<count;i++)
+            {
+                var hit=groundHits[i];
+                if(hit.transform.IsChildOf(transform)||hit.collider.GetComponentInParent<IDamageReceiver>()!=null||hit.normal.y<.45f||hit.distance>=distance)continue;
+                distance=hit.distance;point=hit.point;normal=hit.normal;
+            }
+            if(float.IsPositiveInfinity(distance))return;
+            LastGroundImpact=point;GroundImpactCount++;
+            Surface().Emit(point+normal*.04f,new Color(.45f,.40f,.31f,1),1.35f,18);
+            // A short, low dust ring uses the same bounded combat emitter and shared material.
+            for(int i=0;i<16;i++)
+            {
+                float angle=i*Mathf.PI*2/16;Vector3 radial=Vector3.ProjectOnPlane(new Vector3(Mathf.Cos(angle),0,Mathf.Sin(angle)),normal).normalized;
+                combatParticles.Emit(new ParticleSystem.EmitParams{position=point+normal*.045f+radial*.12f,velocity=radial*(Mathf.Max(.2f,radius-.12f)/.28f)+normal*.12f,startColor=new Color(.60f,.54f,.43f,.48f),startSize=.17f,startLifetime=.28f},1);
+            }
+            if(clip!=null)AudioEvents.RaisePlayAbilitySFX(clip,volume*masterVolume);
+        }
+        private WorldSurfaceFeedback Surface()
+        {
+            if(surfaceFeedback==null)surfaceFeedback=GetComponent<WorldSurfaceFeedback>()??gameObject.AddComponent<WorldSurfaceFeedback>();
+            return surfaceFeedback;
+        }
+
         /// <summary>Emite una señal azul para un ataque bloqueado.</summary>
         public void NotifyBlocked(Vector3 point, Vector3 normal)
         {
@@ -162,6 +204,9 @@ namespace Mismo.Gameplay.Player.Presentation
             main.playOnAwake = false;
             main.loop = false;
             main.startLifetime = 0.35f;
+            main.maxParticles = 96;
+            var fading=combatParticles.colorOverLifetime;fading.enabled=true;
+            var gradient=new Gradient();gradient.SetKeys(new[]{new GradientColorKey(Color.white,0),new GradientColorKey(Color.white,1)},new[]{new GradientAlphaKey(1,0),new GradientAlphaKey(0,1)});fading.color=gradient;
             main.startSpeed = 1.5f;
             main.startSize = 0.1f;
             main.simulationSpace = ParticleSystemSimulationSpace.World;

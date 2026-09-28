@@ -90,7 +90,23 @@ namespace Mismo.Gameplay.Player.Equipment
             }
             if (activeVisual != null)
             {
-                if (weapon.poseProfile != null) ApplyProfile(activeVisual, weapon.poseProfile.equipped);
+                if (weapon.poseProfile != null)
+                {
+                    ApplyProfile(activeVisual, weapon.poseProfile.equipped);
+                    if(weapon.poseProfile.maintainSupportGrip && animator!=null && animator.isHuman)
+                    {
+                        var support=animator.GetBoneTransform(HumanBodyBones.LeftHand);
+                        if(support!=null)
+                        {
+                            // Humanoid muscle blending does not preserve a two-hand constraint.
+                            // Reuse the existing arm solver only for profiles that opt in.
+                            Quaternion wrist=support.rotation;
+                            Vector3 pole=transform.position+animator.transform.rotation*weapon.poseProfile.supportElbowHint;
+                            AimArm(support,activeVisual.transform.TransformPoint(weapon.poseProfile.supportGrip),pole);
+                            support.rotation=wrist;
+                        }
+                    }
+                }
                 else
                 {
                 var anchor = weapon.isBow ? leftHand : hand;

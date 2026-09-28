@@ -17,7 +17,7 @@ namespace Mismo.Gameplay.Player.Equipment
         public SwordParry Parry {get;private set;}
         public bool IsBusy=>Current!=null;
         public bool IsMoving=>Current!=null&&Current.Began&&!Current.Ended&&System.Array.Exists(Current.Definition.actions,a=>a is MoveCasterAction);
-        public float Mobility=>Current==null?1:!Current.Began?Current.Definition.preparationMobility:!Current.Ended?Current.Definition.activeMobility:1;
+        public float Mobility=>Current==null?1:!Current.Began?Current.Definition.preparationMobility:!Current.Ended?Current.Definition.activeMobility:Current.Definition.recoveryMobility;
         public float Normalized=>Current==null?0:Mathf.Clamp01(Current.Elapsed/(Current.Definition.Duration+(Current.Definition.chargeable?Current.Definition.maximumCharge:0)));
         public event System.Action<AbilityDefinition> Started;
         // Read-only presentation snapshot. Gameplay remains the owner of all clocks.

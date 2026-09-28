@@ -22,7 +22,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         }
         void NormalizeHands(InventoryProfile data)
         {
-            if(data.offhands==null)return;
+            // Older and JSON-roundtripped profiles may represent an empty hand list as [].
+            if(data.offhands==null||data.offhands.Length==0)return;
             for(int i=0;i<2;i++)
             {
                 var main=catalog.Find(data.Find(data.equipped[i])?.definitionId);

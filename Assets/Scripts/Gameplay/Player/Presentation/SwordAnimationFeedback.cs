@@ -193,7 +193,7 @@ namespace Mismo.Gameplay.Player.Presentation
                     var cast = equipment.Runner != null ? equipment.Runner.Current : null;
                     trail.emitting = profile.meleeTrail && visual != null &&
                         ((hitbox != null && hitbox.IsWindowOpen) || (spin != null && spin.IsActive) || (lunge != null && lunge.IsActive) ||
-                        (cast != null && cast.Began && !cast.Ended && (cast.Definition.pose == Equipment.AbilityPose.Lunge || cast.Definition.pose == Equipment.AbilityPose.Spin)));
+                        (cast != null && !cast.Definition.usesSwordCombo && !cast.Ended && (cast.Began || profile.trailPreparationFraction>0 && cast.Elapsed>=cast.Definition.preparation*(1-profile.trailPreparationFraction)) && (cast.Definition.pose == Equipment.AbilityPose.Lunge || cast.Definition.pose == Equipment.AbilityPose.Spin)));
                     if (!profile.meleeTrail || visual==null) trail.Clear();
                 }
                 return;

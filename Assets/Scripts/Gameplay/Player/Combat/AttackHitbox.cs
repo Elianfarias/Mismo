@@ -20,6 +20,7 @@ namespace Mismo.Gameplay.Combat
         private Vector3 previousPosition;
         private Quaternion previousRotation;
         private bool finishing, damageConfigured, rangedBasic;
+        private bool impactSoundPlayed;
         private float damageMultiplier;
         private string family;
         private float focusGain;
@@ -60,6 +61,7 @@ namespace Mismo.Gameplay.Combat
             previousPosition = owner.position;
             previousRotation = Facing;
             finishing = damageConfigured = rangedBasic = false;
+            impactSoundPlayed = false;
             IsWindowOpen = false;
             hitTargets.Clear();
             var inventory = GetComponentInParent<Mismo.Gameplay.Player.Equipment.Inventory.PlayerInventory>();
@@ -206,7 +208,12 @@ namespace Mismo.Gameplay.Combat
             if (!hitTargets.Add(receiver)) return;
             Vector3 direction=bladeContact.HasValue&&bladeMotion.sqrMagnitude>.000001f?bladeMotion:other.transform.position-owner.position;
             Vector3 point=bladeContact.HasValue?FindBladeContact(other,bladeA,bladeB,direction):other.ClosestPoint(owner.position+Facing*step.Center);
-            damageDealer.ApplyTo(other.gameObject,point,direction);
+            var soundStep=step;
+            if(damageDealer.ApplyTo(other.gameObject,point,direction)&&!impactSoundPlayed&&soundStep.impactSfx!=null)
+            {
+                impactSoundPlayed=true;
+                AudioEvents.RaisePlayAbilitySFX(soundStep.impactSfx,soundStep.impactVolume);
+            }
         }
 
         public static Vector3 FindBladeContact(Collider other,Vector3 a,Vector3 b,Vector3 direction)

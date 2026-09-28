@@ -77,7 +77,7 @@ namespace Mismo.Gameplay.Player.Editor
             EditorUtility.SetDirty(weapon);
         }
 
-        static Sprite Icon(GameObject source,string name,Vector3 rotation)
+        public static Sprite Icon(GameObject source,string name,Vector3 rotation)
             => InventoryIconCapture.Capture(source,"Assets/Art/UI/Inventory/"+name+".png",rotation);
         static void Part(GameObject parent,PrimitiveType type,Vector3 position,Vector3 scale,Vector3 rotation,Material material)
         {

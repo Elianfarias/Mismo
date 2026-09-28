@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54613e04779c9fb4d8602489d1afca4e, type: 3}
+  m_Name: HammerAnimations
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Presentation.WeaponAnimationSet
+  locomotion: {fileID: 22100000, guid: 556d46f08011a5747a825ddf642ec08e, type: 2}
+  actionMask: {fileID: 0}
+  actions:
+  - ability: {fileID: 11400000, guid: e86c5549c0b231b4db624c1b44b96a1b, type: 2}
+    clip: {fileID: 7400000, guid: 328e3cd3dad443a449fe9f4fa33d8680, type: 2}
+    maskMode: 1
+    customMask: {fileID: 0}
+    useAnimationMovement: 0
+    animationMovementScale: 1
+    comboClips:
+    - {fileID: 7400000, guid: 328e3cd3dad443a449fe9f4fa33d8680, type: 2}
+    - {fileID: 7400000, guid: 3442ec3867202a740ad2879bf112a0bc, type: 2}
+    activeStartsAt: 0.36734694
+    recoveryStartsAt: 0.5714286
+    blendSeconds: 0.1
+    torsoUprightDegrees: 0
+  - ability: {fileID: 11400000, guid: 26d7bc2d444ec99458cfbc9954e3183d, type: 2}
+    clip: {fileID: 7400000, guid: 9a1665c040e9129458e6ca1274565fb0, type: 2}
+    maskMode: 1
+    customMask: {fileID: 0}
+    useAnimationMovement: 0
+    animationMovementScale: 1
+    comboClips: []
+    activeStartsAt: 0.16
+    recoveryStartsAt: 0.6857143
+    blendSeconds: 0.1
+    torsoUprightDegrees: 0
+  - ability: {fileID: 11400000, guid: f8070a27db061654fb6ebbbdbab320ca, type: 2}
+    clip: {fileID: 7400000, guid: c81913561d072e74e81adc88e8096394, type: 2}
+    maskMode: 1
+    customMask: {fileID: 0}
+    useAnimationMovement: 0
+    animationMovementScale: 1
+    comboClips: []
+    activeStartsAt: 0.4777778
+    recoveryStartsAt: 0.6111111
+    blendSeconds: 0.1
+    torsoUprightDegrees: 0
+  - ability: {fileID: 11400000, guid: 515bd37e30775f447aff86b5d4c5f6d2, type: 2}
+    clip: {fileID: 7400000, guid: 2f3fdf31456614246b7e2da330221beb, type: 2}
+    maskMode: 1
+    customMask: {fileID: 0}
+    useAnimationMovement: 0
+    animationMovementScale: 1
+    comboClips: []
+    activeStartsAt: 0.35761592
+    recoveryStartsAt: 0.6357616
+    blendSeconds: 0.1
+    torsoUprightDegrees: 0
+  - ability: {fileID: 11400000, guid: f57390aa23331ff498427e7d131b0a4a, type: 2}
+    clip: {fileID: 7400000, guid: 07dd9f6d0699485499363086369d442b, type: 2}
+    maskMode: 1
+    customMask: {fileID: 0}
+    useAnimationMovement: 0
+    animationMovementScale: 1
+    comboClips: []
+    activeStartsAt: 0.27586207
+    recoveryStartsAt: 0.6666667
+    blendSeconds: 0.1
+    torsoUprightDegrees: 0
+  - ability: {fileID: 11400000, guid: bd4545edcb3a14844ba1feae85fe21df, type: 2}
+    clip: {fileID: 7400000, guid: db7647796f3fe764bac4bed09a26a4ec, type: 2}
+    maskMode: 1
+    customMask: {fileID: 0}
+    useAnimationMovement: 0
+    animationMovementScale: 1
+    comboClips: []
+    activeStartsAt: 0.16783217
+    recoveryStartsAt: 0.7972028
+    blendSeconds: 0.1
+    torsoUprightDegrees: 0

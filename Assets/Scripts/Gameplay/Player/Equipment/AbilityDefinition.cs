@@ -38,6 +38,8 @@ namespace Mismo.Gameplay.Player.Equipment
         public AnimationCurve chargePostureMultiplier = AnimationCurve.Linear(0,1,1,2);
         [Range(0,1)] public float preparationMobility = 1;
         [Range(0,1)] public float activeMobility = 1;
+        [Tooltip("Movilidad durante la recuperación. 1 conserva el comportamiento de las armas existentes.")]
+        [Range(0,1)] public float recoveryMobility = 1;
         public bool interruptible;
         public bool cancelPreparation;
         public bool cancelRecovery;

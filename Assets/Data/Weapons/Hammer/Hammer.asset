@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6caf7fcd2b3f4459a35afabcca675b39, type: 3}
+  m_Name: Hammer
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.WeaponDefinition
+  id: hammer.stone
+  displayName: Mazo de guerra
+  basicAttackCooldown: 0.98
+  abilities:
+  - {fileID: 11400000, guid: e86c5549c0b231b4db624c1b44b96a1b, type: 2}
+  - {fileID: 11400000, guid: 26d7bc2d444ec99458cfbc9954e3183d, type: 2}
+  - {fileID: 11400000, guid: f8070a27db061654fb6ebbbdbab320ca, type: 2}
+  - {fileID: 11400000, guid: bd4545edcb3a14844ba1feae85fe21df, type: 2}
+  family: {fileID: 11400000, guid: ad1786a2fb6ced147aea914fecbd5ca1, type: 2}
+  feedbackOverride: {fileID: 0}
+  isShield: 0
+  dualSwordFamily: {fileID: 0}
+  swordShieldFamily: {fileID: 0}
+  overrideFamilyAbilities: 0
+  visualPrefab: {fileID: 7773669948864502695, guid: aca8c65beab45cc458d2e64b3b824efe, type: 3}
+  isTwoHanded: 1
+  dualWield: 0
+  secondaryVisualPrefab: {fileID: 0}
+  secondaryEquipped:
+    anchor: 2
+    bonePath: 
+    offset: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: 1
+  secondaryHolstered:
+    anchor: 0
+    bonePath: 
+    offset: {x: -0.2, y: 1.2, z: -0.25}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: 1
+  poseProfile: {fileID: 11400000, guid: 68f38c9ada7706047944da360c60bbf2, type: 2}
+  isBow: 0
+  inventoryDescription: "Gran mazo de piedra a dos manos. Golpes con inercia, control de grupos y recuperaci\xF3n comprometida."
+  canDiscard: 1
+  gridWidth: 2
+  gridHeight: 3
+  canRotate: 1
+  inventoryIcon: {fileID: 21300000, guid: 736bcdd6644576a4886ee1b0cdfe4302, type: 3}
+  hudIcon: {fileID: 0}
+  inventoryPreviewRotation: {x: 0, y: 25, z: 0}
+  canSell: 1
+  sellValue: 10
+  handRotation: {x: 0, y: 0, z: 0}
+  backRotation: {x: 0, y: 0, z: 35}
+  handOffset: {x: 0, y: 0, z: 0}
+  backOffset: {x: 0, y: 1.2, z: -0.25}
