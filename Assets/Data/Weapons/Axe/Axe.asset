@@ -21,7 +21,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f138122e27574d65b2fa7bf43e4e1937, type: 2}
   - {fileID: 11400000, guid: b540621fe8f44537a590796373ad3190, type: 2}
   family: {fileID: 11400000, guid: d5214838f4d74ed0b4c183904d17598f, type: 2}
-  feedbackOverride: {fileID: 0}
+  feedbackOverride: {fileID: 11400000, guid: 1212f748600e4807bdd25c3922482275, type: 2}
   isShield: 0
   dualSwordFamily: {fileID: 0}
   swordShieldFamily: {fileID: 0}
@@ -51,7 +51,7 @@ MonoBehaviour:
   gridHeight: 2
   canRotate: 1
   inventoryIcon: {fileID: 21300000, guid: 3c2aaa1eb65602a49ae833af9e06ef8b, type: 3}
-  hudIcon: {fileID: 2800000, guid: c851f4a0e48a4f11b70011a9453b5ef4, type: 3}
+  hudIcon: {fileID: 2800000, guid: 20fb1cb6a2024560ab3b28b9169c121d, type: 3}
   inventoryPreviewRotation: {x: 0, y: 0, z: 0}
   canSell: 1
   sellValue: 10

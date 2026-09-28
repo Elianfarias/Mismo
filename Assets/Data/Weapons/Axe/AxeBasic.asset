@@ -93,7 +93,7 @@ MonoBehaviour:
   comboSteps: []
   targetsGround: 0
   aimFromCamera: 1
-  range: 22
+  range: 38.1
   actions:
   - rid: 1
   references:
