@@ -17,7 +17,7 @@ MonoBehaviour:
   abilityId: DualAxeDoubleEdge
   animationSource: {fileID: 0}
   passive: 10
-  description: "Cada b\xE1sico tiene un 50 % de probabilidad de golpear una segunda vez con la otra hacha."
+  description: "Cada b\xE1sico tiene un 50 % de probabilidad de ser un golpe doble: una hacha barre y la otra la sigue por el mismo recorrido."
   localizationKey: ability.axe.dualaxedoubleedge
   preparation: 0.1
   active: 0.2
@@ -90,9 +90,11 @@ MonoBehaviour:
   comboStepSfx: []
   pose: 0
   usesSwordCombo: 0
+  comboSteps: []
+  comboOrder: 0
   targetsGround: 0
   aimFromCamera: 0
-  range: 8
+  range: 34.4
   actions: []
   references:
     version: 2

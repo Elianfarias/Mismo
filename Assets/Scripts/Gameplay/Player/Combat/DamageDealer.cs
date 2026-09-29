@@ -12,22 +12,29 @@ namespace Mismo.Gameplay.Combat
         private readonly HashSet<UnityEngine.Object> hitObjects = new HashSet<UnityEngine.Object>();
 
         public float Amount => amount;
-        private long attackId;
+        private long attackId, secondAttackId;
         private string family; private float focusGain;
 
-        public void Configure(float damageAmount,string weaponFamilyId=null,float focusGainOnHit=0) { amount = Mathf.Max(0f, damageAmount); attackId=AttackIdentity.Next();family=weaponFamilyId;focusGain=focusGainOnHit; }
+        public void Configure(float damageAmount,string weaponFamilyId=null,float focusGainOnHit=0) { amount = Mathf.Max(0f, damageAmount); attackId=AttackIdentity.Next();secondAttackId=AttackIdentity.Next();family=weaponFamilyId;focusGain=focusGainOnHit; }
 
-        public bool ApplyTo(GameObject target, Vector3 hitPoint, Vector3 direction)
+        /// <param name="secondStrike">La otra arma golpea un objetivo ya alcanzado en este paso: id propio para que el receptor
+        /// no lo descarte, sin Focus ni efectos de "otro básico".</param>
+        public bool ApplyTo(GameObject target, Vector3 hitPoint, Vector3 direction, bool secondStrike = false)
         {
             if (target == null || target == gameObject) return false;
             IDamageReceiver receiver = target.GetComponentInParent<IDamageReceiver>();
             if (receiver == null) return false;
             var effects=GetComponentInParent<Mismo.Gameplay.Player.Equipment.WeaponSkillEffects>();
             bool basic=GetComponent<AttackHitbox>()!=null;
-            if(attackId==0)attackId=AttackIdentity.Next();
-            float multiplier=basic&&effects!=null?effects.BasicMultiplier(attackId,hitPoint,receiver as Component):1;
-            bool hit=receiver.ReceiveDamage(new DamageInfo(amount*multiplier, gameObject, hitPoint, direction,attackId,weaponFamilyId:family,focusGainOnHit:focusGain));
-            if(hit&&basic&&receiver is Component component)effects?.BasicHit(attackId,component);
+            if(attackId==0){attackId=AttackIdentity.Next();secondAttackId=AttackIdentity.Next();}
+            long id=secondStrike?secondAttackId:attackId;
+            float multiplier=basic&&effects!=null?effects.BasicMultiplier(id,hitPoint,receiver as Component):1;
+            bool hit=receiver.ReceiveDamage(new DamageInfo(amount*multiplier, gameObject, hitPoint, direction,id,weaponFamilyId:family,focusGainOnHit:secondStrike?0:focusGain));
+            if(hit&&basic&&effects!=null&&receiver is Component component)
+            {
+                if(!secondStrike)effects.BasicHit(id,component);
+                if(receiver is DamageReceiver resolved)effects.BasicDamageDealt(resolved.LastResult.HealthDamage);
+            }
             return hit;
         }
 

@@ -22,7 +22,7 @@ MonoBehaviour:
   preparation: 0.18
   active: 0.483
   recovery: 0.333
-  cooldown: 0.98
+  cooldown: 0.45
   staminaCost: 10
   chargeable: 0
   maximumCharge: 0.9
@@ -87,21 +87,87 @@ MonoBehaviour:
   loopPreparationSfx: 0
   executionSfx: {fileID: 8300000, guid: 3e000a21a3e669445a9d3001ff083c1f, type: 3}
   executionSfxVolume: 1
-  comboStepSfx: []
+  comboStepSfx:
+  - clip: {fileID: 8300000, guid: 3e000a21a3e669445a9d3001ff083c1f, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 3e000a21a3e669445a9d3001ff083c1f, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 7d39d0a3edc97a54ab5f4c555d8bc153, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 7d39d0a3edc97a54ab5f4c555d8bc153, type: 3}
+    volume: 1
   pose: 1
-  usesSwordCombo: 0
+  usesSwordCombo: 1
+  comboSteps:
+  - id: right
+    duration: 0.75
+    inputStartPercent: 40
+    inputEndPercent: 98
+    branchPercent: 55
+    transitionDuration: 0.04
+    recoveryDuration: 0.25
+    impactStartPercent: 26
+    impactEndPercent: 56
+    damage: 14
+    shape: 2
+    bladeRadius: 0.1
+    center: {x: 0, y: 1, z: 0.65}
+    size: {x: 0.9, y: 1.4, z: 1.4}
+    radius: 0.7
+    striker: 1
+  - id: left
+    duration: 0.75
+    inputStartPercent: 40
+    inputEndPercent: 98
+    branchPercent: 55
+    transitionDuration: 0.04
+    recoveryDuration: 0.25
+    impactStartPercent: 26
+    impactEndPercent: 56
+    damage: 14
+    shape: 2
+    bladeRadius: 0.1
+    center: {x: 0, y: 1, z: 0.65}
+    size: {x: 0.9, y: 1.4, z: 1.4}
+    radius: 0.7
+    striker: 2
+  - id: double_right
+    duration: 1.3
+    inputStartPercent: 65
+    inputEndPercent: 98
+    branchPercent: 70
+    transitionDuration: 0.04
+    recoveryDuration: 0.3
+    impactStartPercent: 24
+    impactEndPercent: 76
+    damage: 14
+    shape: 2
+    bladeRadius: 0.1
+    center: {x: 0, y: 1, z: 0.65}
+    size: {x: 0.9, y: 1.4, z: 1.4}
+    radius: 0.7
+    striker: 3
+  - id: double_left
+    duration: 1.3
+    inputStartPercent: 65
+    inputEndPercent: 98
+    branchPercent: 70
+    transitionDuration: 0.04
+    recoveryDuration: 0.3
+    impactStartPercent: 24
+    impactEndPercent: 76
+    damage: 14
+    shape: 2
+    bladeRadius: 0.1
+    center: {x: 0, y: 1, z: 0.65}
+    size: {x: 0.9, y: 1.4, z: 1.4}
+    radius: 0.7
+    striker: 3
+  comboOrder: 1
   targetsGround: 0
   aimFromCamera: 0
   range: 22
-  actions:
-  - rid: 1
+  actions: []
   references:
     version: 2
-    RefIds:
-    - rid: 1
-      type: {class: MeleeAction, ns: Mismo.Gameplay.Player.Equipment, asm: Mismo.Gameplay.Player}
-      data:
-        damage: 14
-        postureDamage: -1
-        radius: 0.6
-        forward: 0.8
+    RefIds: []

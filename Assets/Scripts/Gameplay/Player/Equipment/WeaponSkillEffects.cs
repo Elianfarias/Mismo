@@ -18,9 +18,7 @@ namespace Mismo.Gameplay.Player.Equipment
         UnityEngine.Object lastTarget;
         float rhythmUntil, empoweredUntil, twoTimesUntil, bucklerReady, bleedPrimedUntil;
         float bucklerThrownAt=-100,bucklerAbsentUntil,offhandAbsentUntil;
-        float berserkUntil,berserkDamage,berserkSpeed,berserkFocus,berserkStamina=1,berserkArmor=1;
-        struct DelayedHit {public Component target;public DamageInfo damage;public float at;}
-        readonly List<DelayedHit> delayedHits=new List<DelayedHit>();
+        float berserkUntil,berserkDamage,berserkSpeed,berserkFocus,berserkStamina=1,berserkArmor=1,berserkLifeSteal;
         public bool BucklerAbsent=>Has(WeaponPassive.Buckler)&&Time.time<bucklerAbsentUntil;
         // The off-hand piece is out of the hand (thrown buckler or thrown axe).
         public bool OffhandAbsent=>BucklerAbsent||Time.time<offhandAbsentUntil;
@@ -43,7 +41,7 @@ namespace Mismo.Gameplay.Player.Equipment
         {
             hits=rhythm=sameTargetHits=twoTimes=0;lastTarget=null;
             rhythmUntil=empoweredUntil=twoTimesUntil=bleedPrimedUntil=0;Barrier=0;basics.Clear();basicOrder.Clear();
-            bucklerAbsentUntil=offhandAbsentUntil=berserkUntil=0;delayedHits.Clear();
+            bucklerAbsentUntil=offhandAbsentUntil=berserkUntil=0;
             if(stamina!=null)stamina.CostMultiplier=1;
             // Keep buckler cooldown across equipment changes.
         }
@@ -63,19 +61,16 @@ namespace Mismo.Gameplay.Player.Equipment
         {
             berserkUntil=Time.time+mode.duration;
             berserkDamage=mode.damageBonus;berserkSpeed=mode.attackSpeedBonus;berserkFocus=mode.focusPerBasic;
-            berserkStamina=mode.staminaCostMultiplier;berserkArmor=mode.armorMultiplier;
+            berserkStamina=mode.staminaCostMultiplier;berserkArmor=mode.armorMultiplier;berserkLifeSteal=mode.lifeSteal;
             GetComponent<CombatState>()?.Reward(0,"MODO BERSERKER");
         }
         void Update()
         {
             if(stamina!=null)stamina.CostMultiplier=Berserking?berserkStamina:1;
-            for(int i=delayedHits.Count-1;i>=0;i--)
-            {
-                var pending=delayedHits[i];
-                if(Time.time<pending.at)continue;
-                delayedHits.RemoveAt(i);
-                if(pending.target!=null)((IDamageReceiver)pending.target).ReceiveDamage(pending.damage);
-            }
+        }
+        public void BasicDamageDealt(float healthDamage)
+        {
+            if(Berserking&&berserkLifeSteal>0&&healthDamage>0&&health!=null&&!health.IsDead)health.Heal(healthDamage*berserkLifeSteal);
         }
         public void TargetDefeatedOrOpened()
         {
@@ -83,13 +78,8 @@ namespace Mismo.Gameplay.Player.Equipment
             if(stamina!=null)stamina.Restore(stamina.Maximum*.2f);
             GetComponent<CombatState>()?.Reward(CombatState.MaximumFocus*.2f,"SED DE SANGRE");
         }
-        // Second hit with the other axe: new attack id so the receiver does not discard it, and no Focus so it never counts as another basic.
-        public void TryDoubleEdge(Component target,DamageInfo hit)
-        {
-            if(!Has(WeaponPassive.DoubleEdge)||OffhandAbsent||!(target is IDamageReceiver)||UnityEngine.Random.value>=.5f)return;
-            delayedHits.Add(new DelayedHit{target=target,at=Time.time+.15f,
-                damage=new DamageInfo(hit.Amount,gameObject,hit.HitPoint,hit.Direction,AttackIdentity.Next(),hit.PostureDamage,weaponFamilyId:hit.WeaponFamilyId)});
-        }
+        // Rolled when a basic step begins; a thrown off-hand axe cannot join the swing.
+        public bool RollDoubleEdge()=>Has(WeaponPassive.DoubleEdge)&&!OffhandAbsent&&UnityEngine.Random.value<.5f;
         public float BasicMultiplier(long attack,Vector3 target,Component receiver=null)
         {
             float value=1;

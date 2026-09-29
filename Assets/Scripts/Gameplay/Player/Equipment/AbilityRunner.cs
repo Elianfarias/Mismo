@@ -76,7 +76,7 @@ namespace Mismo.Gameplay.Player.Equipment
             if(Current!=null)
             {
                 if(definition.usesSwordCombo&&Current.Definition==definition&&combo!=null&&combo.RequestAttack())return true;
-                if(!CanCancel||slot!=AbilitySlot.Q&&slot!=AbilitySlot.E)
+                if(!CanCancel||!CanBranchInto(slot))
                 {
                     pending=slot;pendingDirection=direction;pendingPoint=groundPoint;pendingAim=aimPoint;pendingDash=false;pendingUntil=Time.time+.14f;return false;
                 }
@@ -106,18 +106,21 @@ namespace Mismo.Gameplay.Player.Equipment
             Advance(dt);
             if(Time.time>pendingUntil){pending=null;pendingDash=false;}
             if(pendingDash&&CanCancel){Vector3 direction=pendingDirection;pendingDash=false;TryDash(direction);}
-            else if(pending.HasValue&&(Current==null||CanCancel&&(pending==AbilitySlot.Q||pending==AbilitySlot.E)||pending==AbilitySlot.Basic&&combo!=null&&combo.CanQueue))
+            else if(pending.HasValue&&(Current==null||CanCancel&&CanBranchInto(pending.Value)||pending==AbilitySlot.Basic&&combo!=null&&combo.CanQueue))
             {var slot=pending.Value;pending=null;TryUse(slot,pendingDirection,pendingPoint,pendingAim);}
         }
+        // A looping basic chain never ends while the player keeps clicking, so R may also break it.
+        bool CanBranchInto(AbilitySlot slot)=>slot==AbilitySlot.Q||slot==AbilitySlot.E||
+            slot==AbilitySlot.R&&Current!=null&&Current.Definition.usesSwordCombo&&combo!=null&&combo.Loops;
         void Advance(float dt)
         {
             if(Current==null||dt<=0)return;
             var c=Current;var d=c.Definition;dt*=c.AttackSpeed;c.Elapsed+=dt;
             if(d.usesSwordCombo)
             {
-                int previousStep=combo.CurrentStepIndex;
+                int previousStep=combo.StepSerial;
                 combo.Tick(dt);
-                if(combo.IsActive&&combo.CurrentStepIndex!=previousStep)PlayExecutionSound(d,combo.CurrentStepIndex);
+                if(combo.IsActive&&combo.StepSerial!=previousStep){c.RefreshAttackSpeed();PlayExecutionSound(d,combo.CurrentStepIndex);}
                 if(!combo.IsActive&&!combo.IsRecovering)Current=null;
                 return;
             }

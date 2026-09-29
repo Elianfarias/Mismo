@@ -17,12 +17,12 @@ MonoBehaviour:
   abilityId: DualAxeBerserk
   animationSource: {fileID: 0}
   passive: 0
-  description: "Durante 9 s obten\xE9s un 11 % m\xE1s de da\xF1o de ataque y un 22 % m\xE1s de velocidad de ataque. Cada b\xE1sico acertado da 1 Focus adicional y gast\xE1s un 66 % menos de stamina, pero tu armadura se reduce un 55 %."
+  description: "Durante 9 s obten\xE9s un 11 % m\xE1s de da\xF1o de ataque y un 22 % m\xE1s de velocidad de ataque. Cada b\xE1sico acertado da 1 Focus adicional y te cura el 15 % del da\xF1o que hace, y gast\xE1s un 66 % menos de stamina, pero tu armadura se reduce un 55 %."
   localizationKey: ability.axe.dualaxeberserk
-  preparation: 1
-  active: 0.1
+  preparation: 0.62
+  active: 0.26
   recovery: 0.2
-  cooldown: 13
+  cooldown: 16.01
   staminaCost: 0
   chargeable: 0
   maximumCharge: 0.9
@@ -90,6 +90,8 @@ MonoBehaviour:
   comboStepSfx: []
   pose: 0
   usesSwordCombo: 0
+  comboSteps: []
+  comboOrder: 0
   targetsGround: 0
   aimFromCamera: 0
   range: 22
@@ -107,3 +109,4 @@ MonoBehaviour:
         focusPerBasic: 1
         staminaCostMultiplier: 0.34
         armorMultiplier: 0.45
+        lifeSteal: 0.15

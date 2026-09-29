@@ -17,7 +17,7 @@ MonoBehaviour:
   abilityId: DualAxeThrow
   animationSource: {fileID: 0}
   passive: 0
-  description: "Lanza una de tus hachas hasta 6 m. Vuelve a tu mano al instante al impactar o al terminar su recorrido."
+  description: Lanza una de tus hachas hasta 6 m. Vuelve a tu mano al instante al impactar o al terminar su recorrido.
   localizationKey: ability.axe.dualaxethrow
   preparation: 0.4
   active: 0.2
@@ -90,9 +90,11 @@ MonoBehaviour:
   comboStepSfx: []
   pose: 0
   usesSwordCombo: 0
+  comboSteps: []
+  comboOrder: 0
   targetsGround: 0
-  aimFromCamera: 0
-  range: 6
+  aimFromCamera: 1
+  range: 20
   actions:
   - rid: 1
   references:
@@ -105,4 +107,4 @@ MonoBehaviour:
         postureDamage: -1
         speed: 20
         radius: 0.25
-        spinsPerSecond: 3
+        spinsPerSecond: 4

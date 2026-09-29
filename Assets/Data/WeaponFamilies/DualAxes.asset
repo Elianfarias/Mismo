@@ -24,7 +24,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 751a8b6d670d496093d1af0182182117, type: 2}
   - {fileID: 11400000, guid: 347f76fab7c948d6b2fee61015b04905, type: 2}
   - {fileID: 11400000, guid: 81eca32b632d48e4ad0e326da3fb5f2e, type: 2}
-  - {fileID: 11400000, guid: 5911f4b55ebe41b884bc8ff39b2350f8, type: 2}
   - {fileID: 11400000, guid: 1322194df04446bbb0e9868e7a56ff11, type: 2}
-  masteryLevelsPerUnlock: 3
+  - {fileID: 11400000, guid: 5911f4b55ebe41b884bc8ff39b2350f8, type: 2}
+  masteryLevelsPerUnlock: 1
   animations: {fileID: 11400000, guid: 7b158065c95642879d4661226b4a5c25, type: 2}
+  feedback: {fileID: 0}

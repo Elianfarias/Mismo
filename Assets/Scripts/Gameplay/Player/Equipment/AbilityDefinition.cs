@@ -7,6 +7,7 @@ namespace Mismo.Gameplay.Player.Equipment
     public enum AbilityPose { None, Lunge, Parry, Spin, Bow }
     // Serialized by index: append new passives at the end.
     public enum WeaponPassive { None, ThirdArrow, SwordTip, Rhythm, Finisher, Coverage, Buckler, FiloCruel, Verdugo, Bloodthirst, DoubleEdge }
+    public enum ComboOrder { Sequential, AlternateHands }
 
     [CreateAssetMenu(menuName = "Mismo/Combat/Ability")]
     public sealed class AbilityDefinition : ScriptableObject
@@ -64,6 +65,9 @@ namespace Mismo.Gameplay.Player.Equipment
         [InspectorName("Golpes del combo")]
         [Tooltip("La duración controla la velocidad del clip; las ventanas se expresan de 0 a 100 %. El estado de ejecución pertenece a cada personaje.")]
         public Mismo.Gameplay.Combat.ComboStep[] comboSteps = Array.Empty<Mismo.Gameplay.Combat.ComboStep>();
+        [InspectorName("Orden de los golpes")]
+        [Tooltip("Secuencial: cada golpe lleva al siguiente y la cadena termina en el último. Alternar manos: 0 derecha, 1 izquierda, 2 doble que abre la derecha, 3 doble que abre la izquierda; se repite mientras se encadene y los dobles salen con Doble filo.")]
+        public ComboOrder comboOrder;
         public bool targetsGround;
         public bool aimFromCamera;
         [Tooltip("Alcance de apuntado y proyectiles. Los golpes cuerpo a cuerpo configuran su área en Actions (Radius y Forward), o en Golpes del combo.")]

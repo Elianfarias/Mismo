@@ -11,6 +11,8 @@ namespace Mismo.Gameplay.Combat
     public sealed class AttackHitbox : MonoBehaviour
     {
         private readonly HashSet<Object> hitTargets = new HashSet<Object>();
+        // Off-hand hits when each weapon strikes on its own (ComboStriker.EachHand).
+        private readonly HashSet<Object> secondHandTargets = new HashSet<Object>();
         private DamageDealer damageDealer;
         private PlayerMotor motor;
         private Transform owner;
@@ -62,6 +64,7 @@ namespace Mismo.Gameplay.Combat
             finishing = damageConfigured = rangedBasic = false;
             IsWindowOpen = false;
             hitTargets.Clear();
+            secondHandTargets.Clear();
             var inventory = GetComponentInParent<Mismo.Gameplay.Player.Equipment.Inventory.PlayerInventory>();
             var loadout = GetComponentInParent<EquipmentLoadout>();
             var weapon = loadout != null ? loadout.ActiveDefinition : null;
@@ -82,6 +85,7 @@ namespace Mismo.Gameplay.Combat
             currentIndex = -1;
             IsWindowOpen = finishing = false;
             hitTargets.Clear();
+            secondHandTargets.Clear();
         }
         private void OnDisable() => CancelAttack();
         private void LateUpdate() => EvaluateImpact();
@@ -142,7 +146,7 @@ namespace Mismo.Gameplay.Combat
                 Vector3 b=visual.TransformPoint(legacySecond?profile.secondaryTrailTip:profile.trailTip);
                 bool same=history.valid&&history.visual==visual;
                 Vector3 oldA=same?history.a:a,oldB=same?history.b:b;
-                if(detect)
+                if(detect&&Strikes(hand))
                 {
                     float radius=step.BladeRadius;
                     Vector3 startA=Vector3.Lerp(oldA,a,from),startB=Vector3.Lerp(oldB,b,from);
@@ -155,7 +159,7 @@ namespace Mismo.Gameplay.Combat
                         float t=(float)i/count;Vector3 x=Vector3.Lerp(startA,endA,t),y=Vector3.Lerp(startB,endB,t);
                         bladeA=x;bladeB=y;bladeMotion=((endA-startA)+(endB-startB))*.5f;
                         bladeContact=(x+y)*.5f;transform.position=bladeContact.Value;
-                        foreach(var other in Physics.OverlapCapsule(x,y,radius,~0,QueryTriggerInteraction.Ignore))ApplyHit(other);
+                        foreach(var other in Physics.OverlapCapsule(x,y,radius,~0,QueryTriggerInteraction.Ignore))ApplyHit(other,hand);
                     }
                 }
                 history.a=a;history.b=b;history.visual=visual;history.valid=true;
@@ -199,14 +203,22 @@ namespace Mismo.Gameplay.Combat
             foreach (var other in overlaps) ApplyHit(other);
         }
 
-        private void ApplyHit(Collider other)
+        private bool Strikes(int hand) => step.Striker == ComboStriker.MainHand ? hand == 0 : step.Striker != ComboStriker.OffHand || hand == 1;
+
+        private void ApplyHit(Collider other, int hand = -1)
         {
             if (step == null || other == null || other.transform == owner || other.transform.IsChildOf(owner)) return;
             if (!(other.GetComponentInParent<IDamageReceiver>() is Component receiver)) return;
-            if (!hitTargets.Add(receiver)) return;
+            bool secondStrike = false;
+            if (step.Striker == ComboStriker.EachHand && hand >= 0)
+            {
+                if (!(hand == 0 ? hitTargets : secondHandTargets).Add(receiver)) return;
+                secondStrike = (hand == 0 ? secondHandTargets : hitTargets).Contains(receiver);
+            }
+            else if (!hitTargets.Add(receiver)) return;
             Vector3 direction=bladeContact.HasValue&&bladeMotion.sqrMagnitude>.000001f?bladeMotion:other.transform.position-owner.position;
             Vector3 point=bladeContact.HasValue?FindBladeContact(other,bladeA,bladeB,direction):other.ClosestPoint(owner.position+Facing*step.Center);
-            damageDealer.ApplyTo(other.gameObject,point,direction);
+            damageDealer.ApplyTo(other.gameObject,point,direction,secondStrike);
         }
 
         public static Vector3 FindBladeContact(Collider other,Vector3 a,Vector3 b,Vector3 direction)

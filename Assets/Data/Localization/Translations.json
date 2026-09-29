@@ -1237,8 +1237,8 @@
     },
     {
       "key": "ability.axe.dualaxeberserk.description",
-      "es": "Durante 9 s obtenés un 11 % más de daño de ataque y un 22 % más de velocidad de ataque. Cada básico acertado da 1 Focus adicional y gastás un 66 % menos de stamina, pero tu armadura se reduce un 55 %.",
-      "en": "For 9 s you gain 11% attack damage and 22% attack speed. Each basic attack that lands grants 1 additional Focus and you spend 66% less stamina, but your armor is reduced by 55%."
+      "es": "Durante 9 s obtenés un 11 % más de daño de ataque y un 22 % más de velocidad de ataque. Cada básico acertado da 1 Focus adicional y te cura el 15 % del daño que hace, y gastás un 66 % menos de stamina, pero tu armadura se reduce un 55 %.",
+      "en": "For 9 s you gain 11% attack damage and 22% attack speed. Each basic attack that lands grants 1 additional Focus and heals you for 15% of the damage it deals, and you spend 66% less stamina, but your armor is reduced by 55%."
     },
     {
       "key": "ability.axe.dualaxebloodthirst.name",
@@ -1257,8 +1257,8 @@
     },
     {
       "key": "ability.axe.dualaxedoubleedge.description",
-      "es": "Cada básico tiene un 50 % de probabilidad de golpear una segunda vez con la otra hacha.",
-      "en": "Each basic attack has a 50% chance to strike a second time with the other axe."
+      "es": "Cada básico tiene un 50 % de probabilidad de ser un golpe doble: una hacha barre y la otra la sigue por el mismo recorrido.",
+      "en": "Each basic attack has a 50% chance to become a double strike: one axe sweeps and the other follows the same path."
     }
   ]
 }

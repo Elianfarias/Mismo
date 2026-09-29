@@ -1,0 +1,6 @@
+PASS: cuatro clips Humanoid y sus proyectos editables
+Filo del hacha (espacio local): (1.00, 0.00, 0.00)
+PASS Combat_DualAxe_Basic_Right: 0,75s, derecha 1,72m / izquierda 0,30m, error de pose 0,00000m
+PASS Combat_DualAxe_Basic_Left: 0,75s, derecha 0,26m / izquierda 1,92m, error de pose 0,00000m
+PASS Combat_DualAxe_Double_Right: 1,30s, derecha 1,74m / izquierda 1,99m, error de pose 0,00006m
+PASS Combat_DualAxe_Double_Left: 1,30s, derecha 1,79m / izquierda 1,81m, error de pose 0,00000m

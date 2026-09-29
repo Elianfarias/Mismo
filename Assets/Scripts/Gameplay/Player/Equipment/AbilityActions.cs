@@ -56,7 +56,11 @@ namespace Mismo.Gameplay.Player.Equipment
                 float multiplier=effects!=null?effects.BasicMultiplier(c.AttackId,point,target):1;
                 var info=new DamageInfo(damage*multiplier*c.DamageMultiplier, c.Owner, point, (target.transform.position-c.Owner.transform.position).normalized, c.AttackId, postureDamage, weaponFamilyId:c.WeaponFamilyId,focusGainOnHit:c.Definition.focusGainOnHit);
                 bool hit=receiver.ReceiveDamage(info);
-                if(hit&&effects!=null){effects.BasicHit(c.AttackId,target);effects.TryDoubleEdge(target,info);}
+                if(hit&&effects!=null)
+                {
+                    effects.BasicHit(c.AttackId,target);
+                    if(receiver is DamageReceiver resolved)effects.BasicDamageDealt(resolved.LastResult.HealthDamage);
+                }
             }
         }
     }

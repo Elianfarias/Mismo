@@ -22,8 +22,10 @@ namespace Mismo.Gameplay.Player.Editor
                 else foreach (var step in definition.comboSteps)
                     if (step != null && step.ImpactEnd <= step.ImpactStart)
                         EditorGUILayout.HelpBox("Un golpe tiene una ventana de impacto vacía: no hará daño.", MessageType.Warning);
+                if (definition.comboOrder == ComboOrder.AlternateHands && (definition.comboSteps == null || definition.comboSteps.Length != 4))
+                    EditorGUILayout.HelpBox("Alternar manos necesita cuatro golpes: derecha, izquierda, doble que abre la derecha y doble que abre la izquierda.", MessageType.Warning);
             }
-            else DrawPropertiesExcluding(serializedObject, "comboSteps");
+            else DrawPropertiesExcluding(serializedObject, "comboSteps", "comboOrder");
             serializedObject.ApplyModifiedProperties();
             if (definition.usesSwordCombo) return;
             if (GUILayout.Button("Agregar comportamiento"))

@@ -120,6 +120,8 @@ namespace Mismo.Gameplay.Player.Equipment
         public float staminaCostMultiplier=.34f;
         [Tooltip("Multiplica la armadura positiva mientras dura (0.45 = -55 %).")]
         public float armorMultiplier=.45f;
+        [Tooltip("Fracción del daño de los básicos que cura mientras dura (0.15 = 15 %). Habilidades y sangrado no curan.")]
+        [Range(0,1)] public float lifeSteal=.15f;
         public override void Begin(AbilityExecution c)=>c.Owner.GetComponent<WeaponSkillEffects>()?.Berserk(this);
     }
 }

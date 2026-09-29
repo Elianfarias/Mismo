@@ -19,7 +19,7 @@ MonoBehaviour:
   passive: 0
   description: "Extiende ambas hachas y gira 360\xB0. Cada hacha que golpea a un enemigo le hace un 130 % del da\xF1o del b\xE1sico."
   localizationKey: ability.axe.dualaxedeathspin
-  preparation: 1.62
+  preparation: 0.26
   active: 0.6
   recovery: 0.4
   cooldown: 8
@@ -90,6 +90,8 @@ MonoBehaviour:
   comboStepSfx: []
   pose: 3
   usesSwordCombo: 0
+  comboSteps: []
+  comboOrder: 0
   targetsGround: 0
   aimFromCamera: 0
   range: 22

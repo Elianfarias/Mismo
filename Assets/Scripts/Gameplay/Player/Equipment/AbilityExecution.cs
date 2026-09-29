@@ -9,7 +9,9 @@ namespace Mismo.Gameplay.Player.Equipment
         public readonly AbilityRunner Runner;
         public readonly WeaponDefinition Weapon;
         public readonly AbilityDefinition Definition;
-        public readonly float DamageMultiplier, AttackSpeed;
+        public readonly float DamageMultiplier;
+        public float AttackSpeed {get;private set;}
+        readonly bool offensive;
         public readonly string WeaponFamilyId;
         public Vector3 Direction;
         public readonly Vector3 GroundPoint;
@@ -31,9 +33,15 @@ namespace Mismo.Gameplay.Player.Equipment
             Runner = runner; Weapon = weapon; Definition = definition; Direction = direction; GroundPoint = point;
             var inventory=runner.GetComponent<Inventory.PlayerInventory>();
             DamageMultiplier=inventory!=null?inventory.DamageMultiplier(weapon):1;
-            bool offensive=definition.usesSwordCombo||definition.actions!=null&&System.Array.Exists(definition.actions,a=>a is MeleeAction||a is ProjectileAction||a is PoisonArrowAction||a is RepeatedStrikeAction||a is GroundAreaAction||a is ArmorRendStrikeAction||a is FuriousComboAction||a is AxeThrowAction);
-            AttackSpeed=offensive&&inventory!=null?inventory.AttackSpeed(weapon):1;
+            offensive=definition.usesSwordCombo||definition.actions!=null&&System.Array.Exists(definition.actions,a=>a is MeleeAction||a is ProjectileAction||a is PoisonArrowAction||a is RepeatedStrikeAction||a is GroundAreaAction||a is ArmorRendStrikeAction||a is FuriousComboAction||a is AxeThrowAction);
+            RefreshAttackSpeed();
             WeaponFamilyId=weapon!=null?weapon.MasteryId:null;
+        }
+        // Combos re-read it per step: a looping chain would otherwise keep an expired buff.
+        public void RefreshAttackSpeed()
+        {
+            var inventory=Runner.GetComponent<Inventory.PlayerInventory>();
+            AttackSpeed=offensive&&inventory!=null?inventory.AttackSpeed(Weapon):1;
         }
     }
 }
