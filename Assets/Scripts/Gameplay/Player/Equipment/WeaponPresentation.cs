@@ -62,12 +62,35 @@ namespace Mismo.Gameplay.Player.Equipment
             bool hasEmbedded = embeddedSword.Any(r => r is SkinnedMeshRenderer);
             foreach (var renderer in embeddedSword) renderer.enabled = weapon != null && weapon.visualPrefab == null && !weapon.dualWield && weapon.poseProfile == null && !weapon.isBow && (renderer is SkinnedMeshRenderer || !hasEmbedded);
             if(weapon!=null && weapon.poseProfile!=null)weapon.poseProfile.HideEmbeddedVisuals(animator);
-            if (weapon != null && weapon.visualPrefab != null) activeVisual = Instantiate(weapon.visualPrefab, transform);
-            if (loadout.SecondaryDefinition != null && loadout.SecondaryDefinition.visualPrefab != null) backVisual = Instantiate(loadout.SecondaryDefinition.visualPrefab, transform);
-            if (weapon != null && weapon.SecondaryVisualPrefab != null) activeSecondVisual = Instantiate(weapon.SecondaryVisualPrefab, transform);
+            if (weapon != null && weapon.visualPrefab != null)
+            {
+                activeVisual = Instantiate(weapon.visualPrefab, transform);
+                DisableVisualColliders(activeVisual);
+            }
+            if (loadout.SecondaryDefinition != null && loadout.SecondaryDefinition.visualPrefab != null)
+            {
+                backVisual = Instantiate(loadout.SecondaryDefinition.visualPrefab, transform);
+                DisableVisualColliders(backVisual);
+            }
+            if (weapon != null && weapon.SecondaryVisualPrefab != null)
+            {
+                activeSecondVisual = Instantiate(weapon.SecondaryVisualPrefab, transform);
+                DisableVisualColliders(activeSecondVisual);
+            }
             if (loadout.SecondaryDefinition != null && loadout.SecondaryDefinition.SecondaryVisualPrefab != null)
+            {
                 backSecondVisual = Instantiate(loadout.SecondaryDefinition.SecondaryVisualPrefab, transform);
+                DisableVisualColliders(backSecondVisual);
+            }
         }
+
+        private static void DisableVisualColliders(GameObject visual)
+        {
+            if (visual == null) return;
+            foreach (var collider in visual.GetComponentsInChildren<Collider>(true))
+                collider.enabled = false;
+        }
+
         private void LateUpdate()
         {
             if (loadout == null) return;

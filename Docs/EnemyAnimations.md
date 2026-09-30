@@ -4,7 +4,7 @@ Los ataques de goblins y del primer boss admiten clips individuales en sus Scrip
 
 ## Configuración en Unity
 
-1. Seleccionar el enemigo y abrir su asset **Settings** desde `GoblinController` o `BossController`.
+1. Seleccionar el enemigo y abrir su asset **Settings** desde el controlador propio (`GoblinController`, `ImpController` o `CreatureController`) o `BossController`.
 2. Expandir el ataque: **Slash / Charge** para goblins; **Front Slash / Overhead Smash / Straight Charge** para el boss.
 3. Expandir **Animation** y asignar un `AnimationClip` compatible con el rig del enemigo.
 4. Ajustar **Active Starts At** y **Recovery Starts At** entre 0 y 1. Indican el comienzo del golpe y de la recuperación dentro del clip, no segundos de combate.
@@ -15,6 +15,26 @@ Por ejemplo, para un clip de un segundo con impacto desde 0,25 s y recuperación
 Si **Clip** queda vacío se conserva la animación anterior del controlador. Los assets existentes no se modifican ni se les asigna una animación arbitraria. Dos enemigos que comparten Settings comparten la configuración; duplicar el asset permite una variante independiente.
 
 ## Reproducción y validación
+
+### Movimiento lateral y hacia atrás
+
+`EnemyEquipment` permite asignar `strafeLeftClip`, `strafeRightClip` y `backwardClip`. Se editan y previsualizan en **Mismo → Enemigos → Taller de armas y animaciones**. Los campos vacíos conservan la locomoción anterior. `directionalReferenceSpeed` adapta la velocidad de reproducción al desplazamiento real del NavMeshAgent.
+
+Durante el posicionamiento con un objetivo, `EnemyActionPlayback` selecciona el clip según la velocidad local del enemigo: izquierda, derecha o atrás. Ataques, reacciones, postura rota y muerte mantienen prioridad. Los clips se reproducen sin root motion; el movimiento físico sigue siendo responsabilidad del agente.
+
+El Imp utiliza los clips Humanoid en bucle `HumanM@Run01_Left`, `HumanM@Run01_Right` y `HumanM@Run01_Backward`, de `Art/Animations/WeaponCombat/Human Animations`, mediante referencias serializadas. No se modifican los originales ni se asignan estos clips a rigs Generic.
+
+### Decisiones del Imp
+
+`ImpController` mantiene una banda alrededor de `EnemySettings.preferredRange` (6,5 ± 1,5 metros con la configuración actual). Se acerca hasta esa banda, lanza un proyectil elegible y se desplaza lateralmente durante el cooldown. Si el jugador lo alcanza, puede atacar cuerpo a cuerpo y retirarse después de terminar la recuperación. Las retiradas duran como máximo 1,1 segundos y tienen una pausa de 3 segundos para permitir que el jugador lo alcance. Las nuevas decisiones incluyen una reacción de 0,3 segundos; no cancelan ataques ni recuperaciones ya iniciados.
+
+Los destinos tácticos se comprueban sobre NavMesh, con camino completo y dentro del radio de regreso. Sin visión busca otro ángulo desde la última posición conocida; sólo puede iniciar un ataque cuando la comprobación común recupera la visión. Si no tiene un proyectil habilitado, conserva la selección y el movimiento de combate anteriores.
+
+La entrada estable `forest.Imp` del WorldContentCatalog permite bosque y pradera. Se conservan su peso, porcentaje, cantidad y límites de nivel. Appearance Chance 100 significa participar siempre en el sorteo elegible, no ocupar todos los encuentros. Los cambios se aplican al cargar encuentros; no sustituyen los que ya están instanciados ni reviven enemigos derrotados.
+
+`ImpTacticsChecks` verifica selección, movimiento, clips y aparición real en terreno generado. Se integra en **Mismo → Enemigos → Verificar separación de controladores**. `ImpTacticsChecks.RunBatch` ejecuta configuración, regresiones en una escena temporal y build del catálogo y prefab; guarda los resultados en `output/imp-tactics`.
+
+### Ataques y compatibilidad de rigs
 
 Los clips del esqueleto `Armature_Humanoid` del aventurero se adaptan automáticamente al esqueleto `Goblin_Rig` usado por el goblin y el jefe. El editor guarda las copias en `Assets/Art/Animations/GoblinConcept/Compatible`, conserva el clip asignado y vuelve a generarlas cuando cambia el origen. También se pueden actualizar desde **Mismo > Enemigos > Actualizar clips compatibles**. La adaptación conserva las proporciones del enemigo y su desplazamiento controlado por la IA. Otros esqueletos requieren una adaptación propia.
 

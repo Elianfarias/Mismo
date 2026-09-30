@@ -18,6 +18,21 @@ namespace Mismo.Gameplay.Combat
         float sinceHit,brokenRemaining;
         float breakRecoveryDuration, breakRecoveryRemaining;
         public bool RecoveringFromBreak => breakRecoveryRemaining > 0;
+        int consecutiveInterrupts;
+        float interruptImmunityRemaining;
+        public bool InterruptImmune => interruptImmunityRemaining > 0;
+        // Call only for an eligible mini-interruption, after resolving posture damage.
+        // Posture breaks and parries must never pass through this gate.
+        public bool TryInterrupt(int maximumConsecutive, float immunityDuration)
+        {
+            if (Broken || InterruptImmune || health != null && health.IsDead) return false;
+            if (++consecutiveInterrupts >= Mathf.Max(1, maximumConsecutive))
+            {
+                consecutiveInterrupts = 0;
+                interruptImmunityRemaining = Mathf.Max(0, immunityDuration);
+            }
+            return true;
+        }
         public void ConfigureBreakRecovery(float seconds) => breakRecoveryDuration = Mathf.Max(0, seconds);
         Health health;
         bool wasDead;
@@ -25,7 +40,7 @@ namespace Mismo.Gameplay.Combat
         void OnDestroy(){if(health!=null)health.Changed-=LifeChanged;}
         void LifeChanged(float value,float max){if(value<=0){wasDead=true;Focus=0;}else if(wasDead){wasDead=false;ResetCombat();}}
         public void ConfigurePosture(float maximum){UsesPosture=true;maximumPosture=maximum;ResetCombat();}
-        public void ResetCombat(){Posture=maximumPosture;Focus=0;sinceHit=brokenRemaining=breakRecoveryRemaining=0;Recovering=false;}
+        public void ResetCombat(){Posture=maximumPosture;Focus=0;sinceHit=brokenRemaining=breakRecoveryRemaining=interruptImmunityRemaining=0;consecutiveInterrupts=0;Recovering=false;}
         public void Stagger(float duration)
         {
             if(health!=null&&health.IsDead)return;
@@ -43,7 +58,9 @@ namespace Mismo.Gameplay.Combat
         void Update()=>Tick(Time.deltaTime);
         public void Tick(float dt)
         {
+            if (dt <= 0) return;
             if(health!=null&&health.IsDead)return;
+            interruptImmunityRemaining=Mathf.Max(0,interruptImmunityRemaining-dt);
             if(Broken){brokenRemaining=Mathf.Max(0,brokenRemaining-dt);if(!Broken){Posture=maximumPosture;breakRecoveryRemaining=breakRecoveryDuration;}return;}
             breakRecoveryRemaining=Mathf.Max(0,breakRecoveryRemaining-dt);
             sinceHit+=dt;if(UsesPosture&&sinceHit>=regenerationDelay)Posture=Mathf.Min(maximumPosture,Posture+regeneration*dt);

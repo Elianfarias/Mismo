@@ -18,13 +18,14 @@ namespace Mismo.Gameplay.Player.World
         public bool Complete=>Layout!=null&&stage>=5+Layout.Definition.encounters.Length;
         PlayerController player;
         TutorialGuide guide;
+        WorldMapPanel map;
         ExplorationChunks world;
         EquipmentLoadout equipment;
         Health health;
         Health[] opponents;
         GameObject encounter;
         int stage,lessons;
-        bool accepted;
+        bool talkedToNarrator;
         string saveError;
         float nextSaveAttempt;
         WorldIntroductionDefinition Data=>Layout.Definition;
@@ -42,6 +43,7 @@ namespace Mismo.Gameplay.Player.World
             stage=Mathf.Clamp(WorldSession.Current.introductionStage,0,5+Data.encounters.Length);
             lessons=WorldSession.Current.introductionLessons;
             guide=target.GetComponent<TutorialGuide>()??target.gameObject.AddComponent<TutorialGuide>();guide.Closed+=Closed;
+            map=target.GetComponent<WorldMapPanel>();
             Geometry=new GameObject("Introduction geometry").transform;Geometry.SetParent(transform,false);
             Instantiate(Data.cave,Layout.Cave,Layout.CaveRotation,Geometry);
             Instantiate(Data.grove,Layout.Grove,Layout.Facing,Geometry);
@@ -54,12 +56,20 @@ namespace Mismo.Gameplay.Player.World
         public bool Talk()
         {
             if(stage<3||health.IsDead)return false;
-            return guide.TryBegin(Data.story,true);
+            if(!guide.TryBegin(Data.story,true))return false;
+            if(stage==3)
+            {
+                // The objective is to talk, not to use a particular dialogue dismissal button.
+                // Save now so leaving the game during the conversation cannot restore its marker.
+                talkedToNarrator=true;lessons|=1<<stage;
+                Advance(Layout.Grove+Layout.Facing*new Vector3(0,.35f,-5));
+            }
+            return true;
         }
         void Closed(TutorialSequence sequence,bool skipped)
         {
             if(!isActiveAndEnabled||WorldSession.Current==null||sequence!=Lesson)return;
-            if(stage==3){accepted=!skipped;return;}
+            if(stage==3)return;
             // Persist on the next update, after pause has released its input frame.
             lessons|=1<<stage;
         }
@@ -71,7 +81,7 @@ namespace Mismo.Gameplay.Player.World
             if(WorldSession.Current.introductionLessons!=lessons&&!Save(stage,null))return;
             if(stage==3)
             {
-                if(accepted)Advance(Layout.Grove+Layout.Facing*new Vector3(0,.35f,-5));
+                if(talkedToNarrator)Advance(Layout.Grove+Layout.Facing*new Vector3(0,.35f,-5));
                 return; // F talks to the real NPC; merely entering the grove does not accept the call.
             }
             if(Keyboard.current?.hKey.wasPressedThisFrame==true&&Lesson!=null){guide.TryBegin(Lesson,true);return;}
@@ -107,7 +117,7 @@ namespace Mismo.Gameplay.Player.World
         {
             if(!Save(stage+1,respawn))return;
             // Corpses may finish awarding loot; don't destroy their pending reward components.
-            encounter=null;opponents=null;stage++;accepted=false;
+            encounter=null;opponents=null;stage++;talkedToNarrator=false;
         }
         void OnDisable(){if(guide!=null)guide.Closed-=Closed;}
         string Title=>stage==0?"Despertar entre cristales":stage==1?"Seguí la luz de los cristales":stage==2?"La salida de la cueva":
@@ -115,12 +125,30 @@ namespace Mismo.Gameplay.Player.World
         string Instruction=>stage==0?"WASD · Moverte     Mouse · Mirar":stage==1?"Mantené Shift mientras avanzás para correr. Cuidá tu estamina.":
             stage==2?"Seguí el túnel hasta la luz del día.":stage==3?"Buscá a Liria junto al refugio. Acercate y presioná F para conversar.":
             WaitingForLessonWeapon?"Presioná Tab para equipar el arco y aprender a tensar el disparo y usar su Focus.":CombatStage?Data.encounters[EncounterIndex].instruction:"Llegá a la entrada del pueblo y conocé a sus habitantes.";
+        public Rect ObjectiveRect
+        {
+            get
+            {
+                float scale=PlayerHUD.Scale;var mini=map!=null&&map.isActiveAndEnabled?map.MiniRect:default;
+                return PlaceObjective(new Rect(0,0,Screen.width/scale,Screen.height/scale),new Rect(mini.position/scale,mini.size/scale));
+            }
+        }
+        public static Rect PlaceObjective(Rect screen,Rect minimap)
+        {
+            const float margin=20,gap=12,width=386,height=155;
+            var panel=new Rect(screen.xMax-margin-width,screen.yMin+34,width,height);
+            if(minimap.width<=0||minimap.height<=0)return panel;
+            panel.y=minimap.yMax+gap;
+            // A resized minimap may reach the hotbar: use the free space to its left instead.
+            if(panel.yMax>screen.yMax-180)
+            {panel.x=minimap.xMin-gap-width;panel.y=Mathf.Max(screen.yMin+98,minimap.yMin);}
+            return panel;
+        }
         void OnGUI()
         {
-            if(Layout==null||Complete||guide==null||guide.IsOpen||GameplayPause.IsPaused||InventoryPanel.AnyOpen||WorldMapPanel.AnyOpen)return;
+            if(Layout==null||Complete||talkedToNarrator||guide==null||guide.IsOpen||GameplayPause.IsPaused||InventoryPanel.AnyOpen||WorldMapPanel.AnyOpen)return;
             GUI.depth=0;var matrix=GUI.matrix;float scale=PlayerHUD.Scale;GUI.matrix=Matrix4x4.Scale(Vector3.one*scale);
-            float width=Screen.width/scale;
-            var panel=new Rect(width-410,34,386,155);PlayerHUD.Fill(panel,new Color(.035f,.05f,.06f,.9f));
+            var panel=ObjectiveRect;PlayerHUD.Fill(panel,new Color(.035f,.05f,.06f,.9f));
             QuietFantasyUI.Text(new Rect(panel.x+16,panel.y+10,354,28),Title,21,PlayerHUD.Gold);
             QuietFantasyUI.Text(new Rect(panel.x+16,panel.y+43,354,76),saveError??Instruction,17);
             float distance=Vector2.Distance(new Vector2(player.transform.position.x,player.transform.position.z),new Vector2(Destination.x,Destination.z));

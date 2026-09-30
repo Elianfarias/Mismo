@@ -18,6 +18,7 @@ namespace Mismo.Gameplay.Player.Presentation
         bool dragging,moved;
         int dragButton;
         string error;
+        string mapTooltip;
         Vector2 paletteScroll;
         Rect Card => new Rect(Mathf.Max(8,Screen.width-312),IsOpen?76:MiniRect.yMax+10,300,250);
         public IReadOnlyList<MapPin> Pins => pins;
@@ -86,6 +87,7 @@ namespace Mismo.Gameplay.Player.Presentation
         void OnGUI()
         {
             if(mapCamera==null||InventoryBlocked())return;
+            mapTooltip=null;
             HandleMiniResize();
             // Consume the wheel before marker buttons; zoom must also work over an icon.
             if(!IsOpen&&miniInteractive&&!resizingMini&&Event.current.type==EventType.ScrollWheel&&MiniRect.Contains(Event.current.mousePosition))
@@ -98,8 +100,8 @@ namespace Mismo.Gameplay.Player.Presentation
             {
                 GUI.depth=-200;PlayerHUD.Fill(View,new Color(.015f,.025f,.035f,Mathf.Clamp01(catalog.backgroundOpacity)));
                 if(texture!=null)GUI.DrawTexture(View,texture,ScaleMode.StretchToFill);
-                if(MapIcons.Button(new Rect(Screen.width-56,12,42,42),MapSymbol.Close,"Cerrar · M"))Close();
-                if(MapIcons.Button(new Rect(Screen.width-56,Screen.height-56,42,42),MapSymbol.Center,"Centrar en mí"))Recenter();
+                if(MapButton(new Rect(Screen.width-56,12,42,42),MapSymbol.Close,"Cerrar · M"))Close();
+                if(MapButton(new Rect(Screen.width-56,Screen.height-56,42,42),MapSymbol.Center,"Centrar en mí"))Recenter();
                 DrawMarkers(View,true);
 
             }
@@ -112,7 +114,7 @@ namespace Mismo.Gameplay.Player.Presentation
                 if(texture!=null)GUI.DrawTexture(MiniRect,texture,ScaleMode.StretchToFill);
                 DrawMarkers(MiniRect,miniInteractive);
                 GUI.color=previousColor;
-                if(miniInteractive||!followPlayer||miniOrbitOffset.sqrMagnitude>.001f)if(MapIcons.Button(new Rect(MiniRect.xMax-34,MiniRect.yMax-34,32,32),MapSymbol.Center,"Centrar y restablecer orientación"))Recenter();
+                if(miniInteractive||!followPlayer||miniOrbitOffset.sqrMagnitude>.001f)if(MapButton(new Rect(MiniRect.xMax-34,MiniRect.yMax-34,32,32),MapSymbol.Center,"Centrar y restablecer orientación"))Recenter();
                 float radians=-renderedYaw*Mathf.Deg2Rad;var north=MiniRect.center+new Vector2(Mathf.Sin(radians),-Mathf.Cos(radians))*(MiniRect.width*.43f);
                 QuietFantasyUI.Text(new Rect(north.x-10,north.y-10,20,20),"N",14,Color.white,false,TextAnchor.MiddleCenter);
 
@@ -122,16 +124,21 @@ namespace Mismo.Gameplay.Player.Presentation
             {
                 var p=Project(selectedVillage.Value.position,IsOpen?View:MiniRect);
                 var rect=new Rect(Mathf.Clamp(p.x+30,4,Screen.width-52),Mathf.Clamp(p.y+22,4,Screen.height-52),44,44);
-                if(MapIcons.Button(rect,MapSymbol.Portal,"Viajar"))TravelTo(selectedVillage.Value);
+                if(MapButton(rect,MapSymbol.Portal,"Viajar"))TravelTo(selectedVillage.Value);
             }
             if(!resizingMini&&(IsOpen||miniInteractive))HandleMapInput(IsOpen?View:MiniRect);
             if(!string.IsNullOrEmpty(error))QuietFantasyUI.Text(new Rect(20,Screen.height-80,Screen.width-90,50),error,17,new Color(1,.65f,.5f));
             GUI.depth=oldDepth;
-            if(!string.IsNullOrEmpty(GUI.tooltip))
+            if(!string.IsNullOrEmpty(mapTooltip))
             {
                 var p=Event.current.mousePosition;var r=new Rect(Mathf.Clamp(p.x+12,4,Screen.width-224),Mathf.Clamp(p.y+20,4,Screen.height-34),220,28);
-                PlayerHUD.Fill(r,new Color(.03f,.045f,.06f,.96f));QuietFantasyUI.Text(r,GUI.tooltip,15,Color.white,false,TextAnchor.MiddleCenter);
+                PlayerHUD.Fill(r,new Color(.03f,.045f,.06f,.96f));QuietFantasyUI.Text(r,mapTooltip,15,Color.white,false,TextAnchor.MiddleCenter);
             }
+        }
+        bool MapButton(Rect rect,MapSymbol symbol,string tooltip,Color? color=null,Texture2D custom=null)
+        {
+            if(rect.Contains(Event.current.mousePosition))mapTooltip=tooltip;
+            return MapIcons.Button(rect,symbol,tooltip,color,custom);
         }
         void DrawMarkers(Rect rect,bool interactive)
         {
@@ -141,7 +148,7 @@ namespace Mismo.Gameplay.Player.Presentation
                 if(!VisibleOnMap(site.position))continue;
                 var p=Project(site.position,rect)-rect.position;if(!local.Contains(p))continue;
                 var r=new Rect(p.x-16,p.y-16,32,32);
-                if(interactive&&MapIcons.Button(r,MapSymbol.House,VillageName(site),new Color(1,.91f,.68f),catalog.villageIcon)){selectedVillage=site;draft=null;error=null;}
+                if(interactive&&MapButton(r,MapSymbol.House,VillageName(site),new Color(1,.91f,.68f),catalog.villageIcon)){selectedVillage=site;draft=null;error=null;}
                 else if(!interactive)DrawIcon(r,MapSymbol.House,new Color(1,.91f,.68f),catalog.villageIcon);
                 if(IsOpen)DrawName(p,VillageName(site));
             }
@@ -150,7 +157,7 @@ namespace Mismo.Gameplay.Player.Presentation
                 if(!VisibleOnMap(new Vector3(pin.x,0,pin.z)))continue;
                 var p=Project(new Vector3(pin.x,0,pin.z),rect)-rect.position;if(!local.Contains(p))continue;
                 var type=catalog.Find(pin.typeId);var symbol=type?.symbol??MapSymbol.Flag;var color=type?.color??new Color(1,.76f,.25f);var r=new Rect(p.x-15,p.y-15,30,30);
-                if(interactive&&MapIcons.Button(r,symbol,pin.name,color,type?.icon)){draft=Clone(pin);selectedVillage=null;error=null;}
+                if(interactive&&MapButton(r,symbol,pin.name,color,type?.icon)){draft=Clone(pin);selectedVillage=null;error=null;}
                 else if(!interactive)DrawIcon(r,symbol,color,type?.icon);
                 if(IsOpen)DrawName(p,pin.name);
             }
@@ -264,7 +271,7 @@ namespace Mismo.Gameplay.Player.Presentation
         {
             PlayerHUD.Fill(Card,new Color(.04f,.06f,.08f,.98f));
             var r=Card;GUI.SetNextControlName("MapPinName");draft.name=GUI.TextField(new Rect(r.x+12,r.y+12,r.width-66,32),draft.name??"",48);
-            if(MapIcons.Button(new Rect(r.xMax-44,r.y+12,32,32),MapSymbol.Close,"Cancelar")){draft=null;return;}
+            if(MapButton(new Rect(r.xMax-44,r.y+12,32,32),MapSymbol.Close,"Cancelar")){draft=null;return;}
             var options=catalog.types.FindAll(t=>t!=null&&t.available);
             var viewport=new Rect(r.x+12,r.y+56,r.width-24,126);
             paletteScroll=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.BeginScrollView(viewport,paletteScroll,new Rect(0,0,250,Mathf.Max(126,Mathf.CeilToInt(options.Count/5f)*48)));
@@ -272,14 +279,14 @@ namespace Mismo.Gameplay.Player.Presentation
             {
                 var type=options[i];var cell=new Rect(i%5*48,i/5*48,42,42);
                 if(type.id==draft.typeId)QuietFantasyUI.Border(cell,QuietFantasyUI.Amber,2);
-                if(MapIcons.Button(cell,type.symbol,type.label,type.color,type.icon))draft.typeId=type.id;
+                if(MapButton(cell,type.symbol,type.label,type.color,type.icon))draft.typeId=type.id;
             }
             GUI.EndScrollView();
             bool enabled=GUI.enabled;GUI.enabled=!string.IsNullOrWhiteSpace(draft.name);
-            if(MapIcons.Button(new Rect(r.xMax-54,r.yMax-52,40,40),MapSymbol.Confirm,"Guardar marcador"))
+            if(MapButton(new Rect(r.xMax-54,r.yMax-52,40,40),MapSymbol.Confirm,"Guardar marcador"))
             {draft.name=draft.name.Trim();if(SavePin(draft))draft=null;}
             GUI.enabled=enabled;
-            if(draft!=null&&pins.Exists(p=>p.id==draft.id)&&MapIcons.Button(new Rect(r.x+12,r.yMax-52,40,40),MapSymbol.Delete,"Eliminar marcador"))if(DeletePin(draft.id))draft=null;
+            if(draft!=null&&pins.Exists(p=>p.id==draft.id)&&MapButton(new Rect(r.x+12,r.yMax-52,40,40),MapSymbol.Delete,"Eliminar marcador"))if(DeletePin(draft.id))draft=null;
         }
     }
 }

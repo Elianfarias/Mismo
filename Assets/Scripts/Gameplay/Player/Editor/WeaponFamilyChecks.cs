@@ -51,7 +51,7 @@ namespace Mismo.Gameplay.Player.Editor
         private static IEnumerator Run()
         {
             var player=Object.FindAnyObjectByType<PlayerController>();Check(player!=null,"Player fixture exists");player.enabled=false;
-            foreach(var goblin in Object.FindObjectsByType<Enemies.GoblinController>())goblin.enabled=false;
+            foreach(var goblin in Object.FindObjectsByType<Enemies.EnemyController>())goblin.enabled=false;
             var equipment=player.GetComponent<EquipmentLoadout>();equipment.Runner.Cancel();equipment.Belt?.Cancel();player.GetComponent<Health>().Revive();
             float until=Time.time+7;while(equipment.InCombat && Time.time<until)yield return null;
             var catalog=Mismo.Core.ProjectAssets.Load<ItemCatalog>("ItemCatalog");

@@ -212,7 +212,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 foreach(var loot in pendingLoot)
                 {
                     if(loot==null||!Guid.TryParseExact(loot.id,"N",out _)||!lootIds.Add(loot.id)||
-                        !Finite(loot.x)||!Finite(loot.y)||!Finite(loot.z)||!ValidStacks(loot.materials))return false;
+                        !Finite(loot.x)||!Finite(loot.y)||!Finite(loot.z)||double.IsNaN(loot.expiresAt)||double.IsInfinity(loot.expiresAt)||loot.expiresAt<0||loot.expiresAt>1e12||!ValidStacks(loot.materials))return false;
                     if(!loot.HasWeapon&&loot.weapon!=null&&!string.IsNullOrEmpty(loot.weapon.definitionId))return false;
                     var w=loot.HasWeapon?loot.weapon:null;
                     if(w!=null&&(!Guid.TryParseExact(w.instanceId,"N",out _)||!pendingWeaponIds.Add(w.instanceId)||
@@ -282,6 +282,14 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(harvestedNodes==null)harvestedNodes=new List<HarvestState>();
             if(quests==null)quests=new List<Mismo.Gameplay.Player.Quests.QuestProgress>();
             if(learnedRecipes==null)learnedRecipes=new List<string>();
+        }
+        public bool NormalizePendingLootExpiry(double lifetimeSeconds)
+        {
+            if(pendingLoot==null)return false;
+            bool changed=false;double lifetime=Math.Max(1,lifetimeSeconds);
+            foreach(var loot in pendingLoot)
+                if(loot!=null&&string.IsNullOrEmpty(loot.rewardId)&&loot.expiresAt<=0){loot.expiresAt=worldPlaySeconds+lifetime;changed=true;}
+            return changed;
         }
     }
 }

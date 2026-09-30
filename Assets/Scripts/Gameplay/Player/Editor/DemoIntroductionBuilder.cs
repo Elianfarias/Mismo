@@ -132,7 +132,7 @@ namespace Mismo.Gameplay.Player.Editor
             var prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Enemies/Goblin.prefab");
             if(prefab==null)throw new InvalidOperationException("Falta el prefab Goblin.");
             string path=DataPath+"/Goblin"+z+".asset";
-            var settings=AssetDatabase.LoadAssetAtPath<GoblinSettings>(path);
+            var settings=AssetDatabase.LoadAssetAtPath<EnemySettings>(path);
             if(settings==null)
             {
                 settings=Object.Instantiate(prefab.GetComponent<GoblinController>().Settings);

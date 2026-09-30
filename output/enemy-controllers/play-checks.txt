@@ -1,0 +1,49 @@
+Running actual prefab Play Mode checks
+PASS Inherited lifecycle and navigation: Goblin(Clone)
+PASS Species reaction policy: Goblin(Clone)
+PASS Telegraph without premature damage: Goblin(Clone)
+PASS One melee impact: Goblin(Clone)
+PASS No recovery damage: Goblin(Clone)
+PASS Posture break cancels action: Goblin(Clone)
+PASS Death cancels navigation and contacts: Goblin(Clone)
+PASS Dead enemy cannot damage: Goblin(Clone)
+PASS Inherited lifecycle and navigation: Imp(Clone)
+PASS Species reaction policy: Imp(Clone)
+PASS Telegraph without premature damage: Imp(Clone)
+PASS One melee impact: Imp(Clone)
+PASS No recovery damage: Imp(Clone)
+PASS Posture break cancels action: Imp(Clone)
+PASS Death cancels navigation and contacts: Imp(Clone)
+PASS Dead enemy cannot damage: Imp(Clone)
+PASS Inherited lifecycle and navigation: Boar_Standard(Clone)
+PASS Species reaction policy: Boar_Standard(Clone)
+PASS Telegraph without premature damage: Boar_Standard(Clone)
+PASS One melee impact: Boar_Standard(Clone)
+PASS No recovery damage: Boar_Standard(Clone)
+PASS Posture break cancels action: Boar_Standard(Clone)
+PASS Death cancels navigation and contacts: Boar_Standard(Clone)
+PASS Dead enemy cannot damage: Boar_Standard(Clone)
+PASS Inherited lifecycle and navigation: Spider_Standard(Clone)
+PASS Species reaction policy: Spider_Standard(Clone)
+PASS Telegraph without premature damage: Spider_Standard(Clone)
+PASS One melee impact: Spider_Standard(Clone)
+PASS No recovery damage: Spider_Standard(Clone)
+PASS Posture break cancels action: Spider_Standard(Clone)
+PASS Death cancels navigation and contacts: Spider_Standard(Clone)
+PASS Dead enemy cannot damage: Spider_Standard(Clone)
+PASS Inherited lifecycle and navigation: Forest_Golem_Stylized(Clone)
+PASS Species reaction policy: Forest_Golem_Stylized(Clone)
+PASS Telegraph without premature damage: Forest_Golem_Stylized(Clone)
+PASS One melee impact: Forest_Golem_Stylized(Clone)
+PASS No recovery damage: Forest_Golem_Stylized(Clone)
+PASS Posture break cancels action: Forest_Golem_Stylized(Clone)
+PASS Death cancels navigation and contacts: Forest_Golem_Stylized(Clone)
+PASS Dead enemy cannot damage: Forest_Golem_Stylized(Clone)
+PASS Imp selects its spell at range
+PASS Shared playback recognizes Imp attack
+PASS Imp releases exactly one projectile
+PASS Imp projectile applies damage with actual socket and visual
+PASS Imp begins second spell
+PASS Posture cancels spell before release
+PASS No delayed projectile after interruption
+PASS PLAY_MODE_COMPLETE

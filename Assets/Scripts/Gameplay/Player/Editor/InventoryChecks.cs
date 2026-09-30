@@ -71,7 +71,7 @@ namespace Mismo.Gameplay.Player.Editor
         static IEnumerator Run()
         {
             Application.targetFrameRate = 60; Application.runInBackground = true;
-            foreach (var enemy in Object.FindObjectsByType<GoblinController>()) enemy.enabled = false;
+            foreach (var enemy in Object.FindObjectsByType<EnemyController>()) enemy.enabled = false;
             foreach (var boss in Object.FindObjectsByType<BossController>()) boss.enabled = false;
             var player = Object.FindAnyObjectByType<PlayerController>(); player.enabled = false;
             var loadout = player.GetComponent<EquipmentLoadout>(); loadout.Runner.Cancel();

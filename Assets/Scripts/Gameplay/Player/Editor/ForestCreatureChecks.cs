@@ -38,7 +38,7 @@ namespace Mismo.Gameplay.Player.Editor
         static void Check(bool ok,string message){if(!ok)throw new Exception(message);count++;Debug.Log("FOREST_CHECK "+message);}
         static IEnumerator Run()
         {
-            var enemies=Object.FindObjectsByType<GoblinController>();Check(enemies.Length==8,"Eight variants in test scene");
+            var enemies=Object.FindObjectsByType<EnemyController>();Check(enemies.Length==8,"Eight variants in test scene");
             var catalog=Mismo.Core.ProjectAssets.Load<World.WorldContentCatalog>("WorldContentCatalog");
             var forestIds=new System.Collections.Generic.HashSet<string>();bool outsideForest=false,bossInOrdinary=false;
             for(int i=0;i<1000;i++)
@@ -70,18 +70,18 @@ namespace Mismo.Gameplay.Player.Editor
                     motor.ResetPosition(home+new Vector3(0,.05f,distance));player.GetComponent<Invulnerability>()?.Cancel();life.Revive();
                     // Re-enable resets this life and cooldowns; the enemy's normal Update drives the test.
                     enemy.enabled=true;enemy.SetTarget(player.transform);float end=Time.time+3;
-                    while(enemy.State!=GoblinState.Telegraph&&Time.time<end)yield return null;
-                    Check(enemy.State==GoblinState.Telegraph,attack.label+" enters anticipation");
+                    while(enemy.State!=EnemyState.Telegraph&&Time.time<end)yield return null;
+                    Check(enemy.State==EnemyState.Telegraph,attack.label+" enters anticipation");
                     float healthBefore=life.Current;int releases=0;bool observedHeld=false,windupSafe=true;float timeout=Time.time+attack.windup+attack.active+attack.recovery+2;
                     ProjectileInstance projectile=null;
-                    while(enemy.State!=GoblinState.Recovery&&Time.time<timeout)
+                    while(enemy.State!=EnemyState.Recovery&&Time.time<timeout)
                     {
-                        if(enemy.State==GoblinState.Telegraph)windupSafe&=life.Current==healthBefore;
+                        if(enemy.State==EnemyState.Telegraph)windupSafe&=life.Current==healthBefore;
                         observedHeld|=enemy.GetComponentsInChildren<Transform>().Any(t=>t.name=="Held rock");
                         var active=Object.FindAnyObjectByType<ProjectileInstance>();if(active!=null&&active!=projectile){projectile=active;releases++;}
                         yield return null;
                     }
-                    Check(enemy.State==GoblinState.Recovery,attack.label+" enters recovery");
+                    Check(enemy.State==EnemyState.Recovery,attack.label+" enters recovery");
                     Check(windupSafe,attack.label+" has no windup damage");
                     if(attack.kind==CreatureAttackKind.Projectile)
                     {
@@ -98,13 +98,13 @@ namespace Mismo.Gameplay.Player.Editor
                 }
                 enemy.enabled=true;yield return null;
                 enemy.GetComponent<Health>().ApplyDamage(new DamageInfo(100000,player.gameObject,enemy.transform.position,Vector3.forward));yield return null;
-                Check(enemy.State==GoblinState.Dead&&!enemy.GetComponent<NavMeshAgent>().enabled,species+" death cancels navigation");
+                Check(enemy.State==EnemyState.Dead&&!enemy.GetComponent<NavMeshAgent>().enabled,species+" death cancels navigation");
                 Check(!enemy.GetComponentsInChildren<Collider>().Any(c=>c.enabled),species+" death disables contacts");
                 enemy.enabled=false;
             }
             var interruption=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(ForestCreatureIntegration.Prefabs+"/Forest_Golem_Stylized.prefab"));
             interruption.transform.position=Vector3.zero;yield return null;
-            var caster=interruption.GetComponent<GoblinController>();caster.enabled=false;
+            var caster=interruption.GetComponent<EnemyController>();caster.enabled=false;
             var isolated=Object.Instantiate(caster.Settings);isolated.attacks=isolated.attacks.Where(a=>a.kind==CreatureAttackKind.Projectile).ToArray();
             caster.Configure(isolated,interruption.GetComponent<DamageDealer>());motor.ResetPosition(new Vector3(0,.05f,10));caster.enabled=true;caster.SetTarget(player.transform);
             float deadline=Time.time+5;while(!interruption.GetComponentsInChildren<Transform>().Any(t=>t.name=="Held rock")&&Time.time<deadline)yield return null;

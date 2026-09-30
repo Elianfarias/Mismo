@@ -77,8 +77,8 @@ namespace Mismo.Gameplay.Player.Editor
             Reset(new Vector3(0, 0, 1.65f), Vector3.zero);
             yield return null;
             float until = Time.time + 4f;
-            while (goblin.State != GoblinState.Telegraph && Time.time < until) yield return null;
-            Require(goblin.State == GoblinState.Telegraph && goblin.CurrentAttack == goblin.Settings.slash, "Golpe anunciado");
+            while (goblin.State != EnemyState.Telegraph && Time.time < until) yield return null;
+            Require(goblin.State == EnemyState.Telegraph && goblin.CurrentAttack == goblin.Settings.slash, "Golpe anunciado");
             var animation=goblin.GetComponent<GoblinAnimationDriver>();
             Require(animation!=null && animation.Animator!=null && !animation.Animator.applyRootMotion,"Concept rig and animation driver");
             yield return null;yield return null;
@@ -87,39 +87,39 @@ namespace Mismo.Gameplay.Player.Editor
                 Require(!clip.name.StartsWith("__preview"),"Runtime clips, not previews");
             Require(Mathf.Approximately(playerHealth.Current, playerHealth.Maximum), "Telegraph sin daño");
             until = Time.time + 3;
-            while (goblin.State != GoblinState.Recovery && Time.time < until) yield return null;
-            Require(goblin.State == GoblinState.Recovery, "Recuperación del golpe");
+            while (goblin.State != EnemyState.Recovery && Time.time < until) yield return null;
+            Require(goblin.State == EnemyState.Recovery, "Recuperación del golpe");
             Require(Mathf.Approximately(playerHealth.Current, playerHealth.Maximum - goblin.Settings.slash.damage), "Un solo impacto del golpe");
             Debug.Log("GOBLIN PASS: golpe anunciado, daño único y recuperación");
 
             Reset(new Vector3(0, 0, 1.65f), Vector3.zero);
             yield return null;
             until = Time.time + 4;
-            while (goblin.State != GoblinState.Telegraph && Time.time < until) yield return null;
-            while (goblin.State == GoblinState.Telegraph && goblin.StateProgress < 0.9f && Time.time < until) yield return null;
+            while (goblin.State != EnemyState.Telegraph && Time.time < until) yield return null;
+            while (goblin.State == EnemyState.Telegraph && goblin.StateProgress < 0.9f && Time.time < until) yield return null;
             SwordParry parry = player.GetComponentInChildren<SwordParry>();
             Require(parry != null, "Espada con parry");
             parry.Tick(10f); Require(parry.RequestParry(), "Parry disponible");
             until = Time.time + 2;
-            while (goblin.State == GoblinState.Telegraph && Time.time < until) yield return null;
-            Require(goblin.State == GoblinState.Stagger, "Parry interrumpe al goblin");
+            while (goblin.State == EnemyState.Telegraph && Time.time < until) yield return null;
+            Require(goblin.State == EnemyState.Stagger, "Parry interrumpe al goblin");
             Require(Mathf.Approximately(playerHealth.Current, playerHealth.Maximum), "Parry evita daño");
             float staggerUntil = Time.time + 0.3f;
             while (Time.time < staggerUntil) yield return null;
-            Require(goblin.State == GoblinState.Stagger && Mathf.Approximately(playerHealth.Current, playerHealth.Maximum), "No queda daño pendiente tras parry");
+            Require(goblin.State == EnemyState.Stagger && Mathf.Approximately(playerHealth.Current, playerHealth.Maximum), "No queda daño pendiente tras parry");
             Debug.Log("GOBLIN PASS: parry cancela e interrumpe el ataque");
 
             Reset(new Vector3(0, 0, 1.65f), Vector3.zero);
             yield return null;
             until = Time.time + 4;
-            while (goblin.State != GoblinState.Telegraph && Time.time < until) yield return null;
-            while (goblin.State == GoblinState.Telegraph && goblin.StateProgress < 0.95f && Time.time < until) yield return null;
+            while (goblin.State != EnemyState.Telegraph && Time.time < until) yield return null;
+            while (goblin.State == EnemyState.Telegraph && goblin.StateProgress < 0.95f && Time.time < until) yield return null;
             BeltDash dash = player.GetComponent<BeltDash>();
             dash.Cancel(); dash.TickCooldown(10);
             Require(dash.TryStart(Vector3.right, true), "Dash disponible");
             Require(player.GetComponent<Invulnerability>().IsInvulnerable, "Dash abre iFrames");
             until = Time.time + 2;
-            while (goblin.State != GoblinState.Recovery && Time.time < until) yield return null;
+            while (goblin.State != EnemyState.Recovery && Time.time < until) yield return null;
             Require(Mathf.Approximately(playerHealth.Current, playerHealth.Maximum), "iFrames evitan todo el golpe, sin reimpactar al expirar");
             dash.Cancel();
             Debug.Log("GOBLIN PASS: dash e impacto rechazado no se repite");
@@ -127,13 +127,13 @@ namespace Mismo.Gameplay.Player.Editor
             Reset(new Vector3(0, 0, 4.2f), Vector3.zero);
             yield return null;
             until = Time.time + 4;
-            while (goblin.State != GoblinState.Telegraph && Time.time < until) yield return null;
+            while (goblin.State != EnemyState.Telegraph && Time.time < until) yield return null;
             Require(goblin.CurrentAttack == goblin.Settings.charge, "Carga a media distancia");
             Vector3 direction = goblin.transform.forward;
             PlacePlayer(new Vector3(3f, 0, 4.2f));
             until = Time.time + 3;
-            while (goblin.State != GoblinState.Recovery && Time.time < until) yield return null;
-            Require(goblin.State == GoblinState.Recovery, "Carga completa");
+            while (goblin.State != EnemyState.Recovery && Time.time < until) yield return null;
+            Require(goblin.State == EnemyState.Recovery, "Carga completa");
             Require(Vector3.Angle(direction, goblin.transform.forward) < 1f, "Carga no gira siguiendo al jugador");
             Require(goblin.transform.position.z > 2f, "Carga desplaza al goblin");
             Require(Mathf.Approximately(playerHealth.Current, playerHealth.Maximum), "Salir de la trayectoria esquiva la carga");
@@ -142,18 +142,18 @@ namespace Mismo.Gameplay.Player.Editor
             Reset(new Vector3(0, 0, 4.2f), Vector3.zero);
             yield return null;
             until = Time.time + 5;
-            while (goblin.State != GoblinState.Recovery && Time.time < until) yield return null;
+            while (goblin.State != EnemyState.Recovery && Time.time < until) yield return null;
             Require(Mathf.Approximately(playerHealth.Current, playerHealth.Maximum - goblin.Settings.charge.damage), "Carga hace un solo impacto: health="+playerHealth.Current+" state="+goblin.State+" attack="+goblin.CurrentAttack?.label+" position="+goblin.transform.position+" player="+player.transform.position);
 
             Reset(new Vector3(0, 0, 4.2f), Vector3.zero);
             yield return null;
             until = Time.time + 4;
-            while (goblin.State != GoblinState.Telegraph && Time.time < until) yield return null;
+            while (goblin.State != EnemyState.Telegraph && Time.time < until) yield return null;
             GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
             wall.transform.position = new Vector3(0, 1, 1.8f); wall.transform.localScale = new Vector3(3, 2, 0.5f);
             Physics.SyncTransforms();
             until = Time.time + 3;
-            while (goblin.State != GoblinState.Recovery && Time.time < until) yield return null;
+            while (goblin.State != EnemyState.Recovery && Time.time < until) yield return null;
             Require(goblin.transform.position.z < 1.3f && Mathf.Approximately(playerHealth.Current, playerHealth.Maximum), "Carga no atraviesa pared ni daña detrás");
             Object.DestroyImmediate(wall);
             Debug.Log("GOBLIN PASS: carga hace daño único y respeta paredes");
@@ -161,14 +161,14 @@ namespace Mismo.Gameplay.Player.Editor
             Reset(new Vector3(0, 0, 1.65f), Vector3.zero);
             yield return null;
             until = Time.time + 4;
-            while (goblin.State != GoblinState.Telegraph && Time.time < until) yield return null;
+            while (goblin.State != EnemyState.Telegraph && Time.time < until) yield return null;
             var receiver = goblin.GetComponent<DamageReceiver>();
             Require(receiver.ReceiveDamage(new DamageInfo(18, player.gameObject, goblin.transform.position, Vector3.forward)), "Goblin recibe daño real");
-            Require(goblin.State == GoblinState.Stagger, "Golpe fuerte cancela telegraph");
+            Require(goblin.State == EnemyState.Stagger, "Golpe fuerte cancela telegraph");
             yield return null;yield return null;
             Require(goblin.GetComponent<GoblinAnimationDriver>().Animator.GetInteger("Motion")==4,"Damage plays Hit");
             receiver.ReceiveDamage(new DamageInfo(1000, player.gameObject, goblin.transform.position, Vector3.forward));
-            Require(goblin.State == GoblinState.Dead && !goblin.GetComponent<NavMeshAgent>().enabled, "Muerte cancela IA");
+            Require(goblin.State == EnemyState.Dead && !goblin.GetComponent<NavMeshAgent>().enabled, "Muerte cancela IA");
             foreach (Collider collider in goblin.GetComponentsInChildren<Collider>()) Require(!collider.enabled, "Muerte desactiva collider");
             until = Time.time + 0.5f;
             while (Time.time < until) yield return null;
@@ -181,10 +181,10 @@ namespace Mismo.Gameplay.Player.Editor
             var distantHit = new DamageInfo(1, player.gameObject, goblin.transform.position,
                 Vector3.back, AttackIdentity.Next(), 0, true);
             Require(goblin.GetComponent<DamageReceiver>().ReceiveDamage(distantHit), "Distant arrow deals damage");
-            Require(goblin.Target == player.transform && goblin.State == GoblinState.Chase,
+            Require(goblin.Target == player.transform && goblin.State == EnemyState.Chase,
                 "Damage acquires the attacker beyond detection and loss ranges");
             goblin.Tick(.1f);
-            Require(goblin.Target == player.transform && goblin.State == GoblinState.Chase,
+            Require(goblin.Target == player.transform && goblin.State == EnemyState.Chase,
                 "Provoked target survives the next distance validation");
             PlacePlayer(new Vector3(0, 0, 200));
             goblin.Tick(.1f);
@@ -199,13 +199,13 @@ namespace Mismo.Gameplay.Player.Editor
             Require(goblin.GetComponent<GoblinAnimationDriver>().Animator.GetInteger("Motion")==2,"Chase plays Run");
             PlacePlayer(new Vector3(0, 0, 30));
             yield return null; yield return null;
-            Require(goblin.State == GoblinState.Return || goblin.State == GoblinState.Idle, "Pierde objetivo lejano y vuelve");
+            Require(goblin.State == EnemyState.Return || goblin.State == EnemyState.Idle, "Pierde objetivo lejano y vuelve");
 
             Reset(new Vector3(-6, 0, 3), new Vector3(-2, 0, 3));
             yield return null;
             until = Time.time + 0.8f;
             while (Time.time < until) yield return null;
-            Require(goblin.Target == null && goblin.State == GoblinState.Idle, "Pared bloquea detección");
+            Require(goblin.Target == null && goblin.State == EnemyState.Idle, "Pared bloquea detección");
             var path = new NavMeshPath();
             Require(NavMesh.CalculatePath(new Vector3(-2, 0, 3), new Vector3(-6, 0, 3), NavMesh.AllAreas, path)
                 && path.status == NavMeshPathStatus.PathComplete && path.corners.Length > 2, "NavMesh rodea el obstáculo");
@@ -214,7 +214,7 @@ namespace Mismo.Gameplay.Player.Editor
             yield return null;
             playerHealth.ApplyDamage(new DamageInfo(1000, goblin.gameObject, player.transform.position, Vector3.forward));
             yield return null; yield return null;
-            Require(goblin.State == GoblinState.Return || goblin.State == GoblinState.Idle, "Deja de atacar al jugador muerto");
+            Require(goblin.State == EnemyState.Return || goblin.State == EnemyState.Idle, "Deja de atacar al jugador muerto");
         }
 
         private static void Reset(Vector3 playerPosition, Vector3 goblinPosition)

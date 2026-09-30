@@ -21,12 +21,17 @@ MonoBehaviour:
   positioningSpeed: 1.2
   decisionPause: 0.35
   chargeCooldown: 5
+  interruptibleByCombos: 1
+  comboHitStun: 1
+  maxConsecutiveInterrupts: 2
+  interruptImmunityDuration: 2
   staggerDamageThreshold: 15
   staggerDuration: 0.45
   staggerResistance: 0.75
   parryStaggerDuration: 1.25
   slash:
     label: Golpe
+    resistComboInterrupt: 0
     range: 1.9
     windup: 0.65
     active: 0.18
@@ -63,6 +68,7 @@ MonoBehaviour:
     projectileRadius: 0.6
   charge:
     label: Carga
+    resistComboInterrupt: 0
     range: 5
     windup: 1
     active: 0.4
@@ -105,6 +111,7 @@ MonoBehaviour:
   preferredRange: 4.4
   attacks:
   - label: Ground_Slam
+    resistComboInterrupt: 0
     range: 6
     windup: 1
     active: 0.1
@@ -140,6 +147,7 @@ MonoBehaviour:
     projectileRange: 30
     projectileRadius: 0.6
   - label: Sweep_Attack
+    resistComboInterrupt: 0
     range: 6.2
     windup: 0.8
     active: 0.13333333
@@ -175,6 +183,7 @@ MonoBehaviour:
     projectileRange: 30
     projectileRadius: 0.6
   - label: Throw_Rock
+    resistComboInterrupt: 0
     range: 28
     windup: 2.7666667
     active: 0.06

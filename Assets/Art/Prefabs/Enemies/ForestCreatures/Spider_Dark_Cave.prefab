@@ -169,7 +169,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8718558843661333136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1be9c0843b5326c4580cd52d53e583f1, type: 3}
+  m_Script: {fileID: 11500000, guid: f4e521a7b1604c9d8f8e8416b6af275e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Mismo.Gameplay.Enemies::Mismo.Gameplay.Enemies.GoblinController
   settings: {fileID: 11400000, guid: 522b259824aeb3e47b537c06d190cdef, type: 2}

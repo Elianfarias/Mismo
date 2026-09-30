@@ -108,7 +108,7 @@ namespace Mismo.Gameplay.Player.Editor
                 foreach(var renderer in sword.SwordVisual.GetComponentsInChildren<MeshRenderer>())
                     Require(renderer.bounds.min.y>player.transform.position.y+.1f && renderer.bounds.size.magnitude<1.5f,"Sword idle bounds above feet and normal size");
                 player.GetComponent<Mismo.Gameplay.Player.Movement.PlayerMotor>().ResetPosition(new Vector3(-30,6,-34));
-                var nearGoblin=Object.FindObjectsByType<GoblinController>();
+                var nearGoblin=Object.FindObjectsByType<EnemyController>();
                 foreach(var enemy in nearGoblin)enemy.enabled=false;
                 player.GetComponent<Health>().ApplyDamage(new DamageInfo(25,null,Vector3.zero,Vector3.forward));
                 player.GetComponent<Mismo.Gameplay.Player.Movement.Stamina>().TrySpend(35);
@@ -137,7 +137,7 @@ namespace Mismo.Gameplay.Player.Editor
             foreach(var root in player.gameObject.scene.GetRootGameObjects())
                 foreach(var item in root.GetComponentsInChildren<Transform>(true))
                     Require(GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(item.gameObject)==0,"Missing script "+item.name);
-            var goblins=Object.FindObjectsByType<GoblinController>();
+            var goblins=Object.FindObjectsByType<EnemyController>();
             Require(goblins.Length==5,"Five goblins including elite");
             foreach(var goblin in goblins)
             {

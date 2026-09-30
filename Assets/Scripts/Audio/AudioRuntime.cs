@@ -8,6 +8,20 @@ public sealed class AudioRuntime : MonoBehaviour
     public static AudioRuntime Instance {get;private set;}
     public static AudioMixer Mixer => Mismo.Core.ProjectAssets.Load<AudioMixer>("Audio/AudioMixer");
     public static AudioMixerGroup SfxGroup => Mixer != null ? Mixer.FindMatchingGroups("SFX").FirstOrDefault(g=>g.name=="SFX") : null;
+
+    public static void PlayWorldSFX(AudioClip clip, Vector3 position, float volume = 1f)
+    {
+        if (clip == null || volume <= 0f) return;
+        var go = new GameObject("World SFX");
+        var source = go.AddComponent<AudioSource>();
+        source.playOnAwake = false;
+        source.spatialBlend = 1f;
+        source.volume = Mathf.Clamp01(volume);
+        source.outputAudioMixerGroup = SfxGroup;
+        source.PlayOneShot(clip);
+        UnityEngine.Object.Destroy(go,Mathf.Max(0.05f,clip.length + 0.05f));
+    }
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void Boot()
     {

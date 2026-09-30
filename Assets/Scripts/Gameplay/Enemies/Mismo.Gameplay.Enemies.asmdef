@@ -3,7 +3,8 @@
   "rootNamespace": "Mismo.Gameplay.Enemies",
   "references": [
     "Mismo.Gameplay.Player",
-    "Mismo.Core"
+    "Mismo.Core",
+    "Mismo.Audio"
   ],
   "autoReferenced": true
 }

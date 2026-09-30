@@ -55,7 +55,7 @@ namespace Mismo.Gameplay.Player.Editor
         { foreach(var loot in inventory.PendingLoot)return inventory.CollectPending(loot.id);return false; }
         static IEnumerator Run()
         {
-            foreach(var g in Object.FindObjectsByType<GoblinController>())g.enabled=false;
+            foreach(var g in Object.FindObjectsByType<EnemyController>())g.enabled=false;
             foreach(var b in Object.FindObjectsByType<BossController>())b.enabled=false;
             var player=Object.FindAnyObjectByType<PlayerController>();player.enabled=false;
             var loadout=player.GetComponent<EquipmentLoadout>();loadout.Runner.Cancel();loadout.Belt?.Cancel();
