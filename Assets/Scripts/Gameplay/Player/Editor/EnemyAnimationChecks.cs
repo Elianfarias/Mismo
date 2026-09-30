@@ -33,8 +33,8 @@ namespace Mismo.Gameplay.Player.Editor
             var other=new AnimationClip { name="Enemy second attack" };
             AnimationUtility.SetEditorCurve(clip,EditorCurveBinding.FloatCurve("Probe",typeof(Transform),"m_LocalPosition.x"),AnimationCurve.Linear(0,2,1,6));
             AnimationUtility.SetEditorCurve(other,EditorCurveBinding.FloatCurve("Probe",typeof(Transform),"m_LocalPosition.x"),AnimationCurve.Linear(0,10,1,14));
-            string clipPath=AssetDatabase.GenerateUniqueAssetPath("Assets/EnemyAnimationCheckClip.anim");
-            AssetDatabase.CreateAsset(clip,clipPath);AssetDatabase.SaveAssets();
+            string clipPath=AssetDatabase.GenerateUniqueAssetPath("Assets/Art/Animations/EnemyAnimationCheckClip.anim");
+            AssetDatabase.CreateAsset(clip,clipPath);AssetDatabase.SaveAssetIfDirty(clip);
             var binding=settings.slash.animation;
             binding.clip=clip; binding.activeStartsAt=.25f;binding.recoveryStartsAt=.75f;binding.blendSeconds=0;
             Check(Near(binding.Sample(EnemyAttackPhase.Preparation,.5f),.125f),"Preparation follows configured segment");

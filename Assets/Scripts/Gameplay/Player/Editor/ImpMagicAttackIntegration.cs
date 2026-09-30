@@ -11,7 +11,7 @@ using Object = UnityEngine.Object;
 namespace Mismo.Gameplay.Player.Editor
 {
     /// <summary>
-    /// Configures the Imp's authored melee/projectile actions without replacing its GoblinController.
+    /// Configures the Imp's authored melee/projectile actions using its dedicated ImpController.
     /// The request file makes the operation safe to run from the already open Unity editor.
     /// </summary>
     public static class ImpMagicAttackIntegration
@@ -57,7 +57,7 @@ namespace Mismo.Gameplay.Player.Editor
             var load = LoadClip(LoadPath, "Load");
             var cast = LoadClip(CastPath, "Cast");
             var fireball = BuildFireballPrefab();
-            var settings = AssetDatabase.LoadAssetAtPath<GoblinSettings>(SettingsPath);
+            var settings = AssetDatabase.LoadAssetAtPath<EnemySettings>(SettingsPath);
             if (settings == null) throw new InvalidOperationException("No se encontró Imp.asset en " + SettingsPath);
 
             ConfigureSettings(settings, load, cast, fireball);
@@ -80,7 +80,7 @@ namespace Mismo.Gameplay.Player.Editor
             return clip;
         }
 
-        static void ConfigureSettings(GoblinSettings settings, AnimationClip load, AnimationClip cast, GameObject fireball)
+        static void ConfigureSettings(EnemySettings settings, AnimationClip load, AnimationClip cast, GameObject fireball)
         {
             var melee = settings.slash ?? new GoblinAttack();
             melee.label = "Golpe cuerpo a cuerpo";
@@ -127,7 +127,7 @@ namespace Mismo.Gameplay.Player.Editor
             };
 
             // A non-empty attacks array activates the generic creature path. Keep melee and
-            // fireball together so the same GoblinController can choose by distance.
+            // fireball together so the ImpController can choose by distance.
             settings.preferredRange = 6.5f;
             settings.attacks = new[] { melee, fireballAttack };
             EditorUtility.SetDirty(settings);
@@ -138,6 +138,7 @@ namespace Mismo.Gameplay.Player.Editor
             var root = PrefabUtility.LoadPrefabContents(EnemyPrefabPath);
             try
             {
+                EnemyControllerMigration.UseController<ImpController>(root);
                 var oldDriver = root.GetComponent<GoblinAnimationDriver>();
                 if (oldDriver != null) Object.DestroyImmediate(oldDriver);
 

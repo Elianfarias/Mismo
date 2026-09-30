@@ -8,13 +8,13 @@ namespace Mismo.Gameplay.Enemies
     public sealed class EnemyNameplate : MonoBehaviour
     {
         private Health health;
-        private GoblinController goblin;
+        private EnemyController goblin;
         private BossController boss;
         private DragonBossController dragon;
         private bool elite;
         private void Start()
         {
-            health=GetComponent<Health>();goblin=GetComponent<GoblinController>();boss=GetComponent<BossController>();elite=GetComponent<GoblinEliteVisual>()!=null;
+            health=GetComponent<Health>();goblin=GetComponent<EnemyController>();boss=GetComponent<BossController>();elite=GetComponent<GoblinEliteVisual>()!=null;
             dragon=GetComponent<DragonBossController>();
             GetComponent<GoblinPresentation>()?.HideLegacyStatus();
             GetComponent<BossPresentation>()?.HideLegacyStatus();
@@ -26,7 +26,7 @@ namespace Mismo.Gameplay.Enemies
             if(hud==null || camera==null || health==null || health.IsDead)return;
             float distance=Vector3.Distance(hud.transform.position,transform.position);
             if(distance>28)return;
-            float headHeight=goblin?.Settings is CreatureSettings?(GetComponent<CapsuleCollider>()?.height??2)+.2f:2.05f*transform.lossyScale.y;
+            float headHeight=goblin != null ? goblin.NameplateHeight : 2.05f*transform.lossyScale.y;
             Vector3 head=transform.position+Vector3.up*headHeight;
             Vector3 screen=camera.WorldToScreenPoint(head);
             if(screen.z<=0 || screen.x<0 || screen.x>Screen.width || screen.y<0 || screen.y>Screen.height)return;

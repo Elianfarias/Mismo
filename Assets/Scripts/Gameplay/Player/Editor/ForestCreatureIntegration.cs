@@ -205,7 +205,8 @@ namespace Mismo.Gameplay.Player.Editor
                 if(root.GetComponent<Health>()==null)root.AddComponent<Health>();
                 if(root.GetComponent<DamageReceiver>()==null)root.AddComponent<DamageReceiver>();
                 var dealer=GetOrAdd<DamageDealer>(root);
-                var ai=GetOrAdd<GoblinController>(root);if(!exists||ai.Settings==null)ai.Configure(settings,dealer);
+                EnemyControllerMigration.UseController<CreatureController>(root);
+                var ai=GetOrAdd<CreatureController>(root);if(!exists||ai.Settings==null)ai.Configure(settings,dealer);
                 var driver=GetOrAdd<CreatureAnimationDriver>(root);driver.Configure(animator);
                 PrefabUtility.SaveAsPrefabAsset(root,path);log.Add(name+": height="+BoundsOf(model).size.y.ToString("F2")+"m; generic rig; palette="+palette);
             }
@@ -248,14 +249,14 @@ namespace Mismo.Gameplay.Player.Editor
             foreach(string name in Boars.Concat(Spiders).Concat(new[]{"Forest_Golem_Stylized"}))
             {
                 var root=AssetDatabase.LoadAssetAtPath<GameObject>(Prefabs+"/"+name+".prefab");
-                if(root==null||root.GetComponent<GoblinController>()?.Settings==null||root.GetComponent<CreatureAnimationDriver>()==null)throw new Exception("Invalid prefab "+name);
+                if(root==null||root.GetComponent<CreatureController>()?.Settings==null||root.GetComponent<CreatureAnimationDriver>()==null)throw new Exception("Invalid prefab "+name);
                 foreach(var component in root.GetComponentsInChildren<Component>(true))if(component==null)throw new Exception("Missing script "+name);
                 foreach(var renderer in root.GetComponentsInChildren<Renderer>(true))foreach(var material in renderer.sharedMaterials)
                     if(material==null||material.mainTexture==null||material.shader==null)throw new Exception("Missing palette "+name);
                 if(name=="Forest_Golem_Stylized"&&!root.GetComponentsInChildren<Transform>(true).Any(t=>t.name=="Rock_Carry"))throw new Exception("Missing Rock_Carry");
                 var animator=root.GetComponentInChildren<Animator>(true);
                 if(animator==null||animator.avatar==null||!animator.avatar.isValid||animator.applyRootMotion)throw new Exception("Invalid Generic avatar "+name);
-                var clips=root.GetComponent<GoblinController>().Settings.attacks.SelectMany(a=>new[]{a.animation.PlaybackClip,a.preparationClip,a.recoveryClip})
+                var clips=root.GetComponent<CreatureController>().Settings.attacks.SelectMany(a=>new[]{a.animation.PlaybackClip,a.preparationClip,a.recoveryClip})
                     .Concat(animator.runtimeAnimatorController.animationClips).Where(c=>c!=null).Distinct();
                 foreach(var clip in clips)foreach(var binding in AnimationUtility.GetCurveBindings(clip))
                     if(!string.IsNullOrEmpty(binding.path)&&animator.transform.Find(binding.path)==null)throw new Exception(name+" missing animation binding "+binding.path);

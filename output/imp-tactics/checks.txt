@@ -1,0 +1,44 @@
+Imp tactics / 2026-09-30T00:33:51
+PASS Imp has three serialized directional clips
+PASS Directional clips are looping Humanoid animations
+PASS Local movement selects left, right and backward with forward fallback
+PASS Runtime world uses the edited catalog
+PASS Catalog references the complete Imp enemy
+PASS Imp eligible in forests and meadows
+PASS Other biome restrictions retained
+PASS Forest: Imp selected in 3651/10000 catalog rolls at level 1
+PASS Meadow: Imp selected in 7677/10000 catalog rolls at level 1
+PASS Village remains safe
+PASS Natural meadow site selects Imp using actual density and selection seeds
+PASS World population actually instantiates Imps on generated meadow NavMesh
+PASS Streaming does not duplicate encounters
+PASS Catalog adjustment does not resurrect defeated enemies
+PASS Far Imp approaches a firing position instead of firing immediately or chasing into melee
+PASS Approach destination stops outside melee range
+PASS Imp fires from comfortable range
+PASS Attack respects windup, active and recovery completion
+PASS Fireball cooldown produces lateral movement
+PASS Complete locomotion path for (-1.00, 0.00, 0.00)
+PASS NavMesh advances (-1.00, 0.00, 0.00) (dt 0,010251, stopped False, enabled True, onMesh True, hasPath True, status PathComplete, desired (-1.60, 0.00, 0.00), speed 1,6, remaining 3,995394, position (0.00, 0.08, 0.00))
+PASS Actual playback selects (-1.00, 0.00, 0.00) directional clip (velocity (-0.45, 0.00, 0.00))
+PASS Complete locomotion path for (1.00, 0.00, 0.00)
+PASS NavMesh advances (1.00, 0.00, 0.00) (dt 0,002561997, stopped False, enabled True, onMesh True, hasPath True, status PathComplete, desired (1.60, 0.00, 0.00), speed 1,6, remaining 4,01163, position (-0.02, 0.08, 0.00))
+PASS Actual playback selects (1.00, 0.00, 0.00) directional clip (velocity (0.21, 0.00, 0.00))
+PASS Complete locomotion path for (0.00, 0.00, -1.00)
+PASS NavMesh advances (0.00, 0.00, -1.00) (dt 0,003198002, stopped False, enabled True, onMesh True, hasPath True, status PathComplete, desired (0.00, 0.00, -1.60), speed 1,6, remaining 3,993365, position (-0.01, 0.08, -0.01))
+PASS Actual playback selects (0.00, 0.00, -1.00) directional clip (velocity (0.18, 0.00, -0.47))
+PASS Pressure inside firing band produces a reachable backward retreat
+PASS Retreat duration is bounded and leaves a punishable pause (Hold, Telegraph, stopped True)
+PASS Imp uses melee when caught at close range
+PASS Attack respects windup, active and recovery completion
+PASS Melee finishes recovery before disengaging
+PASS Test obstacle blocks navigation behind Imp
+PASS Cornered Imp can defend with melee
+PASS Attack respects windup, active and recovery completion
+PASS Imp rejects retreat paths through a wall and holds when cornered
+PASS New target has a reaction delay
+PASS Blocked sight repositions without shooting through walls
+PASS Posture break stops tactical navigation
+PASS TACTICS_PLAY_COMPLETE
+PASS Built world catalog includes Imp in meadows
+PASS Built Imp retains all directional clips

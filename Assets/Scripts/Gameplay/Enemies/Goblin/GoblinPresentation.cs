@@ -11,7 +11,7 @@ namespace Mismo.Gameplay.Enemies
         [SerializeField] private Transform healthFill;
         [SerializeField] private Transform billboard;
         [SerializeField] private TextMesh label;
-        private GoblinController goblin;
+        private EnemyController goblin;
         private GoblinVisualStyle style;
         private Health health;
         private Renderer[] skin;
@@ -34,7 +34,7 @@ namespace Mismo.Gameplay.Enemies
 
         private void Awake()
         {
-            goblin = GetComponent<GoblinController>(); health = GetComponent<Health>();
+            goblin = GetComponent<EnemyController>(); health = GetComponent<Health>();
             animatedModel=GetComponentInChildren<Animator>()?.transform;
             style = GetComponent<GoblinVisualStyle>();
             tint = new MaterialPropertyBlock();
@@ -49,28 +49,28 @@ namespace Mismo.Gameplay.Enemies
             if(goblin == null || health == null || visual == null) return;
             float dt = Time.deltaTime;
             flash = Mathf.Max(0f, flash - dt);
-            GoblinState state = goblin.State;
+            EnemyState state = goblin.State;
             bool charge = goblin.CurrentAttack != null && goblin.Settings != null && goblin.CurrentAttack == goblin.Settings.charge;
             float progress = goblin.StateProgress;
             float lean = 0f, swordAngle = 20f, bob = 0f;
-            if (state == GoblinState.Chase || state == GoblinState.Position || state == GoblinState.Return)
+            if (state == EnemyState.Chase || state == EnemyState.Position || state == EnemyState.Return)
                 bob = Mathf.Sin(Time.time * 12f) * 0.035f;
-            if (state == GoblinState.Telegraph) { lean = charge ? -18f : -8f; swordAngle = Mathf.Lerp(20f, -110f, progress); }
-            if (state == GoblinState.Attack) { lean = charge ? 28f : 12f; swordAngle = Mathf.Lerp(-110f, 100f, progress); }
-            if (state == GoblinState.Recovery) { lean = Mathf.Lerp(20f, 0f, progress); swordAngle = Mathf.Lerp(100f, 20f, progress); }
-            if (state == GoblinState.Stagger) { lean = -25f; bob = Mathf.Sin(Time.time * 40f) * 0.025f; }
-            if (state == GoblinState.Dead) bob = 0.35f;
+            if (state == EnemyState.Telegraph) { lean = charge ? -18f : -8f; swordAngle = Mathf.Lerp(20f, -110f, progress); }
+            if (state == EnemyState.Attack) { lean = charge ? 28f : 12f; swordAngle = Mathf.Lerp(-110f, 100f, progress); }
+            if (state == EnemyState.Recovery) { lean = Mathf.Lerp(20f, 0f, progress); swordAngle = Mathf.Lerp(100f, 20f, progress); }
+            if (state == EnemyState.Stagger) { lean = -25f; bob = Mathf.Sin(Time.time * 40f) * 0.025f; }
+            if (state == EnemyState.Dead) bob = 0.35f;
             if(!authoredAnimation)
             {
                 visual.localPosition = Vector3.up * bob;
-                visual.localRotation = Quaternion.Euler(lean, 0f, state == GoblinState.Dead ? 85f : 0f);
+                visual.localRotation = Quaternion.Euler(lean, 0f, state == EnemyState.Dead ? 85f : 0f);
                 if(weaponPivot != null) weaponPivot.localRotation = Quaternion.Euler(swordAngle, 0f, -15f);
             }
             else
             {
-                visual.localPosition=state==GoblinState.Dead?Vector3.up*.24f:Vector3.zero;
-                visual.localRotation=state==GoblinState.Dead?Quaternion.Euler(0,0,90):Quaternion.identity;
-                if (state != GoblinState.Dead && animatedModel != null) groundSupport.Apply(transform, visual, animatedModel.lossyScale.y);
+                visual.localPosition=state==EnemyState.Dead?Vector3.up*.24f:Vector3.zero;
+                visual.localRotation=state==EnemyState.Dead?Quaternion.Euler(0,0,90):Quaternion.identity;
+                if (state != EnemyState.Dead && animatedModel != null) groundSupport.Apply(transform, visual, animatedModel.lossyScale.y);
             }
             
             if (healthFill != null) healthFill.localScale = new Vector3(health.Normalized, 1f, 1f);

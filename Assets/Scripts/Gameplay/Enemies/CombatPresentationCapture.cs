@@ -23,7 +23,7 @@ namespace Mismo.Gameplay.Enemies
             Application.runInBackground=true;
             yield return new WaitForSecondsRealtime(2);
             var player=FindAnyObjectByType<PlayerController>();player.enabled=false;
-            foreach(var goblin in FindObjectsByType<GoblinController>())goblin.enabled=false;
+            foreach(var goblin in FindObjectsByType<EnemyController>())goblin.enabled=false;
             player.GetComponent<PlayerMotor>().ResetPosition(new Vector3(-30,6,-34));
             player.GetComponent<Health>().ApplyDamage(new DamageInfo(25,null,Vector3.zero,Vector3.forward));
             player.GetComponent<Stamina>().TrySpend(35);

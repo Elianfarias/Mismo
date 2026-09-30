@@ -40,7 +40,7 @@ namespace Mismo.Gameplay.Player.Editor
             animator=equipment.ResolveAnimator();
             if(animator!=null)animator.enabled=false;
             bones=preview.GetComponentsInChildren<Transform>(true);positions=bones.Select(b=>b.localPosition).ToArray();rotations=bones.Select(b=>b.localRotation).ToArray();scales=bones.Select(b=>b.localScale).ToArray();
-            var goblin=prefab.GetComponent<GoblinController>();var boss=prefab.GetComponent<BossController>();settings=goblin!=null?(ScriptableObject)goblin.Settings:boss!=null?boss.Settings:null;
+            var goblin=prefab.GetComponent<EnemyController>();var boss=prefab.GetComponent<BossController>();settings=goblin!=null?(ScriptableObject)goblin.Settings:boss!=null?boss.Settings:null;
             equipment.Rebuild();Sample();SceneView.lastActiveSceneView?.Frame(new Bounds(Vector3.up,Vector3.one*4),false);
         }
         void OnGUI()
@@ -85,7 +85,7 @@ namespace Mismo.Gameplay.Player.Editor
         void BuildPaths()
         {
             paths.Clear();labels.Clear();
-            if(settings is GoblinSettings g)
+            if(settings is EnemySettings g)
             {
                 if(g.attacks!=null&&g.attacks.Length>0)for(int i=0;i<g.attacks.Length;i++){paths.Add("attacks.Array.data["+i+"]");labels.Add((i+1)+" · "+(g.attacks[i]?.label??"Vacío"));}
                 else{paths.Add("slash");labels.Add("Golpe");paths.Add("charge");labels.Add("Carga");}
@@ -99,20 +99,20 @@ namespace Mismo.Gameplay.Player.Editor
             EditorGUILayout.Space();EditorGUILayout.LabelField("Movimiento y reacción al daño",EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("Clips opcionales por prefab enemigo, también sin armas. Vacío conserva las animaciones actuales. Hit es la reacción visual; el aturdimiento se configura en los datos de combate.",MessageType.Info);
             var baseData=new SerializedObject(equipment);baseData.Update();int playMotion=0;EditorGUI.BeginChangeCheck();
-            foreach(var pair in new[]{new[]{"idleClip","Reposo (Idle)"},new[]{"walkClip","Caminar (Walk)"},new[]{"runClip","Correr (Run)"},new[]{"hitClip","Recibir golpe (Hit)"},new[]{"postureBreakClip","Ruptura de postura"},new[]{"parryClip","Parry recibido (vacío usa Hit)"},new[]{"parryDuration","Duración visual del parry (segundos)"},new[]{"hitDuration","Duración de reacción (segundos)"},new[]{"hitMask","Máscara de reacción (opcional)"},new[]{"walkReferenceSpeed","Velocidad de referencia al caminar"},new[]{"runReferenceSpeed","Velocidad de referencia al correr"}})
+            foreach(var pair in new[]{new[]{"idleClip","Reposo (Idle)"},new[]{"walkClip","Caminar (Walk)"},new[]{"runClip","Correr (Run)"},new[]{"strafeLeftClip","Paso lateral izquierdo"},new[]{"strafeRightClip","Paso lateral derecho"},new[]{"backwardClip","Retroceder"},new[]{"directionalReferenceSpeed","Velocidad de referencia lateral / atrás"},new[]{"hitClip","Recibir golpe (Hit)"},new[]{"postureBreakClip","Ruptura de postura"},new[]{"parryClip","Parry recibido (vacío usa Hit)"},new[]{"parryDuration","Duración visual del parry (segundos)"},new[]{"hitDuration","Duración de reacción (segundos)"},new[]{"hitMask","Máscara de reacción (opcional)"},new[]{"walkReferenceSpeed","Velocidad de referencia al caminar"},new[]{"runReferenceSpeed","Velocidad de referencia al correr"}})
             {
                 using(new EditorGUILayout.HorizontalScope())
                 {
                     var property=baseData.FindProperty(pair[0]);
                     EditorGUILayout.PropertyField(property,new GUIContent(pair[1]));
-                    int motion=pair[0]=="idleClip"?1:pair[0]=="walkClip"?2:pair[0]=="runClip"?3:pair[0]=="hitClip"?4:pair[0]=="postureBreakClip"?5:pair[0]=="parryClip"?6:0;
+                    int motion=pair[0]=="idleClip"?1:pair[0]=="walkClip"?2:pair[0]=="runClip"?3:pair[0]=="hitClip"?4:pair[0]=="postureBreakClip"?5:pair[0]=="parryClip"?6:pair[0]=="strafeLeftClip"?7:pair[0]=="strafeRightClip"?8:pair[0]=="backwardClip"?9:0;
                     if(motion>0)using(new EditorGUI.DisabledScope((property.objectReferenceValue==null&&(motion!=6||equipment.hitClip==null))||animator==null))
                         if(GUILayout.Button("Reproducir",GUILayout.Width(85)))playMotion=motion;
                 }
             }
             if(EditorGUI.EndChangeCheck()){baseData.ApplyModifiedProperties();equipmentDirty=true;Sample();}
             if(playMotion>0){previewMotion=playMotion;manual=false;progress=0;playing=true;lastTime=EditorApplication.timeSinceStartup;Sample();}
-            EditorGUI.BeginChangeCheck();previewMotion=EditorGUILayout.Popup("Previsualizar",previewMotion,new[]{"Ataque seleccionado","Reposo","Caminar","Correr","Recibir golpe","Ruptura de postura","Parry recibido"});
+            EditorGUI.BeginChangeCheck();previewMotion=EditorGUILayout.Popup("Previsualizar",previewMotion,new[]{"Ataque seleccionado","Reposo","Caminar","Correr","Recibir golpe","Ruptura de postura","Parry recibido","Paso izquierdo","Paso derecho","Retroceder"});
             if(EditorGUI.EndChangeCheck()){manual=false;progress=0;Sample();}
             if(previewMotion==5&&!manual)EditorGUILayout.HelpBox("La prueba reproduce la duración original del clip. En el juego se adapta al tiempo de postura rota, con cuerpo completo y prioridad sobre Hit.",MessageType.Info);
             if(previewMotion==6&&!manual)EditorGUILayout.HelpBox("Vacío usa Hit. Esta duración solo controla la animación; no cambia el tiempo de aturdimiento. Una ruptura real de postura tiene prioridad.",MessageType.Info);
@@ -120,7 +120,7 @@ namespace Mismo.Gameplay.Player.Editor
             if(GUILayout.Button("Guardar movimiento y hit en el prefab"))SaveEquipment();
             EditorGUILayout.Space();EditorGUILayout.LabelField("Animaciones y ataques",EditorStyles.boldLabel);
             EditorGUILayout.ObjectField("Configuración utilizada",settings,typeof(ScriptableObject),false);
-            if(settings==null)EditorGUILayout.HelpBox("Este prefab no utiliza GoblinController o BossController. Podés ajustar su equipo y probar clips; sus ataques deben editarse en su controlador específico.",MessageType.Info);
+            if(settings==null)EditorGUILayout.HelpBox("Este prefab no utiliza EnemyController o BossController. Podés ajustar su equipo y probar clips; sus ataques deben editarse en su controlador específico.",MessageType.Info);
             else
             {
                 EditorGUILayout.HelpBox("Los cambios de ataques se editan en el ScriptableObject compartido y afectan a todos los enemigos que lo usan. Clip vacío conserva la animación del controlador.",MessageType.Info);
@@ -154,7 +154,7 @@ namespace Mismo.Gameplay.Player.Editor
             if(manual){duration=manualClip!=null?Mathf.Max(.01f,manualClip.length):1;return manualClip;}
             if(previewMotion>0&&equipment!=null)
             {
-                var selected=previewMotion==1?equipment.idleClip:previewMotion==2?equipment.walkClip:previewMotion==3?equipment.runClip:previewMotion==4?equipment.hitClip:previewMotion==5?equipment.postureBreakClip:equipment.ParryClip;
+                var selected=previewMotion==1?equipment.idleClip:previewMotion==2?equipment.walkClip:previewMotion==3?equipment.runClip:previewMotion==4?equipment.hitClip:previewMotion==5?equipment.postureBreakClip:previewMotion==6?equipment.ParryClip:previewMotion==7?equipment.strafeLeftClip:previewMotion==8?equipment.strafeRightClip:equipment.backwardClip;
                 duration=previewMotion==6?Mathf.Max(.01f,equipment.parryDuration):previewMotion==4?Mathf.Max(.01f,equipment.hitDuration):selected!=null?Mathf.Max(.01f,selected.length):1;
                 return selected;
             }
@@ -167,7 +167,7 @@ namespace Mismo.Gameplay.Player.Editor
             if(anim.FindPropertyRelative("compatibleSource").objectReferenceValue==clip&&anim.FindPropertyRelative("compatibleClip").objectReferenceValue!=null)clip=(AnimationClip)anim.FindPropertyRelative("compatibleClip").objectReferenceValue;
             float start=anim.FindPropertyRelative("activeStartsAt").floatValue,end=Mathf.Max(start,anim.FindPropertyRelative("recoveryStartsAt").floatValue);
             normalized=t<windup?Mathf.Lerp(0,start,t/Mathf.Max(.01f,windup)):t<windup+active?Mathf.Lerp(start,end,(t-windup)/Mathf.Max(.01f,active)):Mathf.Lerp(end,1,(t-windup-active)/Mathf.Max(.01f,recovery));
-            if(settings is CreatureSettings)
+            if(preview.GetComponent<CreatureAnimationDriver>() != null)
             {
                 var prep=attack.FindPropertyRelative("preparationClip").objectReferenceValue as AnimationClip;
                 var finish=attack.FindPropertyRelative("recoveryClip").objectReferenceValue as AnimationClip;

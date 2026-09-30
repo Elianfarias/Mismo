@@ -62,7 +62,7 @@ namespace Mismo.Gameplay.Player.Editor
             var sources=new System.Collections.Generic.List<NavMeshBuildSource>();Physics.SyncTransforms();NavMeshBuilder.CollectSources(GameObject.Find("Ground").transform,~0,NavMeshCollectGeometry.PhysicsColliders,0,new System.Collections.Generic.List<NavMeshBuildMarkup>(),sources);
             var nav=NavMeshBuilder.BuildNavMeshData(NavMesh.GetSettingsByID(0),sources,new Bounds(Vector3.zero,new Vector3(60,10,60)),Vector3.zero,Quaternion.identity);var instance=NavMesh.AddNavMeshData(nav);
             var companion=player.gameObject.AddComponent<CompanionPlayer>();for(int i=0;i<15;i++)yield return null;
-            var model=GameObject.Find("Companion - "+boar.displayName);Check(model!=null&&model.GetComponent<Mismo.Gameplay.Enemies.GoblinController>()==null,"Companion spawns without hostile scripts");
+            var model=GameObject.Find("Companion - "+boar.displayName);Check(model!=null&&model.GetComponent<Mismo.Gameplay.Enemies.EnemyController>()==null,"Companion spawns without hostile scripts");
             typeof(CompanionPlayer).GetMethod("Mount",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(companion,null);yield return null;
             Check(companion.Riding&&!player.enabled&&!player.GetComponent<CharacterController>().enabled,"Mount transfers movement and disables player body");
             Check(player.GetComponent<CapsuleCollider>()?.enabled==true,"Mounted player remains a damage target");

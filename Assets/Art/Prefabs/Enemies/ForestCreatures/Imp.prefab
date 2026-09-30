@@ -970,12 +970,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 6870553644002267613}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1be9c0843b5326c4580cd52d53e583f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 68135f75b554479a97d6b8897799c863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Mismo.Gameplay.Enemies::Mismo.Gameplay.Enemies.GoblinController
   settings: {fileID: 11400000, guid: ef99b0df38ff776418593b0944d21634, type: 2}
   weapon: {fileID: 5745414932166241887}
   target: {fileID: 0}
+  rangeTolerance: 1.5
+  reactionDelay: 0.3
+  retreatSpeed: 3.2
+  retreatDuration: 1.1
+  retreatCooldown: 3
+  strafeStep: 2
 --- !u!114 &3287967456599349044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1015,6 +1021,10 @@ MonoBehaviour:
   walkClip: {fileID: -370141452831569596, guid: e040b5e6a47bcb34c8f7028964671571, type: 3}
   runClip: {fileID: -6848113619949682186, guid: 77cbe76379436db42afc0e47ff625926, type: 3}
   hitClip: {fileID: -379998487791383941, guid: 542aee31f3000ee4095be9a612acd2a3, type: 3}
+  strafeLeftClip: {fileID: 3094330708855449807, guid: 9f9dbe8815370164d8a2214328af4f13, type: 3}
+  strafeRightClip: {fileID: 3094330708855449807, guid: 846fff649819bcf49b933d00ef6f703f, type: 3}
+  backwardClip: {fileID: 3094330708855449807, guid: a8e6c7cf678a13541a726c2ae9ec00e3, type: 3}
+  directionalReferenceSpeed: 3.2
   postureBreakClip: {fileID: -595300085847744924, guid: fa9977cfde8c9ee4ab914acbdb43cde5, type: 3}
   parryClip: {fileID: 0}
   parryDuration: 0.36

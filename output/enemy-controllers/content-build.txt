@@ -1,0 +1,1 @@
+PASS: Goblin, Imp and creature controllers and settings loaded from Windows asset bundle.

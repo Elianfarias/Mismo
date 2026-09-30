@@ -17,8 +17,8 @@ namespace Mismo.Gameplay.Player.Editor
         static int checks;
         static void Check(bool condition, string message)
         { if (!condition) throw new InvalidOperationException(message); checks++; }
-        static void Call(object target, string method, params object[] args) => target.GetType().GetMethod(method, BindingFlags.Instance|BindingFlags.NonPublic).Invoke(target,args);
-        static void Set(object target, string field, object value) => target.GetType().GetField(field,BindingFlags.Instance|BindingFlags.NonPublic).SetValue(target,value);
+        static void Call(object target, string method, params object[] args) => (target is EnemyController ? typeof(EnemyController) : target.GetType()).GetMethod(method, BindingFlags.Instance|BindingFlags.NonPublic).Invoke(target,args);
+        static void Set(object target, string field, object value) => (target is EnemyController ? typeof(EnemyController) : target.GetType()).GetField(field,BindingFlags.Instance|BindingFlags.NonPublic).SetValue(target,value);
         static void Delete(Object value) { if (value != null) Object.DestroyImmediate(value); }
 #if UNITY_EDITOR
         [MenuItem("Mismo/Combate/Verificar feedback espada-goblin")]
@@ -86,12 +86,12 @@ namespace Mismo.Gameplay.Player.Editor
 
                 var goblin=actor.AddComponent<GoblinController>();goblin.Configure(settings,null);
                 if(!Application.isPlaying){Call(goblin,"Awake");Call(goblin,"OnEnable");}
-                Call(goblin,"Enter",GoblinState.Attack,1f);receiver.Resolve(hit(10,5));Check(goblin.State==GoblinState.Attack,"Light hit preserves attack");
-                receiver.Resolve(hit(24,16));Check(goblin.State==GoblinState.Attack,"Heavy hit preserves active attack");CombatTimeFeedback.CancelForPause();
-                state.ResetCombat();Call(goblin,"Enter",GoblinState.Recovery,.8f);receiver.Resolve(hit(24,16));
-                Check(goblin.State==GoblinState.Stagger && (float)goblin.GetType().GetField("timer",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(goblin)>=.8f,"Heavy recovery interruption preserves punish window");CombatTimeFeedback.CancelForPause();
-                Call(goblin,"Enter",GoblinState.Recovery,.8f);receiver.Resolve(hit(24,16));Check(goblin.State==GoblinState.Recovery,"Flinch cooldown prevents repeated cancel");CombatTimeFeedback.CancelForPause();
-                state.ResetCombat();Call(goblin,"Enter",GoblinState.Attack,1f);receiver.Resolve(hit(10,90));Check(goblin.State==GoblinState.Stagger,"Posture break really cancels attack");CombatTimeFeedback.CancelForPause();
+                Call(goblin,"Enter",EnemyState.Attack,1f);receiver.Resolve(hit(10,5));Check(goblin.State==EnemyState.Attack,"Light hit preserves attack");
+                receiver.Resolve(hit(24,16));Check(goblin.State==EnemyState.Attack,"Heavy hit preserves active attack");CombatTimeFeedback.CancelForPause();
+                state.ResetCombat();Call(goblin,"Enter",EnemyState.Recovery,.8f);receiver.Resolve(hit(24,16));
+                Check(goblin.State==EnemyState.Stagger && (float)typeof(EnemyController).GetField("timer",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(goblin)>=.8f,"Heavy recovery interruption preserves punish window");CombatTimeFeedback.CancelForPause();
+                Call(goblin,"Enter",EnemyState.Recovery,.8f);receiver.Resolve(hit(24,16));Check(goblin.State==EnemyState.Recovery,"Flinch cooldown prevents repeated cancel");CombatTimeFeedback.CancelForPause();
+                state.ResetCombat();Call(goblin,"Enter",EnemyState.Attack,1f);receiver.Resolve(hit(10,90));Check(goblin.State==EnemyState.Stagger,"Posture break really cancels attack");CombatTimeFeedback.CancelForPause();
                 var reaction=actor.GetComponent<GoblinHitReaction>();
                 if(!Application.isPlaying){Call(reaction,"Awake");Call(reaction,"OnEnable");}
                 state.ResetCombat();var before=visual.transform.localRotation;receiver.Resolve(hit(10,5));Call(reaction,"LateUpdate");
@@ -109,7 +109,7 @@ namespace Mismo.Gameplay.Player.Editor
                 GameplayPause.Pause();CombatTimeFeedback.HitStop(.04f);CombatTimeFeedback.PerfectDefense();Check(Time.timeScale==0,"Feedback cannot steal gameplay pause");GameplayPause.Resume();
                 CheckInterruptResistance(goblin, state, receiver, source, settings, hit);
                 state.ResetCombat();result=receiver.Resolve(hit(5000,90));
-                Check(health.IsDead && goblin.State==GoblinState.Dead && !result.PostureBroken,"Lethal hit cannot replace death with posture stagger");
+                Check(health.IsDead && goblin.State==EnemyState.Dead && !result.PostureBroken,"Lethal hit cannot replace death with posture stagger");
                 Debug.Log("COMBAT_FEEDBACK_PASS: "+checks+" checks");
             }
             finally
@@ -124,36 +124,36 @@ namespace Mismo.Gameplay.Player.Editor
             source.AddComponent<BoxCollider>();
             source.AddComponent<AttackHitbox>();
             state.ResetCombat();
-            foreach (var phase in new[] { GoblinState.Telegraph, GoblinState.Attack })
+            foreach (var phase in new[] { EnemyState.Telegraph, EnemyState.Attack })
             {
                 Set(goblin,"attack",new GoblinAttack());Call(goblin,"Enter",phase,.4f);
                 var result=receiver.Resolve(hit(10,1));
-                Check(result.HealthDamage>0 && result.PostureDamage>0 && goblin.State==GoblinState.Stagger && goblin.CurrentAttack==null,
+                Check(result.HealthDamage>0 && result.PostureDamage>0 && goblin.State==EnemyState.Stagger && goblin.CurrentAttack==null,
                     "Allowed mini-interruption cancels and discards "+phase);
             }
             Check(state.InterruptImmune,"Second interruption activates immunity");
-            var action=new GoblinAttack();Set(goblin,"attack",action);Call(goblin,"Enter",GoblinState.Attack,.4f);
+            var action=new GoblinAttack();Set(goblin,"attack",action);Call(goblin,"Enter",EnemyState.Attack,.4f);
             for(int i=0;i<2;i++)
             {
                 var result=receiver.Resolve(hit(10,1));
-                Check(result.HealthDamage>0 && result.PostureDamage>0 && goblin.State==GoblinState.Attack && goblin.CurrentAttack==action,
+                Check(result.HealthDamage>0 && result.PostureDamage>0 && goblin.State==EnemyState.Attack && goblin.CurrentAttack==action,
                     "Immune hit damages health/posture without cancelling attack");
             }
             state.Tick(1.49f);Check(state.InterruptImmune,"Immunity lasts configured duration");
             state.Tick(.02f);receiver.Resolve(hit(10,1));
-            Check(!state.InterruptImmune && goblin.State==GoblinState.Stagger,"Interruption returns after expiry");
+            Check(!state.InterruptImmune && goblin.State==EnemyState.Stagger,"Interruption returns after expiry");
             receiver.Resolve(hit(10,1));Check(state.InterruptImmune,"Fresh cycle permits two interruptions");
-            Set(goblin,"attack",action);Call(goblin,"Enter",GoblinState.Attack,.4f);
+            Set(goblin,"attack",action);Call(goblin,"Enter",EnemyState.Attack,.4f);
             var broken=receiver.Resolve(hit(10,1000));
-            Check(broken.PostureBroken && state.Broken && goblin.State==GoblinState.Stagger && goblin.CurrentAttack==null,
+            Check(broken.PostureBroken && state.Broken && goblin.State==EnemyState.Stagger && goblin.CurrentAttack==null,
                 "Posture break overrides interrupt immunity and cancels attack");
-            float stun=(float)typeof(GoblinController).GetField("timer",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(goblin);
+            float stun=(float)typeof(EnemyController).GetField("timer",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(goblin);
             receiver.Resolve(hit(10,1));
-            Check(stun>=2 && stun==(float)typeof(GoblinController).GetField("timer",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(goblin),
+            Check(stun>=2 && stun==(float)typeof(EnemyController).GetField("timer",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(goblin),
                 "Mini hits cannot shorten or renew posture-break stun");
             state.ResetCombat();Check(!state.InterruptImmune,"Reset clears interrupt immunity");
             action.CanBeInterrupted=false;
-            foreach(var phase in new[]{GoblinState.Telegraph,GoblinState.Attack})
+            foreach(var phase in new[]{EnemyState.Telegraph,EnemyState.Attack})
             {
                 Set(goblin,"attack",action);Call(goblin,"Enter",phase,.4f);
                 var result=receiver.Resolve(hit(10,1));
@@ -161,11 +161,11 @@ namespace Mismo.Gameplay.Player.Editor
                     "Super armor preserves "+phase+" without consuming interrupt budget");
             }
             broken=receiver.Resolve(hit(10,1000));
-            Check(broken.PostureBroken && goblin.CurrentAttack==null && goblin.State==GoblinState.Stagger,"Break overrides super armor");
-            state.ResetCombat();Set(goblin,"attack",action);Call(goblin,"Enter",GoblinState.Attack,.4f);
+            Check(broken.PostureBroken && goblin.CurrentAttack==null && goblin.State==EnemyState.Stagger,"Break overrides super armor");
+            state.ResetCombat();Set(goblin,"attack",action);Call(goblin,"Enter",EnemyState.Attack,.4f);
             goblin.OnAttackParried(hit(10,1));Check(goblin.CurrentAttack==null,"Parry still overrides super armor");
             state.ResetCombat();settings.maxConsecutiveInterrupts=1;settings.interruptImmunityDuration=.3f;
-            Set(goblin,"attack",new GoblinAttack());Call(goblin,"Enter",GoblinState.Attack,.4f);receiver.Resolve(hit(10,1));
+            Set(goblin,"attack",new GoblinAttack());Call(goblin,"Enter",EnemyState.Attack,.4f);receiver.Resolve(hit(10,1));
             Check(state.InterruptImmune,"Custom interrupt limit is honored");state.Tick(.31f);
             Check(!state.InterruptImmune,"Custom immunity duration is honored");
             settings.maxConsecutiveInterrupts=2;settings.interruptImmunityDuration=1.5f;
