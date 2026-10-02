@@ -1,0 +1,30 @@
+PASS CharacterController preserved.
+PASS gameplay component preserved: 2181366826640092178
+PASS gameplay component preserved: 432830452394142373
+PASS gameplay component preserved: 7112745388872497351
+PASS gameplay component preserved: 164532361835754017
+PASS gameplay component preserved: 8925013795593426878
+PASS gameplay component preserved: 7172669298087625043
+PASS gameplay component preserved: 7384112345678901234
+PASS gameplay component preserved: 7384112345678901235
+PASS gameplay component preserved: 7384112345678901237
+PASS gameplay component preserved: 7384112345678901238
+PASS gameplay component preserved: 7384112345678901239
+PASS gameplay component preserved: 7384112345678901240
+PASS gameplay component preserved: 8533537562741366807
+PASS gameplay component preserved: 963506086441823015
+PASS gameplay component preserved: 7309870534223546166
+PASS gameplay component preserved: 6139513958556759282
+PASS gameplay component preserved: 8782606980980705582
+PASS gameplay component preserved: 213399419755465299
+PASS gameplay component preserved: 505906180060552088
+PASS gameplay component preserved: 4307644925425241861
+PASS gameplay component preserved: 3702891871247302310
+PASS gameplay component preserved: 2991368484576200107
+PASS gameplay component preserved: 4734037579532205185
+PASS gameplay component preserved: 802370064558194752
+PASS gameplay component preserved: 4643420922271759297
+PASS Animator identity, controller and settings preserved; only avatar changed.
+PASS gameplay component preserved: 914622531955209381
+PASS gameplay component preserved: 7384112345678901244
+PASS gameplay component preserved: 7384112345678901245

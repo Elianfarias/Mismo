@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbaed6838d1a4d369404166107b9bbf5, type: 3}
   m_Name: FirmGuard
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: recovery
+    displayName: "Recuperación"
+    description: "Cada rango reduce un 5% la recarga de esta habilidad."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0.05
   displayName: Guardia firme
   abilityId: FirmGuard
   animationSource: {fileID: 11400000, guid: e7555c6d155e93448b2c9f2f131ceec1, type: 2}

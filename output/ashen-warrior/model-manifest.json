@@ -1,0 +1,613 @@
+{
+  "voxel_size": 0.028,
+  "helmet_voxel_size": 0.014,
+  "mesh_count": 57,
+  "occupied_voxels": 63857,
+  "vertices": 112024,
+  "triangles": 56012,
+  "bones": [
+    "Root",
+    "Hips",
+    "Spine",
+    "Chest",
+    "Neck",
+    "Head",
+    "Plume_1",
+    "Plume_2",
+    "Plume_3",
+    "Plume_4",
+    "Plume_5",
+    "Clavicle.L",
+    "UpperArm.L",
+    "LowerArm.L",
+    "Hand.L",
+    "Clavicle.R",
+    "UpperArm.R",
+    "LowerArm.R",
+    "Hand.R",
+    "Cape.L_1",
+    "Cape.L_2",
+    "Cape.L_3",
+    "Cape.L_4",
+    "Cape.C_1",
+    "Cape.C_2",
+    "Cape.C_3",
+    "Cape.C_4",
+    "Cape.R_1",
+    "Cape.R_2",
+    "Cape.R_3",
+    "Cape.R_4",
+    "UpperLeg.L",
+    "LowerLeg.L",
+    "Foot.L",
+    "Toes.L",
+    "UpperLeg.R",
+    "LowerLeg.R",
+    "Foot.R",
+    "Toes.R"
+  ],
+  "cape_tips_blender": {
+    "L": [
+      0.29,
+      0.4,
+      0.4
+    ],
+    "C": [
+      0.0,
+      0.4,
+      0.4
+    ],
+    "R": [
+      -0.29,
+      0.4,
+      0.4
+    ]
+  },
+  "plume_tip_blender": [
+    0.0,
+    0.5199999809265137,
+    1.4700000286102295
+  ],
+  "colors": {
+    "Warrior_Steel_0": {
+      "color": [
+        0.3538823529411764,
+        0.3833725490196078,
+        0.44603921568627447
+      ],
+      "roughness": 0.55,
+      "metallic": 0.65,
+      "emission": false
+    },
+    "Warrior_Steel_1": {
+      "color": [
+        0.3764705882352941,
+        0.40784313725490196,
+        0.4745098039215686
+      ],
+      "roughness": 0.55,
+      "metallic": 0.65,
+      "emission": false
+    },
+    "Warrior_Steel_2": {
+      "color": [
+        0.4009411764705882,
+        0.43435294117647055,
+        0.5053529411764706
+      ],
+      "roughness": 0.55,
+      "metallic": 0.65,
+      "emission": false
+    },
+    "Warrior_SteelDark_0": {
+      "color": [
+        0.23223529411764707,
+        0.2580392156862745,
+        0.3133333333333333
+      ],
+      "roughness": 0.67,
+      "metallic": 0.55,
+      "emission": false
+    },
+    "Warrior_SteelDark_1": {
+      "color": [
+        0.24705882352941178,
+        0.27450980392156865,
+        0.3333333333333333
+      ],
+      "roughness": 0.67,
+      "metallic": 0.55,
+      "emission": false
+    },
+    "Warrior_SteelDark_2": {
+      "color": [
+        0.2631176470588235,
+        0.2923529411764706,
+        0.355
+      ],
+      "roughness": 0.67,
+      "metallic": 0.55,
+      "emission": false
+    },
+    "Warrior_Edge_0": {
+      "color": [
+        0.5492549019607843,
+        0.5676862745098038,
+        0.6082352941176471
+      ],
+      "roughness": 0.47,
+      "metallic": 0.7,
+      "emission": false
+    },
+    "Warrior_Edge_1": {
+      "color": [
+        0.5843137254901961,
+        0.6039215686274509,
+        0.6470588235294118
+      ],
+      "roughness": 0.47,
+      "metallic": 0.7,
+      "emission": false
+    },
+    "Warrior_Edge_2": {
+      "color": [
+        0.6222941176470588,
+        0.6431764705882352,
+        0.6891176470588235
+      ],
+      "roughness": 0.47,
+      "metallic": 0.7,
+      "emission": false
+    },
+    "Warrior_Chain_0": {
+      "color": [
+        0.14745098039215684,
+        0.16588235294117648,
+        0.19537254901960785
+      ],
+      "roughness": 0.72,
+      "metallic": 0.45,
+      "emission": false
+    },
+    "Warrior_Chain_1": {
+      "color": [
+        0.1568627450980392,
+        0.17647058823529413,
+        0.20784313725490197
+      ],
+      "roughness": 0.72,
+      "metallic": 0.45,
+      "emission": false
+    },
+    "Warrior_Chain_2": {
+      "color": [
+        0.16705882352941176,
+        0.18794117647058825,
+        0.22135294117647059
+      ],
+      "roughness": 0.72,
+      "metallic": 0.45,
+      "emission": false
+    },
+    "Warrior_ChainLight_0": {
+      "color": [
+        0.22117647058823528,
+        0.23960784313725486,
+        0.27647058823529413
+      ],
+      "roughness": 0.67,
+      "metallic": 0.55,
+      "emission": false
+    },
+    "Warrior_ChainLight_1": {
+      "color": [
+        0.23529411764705882,
+        0.2549019607843137,
+        0.29411764705882354
+      ],
+      "roughness": 0.67,
+      "metallic": 0.55,
+      "emission": false
+    },
+    "Warrior_ChainLight_2": {
+      "color": [
+        0.2505882352941176,
+        0.2714705882352941,
+        0.31323529411764706
+      ],
+      "roughness": 0.67,
+      "metallic": 0.55,
+      "emission": false
+    },
+    "Warrior_Cloth_0": {
+      "color": [
+        0.42760784313725486,
+        0.1769411764705882,
+        0.21011764705882352
+      ],
+      "roughness": 0.93,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_Cloth_1": {
+      "color": [
+        0.4549019607843137,
+        0.18823529411764706,
+        0.2235294117647059
+      ],
+      "roughness": 0.93,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_Cloth_2": {
+      "color": [
+        0.4844705882352941,
+        0.2004705882352941,
+        0.23805882352941177
+      ],
+      "roughness": 0.93,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_ClothLight_0": {
+      "color": [
+        0.5197647058823529,
+        0.24329411764705883,
+        0.2580392156862745
+      ],
+      "roughness": 0.9,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_ClothLight_1": {
+      "color": [
+        0.5529411764705883,
+        0.25882352941176473,
+        0.27450980392156865
+      ],
+      "roughness": 0.9,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_ClothLight_2": {
+      "color": [
+        0.5888823529411765,
+        0.2756470588235294,
+        0.2923529411764706
+      ],
+      "roughness": 0.9,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_ClothDark_0": {
+      "color": [
+        0.26909803921568626,
+        0.12164705882352941,
+        0.16219607843137254
+      ],
+      "roughness": 0.96,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_ClothDark_1": {
+      "color": [
+        0.28627450980392155,
+        0.12941176470588237,
+        0.17254901960784313
+      ],
+      "roughness": 0.96,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_ClothDark_2": {
+      "color": [
+        0.30488235294117644,
+        0.1378235294117647,
+        0.18376470588235294
+      ],
+      "roughness": 0.96,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_Crimson_0": {
+      "color": [
+        0.6156078431372549,
+        0.15850980392156863,
+        0.19537254901960785
+      ],
+      "roughness": 0.9,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_Crimson_1": {
+      "color": [
+        0.6549019607843137,
+        0.16862745098039217,
+        0.20784313725490197
+      ],
+      "roughness": 0.9,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_Crimson_2": {
+      "color": [
+        0.6974705882352941,
+        0.17958823529411766,
+        0.22135294117647059
+      ],
+      "roughness": 0.9,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_CrimsonLight_0": {
+      "color": [
+        0.748313725490196,
+        0.25435294117647056,
+        0.2580392156862745
+      ],
+      "roughness": 0.88,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_CrimsonLight_1": {
+      "color": [
+        0.796078431372549,
+        0.27058823529411763,
+        0.27450980392156865
+      ],
+      "roughness": 0.88,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_CrimsonLight_2": {
+      "color": [
+        0.8478235294117646,
+        0.28817647058823526,
+        0.2923529411764706
+      ],
+      "roughness": 0.88,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_CrimsonDark_0": {
+      "color": [
+        0.376,
+        0.11058823529411764,
+        0.1548235294117647
+      ],
+      "roughness": 0.95,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_CrimsonDark_1": {
+      "color": [
+        0.4,
+        0.11764705882352941,
+        0.16470588235294117
+      ],
+      "roughness": 0.95,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_CrimsonDark_2": {
+      "color": [
+        0.426,
+        0.1252941176470588,
+        0.17541176470588235
+      ],
+      "roughness": 0.95,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_Leather_0": {
+      "color": [
+        0.26172549019607844,
+        0.188,
+        0.14376470588235293
+      ],
+      "roughness": 0.86,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_Leather_1": {
+      "color": [
+        0.2784313725490196,
+        0.2,
+        0.15294117647058825
+      ],
+      "roughness": 0.86,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_Leather_2": {
+      "color": [
+        0.2965294117647059,
+        0.213,
+        0.16288235294117648
+      ],
+      "roughness": 0.86,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_LeatherEdge_0": {
+      "color": [
+        0.43498039215686274,
+        0.3207058823529412,
+        0.24329411764705883
+      ],
+      "roughness": 0.8,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_LeatherEdge_1": {
+      "color": [
+        0.4627450980392157,
+        0.3411764705882353,
+        0.25882352941176473
+      ],
+      "roughness": 0.8,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_LeatherEdge_2": {
+      "color": [
+        0.4928235294117647,
+        0.3633529411764706,
+        0.2756470588235294
+      ],
+      "roughness": 0.8,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_Brass_0": {
+      "color": [
+        0.656156862745098,
+        0.5308235294117647,
+        0.3465098039215686
+      ],
+      "roughness": 0.5,
+      "metallic": 0.5,
+      "emission": false
+    },
+    "Warrior_Brass_1": {
+      "color": [
+        0.6980392156862745,
+        0.5647058823529412,
+        0.3686274509803922
+      ],
+      "roughness": 0.5,
+      "metallic": 0.5,
+      "emission": false
+    },
+    "Warrior_Brass_2": {
+      "color": [
+        0.7434117647058823,
+        0.6014117647058823,
+        0.3925882352941176
+      ],
+      "roughness": 0.5,
+      "metallic": 0.5,
+      "emission": false
+    },
+    "Warrior_Rust_0": {
+      "color": [
+        0.42023529411764704,
+        0.2949019607843137,
+        0.21749019607843137
+      ],
+      "roughness": 0.85,
+      "metallic": 0.2,
+      "emission": false
+    },
+    "Warrior_Rust_1": {
+      "color": [
+        0.4470588235294118,
+        0.3137254901960784,
+        0.23137254901960785
+      ],
+      "roughness": 0.85,
+      "metallic": 0.2,
+      "emission": false
+    },
+    "Warrior_Rust_2": {
+      "color": [
+        0.47611764705882353,
+        0.3341176470588235,
+        0.24641176470588236
+      ],
+      "roughness": 0.85,
+      "metallic": 0.2,
+      "emission": false
+    },
+    "Warrior_Sole_0": {
+      "color": [
+        0.12901960784313726,
+        0.1363921568627451,
+        0.1548235294117647
+      ],
+      "roughness": 0.95,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_Sole_1": {
+      "color": [
+        0.13725490196078433,
+        0.1450980392156863,
+        0.16470588235294117
+      ],
+      "roughness": 0.95,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_Sole_2": {
+      "color": [
+        0.1461764705882353,
+        0.1545294117647059,
+        0.17541176470588235
+      ],
+      "roughness": 0.95,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_Face_0": {
+      "color": [
+        0.03137254901960784,
+        0.047058823529411764,
+        0.09411764705882353
+      ],
+      "roughness": 1,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_Face_1": {
+      "color": [
+        0.03137254901960784,
+        0.047058823529411764,
+        0.09411764705882353
+      ],
+      "roughness": 1,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_Face_2": {
+      "color": [
+        0.03137254901960784,
+        0.047058823529411764,
+        0.09411764705882353
+      ],
+      "roughness": 1,
+      "metallic": 0,
+      "emission": false
+    },
+    "Warrior_Eyes_0": {
+      "color": [
+        0.9176470588235294,
+        0.8588235294117647,
+        1
+      ],
+      "roughness": 0.8,
+      "metallic": 0,
+      "emission": true
+    },
+    "Warrior_Eyes_1": {
+      "color": [
+        0.9176470588235294,
+        0.8588235294117647,
+        1
+      ],
+      "roughness": 0.8,
+      "metallic": 0,
+      "emission": true
+    },
+    "Warrior_Eyes_2": {
+      "color": [
+        0.9176470588235294,
+        0.8588235294117647,
+        1
+      ],
+      "roughness": 0.8,
+      "metallic": 0,
+      "emission": true
+    }
+  }
+}

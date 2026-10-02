@@ -38,8 +38,8 @@ MonoBehaviour:
     requiredWeapon: {fileID: 0}
     lessonWeapon: {fileID: 0}
     count: 1
-  - title: Practicar parry
-    instruction: "Espada: E justo antes del impacto.\nDerrot\xE1 al goblin para seguir."
+  - title: "Elegir habilidades"
+    instruction: "Desde maestría 3, elegí una habilidad en K.\nM1 y C alcanzan para superar este encuentro."
     offset: {x: -12, y: -165}
     lesson: {fileID: 11400000, guid: 1949c9db5b055b74abd516c1e593ab19, type: 2}
     prefab: {fileID: 5335981839036757142, guid: 4c185bcb06948d34f8cbe1437ef73bdf, type: 3}
@@ -55,7 +55,7 @@ MonoBehaviour:
     lessonWeapon: {fileID: 0}
     count: 1
   - title: Arco y Focus
-    instruction: "Manten\xE9 M1 para tensar y solt\xE1 para disparar. Acert\xE1 para generar Focus y usar Q."
+    instruction: "Mantené M1 para tensar y soltá para disparar. Ganá maestría con el arco y elegí sus habilidades en K."
     offset: {x: 12, y: -139}
     lesson: {fileID: 11400000, guid: eb3a73a4a8e4b4c45b6775d6b323fe91, type: 2}
     prefab: {fileID: 4371155951810911388, guid: 3da4a2fe569475b40ad9e8f150740a7a, type: 3}

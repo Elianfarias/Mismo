@@ -14,13 +14,15 @@ namespace Mismo.Gameplay.Player.Equipment
         private readonly Queue<float> impacts = new Queue<float>();
         private Material material;
         private string family; private float focusGain;
+        private string abilityId;private long abilityUseId;
         public static AreaInstance Spawn(GameObject owner, Vector3 point, float radius, float duration, float interval, float damage,
-            GameObject fallingVisual = null, int arrowsPerVolley = 9, float fallHeight = 5, float fallSpeed = 12,string weaponFamilyId=null, float focusGainOnHit=0)
+            GameObject fallingVisual = null, int arrowsPerVolley = 9, float fallHeight = 5, float fallSpeed = 12,string weaponFamilyId=null, float focusGainOnHit=0,string abilityId=null,long abilityUseId=0)
         {
             var go = new GameObject("Ground arrow area"); go.transform.position = point;
             var area = go.AddComponent<AreaInstance>(); area.owner = owner; area.radius = radius; area.duration = Mathf.Max(.1f, duration);
             area.interval = Mathf.Max(.1f, interval); area.damage = damage;
             area.family=weaponFamilyId; area.focusGain=focusGainOnHit;
+            area.abilityId=abilityId;area.abilityUseId=abilityUseId;
             area.fallingVisual = fallingVisual; area.arrowsPerVolley = Mathf.Clamp(arrowsPerVolley, 1, 40);
             area.fallHeight = Mathf.Max(.5f, fallHeight); area.fallSpeed = Mathf.Max(.1f, fallSpeed);
             var line = go.AddComponent<LineRenderer>(); line.useWorldSpace = false; line.loop = true; line.positionCount = 48; line.widthMultiplier = .055f;
@@ -68,7 +70,7 @@ namespace Mismo.Gameplay.Player.Equipment
                 if (Mathf.Abs(target.transform.position.y - transform.position.y) > 1.5f) continue;
                 Vector3 point = other.ClosestPoint(origin);
                 if (Physics.Linecast(origin, point, out var obstruction, ~0, QueryTriggerInteraction.Ignore) && obstruction.collider.GetComponentInParent<IDamageReceiver>() != receiver) continue;
-                receiver.ReceiveDamage(new DamageInfo(damage, owner, point, Vector3.down, attackId, damage*.5f, true, true, transform.position, false,family,focusGain));
+                receiver.ReceiveDamage(new DamageInfo(damage, owner, point, Vector3.down, attackId, damage*.5f, true, true, transform.position, false,family,focusGain,abilityId:abilityId,abilityUseId:abilityUseId));
             }
         }
         private void OnDestroy() { if (material != null) Destroy(material); }

@@ -1,0 +1,7 @@
+PASS Rules: one unlock point per mastery level, damage XP, 80 starting stamina
+PASS Arco: repertoire and optional modifier IDs
+PASS Dos espadas: repertoire and optional modifier IDs
+PASS Espada sola: repertoire and optional modifier IDs
+PASS Espada y escudo: repertoire and optional modifier IDs
+PASS Updated tutorial lessons deserialize and do not require a default skill
+PASS ALL CONTENT CHECKS

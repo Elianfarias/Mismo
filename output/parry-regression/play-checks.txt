@@ -1,0 +1,12 @@
+Real player parry / 2026-10-01T08:36:08
+Ability=SwordParry actions=1 active=0,5 animator=Voxel_Reference_Mage
+VFX=True t=0,04 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=PerfectParry damage=0 particles=8
+VFX=True t=0,2 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=Parry damage=0 particles=7
+VFX=True t=0,4 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=Parry damage=0 particles=8
+VFX=False t=0,04 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=PerfectParry damage=0 particles=0
+VFX=False t=0,2 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=Parry damage=0 particles=0
+VFX=False t=0,4 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=Parry damage=0 particles=0
+GOBLIN defending=False outcome=Hit damage=12 enemy=Attack
+GOBLIN defending=True outcome=PerfectParry damage=0 enemy=Stagger
+PASS ALL real player frontal parries, VFX playback and goblin melee contact
+COMPLETE

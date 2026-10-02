@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Presentation.TutorialSequence
   id: demo.parry
   pages:
-  - title: Parry con espada
-    body: "Con la espada inicial, E activa la parada. Usala justo antes de que conecte el golpe del goblin. Un parry acertado te da una oportunidad de contraatacar. Pod\xE9s ganar este encuentro aunque todav\xEDa no te salga."
-    highlight: 7
+  - title: "Elegir tu primera habilidad"
+    body: "Desde maestría 3, abrí K fuera de combate para elegir una habilidad con tus puntos de habilidad. Si elegís Parada, arrastrala a Q, E o R y usá esa tecla justo antes del impacto. También podés elegir otra habilidad y ganar con M1 y la esquiva C: la parada es opcional."
+    highlight: 4

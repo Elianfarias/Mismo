@@ -39,7 +39,7 @@ namespace Mismo.Gameplay.Combat
             var rules=CombatRules.Current;
             var attacker=damage.Source!=null?damage.Source.GetComponentInParent<CombatState>():null;
             var outcome=defense.Resolve(damage);
-            if(outcome==HitOutcome.Block){state.Reward(0,"BLOQUEO");return Publish(damage,new HitResult(outcome));}
+            if(outcome==HitOutcome.Block){RecordSkillDefense(damage);state.Reward(0,"BLOQUEO");return Publish(damage,new HitResult(outcome));}
             if(outcome==HitOutcome.Parry||outcome==HitOutcome.PerfectParry)
             {
                 bool perfect=outcome==HitOutcome.PerfectParry;
@@ -62,6 +62,7 @@ namespace Mismo.Gameplay.Combat
             }
             if(outcome==HitOutcome.Dodge||outcome==HitOutcome.PerfectDodge)
             {
+                RecordSkillDefense(damage);
                 if(outcome==HitOutcome.PerfectDodge){state.Reward(rules.perfectFocus,"ESQUIVA PERFECTA");CombatTimeFeedback.PerfectDodge();}
                 return Publish(damage,new HitResult(outcome));
             }
@@ -81,7 +82,7 @@ namespace Mismo.Gameplay.Combat
             var inventory=GetComponent<Mismo.Gameplay.Player.Equipment.Inventory.PlayerInventory>();
             if(inventory!=null&&inventory.IsReady)amount*=inventory.IncomingDamageMultiplier;
             var skillEffects=GetComponent<Mismo.Gameplay.Player.Equipment.WeaponSkillEffects>();
-            if(skillEffects!=null)amount=skillEffects.Absorb(amount,damage.Direction);
+            if(skillEffects!=null)amount=skillEffects.Absorb(amount,damage.Direction,damage.Source,damage.AttackId);
             float previousHealth=health.Current;
             health.ApplyDamage(new DamageInfo(amount,damage.Source,damage.HitPoint,damage.Direction,damage.AttackId));
             float healthDamage=previousHealth-health.Current;
@@ -96,8 +97,16 @@ namespace Mismo.Gameplay.Combat
         HitResult Publish(DamageInfo damage,HitResult result)
         {
             LastResult=result;
+            GetComponent<Mismo.Gameplay.Player.Equipment.AbilityRunner>()?.OnDefenseResolved(result.Outcome);
             if (Application.isPlaying) Mismo.Gameplay.Player.Presentation.CombatImpactPool.Confirm(this, damage, result);
             Resolved?.Invoke(damage,result);return result;
+        }
+        void RecordSkillDefense(DamageInfo damage)
+        {
+            var player=GetComponent<Mismo.Gameplay.Player.Equipment.Inventory.PlayerInventory>();
+            var cast=GetComponent<Mismo.Gameplay.Player.Equipment.AbilityRunner>()?.Current;
+            if(player!=null&&cast!=null&&cast.Began&&!cast.Ended)
+                damage.Source?.GetComponentInParent<ICombatContribution>()?.RecordSkillUse(player,cast.WeaponFamilyId,cast.Definition.Id,cast.AttackId);
         }
     }
 }

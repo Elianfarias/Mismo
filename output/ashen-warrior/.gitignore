@@ -1,0 +1,5 @@
+# Working copies; the versioned FBX and source archive live under Assets/Art.
+*.blend
+*.blend1
+*.fbx
+staging/

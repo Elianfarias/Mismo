@@ -17,6 +17,39 @@ MonoBehaviour:
   abilityId: 
   animationSource: {fileID: 0}
   passive: 0
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: power
+    displayName: "Entrada y remate"
+    description: "Si la estocada golpea a un monstruo, presioná M1 durante la apertura para enlazar el golpe pesado. Si fallás, no hay remate."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 4
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    weaponVfx:
+    - prefab: {fileID: 2017351123791242961, guid: 2082068b2c74d9746bb1d5d6e172e4de, type: 3}
+      phase: 1
+      hand: 0
+      socketId: blade
+      localOffset: {x: 0, y: 0, z: 0}
+      localRotation: {x: 0, y: 0, z: 0}
+      localScale: {x: 1, y: 1, z: 1}
+      fullChargeScale: 1
+      lifetime: 0.42
+  - id: recovery
+    retired: 1
+    displayName: "Recuperaci\xF3n"
+    description: Cada rango reduce un 5% la recarga de esta habilidad.
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0.05
+    weaponVfx: []
   description: Avanza con una estocada para golpear al enemigo de frente.
   localizationKey: ability.sword.swordlunge
   preparation: 0.02
@@ -87,6 +120,16 @@ MonoBehaviour:
   executionSfx: {fileID: 8300000, guid: eec22285c386e884791b851e07691afe, type: 3}
   executionSfxVolume: 0.5
   comboStepSfx: []
+  weaponVfx:
+  - prefab: {fileID: 6496479300713825514, guid: 14b97246008f6d3489163eedbf6154da, type: 3}
+    phase: 1
+    hand: 0
+    socketId: blade
+    localOffset: {x: 0, y: 0, z: 0}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 1, z: 1}
+    fullChargeScale: 1
+    lifetime: 0.4
   pose: 1
   usesSwordCombo: 0
   comboSteps: []

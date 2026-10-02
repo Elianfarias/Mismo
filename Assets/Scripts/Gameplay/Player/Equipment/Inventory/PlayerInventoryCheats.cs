@@ -5,6 +5,33 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
 {
     public sealed partial class PlayerInventory
     {
+        /// <summary>Maximiza las maestrías de las armas propias, incluidas sus variantes de dos manos.</summary>
+        public bool TryMaxCheatWeaponMasteries()
+        {
+            if(!IsReady||catalog==null)return false;
+            var next=profile.Copy();
+            var families=new System.Collections.Generic.HashSet<string>(StringComparer.Ordinal);
+            foreach(var item in next.weapons)Include(catalog.Find(item.definitionId));
+            foreach(var loot in next.pendingLoot)if(loot.HasWeapon)Include(catalog.Find(loot.weapon.definitionId));
+            if(families.Count==0)return false;
+            int cap=Mathf.Clamp(Rules.masteryMaxLevel,2,1000);
+            foreach(string family in families)
+            {
+                var mastery=next.progression.GetOrCreate(family);
+                mastery.level=Mathf.Max(mastery.level,cap);mastery.experience=0;mastery.damageExperienceRemainder=0;
+            }
+            // Commit saves atomically and includes any pending combat training.
+            return Commit(next,"Cheat: maestría máxima en "+families.Count+" familias de armas. Distribuí los puntos en Armas y elegí habilidades en K.",false);
+
+            void Include(WeaponDefinition weapon)
+            {
+                if(weapon==null)return;
+                families.Add(weapon.MasteryId);
+                if(weapon.dualSwordFamily!=null)families.Add(weapon.dualSwordFamily.progressionId);
+                if(weapon.swordShieldFamily!=null)families.Add(weapon.swordShieldFamily.progressionId);
+            }
+        }
+
         /// <summary>Añade una copia de cada arma faltante, sin duplicar posesiones ni recompensas pendientes.</summary>
         public bool TryGrantCheatWeapons()
         {

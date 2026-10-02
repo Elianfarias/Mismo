@@ -9,19 +9,23 @@ namespace Mismo.Gameplay.Combat
         public readonly float FocusGainOnHit;
         public readonly float PostureDamage;
         public readonly long AttackId;
-        public readonly bool Ranged, Area, Parryable;
+        public readonly bool Ranged, Area, Parryable, BreaksGuard;
         public readonly Vector3 Origin;
         public readonly GameObject Source;
         public readonly Vector3 HitPoint;
         public readonly Vector3 Direction;
         public readonly string WeaponFamilyId;
+        public readonly string AbilityId;
+        public readonly long AbilityUseId;
         public readonly Mismo.Gameplay.Player.Presentation.CombatFeedbackProfile FeedbackProfile;
 
-        public DamageInfo(float amount, GameObject source, Vector3 hitPoint, Vector3 direction, long attackId = 0, float postureDamage = -1, bool ranged = false, bool area = false, Vector3? origin = null, bool parryable = true, string weaponFamilyId = null, float focusGainOnHit = 0, Mismo.Gameplay.Player.Presentation.CombatFeedbackProfile feedbackProfile = null)
+        public DamageInfo(float amount, GameObject source, Vector3 hitPoint, Vector3 direction, long attackId = 0, float postureDamage = -1, bool ranged = false, bool area = false, Vector3? origin = null, bool parryable = true, string weaponFamilyId = null, float focusGainOnHit = 0, Mismo.Gameplay.Player.Presentation.CombatFeedbackProfile feedbackProfile = null,string abilityId=null,long abilityUseId=0,bool breaksGuard=false)
         {
             Amount = Mathf.Max(0f, amount);
             FocusGainOnHit = Mathf.Max(0f, focusGainOnHit);
             WeaponFamilyId=weaponFamilyId;
+            AbilityId=abilityId;AbilityUseId=abilityUseId;
+            BreaksGuard=breaksGuard;
             FeedbackProfile = feedbackProfile != null ? feedbackProfile : source != null ? source.GetComponentInParent<Mismo.Gameplay.Player.Equipment.EquipmentLoadout>()?.ActiveDefinition?.FeedbackProfile : null;
             PostureDamage = postureDamage < 0 ? amount * .65f : postureDamage;
             AttackId = attackId; Ranged = ranged; Area = area; Parryable = parryable;
@@ -62,5 +66,6 @@ namespace Mismo.Gameplay.Combat
     public interface ICombatContribution
     {
         void RecordDefense(Mismo.Gameplay.Player.Equipment.Inventory.PlayerInventory player,string family);
+        void RecordSkillUse(Mismo.Gameplay.Player.Equipment.Inventory.PlayerInventory player,string family,string abilityId,long useId);
     }
 }

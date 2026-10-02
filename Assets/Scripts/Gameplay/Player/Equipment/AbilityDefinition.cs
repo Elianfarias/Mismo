@@ -20,6 +20,12 @@ namespace Mismo.Gameplay.Player.Equipment
         public WeaponPassive passive;
         public bool IsPassive => passive != WeaponPassive.None;
         public string Id => string.IsNullOrEmpty(abilityId) ? name : abilityId;
+        [Header("Maestría de habilidad")]
+        [Tooltip("Usos efectivos contra monstruos necesarios para habilitar modificadores. Un uso cuenta una vez aunque alcance varios blancos o haga varios pulsos.")]
+        [Min(1)] public int masteryUsesRequired=25;
+        [Tooltip("Opciones de diseño. Vacío = sin modificadores disponibles; no se inventan efectos automáticamente.")]
+        public AbilityModifierDefinition[] masteryModifiers=Array.Empty<AbilityModifierDefinition>();
+        public AbilityModifierDefinition FindModifier(string id)=>string.IsNullOrEmpty(id)?null:Array.Find(masteryModifiers??Array.Empty<AbilityModifierDefinition>(),m=>m!=null&&m.id==id);
         [TextArea(2, 5)] public string description;
         [Tooltip("Clave estable para traducir el nombre y la descripción en una futura tabla de idiomas.")]
         public string localizationKey;
@@ -55,6 +61,9 @@ namespace Mismo.Gameplay.Player.Equipment
         [Range(0f, 1f)] public float executionSfxVolume = 1f;
         [Tooltip("Un sonido por golpe del combo, en orden: Element 0 = primero, Element 1 = segundo, etc. Un elemento sin clip usa Execution Sfx. Volumen 0 silencia ese golpe.")]
         public ComboStepSound[] comboStepSfx = Array.Empty<ComboStepSound>();
+        [Header("VFX en el arma")]
+        [Tooltip("Prefabs visuales por fase de ejecución. Preparación permanece mientras se carga; Al ejecutar crea un efecto breve al soltar. Vacío = sin VFX.")]
+        public WeaponVfxDefinition[] weaponVfx = Array.Empty<WeaponVfxDefinition>();
         [Header("Presentación y acciones")]
         public AbilityPose pose;
         public bool usesSwordCombo;
@@ -70,6 +79,58 @@ namespace Mismo.Gameplay.Player.Equipment
     }
 
     [Serializable]
+    public sealed class AbilityModifierDefinition
+    {
+        [Tooltip("ID persistente dentro de esta habilidad.")] public string id;
+        public string displayName;
+        [TextArea] public string description;
+        [Range(1,100)] public int maxLevel=3;
+        [Range(1,1000000)] public int effectiveUsesPerLevel=10;
+        [Tooltip("Bonificación por rango entrenado. Rango 0 no aplica efectos.")]
+        public float damagePerLevel;
+        [Range(0,.2f)] public float cooldownReductionPerLevel;
+        [Tooltip("Evolución jugable, activa al elegirla después de dominar la habilidad. Los campos numéricos anteriores se conservan para los modificadores antiguos.")]
+        public AbilityModifierBehavior behavior;
+        [Tooltip("Conserva el ID y progreso de un modificador antiguo, pero deja de ofrecerlo o aplicarlo.")]
+        public bool retired;
+        [Min(.1f)] public float chargeSeconds=.85f;
+        [Min(1)] public float chargedPostureMultiplier=3;
+        [Min(.1f)] public float followupWindow=1.4f;
+        [Tooltip("Cada rango entrenado amplía la ventana para encadenar y reduce la carga en 0,05 segundos.")]
+        [Min(0)] public float windowPerRank=.15f;
+        [Tooltip("VFX adicionales a los de la habilidad. Se reproducen si este modificador está elegido y tiene al menos un rango entrenado.")]
+        public WeaponVfxDefinition[] weaponVfx = Array.Empty<WeaponVfxDefinition>();
+    }
+
+    public enum AbilityModifierBehavior { None, ChargedCut, DodgeChain, ParryRiposte, LungeFinisher }
+
+    public enum WeaponVfxPhase { Preparation, Execution, Active }
+    public enum WeaponVfxHand { Main, Offhand, Both }
+    public enum WeaponVfxAnchor { Weapon, Character, AboveHead }
+
+    [Serializable]
+    public sealed class WeaponVfxDefinition
+    {
+        [Tooltip("Prefab visual, normalmente con Particle Systems. Guardarlo en Assets/Art/Prefabs. No debe contener lógica de combate.")]
+        public GameObject prefab;
+        [Tooltip("Preparation: mientras prepara/carga. Execution: una vez al ejecutar/soltar. Active: durante la fase activa.")]
+        public WeaponVfxPhase phase;
+        public WeaponVfxHand hand;
+        [Tooltip("Weapon usa el socket del arma. Character usa la raíz del personaje. AboveHead coloca el efecto por encima de su altura, visible desde cualquier lado.")]
+        public WeaponVfxAnchor anchor;
+        [Tooltip("Orienta el efecto hacia la cámara principal sin moverla. Útil para auras sobre el personaje.")]
+        public bool faceCamera;
+        [Tooltip("ID de un Weapon Vfx Socket del modelo. Vacío usa la raíz del modelo. Si el ID no existe, no se emite el efecto.")]
+        public string socketId;
+        public Vector3 localOffset, localRotation;
+        public Vector3 localScale = Vector3.one;
+        [Tooltip("Sólo Preparation: multiplica la escala al alcanzar la carga máxima. 1 conserva el tamaño. No modifica daño ni tiempos.")]
+        [Min(.01f)] public float fullChargeScale = 1;
+        [Tooltip("Sólo Execution: duración del efecto, en segundos de juego. Permanece unido al arma; cancelar o cambiar de arma lo retira.")]
+        [Min(.01f)] public float lifetime = 1;
+    }
+
+    [Serializable]
     public sealed class ComboStepSound
     {
         public AudioClip clip;
@@ -80,6 +141,8 @@ namespace Mismo.Gameplay.Player.Equipment
     [Serializable]
     public abstract class AbilityAction
     {
+        // Only evasive weapon actions can open weapon followups; the belt is independent.
+        public virtual bool IsEvasion => false;
         public virtual void Begin(AbilityExecution cast) { }
         public virtual void Tick(AbilityExecution cast, float dt) { }
         public virtual void End(AbilityExecution cast) { }

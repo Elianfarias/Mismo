@@ -1,0 +1,48 @@
+Enemy combat response / 2026-10-01T02:08:31
+PASS Existing combat feedback and interrupt resistance regression
+PASS Isolated navigation surface
+PASS Goblin(Clone): serialized lateral movement is brisk
+PASS Goblin(Clone): normal melee telegraph before interruption
+PASS Goblin(Clone): first basic interrupts
+PASS Goblin(Clone): second basic activates resistance
+PASS Goblin(Clone): escape starts within 0.13 seconds of second basic
+PASS Goblin(Clone): burst does not inherit walking speed/acceleration
+PASS Goblin(Clone): further basic damages without restarting flinch
+PASS Goblin(Clone): further basic damages without restarting flinch
+PASS Goblin(Clone): real quick retreat, distance 2,46, peak speed 9,29
+PASS Goblin(Clone): temporary navigation settings restored
+PASS Goblin(Clone): resumes an attack immediately after separation
+PASS Goblin(Clone): melee re-engages, Imp takes ranged opportunity
+PASS Goblin(Clone): counter still has its authored telegraph
+PASS Goblin(Clone): posture break still overrides resistance
+PASS Imp(Clone): serialized lateral movement is brisk
+PASS Imp(Clone): normal melee telegraph before interruption
+PASS Imp(Clone): first basic interrupts
+PASS Imp(Clone): second basic activates resistance
+PASS Imp(Clone): escape starts within 0.13 seconds of second basic
+PASS Imp(Clone): burst does not inherit walking speed/acceleration
+PASS Imp(Clone): further basic damages without restarting flinch
+PASS Imp(Clone): further basic damages without restarting flinch
+PASS Imp(Clone): real quick retreat, distance 2,45, peak speed 9,29
+PASS Imp(Clone): temporary navigation settings restored
+PASS Imp plays backward motion during escape instead of full-body hit flinch
+PASS Imp(Clone): resumes an attack immediately after separation
+PASS Imp(Clone): melee re-engages, Imp takes ranged opportunity
+PASS Imp(Clone): counter still has its authored telegraph
+PASS Imp(Clone): posture break still overrides resistance
+PASS Goblin(Clone): first basic interrupts
+PASS Goblin(Clone): second basic activates resistance
+PASS Goblin(Clone): cornered enemy counters with melee instead of moving through wall
+PASS Imp(Clone): first basic interrupts
+PASS Imp(Clone): second basic activates resistance
+PASS Imp(Clone): cornered enemy counters with melee instead of moving through wall
+PASS Imp(Clone): first basic interrupts
+PASS Imp(Clone): second basic activates resistance
+PASS Interruption test starts an escape
+PASS Posture break cancels escape immediately
+PASS Imp(Clone): first basic interrupts
+PASS Imp(Clone): second basic activates resistance
+PASS Interruption test starts an escape
+PASS Disable cancels escape and restores navigation
+PASS Existing Imp tactical navigation and directional animation regression
+PASS ALL_RESPONSE_CHECKS_COMPLETE

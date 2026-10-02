@@ -21,6 +21,6 @@ MonoBehaviour:
   - title: Generar Focus
     body: "Acertar un disparo b\xE1sico genera {basicGain} Focus. Los disparos fallidos no lo generan. El borde de las habilidades que consumen Focus muestra cu\xE1nto te falta."
     highlight: 5
-  - title: La habilidad Q del arco
-    body: "Ahora ten\xE9s {q} en Q. Cuesta {focusCost} Focus: acert\xE1 disparos b\xE1sicos para reunirlo y despu\xE9s presion\xE1 Q."
-    highlight: 6
+  - title: "Elegir una habilidad del arco"
+    body: "El arco también empieza sin habilidades. En maestría 3, 6, 9… ganás puntos de habilidad: abrí K y elegí cuál desbloquear. Equipala en Q, E o R. Si consume Focus, reunilo acertando básicos; el borde de su icono indica cuándo podés usarla."
+    highlight: 4

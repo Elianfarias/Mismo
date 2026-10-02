@@ -18,8 +18,11 @@ MonoBehaviour:
     body: "Esta barra muestra cu\xE1nta vida te queda. Los golpes enemigos la reducen. En esta demo, si ca\xE9s, volv\xE9s a comenzar en la cueva."
     highlight: 1
   - title: Tu estamina
-    body: "Correr, esquivar y algunas acciones gastan estamina. Dej\xE1 de gastarla un momento para recuperarla; reserv\xE1 un poco para defenderte."
+    body: "Correr, esquivar y atacar gastan estamina. Empezás con 80. En Personaje (P) podés invertir puntos para aumentar su capacidad: la barra se alarga. Dejá de gastar estamina un momento para recuperarla."
     highlight: 2
+  - title: Doble salto
+    body: "Presioná Espacio para saltar. Mientras estás en el aire, soltá y volvé a presionar Espacio para hacer un doble salto. Al tocar el suelo recuperás ambos saltos."
+    highlight: 0
   - title: "Sal\xED de la cueva"
     body: "Movete con WASD y mir\xE1 alrededor con el mouse. Segu\xED el sendero: al fondo te espera el primer pueblo."
     highlight: 0
@@ -27,11 +30,14 @@ MonoBehaviour:
     body: "Tab alterna entre tus dos conjuntos de armas. Al cambiar, tambi\xE9n cambian sus habilidades. Equip\xE1 el arco para el pr\xF3ximo tramo."
     highlight: 3
   - title: Habilidades del arma
-    body: "M1 es tu ataque b\xE1sico. Q, E y R son los espacios de habilidades del arma equipada. Sus iconos muestran recarga y disponibilidad."
+    body: "Empezás con el ataque básico M1 y sin habilidades en Q, E o R. El daño real a monstruos aumenta la maestría de esa familia de arma. Ganás 1 punto de habilidad cada 3 niveles de maestría (3, 6, 9…): abrí K, elegí cualquiera, desbloqueala y arrastrala a un espacio. Hacelo fuera de combate."
     highlight: 4
+  - title: Mejorar tu arma
+    body: "Cada nivel ganado da 1 punto de maestría para mejorar daño, velocidad o recarga de habilidades en la pestaña Armas. Las mejoras son propias de esa familia. Los puntos para desbloquear habilidades se obtienen aparte, cada 3 niveles."
+    highlight: 3
   - title: Generar Focus con el arco
     body: "Acertar un disparo b\xE1sico del arco genera {basicGain} Focus. Los disparos fallidos no lo generan. El borde de las habilidades que consumen Focus muestra cu\xE1nto te falta para poder usarlas."
     highlight: 5
-  - title: Tu habilidad Q
-    body: "Ahora ten\xE9s {q} en Q. Cuesta {focusCost} Focus: acert\xE1 disparos b\xE1sicos para reunirlo y despu\xE9s presion\xE1 Q. La habilidad consume ese recurso."
+  - title: "Elegir una habilidad del arco"
+    body: "El arco también empieza sin habilidades. En maestría 3, 6, 9… ganás puntos de habilidad: abrí K y elegí cuál desbloquear. Equipala en Q, E o R. Si consume Focus, reunilo acertando básicos; el borde de su icono indica cuándo podés usarla."
     highlight: 6

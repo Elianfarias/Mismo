@@ -53,6 +53,8 @@ namespace Mismo.Gameplay.Player.Presentation
             }
             else
             {
+                if(frame.Phase==CombatAnimationPhase.Preparation&&frame.ComboIndex>=0&&comboClips!=null&&frame.ComboIndex<comboClips.Length)
+                {selected=comboClips[frame.ComboIndex];normalized=Mathf.Lerp(0,.22f,frame.Progress);return selected!=null;}
                 float start=Mathf.Clamp01(activeStartsAt),end=Mathf.Clamp(recoveryStartsAt,start,1);
                 normalized=frame.Phase==CombatAnimationPhase.Preparation ? Mathf.Lerp(0,start,frame.Progress)
                     : frame.Phase==CombatAnimationPhase.Active ? Mathf.Lerp(start,end,frame.Progress)

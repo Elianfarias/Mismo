@@ -11,8 +11,8 @@ namespace Mismo.Gameplay.Enemies
         [Min(.2f), Tooltip("Margen alrededor de Preferred Range en los datos del enemigo.")]
         public float rangeTolerance = 1.5f;
         [Min(.1f)] public float reactionDelay = .3f;
-        [Min(.1f)] public float retreatSpeed = 3.2f;
-        [Min(.1f)] public float retreatDuration = 1.1f;
+        [Min(.1f)] public float retreatSpeed = 5.5f;
+        [Min(.1f)] public float retreatDuration = .65f;
         [Min(.1f)] public float retreatCooldown = 3f;
         [Min(.2f)] public float strafeStep = 2f;
 
@@ -54,6 +54,15 @@ namespace Mismo.Gameplay.Enemies
             reconsider = 0;
             reaction = reactionDelay;
             leaveMelee = completed != null && completed.kind != CreatureAttackKind.Projectile;
+        }
+
+        protected override void ComboResponseFinished()
+        {
+            // The quick step already bought space. Take a firing/melee decision immediately,
+            // preserving attack cooldowns and avoiding a second retreat chained onto it.
+            reaction = retreatLeft = reconsider = 0;
+            retreatWait = retreatCooldown;
+            hasDestination = leaveMelee = false;
         }
 
         protected override void PrepareDecision(float dt, float distance, bool sight)

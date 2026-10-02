@@ -23,6 +23,7 @@ namespace Mismo.Menu
         public Slider UI => ui;
         public bool OptionsVisible => options.activeSelf;
         bool loading;
+        CharacterCreatorView characterCreator;
         GameObject credits;
         Button openCredits;
         [Header("Créditos de iconos")]
@@ -125,9 +126,15 @@ namespace Mismo.Menu
         public void Begin()
         {
             if(loading)return;
-            if(!Application.CanStreamedLevelBeLoaded(gameplayScene)){status.text=L.Text("No se encontró la región de juego.");return;}
-            if(!WorldSession.NewGame()){status.text=WorldSession.LastError??"No se pudo crear la partida.";return;}
-            LoadGame();
+            if(characterCreator==null)characterCreator=CharacterCreatorView.Create(transform,CreateCharacter,()=>ShowOptions(false));
+            characterCreator.Open();
+        }
+        string CreateCharacter(string playerName,string skin)
+        {
+            if(loading)return "Preparando tu aventura…";
+            if(!Application.CanStreamedLevelBeLoaded(gameplayScene))return L.Text("No se encontró la región de juego.");
+            if(!WorldSession.NewGame(playerName,skin))return WorldSession.LastError??"No se pudo crear la partida.";
+            LoadGame();return null;
         }
         public void Continue()
         {

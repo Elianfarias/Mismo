@@ -34,7 +34,8 @@ public static class WorldIntroductionBuilder
             data.cave=BuildCave(out float radius);data.caveRadius=radius;
             data.grove=BuildGrove();data.narrator=BuildNarrator();
             data.arrival=Sequence("WorldArrival",Page("Tu vida","Despertaste en las galerías de cristal. Esta barra muestra tu vida. Si caés, reaparecés en el último tramo completado de esta introducción.",TutorialAnchor.Health),
-                Page("Tu estamina","Correr con Shift, esquivar y algunas acciones gastan estamina. Dejá de gastarla un momento para recuperarla y reservá un poco para defenderte.",TutorialAnchor.Stamina),
+                Page("Tu estamina","Correr con Shift, esquivar y atacar gastan estamina. Empezás con 80. En Personaje (P) podés aumentar su capacidad y ver crecer la barra. Dejá de gastarla un momento para recuperarla.",TutorialAnchor.Stamina),
+                Page("Doble salto","Presioná Espacio para saltar. Mientras estás en el aire, soltá y volvé a presionar Espacio para hacer un doble salto. Al tocar el suelo recuperás ambos saltos.",TutorialAnchor.None),
                 Page("Un camino hacia la superficie","Movete con WASD y mirá con el mouse. Seguí las salas iluminadas por cristales hasta encontrar la salida.",TutorialAnchor.None));
             data.sprint=Sequence("Sprint",Page("Correr con Shift","Mantené Shift mientras te movés con WASD para correr. Soltá Shift para caminar y recuperar estamina. Atravesá las siguientes galerías hasta la luz del día.",TutorialAnchor.Stamina));
             data.story=Sequence("Liria",Page("Liria · Guardiana del claro","Al fin alguien salió de las galerías. Soy Liria. Este claro todavía está a salvo, pero los caminos ya no lo están: los goblins han aislado nuestros pueblos.",TutorialAnchor.None),
@@ -44,13 +45,13 @@ public static class WorldIntroductionBuilder
             data.village=Sequence("WorldVillage",Page("El primer pueblo","Este es el primer pueblo de tu continente. Acercate a sus habitantes y presioná F para conversar y aceptar encargos. J abre el diario de misiones. Tu inventario, ubicación y avance se guardan en esta partida.",TutorialAnchor.None));
             var focus=Sequence("WorldFocus",Page("Tensar el arco","Mantené el clic izquierdo para tensar el arco y aumentar la potencia del disparo. Soltalo para disparar; al llegar a la carga máxima la flecha se dispara automáticamente.",TutorialAnchor.Basic),
                 Page("Generar Focus","Acertar un disparo básico genera {basicGain} Focus. Los disparos fallidos no lo generan. El borde de las habilidades que consumen Focus muestra cuánto te falta.",TutorialAnchor.Basic),
-                Page("La habilidad Q del arco","Ahora tenés {q} en Q. Cuesta {focusCost} Focus: acertá disparos básicos para reunirlo y después presioná Q.",TutorialAnchor.Q));
+                Page("Elegir una habilidad del arco","El arco también empieza sin habilidades. En maestría 3, 6, 9… ganás puntos de habilidad: abrí K y elegí cuál desbloquear. Equipala en Q, E o R. Si consume Focus, reunilo acertando básicos; el borde de su icono indica cuándo podés usarla.",TutorialAnchor.Skills));
             data.encounters=new[]{
                 Encounter("Primer combate","M1 · Atacar    C · Esquivar\nDerrotá al goblin para despejar el camino.",-12,-217,"FirstFight",44),
                 Encounter("Romper postura","Atacá al goblin y aprovechá su stagger.",14,-191,"Stagger",68),
-                Encounter("Practicar parry","Espada: E justo antes del impacto.\nDerrotá al goblin para seguir.",-12,-165,"Parry",92),
+                Encounter("Elegir habilidades","Desde maestría 3, elegí una habilidad en K.\nM1 y C alcanzan para superar este encuentro.",-12,-165,"Parry",92),
                 new WorldIntroductionEncounter{title="Equipar el arco",instruction="Tab alterna tus armas. Equipá el arco; I permite revisar tus conjuntos.",offset=new Vector2(8,-152),lesson=LoadLesson("Weapons"),requiredWeapon=AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Data/Weapons/Bow/Bow.asset")},
-                Encounter("Arco y Focus","Mantené M1 para tensar y soltá para disparar. Acertá para generar Focus y usar Q.",12,-139,null,119),
+                Encounter("Arco y Focus","Mantené M1 para tensar y soltá para disparar. Ganá maestría con el arco y elegí sus habilidades en K.",12,-139,null,119),
                 Encounter("El último tramo","Combiná espada, arco y habilidades. Despejá el camino hasta el pueblo.",0,-114,"Combine",147,2)};
             data.encounters[4].lesson=focus;data.encounters[4].lessonWeapon=data.encounters[3].requiredWeapon;
             EditorUtility.SetDirty(data);EditorUtility.SetDirty(data.story);

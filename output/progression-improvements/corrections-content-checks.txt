@@ -1,0 +1,10 @@
+PASS Arrival: serialized lesson text and milestones
+PASS WorldArrival: serialized lesson text and milestones
+PASS Interface: serialized lesson text and milestones
+PASS Weapons: serialized lesson text and milestones
+PASS Parry: serialized lesson text and milestones
+PASS Focus: serialized lesson text and milestones
+PASS WorldFocus: serialized lesson text and milestones
+PASS WorldIntroductionBuilder.cs: generator retains double-jump lesson
+PASS DemoIntroductionBuilder.cs: generator retains double-jump lesson
+PASS Movement and progression assets match tutorial rules

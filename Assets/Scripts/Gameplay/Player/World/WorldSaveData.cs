@@ -6,6 +6,8 @@ namespace Mismo.Gameplay.Player.World
     public sealed class WorldSaveData
     {
         public int version=1;
+        public string playerName;
+        public string playerSkin;
         public System.Collections.Generic.List<Mismo.Gameplay.Player.Presentation.MapPin> mapPins = new System.Collections.Generic.List<Mismo.Gameplay.Player.Presentation.MapPin>();
         public System.Collections.Generic.List<MapDiscoveryBlock> mapDiscovery = new System.Collections.Generic.List<MapDiscoveryBlock>();
         public int villageLayoutRevision;

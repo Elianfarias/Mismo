@@ -25,10 +25,13 @@ namespace Mismo.Gameplay.Enemies
             }
             // Read the resolved AI state: damage alone does not mean an attack was interrupted.
             bool attacking=binding!=null||legacyMotion==3||IsPerformingAttack(animator);
-            if(attacking)reaction=null;
+            var enemy=animator.GetComponentInParent<EnemyController>();
+            bool responding=enemy!=null && enemy.State!=EnemyState.Stagger &&
+                enemy.GetComponent<Mismo.Gameplay.Combat.CombatState>()?.InterruptImmune==true;
+            if(attacking||responding)reaction=null;
             var customization=animator.GetComponentInParent<EnemyEquipment>();
             if(customization!=null&&!customization.isActiveAndEnabled)customization=null;
-            if(attacking&&customization!=null)customization.CancelHitReaction();
+            if((attacking||responding)&&customization!=null)customization.CancelHitReaction();
             if(!attacking&&customization!=null&&customization.PlayingPostureBreak)
             {reaction=customization.postureBreakClip;reactionProgress=customization.PostureBreakProgress;reactionMask=null;}
             else if(!attacking&&customization!=null&&customization.PlayingParry)

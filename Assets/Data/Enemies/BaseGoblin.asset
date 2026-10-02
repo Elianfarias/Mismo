@@ -18,13 +18,16 @@ MonoBehaviour:
   leashRange: 22
   memoryDuration: 3
   speed: 6
-  positioningSpeed: 1.6
+  positioningSpeed: 3.6
   decisionPause: 0.35
   chargeCooldown: 5
   interruptibleByCombos: 1
   comboHitStun: 1
   maxConsecutiveInterrupts: 2
   interruptImmunityDuration: 2
+  comboResponseStun: 0.12
+  comboBackstepDistance: 2.6
+  comboBackstepDuration: 0.28
   staggerDamageThreshold: 15
   staggerDuration: 0.45
   staggerResistance: 0.75

@@ -1,0 +1,25 @@
+SERIALIZED SwordParry actions=1 action=Mismo.Gameplay.Player.Equipment.ParryAction vfx=1
+PASS Start E
+VFX=True time=0,01 Began=True defense=True particles=3
+OUTCOME=PerfectParry damage=0
+PASS Frontal attack parried
+PASS Start E
+VFX=True time=0,2 Began=True defense=True particles=3
+OUTCOME=Parry damage=0
+PASS Frontal attack parried
+PASS Start E
+VFX=True time=0,49 Began=True defense=True particles=3
+OUTCOME=Parry damage=0
+PASS Frontal attack parried
+PASS Start E
+VFX=False time=0,01 Began=True defense=True particles=0
+OUTCOME=PerfectParry damage=0
+PASS Frontal attack parried
+PASS Start E
+VFX=False time=0,2 Began=True defense=True particles=0
+OUTCOME=Parry damage=0
+PASS Frontal attack parried
+PASS Start E
+VFX=False time=0,49 Began=True defense=True particles=0
+OUTCOME=Parry damage=0
+PASS Frontal attack parried

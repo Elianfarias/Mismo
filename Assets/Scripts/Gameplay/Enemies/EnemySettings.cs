@@ -24,6 +24,12 @@ namespace Mismo.Gameplay.Enemies
         public int maxConsecutiveInterrupts = 2;
         [Min(0), Tooltip("Segundos de inmunidad a mini-interrupciones desde la última permitida. No bloquea daño, postura, rotura ni parry.")]
         public float interruptImmunityDuration = 1.5f;
+        [Min(.05f), Tooltip("Reacción breve al alcanzar el límite de interrupciones; luego responde sin pausa adicional.")]
+        public float comboResponseStun = .12f;
+        [Min(0), Tooltip("Distancia del paso de escape de humanoides tras el límite de interrupciones. Cero lo desactiva.")]
+        public float comboBackstepDistance = 2.6f;
+        [Min(.1f), Tooltip("Duración del paso de escape; conserva daño recibido y respeta obstáculos.")]
+        public float comboBackstepDuration = .28f;
         [Header("Aturdimiento general")]
         [Min(0f)] public float staggerDamageThreshold = 15f;
         [Min(0.05f)] public float staggerDuration = 0.45f;

@@ -10,6 +10,15 @@ namespace Mismo.Gameplay.Player.Equipment
         public readonly WeaponDefinition Weapon;
         public readonly AbilityDefinition Definition;
         public readonly float DamageMultiplier, AttackSpeed;
+        public readonly AbilityModifierDefinition Modifier;
+        public readonly int ModifierRank;
+        public bool DodgeChain, CounterOpener;
+        public int OpeningStep;
+        public bool ChargedCombo=>Definition.usesSwordCombo&&Modifier?.behavior==AbilityModifierBehavior.ChargedCut;
+        public bool Chargeable=>Definition.chargeable||ChargedCombo;
+        public float MaximumCharge=>ChargedCombo?Mathf.Max(.25f,Modifier.chargeSeconds-ModifierRank*.05f):Definition.maximumCharge;
+        public bool BreaksGuard=>ChargedCombo&&Charge>=.95f;
+        public float PostureMultiplier=>ChargedCombo?Mathf.Lerp(1,Mathf.Max(1,Modifier.chargedPostureMultiplier),Charge):1;
         public readonly string WeaponFamilyId;
         public Vector3 Direction;
         public readonly Vector3 GroundPoint;
@@ -29,7 +38,8 @@ namespace Mismo.Gameplay.Player.Equipment
         {
             Runner = runner; Weapon = weapon; Definition = definition; Direction = direction; GroundPoint = point;
             var inventory=runner.GetComponent<Inventory.PlayerInventory>();
-            DamageMultiplier=inventory!=null?inventory.DamageMultiplier(weapon):1;
+            int rank=0;Modifier=inventory!=null?inventory.AbilityBehavior(weapon,definition,out rank):null;ModifierRank=rank;
+            DamageMultiplier=inventory!=null?inventory.DamageMultiplier(weapon)*inventory.AbilityDamageMultiplier(weapon,definition):1;
             bool offensive=definition.usesSwordCombo||definition.actions!=null&&System.Array.Exists(definition.actions,a=>a is MeleeAction||a is ProjectileAction||a is PoisonArrowAction||a is RepeatedStrikeAction||a is GroundAreaAction);
             AttackSpeed=offensive&&inventory!=null?inventory.AttackSpeed(weapon):1;
             WeaponFamilyId=weapon!=null?weapon.MasteryId:null;

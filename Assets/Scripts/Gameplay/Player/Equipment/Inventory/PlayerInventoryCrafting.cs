@@ -16,6 +16,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         void Update()
         {
             if(!IsReady)return;
+            TickCombatProgress();
             worldClock+=Time.deltaTime;
             if(Time.unscaledTime>=pendingLootCleanupAt){pendingLootCleanupAt=Time.unscaledTime+1;RemoveExpiredPendingLoot();}
             if(Time.unscaledTime>=clockSaveAt){clockSaveAt=Time.unscaledTime+15;SaveClock();}
@@ -31,6 +32,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         void OnDestroy(){SaveClock();ReleaseComposedWeapons();}
         void SaveClock()
         {
+            if(!FlushCombatProgress())return;
             if(!IsReady||!writable||WorldPlaySeconds-profile.worldPlaySeconds<.1)return;
             var next=profile.Copy();next.worldPlaySeconds=WorldPlaySeconds;
             // Keep the clock and all inventory mutations in the same protected file.

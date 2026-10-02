@@ -124,7 +124,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             else if (page != target) GameAudio.Play(GameSound.TabChanged);
             if(target==Page.Skills&&page!=Page.Skills){skillsWeapon=loadout.ActiveDefinition;skillsScroll=Vector2.zero;}
             CancelSkillDrag();CancelInventoryDrag();showItemActions=false;
-            if(page!=target){System.Array.Clear(pendingAttributes,0,3);ResetMasteryDraft();}
+            if(page!=target){System.Array.Clear(pendingAttributes,0,pendingAttributes.Length);ResetMasteryDraft();}
             if(page==Page.Recipes&&target!=Page.Recipes)recipeBook.Dispose();
             if(page==Page.Quests&&target!=Page.Quests)questJournal.Back();
             page=target;confirmDiscard=false;previewDirty=true;searchFocused=false;
@@ -146,7 +146,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(!IsOpen)return;
             questJournal.Back();
             GameAudio.Play(GameSound.MenuClose);
-            IsOpen=false;System.Array.Clear(pendingAttributes,0,3);ResetMasteryDraft();radialHeld=false;closedFrame=Time.frameCount;if(active==this)active=null;
+            IsOpen=false;System.Array.Clear(pendingAttributes,0,pendingAttributes.Length);ResetMasteryDraft();radialHeld=false;closedFrame=Time.frameCount;if(active==this)active=null;
             Cursor.lockState=previousLock;Cursor.visible=previousVisible;confirmDiscard=false;showChest=false;draggedGrid=null;
             CancelSkillDrag();CancelInventoryDrag();showItemActions=false;preview.Dispose();recipeBook.Dispose();searchFocused=false;rotatingPreview=false;
         }

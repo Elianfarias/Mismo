@@ -50,6 +50,7 @@ namespace Mismo.Gameplay.Enemies
         private float search;
 
         private bool started;
+        private bool comboResponsePending;
 
         private float provokedLoseRange;
         private float provokedLeashRange;
@@ -95,6 +96,8 @@ namespace Mismo.Gameplay.Enemies
         protected virtual bool UsesAdditiveHitReaction => false;
         protected virtual bool AllowsHeavyRecoveryInterrupt => false;
         protected virtual float BreakRecoveryDuration => 0f;
+        protected virtual bool UsesComboBackstep => false;
+        protected virtual void ComboResponseFinished() { }
         protected virtual void ResetTactics() { }
         protected virtual void PrepareDecision(float dt, float distance, bool sight) { }
         protected virtual void AttackFinished(GoblinAttack completed) { }
@@ -120,7 +123,12 @@ namespace Mismo.Gameplay.Enemies
 
         public void SetTarget(Transform value)
         {
-            if (target != value) ResetTactics();
+            if (target != value)
+            {
+                CancelBackstep();
+                comboResponsePending = false;
+                ResetTactics();
+            }
             target = value;
             targetHealth =
                 value != null
@@ -207,6 +215,8 @@ namespace Mismo.Gameplay.Enemies
 
         private void ResetLife()
         {
+            CancelBackstep();
+            comboResponsePending = false;
             combat.ResetCombat();
 
             agent.updateRotation = false;
@@ -255,6 +265,8 @@ namespace Mismo.Gameplay.Enemies
 
         protected void OnDisable()
         {
+            CancelBackstep();
+            comboResponsePending = false;
             combat.PostureBroken -= Stagger;
             health.Damaged -= OnDamaged;
             health.Died -= OnDied;
@@ -341,13 +353,15 @@ namespace Mismo.Gameplay.Enemies
 
                 if (timer <= 0f && !combat.Broken)
                 {
-                    decision =
-                        Mathf.Max(
-                            .35f,
-                            settings.decisionPause
-                        );
-
+                    bool respond = comboResponsePending;
+                    comboResponsePending = false;
+                    decision = respond ? 0f : Mathf.Max(.35f, settings.decisionPause);
                     Enter(EnemyState.Position);
+                    if (respond)
+                    {
+                        GetComponent<EnemyEquipment>()?.CancelHitReaction();
+                        if (!UsesComboBackstep || !TryStartBackstep()) ComboResponseFinished();
+                    }
                 }
 
                 return;
@@ -476,6 +490,13 @@ namespace Mismo.Gameplay.Enemies
             // =====================================================
             // TELEGRAPH
             // =====================================================
+
+            if (IsBackstepping)
+            {
+                Face(Vector3.ProjectOnPlane(target.position - transform.position, Vector3.up), dt);
+                TickBackstep(dt);
+                return;
+            }
 
             if (State == EnemyState.Telegraph)
             {
