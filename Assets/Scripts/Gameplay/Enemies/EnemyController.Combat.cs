@@ -354,6 +354,8 @@ namespace Mismo.Gameplay.Enemies
             )
                 return;
 
+            CancelBackstep();
+            comboResponsePending = false;
             attack = null;
 
             projectileReleased = true;
@@ -399,6 +401,14 @@ namespace Mismo.Gameplay.Enemies
             {
                 if (!TryMiniInterrupt())
                     return;
+
+                // Spend the resistance window responding, instead of waiting out another full hit stun.
+                if (combat.InterruptImmune)
+                {
+                    Stagger(Mathf.Max(.05f, Mathf.Min(settings.comboHitStun, settings.comboResponseStun)));
+                    comboResponsePending = true;
+                    return;
+                }
 
                 float remaining =
                     State ==
@@ -490,6 +500,8 @@ namespace Mismo.Gameplay.Enemies
         private void OnDied(
             DamageInfo damage)
         {
+            CancelBackstep();
+            comboResponsePending = false;
             Enter(EnemyState.Dead);
 
             hitTargets.Clear();

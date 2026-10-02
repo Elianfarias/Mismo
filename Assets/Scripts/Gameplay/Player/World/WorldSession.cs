@@ -75,13 +75,18 @@ namespace Mismo.Gameplay.Player.World
                 x=spawn.x,y=spawn.y,z=spawn.z,yaw=spawnYaw,spawnX=spawn.x,spawnY=spawn.y,spawnZ=spawn.z};
             UnityEngine.Object.Destroy(settings);return record;
         }
-        public static bool NewGame()
+        public static bool NewGame(string playerName = null, string playerSkin = null)
         {
+            if(playerName != null && !Presentation.PlayerAppearance.ValidName(playerName))
+            {LastError="Escribí un nombre de 1 a 24 caracteres, sin símbolos de formato.";return false;}
+            if(playerSkin != null && !Presentation.PlayerAppearance.ValidSkin(playerSkin))
+            {LastError="Elegí una apariencia disponible.";return false;}
             // Validate existing state before any replacement; corrupted files are preserved by the repository.
             if(!Read(out var previous,out _))return false;
             try
             {
                 var next=CreateRecord(false,previous?.seed??0);
+                next.playerName=playerName?.Trim();next.playerSkin=playerSkin;
                 return Commit(next);
             }
             catch(Exception e) when(e is InvalidOperationException||e is ArgumentException){LastError=e.Message;return false;}

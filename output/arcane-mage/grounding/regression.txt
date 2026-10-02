@@ -1,0 +1,5 @@
+PASS Idle 48 poses, sole range=0,00200..0,00200, root preserved, pose restoration verified
+PASS Walk 48 poses, sole range=0,00200..0,00200, root preserved, pose restoration verified
+PASS Run 48 poses, sole range=0,00200..0,00200, root preserved, pose restoration verified
+PASS Jump 48 poses, sole range=-0,05667..0,35837, root preserved, pose restoration verified, airborne unmodified
+PASS Fall 48 poses, sole range=-0,04857..-0,00975, root preserved, pose restoration verified, airborne unmodified

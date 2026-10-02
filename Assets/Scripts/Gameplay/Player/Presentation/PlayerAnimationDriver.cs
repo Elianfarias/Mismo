@@ -56,6 +56,7 @@ namespace Mismo.Gameplay.Player.Presentation
             motor = GetComponent<PlayerMotor>(); controller = GetComponent<PlayerController>(); health = GetComponent<Health>();
             legacy = new LegacyCombatAnimationAdapter(gameObject);
             if (animator == null) animator = GetComponentInChildren<Animator>();
+            if (Application.isPlaying) animator = PlayerAppearance.Apply(gameObject, animator);
             abilityRunner = GetComponent<Equipment.AbilityRunner>();
             if (animator != null)
             {

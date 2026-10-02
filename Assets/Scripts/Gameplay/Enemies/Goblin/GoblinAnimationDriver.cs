@@ -27,7 +27,9 @@ namespace Mismo.Gameplay.Enemies
         {
             if(animator==null||goblin==null){playback.Dispose();return;}
             int motion=0;float time=0;float speed=agent!=null&&agent.enabled&&agent.isOnNavMesh?agent.velocity.magnitude:0;
-            if(EnemyActionPlayback.IsPerformingAttack(this))hitAt=float.NegativeInfinity;
+            if(EnemyActionPlayback.IsPerformingAttack(this) ||
+                goblin.State!=EnemyState.Stagger && GetComponent<CombatState>()?.InterruptImmune==true)
+                hitAt=float.NegativeInfinity;
             switch(goblin.State)
             {
                 // One authored attack is mapped to the existing AI clocks, preserving damage timing.

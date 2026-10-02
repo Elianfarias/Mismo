@@ -1,0 +1,11 @@
+PASS BowCharge: particle layers and serialized mesh/material/shader dependencies
+PASS BowRelease: particle layers and serialized mesh/material/shader dependencies
+PASS BladeCharge: particle layers and serialized mesh/material/shader dependencies
+PASS BladeRelease: particle layers and serialized mesh/material/shader dependencies
+PASS ParryHalo: particle layers and serialized mesh/material/shader dependencies
+PASS MasteryPowerFlare: particle layers and serialized mesh/material/shader dependencies
+PASS Bow/BowShot: effects bound to existing weapon sockets
+PASS Bow/BowPower: effects bound to existing weapon sockets
+PASS Sword/SwordLunge: effects bound to existing weapon sockets
+PASS Sword/SwordParry: effects bound to existing weapon sockets
+PASS Skills/GuardBreaker: effects bound to existing weapon sockets

@@ -175,7 +175,7 @@ namespace Mismo.Gameplay.Player.Presentation
             var vitalsPosition=icons!=null?icons.hudVitalsPosition:new Vector2(16,18);
             float vitalsWidth=icons!=null?Mathf.Max(1,icons.hudVitalsWidth):380;
             PaintedBar(0,vitalsPosition+(icons!=null?icons.hudHealthOffset:Vector2.zero),health.Normalized,new Color(.95f,.30f,.32f),vitalsWidth);
-            PaintedBar(1,vitalsPosition+(icons!=null?icons.hudStaminaOffset:new Vector2(0,15)),stamina!=null?stamina.Normalized:0,new Color(.50f,.76f,.39f),vitalsWidth);
+            PaintedBar(1,vitalsPosition+(icons!=null?icons.hudStaminaOffset:new Vector2(0,15)),stamina!=null?stamina.Normalized:0,new Color(.50f,.76f,.39f),StaminaBarWidth(vitalsWidth));
             DrawNavigation(height);
             float left=(width-792)/2;
             var climbing=GetComponent<TreeClimbing>();
@@ -203,7 +203,14 @@ namespace Mismo.Gameplay.Player.Presentation
                 for(int i=0;i<4;i++)
                 {
                     var ability=equipment.GetAbility((Equipment.AbilitySlot)i);
-                    if(ability==null)continue;
+                    if(ability==null)
+                    {
+                        float emptyX=left+skillsOffset.x+(skillsAsColumn?0:i*88);
+                        float emptyY=height-118+skillsYOffset+skillsOffset.y+(skillsAsColumn?i*88:0);
+                        Ability(emptyX,emptyY,keys[i],"VACÍO","K · HABILIDADES",0,false,null);
+                        Label(new Rect(emptyX,emptyY+24,76,28),"K",17,Muted,TextAnchor.MiddleCenter);
+                        continue;
+                    }
                     float remaining=equipment.Runner.Remaining(ability);
                     bool active=equipment.Runner.Current!=null&&equipment.Runner.Current.Definition==ability;
                     float skillX=left+skillsOffset.x+(skillsAsColumn?0:i*88);
@@ -211,7 +218,8 @@ namespace Mismo.Gameplay.Player.Presentation
                     float focusProgress=AbilityFocusProgress(combat!=null?combat.Focus:0,ability.focusCost);
                     bool showFocus=!ability.IsPassive&&ability.focusCost>0;
                     bool hasStamina=ability.IsPassive||stamina==null||stamina.Current>=ability.staminaCost;
-                    Ability(skillX,skillY,ability.IsPassive?"PASIVA":keys[i],ability.DisplayName,ability.IsPassive?"EQUIPADA":Status(remaining,active),ability.cooldown>0?remaining/ability.cooldown:0,hasStamina&&(!showFocus||focusProgress>=1),QuietFantasyUI.AbilityIcon(ability),showFocus?focusProgress:-1,hasStamina);
+                    float cooldownDuration=equipment.Runner.CooldownDuration(ability);
+                    Ability(skillX,skillY,ability.IsPassive?"PASIVA":keys[i],ability.DisplayName,ability.IsPassive?"EQUIPADA":Status(remaining,active),cooldownDuration>0?remaining/cooldownDuration:0,hasStamina&&(!showFocus||focusProgress>=1),QuietFantasyUI.AbilityIcon(ability),showFocus?focusProgress:-1,hasStamina);
                 }
             }
             if(!health.IsDead&&!GameplayPause.BlocksInput&&!UIEditMode)
@@ -254,6 +262,7 @@ namespace Mismo.Gameplay.Player.Presentation
             {
                 var basePosition=icons!=null?icons.hudVitalsPosition:new Vector2(16,18);
                 float barWidth=icons!=null?Mathf.Max(1,icons.hudVitalsWidth):380;
+                if(target==EditTarget.Stamina)barWidth=StaminaBarWidth(barWidth);
                 Vector2 offset=target==EditTarget.Health?(icons!=null?icons.hudHealthOffset:Vector2.zero):(icons!=null?icons.hudStaminaOffset:new Vector2(0,15));
                 // Keep each hitbox tight; the bars are intentionally close together and must remain individually selectable.
                 return ExpandRect(new Rect(basePosition+offset,new Vector2(barWidth,target==EditTarget.Health?28:21)),2);
@@ -451,6 +460,8 @@ namespace Mismo.Gameplay.Player.Presentation
             FantasyUI.Panel(rect,theme!=null?theme.hudBackgroundOpacity:.85f);
             FantasyUI.Frame(rect,Color.white);
         }
+        public static float StaminaWidth(float referenceWidth,float maximum)=>referenceWidth*(.8f+Mathf.Max(0,maximum-80)*.004f);
+        float StaminaBarWidth(float referenceWidth)=>StaminaWidth(referenceWidth,stamina?.Maximum??80);
         void PaintedBar(int row,Vector2 position,float value,Color tint,float width)
         {
             float height=row==0?28:21;
@@ -460,6 +471,12 @@ namespace Mismo.Gameplay.Player.Presentation
             var well=new Rect(frame.x+6,frame.y+6,Mathf.Max(0,width-12),height-12);
             tint.a*=opacity;
             Fill(new Rect(well.x,well.y,well.width*Mathf.Clamp01(value),well.height),tint);
+            if(row==1&&stamina!=null)
+            {
+                for(float capacity=20;capacity<stamina.Maximum;capacity+=20)
+                    Fill(new Rect(well.x+well.width*capacity/stamina.Maximum,well.y,1,well.height),new Color(.04f,.08f,.04f,.4f*opacity));
+                if(frame.Contains(Event.current.mousePosition))Label(new Rect(frame.xMax+8,frame.y-2,130,25),$"{stamina.Current:0} / {stamina.Maximum:0}",16,QuietFantasyUI.Ink);
+            }
         }
         void DrawNavigation(float height)
         {

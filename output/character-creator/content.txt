@@ -1,0 +1,1 @@
+PASS: both skins and dependencies built for Windows.

@@ -42,3 +42,30 @@ PASS Posture break stops tactical navigation
 PASS TACTICS_PLAY_COMPLETE
 PASS Built world catalog includes Imp in meadows
 PASS Built Imp retains all directional clips
+PASS Far Imp approaches a firing position instead of firing immediately or chasing into melee
+PASS Approach destination stops outside melee range
+PASS Imp fires from comfortable range
+PASS Attack respects windup, active and recovery completion
+PASS Fireball cooldown produces lateral movement
+PASS Complete locomotion path for (-1.00, 0.00, 0.00)
+PASS NavMesh advances (-1.00, 0.00, 0.00) (dt 0,0129148, stopped False, enabled True, onMesh True, hasPath True, status PathComplete, desired (-1.60, 0.00, 0.00), speed 1,6, remaining 3,993198, position (-0.01, 0.08, 0.00))
+PASS Actual playback selects (-1.00, 0.00, 0.00) directional clip (velocity (-0.53, 0.00, 0.00))
+PASS Complete locomotion path for (1.00, 0.00, 0.00)
+PASS NavMesh advances (1.00, 0.00, 0.00) (dt 0,001321202, stopped False, enabled True, onMesh True, hasPath True, status PathComplete, desired (1.60, 0.00, 0.00), speed 1,6, remaining 4,015975, position (-0.02, 0.08, 0.00))
+PASS Actual playback selects (1.00, 0.00, 0.00) directional clip (velocity (0.20, 0.00, 0.00))
+PASS Complete locomotion path for (0.00, 0.00, -1.00)
+PASS NavMesh advances (0.00, 0.00, -1.00) (dt 0,001738294, stopped False, enabled True, onMesh True, hasPath True, status PathComplete, desired (0.00, 0.00, -1.60), speed 1,6, remaining 3,996216, position (-0.02, 0.08, 0.00))
+PASS Actual playback selects (0.00, 0.00, -1.00) directional clip (velocity (0.17, 0.00, -0.37))
+PASS Pressure inside firing band produces a reachable backward retreat
+PASS Retreat duration is bounded and leaves a punishable pause (Hold, Telegraph, stopped True)
+PASS Imp uses melee when caught at close range
+PASS Attack respects windup, active and recovery completion
+PASS Melee finishes recovery before disengaging
+PASS Test obstacle blocks navigation behind Imp
+PASS Cornered Imp can defend with melee
+PASS Attack respects windup, active and recovery completion
+PASS Imp rejects retreat paths through a wall and holds when cornered
+PASS New target has a reaction delay
+PASS Blocked sight repositions without shooting through walls
+PASS Posture break stops tactical navigation
+PASS TACTICS_PLAY_COMPLETE

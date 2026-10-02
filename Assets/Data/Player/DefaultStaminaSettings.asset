@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c85b461d2b18740a2f89da4e2f0cce, type: 3}
   m_Name: DefaultStaminaSettings
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Movement.StaminaSettings
-  maximum: 100
+  maximum: 80
   sprintCostPerSecond: 20
   regenerationPerSecond: 25
   regenerationDelay: 0.75

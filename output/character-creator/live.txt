@@ -1,0 +1,3 @@
+Ready=True Rotation=(0.00, 168.00, 0.00)
+Girar personaje
+Crear personaje

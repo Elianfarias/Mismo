@@ -48,7 +48,7 @@ namespace Mismo.Gameplay.Player.Equipment
                 if (!(receiver is Component target) || target.transform.root == c.Owner.transform.root || !c.HitTargets.Add(target)) continue;
                 Vector3 point = other.ClosestPoint(origin);
                 if (Physics.Linecast(origin, point, out var wall, ~0, QueryTriggerInteraction.Ignore) && wall.transform.root != c.Owner.transform.root && wall.collider.GetComponentInParent<IDamageReceiver>() != receiver) continue;
-                receiver.ReceiveDamage(new DamageInfo(damage*c.DamageMultiplier, c.Owner, other.ClosestPoint(origin), (target.transform.position-c.Owner.transform.position).normalized, c.AttackId, postureDamage, weaponFamilyId:c.WeaponFamilyId,focusGainOnHit:c.Definition.focusGainOnHit));
+                receiver.ReceiveDamage(new DamageInfo(damage*c.DamageMultiplier, c.Owner, other.ClosestPoint(origin), (target.transform.position-c.Owner.transform.position).normalized, c.AttackId, postureDamage, weaponFamilyId:c.WeaponFamilyId,focusGainOnHit:c.Definition.focusGainOnHit,abilityId:c.Definition.Id,abilityUseId:c.AttackId));
             }
         }
     }
@@ -73,6 +73,7 @@ namespace Mismo.Gameplay.Player.Equipment
             Vector3 origin = WeaponAim.Muzzle(c.Owner);
             var projectile=ProjectileInstance.Spawn(c.Owner, origin, c.AimPoint.HasValue ? (c.AimPoint.Value - origin).normalized : c.Direction, damage * c.DamageMultiplier * (c.Definition.chargeable ? c.Definition.chargeDamageMultiplier.Evaluate(c.Charge) : 1), speed, c.Definition.range, radius, visual, c.AttackId, (postureDamage < 0 ? damage*.8f : postureDamage) * (c.Definition.chargeable ? c.Definition.chargePostureMultiplier.Evaluate(c.Charge) : 1), c.WeaponFamilyId,c.Definition.focusGainOnHit);
             if(c.Definition==c.Weapon.GetAbility(AbilitySlot.Basic))projectile.BasicEffects=c.Owner.GetComponent<WeaponSkillEffects>();
+            projectile.AbilityId=c.Definition.Id;projectile.AbilityUseId=c.AttackId;
         }
     }
 
@@ -88,6 +89,6 @@ namespace Mismo.Gameplay.Player.Equipment
         [Min(.5f)] public float fallHeight = 5;
         [Min(.1f)] public float fallSpeed = 12;
         public override void Begin(AbilityExecution c) => AreaInstance.Spawn(c.Owner, c.GroundPoint, radius, duration, interval, damage*c.DamageMultiplier,
-            fallingVisual, arrowsPerVolley, fallHeight, fallSpeed,c.WeaponFamilyId,c.Definition.focusGainOnHit);
+            fallingVisual, arrowsPerVolley, fallHeight, fallSpeed,c.WeaponFamilyId,c.Definition.focusGainOnHit,c.Definition.Id,c.AttackId);
     }
 }

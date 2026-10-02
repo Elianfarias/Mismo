@@ -98,7 +98,7 @@ namespace Mismo.Gameplay.Combat
         /// Recibe una pulsación de ataque. En la ventana configurada la conserva para enlazar
         /// la siguiente etapa; fuera de ella no altera el estado actual.
         /// </summary>
-        public bool RequestAttack(Mismo.Gameplay.Player.Equipment.AbilityDefinition definition = null)
+        public bool RequestAttack(Mismo.Gameplay.Player.Equipment.AbilityDefinition definition = null,int openingStep=0,bool chainNext=false)
         {
             if (phase == Phase.Idle)
             {
@@ -107,7 +107,9 @@ namespace Mismo.Gameplay.Combat
                 stamina=GetComponentInParent<Mismo.Gameplay.Player.Movement.Stamina>();
                 staminaCost=Mathf.Max(0,definition.staminaCost);
                 steps = definition.comboSteps;
-                return BeginStep(0);
+                if(!BeginStep(Mathf.Clamp(openingStep,0,steps.Length-1)))return false;
+                queuedNext=chainNext&&currentStep+1<StepCount;
+                return true;
             }
             if (!CanQueue || queuedNext || currentStep + 1 >= StepCount || stamina!=null&&stamina.Current<staminaCost) return false;
             queuedNext = true;

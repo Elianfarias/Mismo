@@ -1,0 +1,1 @@
+PASS: actual main-menu cottage; camera travel and zoom; input gating; both in-world skins; left-button drag, release and right-button rejection; return and interrupted-transition restoration. Open editor scenes untouched.

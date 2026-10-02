@@ -1,0 +1,974 @@
+fileFormatVersion: 2
+guid: ce3f7b6ef7103134195b5ef187881480
+ModelImporter:
+  serializedVersion: 24600
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Brass_0
+    second: {fileID: 2100000, guid: 88e0cabcdac296c4c85ee99c49ae2d0b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Brass_1
+    second: {fileID: 2100000, guid: 8fde7467b8ff575468e78854c700c06c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Brass_2
+    second: {fileID: 2100000, guid: 681d64c2065547049ab2d19c9c34f278, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_ChainLight_0
+    second: {fileID: 2100000, guid: 88a62e13a96fdb54aaa43d705c8e7a3b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_ChainLight_1
+    second: {fileID: 2100000, guid: c26e1b3e95c010146a724bdeb1ed08d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_ChainLight_2
+    second: {fileID: 2100000, guid: 7e0bc961569c0dc4e85c2037946c3a76, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Chain_0
+    second: {fileID: 2100000, guid: 0e2742bd34c1026408a716a630f3c150, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Chain_1
+    second: {fileID: 2100000, guid: 75d62fce4f1ba7c479c1be8bc6577dd5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Chain_2
+    second: {fileID: 2100000, guid: 16e23692d44ba994bbc542b2ccec56a9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_ClothDark_0
+    second: {fileID: 2100000, guid: 0bdb1996b921ec343a942a8887475f5b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_ClothDark_1
+    second: {fileID: 2100000, guid: c90abb516bd873341baed23683e39e5d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_ClothDark_2
+    second: {fileID: 2100000, guid: 25b96e1afcdbf394a9e76c19436cc827, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_ClothLight_0
+    second: {fileID: 2100000, guid: 65401458295015441abe21388679e869, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_ClothLight_1
+    second: {fileID: 2100000, guid: 4ba09993e0374e6478cab689b042959b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_ClothLight_2
+    second: {fileID: 2100000, guid: d83952504227e0141945bfcd0a99dda1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Cloth_0
+    second: {fileID: 2100000, guid: abed063691cf8304fb66086bf8f4ddb5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Cloth_1
+    second: {fileID: 2100000, guid: 0a93115c34ad4ec45bf1b40f06d554c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Cloth_2
+    second: {fileID: 2100000, guid: b1178675d2c205b49935cb46117139ae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_CrimsonDark_0
+    second: {fileID: 2100000, guid: 247f94b428eea1f48a71ddaa2d4a2650, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_CrimsonDark_1
+    second: {fileID: 2100000, guid: 78388f2a9b5d73e4e9aa1c53f25d9d0f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_CrimsonDark_2
+    second: {fileID: 2100000, guid: 28a354f1fbb95dc4f863d2dc61f7749e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_CrimsonLight_0
+    second: {fileID: 2100000, guid: 62c9a57d820c0b54286668af4e2e637a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_CrimsonLight_1
+    second: {fileID: 2100000, guid: b087906398d359e4ead7c057f1e9e398, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_CrimsonLight_2
+    second: {fileID: 2100000, guid: ddd7e0aa12c9ae6409523b812b109f1a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Crimson_0
+    second: {fileID: 2100000, guid: 15ef7ec3049c40c47afd1d7a848337a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Crimson_1
+    second: {fileID: 2100000, guid: 0507fc8ac65e38649a3fbe06ebbce0e9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Crimson_2
+    second: {fileID: 2100000, guid: 528f058eae206814e87c71b349ce52a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Edge_0
+    second: {fileID: 2100000, guid: 4abdebc2eefe1af479476be4376e66ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Edge_1
+    second: {fileID: 2100000, guid: 935e073c533188b40a7f79db99ace2fc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Edge_2
+    second: {fileID: 2100000, guid: 23b8764089021e245aa0140c70bdae18, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Eyes_1
+    second: {fileID: 2100000, guid: 6b6e4913df84ace4fa135a76804f0a67, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Face_0
+    second: {fileID: 2100000, guid: 06500141ca04de94faba7f42dd3088a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Face_1
+    second: {fileID: 2100000, guid: c039d4153906a074dab819d967918ba1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Face_2
+    second: {fileID: 2100000, guid: a1f716c1de8ec2e49a2e1efc384765ad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_LeatherEdge_0
+    second: {fileID: 2100000, guid: c8c246763fb8e1d4fbd557400433d36a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_LeatherEdge_1
+    second: {fileID: 2100000, guid: 1652089b71b232247b120e9175d08330, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_LeatherEdge_2
+    second: {fileID: 2100000, guid: 733692abbf120424b815b320be8166c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Leather_0
+    second: {fileID: 2100000, guid: 318f5aa26a97b63459a83b7bb7347470, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Leather_1
+    second: {fileID: 2100000, guid: c4ba7ab2dd3f3134c9af945e303db42e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Leather_2
+    second: {fileID: 2100000, guid: 72786e3a8f164e54ea84b04f682e8c49, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Rust_0
+    second: {fileID: 2100000, guid: 6efb3e164e3338849b46a476c8a913b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Rust_1
+    second: {fileID: 2100000, guid: 9512de1c0c4c6d24aa21a28254b1791b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Rust_2
+    second: {fileID: 2100000, guid: 3146f44afda598d42add547e669565d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Sole_0
+    second: {fileID: 2100000, guid: c77f437ca104b6b4eb4e5d6c78fb944f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Sole_1
+    second: {fileID: 2100000, guid: def7275065e9be34da0549cba3b35b43, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Sole_2
+    second: {fileID: 2100000, guid: b7358ceebcfaf1844ac874da5eba741f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_SteelDark_0
+    second: {fileID: 2100000, guid: c910b755c28ad1442a2f733d52921bf0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_SteelDark_1
+    second: {fileID: 2100000, guid: e827ad44a6bc7df4789ad66a43ea05d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_SteelDark_2
+    second: {fileID: 2100000, guid: 93b197022d5976f48ad24a01a8c79452, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Steel_0
+    second: {fileID: 2100000, guid: 3c1260d9e83b6dd4fac51203a07c0a81, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Steel_1
+    second: {fileID: 2100000, guid: 81b543bc8157b6245b5b059cbb7084d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Warrior_Steel_2
+    second: {fileID: 2100000, guid: 2234dc7effa793d46b81a96909572558, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+    searchTexturesGlobally: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    preBakeConvexCollisionMesh: 0
+    preBakeTriangleCollisionMesh: 0
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    importUVs: -1
+    importVertexColors: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+    calculateBlendshapeNormalsDeltaFromImportedNormals: 0
+  referencedClips: []
+  importAnimation: 0
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Chest
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Clavicle.L
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: UpperArm.L
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LowerArm.L
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Hand.L
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Clavicle.R
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: UpperArm.R
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LowerArm.R
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Hand.R
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: UpperLeg.L
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LowerLeg.L
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Foot.L
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Toes.L
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: UpperLeg.R
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LowerLeg.R
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Foot.R
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Toes.R
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: AshenWarrior(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Armature_Humanoid
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Root
+      parentName: Armature_Humanoid
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hips
+      parentName: Root
+      position: {x: -0, y: 0.78, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine
+      parentName: Hips
+      position: {x: -0, y: 0.17999995, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Chest
+      parentName: Spine
+      position: {x: -0, y: 0.18999994, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Neck
+      parentName: Chest
+      position: {x: -0, y: 0.19000006, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head
+      parentName: Neck
+      position: {x: -0, y: 0.120000005, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Clavicle.L
+      parentName: Chest
+      position: {x: -0.05, y: 0.15999997, z: 0}
+      rotation: {x: 0.51030153, y: -0.48948175, z: -0.5103015, w: -0.48948178}
+      scale: {x: 1, y: 0.9999999, z: 1}
+    - name: UpperArm.L
+      parentName: Clavicle.L
+      position: {x: 2.8310687e-15, y: 0.24020822, z: 0.00000004377216}
+      rotation: {x: 0.020814635, y: -0.00046234112, z: 0.022200976, w: 0.9995367}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LowerArm.L
+      parentName: UpperArm.L
+      position: {x: -8.5526014e-10, y: 0.2702665, z: -4.4968473e-12}
+      rotation: {x: 8.0863707e-13, y: 3.6673764e-10, z: -0.045252703, w: 0.9989756}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hand.L
+      parentName: LowerArm.L
+      position: {x: 0.0000000037252903, y: 0.26027673, z: -0.00000011922384}
+      rotation: {x: -4.9089686e-12, y: -1.7204368e-10, z: 0.023058522, w: 0.99973416}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: Clavicle.R
+      parentName: Chest
+      position: {x: 0.05, y: 0.15999997, z: 0}
+      rotation: {x: 0.51030153, y: 0.48948175, z: 0.5103015, w: -0.48948178}
+      scale: {x: 1, y: 0.9999999, z: 1}
+    - name: UpperArm.R
+      parentName: Clavicle.R
+      position: {x: -2.8310687e-15, y: 0.24020822, z: 0.00000004377216}
+      rotation: {x: 0.020814635, y: 0.00046234112, z: -0.022200976, w: 0.9995367}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LowerArm.R
+      parentName: UpperArm.R
+      position: {x: 8.5526014e-10, y: 0.2702665, z: -4.4968473e-12}
+      rotation: {x: 8.0863707e-13, y: -3.6673764e-10, z: 0.045252703, w: 0.9989756}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hand.R
+      parentName: LowerArm.R
+      position: {x: -0.0000000037252903, y: 0.26027673, z: -0.00000011922384}
+      rotation: {x: -4.9089686e-12, y: 1.7204368e-10, z: -0.023058522, w: 0.99973416}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: Cape.L_1
+      parentName: Chest
+      position: {x: -0.16, y: 0.25, z: -0.25}
+      rotation: {x: 0.9964634, y: -0.059574116, z: 0.0035392744, w: -0.05915306}
+      scale: {x: 0.99999446, y: 0.9999998, z: 0.99999446}
+    - name: Cape.L_2
+      parentName: Cape.L_1
+      position: {x: -0.000000009424923, y: 0.25357455, z: 0.0000000062864274}
+      rotation: {x: 0.019477667, y: 0.000000008943805, z: -9.439474e-10, w: 0.9998103}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Cape.L_3
+      parentName: Cape.L_2
+      position: {x: -0.000000022351742, y: 0.25495103, z: 0.000000011641532}
+      rotation: {x: -0.00042431513, y: 0.0030687777, z: 0.01937043, w: 0.9998076}
+      scale: {x: 0.9999999, y: 0.99999994, z: 1}
+    - name: Cape.L_4
+      parentName: Cape.L_3
+      position: {x: 0.0000000026822395, y: 0.25632006, z: -0.000000005122274}
+      rotation: {x: 0.00042432852, y: -0.0030687724, z: -0.019370405, w: 0.9998076}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Cape.C_1
+      parentName: Chest
+      position: {x: -0, y: 0.25, z: -0.25}
+      rotation: {x: 0.99821764, y: 0.0000000017785734, z: -0.000000029749202, w: -0.05967903}
+      scale: {x: 1, y: 0.99999994, z: 0.9999971}
+    - name: Cape.C_2
+      parentName: Cape.C_1
+      position: {x: 1.7763568e-15, y: 0.25179353, z: 0.000000014901161}
+      rotation: {x: 0.019611953, y: -0.000000052144046, z: -0.0000000021918034, w: 0.99980766}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cape.C_3
+      parentName: Cape.C_2
+      position: {x: 8.76935e-15, y: 0.25317973, z: 0}
+      rotation: {x: 0.000000044703484, y: 0.000000044703647, z: -7.3753446e-15, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cape.C_4
+      parentName: Cape.C_3
+      position: {x: 3.857577e-16, y: 0.25317976, z: 0}
+      rotation: {x: -0.00000005960465, y: -0.000000052154206, z: 6.224205e-15, w: 1}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: Cape.R_1
+      parentName: Chest
+      position: {x: 0.16, y: 0.25, z: -0.25}
+      rotation: {x: 0.9964634, y: 0.059574116, z: -0.0035392744, w: -0.05915306}
+      scale: {x: 0.99999446, y: 0.9999998, z: 0.99999446}
+    - name: Cape.R_2
+      parentName: Cape.R_1
+      position: {x: 0.000000009424923, y: 0.25357455, z: 0.0000000062864274}
+      rotation: {x: 0.019477667, y: -0.000000008943805, z: 9.439474e-10, w: 0.9998103}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Cape.R_3
+      parentName: Cape.R_2
+      position: {x: 0.000000022351742, y: 0.25495103, z: 0.000000011641532}
+      rotation: {x: -0.00042431513, y: -0.0030687777, z: -0.01937043, w: 0.9998076}
+      scale: {x: 0.9999999, y: 0.99999994, z: 1}
+    - name: Cape.R_4
+      parentName: Cape.R_3
+      position: {x: -0.0000000026822395, y: 0.25632006, z: -0.000000005122274}
+      rotation: {x: 0.00042432852, y: 0.0030687724, z: 0.019370405, w: 0.9998076}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: UpperLeg.L
+      parentName: Hips
+      position: {x: -0.145, y: 0.00999999, z: 0}
+      rotation: {x: 0.99861336, y: -0.049807098, z: -0.0008446954, w: 0.017028939}
+      scale: {x: 1.0000273, y: 0.9999995, z: 1.0000032}
+    - name: LowerLeg.L
+      parentName: UpperLeg.L
+      position: {x: 0.0000000057910143, y: 0.3519503, z: 0.0000000021536835}
+      rotation: {x: 0.039185, y: -0.000065498716, z: -0.012863956, w: 0.9991492}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: Foot.L
+      parentName: LowerLeg.L
+      position: {x: 2.7755576e-17, y: 0.27100563, z: -0.0000000015789401}
+      rotation: {x: -0.52213436, y: 0.017897265, z: -0.03233823, w: 0.85206205}
+      scale: {x: 0.99999994, y: 0.9999999, z: 0.9999999}
+    - name: Toes.L
+      parentName: Foot.L
+      position: {x: -0.0000000036455, y: 0.17240879, z: -0.000000015249213}
+      rotation: {x: 0.00000008784852, y: 0.9669595, z: -0.25493017, w: 0.000000424765}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: UpperLeg.R
+      parentName: Hips
+      position: {x: 0.145, y: 0.00999999, z: 0}
+      rotation: {x: 0.99861336, y: 0.049807098, z: 0.0008446954, w: 0.017028939}
+      scale: {x: 1.0000273, y: 0.9999995, z: 1.0000032}
+    - name: LowerLeg.R
+      parentName: UpperLeg.R
+      position: {x: -0.0000000057910143, y: 0.3519503, z: 0.0000000021536835}
+      rotation: {x: 0.039185, y: 0.000065498716, z: 0.012863956, w: 0.9991492}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: Foot.R
+      parentName: LowerLeg.R
+      position: {x: -2.7755576e-17, y: 0.27100563, z: -0.0000000015789401}
+      rotation: {x: -0.52213436, y: -0.017897584, z: 0.03233843, w: 0.85206205}
+      scale: {x: 0.99999994, y: 0.9999999, z: 0.99999994}
+    - name: Toes.R
+      parentName: Foot.R
+      position: {x: -0.000000017471628, y: 0.1724088, z: -0.0000000017020056}
+      rotation: {x: -0.0000001876847, y: 0.9669595, z: -0.25493017, w: -0.0000007682919}
+      scale: {x: 1, y: 1.0000002, z: 1}
+    - name: Warrior_Abdomen_0
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Abdomen_1
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Abdomen_2
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Backplate
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Belt
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Boot_L
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Boot_R
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Breastplate
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Cape
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Elbow_L
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Elbow_R
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Eyes_Flush
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Gauntlet_L
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Gauntlet_R
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Greave_L
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Greave_R
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Harness
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Helmet
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_HelmetRidge
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Knee_L
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Knee_R
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_MailArm_L
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_MailArm_R
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_MailLeg_L
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_MailLeg_R
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_MailTorso
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Pauldron_0_L
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Pauldron_0_R
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Pauldron_1_L
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Pauldron_1_R
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Pauldron_2_L
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Pauldron_2_R
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Scarf
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Tabard_L
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Tabard_R
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Tasset_0_L
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Tasset_0_R
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Tasset_1_L
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Tasset_1_R
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Tasset_2_L
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Tasset_2_R
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_ThighPlate_L
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_ThighPlate_R
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Vambrace_0_L
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Vambrace_0_R
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Vambrace_1_L
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Vambrace_1_R
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Vambrace_2_L
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Vambrace_2_R
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Warrior_Visor
+      parentName: AshenWarrior(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbaed6838d1a4d369404166107b9bbf5, type: 3}
   m_Name: SwordTip
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: power
+    displayName: "Potencia"
+    description: "Cada rango mejora un 5% el daño de la habilidad o la magnitud de su efecto."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0.05
+    cooldownReductionPerLevel: 0
   displayName: "Punta de espada"
   description: "Tus básicos hacen un 25 % de daño adicional al conectar a 1,25 m o más. Ajustá la distancia para golpear con la punta."
   abilityId: SwordTip

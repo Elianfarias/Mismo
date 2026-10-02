@@ -8,7 +8,7 @@ namespace Mismo.Gameplay.Player.Movement
     [CreateAssetMenu(fileName = "DefaultStaminaSettings", menuName = "Mismo/Player/Stamina Settings")]
     public sealed class StaminaSettings : ScriptableObject
     {
-        [SerializeField, Min(0.01f)] private float maximum = 100f;
+        [SerializeField, Min(0.01f)] private float maximum = 80f;
         [SerializeField, Min(0f)] private float sprintCostPerSecond = 20f;
         [SerializeField, Min(0f)] private float regenerationPerSecond = 25f;
         [SerializeField, Min(0f)] private float regenerationDelay = 0.75f;

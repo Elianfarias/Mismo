@@ -8,6 +8,7 @@ namespace Mismo.Gameplay.Enemies
         protected override bool UsesAdditiveHitReaction => true;
         protected override bool AllowsHeavyRecoveryInterrupt => true;
         protected override float BreakRecoveryDuration => 1.5f;
+        protected override bool UsesComboBackstep => true;
         public override float NameplateHeight => 2.05f * transform.lossyScale.y;
     }
 }

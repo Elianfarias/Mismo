@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbaed6838d1a4d369404166107b9bbf5, type: 3}
   m_Name: DualFinisher
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: power
+    displayName: "Potencia"
+    description: "Cada rango mejora un 5% el daño de la habilidad o la magnitud de su efecto."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0.05
+    cooldownReductionPerLevel: 0
   displayName: "Remate"
   description: "Cada cuarto básico sobre el mismo enemigo incorpora un golpe de la segunda espada: +50 % de daño. Cambiar de objetivo reinicia la cuenta."
   abilityId: DualFinisher

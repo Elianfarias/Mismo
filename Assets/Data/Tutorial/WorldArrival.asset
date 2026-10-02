@@ -19,8 +19,11 @@ MonoBehaviour:
     body: "Despertaste en las galer\xEDas de cristal. Esta barra muestra tu vida. Si ca\xE9s, reaparec\xE9s en el \xFAltimo tramo completado de esta introducci\xF3n."
     highlight: 1
   - title: Tu estamina
-    body: "Correr con Shift, esquivar y algunas acciones gastan estamina. Dej\xE1 de gastarla un momento para recuperarla y reserv\xE1 un poco para defenderte."
+    body: "Correr con Shift, esquivar y atacar gastan estamina. Empezás con 80. En Personaje (P) podés aumentar su capacidad y ver crecer la barra. Dejá de gastarla un momento para recuperarla."
     highlight: 2
+  - title: Doble salto
+    body: "Presioná Espacio para saltar. Mientras estás en el aire, soltá y volvé a presionar Espacio para hacer un doble salto. Al tocar el suelo recuperás ambos saltos."
+    highlight: 0
   - title: Un camino hacia la superficie
     body: "Movete con WASD y mir\xE1 con el mouse. Segu\xED las salas iluminadas por cristales hasta encontrar la salida."
     highlight: 0

@@ -1,0 +1,1 @@
+PASS: New game opens creator without saving; empty names blocked; both previews switch; cancel preserves session; confirmed name/skin load into gameplay and survive continue; both runtime skins spawn with valid avatars.

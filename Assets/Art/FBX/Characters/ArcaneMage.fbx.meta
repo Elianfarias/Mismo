@@ -1,0 +1,804 @@
+fileFormatVersion: 2
+guid: 11fe77440f2e5ed4881debe13c390801
+ModelImporter:
+  serializedVersion: 24600
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Eyes_1
+    second: {fileID: 2100000, guid: e58452fca5c1a7047a4c60daa4976cb5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Face_0
+    second: {fileID: 2100000, guid: bdf717daf50966d46a409ef233a7b28c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Face_1
+    second: {fileID: 2100000, guid: ff1563997de71cf4fb1f6c801b389f1c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Face_2
+    second: {fileID: 2100000, guid: 202b3a4620690824cb17bd8c55867897, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Glove_0
+    second: {fileID: 2100000, guid: 28ce86e380a50dd498e4846b44c3f904, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Glove_1
+    second: {fileID: 2100000, guid: abf68f107aa7620468753c4e1e041e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Glove_2
+    second: {fileID: 2100000, guid: bbc08655598270542b32ab25b1e5377a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_GoldLight_0
+    second: {fileID: 2100000, guid: 3644f22f05051f5459198197e90e18a7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_GoldLight_1
+    second: {fileID: 2100000, guid: 52551d6b34087b74098f1e68c883941e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_GoldLight_2
+    second: {fileID: 2100000, guid: a46bc151e9954dd4a995754659272914, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Gold_0
+    second: {fileID: 2100000, guid: fcaa82482818d2c419ab804806c93eee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Gold_1
+    second: {fileID: 2100000, guid: 0b0376c46d3fe744293df681620de13e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Gold_2
+    second: {fileID: 2100000, guid: 33f09baf863c95a44af1dcd2649a2d9d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_IndigoDark_0
+    second: {fileID: 2100000, guid: 29ae6e654d4566f40be48273986c281c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_IndigoDark_1
+    second: {fileID: 2100000, guid: e21ff55e80d71994da7ec68363857b30, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_IndigoDark_2
+    second: {fileID: 2100000, guid: b45d5ad22490b09409a8d2affe1258b3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_IndigoLight_0
+    second: {fileID: 2100000, guid: 3fa1764966890724c85f5cd4be84f9e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_IndigoLight_1
+    second: {fileID: 2100000, guid: 624510c1f0489f74e950c198afad84aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_IndigoLight_2
+    second: {fileID: 2100000, guid: e99dc2245ba6d114d81adead46defbda, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Indigo_0
+    second: {fileID: 2100000, guid: 9e31e732f460f964eaf49b238f68a1ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Indigo_1
+    second: {fileID: 2100000, guid: 1a81a4d98e7e3a44b8f8c72180fa28f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Indigo_2
+    second: {fileID: 2100000, guid: ea92ac9d60bf15f40a30946cba257f50, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_LeatherLight_0
+    second: {fileID: 2100000, guid: fa25f5b6d3379da419043e5ec8154e56, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_LeatherLight_1
+    second: {fileID: 2100000, guid: 3dae355344d193a45bbcbe93a2e7459c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_LeatherLight_2
+    second: {fileID: 2100000, guid: dd4e851c0b3e8464697fc4d57b4a034f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Leather_0
+    second: {fileID: 2100000, guid: f60859032c7a2ef479577646f8e02d89, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Leather_1
+    second: {fileID: 2100000, guid: ef2b47b9088e34c4488d656f720d258e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Leather_2
+    second: {fileID: 2100000, guid: 88a4f40990daa3e448c5bc6e53694428, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Lining_0
+    second: {fileID: 2100000, guid: 4abf10a63f3d5554590f8579a28b3e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Lining_1
+    second: {fileID: 2100000, guid: 6c005c9b4cf0bf242935ebe0282e0c51, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Lining_2
+    second: {fileID: 2100000, guid: 4d15b3c934a35b24698871cfe5cc80aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_MantleDark_0
+    second: {fileID: 2100000, guid: ffd0e57ce209bec4e9f1ae11d8898307, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_MantleDark_1
+    second: {fileID: 2100000, guid: c7b4eb162d31ee345a674edbcf0e0e39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_MantleDark_2
+    second: {fileID: 2100000, guid: c083a8edfa96b494b993eadeb3779ae9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_MantleLight_0
+    second: {fileID: 2100000, guid: adcc423d4de430c4f8200995c745441f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_MantleLight_1
+    second: {fileID: 2100000, guid: b366bcb5841de94419f751e22c096757, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_MantleLight_2
+    second: {fileID: 2100000, guid: 625828b006158e748a8016981fd42bc3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Mantle_0
+    second: {fileID: 2100000, guid: 478025b93a53ee3428ac80f1ef440fb4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Mantle_1
+    second: {fileID: 2100000, guid: 40d8b55da77588445a445ee4ef00d5b7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Mantle_2
+    second: {fileID: 2100000, guid: 98d058d964fa17840972ed0b0bb4f0f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Pages_0
+    second: {fileID: 2100000, guid: c35ff30f5b23d084c8e52e6825729101, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Pages_1
+    second: {fileID: 2100000, guid: 2ebe6afd832d8704286c7f482fad41f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Pages_2
+    second: {fileID: 2100000, guid: 68bec47ef67f78f469504de697a6b855, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Sole_0
+    second: {fileID: 2100000, guid: 2a7819c9540fb354ba5d8a1d59a851a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Sole_1
+    second: {fileID: 2100000, guid: 4b8fd685963c0bb4dad026a96b0ab4e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mage_Sole_2
+    second: {fileID: 2100000, guid: e4c16eaa6aa426d45b9e5f2fca9c0bf3, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+    searchTexturesGlobally: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    preBakeConvexCollisionMesh: 0
+    preBakeTriangleCollisionMesh: 0
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    importUVs: -1
+    importVertexColors: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+    calculateBlendshapeNormalsDeltaFromImportedNormals: 0
+  referencedClips: []
+  importAnimation: 0
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Chest
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Clavicle.L
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: UpperArm.L
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LowerArm.L
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Hand.L
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Clavicle.R
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: UpperArm.R
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LowerArm.R
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Hand.R
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: UpperLeg.L
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LowerLeg.L
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Foot.L
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Toes.L
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: UpperLeg.R
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LowerLeg.R
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Foot.R
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Toes.R
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: ArcaneMage(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Armature_Humanoid
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Root
+      parentName: Armature_Humanoid
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hips
+      parentName: Root
+      position: {x: -0, y: 0.78, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine
+      parentName: Hips
+      position: {x: -0, y: 0.17999995, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Chest
+      parentName: Spine
+      position: {x: -0, y: 0.18999994, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Neck
+      parentName: Chest
+      position: {x: -0, y: 0.19000006, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head
+      parentName: Neck
+      position: {x: -0, y: 0.120000005, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hat_1
+      parentName: Head
+      position: {x: -0, y: 0.52, z: -0.018}
+      rotation: {x: -0.005531822, y: 0.07417022, z: 0.07417022, w: 0.9944682}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hat_2
+      parentName: Hat_1
+      position: {x: -0.000000013271347, y: 0.20223738, z: -0.000000004656613}
+      rotation: {x: -0.057389643, y: 0.17529875, z: 0.16865145, w: 0.9682631}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hat_3
+      parentName: Hat_2
+      position: {x: 0.00000005122274, y: 0.20591238, z: 0.000000027939677}
+      rotation: {x: -0.25138277, y: 0.31563514, z: 0.22141653, w: 0.88778144}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+    - name: Hat_4
+      parentName: Hat_3
+      position: {x: 0.00000009126961, y: 0.16155499, z: 0.000000040978193}
+      rotation: {x: -0.5235584, y: 0.45058373, z: -0.09566127, w: 0.71673554}
+      scale: {x: 1, y: 0.9999999, z: 1}
+    - name: Clavicle.L
+      parentName: Chest
+      position: {x: -0.05, y: 0.15999997, z: 0}
+      rotation: {x: 0.5238925, y: -0.50251997, z: -0.49633685, w: -0.47608826}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: UpperArm.L
+      parentName: Clavicle.L
+      position: {x: -0.000000005296897, y: 0.24020825, z: -0.00000003259629}
+      rotation: {x: 0.020207627, y: -0.0274492, z: 0.022754861, w: 0.9991599}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: LowerArm.L
+      parentName: UpperArm.L
+      position: {x: -2.4856517e-10, y: 0.27026653, z: -0.00000011940116}
+      rotation: {x: -5.615337e-10, y: 0.0000000024897635, z: -0.04525271, w: 0.9989756}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hand.L
+      parentName: LowerArm.L
+      position: {x: 0.000000003539225, y: 0.26027673, z: -0.000000118834386}
+      rotation: {x: 2.430105e-10, y: -6.2215816e-10, z: 0.023058526, w: 0.99973416}
+      scale: {x: 0.99999994, y: 1.0000001, z: 1}
+    - name: Clavicle.R
+      parentName: Chest
+      position: {x: 0.05, y: 0.15999997, z: 0}
+      rotation: {x: 0.5238925, y: 0.50251997, z: 0.49633685, w: -0.47608826}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: UpperArm.R
+      parentName: Clavicle.R
+      position: {x: 0.000000005296897, y: 0.24020825, z: -0.00000003259629}
+      rotation: {x: 0.020207627, y: 0.0274492, z: -0.022754861, w: 0.9991599}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: LowerArm.R
+      parentName: UpperArm.R
+      position: {x: 2.4856517e-10, y: 0.27026653, z: -0.00000011940116}
+      rotation: {x: -5.615337e-10, y: -0.0000000024897635, z: 0.04525271, w: 0.9989756}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hand.R
+      parentName: LowerArm.R
+      position: {x: -0.000000003539225, y: 0.26027673, z: -0.000000118834386}
+      rotation: {x: 2.430105e-10, y: 6.2215816e-10, z: -0.023058526, w: 0.99973416}
+      scale: {x: 0.99999994, y: 1.0000001, z: 1}
+    - name: UpperLeg.L
+      parentName: Hips
+      position: {x: -0.145, y: 0.00999999, z: 0}
+      rotation: {x: 0.99822694, y: -0.050248455, z: -0.027789686, w: 0.015678765}
+      scale: {x: 1.0000273, y: 0.9999996, z: 1.0000032}
+    - name: LowerLeg.L
+      parentName: UpperLeg.L
+      position: {x: 0.00000001816079, y: 0.35195032, z: 0}
+      rotation: {x: 0.038632102, y: 0.013399275, z: -0.014439694, w: 0.9990593}
+      scale: {x: 0.9999998, y: 1, z: 0.99999994}
+    - name: Foot.L
+      parentName: LowerLeg.L
+      position: {x: 0.000000001082127, y: 0.27100566, z: 4.5813042e-10}
+      rotation: {x: -0.52252364, y: 0.029406196, z: -0.025282536, w: 0.8517424}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Toes.L
+      parentName: Foot.L
+      position: {x: 0.000000008407326, y: 0.17240892, z: -0.0000000021715891}
+      rotation: {x: 0.00000030911363, y: 0.96695954, z: -0.25492993, w: 0.0000011061261}
+      scale: {x: 1, y: 0.9999997, z: 0.99999994}
+    - name: UpperLeg.R
+      parentName: Hips
+      position: {x: 0.145, y: 0.00999999, z: 0}
+      rotation: {x: 0.99822694, y: 0.050248455, z: 0.027789686, w: 0.015678765}
+      scale: {x: 1.0000273, y: 0.9999996, z: 1.0000032}
+    - name: LowerLeg.R
+      parentName: UpperLeg.R
+      position: {x: -0.00000001816079, y: 0.35195032, z: 0}
+      rotation: {x: 0.038632102, y: -0.013399275, z: 0.014439694, w: 0.9990593}
+      scale: {x: 0.9999998, y: 1, z: 0.99999994}
+    - name: Foot.R
+      parentName: LowerLeg.R
+      position: {x: -0.000000001082127, y: 0.27100566, z: 4.5813042e-10}
+      rotation: {x: -0.52252364, y: -0.029406196, z: 0.025282536, w: 0.8517424}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Toes.R
+      parentName: Foot.R
+      position: {x: -0.000000008407326, y: 0.17240892, z: -0.0000000021715891}
+      rotation: {x: -0.00000030911363, y: 0.96695954, z: -0.25492993, w: -0.0000011061261}
+      scale: {x: 1, y: 0.9999997, z: 0.99999994}
+    - name: Mage_Belt
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_BeltPouch
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_BootCuff_L
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_BootCuff_R
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Boot_L
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Boot_R
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_ChestSigil
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Cuff_L
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Cuff_R
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Eyes_Flush
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Face
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Glove_L
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Glove_R
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Hat
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_HatBand
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_HatCrown
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_HatSigil
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Hood
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Mantle
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_MantleLining
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_SatchelStrap
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Scarf
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_ScarfTail
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Sleeve_L
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Sleeve_R
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Spellbook
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_SplitRobe
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Trousers_L
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Trousers_R
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mage_Tunic
+      parentName: ArcaneMage(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

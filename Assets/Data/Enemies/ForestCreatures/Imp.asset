@@ -17,14 +17,17 @@ MonoBehaviour:
   loseRange: 18
   leashRange: 22
   memoryDuration: 3
-  speed: 6
-  positioningSpeed: 1.6
-  decisionPause: 0.35
+  speed: 7
+  positioningSpeed: 5
+  decisionPause: 0
   chargeCooldown: 5
   interruptibleByCombos: 1
   comboHitStun: 1
   maxConsecutiveInterrupts: 2
   interruptImmunityDuration: 2
+  comboResponseStun: 0.12
+  comboBackstepDistance: 2.6
+  comboBackstepDuration: 0.28
   staggerDamageThreshold: 15
   staggerDuration: 0.45
   staggerResistance: 0.75
@@ -149,7 +152,7 @@ MonoBehaviour:
     range: 2.2
     windup: 0.5
     active: 0.7
-    recovery: 0.5
+    recovery: 0.05
     damage: 12
     travel: 0
     halfExtents: {x: 0.65, y: 0.5, z: 0.8}

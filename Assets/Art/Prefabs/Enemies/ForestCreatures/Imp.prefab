@@ -978,8 +978,8 @@ MonoBehaviour:
   target: {fileID: 0}
   rangeTolerance: 1.5
   reactionDelay: 0.3
-  retreatSpeed: 3.2
-  retreatDuration: 1.1
+  retreatSpeed: 5.5
+  retreatDuration: 0.65
   retreatCooldown: 3
   strafeStep: 2
 --- !u!114 &3287967456599349044

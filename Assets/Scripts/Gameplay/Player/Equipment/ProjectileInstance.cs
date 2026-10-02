@@ -43,6 +43,8 @@ namespace Mismo.Gameplay.Player.Equipment
         private long attackId;
         private Vector3 origin;
         private string family; private float focusGain;
+        public string AbilityId;
+        public long AbilityUseId;
         private ProjectileImpactSettings impactSettings;
         public Action<Component,Vector3> OnImpact;
         public WeaponSkillEffects BasicEffects;
@@ -51,8 +53,9 @@ namespace Mismo.Gameplay.Player.Equipment
             SpawnImpactEffects(point,normal);
             var receiver=collider.GetComponentInParent<IDamageReceiver>();
             var target=receiver as Component;
+            if(BasicEffects!=null&&BasicEffects.GetComponent<EquipmentLoadout>()?.ActiveDefinition?.MasteryId!=family)BasicEffects=null;
             float multiplier=BasicEffects!=null?BasicEffects.BasicMultiplier(attackId,point,target):1;
-            bool hit=receiver!=null&&receiver.ReceiveDamage(new DamageInfo(damage*multiplier,owner,point,direction,attackId,posture,true,false,origin,weaponFamilyId:family,focusGainOnHit:focusGain));
+            bool hit=receiver!=null&&receiver.ReceiveDamage(new DamageInfo(damage*multiplier,owner,point,direction,attackId,posture,true,false,origin,weaponFamilyId:family,focusGainOnHit:focusGain,abilityId:AbilityId,abilityUseId:AbilityUseId));
             if(hit&&target!=null)BasicEffects?.BasicHit(attackId,target);
             OnImpact?.Invoke(hit?target:null,point);
             Destroy(gameObject);enabled=false;
@@ -133,7 +136,7 @@ namespace Mismo.Gameplay.Player.Equipment
             if (impactSettings.groundPoolDealsDamage && impactSettings.groundPoolDamagePerTick > 0f)
             {
                 var damagePool = groundPool.GetComponent<GroundDamagePool>() ?? groundPool.AddComponent<GroundDamagePool>();
-                damagePool.Initialize(owner,impactSettings.groundPoolDamageRadius,poolLifetime,impactSettings.groundPoolDamageTickInterval,impactSettings.groundPoolDamagePerTick,groundPool.transform.position, family,focusGain);
+                damagePool.Initialize(owner,impactSettings.groundPoolDamageRadius,poolLifetime,impactSettings.groundPoolDamageTickInterval,impactSettings.groundPoolDamagePerTick,groundPool.transform.position, family,focusGain,AbilityId,AbilityUseId);
             }
 
             Destroy(groundPool,poolLifetime);
@@ -153,10 +156,11 @@ namespace Mismo.Gameplay.Player.Equipment
         private float radius, duration, interval, damage, age, nextTick;
         private Vector3 origin;
         private string family;
+        private string abilityId;private long abilityUseId;
         private float focusGain;
         private bool initialized;
 
-        public void Initialize(GameObject source, float damageRadius, float lifetime, float tickInterval, float damagePerTick, Vector3 damageOrigin, string weaponFamilyId = null, float focusGainOnHit = 0f)
+        public void Initialize(GameObject source, float damageRadius, float lifetime, float tickInterval, float damagePerTick, Vector3 damageOrigin, string weaponFamilyId = null, float focusGainOnHit = 0f,string skillId=null,long useId=0)
         {
             owner = source;
             radius = Mathf.Max(0.01f,damageRadius);
@@ -165,6 +169,7 @@ namespace Mismo.Gameplay.Player.Equipment
             damage = Mathf.Max(0f,damagePerTick);
             origin = damageOrigin;
             family = weaponFamilyId;
+            abilityId=skillId;abilityUseId=useId;
             focusGain = focusGainOnHit;
             age = 0f;
             nextTick = 0f;
@@ -198,7 +203,7 @@ namespace Mismo.Gameplay.Player.Equipment
                 if (owner != null && target.transform.root == owner.transform.root) continue;
 
                 Vector3 point = other.ClosestPoint(queryOrigin);
-                receiver.ReceiveDamage(new DamageInfo(damage,owner,point,-transform.up,attackId,damage * 0.5f,true,true,origin,false,family,focusGain));
+                receiver.ReceiveDamage(new DamageInfo(damage,owner,point,-transform.up,attackId,damage * 0.5f,true,true,origin,false,family,focusGain,abilityId:abilityId,abilityUseId:abilityUseId));
             }
         }
     }

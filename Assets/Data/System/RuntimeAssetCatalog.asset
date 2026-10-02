@@ -107,9 +107,9 @@ MonoBehaviour:
     - {fileID: 12800000, guid: feb885b141d08e34b950775a3338bf34, type: 3}
   - key: Fonts/hurry up
     assets:
-    - {fileID: 2100000, guid: 999d6718663be1340a0770a4e3a6741b, type: 3}
     - {fileID: 2800000, guid: 999d6718663be1340a0770a4e3a6741b, type: 3}
     - {fileID: 12800000, guid: 999d6718663be1340a0770a4e3a6741b, type: 3}
+    - {fileID: 2100000, guid: 999d6718663be1340a0770a4e3a6741b, type: 3}
   - key: Gathering/GatheringSettings
     assets:
     - {fileID: 11400000, guid: f56ac9da4bcffc045b90e2e8c1318ad1, type: 2}
@@ -380,6 +380,12 @@ MonoBehaviour:
   - key: Materials/Wood
     assets:
     - {fileID: 11400000, guid: bc76b6759a9645589f70766dbde4bd8f, type: 2}
+  - key: PlayerSkins/knight
+    assets:
+    - {fileID: 7986347465092747304, guid: aa7470ee428efc949aecc11e922ea0f3, type: 3}
+  - key: PlayerSkins/mage
+    assets:
+    - {fileID: 1867943348224582710, guid: 49682578b4b665d4e8a5f9fe2608e415, type: 3}
   - key: ProgressionRules
     assets:
     - {fileID: 11400000, guid: 7a33d622deef47479b040099364378c4, type: 2}

@@ -1,0 +1,1 @@
+PASS: Windows player scripts with the in-scene cinematic and drag controls.

@@ -22,6 +22,11 @@ MonoBehaviour:
   enemyMasteryExperience: 20
   bossExperience: 200
   bossMasteryExperience: 120
+  masteryExperiencePerDamage: 0.2
+  masteryLevelsPerAbilityPoint: 3
+  staminaPerPoint: 5
+  cooldownReductionPerPoint: 0.02
+  maximumCooldownReduction: 0.4
   lifePerPoint: 5
   armorPerPoint: 2
   attackPerPoint: 0.02

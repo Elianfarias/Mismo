@@ -1,0 +1,5 @@
+PASS Windows bundle: BowShot -> VFX prefabs -> meshes/materials/shader
+PASS Windows bundle: BowPower -> VFX prefabs -> meshes/materials/shader
+PASS Windows bundle: SwordLunge -> VFX prefabs -> meshes/materials/shader
+PASS Windows bundle: SwordParry -> VFX prefabs -> meshes/materials/shader
+PASS Windows bundle: GuardBreaker -> VFX prefabs -> meshes/materials/shader
