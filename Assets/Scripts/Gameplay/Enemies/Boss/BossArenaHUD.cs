@@ -16,6 +16,7 @@ namespace Mismo.Gameplay.Enemies
 
         private void OnGUI()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
             if(Mismo.Gameplay.Player.Presentation.PlayerHUD.Active!=null)return;
             GUILayout.BeginArea(new Rect(16f, 16f, 470f, 190f), GUI.skin.box);
             GUILayout.Label("FIRST BOSS | Arena de combate");

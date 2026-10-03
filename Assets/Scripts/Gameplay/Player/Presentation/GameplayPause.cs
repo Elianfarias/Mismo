@@ -5,6 +5,7 @@ namespace Mismo.Gameplay.Player.Presentation
     public static class GameplayPause
     {
         public static bool IsPaused { get; private set; }
+        public static bool CameraMode { get; set; }
         public static bool BlocksInput => IsPaused || releasedFrame == Time.frameCount;
         static int releasedFrame = -1;
         static float previousScale;
@@ -13,7 +14,7 @@ namespace Mismo.Gameplay.Player.Presentation
         static object pauseOwner;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        static void Reset() { IsPaused = false; releasedFrame = -1; pauseOwner = null; }
+        static void Reset() { IsPaused = false; CameraMode = false; releasedFrame = -1; pauseOwner = null; }
 
         public static void Pause()
         { TryPause(null); }

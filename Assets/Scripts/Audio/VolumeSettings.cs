@@ -27,7 +27,9 @@ public class VolumeSettings : MonoBehaviour
         if(audioMixer!=null) audioMixer.SetFloat(parameter, Decibels(value));
         PlayerPrefs.SetFloat(key,value);
     }
-    public static float Decibels(float value) => value<=0 ? -80f : Mathf.Log10(Mathf.Clamp(value,.000001f,1))*10;
+    // Slider values represent signal amplitude: dB = 20 * log10(amplitude).
+    // Using 10 here makes 1% output 10% amplitude instead of 1%.
+    public static float Decibels(float value) => 20f * Mathf.Log10(Mathf.Clamp(value,.0001f,1f));
     public static void ApplySaved(AudioMixer mixer)
     {
         if(mixer==null)return;

@@ -1,0 +1,979 @@
+fileFormatVersion: 2
+guid: 926e0caa62141d045bc435dbef4b8a4e
+ModelImporter:
+  serializedVersion: 24600
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_BellyShade_0
+    second: {fileID: 2100000, guid: b378e129fe4930a4997d5bf3fbb1409a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_BellyShade_1
+    second: {fileID: 2100000, guid: 774a5392aa65b53429e022995a892d41, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_BellyShade_2
+    second: {fileID: 2100000, guid: 11ad99cc8d3662f4bb8e41e929569d8d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Belly_0
+    second: {fileID: 2100000, guid: aad8d2b9da894de43b13d90a136ec62c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Belly_1
+    second: {fileID: 2100000, guid: 5332fdecb21f78e45bbc1298dad927ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Belly_2
+    second: {fileID: 2100000, guid: 7029688c59e3e454b9a78043a7a664be, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_CordLight_0
+    second: {fileID: 2100000, guid: 46fe0ce44f39d4d479e9d678fdc5eb1a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_CordLight_1
+    second: {fileID: 2100000, guid: d98ced70f24182e49a0501c397503f7f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_CordLight_2
+    second: {fileID: 2100000, guid: 59ed8a3e242653b4293933c4ba843dff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Cord_0
+    second: {fileID: 2100000, guid: 39499041b0e3990448c9b133059d5f56, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Cord_1
+    second: {fileID: 2100000, guid: d577499945c10634a81418ef9c53aee0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Cord_2
+    second: {fileID: 2100000, guid: cf0b12ddfc906b548b28f46dc8d2f186, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Glint_1
+    second: {fileID: 2100000, guid: fe2f836ace1b2234db2b6389bc8a7d88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Glint_2
+    second: {fileID: 2100000, guid: 704163b0ae119104595c697056b07861, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_IrisLight_0
+    second: {fileID: 2100000, guid: d5f689eb77fd34b4ebcfcfb20ce26bf9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_IrisLight_1
+    second: {fileID: 2100000, guid: 0b3aae89bb9344b469bf72df0600fcc2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_IrisLight_2
+    second: {fileID: 2100000, guid: bcd437bfbcdbf684da6b26dc7ed2f284, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Iris_0
+    second: {fileID: 2100000, guid: 8d06f17ba3024b54787165be401f37ae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Iris_1
+    second: {fileID: 2100000, guid: 9bebea1bd786ce241a225e16197b8955, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Iris_2
+    second: {fileID: 2100000, guid: a3c88dbd0652e754a8c873709ec0c301, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_JacketDark_0
+    second: {fileID: 2100000, guid: 391307dd6292d41419e93a917f6fe239, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_JacketDark_1
+    second: {fileID: 2100000, guid: c54721a7410ff14408a0a8e05bc59601, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_JacketDark_2
+    second: {fileID: 2100000, guid: 112efe19fac598c44b390f4b4902b540, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_JacketLight_0
+    second: {fileID: 2100000, guid: 30ab38ca1c94de94b871d470323ce3ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_JacketLight_1
+    second: {fileID: 2100000, guid: 1b6da0f7b135a3c4494e22dedf55254d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_JacketLight_2
+    second: {fileID: 2100000, guid: b231e16bc2551704aa942071dc4f62bf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Jacket_0
+    second: {fileID: 2100000, guid: a0f571a9591612f4795cf5752014fd51, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Jacket_1
+    second: {fileID: 2100000, guid: 06b9dcbbc025cae4f9283f1fb2e1c983, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Jacket_2
+    second: {fileID: 2100000, guid: f90fef743a05ff34797d9aa41ec53948, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_OrangeDark_0
+    second: {fileID: 2100000, guid: 22c700f93f79f1842bb32080050b4b28, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_OrangeDark_1
+    second: {fileID: 2100000, guid: b721c1167d4f94942af0a32fceb6bb10, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_OrangeDark_2
+    second: {fileID: 2100000, guid: e43280c417819994ba58d7e433e6b9f1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_OrangeLight_0
+    second: {fileID: 2100000, guid: 64caa1151035f7144954358f34ab59dd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_OrangeLight_1
+    second: {fileID: 2100000, guid: 2a5ce61c27fadd2488b479cea7a06800, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_OrangeLight_2
+    second: {fileID: 2100000, guid: a2125630e55e5474bbd3555a047c8ae7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Orange_0
+    second: {fileID: 2100000, guid: 79ec1ef8950349a4489673df66c97f38, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Orange_1
+    second: {fileID: 2100000, guid: 28e6309dd69a3ac4fafbf6bcfab16949, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Orange_2
+    second: {fileID: 2100000, guid: 203541cb3f4e97f48948b964b5ed158b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_PantsDark_0
+    second: {fileID: 2100000, guid: b1f24f366bf696149a53d93d09354bed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_PantsDark_1
+    second: {fileID: 2100000, guid: 0523ae33eb58e90438c3e3d38b900b52, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_PantsDark_2
+    second: {fileID: 2100000, guid: ca7c14526ba162d4583d71a6e126a718, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_PantsLight_0
+    second: {fileID: 2100000, guid: 31c4835317030674ab24f88b925398d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_PantsLight_1
+    second: {fileID: 2100000, guid: ea01465d5f5f4ad43a67d80ca3751850, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_PantsLight_2
+    second: {fileID: 2100000, guid: 39eceee9dc3f5c649a5a087283c2c2c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Pants_0
+    second: {fileID: 2100000, guid: 81acee6491be4e542b42f2f1698dacd6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Pants_1
+    second: {fileID: 2100000, guid: 33fdb9ea4728bee438885ff4c7a4f2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Pants_2
+    second: {fileID: 2100000, guid: 066a3c617565a5048b42f2499b9cf4a2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Pupil_0
+    second: {fileID: 2100000, guid: 36ad711f836d5c34d84dec020117b83f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Pupil_1
+    second: {fileID: 2100000, guid: 78637628a3141f44a986a73e02bac9fc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Pupil_2
+    second: {fileID: 2100000, guid: b7d3d0029e3161c48a7709c3a6e07fb7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_SashDark_0
+    second: {fileID: 2100000, guid: 3173d0b25a6bcfb458ebba8105486aab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_SashDark_1
+    second: {fileID: 2100000, guid: 9c4dd15e5cf8cec40a88c62777f95dd5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_SashDark_2
+    second: {fileID: 2100000, guid: 7682f2dac649a3c419990428b58bb149, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_SashLight_0
+    second: {fileID: 2100000, guid: 2d4c629d7febf41429d89b4eec657827, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_SashLight_1
+    second: {fileID: 2100000, guid: 6b19bcbc7f30abe4896f976ea088d4fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_SashLight_2
+    second: {fileID: 2100000, guid: 704ad2f962b2a6f4aa11cd9c1c274e2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Sash_0
+    second: {fileID: 2100000, guid: b6c445beb853c8c4e96b46be7a25a34f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Sash_1
+    second: {fileID: 2100000, guid: c9851642ed36a1a49bc1837421799876, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Sash_2
+    second: {fileID: 2100000, guid: 827c7f38ff80d4a42b0f828e150e6cbf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_SkinDark_0
+    second: {fileID: 2100000, guid: ebd64e270fe5c9a4b958331f70efbcee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_SkinDark_1
+    second: {fileID: 2100000, guid: 004a00a0a2e57df43a35b5cd8e665eb8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_SkinDark_2
+    second: {fileID: 2100000, guid: 9622d424376612248a9c5d7ee23f5217, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_SkinLight_0
+    second: {fileID: 2100000, guid: 19be97ec2bc00b649bb851f0acbfb4a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_SkinLight_1
+    second: {fileID: 2100000, guid: 04e8cb1609654274da1dca28c40b1c95, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_SkinLight_2
+    second: {fileID: 2100000, guid: 833a64b9c8e31354db0095be7d1fc685, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Skin_0
+    second: {fileID: 2100000, guid: dc9ed05cb8a34c9438d2c39efae9ece7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Skin_1
+    second: {fileID: 2100000, guid: c84bd9e4b0b99b84092f2f2f295290dd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frog_Skin_2
+    second: {fileID: 2100000, guid: 3d114b2af60aae34f8f7a45700424baa, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+    searchTexturesGlobally: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    preBakeConvexCollisionMesh: 0
+    preBakeTriangleCollisionMesh: 0
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    importUVs: -1
+    importVertexColors: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+    calculateBlendshapeNormalsDeltaFromImportedNormals: 0
+  referencedClips: []
+  importAnimation: 0
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Chest
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Clavicle.L
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: UpperArm.L
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LowerArm.L
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Hand.L
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Clavicle.R
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: UpperArm.R
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LowerArm.R
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Hand.R
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: UpperLeg.L
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LowerLeg.L
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Foot.L
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Toes.L
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: UpperLeg.R
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LowerLeg.R
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Foot.R
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Toes.R
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: NinjaFrog(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Armature_Humanoid
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Root
+      parentName: Armature_Humanoid
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hips
+      parentName: Root
+      position: {x: -0, y: 0.78, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine
+      parentName: Hips
+      position: {x: -0, y: 0.17999995, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Chest
+      parentName: Spine
+      position: {x: -0, y: 0.18999994, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Neck
+      parentName: Chest
+      position: {x: -0, y: 0.19000006, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head
+      parentName: Neck
+      position: {x: -0, y: 0.120000005, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Clavicle.L
+      parentName: Chest
+      position: {x: -0.05, y: 0.15999997, z: 0}
+      rotation: {x: 0.51030153, y: -0.48948175, z: -0.5103015, w: -0.48948178}
+      scale: {x: 1, y: 0.9999999, z: 1}
+    - name: UpperArm.L
+      parentName: Clavicle.L
+      position: {x: 2.8310687e-15, y: 0.24020822, z: 0.00000004377216}
+      rotation: {x: 0.020814635, y: -0.00046234112, z: 0.022200976, w: 0.9995367}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LowerArm.L
+      parentName: UpperArm.L
+      position: {x: -8.5526014e-10, y: 0.2702665, z: -4.4968473e-12}
+      rotation: {x: 8.0863707e-13, y: 3.6673764e-10, z: -0.045252703, w: 0.9989756}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hand.L
+      parentName: LowerArm.L
+      position: {x: 0.0000000037252903, y: 0.26027673, z: -0.00000011922384}
+      rotation: {x: -4.9089686e-12, y: -1.7204368e-10, z: 0.023058522, w: 0.99973416}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: Clavicle.R
+      parentName: Chest
+      position: {x: 0.05, y: 0.15999997, z: 0}
+      rotation: {x: 0.51030153, y: 0.48948175, z: 0.5103015, w: -0.48948178}
+      scale: {x: 1, y: 0.9999999, z: 1}
+    - name: UpperArm.R
+      parentName: Clavicle.R
+      position: {x: -2.8310687e-15, y: 0.24020822, z: 0.00000004377216}
+      rotation: {x: 0.020814635, y: 0.00046234112, z: -0.022200976, w: 0.9995367}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LowerArm.R
+      parentName: UpperArm.R
+      position: {x: 8.5526014e-10, y: 0.2702665, z: -4.4968473e-12}
+      rotation: {x: 8.0863707e-13, y: -3.6673764e-10, z: 0.045252703, w: 0.9989756}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hand.R
+      parentName: LowerArm.R
+      position: {x: -0.0000000037252903, y: 0.26027673, z: -0.00000011922384}
+      rotation: {x: -4.9089686e-12, y: 1.7204368e-10, z: -0.023058522, w: 0.99973416}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: Scarf.L_1
+      parentName: Chest
+      position: {x: 0.11, y: 0.26, z: -0.17}
+      rotation: {x: -0.7074728, y: -0.37862825, z: 0.28158626, w: 0.5261484}
+      scale: {x: 0.9999999, y: 0.9999999, z: 0.9999999}
+    - name: Scarf.L_2
+      parentName: Scarf.L_1
+      position: {x: -0.000000080764295, y: 0.12529963, z: 0.000000007450581}
+      rotation: {x: -0.4036407, y: 0.27088445, z: 0.24770601, w: 0.8380558}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: Scarf.L_3
+      parentName: Scarf.L_2
+      position: {x: 0.000000008940713, y: 0.18814889, z: 0.00000005122274}
+      rotation: {x: -0.082574055, y: 0.009694657, z: 0.03150737, w: 0.99603957}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Scarf.L_4
+      parentName: Scarf.L_3
+      position: {x: -0.00000004172325, y: 0.18681552, z: 0.000000042375177}
+      rotation: {x: -0.020897664, y: -0.018709395, z: -0.094832055, w: 0.99509805}
+      scale: {x: 1, y: 0.9999999, z: 1}
+    - name: Scarf.L_tip
+      parentName: Scarf.L_4
+      position: {x: 0.000000028200446, y: 0.17349347, z: -0.000000020489097}
+      rotation: {x: -0.085393436, y: 0.015484799, z: 0.17775168, w: 0.98024106}
+      scale: {x: 1, y: 0.9999999, z: 0.99999994}
+    - name: Scarf.R_1
+      parentName: Chest
+      position: {x: -0.045, y: 0.26, z: -0.17}
+      rotation: {x: 0.73346376, y: -0.39253813, z: 0.26184708, w: -0.48926562}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: Scarf.R_2
+      parentName: Scarf.R_1
+      position: {x: -0.00000003948808, y: 0.14080125, z: -0.000000074505806}
+      rotation: {x: -0.3763368, y: -0.21369907, z: -0.2203761, w: 0.8741497}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: Scarf.R_3
+      parentName: Scarf.R_2
+      position: {x: 0.000000009462239, y: 0.18282506, z: -0.000000024214387}
+      rotation: {x: -0.04518989, y: -0.01586338, z: -0.048156325, w: 0.997691}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Scarf.R_4
+      parentName: Scarf.R_3
+      position: {x: -0.000000020414596, y: 0.2040221, z: 0.00000006426126}
+      rotation: {x: 0.008794251, y: 0.012708874, z: 0.04390546, w: 0.99891615}
+      scale: {x: 0.99999994, y: 1.0000001, z: 1}
+    - name: Scarf.R_tip
+      parentName: Scarf.R_4
+      position: {x: 0.00000003792346, y: 0.12216787, z: 0.00000009313226}
+      rotation: {x: -0.14257503, y: -0.025118152, z: -0.17167526, w: 0.97445834}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: UpperLeg.L
+      parentName: Hips
+      position: {x: -0.145, y: 0.00999999, z: 0}
+      rotation: {x: 0.99861336, y: -0.049807098, z: -0.0008446954, w: 0.017028939}
+      scale: {x: 1.0000273, y: 0.9999995, z: 1.0000032}
+    - name: LowerLeg.L
+      parentName: UpperLeg.L
+      position: {x: 0.0000000057910143, y: 0.3519503, z: 0.0000000021536835}
+      rotation: {x: 0.039185, y: -0.000065498716, z: -0.012863956, w: 0.9991492}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: Foot.L
+      parentName: LowerLeg.L
+      position: {x: 2.7755576e-17, y: 0.27100563, z: -0.0000000015789401}
+      rotation: {x: -0.52213436, y: 0.017897265, z: -0.03233823, w: 0.85206205}
+      scale: {x: 0.99999994, y: 0.9999999, z: 0.9999999}
+    - name: Toes.L
+      parentName: Foot.L
+      position: {x: -0.0000000036455, y: 0.17240879, z: -0.000000015249213}
+      rotation: {x: 0.00000008784852, y: 0.9669595, z: -0.25493017, w: 0.000000424765}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: UpperLeg.R
+      parentName: Hips
+      position: {x: 0.145, y: 0.00999999, z: 0}
+      rotation: {x: 0.99861336, y: 0.049807098, z: 0.0008446954, w: 0.017028939}
+      scale: {x: 1.0000273, y: 0.9999995, z: 1.0000032}
+    - name: LowerLeg.R
+      parentName: UpperLeg.R
+      position: {x: -0.0000000057910143, y: 0.3519503, z: 0.0000000021536835}
+      rotation: {x: 0.039185, y: 0.000065498716, z: 0.012863956, w: 0.9991492}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: Foot.R
+      parentName: LowerLeg.R
+      position: {x: -2.7755576e-17, y: 0.27100563, z: -0.0000000015789401}
+      rotation: {x: -0.52213436, y: -0.017897584, z: 0.03233843, w: 0.85206205}
+      scale: {x: 0.99999994, y: 0.9999999, z: 0.99999994}
+    - name: Toes.R
+      parentName: Foot.R
+      position: {x: -0.000000017471628, y: 0.1724088, z: -0.0000000017020056}
+      rotation: {x: -0.0000001876847, y: 0.9669595, z: -0.25493017, w: -0.0000007682919}
+      scale: {x: 1, y: 1.0000002, z: 1}
+    - name: Frog_Arm_L
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Arm_R
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_BackPatch
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_EyeTower_L
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_EyeTower_R
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Foot_L
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Foot_R
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Hand_L
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Hand_R
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Head
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Iris_L
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Iris_R
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Jacket
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_JacketTail_L
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_JacketTail_R
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Jaw
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Lapels
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_LegWrap_L
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_LegWrap_R
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Neck
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Pants_L
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Pants_R
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Sash
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_SashEnd_L
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_SashEnd_R
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_ScarfCollar
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_ScarfTail_L
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_ScarfTail_R
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Shin_L
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Shin_R
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_ShoulderCord_L
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_ShoulderCord_R
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Sleeve_L
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Sleeve_R
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_Tunic
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_WristWrap_L
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Frog_WristWrap_R
+      parentName: NinjaFrog(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

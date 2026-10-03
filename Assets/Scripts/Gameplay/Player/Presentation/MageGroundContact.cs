@@ -10,6 +10,7 @@ namespace Mismo.Gameplay.Player.Presentation
     {
         const float Clearance = .002f;
         const float MaximumCorrection = .3f;
+        float maximumCorrection = MaximumCorrection;
         CharacterController body;
         Transform hips;
         readonly List<Transform> feet = new List<Transform>();
@@ -21,13 +22,15 @@ namespace Mismo.Gameplay.Player.Presentation
 
         public void Initialize(Animator animator, CharacterController controller)
         {
-            RestorePose();feet.Clear();samples.Clear();body=controller;
+            RestorePose();feet.Clear();samples.Clear();body=controller;maximumCorrection=MaximumCorrection;
             if(animator==null || animator.avatar==null || !animator.isHuman)return;
             hips=animator.GetBoneTransform(HumanBodyBones.Hips);
             foreach(var renderer in animator.GetComponentsInChildren<SkinnedMeshRenderer>())
             {
                 if(!renderer.name.EndsWith("_Boot_L",System.StringComparison.Ordinal) &&
-                   !renderer.name.EndsWith("_Boot_R",System.StringComparison.Ordinal))continue;
+                   !renderer.name.EndsWith("_Boot_R",System.StringComparison.Ordinal) &&
+                   !renderer.name.EndsWith("_Foot_L",System.StringComparison.Ordinal) &&
+                   !renderer.name.EndsWith("_Foot_R",System.StringComparison.Ordinal))continue;
                 var foot=animator.GetBoneTransform(renderer.name.EndsWith("_L")?HumanBodyBones.LeftFoot:HumanBodyBones.RightFoot);
                 var mesh=renderer.sharedMesh;
                 if(foot==null || mesh==null || !mesh.isReadable)continue;
@@ -41,6 +44,11 @@ namespace Mismo.Gameplay.Player.Presentation
                     if(weights[i].boneIndex0==index && weights[i].weight0>.999f)
                         unique.Add(bind.MultiplyPoint3x4(vertices[i]));
                 if(unique.Count==0)continue;
+                // Amphibian toes reach farther past the Humanoid foot pivot than
+                // the boots. Include that extra reach in the bounded correction.
+                if(renderer.name.EndsWith("_Foot_L",System.StringComparison.Ordinal) ||
+                   renderer.name.EndsWith("_Foot_R",System.StringComparison.Ordinal))
+                    maximumCorrection=Mathf.Max(maximumCorrection,.45f*Mathf.Abs(transform.lossyScale.y));
                 var points=new Vector3[unique.Count];unique.CopyTo(points);feet.Add(foot);samples.Add(points);
             }
         }
@@ -71,7 +79,7 @@ namespace Mismo.Gameplay.Player.Presentation
                 var matrix=feet[i].localToWorldMatrix;
                 foreach(var point in samples[i])sole=Mathf.Min(sole,matrix.MultiplyPoint3x4(point).y);
             }
-            float correction=Mathf.Clamp(surfaceY+Clearance-sole,-MaximumCorrection,MaximumCorrection);
+            float correction=Mathf.Clamp(surfaceY+Clearance-sole,-maximumCorrection,maximumCorrection);
             originalHipsPosition=hips.localPosition;applied=true;
             hips.position+=Vector3.up*correction;
         }

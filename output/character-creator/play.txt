@@ -1,1 +1,1 @@
-PASS: New game opens creator without saving; empty names blocked; both previews switch; cancel preserves session; confirmed name/skin load into gameplay and survive continue; both runtime skins spawn with valid avatars.
+PASS: New game opens creator without saving; empty names blocked; three previews switch and wrap in both directions; cancel preserves session; confirmed frog/name load into gameplay and survive continue; all runtime skins spawn with valid avatars and secondary motion.

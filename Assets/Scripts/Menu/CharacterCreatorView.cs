@@ -17,10 +17,12 @@ namespace Mismo.Menu
         CharacterCreationStage stage;
         Func<string,string,string> submit;
         Action cancel;
-        string selected = PlayerAppearance.Mage;
+        int selectedIndex;
+        string SelectedSkin => PlayerAppearance.Skins[selectedIndex];
         bool submitting, closing;
         readonly List<GameObject> hiddenMenu = new List<GameObject>();
         readonly Color gold = new Color(.88f,.75f,.48f);
+        Sprite frameSprite, panelSprite;
         public CharacterCreationStage Stage => stage;
         public bool Ready => stage != null && stage.Ready && !closing && !submitting;
 
@@ -35,6 +37,10 @@ namespace Mismo.Menu
         }
         void Build()
         {
+            var frame=FantasyUI.FrameTexture;
+            if(frame!=null)frameSprite=Sprite.Create(frame,new Rect(0,0,frame.width,frame.height),new Vector2(.5f,.5f),100,0,SpriteMeshType.FullRect,Vector4.one*FantasyUI.Slice);
+            var surface=FantasyUI.PanelTexture;
+            panelSprite=Sprite.Create(surface,new Rect(0,0,surface.width,surface.height),new Vector2(.5f,.5f),100);
             // Transparent hit area: the character is part of the real garden, not a render texture.
             var drag=MainMenuView.Box("Girar personaje",transform,Vector2.zero,Vector2.zero,Color.clear);
             drag.rectTransform.anchorMin=new Vector2(.32f,0);drag.rectTransform.anchorMax=Vector2.one;
@@ -49,36 +55,51 @@ namespace Mismo.Menu
             panel.rectTransform.anchorMin=panel.rectTransform.anchorMax=Vector2.zero;panel.rectTransform.pivot=Vector2.zero;
             panel.rectTransform.anchoredPosition=new Vector2(56,70);
             var p=panel.transform;
-            MainMenuView.Box("Borde dorado",p,Vector2.zero,new Vector2(3,478),gold);
+            StyleSurface(panel,.96f);
             Label(p,"TU PERSONAJE",28,26,325,25,16,gold);
-            Label(p,"Elegí tu historia",28,63,325,43,31,Color.white);
+            Label(p,"Elegí tu historia",28,63,325,43,31,QuietFantasyUI.Ink);
             Label(p,"NOMBRE",28,131,325,24,16,gold);
             var field=MainMenuView.Box("Nombre",p,new Vector2(28,166),new Vector2(324,53),new Color(.15f,.19f,.19f));field.raycastTarget=true;
+            StyleSurface(field,1);
             nameInput=field.gameObject.AddComponent<InputField>();nameInput.targetGraphic=field;
-            nameInput.textComponent=Label(field.transform,"",12,10,300,33,23,Color.white);nameInput.textComponent.supportRichText=false;
-            nameInput.placeholder=Label(field.transform,"Nombre de tu jugador",12,10,300,33,21,new Color(.64f,.7f,.68f));
+            nameInput.textComponent=Label(field.transform,"",12,10,300,33,23,QuietFantasyUI.Ink);nameInput.textComponent.supportRichText=false;
+            nameInput.placeholder=Label(field.transform,"Nombre de tu jugador",12,10,300,33,21,QuietFantasyUI.Muted);
             nameInput.characterLimit=PlayerAppearance.NameLimit;nameInput.lineType=InputField.LineType.SingleLine;
             nameInput.onValidateInput+=(text,index,c)=>char.IsControl(c)||c=='<'||c=='>'?'\0':c;
             nameInput.onValueChanged.AddListener(_=>RefreshValidity());
             Label(p,"APARIENCIA",28,249,324,24,16,gold);
-            MakeButton(p,"‹",28,285,50,SelectOther);
-            skinLabel=Label(p,"Mago",82,294,216,36,25,Color.white);skinLabel.alignment=TextAnchor.MiddleCenter;
-            MakeButton(p,"›",302,285,50,SelectOther);
+            MakeButton(p,"‹",28,285,50,()=>SelectSkin(-1));
+            skinLabel=Label(p,PlayerAppearance.SkinName(SelectedSkin),82,294,216,36,25,QuietFantasyUI.Ink);skinLabel.alignment=TextAnchor.MiddleCenter;
+            MakeButton(p,"›",302,285,50,()=>SelectSkin(1));
             notice=Label(p,"",28,349,324,36,16,new Color(1,.81f,.58f));notice.supportRichText=false;
             confirm=MakeButton(p,"Comenzar aventura",28,403,324,Confirm,true);
             var tip=MainMenuView.Box("Ayuda de giro",content.transform,Vector2.zero,new Vector2(650,40),new Color(.03f,.05f,.05f,.65f));
+            StyleSurface(tip,.9f);
             tip.rectTransform.anchorMin=tip.rectTransform.anchorMax=new Vector2(.66f,0);tip.rectTransform.pivot=new Vector2(.5f,0);
             tip.rectTransform.anchoredPosition=new Vector2(0,40);
             var hint=Label(tip.transform,"Mantené el clic izquierdo y arrastrá para girar",12,8,626,27,18,new Color(.92f,.9f,.82f));hint.alignment=TextAnchor.MiddleCenter;
         }
         static Text Label(Transform p,string value,float x,float y,float width,float height,int size,Color color)
             =>MainMenuView.Label(p,value,new Vector2(x,y),new Vector2(width,height),size,color);
+        void StyleSurface(Image image,float opacity)
+        {
+            image.sprite=panelSprite;image.type=Image.Type.Simple;image.color=new Color(1,1,1,opacity);
+            FantasyPanelClip.Apply(image);
+            var border=MainMenuView.Box("Fantasy border",image.transform,Vector2.zero,Vector2.zero,QuietFantasyUI.Ink);
+            border.sprite=frameSprite;border.type=Image.Type.Sliced;border.fillCenter=false;
+            border.rectTransform.anchorMin=Vector2.zero;border.rectTransform.anchorMax=Vector2.one;
+            border.rectTransform.offsetMin=border.rectTransform.offsetMax=Vector2.zero;
+        }
         Button MakeButton(Transform p,string title,float x,float y,float width,Action action,bool primary=false)
         {
             var button=MainMenuView.ButtonAt(p,title,y,primary);
+            StyleSurface((Image)button.targetGraphic,1);
+            var colors=button.colors;colors.normalColor=Color.white;colors.highlightedColor=PlayerHUD.Gold;
+            colors.selectedColor=PlayerHUD.Gold;colors.pressedColor=QuietFantasyUI.Amber;
+            colors.disabledColor=new Color(.65f,.65f,.65f,1);button.colors=colors;
             var rect=(RectTransform)button.transform;rect.anchoredPosition=new Vector2(x,-y);rect.sizeDelta=new Vector2(width,52);
             var label=button.GetComponentInChildren<Text>();label.rectTransform.anchoredPosition=new Vector2(8,-8);
-            label.rectTransform.sizeDelta=new Vector2(width-16,36);label.fontSize=22;label.alignment=TextAnchor.MiddleCenter;
+            label.rectTransform.sizeDelta=new Vector2(width-16,36);label.fontSize=22;label.alignment=TextAnchor.MiddleCenter;label.color=QuietFantasyUI.Ink;
             button.onClick.AddListener(()=>{if(!submitting&&!closing)action();});button.gameObject.AddComponent<UISoundFeedback>();return button;
         }
         public void Open()
@@ -87,7 +108,7 @@ namespace Mismo.Menu
             gameObject.SetActive(true);transform.SetAsLastSibling();submitting=closing=false;
             try
             {
-                stage=new CharacterCreationStage(gameObject.scene);stage.Show(selected);stage.Enter();
+                stage=new CharacterCreationStage(gameObject.scene);stage.Show(SelectedSkin);stage.Enter();
                 foreach(Transform sibling in transform.parent)
                     if(sibling!=transform&&sibling.gameObject.activeSelf){hiddenMenu.Add(sibling.gameObject);sibling.gameObject.SetActive(false);}
                 controls.alpha=0;controls.interactable=false;
@@ -99,11 +120,15 @@ namespace Mismo.Menu
                 stage?.Dispose();stage=null;controls.alpha=1;controls.interactable=true;notice.text=e.Message;confirm.interactable=false;
             }
         }
-        void SelectOther()
+        void SelectSkin(int direction)
         {
             if(!Ready)return;
-            selected=selected==PlayerAppearance.Mage?PlayerAppearance.Knight:PlayerAppearance.Mage;
-            try{stage.Show(selected);skinLabel.text=selected==PlayerAppearance.Mage?"Mago":"Caballero";RefreshValidity();}
+            int next=(selectedIndex+direction+PlayerAppearance.Skins.Count)%PlayerAppearance.Skins.Count;
+            try
+            {
+                stage.Show(PlayerAppearance.Skins[next]);selectedIndex=next;
+                skinLabel.text=PlayerAppearance.SkinName(SelectedSkin);RefreshValidity();
+            }
             catch(Exception e){notice.text=e.Message;confirm.interactable=false;}
         }
         void RefreshValidity()
@@ -118,7 +143,7 @@ namespace Mismo.Menu
         {
             if(!confirm.interactable||!Ready)return;
             submitting=true;confirm.interactable=false;
-            var error=submit(nameInput.text.Trim(),selected);
+            var error=submit(nameInput.text.Trim(),SelectedSkin);
             if(error!=null){submitting=false;RefreshValidity();notice.text=error;return;}
             notice.text="Preparando tu aventura…";
         }
@@ -152,7 +177,7 @@ namespace Mismo.Menu
             Advance(Time.unscaledDeltaTime);
             if(!submitting&&Keyboard.current!=null&&Keyboard.current.escapeKey.wasPressedThisFrame)Close();
         }
-        void OnDestroy(){stage?.Dispose();stage=null;}
+        void OnDestroy(){stage?.Dispose();stage=null;if(frameSprite!=null)Destroy(frameSprite);if(panelSprite!=null)Destroy(panelSprite);}
     }
 
     public sealed class CharacterCreatorDragSurface : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IInitializePotentialDragHandler, IBeginDragHandler, IDragHandler, IEndDragHandler

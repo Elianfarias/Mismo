@@ -8,6 +8,8 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 
 /// <summary>Authoring-time skin selection. Keeps the Player Animator and gameplay root stable.</summary>
+public enum PlayerSkinKind { Mage, Warrior, NinjaFrog }
+
 public static class AshenWarriorIntegration
 {
     public const string Model = "Assets/Art/FBX/Characters/AshenWarrior.fbx";
@@ -92,7 +94,7 @@ public static class AshenWarriorIntegration
                 Require(skinAnimator!=null && skinAnimator.avatar!=null && skinAnimator.avatar.isHuman && skinAnimator.avatar.isValid,"Avatar del guerrero inválido.");
                 skinAnimator.runtimeAnimatorController=animator.runtimeAnimatorController;
                 skinAnimator.applyRootMotion=animator.applyRootMotion;
-                ConfigureVisual(skinAnimator,player.layer,true);
+                ConfigureVisual(skinAnimator,player.layer,PlayerSkinKind.Warrior);
                 PrefabUtility.SaveAsPrefabAsset(skin,Warrior);
             }
             finally{Object.DestroyImmediate(skin);}
@@ -104,11 +106,11 @@ public static class AshenWarriorIntegration
     }
 
     [MenuItem("Mismo/Character/Skins/Usar guerrero")]
-    public static void UseWarrior()=>UseSkin(Warrior,true);
+    public static void UseWarrior()=>UseSkin(Warrior,PlayerSkinKind.Warrior);
     [MenuItem("Mismo/Character/Skins/Usar mago")]
-    public static void UseMage()=>UseSkin(Mage,false);
+    public static void UseMage()=>UseSkin(Mage,PlayerSkinKind.Mage);
 
-    static void UseSkin(string path,bool warrior)
+    public static void UseSkin(string path,PlayerSkinKind kind)
     {
         Require(!EditorApplication.isPlayingOrWillChangePlaymode,"Salir de Play Mode antes de cambiar la skin.");
         var source=AssetDatabase.LoadAssetAtPath<GameObject>(path);
@@ -123,6 +125,7 @@ public static class AshenWarriorIntegration
             if(visual.GetComponent<MageHatMotion>()!=null)Object.DestroyImmediate(visual.GetComponent<MageHatMotion>());
             if(visual.GetComponent<WarriorCapeMotion>()!=null)Object.DestroyImmediate(visual.GetComponent<WarriorCapeMotion>());
             if(visual.GetComponent<WarriorPlumeMotion>()!=null)Object.DestroyImmediate(visual.GetComponent<WarriorPlumeMotion>());
+            if(visual.GetComponent<FrogScarfMotion>()!=null)Object.DestroyImmediate(visual.GetComponent<FrogScarfMotion>());
             var replacement=Object.Instantiate(source);
             try
             {
@@ -146,17 +149,17 @@ public static class AshenWarriorIntegration
                 }
                 animator.avatar=source.GetComponent<Animator>().avatar;
                 foreach(var child in oldChildren)Object.DestroyImmediate(child.gameObject);
-                ConfigureVisual(animator,root.layer,warrior);
+                ConfigureVisual(animator,root.layer,kind);
             }
             finally{Object.DestroyImmediate(replacement);}
             PrefabUtility.SaveAsPrefabAsset(root,Player);
         }
         finally{PrefabUtility.UnloadPrefabContents(root);}
         AssetDatabase.SaveAssets();
-        Debug.Log("Player: skin "+(warrior?"guerrero":"mago")+" activa.");
+        Debug.Log("Player: skin "+kind+" activa.");
     }
 
-    static void ConfigureVisual(Animator animator,int layer,bool warrior)
+    public static void ConfigureVisual(Animator animator,int layer,PlayerSkinKind kind)
     {
         // Avatar assignment can leave a cached mapping to the removed hierarchy,
         // especially when reapplying the same avatar. Rebuild it before capturing bones.
@@ -165,13 +168,19 @@ public static class AshenWarriorIntegration
         var map=visual.GetComponentsInChildren<Transform>(true).GroupBy(t=>t.name).ToDictionary(g=>g.Key,g=>g.First());
         if(visual.GetComponent<MageGroundContact>()==null)visual.gameObject.AddComponent<MageGroundContact>();
         animator.cullingMode=AnimatorCullingMode.AlwaysAnimate;
-        if(warrior)
+        if(kind==PlayerSkinKind.Warrior)
         {
             var bones=new[]{"L","C","R"}.SelectMany(c=>Enumerable.Range(1,4).Select(i=>map["Cape."+c+"_"+i])).ToArray();
             var tips=Enumerable.Range(0,3).Select(c=>bones[c*4+3].position+bones[c*4+3].up*(c==1?.25318f:.25495f)*visual.lossyScale.y).ToArray();
             (visual.GetComponent<WarriorCapeMotion>()??visual.gameObject.AddComponent<WarriorCapeMotion>()).Configure(animator,bones,tips);
             var plume=Enumerable.Range(1,5).Select(i=>map["Plume_"+i]).ToArray();
             (visual.GetComponent<WarriorPlumeMotion>()??visual.gameObject.AddComponent<WarriorPlumeMotion>()).Configure(animator.GetBoneTransform(HumanBodyBones.Head),plume,plume[4].position+plume[4].up*.220907f*visual.lossyScale.y);
+        }
+        else if(kind==PlayerSkinKind.NinjaFrog)
+        {
+            var bones=new[]{"L","R"}.SelectMany(c=>Enumerable.Range(1,4).Select(i=>map["Scarf."+c+"_"+i])).ToArray();
+            var tips=new[]{map["Scarf.L_tip"].position,map["Scarf.R_tip"].position};
+            (visual.GetComponent<FrogScarfMotion>()??visual.gameObject.AddComponent<FrogScarfMotion>()).Configure(animator,bones,tips);
         }
         else
         {

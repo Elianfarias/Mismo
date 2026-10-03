@@ -16,6 +16,7 @@ namespace Mismo.Gameplay.Enemies
         }
         private void OnGUI()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
             if(Mismo.Gameplay.Player.Presentation.PlayerHUD.Active!=null)return;
             GUILayout.BeginArea(new Rect(16, 16, 420, 165), GUI.skin.box);
             GoblinEliteVisual elite = goblin != null ? goblin.GetComponent<GoblinEliteVisual>() : null;

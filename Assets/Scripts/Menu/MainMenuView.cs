@@ -10,6 +10,45 @@ using L = Mismo.Gameplay.Player.Localization.GameLanguage;
 
 namespace Mismo.Menu
 {
+    // Match FantasyUI.DrawClippedSurface without shrinking the control or its hit area.
+    public sealed class FantasyPanelClip : BaseMeshEffect
+    {
+        public static void Apply(Image image)
+        {
+            if(image.GetComponent<FantasyPanelClip>()==null)image.gameObject.AddComponent<FantasyPanelClip>();
+        }
+        public override void ModifyMesh(VertexHelper mesh)
+        {
+            if(!IsActive()||mesh.currentVertCount!=4)return;
+            var bottomLeft=new UIVertex();var topRight=new UIVertex();
+            mesh.PopulateUIVertex(ref bottomLeft,0);mesh.PopulateUIVertex(ref topRight,2);
+            var bounds=Rect.MinMaxRect(bottomLeft.position.x,bottomLeft.position.y,topRight.position.x,topRight.position.y);
+            float unit=Mathf.Min(1,Mathf.Min(bounds.width,bounds.height)/(2*FantasyUI.Slice));
+            mesh.Clear();if(unit<=0)return;
+            float inset=5*unit,corner=8*unit,step=corner-inset;
+            Strip(mesh,bounds,new Rect(bounds.x+corner,bounds.y+inset,bounds.width-2*corner,step),bottomLeft,topRight);
+            Strip(mesh,bounds,new Rect(bounds.x+inset,bounds.y+corner,bounds.width-2*inset,bounds.height-2*corner),bottomLeft,topRight);
+            Strip(mesh,bounds,new Rect(bounds.x+corner,bounds.yMax-corner,bounds.width-2*corner,step),bottomLeft,topRight);
+        }
+        static void Strip(VertexHelper mesh,Rect bounds,Rect strip,UIVertex bottomLeft,UIVertex topRight)
+        {
+            if(strip.width<=0||strip.height<=0)return;
+            int start=mesh.currentVertCount;
+            Vertex(mesh,bounds,strip.xMin,strip.yMin,bottomLeft,topRight);
+            Vertex(mesh,bounds,strip.xMin,strip.yMax,bottomLeft,topRight);
+            Vertex(mesh,bounds,strip.xMax,strip.yMax,bottomLeft,topRight);
+            Vertex(mesh,bounds,strip.xMax,strip.yMin,bottomLeft,topRight);
+            mesh.AddTriangle(start,start+1,start+2);mesh.AddTriangle(start+2,start+3,start);
+        }
+        static void Vertex(VertexHelper mesh,Rect bounds,float x,float y,UIVertex bottomLeft,UIVertex topRight)
+        {
+            var vertex=bottomLeft;vertex.position=new Vector3(x,y,bottomLeft.position.z);
+            vertex.uv0=new Vector4(Mathf.Lerp(bottomLeft.uv0.x,topRight.uv0.x,(x-bounds.x)/bounds.width),
+                Mathf.Lerp(bottomLeft.uv0.y,topRight.uv0.y,(y-bounds.y)/bounds.height),bottomLeft.uv0.z,bottomLeft.uv0.w);
+            mesh.AddVert(vertex);
+        }
+    }
+
     public sealed class MainMenuView : MonoBehaviour
     {
         [SerializeField] string gameplayScene="VoxelRegion_7319";
@@ -35,6 +74,7 @@ namespace Mismo.Menu
         void Awake()
         {
             Time.timeScale=1; Cursor.lockState=CursorLockMode.None;Cursor.visible=true;
+            EnsureAudioListener();
             begin.onClick.AddListener(Begin);
             // Also upgrade saved menu scenes without rebuilding their art or audio settings.
             if(continueGame==null)continueGame=ButtonAt(home.transform,"Continuar",0,true);
@@ -53,6 +93,20 @@ namespace Mismo.Menu
             back.onClick.AddListener(()=>ShowOptions(false));
             quit.onClick.AddListener(Application.Quit);
             ShowOptions(false);
+        }
+        void EnsureAudioListener()
+        {
+            foreach (var listener in FindObjectsByType<AudioListener>(FindObjectsSortMode.None))
+                if (listener.isActiveAndEnabled) return;
+
+            // The cinematic menu environment can provide a camera without an audio listener.
+            // Keep the fallback in this scene so it is unloaded before gameplay starts.
+            var camera = Camera.main;
+            var target = camera != null && camera.gameObject.scene == gameObject.scene
+                ? camera.gameObject : gameObject;
+            var menuListener = target.GetComponent<AudioListener>();
+            if (menuListener == null) menuListener = target.AddComponent<AudioListener>();
+            menuListener.enabled = true;
         }
         void Start()
         {
@@ -74,6 +128,7 @@ namespace Mismo.Menu
             {
                 var image=control.targetGraphic as Image;if(image==null)continue;
                 image.sprite=pixelPanel;image.type=Image.Type.Simple;image.color=new Color(1, 1, 1, 0.6f);
+                FantasyPanelClip.Apply(image);
                 AddFantasyFrame(control.transform, new Color(1, 1, 1, 0.2f));
                 var label=control.GetComponentInChildren<Text>();if(label!=null)label.color=new Color(.94f,.90f,.79f);
                 var colors=control.colors;colors.normalColor=new Color(1, 1, 1, 0.6f);colors.highlightedColor=PlayerHUD.Gold;colors.selectedColor=PlayerHUD.Gold;control.colors=colors;
@@ -82,7 +137,7 @@ namespace Mismo.Menu
             if(panel!=null)
             {
                 var edge=panel.Find("Gold edge");if(edge!=null)edge.gameObject.SetActive(false);
-                var background=panel.GetComponent<Image>();if(background!=null){background.sprite=pixelPanel;background.type=Image.Type.Simple;background.color=new Color(1,1,1,0.2f);}
+                var background=panel.GetComponent<Image>();if(background!=null){background.sprite=pixelPanel;background.type=Image.Type.Simple;background.color=new Color(1,1,1,0.2f);FantasyPanelClip.Apply(background);}
                 AddFantasyFrame(panel,new Color(1, 1, 1, 0.6f)); 
             }
         }

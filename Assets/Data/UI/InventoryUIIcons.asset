@@ -19,8 +19,8 @@ MonoBehaviour:
   menuEdgeFade: 0.65
   menuBackgroundBlur: 1
   menuBlurRadius: 1.5
-  panelOpacity: 0.8
-  inventoryBackgroundOpacity: 0.7
+  panelOpacity: 1
+  inventoryBackgroundOpacity: 0.96
   emptyInventorySlotOpacity: 0.16
   navigationIconOpacity: 1
   navigationIconSize: 24

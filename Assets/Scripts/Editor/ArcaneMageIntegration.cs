@@ -106,6 +106,7 @@ public static class ArcaneMageIntegration
             var visual=animator.transform;
             if(visual.GetComponent<WarriorCapeMotion>()!=null)Object.DestroyImmediate(visual.GetComponent<WarriorCapeMotion>());
             if(visual.GetComponent<WarriorPlumeMotion>()!=null)Object.DestroyImmediate(visual.GetComponent<WarriorPlumeMotion>());
+            if(visual.GetComponent<FrogScarfMotion>()!=null)Object.DestroyImmediate(visual.GetComponent<FrogScarfMotion>());
             // Reuse the visual root and Animator so scene/driver references survive.
             var previousChildren=visual.Cast<Transform>().ToArray();
             var previousObjects=previousChildren.SelectMany(t=>t.GetComponentsInChildren<Transform>(true)).ToArray();

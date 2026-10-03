@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using Mismo.Menu;
+using Mismo.Gameplay.Player.Presentation;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -73,8 +74,8 @@ public static class CharacterCreatorSceneChecks
             camera.scene=scene;camera.aspect=1600f/900;
             var startPosition=camera.transform.position;var startRotation=camera.transform.rotation;float startSize=camera.orthographicSize;
             Capture(canvas,camera,"cinematic-home");
-            bool cancelled=false;
-            var creator=CharacterCreatorView.Create(menu.transform,(name,skin)=>null,()=>cancelled=true);
+            bool cancelled=false;string submittedName=null,submittedSkin=null;
+            var creator=CharacterCreatorView.Create(menu.transform,(name,skin)=>{submittedName=name;submittedSkin=skin;return null;},()=>cancelled=true);
             creator.Open();Require(creator.Stage!=null,"Scene camera and cottage were not resolved");
             creator.Advance(.8f);
             Require(creator.Stage.Moving&&Vector3.Distance(camera.transform.position,startPosition)>.1f,"Camera must travel before arrival");
@@ -100,16 +101,33 @@ public static class CharacterCreatorSceneChecks
             data.button=PointerEventData.InputButton.Right;drag.OnBeginDrag(data);drag.OnDrag(data);drag.OnEndDrag(data);
             Require(Quaternion.Angle(after,creator.Stage.Model.transform.rotation)<.01f,"Right click rotates character");
             creator.Drag(-120);
-            Button(creator,"›").onClick.Invoke();Capture(canvas,camera,"cottage-knight");
+            Button(creator,"›").onClick.Invoke();CheckSelected(creator,PlayerAppearance.Knight);Capture(canvas,camera,"cottage-knight");
+            Button(creator,"›").onClick.Invoke();CheckSelected(creator,PlayerAppearance.NinjaFrog);Capture(canvas,camera,"cottage-ninja-frog");
+            Button(creator,"›").onClick.Invoke();CheckSelected(creator,PlayerAppearance.Mage);
+            Button(creator,"‹").onClick.Invoke();CheckSelected(creator,PlayerAppearance.NinjaFrog);
+            Button(creator,"‹").onClick.Invoke();CheckSelected(creator,PlayerAppearance.Knight);
+            Button(creator,"›").onClick.Invoke();CheckSelected(creator,PlayerAppearance.NinjaFrog);
+            Require(creator.GetComponentInChildren<InputField>().text=="Élian"&&submittedSkin==null,"Switching skin changed the name or submitted early");
             Button(creator,"Volver").onClick.Invoke();creator.Advance(1.3f);
             Require(cancelled&&!creator.gameObject.activeSelf&&creator.Stage==null,"Cancel did not dispose the stage");
             Require(Vector3.Distance(camera.transform.position,startPosition)<.0001f&&Quaternion.Angle(camera.transform.rotation,startRotation)<.001f&&Mathf.Abs(camera.orthographicSize-startSize)<.0001f,"Original camera was not restored");
             creator.Open();creator.Advance(.2f);Button(creator,"Volver").onClick.Invoke();creator.Advance(2);
             Require(Vector3.Distance(camera.transform.position,startPosition)<.0001f,"Cancelling midway did not restore camera");
-            File.WriteAllText(Output+"/scene-checks.txt","PASS: actual main-menu cottage; camera travel and zoom; input gating; both in-world skins; left-button drag, release and right-button rejection; return and interrupted-transition restoration. Open editor scenes untouched.");
+            creator.Open();creator.Advance(2);CheckSelected(creator,PlayerAppearance.NinjaFrog);
+            Button(creator,"Comenzar aventura").onClick.Invoke();
+            Require(submittedName=="Élian"&&submittedSkin==PlayerAppearance.NinjaFrog,"Confirmation did not pass the selected frog and name");
+            File.WriteAllText(Output+"/scene-checks.txt","PASS: actual main-menu cottage; camera travel and zoom; input gating; all three in-world skins; forward/backward wrap; name preserved; frog confirmed after closing/reopening; left-button drag, release and right-button rejection; return and interrupted-transition restoration. Open editor scenes untouched.");
             Debug.Log("CHARACTER_CREATOR_SCENE_CHECKS_OK");
         }
         finally{EditorSceneManager.ClosePreviewScene(scene);}
+    }
+    static void CheckSelected(CharacterCreatorView creator,string id)
+    {
+        Require(creator.Stage.Model.name==PlayerAppearance.Prefab(id).name+"(Clone)","Wrong preview: "+id);
+        Require(creator.GetComponentsInChildren<Text>().Any(t=>t.text==PlayerAppearance.SkinName(id)),"Wrong appearance label: "+id);
+        var animator=creator.Stage.Model.GetComponent<Animator>();
+        Require(animator.isHuman&&animator.avatar.isValid&&animator.runtimeAnimatorController!=null,"Preview animator invalid: "+id);
+        if(id==PlayerAppearance.NinjaFrog)Require(creator.Stage.Model.GetComponent<FrogScarfMotion>()?.enabled==true,"Frog preview lost scarf motion");
     }
     static System.Collections.IEnumerator CheckInput()
     {
