@@ -1,1 +1,1 @@
-PASS: both skins and dependencies built for Windows.
+PASS: all three skins and dependencies built for Windows.

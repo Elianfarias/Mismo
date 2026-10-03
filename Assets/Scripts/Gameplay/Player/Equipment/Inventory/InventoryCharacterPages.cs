@@ -154,7 +154,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 QuietLine(650,y+69,529);
             }
             bool was=GUI.enabled;GUI.enabled=was&&loadout.CanChangeEquipment&&PendingMasteryCount>0;
-            if(U.Button(new Rect(650,634,529,40),"Aplicar")&&inventory.TrySpendMasteryPoints(weapon,pendingMastery[0],pendingMastery[1],pendingMastery[2]))ResetMasteryDraft();
+            if(U.Button(new Rect(650,634,250,43),"Aplicar")&&inventory.TrySpendMasteryPoints(weapon,pendingMastery[0],pendingMastery[1],pendingMastery[2]))ResetMasteryDraft();
             GUI.enabled=was;
             if(U.Button(new Rect(650,684,250,43),"Ver habilidades")){OpenPage(Page.Skills);skillsWeapon=weapon;}
             U.Text(new Rect(950,680,252,63),"Progreso compartido por familia de arma.",17,U.Muted);

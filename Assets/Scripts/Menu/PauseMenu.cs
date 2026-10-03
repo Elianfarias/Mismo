@@ -18,6 +18,9 @@ namespace Mismo.Menu
         InventoryUIIcons icons;
         readonly MenuBackgroundBlur backgroundBlur=new MenuBackgroundBlur();
         readonly List<Vector2Int> resolutions=new List<Vector2Int>();
+        readonly HashSet<Canvas> hiddenCanvases=new HashSet<Canvas>();
+        CursorLockMode cameraModePreviousLock;
+        bool cameraModePreviousCursor;
         static readonly int[] FrameCaps={30,60,90,120,144,240,-1};
         static readonly FullScreenMode[] Modes={FullScreenMode.Windowed,FullScreenMode.FullScreenWindow,FullScreenMode.ExclusiveFullScreen};
         static readonly string[] ModeNames={"Ventana","Sin bordes","Pantalla completa"};
@@ -44,12 +47,14 @@ namespace Mismo.Menu
         {
             if(revertAt>0&&Time.unscaledTime>=revertAt)RevertDisplay();
             if(Keyboard.current?.escapeKey.wasPressedThisFrame!=true)return;
+            if(GameplayPause.CameraMode){EndCameraMode();return;}
             if(opened){if(uiEditor)EndUIEditor();else if(revertAt>0)RevertDisplay();else if(confirmExit)confirmExit=false;else if(options)options=false;else Resume();return;}
             if(!InventoryPanel.AnyOpen&&!WorldMapPanel.BlocksGameplay)Open();
         }
         void LateUpdate()
         {
-            backgroundBlur.Update(icons!=null&&icons.menuBackgroundBlur&&
+            if(GameplayPause.CameraMode)HideCameraModeCanvases();
+            backgroundBlur.Update(!GameplayPause.CameraMode&&icons!=null&&icons.menuBackgroundBlur&&
                 (opened||InventoryPanel.AnyOpen||WorldMapPanel.AnyOpen),icons!=null?icons.menuBlurRadius:1.5f);
         }
         public void Open()
@@ -61,10 +66,35 @@ namespace Mismo.Menu
             GameplayPause.Pause();opened=true;options=false;confirmExit=false;ReadSettings();GameAudio.Play(GameSound.MenuOpen);
         }
         public void Resume()
-        {if(!opened)return;if(uiEditor)EndUIEditor();if(revertAt>0)RevertDisplay();opened=false;GameplayPause.Resume();PlayerPrefs.Save();GameAudio.Play(GameSound.MenuClose);}
+        {if(!opened)return;EndCameraMode();if(uiEditor)EndUIEditor();if(revertAt>0)RevertDisplay();opened=false;GameplayPause.Resume();PlayerPrefs.Save();GameAudio.Play(GameSound.MenuClose);}
+        public void BeginCameraMode()
+        {
+            if(!opened||!options||uiEditor||revertAt>0||GameplayPause.CameraMode)return;
+            cameraModePreviousLock=Cursor.lockState;cameraModePreviousCursor=Cursor.visible;
+            GameplayPause.CameraMode=true;
+            Canvas.preWillRenderCanvases+=HideCameraModeCanvases;
+            Cursor.lockState=CursorLockMode.Locked;Cursor.visible=false;
+            backgroundBlur.Update(false,0);
+            HideCameraModeCanvases();
+        }
+        void HideCameraModeCanvases()
+        {
+            foreach(var canvas in Object.FindObjectsByType<Canvas>())
+                if(canvas.enabled){hiddenCanvases.Add(canvas);canvas.enabled=false;}
+            Cursor.visible=false;
+        }
+        public void EndCameraMode()
+        {
+            if(!GameplayPause.CameraMode)return;
+            GameplayPause.CameraMode=false;
+            Canvas.preWillRenderCanvases-=HideCameraModeCanvases;
+            foreach(var canvas in hiddenCanvases)if(canvas!=null)canvas.enabled=true;
+            hiddenCanvases.Clear();
+            Cursor.lockState=cameraModePreviousLock;Cursor.visible=cameraModePreviousCursor;
+        }
         void BeginUIEditor(){uiEditor=true;options=false;PlayerHUD.SetUIEditMode(true);GameAudio.Play(GameSound.MenuOpen);}
         void EndUIEditor(){uiEditor=false;PlayerHUD.SetUIEditMode(false);options=true;PlayerPrefs.Save();GameAudio.Play(GameSound.MenuClose);}
-        void OnDisable(){Resume();backgroundBlur.Dispose();}
+        void OnDisable(){EndCameraMode();Resume();backgroundBlur.Dispose();}
         void ReadSettings()
         {
             resolutions.Clear();foreach(var value in Screen.resolutions){var size=new Vector2Int(value.width,value.height);if(!resolutions.Contains(size))resolutions.Add(size);}
@@ -88,11 +118,12 @@ namespace Mismo.Menu
         }
         void OnGUI()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
             if(!opened)return;var matrix=GUI.matrix;int depth=GUI.depth;GUI.depth=-100;
             float opacity=icons!=null?Mathf.Clamp01(icons.panelOpacity):1;
             float scale=Mathf.Min(Screen.width/1280f,Screen.height/800f)*.9f;
             GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-1280*scale)/2,(Screen.height-800*scale)/2,0),Quaternion.identity,Vector3.one*scale);
-            var panel=options?new Rect(155,80,970,640):new Rect(460,250,360,285);
+            var panel=options?new Rect(155,80,970,640):confirmExit?new Rect(400,250,480,285):new Rect(460,250,360,285);
             if(uiEditor)
             {
                 FantasyUI.Panel(new Rect(320,20,640,290),opacity);
@@ -121,7 +152,8 @@ namespace Mismo.Menu
                 GUI.matrix=matrix;GUI.depth=depth;return;
             }
             FantasyUI.Panel(panel,opacity);
-            U.Border(new Rect(panel.x+28,panel.y+75,panel.width-56,1),U.Rule);Text(panel.x+30,panel.y+23,350,options?"Opciones":"Pausa",27);
+            U.Border(new Rect(panel.x+28,panel.y+75,panel.width-56,1),U.Rule);
+            Text(panel.x+30,panel.y+23,panel.width-110,confirmExit?"¿Volver al menú principal?":options?"Opciones":"Pausa",confirmExit?23:27);
             if(U.CloseButton(new Rect(panel.xMax-68,panel.y+18,42,42)))Resume();
             if(revertAt>0)
             {
@@ -132,9 +164,8 @@ namespace Mismo.Menu
             }
             else if(confirmExit)
             {
-                Text(445,275,385,"¿Volver al menú principal?",23);
-                if(Button(new Rect(450,380,380,48),"Volver al menú principal")){Resume();SceneManager.LoadScene("MainMenu");}
-                if(Button(new Rect(450,455,380,48),"Cancelar"))confirmExit=false;
+                if(Button(new Rect(panel.x+30,panel.y+130,panel.width-60,48),"Volver al menú principal")){Resume();SceneManager.LoadScene("MainMenu");}
+                if(Button(new Rect(panel.x+30,panel.y+205,panel.width-60,48),"Cancelar"))confirmExit=false;
             }
             else if(!options)
             {
@@ -148,6 +179,7 @@ namespace Mismo.Menu
                 for(int i=0;i<4;i++)if(IconButton(new Rect(185+i*223,180,210,44),art[i],tabs[i],tab==i,true)){tab=i;GameAudio.Play(GameSound.TabChanged);}
                 if(tab==0)DrawSound();else if(tab==1)DrawDisplay();else if(tab==2)DrawGraphics();else DrawControls();
                 if(IconButton(new Rect(185,645,140,43),icons?.previousPage,"Volver",false,true))options=false;
+                if(Button(new Rect(865,645,230,43),"Modo cámara"))BeginCameraMode();
             }
             GUI.matrix=matrix;GUI.depth=depth;
         }

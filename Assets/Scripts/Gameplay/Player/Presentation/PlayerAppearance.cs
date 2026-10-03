@@ -1,17 +1,29 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Mismo.Core;
 using Mismo.Gameplay.Player.World;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Mismo.Gameplay.Player.Presentation
 {
     public static class PlayerAppearance
     {
-        public const string Mage = "mage", Knight = "knight";
+        // IDs are persisted in saves. Keep them stable when renaming a visible label.
+        public const string Mage = "mage", Knight = "knight", NinjaFrog = "ninja-frog";
+        public static IReadOnlyList<string> Skins { get; } = Array.AsReadOnly(new[] { Mage, Knight, NinjaFrog });
         public const int NameLimit = 24;
         public static string DisplayName => string.IsNullOrWhiteSpace(WorldSession.Current?.playerName)
             ? "Aventurero" : WorldSession.Current.playerName;
-        public static bool ValidSkin(string id) => id == Mage || id == Knight;
+        public static bool ValidSkin(string id) => Skins.Contains(id);
+        public static string SkinName(string id) => id switch
+        {
+            Mage => "Umbra",
+            Knight => "Caballero",
+            NinjaFrog => "Ranin",
+            _ => "Apariencia desconocida"
+        };
         public static bool ValidName(string value) => !string.IsNullOrWhiteSpace(value) &&
             value.Trim().Length <= NameLimit && !value.Any(c => char.IsControl(c) || c == '<' || c == '>');
         public static GameObject Prefab(string id) => ValidSkin(id)

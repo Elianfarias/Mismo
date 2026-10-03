@@ -21,6 +21,7 @@ namespace Mismo.Gameplay.Enemies
         }
         private void OnGUI()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
             if (Mismo.Gameplay.Player.Equipment.Inventory.InventoryPanel.AnyOpen) return;
             var hud=PlayerHUD.Active;var camera=Camera.main;
             if(hud==null || camera==null || health==null || health.IsDead)return;

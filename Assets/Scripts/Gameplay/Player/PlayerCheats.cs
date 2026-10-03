@@ -77,6 +77,7 @@ namespace Mismo.Gameplay.Player
         private void OnDisable() { Active = false; if (motor != null && motor.IsFlying) motor.SetFlight(false); }
         private void OnGUI()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
             if (MenusOpen) return;
             float width = Mathf.Min(650, Screen.width - 24);
             if (Active)

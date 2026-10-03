@@ -12,23 +12,61 @@ using UnityEngine;
 using UnityEngine.UI;
 using Object=UnityEngine.Object;
 
-// Batch-only integration check. Saves are redirected to an isolated test directory.
+// Saves are redirected to an isolated test directory; editor runs restore the scene setup.
 public static class CharacterCreatorPlayChecks
 {
     const string Active="Mismo.CharacterCreatorChecks",Output="output/character-creator";
     static IEnumerator routine;
     static double deadline;
     static int wait;
-    [InitializeOnLoadMethod] static void Register(){EditorApplication.update-=Tick;EditorApplication.update+=Tick;}
+    [Serializable] sealed class SavedScenes { public SceneSetup[] scenes; }
+    [InitializeOnLoadMethod] static void Register()
+    {
+        EditorApplication.update-=Tick;EditorApplication.update+=Tick;
+        EditorApplication.playModeStateChanged-=State;EditorApplication.playModeStateChanged+=State;
+    }
+    [MenuItem("Mismo/Character/Verificar creador en Play Mode")]
     public static void Run()
     {
-        if(!Application.isBatchMode)throw new InvalidOperationException("Run this check in batch mode.");
+        Directory.CreateDirectory(Output);
+        if(EditorApplication.isPlayingOrWillChangePlaymode)throw new InvalidOperationException("Exit Play Mode before running the check.");
+        var scenes=EditorSceneManager.GetSceneManagerSetup();
+        if(!Application.isBatchMode&&scenes.Any(s=>string.IsNullOrEmpty(s.path)||UnityEngine.SceneManagement.SceneManager.GetSceneByPath(s.path).isDirty))
+        {File.WriteAllText(Output+"/play.txt","BLOCKED: open scene has unsaved changes; preserved intact.");return;}
+        SessionState.SetString(Active+".Scenes",JsonUtility.ToJson(new SavedScenes{scenes=scenes}));
+        SessionState.SetBool(Active+".Background",Application.runInBackground);
+        SessionState.SetBool(Active+".Finishing",false);
+        routine=null;wait=0;
+        File.WriteAllText(Output+"/play.txt","RUNNING: isolated character creator check.");
         EditorSceneManager.OpenScene("Assets/Scenes/MainMenu.unity");
         SessionState.SetBool(Active,true);EditorApplication.EnterPlaymode();
     }
+    static void State(PlayModeStateChange state)
+    {
+        if(!SessionState.GetBool(Active,false))return;
+        if(state==PlayModeStateChange.EnteredPlayMode)Application.runInBackground=true;
+        if(state!=PlayModeStateChange.EnteredEditMode)return;
+        SessionState.SetBool(Active,false);routine=null;
+        Application.runInBackground=SessionState.GetBool(Active+".Background",false);
+        var saved=JsonUtility.FromJson<SavedScenes>(SessionState.GetString(Active+".Scenes",""));
+        if(saved!=null&&saved.scenes.Length>0)EditorSceneManager.RestoreSceneManagerSetup(saved.scenes);
+        SessionState.EraseString(Active+".Scenes");
+        if(Application.isBatchMode)EditorApplication.delayCall+=()=>EditorApplication.Exit(SessionState.GetInt(Active+".ExitCode",1));
+    }
+    static void Finish(int exitCode)
+    {
+        routine=null;SessionState.SetBool(Active+".Finishing",true);SessionState.SetInt(Active+".ExitCode",exitCode);EditorApplication.ExitPlaymode();
+    }
     static void Tick()
     {
-        if(!SessionState.GetBool(Active,false)||!Application.isPlaying||EditorApplication.isCompiling)return;
+        const string request="Temp/CharacterCreatorPlayChecks.request";
+        if(!EditorApplication.isCompiling&&!EditorApplication.isUpdating&&!BuildPipeline.isBuildingPlayer&&!EditorApplication.isPlayingOrWillChangePlaymode&&File.Exists(request))
+        {
+            File.Delete(request);
+            try{Run();}catch(Exception e){Directory.CreateDirectory(Output);File.WriteAllText(Output+"/play.txt","FAIL\n"+e);Debug.LogException(e);}
+            return;
+        }
+        if(!SessionState.GetBool(Active,false)||SessionState.GetBool(Active+".Finishing",false)||!Application.isPlaying||EditorApplication.isCompiling)return;
         if(routine==null){routine=Check();deadline=EditorApplication.timeSinceStartup+180;}
         EditorApplication.QueuePlayerLoopUpdate();
         if(wait++%3!=0)return;
@@ -36,10 +74,10 @@ public static class CharacterCreatorPlayChecks
         {
             if(EditorApplication.timeSinceStartup>deadline)throw new TimeoutException("Character creator play check");
             if(routine.MoveNext())return;
-            File.WriteAllText(Output+"/play.txt","PASS: New game opens creator without saving; empty names blocked; both previews switch; cancel preserves session; confirmed name/skin load into gameplay and survive continue; both runtime skins spawn with valid avatars.");
-            SessionState.SetBool(Active,false);EditorApplication.Exit(0);
+            File.WriteAllText(Output+"/play.txt","PASS: New game opens creator without saving; empty names blocked; three previews switch and wrap in both directions; cancel preserves session; confirmed frog/name load into gameplay and survive continue; all runtime skins spawn with valid avatars and secondary motion.");
+            Finish(0);
         }
-        catch(Exception e){File.WriteAllText(Output+"/play.txt","FAIL\n"+e);SessionState.SetBool(Active,false);Debug.LogException(e);EditorApplication.Exit(1);}
+        catch(Exception e){File.WriteAllText(Output+"/play.txt","FAIL\n"+e);Debug.LogException(e);Finish(1);}
     }
     static void Require(bool value,string message){if(!value)throw new InvalidOperationException(message);}
     static Button Button(CharacterCreatorView view,string name)=>view.GetComponentsInChildren<Button>().First(b=>b.name==name);
@@ -60,6 +98,14 @@ public static class CharacterCreatorPlayChecks
         Button(creator,"›").onClick.Invoke();
         for(int i=0;i<10;i++)yield return null;
         Capture(creator,"knight");
+        Button(creator,"›").onClick.Invoke();
+        for(int i=0;i<10;i++)yield return null;
+        Require(creator.Stage.Model.GetComponent<FrogScarfMotion>()!=null,"Frog preview missing");
+        Capture(creator,"ninja-frog");
+        Button(creator,"›").onClick.Invoke();
+        Require(creator.Stage.Model.GetComponent<MageHatMotion>()!=null,"Forward wrap failed");
+        Button(creator,"‹").onClick.Invoke();
+        Require(creator.Stage.Model.GetComponent<FrogScarfMotion>()!=null,"Backward wrap failed");
         Button(creator,"Volver").onClick.Invoke();yield return null;
         while(creator.gameObject.activeSelf)yield return null;
         Require(WorldSession.Current==null,"Cancel committed a world");
@@ -71,17 +117,25 @@ public static class CharacterCreatorPlayChecks
             yield return null;
             if(Object.FindAnyObjectByType<MainMenuView>()==null&&Object.FindAnyObjectByType<PlayerAnimationDriver>()!=null)break;
         }
-        Require(WorldSession.Current?.playerName=="Élian"&&WorldSession.Current.playerSkin==PlayerAppearance.Knight,"Character not saved");
+        Require(WorldSession.Current?.playerName=="Élian"&&WorldSession.Current.playerSkin==PlayerAppearance.NinjaFrog,"Character not saved");
         var player=Object.FindAnyObjectByType<PlayerAnimationDriver>();Require(player!=null,"Player not spawned");
-        Require(player.Animator.GetComponent<WarriorCapeMotion>()!=null,"Knight skin not applied in gameplay");
+        Require(player.Animator.GetComponent<FrogScarfMotion>()!=null,"Frog skin not applied in gameplay");
         Require(player.Animator.avatar.isValid&&player.Animator.isHuman,"Runtime avatar invalid");
-        Require(WorldSession.Continue()&&WorldSession.Current.playerName=="Élian"&&WorldSession.Current.playerSkin==PlayerAppearance.Knight,"Continue lost character");
-        var savedSkin=WorldSession.Current.playerSkin;WorldSession.Current.playerSkin=PlayerAppearance.Mage;
-        var mage=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(AshenWarriorIntegration.Player));
-        yield return null;
-        var mageAnimator=mage.GetComponent<PlayerAnimationDriver>().Animator;
-        Require(mageAnimator.GetComponent<MageHatMotion>()!=null&&mageAnimator.avatar.isValid,"Mage skin not applied in gameplay");
-        Object.Destroy(mage);WorldSession.Current.playerSkin=savedSkin;
+        Require(WorldSession.Continue()&&WorldSession.Current.playerName=="Élian"&&WorldSession.Current.playerSkin==PlayerAppearance.NinjaFrog,"Continue lost character");
+        var savedSkin=WorldSession.Current.playerSkin;
+        foreach(var id in PlayerAppearance.Skins)
+        {
+            WorldSession.Current.playerSkin=id;
+            var instance=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(AshenWarriorIntegration.Player));
+            yield return null;
+            var animator=instance.GetComponent<PlayerAnimationDriver>().Animator;
+            Require(animator.avatar.isValid&&animator.isHuman,"Runtime avatar invalid: "+id);
+            Require(id==PlayerAppearance.Mage?animator.GetComponent<MageHatMotion>()!=null:
+                id==PlayerAppearance.NinjaFrog?animator.GetComponent<FrogScarfMotion>()!=null:
+                animator.GetComponent<WarriorCapeMotion>()!=null&&animator.GetComponent<WarriorPlumeMotion>()!=null,"Runtime skin not applied: "+id);
+            Object.Destroy(instance);WorldSession.Current.playerSkin=savedSkin;
+            yield return null;
+        }
     }
     static void Capture(CharacterCreatorView creator,string suffix)
     {

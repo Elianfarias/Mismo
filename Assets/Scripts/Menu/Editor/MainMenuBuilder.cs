@@ -88,8 +88,12 @@ namespace Mismo.Menu.Editor
             {
                 float original=sliders[i].value;
                 sliders[i].value=.7f;yield return null;
-                Require(AudioRuntime.Mixer.GetFloat(parameters[i],out float gain)&&Mathf.Abs(gain-(-1.54902f))<.02f,"70 percent remains audible: "+parameters[i]);
+                Require(AudioRuntime.Mixer.GetFloat(parameters[i],out float gain)&&Mathf.Abs(gain-(-3.09804f))<.02f,"70 percent amplitude: "+parameters[i]);
                 Require(Mathf.Abs(PlayerPrefs.GetFloat(new[]{"Mismo.Music","Mismo.SFX","Mismo.UI"}[i])-.7f)<.001f,"Volume preference saved: "+parameters[i]);
+                sliders[i].value=.01f;yield return null;
+                Require(AudioRuntime.Mixer.GetFloat(parameters[i],out gain)&&Mathf.Abs(gain-(-40f))<.02f,"One percent is quiet: "+parameters[i]);
+                sliders[i].value=1f;yield return null;
+                Require(AudioRuntime.Mixer.GetFloat(parameters[i],out gain)&&Mathf.Abs(gain)<.02f,"Full volume is unity gain: "+parameters[i]);
                 sliders[i].value=0;yield return null;
                 Require(AudioRuntime.Mixer.GetFloat(parameters[i],out gain)&&gain<=-79,"Zero mutes: "+parameters[i]);
                 sliders[i].value=original;

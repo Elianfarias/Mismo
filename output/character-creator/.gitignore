@@ -1,0 +1,2 @@
+# Per-run isolated save files are disposable; retain reports and screenshots.
+test-save-*/

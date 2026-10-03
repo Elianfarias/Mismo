@@ -13,16 +13,31 @@ using Object = UnityEngine.Object;
 public static class CharacterCreatorChecks
 {
     const string Output="output/character-creator";
+    [InitializeOnLoadMethod] static void RegisterRequests(){EditorApplication.update-=Poll;EditorApplication.update+=Poll;}
+    static void Poll()
+    {
+        const string request="Temp/CharacterCreatorChecks.request";
+        if(EditorApplication.isCompiling||EditorApplication.isUpdating||BuildPipeline.isBuildingPlayer||EditorApplication.isPlayingOrWillChangePlaymode||!File.Exists(request))return;
+        string command=File.ReadAllText(request).Trim();File.Delete(request);Directory.CreateDirectory(Output);
+        try
+        {
+            PlayerSkinCatalogIntegration.Register();
+            if(command=="build")Build();
+            else{Run();CharacterCreatorSceneChecks.Run();}
+            File.WriteAllText(Output+"/request-result.txt","PASS: "+command);
+        }
+        catch(Exception e){File.WriteAllText(Output+"/request-result.txt","FAIL: "+command+"\n"+e);Debug.LogException(e);}
+    }
     static void Require(bool condition,string message){if(!condition)throw new InvalidOperationException(message);}
     [MenuItem("Mismo/Character/Verificar creador de personaje")]
     public static void Run()
     {
         Directory.CreateDirectory(Output);
         var catalog=AssetDatabase.LoadAssetAtPath<RuntimeAssetCatalog>(ProjectAssets.CatalogPath);
-        var entries=catalog.entries.Where(e=>e.key!="PlayerSkins/mage"&&e.key!="PlayerSkins/knight").ToList();
-        entries.Add(new RuntimeAssetCatalog.Entry{key="PlayerSkins/mage",assets=new Object[]{AssetDatabase.LoadAssetAtPath<GameObject>(AshenWarriorIntegration.Mage)}});
-        entries.Add(new RuntimeAssetCatalog.Entry{key="PlayerSkins/knight",assets=new Object[]{AssetDatabase.LoadAssetAtPath<GameObject>(AshenWarriorIntegration.Warrior)}});
-        catalog.entries=entries.ToArray();catalog.Invalidate();EditorUtility.SetDirty(catalog);AssetDatabase.SaveAssets();
+        Require(catalog!=null,"Missing runtime asset catalog");
+        Require(PlayerSettings.GetPreloadedAssets().Contains(catalog),"Runtime catalog is not preloaded in builds");
+        foreach(var id in PlayerAppearance.Skins)
+            Require(catalog.entries.Count(e=>e?.key=="PlayerSkins/"+id)==1&&PlayerAppearance.Prefab(id)!=null,"Skin missing or duplicated in catalog: "+id);
         try{ProjectOrganizationChecks.Run();File.WriteAllText(Output+"/organization.txt","PASS");}
         catch(InvalidOperationException e){File.WriteAllText(Output+"/organization.txt",e.Message);Debug.LogWarning("Organization checks failed; see "+Output+"/organization.txt");}
         Require(!PlayerAppearance.ValidName("   ")&&!PlayerAppearance.ValidName("<b>A</b>")&&!PlayerAppearance.ValidName(new string('a',25)),"Invalid names accepted");
@@ -31,7 +46,7 @@ public static class CharacterCreatorChecks
         var previous=session.GetValue(null);
         try
         {
-            foreach(var id in new[]{PlayerAppearance.Mage,PlayerAppearance.Knight})
+            foreach(var id in PlayerAppearance.Skins)
             {
                 var save=new WorldSaveData{playerName="Élian",playerSkin=id};
                 var copy=JsonUtility.FromJson<WorldSaveData>(JsonUtility.ToJson(save.Copy()));
@@ -46,7 +61,17 @@ public static class CharacterCreatorChecks
                     Require(player.GetComponent<PlayerMotor>().Visual==result.transform,"Motor lost visual: "+id);
                     Require(player.GetComponent<SwordAnimationFeedback>().SwordVisual==result.GetBoneTransform(HumanBodyBones.RightHand),"Weapon lost hand: "+id);
                     Require(result.GetComponentsInChildren<SkinnedMeshRenderer>().All(r=>r.sharedMesh!=null&&r.bones.All(b=>b!=null)&&r.sharedMaterials.All(m=>m!=null)),"Broken skin: "+id);
-                    Require(id==PlayerAppearance.Mage?result.GetComponent<MageHatMotion>()!=null:result.GetComponent<WarriorCapeMotion>()!=null&&result.GetComponent<WarriorPlumeMotion>()!=null,"Secondary motion missing: "+id);
+                    Require(id==PlayerAppearance.Mage?result.GetComponent<MageHatMotion>()!=null:
+                        id==PlayerAppearance.NinjaFrog?result.GetComponent<FrogScarfMotion>()!=null:
+                        result.GetComponent<WarriorCapeMotion>()!=null&&result.GetComponent<WarriorPlumeMotion>()!=null,"Secondary motion missing: "+id);
+                    Require(result.GetComponent<MageGroundContact>()!=null,"Ground contact missing: "+id);
+                    if(id==PlayerAppearance.NinjaFrog)
+                    {
+                        var scarf=result.GetComponent<FrogScarfMotion>();
+                        var bones=(Transform[])typeof(FrogScarfMotion).GetField("bones",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(scarf);
+                        Require(bones.Length==8&&bones.All(b=>b!=null&&b.IsChildOf(result.transform)),"Scarf references escaped replacement rig");
+                        scarf.Advance(1f/60);scarf.Advance(1f/60);
+                    }
                 }
                 finally{Object.DestroyImmediate(player);}
             }
@@ -54,11 +79,12 @@ public static class CharacterCreatorChecks
             Require(legacy.playerSkin==null,"Old saves must retain authored skin");
         }
         finally{session.SetValue(null,previous);}
-        File.WriteAllText(Output+"/checks.txt","PASS: catalog, name validation, save roundtrip, legacy saves, both Humanoid avatars, meshes, materials, weapon hand, motor visual and secondary motion. See organization.txt for the separate project-wide check.");
+        File.WriteAllText(Output+"/checks.txt","PASS: all registered skins (mage, knight, ninja-frog), preloaded catalog, name validation, save roundtrip, legacy saves, Humanoid avatars, meshes, materials, weapon hand, motor visual, ground contact and secondary motion including scarf rig references. See organization.txt for the separate project-wide check.");
         Debug.Log("CHARACTER_CREATOR_CHECKS_OK");
     }
     public static void Build()
     {
+        PlayerSkinCatalogIntegration.Register();
         Run();
         var compiled=UnityEditor.Build.Player.PlayerBuildInterface.CompilePlayerScripts(new UnityEditor.Build.Player.ScriptCompilationSettings{
             target=BuildTarget.StandaloneWindows64,group=BuildTargetGroup.Standalone},".validation/CharacterCreatorScripts");
@@ -66,10 +92,10 @@ public static class CharacterCreatorChecks
         File.WriteAllText(Output+"/compilation.txt","PASS: Windows player scripts, including creator and runtime appearance.");
         Directory.CreateDirectory(".validation/CharacterCreatorContent");
         var bundle=BuildPipeline.BuildAssetBundles(".validation/CharacterCreatorContent",new[]{new AssetBundleBuild{
-            assetBundleName="character-skins",assetNames=new[]{AshenWarriorIntegration.Mage,AshenWarriorIntegration.Warrior}}},
+            assetBundleName="character-skins",assetNames=PlayerSkinCatalogIntegration.SkinPaths}},
             BuildAssetBundleOptions.ChunkBasedCompression,BuildTarget.StandaloneWindows64);
         Require(bundle!=null,"Skin content build failed");
-        File.WriteAllText(Output+"/content.txt","PASS: both skins and dependencies built for Windows.");
+        File.WriteAllText(Output+"/content.txt","PASS: all three skins and dependencies built for Windows.");
         var report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{
             scenes=EditorBuildSettings.scenes.Where(s=>s.enabled).Select(s=>s.path).ToArray(),
             locationPathName=".validation/CharacterCreator/Mismo.exe",target=BuildTarget.StandaloneWindows64,

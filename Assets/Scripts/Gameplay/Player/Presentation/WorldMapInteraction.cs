@@ -86,6 +86,7 @@ namespace Mismo.Gameplay.Player.Presentation
         bool InventoryBlocked()=>Equipment.Inventory.InventoryPanel.AnyOpen||GameplayPause.BlocksInput||GetComponent<Mismo.Gameplay.Combat.Health>()?.IsDead==true;
         void OnGUI()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
             if(mapCamera==null||InventoryBlocked())return;
             mapTooltip=null;
             HandleMiniResize();

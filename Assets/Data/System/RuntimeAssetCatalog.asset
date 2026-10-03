@@ -386,6 +386,9 @@ MonoBehaviour:
   - key: PlayerSkins/mage
     assets:
     - {fileID: 1867943348224582710, guid: 49682578b4b665d4e8a5f9fe2608e415, type: 3}
+  - key: PlayerSkins/ninja-frog
+    assets:
+    - {fileID: 1116292868861826108, guid: c474e3ec36ecd694aad55b8d723858ed, type: 3}
   - key: ProgressionRules
     assets:
     - {fileID: 11400000, guid: 7a33d622deef47479b040099364378c4, type: 2}

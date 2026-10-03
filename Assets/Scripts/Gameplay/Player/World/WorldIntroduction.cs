@@ -146,6 +146,7 @@ namespace Mismo.Gameplay.Player.World
         }
         void OnGUI()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
             if(Layout==null||Complete||talkedToNarrator||guide==null||guide.IsOpen||GameplayPause.IsPaused||InventoryPanel.AnyOpen||WorldMapPanel.AnyOpen)return;
             GUI.depth=0;var matrix=GUI.matrix;float scale=PlayerHUD.Scale;GUI.matrix=Matrix4x4.Scale(Vector3.one*scale);
             var panel=ObjectiveRect;PlayerHUD.Fill(panel,new Color(.035f,.05f,.06f,.9f));

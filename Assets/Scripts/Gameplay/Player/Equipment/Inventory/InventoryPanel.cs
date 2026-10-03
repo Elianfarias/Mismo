@@ -172,6 +172,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         void Line(float x,float y,float width)=>PlayerHUD.Fill(new Rect(x,y,width,1),new Color(.55f,.56f,.53f,.4f));
         void OnGUI()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
             if(!PlayerHUD.UIEditMode)questJournal.EndTrackerEdit();
             if(PlayerHUD.UIEditMode)
             {

@@ -1,1 +1,1 @@
-PASS: catalog, name validation, save roundtrip, legacy saves, both Humanoid avatars, meshes, materials, weapon hand, motor visual and secondary motion. See organization.txt for the separate project-wide check.
+PASS: all registered skins (mage, knight, ninja-frog), preloaded catalog, name validation, save roundtrip, legacy saves, Humanoid avatars, meshes, materials, weapon hand, motor visual, ground contact and secondary motion including scarf rig references. See organization.txt for the separate project-wide check.

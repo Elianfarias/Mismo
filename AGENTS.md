@@ -4,6 +4,8 @@ Antes de añadir, importar, generar o mover assets, leer `Docs/Buenas-practicas-
 
 Antes de crear o integrar un enemigo voxelizado, leer `Docs/Crear-enemigos-voxelizados.md`: describe el flujo del goblin, el taller de ataques, la compatibilidad Humanoid y el registro por bioma en WorldContentCatalog.
 
+Antes de crear, modificar o integrar un personaje jugable o una skin voxel, leer `Docs/Crear-personajes-jugables.md`: incluye concept, escala, modelado, rig Humanoid, accesorios móviles, apoyo al suelo, prefab visual, catálogo, selector del MainMenu, guardado y validación. Crear el modelo no completa la integración: debe poder elegirse en el menú y conservarse al iniciar y continuar la partida.
+
 - Todo el arte y audio pertenece a `Assets/Art`, separado en `FBX`, `Models`, `Animations`, `Meshes`, `Prefabs`, `Materials`, `Textures`, `UI`, `Sprites`, `Audio`, `Fonts`, `Shaders` y `Source` según el tipo.
 - Los ScriptableObjects pertenecen a `Assets/Data`, agrupados por sistema. Una malla `.asset` pertenece a `Art/Meshes`, no a `Data`.
 - Código en `Assets/Scripts`; herramientas dentro de subcarpetas `Editor`; escenas en `Assets/Scenes`.
