@@ -1,0 +1,10 @@
+System.IO.IOException: Win32 IO returned 1224. Path: C:\Users\elian\Mismo\Assets\Data\Weapons\Sword\SwordParry.asset
+  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x0019e] in <c5ae8a4eeb824526b5df2932bc2395e0>:0 
+  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.IO.FileOptions options) [0x00000] in <c5ae8a4eeb824526b5df2932bc2395e0>:0 
+  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,int,System.IO.FileOptions)
+  at System.IO.StreamWriter..ctor (System.String path, System.Boolean append, System.Text.Encoding encoding, System.Int32 bufferSize) [0x00055] in <c5ae8a4eeb824526b5df2932bc2395e0>:0 
+  at System.IO.StreamWriter..ctor (System.String path) [0x00008] in <c5ae8a4eeb824526b5df2932bc2395e0>:0 
+  at (wrapper remoting-invoke-with-check) System.IO.StreamWriter..ctor(string)
+  at System.IO.File.WriteAllText (System.String path, System.String contents) [0x00026] in <c5ae8a4eeb824526b5df2932bc2395e0>:0 
+  at SwordConceptFeedbackSetup.Write (System.String path, System.String text) [0x00007] in C:\Users\elian\Mismo\Assets\Scripts\Editor\SwordConceptFeedbackSetup.cs:127 
+  at SwordConceptFeedbackSetup.Run () [0x003d8] in C:\Users\elian\Mismo\Assets\Scripts\Editor\SwordConceptFeedbackSetup.cs:66 

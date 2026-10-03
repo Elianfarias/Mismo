@@ -99,19 +99,10 @@ MonoBehaviour:
   preparationSfx: {fileID: 0}
   preparationSfxVolume: 1
   loopPreparationSfx: 0
-  executionSfx: {fileID: 8300000, guid: d6d09ed11124bb9488e47a06dfa85661, type: 3}
-  executionSfxVolume: 0.2
+  executionSfx: {fileID: 8300000, guid: d81c6b4ba45460148b3d6c2e02ffbfe0, type: 3}
+  executionSfxVolume: 0.5
   comboStepSfx: []
-  weaponVfx:
-  - prefab: {fileID: 7305121681696476026, guid: 192ee4bdd71bdff4094da288c07a721a, type: 3}
-    phase: 2
-    hand: 0
-    socketId: blade
-    localOffset: {x: 0, y: 0, z: 0}
-    localRotation: {x: 0, y: 0, z: 0}
-    localScale: {x: 1, y: 1, z: 1}
-    fullChargeScale: 1
-    lifetime: 1
+  weaponVfx: []
   pose: 2
   usesSwordCombo: 0
   comboSteps: []

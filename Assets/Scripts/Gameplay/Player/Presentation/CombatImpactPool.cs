@@ -40,7 +40,22 @@ namespace Mismo.Gameplay.Player.Presentation
             CombatCue kind = profile.Select(damage, result);
             if (kind == CombatCue.None) return;
             var cue = profile.Get(kind);
-            Instance.Play(cue, damage.HitPoint, defense ? -damage.Direction : damage.Direction);
+            Vector3 point=damage.HitPoint;
+            Color? bladeTint=null;
+            if(kind==CombatCue.Parry&&cue!=null&&cue.useDefenderBlade)
+            {
+                var weapon=receiver.GetComponent<Equipment.EquipmentLoadout>()?.ActiveDefinition;
+                var blade=receiver.GetComponent<Equipment.WeaponPresentation>()?.ActiveVisual;
+                if(blade!=null&&weapon?.poseProfile!=null)
+                {
+                    var pose=weapon.poseProfile;
+                    Vector3 start=blade.TransformPoint(pose.trailBase),end=blade.TransformPoint(pose.trailTip),axis=end-start;
+                    float along=Mathf.Clamp(Vector3.Dot(point-start,axis)/Mathf.Max(.0001f,axis.sqrMagnitude),.2f,.85f);
+                    point=start+axis*along-damage.Direction.normalized*.04f;
+                    var color=Color.Lerp(pose.trailStartColor,Color.white,.45f);color.a=cue.tint.a;bladeTint=color;
+                }
+            }
+            Instance.Play(cue, point, defense ? -damage.Direction : damage.Direction, bladeTint);
             if (Application.isPlaying && cue != null && cue.feel != null)
             {
                 var presentation = Instance.GetComponent<CombatFeelPlayer>();
@@ -50,7 +65,7 @@ namespace Mismo.Gameplay.Player.Presentation
             if (cue != null && cue.hitStop > 0) CombatTimeFeedback.HitStop(cue.hitStop);
         }
 
-        public bool Play(CombatFeedbackCue cue, Vector3 point, Vector3 direction)
+        public bool Play(CombatFeedbackCue cue, Vector3 point, Vector3 direction, Color? tintOverride=null)
         {
             if (cue == null || cue.prefab == null && cue.sound == null) return false;
             Voice voice = voices.Find(v => !v.active && v.prefab == cue.prefab && v.root != null);
@@ -87,7 +102,7 @@ namespace Mismo.Gameplay.Player.Presentation
             voice.age = 0; voice.limit = Mathf.Clamp(cue.maximumLifetime, .1f, 10); voice.active = true;
             foreach (var renderer in voice.renderers)
             {
-                renderer.GetPropertyBlock(voice.properties); voice.properties.SetColor("_Color", cue.tint); renderer.SetPropertyBlock(voice.properties);
+                renderer.GetPropertyBlock(voice.properties); voice.properties.SetColor("_Color", tintOverride??cue.tint); renderer.SetPropertyBlock(voice.properties);
             }
             foreach (var particle in voice.particles) { particle.Clear(false); particle.Play(false); }
             voice.audio.clip = cue.sound; voice.audio.volume = cue.volume;

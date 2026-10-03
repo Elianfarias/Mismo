@@ -1,0 +1,5 @@
+PASS: prefab variant, repaired mouth mesh, original rig/controller and 17 clips shared.
+PASS: green source albedo and PBR maps, flat voxel normals and visible eye details.
+PASS: all 17 clips deform finite geometry; 21 samples checked per clip.
+PASS: 17 clips rendered with URP using saved variant materials.
+Visual preview only; no boss AI or world integration added.

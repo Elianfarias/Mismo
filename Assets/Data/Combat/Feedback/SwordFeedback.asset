@@ -55,11 +55,12 @@ MonoBehaviour:
     maximumLifetime: 3
   parry:
     feel: {fileID: 4304006149318040493, guid: a1c0fb7b8f83ba746b532f9cb4fdf9f6, type: 3}
-    prefab: {fileID: 85941164691198867, guid: bad3cf055489f0e4e9cd51bd9cdb7008, type: 3}
+    prefab: {fileID: 5175518241582468854, guid: 9be1fe16c641d8245b03450317ecf3d9, type: 3}
     scale: 1
     rotation: {x: 0, y: 0, z: 0}
-    tint: {r: 0.7, g: 0.95, b: 1, a: 1}
+    tint: {r: 1, g: 0.94, b: 0.8, a: 1}
+    useDefenderBlade: 1
     sound: {fileID: 8300000, guid: b346236de65a42b8a21ffea0f226a6be, type: 3}
     volume: 0.65
     hitStop: 0
-    maximumLifetime: 3
+    maximumLifetime: 1

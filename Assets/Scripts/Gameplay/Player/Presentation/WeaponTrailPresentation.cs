@@ -30,6 +30,8 @@ namespace Mismo.Gameplay.Player.Presentation
             if(cast!=null&&cast.Definition.usesSwordCombo&&combo!=null&&combo.IsActive&&combo.CurrentStep!=null)
             {float p=combo.CurrentStepNormalized;emit=p>=combo.CurrentStep.ImpactStart&&p<combo.CurrentStep.ImpactEnd;}
             else if(cast!=null)emit=cast.Began&&!cast.Ended;
+            // Lunge owns its turquoise wake. Parry uses the normal blade trail and its animation.
+            if(cast!=null&&cast.Definition.Id=="SwordLunge")emit=false;
             if(mainEnabled)main.SampleBlade(presentation.ActiveVisual,profile,Time.time,emit);else main.Clear();
 
 

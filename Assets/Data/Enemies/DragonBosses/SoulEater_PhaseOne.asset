@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d620794ca1a91c84b835cb8426606738, type: 3}
+  m_Name: SoulEater_PhaseOne
+  m_EditorClassIdentifier: Mismo.Gameplay.Enemies::Mismo.Gameplay.Enemies.SoulEaterPhaseOneSettings
+  displayName: SOUL EATER
+  accent: {r: 0.36, g: 0.85, b: 0.16, a: 1}
+  health: 1400
+  posture: 220
+  movementSpeed: 3.4
+  turnSpeed: 65
+  detectionRange: 22
+  arenaRadius: 28
+  biteRange: 5.1
+  tailRange: 4
+  breathRange: 13
+  breathHalfAngle: 14
+  biteWindup: 0.95
+  biteActive: 0.42
+  biteRecovery: 1.25
+  tailWindup: 1.1
+  tailActive: 0.65
+  tailRecovery: 1.35
+  breathWindup: 1.5
+  breathActive: 2.2
+  breathRecovery: 1.7
+  biteDamage: 22
+  tailDamage: 19
+  breathTickDamage: 6
+  chargeDamage: 30
+  breathTickInterval: 0.4
+  biteCooldown: 2.6
+  tailCooldown: 5
+  breathCooldown: 8
+  rearDwellTime: 0.8
+  decisionPause: 0.55
+  biteRadius: 0.85
+  tailRadius: 0.55
+  chargeThreshold: 0.75
+  phaseThreshold: 0.5
+  specialRoar: 1.65
+  retreatDistance: 11
+  jumpHeight: 3
+  jumpDuration: 1.35
+  chargeWindup: 1
+  chargeSpeed: 14
+  chargeDistance: 34
+  brakeDuration: 1.3
+  phaseRoar: 2.6
+  parryRecovery: 0.7
+  idle: {fileID: 7400000, guid: 689049bae118d1f409f035177583abb4, type: 2}
+  walk: {fileID: 7400000, guid: ae76d2f162e4b734c8db298f7ac4cdc2, type: 2}
+  run: {fileID: 7400000, guid: 25a0462a53c59e7469d91f9916350e87, type: 2}
+  bite: {fileID: 7400000, guid: e3582a06a0237b645925dc3918aa4c7c, type: 2}
+  tail: {fileID: 7400000, guid: 5b2c03f0232066b4994b3c0b51a27842, type: 2}
+  breath: {fileID: 7400000, guid: 28ba9acc58b1d314b8febcb522500402, type: 2}
+  roar: {fileID: 7400000, guid: 4b170173166a9e249aee502c5229640b, type: 2}
+  takeOff: {fileID: 7400000, guid: d51ac9afb5ad0a14991e4e0681115a59, type: 2}
+  land: {fileID: 7400000, guid: 95ee20ac26f47bb4ab03f726f92fd7aa, type: 2}
+  hit: {fileID: 7400000, guid: 6d32bc2df00c3484c838fff629a1dfad, type: 2}
+  die: {fileID: 7400000, guid: 36eb94a33802bc0448cde7fc6c9fd112, type: 2}
+  chargePose: {fileID: 7400000, guid: 20e3ad3da700599499c6b35c7ad78a37, type: 2}
+  brake: {fileID: 7400000, guid: 85ab052c11bbdff43ad961c4b3fea6a9, type: 2}

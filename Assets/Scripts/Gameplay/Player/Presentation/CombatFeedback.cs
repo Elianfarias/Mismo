@@ -136,13 +136,11 @@ namespace Mismo.Gameplay.Player.Presentation
         {
             cooldownDuration = Mathf.Max(0f, duration);
             cooldownRemaining = cooldownDuration;
-            Emit(transform.position + Vector3.up, Vector3.up, cooldownColor, 9, 1.3f, 0.09f);
         }
 
         private void OnCooldownReady()
         {
             cooldownRemaining = 0f;
-            Emit(transform.position + Vector3.up, Vector3.up, cooldownColor, 5, 0.8f, 0.07f);
         }
 
         private void CreatePresentationObjects()

@@ -121,15 +121,16 @@ MonoBehaviour:
   executionSfxVolume: 0.5
   comboStepSfx: []
   weaponVfx:
-  - prefab: {fileID: 6496479300713825514, guid: 14b97246008f6d3489163eedbf6154da, type: 3}
+  - prefab: {fileID: 5600845967638832495, guid: fa05bfd52e7d9504ba3207e9089e0c3f, type: 3}
     phase: 1
     hand: 0
-    socketId: blade
+    anchor: 1
+    socketId:
     localOffset: {x: 0, y: 0, z: 0}
     localRotation: {x: 0, y: 0, z: 0}
     localScale: {x: 1, y: 1, z: 1}
     fullChargeScale: 1
-    lifetime: 0.4
+    lifetime: 0.38
   pose: 1
   usesSwordCombo: 0
   comboSteps: []

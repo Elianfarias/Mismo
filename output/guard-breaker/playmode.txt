@@ -1,0 +1,1 @@
+PASS: real Player prefab, single equipped sword, full-body Humanoid playback, grip, edge-first strike, no preparation ring, pause/resume, synchronized single posture hit, recovery and cancellation.

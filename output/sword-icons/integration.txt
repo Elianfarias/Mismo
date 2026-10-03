@@ -1,0 +1,1 @@
+PASS: siete iconos asignados; dimensiones, color y alpha de bloqueo verificados. Organización global: ver organization.txt.

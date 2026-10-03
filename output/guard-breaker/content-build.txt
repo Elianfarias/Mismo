@@ -1,0 +1,1 @@
+PASS: animation and dedicated ability binding included in the Windows content bundle and reloaded. This is not a full game player build.
