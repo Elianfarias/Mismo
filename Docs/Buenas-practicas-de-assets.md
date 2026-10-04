@@ -68,6 +68,7 @@ La build actualiza el catálogo y verifica la organización automáticamente. No
 - Mantener las licencias y documentación de terceros. Las rutas internas de OBJ/MTL y otras fuentes pueden necesitar ajustes al separar modelos y texturas.
 - Revisar las rutas escritas en scripts de editor. Un traslado por GUID conserva referencias serializadas, pero no corrige automáticamente un texto como `AssetDatabase.LoadAssetAtPath("...")`.
 - Un importador o generador nuevo debe crear los directorios de destino antes de guardar y no sobrescribir assets existentes salvo que esa actualización sea intencional.
+- En assets YAML de Unity, no insertar líneas vacías entre campos: el importador puede dejar de leer el objeto allí y usar valores predeterminados para el resto. Verificar los valores cargados con `AssetDatabase`, no sólo el texto del archivo; la regresión de Parada comprueba acciones, tiempos y VFX importados.
 - Evitar copias con nombres `1`, `2`, `FinalFinal`. Si hace falta una variante, nombrarla por su función o color y compartir mallas, rigs y clips compatibles.
 
 ## Paquetes de Unity

@@ -8,6 +8,7 @@ namespace Mismo.Gameplay.Combat
         float slowUntil,slow=1,poisonUntil,nextPoison,poisonDamage;
         float armorDebuffUntil,armorDebuffMultiplier=1,baseArmor;
         GameObject source;string family;
+        string abilityId;long abilityUseId;
         public float SpeedMultiplier=>Time.time<slowUntil?slow:1;
         public bool Poisoned=>Time.time<poisonUntil;
         public bool ArmorWeakened=>Time.time<armorDebuffUntil;
@@ -18,12 +19,13 @@ namespace Mismo.Gameplay.Combat
             effect.slow=Time.time<effect.slowUntil?Mathf.Min(effect.slow,multiplier):multiplier;
             effect.slowUntil=Mathf.Max(effect.slowUntil,Time.time+duration);
         }
-        public static void Poison(GameObject target,GameObject source,string family,float damage,float duration)
+        public static void Poison(GameObject target,GameObject source,string family,float damage,float duration,string abilityId=null,long abilityUseId=0)
         {
             if(target==null)return;
             var effect=target.GetComponent<CombatAilment>()??target.AddComponent<CombatAilment>();
             bool fresh=Time.time>=effect.poisonUntil;
             effect.source=source;effect.family=family;effect.poisonDamage=damage;effect.poisonUntil=Time.time+duration;
+            effect.abilityId=abilityId;effect.abilityUseId=abilityUseId;
             if(fresh)effect.nextPoison=Time.time+1;
         }
         // No acumulable: la reaplicación reemplaza el multiplicador y renueva la duración, no los suma.
@@ -50,7 +52,7 @@ namespace Mismo.Gameplay.Combat
         {
             if(Time.time<nextPoison||Time.time>poisonUntil||source==null)return;
             nextPoison=Time.time+1;
-            GetComponent<IDamageReceiver>()?.ReceiveDamage(new DamageInfo(poisonDamage,source,transform.position,Vector3.zero,AttackIdentity.Next(),0,area:true,parryable:false,weaponFamilyId:family));
+            GetComponent<IDamageReceiver>()?.ReceiveDamage(new DamageInfo(poisonDamage,source,transform.position,Vector3.zero,AttackIdentity.Next(),0,area:true,parryable:false,weaponFamilyId:family,abilityId:abilityId,abilityUseId:abilityUseId));
         }
         void OnDisable(){slowUntil=poisonUntil=armorDebuffUntil=0;source=null;}
     }

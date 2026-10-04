@@ -33,7 +33,7 @@ namespace Mismo.Gameplay.Player.Editor
             var runner=player.GetComponent<AbilityRunner>();var loadout=player.GetComponent<EquipmentLoadout>();var motor=player.GetComponent<PlayerMotor>();
             var playerState=player.GetComponent<CombatState>();var receiver=player.GetComponent<DamageReceiver>();var defense=player.GetComponent<DefenseWindow>();
             string feedback=null;playerState.Rewarded+=value=>feedback=value;
-            var enemy=Object.FindAnyObjectByType<GoblinController>();enemy.enabled=false;
+            var enemy=Object.FindAnyObjectByType<EnemyController>();enemy.enabled=false;
             var dummy=GameObject.CreatePrimitive(PrimitiveType.Capsule);dummy.transform.position=new Vector3(50,1,50);
             var health=dummy.AddComponent<Health>();health.ConfigureMaximum(1000);health.Revive();var target=dummy.AddComponent<DamageReceiver>();var state=dummy.GetComponent<CombatState>();state.ConfigurePosture(100);
             var front=new DamageInfo(20,player.gameObject,dummy.transform.position,Vector3.back,AttackIdentity.Next());
@@ -97,7 +97,7 @@ namespace Mismo.Gameplay.Player.Editor
             runner.TryUse(AbilitySlot.E,Vector3.forward,Vector3.zero);runner.Tick(.09f);
             Check(runner.Current!=null&&runner.Current.Definition==loadout.ActiveDefinition.GetAbility(AbilitySlot.E),"Buffered parry branches from sword combo");runner.Cancel();
             enemy.enabled=true;var enemyState=enemy.GetComponent<CombatState>();enemyState.DamagePosture(10000);
-            Check(enemyState.Broken&&enemy.State==GoblinState.Stagger,"Posture Break drives Elite vulnerability");
+            Check(enemyState.Broken&&enemy.State==EnemyState.Stagger,"Posture Break drives Elite vulnerability");
             Check(enemyState.DamagePosture(50)==0,"Break cannot be extended by repeated Posture hits");
             enemyState.Tick(2.1f);Check(!enemyState.Broken&&enemyState.PostureNormalized==1,"Posture resets after break");
             enemy.enabled=false;enemy.enabled=true;
@@ -107,7 +107,7 @@ namespace Mismo.Gameplay.Player.Editor
             float ready=Time.time+Mathf.Max(.5f,runner.Remaining(loadout.ActiveDefinition.GetAbility(AbilitySlot.Basic))+.01f);while(Time.time<ready)yield return null;
             enemy.enabled=true;enemy.SetTarget(player.transform);
             Check(runner.TryUse(AbilitySlot.Basic,Vector3.back,Vector3.zero,null,true),"Ranged preparation actually starts before AI response");runner.Tick(.2f);enemy.Tick(.8f);
-            Check(enemy.State==GoblinState.Telegraph&&enemy.CurrentAttack==enemy.Settings.charge,"Elite answers visible ranged preparation with a telegraphed charge");
+            Check(enemy.State==EnemyState.Telegraph&&enemy.CurrentAttack==enemy.Settings.charge,"Elite answers visible ranged preparation with a telegraphed charge");
             runner.Cancel();
             enemy.enabled=false;
             float chargeReady=Time.time+Mathf.Max(.6f,runner.Remaining(loadout.ActiveDefinition.GetAbility(AbilitySlot.Basic))+.01f);while(Time.time<chargeReady)yield return null;

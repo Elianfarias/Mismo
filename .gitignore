@@ -60,7 +60,8 @@ Thumbs.db
 # Local source material, notes, and validation tools.
 /.gdd-work/
 /ArtSource/
-/Docs/
+/Docs/*
+!/Docs/Crear-personajes-jugables.md
 /Tools/
 /*.docx
 /.vsconfig

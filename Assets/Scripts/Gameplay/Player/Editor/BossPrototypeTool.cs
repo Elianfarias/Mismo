@@ -154,7 +154,7 @@ namespace Mismo.Gameplay.Player.Editor
                 Object.DestroyImmediate(oldBoss.gameObject);
             }
             bool positionCaptured = oldBoss != null;
-            foreach (GoblinController goblin in Object.FindObjectsByType<GoblinController>())
+            foreach (EnemyController goblin in Object.FindObjectsByType<EnemyController>())
             {
                 if (!positionCaptured)
                 {

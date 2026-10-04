@@ -15,7 +15,6 @@ namespace Mismo.Gameplay.Enemies
         Health health;
         DamageReceiver receiver;
         PlayerInventory participant;
-        readonly Dictionary<string,float> contributions=new Dictionary<string,float>();
         bool pending,claimed;
         bool recognized;
         Mismo.Gameplay.Player.World.CreatureSpecies species;
@@ -28,7 +27,7 @@ namespace Mismo.Gameplay.Enemies
         void Awake()
         {
             health=GetComponent<Health>();receiver=GetComponent<DamageReceiver>();
-            if(materialLoot==null&&GetComponent<GoblinController>()!=null)materialLoot=Mismo.Core.ProjectAssets.Load<Mismo.Gameplay.Player.World.GatheringSettings>("GatheringSettings")?.monsterLoot;
+            if(materialLoot==null&&GetComponent<EnemyController>()!=null)materialLoot=Mismo.Core.ProjectAssets.Load<Mismo.Gameplay.Player.World.GatheringSettings>("GatheringSettings")?.monsterLoot;
         }
         void OnEnable(){if(receiver!=null)receiver.Resolved+=OnResolved;}
         void OnDisable(){if(receiver!=null)receiver.Resolved-=OnResolved;}
@@ -37,7 +36,14 @@ namespace Mismo.Gameplay.Enemies
             if(claimed||health==null||health.IsDead||player==null||!player.IsReady||string.IsNullOrEmpty(family))return;
             if(participant!=null&&participant!=player)return;
             participant=player;
-            contributions.TryGetValue(family,out float old);contributions[family]=Mathf.Min(health.Maximum,old+5);
+            // Defenses can train the skill used, but never manufacture weapon damage EXP.
+            var cast=player.GetComponent<AbilityRunner>()?.Current;
+            if(cast!=null&&cast.Began&&!cast.Ended)RecordSkillUse(player,cast.WeaponFamilyId,cast.Definition.Id,cast.AttackId);
+        }
+        public void RecordSkillUse(PlayerInventory player,string family,string abilityId,long useId)
+        {
+            if(player==null||!player.IsReady||GetComponent<TrainingDummy>()!=null)return;
+            player.RecordMonsterSkillUse(family,abilityId,useId);
         }
         void OnResolved(DamageInfo damage,HitResult result)
         {
@@ -45,19 +51,12 @@ namespace Mismo.Gameplay.Enemies
             var player=damage.Source!=null?damage.Source.GetComponentInParent<PlayerInventory>():null;
             if(player==null||!player.IsReady||participant!=null&&participant!=player)return;
             participant=player;
-            if(!string.IsNullOrEmpty(damage.WeaponFamilyId))
-            {
-                contributions.TryGetValue(damage.WeaponFamilyId,out float old);
-                contributions[damage.WeaponFamilyId]=old+result.HealthDamage;
-            }
+            if(GetComponent<TrainingDummy>()==null)player.RecordMonsterDamage(damage.WeaponFamilyId,result.HealthDamage,damage.AbilityId,damage.AbilityUseId);
             if(!health.IsDead)return;
             Observe();
-            var rules=player.Rules;bool boss=GetComponent<BossController>()!=null||GetComponent<DragonBossController>()!=null||GetComponent<GoblinController>()?.Settings?.isBoss==true;
+            var rules=player.Rules;bool boss=GetComponent<BossController>()!=null||GetComponent<DragonBossController>()!=null||GetComponent<EnemyController>()?.Settings?.isBoss==true;
             experience=boss?rules.bossExperience:rules.enemyExperience;
-            int masteryPool=boss?rules.bossMasteryExperience:rules.enemyMasteryExperience;
-            float total=0;foreach(float contribution in contributions.Values)total+=contribution;
-            mastery=new Dictionary<string,int>();
-            foreach(var pair in contributions)mastery[pair.Key]=Mathf.FloorToInt(masteryPool*pair.Value/Mathf.Max(1,total));
+            mastery=null; // Weapon EXP is credited from actual health damage, including nonlethal hits.
             drop=!boss&&Random.value<rules.dropChance?player.RollDrop():null;
             rolledMaterials=materialLoot!=null?materialLoot.Roll():null;
             species=Mismo.Gameplay.Player.World.CreatureSpecies.For(gameObject);
@@ -69,7 +68,7 @@ namespace Mismo.Gameplay.Enemies
         void Update()
         {
             if(Time.unscaledTime>=observeAt){observeAt=Time.unscaledTime+.75f;Observe();}
-            if(claimed&&health!=null&&!health.IsDead){claimed=false;participant=null;contributions.Clear();}
+            if(claimed&&health!=null&&!health.IsDead){claimed=false;participant=null;}
             if(pending&&Time.unscaledTime>=retryAt)TryCommit();
         }
         void Observe()

@@ -17,6 +17,21 @@ MonoBehaviour:
   abilityId: 
   animationSource: {fileID: 0}
   passive: 0
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: recovery
+    displayName: "Réplica"
+    description: "Después de parar un ataque, presioná M1 durante la apertura para contraatacar con el golpe pesado. Una parada al aire no habilita la réplica."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 3
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    weaponVfx: []
   description: Defiende en el momento justo para desviar el ataque enemigo.
   localizationKey: ability.sword.swordparry
   preparation: 0
@@ -87,8 +102,19 @@ MonoBehaviour:
   executionSfx: {fileID: 8300000, guid: d6d09ed11124bb9488e47a06dfa85661, type: 3}
   executionSfxVolume: 0.2
   comboStepSfx: []
+  weaponVfx:
+  - prefab: {fileID: 7305121681696476026, guid: 192ee4bdd71bdff4094da288c07a721a, type: 3}
+    phase: 2
+    hand: 0
+    socketId: blade
+    localOffset: {x: 0, y: 0, z: 0}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 1, z: 1}
+    fullChargeScale: 1
+    lifetime: 1
   pose: 2
   usesSwordCombo: 0
+  comboSteps: []
   targetsGround: 0
   aimFromCamera: 0
   range: 25

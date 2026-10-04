@@ -13,9 +13,37 @@ MonoBehaviour:
   m_Name: GuardBreaker
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
   displayName: Rompeguardia
+  icon: {fileID: 0}
   abilityId: GuardBreaker
   animationSource: {fileID: 11400000, guid: ce744cb14261acd4a92c927ed4ad58ab, type: 2}
   passive: 0
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: power
+    displayName: Potencia
+    description: "Cada rango mejora un 5% el da\xF1o de la habilidad o la magnitud de su efecto."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0.05
+    cooldownReductionPerLevel: 0
+    weaponVfx:
+    - prefab: {fileID: 2017351123791242961, guid: 2082068b2c74d9746bb1d5d6e172e4de, type: 3}
+      phase: 1
+      hand: 0
+      socketId: blade
+      localOffset: {x: 0, y: 0, z: 0}
+      localRotation: {x: 0, y: 0, z: 0}
+      localScale: {x: 1, y: 1, z: 1}
+      fullChargeScale: 1
+      lifetime: 0.42
+  - id: recovery
+    displayName: "Recuperaci\xF3n"
+    description: Cada rango reduce un 5% la recarga de esta habilidad.
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0.05
+    weaponVfx: []
   description: "Prepara un golpe que causa gran da\xF1o a la postura y puede romper la guardia del enemigo."
   localizationKey: 
   preparation: 0.5
@@ -80,8 +108,34 @@ MonoBehaviour:
   cancelRecovery: 0
   focusCost: 0
   focusGainOnHit: 0
+  preparationSfx: {fileID: 0}
+  preparationSfxVolume: 1
+  loopPreparationSfx: 0
+  executionSfx: {fileID: 0}
+  executionSfxVolume: 1
+  comboStepSfx: []
+  weaponVfx:
+  - prefab: {fileID: 7012119529295474499, guid: dc6e0bab45ccf964598ea73144bc4dd1, type: 3}
+    phase: 0
+    hand: 0
+    socketId: blade
+    localOffset: {x: 0, y: 0, z: 0}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 1, z: 1}
+    fullChargeScale: 1
+    lifetime: 1
+  - prefab: {fileID: 6496479300713825514, guid: 14b97246008f6d3489163eedbf6154da, type: 3}
+    phase: 1
+    hand: 0
+    socketId: blade
+    localOffset: {x: 0, y: 0, z: 0}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 1, z: 1}
+    fullChargeScale: 1
+    lifetime: 0.4
   pose: 1
   usesSwordCombo: 0
+  comboSteps: []
   targetsGround: 0
   aimFromCamera: 0
   range: 15

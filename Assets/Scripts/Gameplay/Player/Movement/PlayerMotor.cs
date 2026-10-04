@@ -26,6 +26,7 @@ namespace Mismo.Gameplay.Player.Movement
         public float Speed => body != null ? Vector3.ProjectOnPlane(body.velocity, Vector3.up).magnitude : 0f;
         public Vector3 Facing => visual != null ? visual.forward : transform.forward;
         public Transform Visual => visual;
+        public void SetVisual(Transform visualRoot) => visual = visualRoot;
         public float VerticalSpeed => verticalVelocity;
         public CollisionFlags LastCollisionFlags { get; private set; }
         public bool LastMovementWasControlled { get; private set; }

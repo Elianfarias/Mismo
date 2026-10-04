@@ -131,6 +131,7 @@ public static class RuntimeCatalogBuilder
     {
         var catalog = AssetDatabase.LoadAssetAtPath<RuntimeAssetCatalog>(ProjectAssets.CatalogPath);
         if (catalog == null) throw new InvalidOperationException("Primero aplicar la organización de assets.");
+        PlayerSkinCatalogIntegration.UpdateEntries(catalog);
         var entries = catalog.entries.Where(e => e != null && e.assets != null && e.assets.Any(a => a != null))
             .GroupBy(e => e.key, StringComparer.Ordinal).ToDictionary(g => g.Key, g => new RuntimeAssetCatalog.Entry
             { key = g.Key, assets = g.SelectMany(e => e.assets).Where(a => a != null).Distinct().ToArray() }, StringComparer.Ordinal);

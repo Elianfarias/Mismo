@@ -1,0 +1,98 @@
+[
+  {
+    "clip": "01_accion",
+    "source": "D:/Mismo/Videos/Gameplay.mp4",
+    "source_start": 290,
+    "source_end": 295.5,
+    "showcase_start": 0,
+    "showcase_end": 5.5,
+    "title": "MISMO"
+  },
+  {
+    "clip": "02_mundo",
+    "source": "D:/Mismo/Videos/Gameplay.mp4",
+    "source_start": 54,
+    "source_end": 59,
+    "showcase_start": 5.5,
+    "showcase_end": 10.5,
+    "title": "UN MUNDO POR DESCUBRIR"
+  },
+  {
+    "clip": "03_pueblo",
+    "source": "D:/Mismo/Videos/Muestra de menu.mp4",
+    "source_start": 76,
+    "source_end": 81.5,
+    "showcase_start": 10.5,
+    "showcase_end": 16.0,
+    "title": "ENTRÁ EN LA AVENTURA"
+  },
+  {
+    "clip": "04_equipo",
+    "source": "D:/Mismo/Videos/Muestra de menu.mp4",
+    "source_start": 21,
+    "source_end": 24.5,
+    "showcase_start": 16.0,
+    "showcase_end": 19.5,
+    "title": "ELEGÍ TU EQUIPO"
+  },
+  {
+    "clip": "05_habilidades",
+    "source": "D:/Mismo/Videos/Gameplay.mp4",
+    "source_start": 261.5,
+    "source_end": 265.5,
+    "showcase_start": 19.5,
+    "showcase_end": 23.5,
+    "title": "LAS HABILIDADES ESTÁN EN EL ARMA"
+  },
+  {
+    "clip": "06_arco",
+    "source": "D:/Mismo/Videos/Gameplay.mp4",
+    "source_start": 210,
+    "source_end": 216,
+    "showcase_start": 23.5,
+    "showcase_end": 29.5,
+    "title": "CAMBIÁ TU FORMA DE COMBATIR"
+  },
+  {
+    "clip": "07_espada",
+    "source": "D:/Mismo/Videos/Gameplay.mp4",
+    "source_start": 233,
+    "source_end": 238.8,
+    "showcase_start": 29.5,
+    "showcase_end": 35.3,
+    "title": "ESPADA Y COMBOS"
+  },
+  {
+    "clip": "08_fabricacion",
+    "source": "D:/Mismo/Videos/Muestra de menu.mp4",
+    "source_start": 30,
+    "source_end": 33.2,
+    "showcase_start": 35.3,
+    "showcase_end": 38.5,
+    "title": "PREPARATE PARA SEGUIR"
+  },
+  {
+    "clip": "09_mapa",
+    "source": "D:/Mismo/Videos/Muestra de menu.mp4",
+    "source_start": 48,
+    "source_end": 51,
+    "showcase_start": 38.5,
+    "showcase_end": 41.5,
+    "title": "BUSCÁ TU PRÓXIMO DESTINO"
+  },
+  {
+    "clip": "10_remate",
+    "source": "D:/Mismo/Videos/Gameplay.mp4",
+    "source_start": 310,
+    "source_end": 315,
+    "showcase_start": 41.5,
+    "showcase_end": 46.5,
+    "title": "SEGUÍ TU PROPIA AVENTURA"
+  },
+  {
+    "clip": "11_cierre",
+    "showcase_start": 46.5,
+    "showcase_end": 51.0,
+    "title": "MISMO — Windows e itch.io"
+  }
+]

@@ -25,10 +25,13 @@ namespace Mismo.Gameplay.Enemies
             }
             // Read the resolved AI state: damage alone does not mean an attack was interrupted.
             bool attacking=binding!=null||legacyMotion==3||IsPerformingAttack(animator);
-            if(attacking)reaction=null;
+            var enemy=animator.GetComponentInParent<EnemyController>();
+            bool responding=enemy!=null && enemy.State!=EnemyState.Stagger &&
+                enemy.GetComponent<Mismo.Gameplay.Combat.CombatState>()?.InterruptImmune==true;
+            if(attacking||responding)reaction=null;
             var customization=animator.GetComponentInParent<EnemyEquipment>();
             if(customization!=null&&!customization.isActiveAndEnabled)customization=null;
-            if(attacking&&customization!=null)customization.CancelHitReaction();
+            if((attacking||responding)&&customization!=null)customization.CancelHitReaction();
             if(!attacking&&customization!=null&&customization.PlayingPostureBreak)
             {reaction=customization.postureBreakClip;reactionProgress=customization.PostureBreakProgress;reactionMask=null;}
             else if(!attacking&&customization!=null&&customization.PlayingParry)
@@ -37,15 +40,27 @@ namespace Mismo.Gameplay.Enemies
             {reaction=customization.hitClip;reactionProgress=customization.HitProgress;reactionMask=customization.hitMask;}
             AnimationClip movement=null;
             bool alive=animator.GetComponentInParent<Mismo.Gameplay.Combat.Health>()?.IsDead!=true;
-            var goblin=animator.GetComponentInParent<GoblinController>();
-            bool staggered=goblin!=null&&goblin.State==GoblinState.Stagger;
+            var goblin=animator.GetComponentInParent<EnemyController>();
+            bool staggered=goblin!=null&&goblin.State==EnemyState.Stagger;
             if(customization!=null&&alive&&!staggered&&reaction==null&&binding==null&&legacyMotion<=2)
                 movement=legacyMotion==2?customization.runClip:legacyMotion==1?customization.walkClip:customization.idleClip;
+            bool directional = false;
+            if (customization != null && alive && !staggered && reaction == null && binding == null &&
+                legacyMotion > 0 && legacyMotion <= 2 && goblin != null && goblin.Target != null &&
+                goblin.State == EnemyState.Position)
+            {
+                var navigation = goblin.GetComponent<UnityEngine.AI.NavMeshAgent>();
+                if (navigation != null && navigation.enabled && navigation.isOnNavMesh)
+                {
+                    var clip = customization.DirectionalMovement(goblin.transform.InverseTransformDirection(navigation.velocity));
+                    if (clip != null) { movement = clip; directional = true; }
+                }
+            }
             if(movementClip!=movement){movementClip=movement;movementTime=0;}
             float movementProgress=0;
             if(movement!=null)
             {
-                float reference=legacyMotion==2?customization.runReferenceSpeed:customization.walkReferenceSpeed;
+                float reference=directional?customization.directionalReferenceSpeed:legacyMotion==2?customization.runReferenceSpeed:customization.walkReferenceSpeed;
                 float movementRate=legacyMotion==0?1:Mathf.Clamp(speed/Mathf.Max(.1f,reference),.25f,2);
                 movementTime+=Mathf.Max(0,deltaTime)*movementRate;
                 movementProgress=Mathf.Repeat(movementTime/Mathf.Max(.01f,movement.length),1);
@@ -78,8 +93,8 @@ namespace Mismo.Gameplay.Enemies
 
         public static bool IsPerformingAttack(Component actor)
         {
-            var goblin=actor.GetComponentInParent<GoblinController>();
-            if(goblin!=null)return goblin.State==GoblinState.Telegraph||goblin.State==GoblinState.Attack||goblin.State==GoblinState.Recovery;
+            var goblin=actor.GetComponentInParent<EnemyController>();
+            if(goblin!=null)return goblin.State==EnemyState.Telegraph||goblin.State==EnemyState.Attack||goblin.State==EnemyState.Recovery;
             var boss=actor.GetComponentInParent<BossController>();
             return boss!=null&&(boss.State==BossState.Telegraph||boss.State==BossState.Attack||boss.State==BossState.Recovery);
         }

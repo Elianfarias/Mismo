@@ -29,12 +29,12 @@ MonoBehaviour:
   visualPrefab: {fileID: 8645204569604834416, guid: 9b664b809b3452f439b77f4654391891, type: 3}
   isTwoHanded: 0
   dualWield: 0
-  secondaryVisualPrefab: {fileID: 0}
+  secondaryVisualPrefab: {fileID: 8645204569604834416, guid: 9b664b809b3452f439b77f4654391891, type: 3}
   secondaryEquipped:
     anchor: 2
     bonePath: 
-    offset: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
+    offset: {x: -0.37248495, y: 0.59441686, z: -0.024280652}
+    rotation: {x: 0.0000041628396, y: -0.000010971817, z: 41.191383}
     scale: 1
   secondaryHolstered:
     anchor: 0

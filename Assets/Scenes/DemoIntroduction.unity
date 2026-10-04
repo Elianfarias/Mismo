@@ -3009,8 +3009,8 @@ MonoBehaviour:
     encounter: {fileID: 366902813}
     objective: 1
     weapon: {fileID: 0}
-  - title: Practicar parry
-    instruction: "Espada: E justo antes del impacto.\nDerrot\xE1 al goblin para seguir."
+  - title: "Elegir habilidades"
+    instruction: "Desde maestría 3, elegí una habilidad en K.\nM1 y C alcanzan para superar este encuentro."
     destination: {fileID: 1039270634}
     radius: 8
     lesson: {fileID: 11400000, guid: 1949c9db5b055b74abd516c1e593ab19, type: 2}
@@ -3026,7 +3026,7 @@ MonoBehaviour:
     objective: 2
     weapon: {fileID: 11400000, guid: 835c07f02b4157f4ca9e69fe3d5490ad, type: 2}
   - title: Arco y Focus
-    instruction: "Acert\xE1 disparos con M1 y us\xE1 Q.\nDerrot\xE1 al goblin para seguir."
+    instruction: "Acertá disparos con M1 para ganar maestría.\nElegí las habilidades del arco en K."
     destination: {fileID: 1111312166}
     radius: 8
     lesson: {fileID: 11400000, guid: 9a9c878bcc77b224cafc516da0b84893, type: 2}

@@ -47,17 +47,19 @@ namespace Mismo.Gameplay.Player.Editor
             if(AssetDatabase.LoadAssetAtPath<SceneAsset>(ScenePath)!=null)return;
             Folder(DataPath);Folder(MaterialsPath);
             var life=Sequence("Arrival",Page("Tu vida", "Esta barra muestra cuánta vida te queda. Los golpes enemigos la reducen. En esta demo, si caés, volvés a comenzar en la cueva.",TutorialAnchor.Health),
-                Page("Tu estamina","Correr, esquivar y algunas acciones gastan estamina. Dejá de gastarla un momento para recuperarla; reservá un poco para defenderte.",TutorialAnchor.Stamina),
+                Page("Tu estamina","Correr, esquivar y atacar gastan estamina. Empezás con 80. En Personaje (P) podés invertir puntos para aumentar su capacidad: la barra se alarga. Dejá de gastar estamina un momento para recuperarla.",TutorialAnchor.Stamina),
+                Page("Doble salto","Presioná Espacio para saltar. Mientras estás en el aire, soltá y volvé a presionar Espacio para hacer un doble salto. Al tocar el suelo recuperás ambos saltos.",TutorialAnchor.None),
                 Page("Salí de la cueva","Movete con WASD y mirá alrededor con el mouse. Seguí el sendero: al fondo te espera el primer pueblo.",TutorialAnchor.None));
             var basics=Sequence("FirstFight",Page("Un goblin en el camino","Acercate y atacá con el botón izquierdo del mouse. Observá su preparación antes del golpe y dejá espacio para reaccionar.",TutorialAnchor.Basic),
                 Page("Esquivar","C activa la acción especial de tu cinturón. Usala mientras te movés para salir del ataque del goblin. Revisá la estamina y el tiempo de recarga antes de repetirla.",TutorialAnchor.Dash));
             var posture=Sequence("Stagger",Page("Rompé su postura","Los golpes también dañan la postura del enemigo. Cuando se rompe, el goblin queda vulnerable durante un momento: ese es el stagger. Aprovechá esa apertura para atacar.",TutorialAnchor.None));
-            var parry=Sequence("Parry",Page("Parry con espada","Con la espada inicial, E activa la parada. Usala justo antes de que conecte el golpe del goblin. Un parry acertado te da una oportunidad de contraatacar. Podés ganar este encuentro aunque todavía no te salga.",TutorialAnchor.E));
+            var parry=Sequence("Parry",Page("Elegir tu primera habilidad","Desde maestría 3, abrí K fuera de combate para elegir una habilidad con tus puntos de habilidad. Si elegís Parada, arrastrala a Q, E o R y usá esa tecla justo antes del impacto. También podés elegir otra habilidad y ganar con M1 y la esquiva C: la parada es opcional.",TutorialAnchor.Skills));
             var weapons=Sequence("Weapons",Page("Cambiar de arma","Tab alterna entre tus dos conjuntos de armas. Al cambiar, también cambian sus habilidades. Equipá el arco para el próximo tramo.",TutorialAnchor.Weapons),
-                Page("Habilidades del arma","M1 es tu ataque básico. Q, E y R son los espacios de habilidades del arma equipada. Sus iconos muestran recarga y disponibilidad.",TutorialAnchor.Skills));
+                Page("Habilidades del arma","Empezás con el ataque básico M1 y sin habilidades en Q, E o R. El daño real a monstruos aumenta la maestría de esa familia de arma. Ganás 1 punto de habilidad cada 3 niveles de maestría (3, 6, 9…): abrí K, elegí cualquiera, desbloqueala y arrastrala a un espacio. Hacelo fuera de combate.",TutorialAnchor.Skills),
+                Page("Mejorar tu arma","Cada nivel ganado da 1 punto de maestría para mejorar daño, velocidad o recarga de habilidades en la pestaña Armas. Las mejoras son propias de esa familia. Los puntos para desbloquear habilidades se obtienen aparte, cada 3 niveles.",TutorialAnchor.Weapons));
             var focus=Sequence("Focus",Page("Generar Focus con el arco","Acertar un disparo básico del arco genera {basicGain} Focus. Los disparos fallidos no lo generan. El borde de las habilidades que consumen Focus muestra cuánto te falta para poder usarlas.",TutorialAnchor.Basic),
-                Page("Tu habilidad Q","Ahora tenés {q} en Q. Cuesta {focusCost} Focus: acertá disparos básicos para reunirlo y después presioná Q. La habilidad consume ese recurso.",TutorialAnchor.Q));
-            var free=Sequence("Combine",Page("Ponelo en práctica","Dos goblins custodian el último tramo. Alterná espada y arco, esquivá, aprovechá el stagger y usá tus habilidades cuando estén disponibles.",TutorialAnchor.Weapons));
+                Page("Elegir una habilidad del arco","El arco también empieza sin habilidades. En maestría 3, 6, 9… ganás puntos de habilidad: abrí K y elegí cuál desbloquear. Equipala en Q, E o R. Si consume Focus, reunilo acertando básicos; el borde de su icono indica cuándo podés usarla.",TutorialAnchor.Skills));
+            var free=Sequence("Combine",Page("Ponelo en práctica","Dos goblins custodian el último tramo. Alterná espada y arco, esquivá y aprovechá el stagger. Usá las habilidades que hayas elegido. Al dominarlas con usos efectivos contra monstruos podrás elegir un modificador opcional en K. Usarlas al aire no da progreso.",TutorialAnchor.Weapons));
             var village=Sequence("Village",Page("El primer pueblo","Acercate a un habitante y presioná F para conversar y aceptar un pedido. J abre tu diario. Esta demo usa una partida temporal: tu aventura guardada queda intacta.",TutorialAnchor.None));
             Sequence("Interface",life.pages.Concat(weapons.pages).Concat(focus.pages).ToArray());
             var source="Assets/Scenes/BossArena.unity";
@@ -99,10 +101,10 @@ namespace Mismo.Gameplay.Player.Editor
                 stages.Add(Stage(root.transform,"Salir de la cueva","WASD · Moverte\nMouse · Mirar alrededor",0,life));
                 stages.Add(Stage(root.transform,"Primer combate","Atacá con M1 y esquivá con C.\nH · Volver a leer la explicación",30,basics,Encounter(root.transform,44,90,60,1)));
                 stages.Add(Stage(root.transform,"Romper postura","Atacá al goblin y aprovechá el stagger.\nH · Volver a leer la explicación",57,posture,Encounter(root.transform,68,145,32,1)));
-                stages.Add(Stage(root.transform,"Practicar parry","Espada: E justo antes del impacto.\nDerrotá al goblin para seguir.",81,parry,Encounter(root.transform,92,110,55,1)));
+                stages.Add(Stage(root.transform,"Elegir habilidades","Desde maestría 3, elegí una habilidad en K.\nM1 y C alcanzan para superar este encuentro.",81,parry,Encounter(root.transform,92,110,55,1)));
                 var swap=Stage(root.transform,"Equipar el arco","Presioná Tab para cambiar al arco.",104,weapons);
                 swap.objective=DemoObjective.EquipWeapon;swap.weapon=AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Data/Weapons/Bow/Bow.asset");stages.Add(swap);
-                stages.Add(Stage(root.transform,"Arco y Focus","Acertá disparos con M1 y usá Q.\nDerrotá al goblin para seguir.",104,focus,Encounter(root.transform,119,180,70,1)));
+                stages.Add(Stage(root.transform,"Arco y Focus","Acertá disparos con M1 para ganar maestría.\nElegí las habilidades del arco en K.",104,focus,Encounter(root.transform,119,180,70,1)));
                 stages.Add(Stage(root.transform,"Último encuentro","Combiná tus armas y habilidades.\nEl pueblo está al final del sendero.",135,free,Encounter(root.transform,147,80,55,2)));
                 stages.Add(Stage(root.transform,"Llegar al pueblo","Seguí el camino hasta las casas.",174,village));intro.stages=stages.ToArray();
                 for(int i=0;i<4;i++)
@@ -132,7 +134,7 @@ namespace Mismo.Gameplay.Player.Editor
             var prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Enemies/Goblin.prefab");
             if(prefab==null)throw new InvalidOperationException("Falta el prefab Goblin.");
             string path=DataPath+"/Goblin"+z+".asset";
-            var settings=AssetDatabase.LoadAssetAtPath<GoblinSettings>(path);
+            var settings=AssetDatabase.LoadAssetAtPath<EnemySettings>(path);
             if(settings==null)
             {
                 settings=Object.Instantiate(prefab.GetComponent<GoblinController>().Settings);

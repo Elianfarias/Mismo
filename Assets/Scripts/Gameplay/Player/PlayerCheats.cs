@@ -33,6 +33,8 @@ namespace Mismo.Gameplay.Player
                 else motor.SetFlight(!motor.IsFlying);
             }
             if (keys.f10Key.wasPressedThisFrame) GrantWeapons();
+            if (keys.f11Key.wasPressedThisFrame) MaxWeaponMasteries();
+            if (keys.f12Key.wasPressedThisFrame) RestoreHealth();
         }
 
         public bool SetActive(bool active)
@@ -57,18 +59,34 @@ namespace Mismo.Gameplay.Player
                 Notify("No se pudieron guardar las armas. Reintentá con F10 cuando el inventario esté listo.");
             else Notify(inventory.Notice);
         }
+        public bool MaxWeaponMasteries()
+        {
+            if(!Active)return false;
+            var inventory=GetComponent<PlayerInventory>();
+            if(inventory==null||!inventory.TryMaxCheatWeaponMasteries())
+            {Notify("No se pudo guardar la maestría. Reintentá con F11 cuando el inventario esté listo.");return false;}
+            Notify(inventory.Notice);return true;
+        }
+        public bool RestoreHealth()
+        {
+            var health=GetComponent<Mismo.Gameplay.Combat.Health>();
+            if(!Active||health==null||health.IsDead)return false;
+            health.Heal(health.Maximum);Notify("Cheat: vida recuperada al máximo.");return true;
+        }
         private void Notify(string message) { notice = message; noticeUntil = Time.unscaledTime + 8; }
         private void OnDisable() { Active = false; if (motor != null && motor.IsFlying) motor.SetFlight(false); }
         private void OnGUI()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
             if (MenusOpen) return;
             float width = Mathf.Min(650, Screen.width - 24);
             if (Active)
-                GUI.Box(new Rect((Screen.width - width) / 2, 42, width, 52),
+                GUI.Box(new Rect((Screen.width - width) / 2, 42, width, 72),
                     "CHEAT · [F8] Salir · [F9] Vuelo " + (motor.IsFlying ? "ON" : "OFF") + " · [F10] Todas las armas\n" +
+                    "[F11] Maestrías al máximo · [F12] Recuperar toda la vida\n" +
                     "WASD: mover · Espacio: subir · Ctrl: bajar · Shift: acelerar");
             if (Time.unscaledTime < noticeUntil)
-                GUI.Box(new Rect((Screen.width - width) / 2, Active ? 98 : 42, width, 48), notice);
+                GUI.Box(new Rect((Screen.width - width) / 2, Active ? 118 : 42, width, 48), notice);
         }
     }
 }

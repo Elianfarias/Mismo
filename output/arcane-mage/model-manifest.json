@@ -1,0 +1,518 @@
+{
+  "voxel_size": 0.028,
+  "occupied_voxels": 22355,
+  "mesh_count": 30,
+  "vertices": 78136,
+  "triangles": 39068,
+  "bones": [
+    "Root",
+    "Hips",
+    "Spine",
+    "Chest",
+    "Neck",
+    "Head",
+    "Hat_1",
+    "Hat_2",
+    "Hat_3",
+    "Hat_4",
+    "Clavicle.L",
+    "UpperArm.L",
+    "LowerArm.L",
+    "Hand.L",
+    "Clavicle.R",
+    "UpperArm.R",
+    "LowerArm.R",
+    "Hand.R",
+    "UpperLeg.L",
+    "LowerLeg.L",
+    "Foot.L",
+    "Toes.L",
+    "UpperLeg.R",
+    "LowerLeg.R",
+    "Foot.R",
+    "Toes.R"
+  ],
+  "eye_surface_gap": 0.0007,
+  "colors": {
+    "Mage_Indigo_0": {
+      "color": [
+        0.1769411764705882,
+        0.21749019607843137,
+        0.3649411764705882
+      ],
+      "roughness": 0.84,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Indigo_1": {
+      "color": [
+        0.18823529411764706,
+        0.23137254901960785,
+        0.38823529411764707
+      ],
+      "roughness": 0.84,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Indigo_2": {
+      "color": [
+        0.2004705882352941,
+        0.24641176470588236,
+        0.4134705882352941
+      ],
+      "roughness": 0.84,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_IndigoLight_0": {
+      "color": [
+        0.22854901960784313,
+        0.27647058823529413,
+        0.42760784313725486
+      ],
+      "roughness": 0.84,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_IndigoLight_1": {
+      "color": [
+        0.24313725490196078,
+        0.29411764705882354,
+        0.4549019607843137
+      ],
+      "roughness": 0.84,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_IndigoLight_2": {
+      "color": [
+        0.25894117647058823,
+        0.31323529411764706,
+        0.4844705882352941
+      ],
+      "roughness": 0.84,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_IndigoDark_0": {
+      "color": [
+        0.12533333333333332,
+        0.16588235294117648,
+        0.2727843137254902
+      ],
+      "roughness": 0.86,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_IndigoDark_1": {
+      "color": [
+        0.13333333333333333,
+        0.17647058823529413,
+        0.2901960784313726
+      ],
+      "roughness": 0.86,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_IndigoDark_2": {
+      "color": [
+        0.142,
+        0.18794117647058825,
+        0.3090588235294118
+      ],
+      "roughness": 0.86,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Mantle_0": {
+      "color": [
+        0.3243921568627451,
+        0.3944313725490196,
+        0.49027450980392157
+      ],
+      "roughness": 0.88,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Mantle_1": {
+      "color": [
+        0.34509803921568627,
+        0.4196078431372549,
+        0.5215686274509804
+      ],
+      "roughness": 0.88,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Mantle_2": {
+      "color": [
+        0.3675294117647059,
+        0.44688235294117645,
+        0.5554705882352942
+      ],
+      "roughness": 0.88,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_MantleLight_0": {
+      "color": [
+        0.38705882352941173,
+        0.45709803921568626,
+        0.5381960784313725
+      ],
+      "roughness": 0.88,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_MantleLight_1": {
+      "color": [
+        0.4117647058823529,
+        0.48627450980392156,
+        0.5725490196078431
+      ],
+      "roughness": 0.88,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_MantleLight_2": {
+      "color": [
+        0.43852941176470583,
+        0.5178823529411765,
+        0.6097647058823529
+      ],
+      "roughness": 0.88,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_MantleDark_0": {
+      "color": [
+        0.24698039215686274,
+        0.31701960784313726,
+        0.40917647058823525
+      ],
+      "roughness": 0.88,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_MantleDark_1": {
+      "color": [
+        0.2627450980392157,
+        0.33725490196078434,
+        0.43529411764705883
+      ],
+      "roughness": 0.88,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_MantleDark_2": {
+      "color": [
+        0.2798235294117647,
+        0.3591764705882353,
+        0.46358823529411763
+      ],
+      "roughness": 0.88,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Lining_0": {
+      "color": [
+        0.3796862745098039,
+        0.22854901960784313,
+        0.2949019607843137
+      ],
+      "roughness": 0.92,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Lining_1": {
+      "color": [
+        0.403921568627451,
+        0.24313725490196078,
+        0.3137254901960784
+      ],
+      "roughness": 0.92,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Lining_2": {
+      "color": [
+        0.43017647058823527,
+        0.25894117647058823,
+        0.3341176470588235
+      ],
+      "roughness": 0.92,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Gold_0": {
+      "color": [
+        0.6782745098039216,
+        0.516078431372549,
+        0.26541176470588235
+      ],
+      "roughness": 0.4,
+      "metallic": 0.52,
+      "emission": false
+    },
+    "Mage_Gold_1": {
+      "color": [
+        0.7215686274509804,
+        0.5490196078431373,
+        0.2823529411764706
+      ],
+      "roughness": 0.4,
+      "metallic": 0.52,
+      "emission": false
+    },
+    "Mage_Gold_2": {
+      "color": [
+        0.768470588235294,
+        0.5847058823529412,
+        0.30070588235294116
+      ],
+      "roughness": 0.4,
+      "metallic": 0.52,
+      "emission": false
+    },
+    "Mage_GoldLight_0": {
+      "color": [
+        0.7667450980392156,
+        0.6229803921568627,
+        0.3796862745098039
+      ],
+      "roughness": 0.4,
+      "metallic": 0.5,
+      "emission": false
+    },
+    "Mage_GoldLight_1": {
+      "color": [
+        0.8156862745098039,
+        0.6627450980392157,
+        0.403921568627451
+      ],
+      "roughness": 0.4,
+      "metallic": 0.5,
+      "emission": false
+    },
+    "Mage_GoldLight_2": {
+      "color": [
+        0.8687058823529411,
+        0.7058235294117646,
+        0.43017647058823527
+      ],
+      "roughness": 0.4,
+      "metallic": 0.5,
+      "emission": false
+    },
+    "Mage_Leather_0": {
+      "color": [
+        0.2949019607843137,
+        0.21380392156862743,
+        0.1695686274509804
+      ],
+      "roughness": 0.85,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Leather_1": {
+      "color": [
+        0.3137254901960784,
+        0.22745098039215686,
+        0.1803921568627451
+      ],
+      "roughness": 0.85,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Leather_2": {
+      "color": [
+        0.3341176470588235,
+        0.24223529411764705,
+        0.1921176470588235
+      ],
+      "roughness": 0.85,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_LeatherLight_0": {
+      "color": [
+        0.4054901960784314,
+        0.2949019607843137,
+        0.20643137254901958
+      ],
+      "roughness": 0.8,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_LeatherLight_1": {
+      "color": [
+        0.43137254901960786,
+        0.3137254901960784,
+        0.2196078431372549
+      ],
+      "roughness": 0.8,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_LeatherLight_2": {
+      "color": [
+        0.45941176470588235,
+        0.3341176470588235,
+        0.23388235294117646
+      ],
+      "roughness": 0.8,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Sole_0": {
+      "color": [
+        0.15113725490196078,
+        0.14376470588235293,
+        0.14745098039215684
+      ],
+      "roughness": 0.94,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Sole_1": {
+      "color": [
+        0.1607843137254902,
+        0.15294117647058825,
+        0.1568627450980392
+      ],
+      "roughness": 0.94,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Sole_2": {
+      "color": [
+        0.17123529411764707,
+        0.16288235294117648,
+        0.16705882352941176
+      ],
+      "roughness": 0.94,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Glove_0": {
+      "color": [
+        0.19537254901960785,
+        0.1916862745098039,
+        0.24329411764705883
+      ],
+      "roughness": 0.87,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Glove_1": {
+      "color": [
+        0.20784313725490197,
+        0.20392156862745098,
+        0.25882352941176473
+      ],
+      "roughness": 0.87,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Glove_2": {
+      "color": [
+        0.22135294117647059,
+        0.21717647058823528,
+        0.2756470588235294
+      ],
+      "roughness": 0.87,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Pages_0": {
+      "color": [
+        0.6414117647058823,
+        0.564,
+        0.42392156862745095
+      ],
+      "roughness": 0.95,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Pages_1": {
+      "color": [
+        0.6823529411764706,
+        0.6,
+        0.45098039215686275
+      ],
+      "roughness": 0.95,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Pages_2": {
+      "color": [
+        0.7267058823529412,
+        0.6389999999999999,
+        0.4802941176470588
+      ],
+      "roughness": 0.95,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Face_0": {
+      "color": [
+        0.03137254901960784,
+        0.047058823529411764,
+        0.09411764705882353
+      ],
+      "roughness": 1,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Face_1": {
+      "color": [
+        0.03137254901960784,
+        0.047058823529411764,
+        0.09411764705882353
+      ],
+      "roughness": 1,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Face_2": {
+      "color": [
+        0.03137254901960784,
+        0.047058823529411764,
+        0.09411764705882353
+      ],
+      "roughness": 1,
+      "metallic": 0,
+      "emission": false
+    },
+    "Mage_Eyes_0": {
+      "color": [
+        0.9176470588235294,
+        0.8588235294117647,
+        1
+      ],
+      "roughness": 0.8,
+      "metallic": 0,
+      "emission": true
+    },
+    "Mage_Eyes_1": {
+      "color": [
+        0.9176470588235294,
+        0.8588235294117647,
+        1
+      ],
+      "roughness": 0.8,
+      "metallic": 0,
+      "emission": true
+    },
+    "Mage_Eyes_2": {
+      "color": [
+        0.9176470588235294,
+        0.8588235294117647,
+        1
+      ],
+      "roughness": 0.8,
+      "metallic": 0,
+      "emission": true
+    }
+  }
+}

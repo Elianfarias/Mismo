@@ -1,0 +1,451 @@
+PASS One controller: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab
+PASS Settings and damage source: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Boar_Dark_Fur
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Visual
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Boar_Dark_Fur
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Boar_Dark_Fur
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Boar_Rig
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Root
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Body
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Head
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Ear-1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Ear1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Tail
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/TailTip
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Upper_FL
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Lower_FL
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Foot_FL
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Upper_FR
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Lower_FR
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Foot_FR
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Upper_HL
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Lower_HL
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Foot_HL
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Upper_HR
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Lower_HR
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab/Foot_HR
+PASS Creature stays outside humanoid branch: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab
+PASS Inherited settings round trip: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab
+PASS One controller: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab
+PASS Settings and damage source: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Boar_Forest_Moss
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Visual
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Boar_Forest_Moss
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Boar_Forest_Moss
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Boar_Rig
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Root
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Body
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Head
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Ear-1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Ear1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Tail
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/TailTip
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Upper_FL
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Lower_FL
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Foot_FL
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Upper_FR
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Lower_FR
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Foot_FR
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Upper_HL
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Lower_HL
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Foot_HL
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Upper_HR
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Lower_HR
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab/Foot_HR
+PASS Creature stays outside humanoid branch: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab
+PASS Inherited settings round trip: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab
+PASS One controller: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab
+PASS Settings and damage source: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Boar_Standard
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Visual
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Boar_Standard
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Boar_Rig
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Root
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Body
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Head
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Ear-1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Ear1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Tail
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/TailTip
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Upper_FL
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Lower_FL
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Foot_FL
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Upper_FR
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Lower_FR
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Foot_FR
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Upper_HL
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Lower_HL
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Foot_HL
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Upper_HR
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Lower_HR
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Foot_HR
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab/Boar_Standard
+PASS Creature stays outside humanoid branch: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab
+PASS Inherited settings round trip: Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab
+PASS One controller: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab
+PASS Settings and damage source: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Forest_Golem_Stylized
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Visual
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Forest_Golem_Stylized
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Forest_Golem
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Golem_Rig
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Root
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Pelvis
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Chest
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Core
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Head
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Shoulder_L
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/UpperArm_L
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Forearm_L
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Hand_L
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Finger_L0
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Finger_L1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Finger_L2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Rock_Grip
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Thumb_L
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Shoulder_R
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/UpperArm_R
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Forearm_R
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Hand_R
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Finger_R0
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Finger_R1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Finger_R2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Thumb_R
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Thigh_L
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Shin_L
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Foot_L
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Thigh_R
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Shin_R
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Foot_R
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab/Rock_Carry
+PASS Creature stays outside humanoid branch: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab
+PASS Inherited settings round trip: Assets/Art/Prefabs/Enemies/ForestCreatures/Forest_Golem_Stylized.prefab
+PASS One controller: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab
+PASS Settings and damage source: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Imp
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Visual
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/ImpVoxelized
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Imp
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Armature
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/root
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/pelvis
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/spine_01
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/spine_02
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/spine_03
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/clavicle_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/upperarm_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/lowerarm_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/hand_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/index_01_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/index_02_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/index_03_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/index_04_leaf_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/middle_01_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/middle_02_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/middle_03_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/middle_04_leaf_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/ring_01_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/ring_02_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/ring_03_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/ring_04_leaf_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/thumb_01_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/thumb_02_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/thumb_03_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/thumb_04_leaf_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/clavicle_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/upperarm_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/lowerarm_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/hand_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/index_01_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/index_02_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/index_03_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/index_04_leaf_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/middle_01_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/middle_02_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/middle_03_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/middle_04_leaf_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/ring_01_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/ring_02_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/ring_03_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/ring_04_leaf_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/thumb_01_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/thumb_02_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/thumb_03_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/thumb_04_leaf_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/neck_01
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Head
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/thigh_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/calf_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/foot_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/ball_l
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/thigh_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/calf_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/foot_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/ball_r
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Imp_Body
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Imp_Chains
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Imp_Mace
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Imp_Shorts
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Imp_SpikedCollar
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Combat Trim
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Belt
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Buckle
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Shoulder
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Pupil
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Brow
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Shoulder
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Pupil
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Brow
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Attack Source
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab/Attack Telegraph
+PASS Imp uses its own humanoid controller
+PASS Inherited settings round trip: Assets/Art/Prefabs/Enemies/ForestCreatures/Imp.prefab
+PASS One controller: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab
+PASS Settings and damage source: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Spider_Albino
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Visual
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Spider_Albino
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Spider_Albino
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Spider_Rig
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Root
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Body
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Abdomen
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Head
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Fang_L
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Fang_R
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Palp_L
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Palp_R
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Web_Origin
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Upper_L1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Lower_L1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Foot_L1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Upper_L2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Lower_L2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Foot_L2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Upper_L3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Lower_L3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Foot_L3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Upper_L4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Lower_L4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Foot_L4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Upper_R1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Lower_R1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Foot_R1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Upper_R2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Lower_R2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Foot_R2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Upper_R3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Lower_R3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Foot_R3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Upper_R4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Lower_R4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab/Foot_R4
+PASS Creature stays outside humanoid branch: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab
+PASS Inherited settings round trip: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab
+PASS One controller: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab
+PASS Settings and damage source: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Spider_Dark_Cave
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Visual
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Spider_Dark_Cave
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Spider_Dark_Cave
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Spider_Rig
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Root
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Body
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Abdomen
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Head
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Fang_L
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Fang_R
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Palp_L
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Palp_R
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Web_Origin
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Upper_L1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Lower_L1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Foot_L1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Upper_L2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Lower_L2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Foot_L2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Upper_L3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Lower_L3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Foot_L3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Upper_L4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Lower_L4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Foot_L4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Upper_R1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Lower_R1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Foot_R1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Upper_R2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Lower_R2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Foot_R2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Upper_R3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Lower_R3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Foot_R3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Upper_R4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Lower_R4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab/Foot_R4
+PASS Creature stays outside humanoid branch: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab
+PASS Inherited settings round trip: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab
+PASS One controller: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab
+PASS Settings and damage source: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Spider_Forest_Moss
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Visual
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Spider_Forest_Moss
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Spider_Forest_Moss
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Spider_Rig
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Root
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Body
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Abdomen
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Head
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Fang_L
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Fang_R
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Palp_L
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Palp_R
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Web_Origin
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Upper_L1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Lower_L1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Foot_L1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Upper_L2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Lower_L2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Foot_L2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Upper_L3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Lower_L3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Foot_L3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Upper_L4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Lower_L4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Foot_L4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Upper_R1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Lower_R1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Foot_R1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Upper_R2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Lower_R2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Foot_R2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Upper_R3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Lower_R3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Foot_R3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Upper_R4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Lower_R4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab/Foot_R4
+PASS Creature stays outside humanoid branch: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab
+PASS Inherited settings round trip: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab
+PASS One controller: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab
+PASS Settings and damage source: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Spider_Standard
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Visual
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Spider_Standard
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Spider_Rig
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Root
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Body
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Abdomen
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Head
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Fang_L
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Fang_R
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Palp_L
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Palp_R
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Web_Origin
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Upper_L1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Lower_L1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Foot_L1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Upper_L2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Lower_L2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Foot_L2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Upper_L3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Lower_L3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Foot_L3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Upper_L4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Lower_L4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Foot_L4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Upper_R1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Lower_R1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Foot_R1
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Upper_R2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Lower_R2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Foot_R2
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Upper_R3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Lower_R3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Foot_R3
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Upper_R4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Lower_R4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Foot_R4
+PASS No missing script: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab/Spider_Standard
+PASS Creature stays outside humanoid branch: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab
+PASS Inherited settings round trip: Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab
+PASS One controller: Assets/Art/Prefabs/Enemies/Goblin.prefab
+PASS Settings and damage source: Assets/Art/Prefabs/Enemies/Goblin.prefab
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Goblin
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Visual
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Combat Trim
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Belt
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Buckle
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Shoulder
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Pupil
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Brow
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Shoulder
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Pupil
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Brow
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/ConceptGoblin
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Goblin_Concept_Mesh
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Goblin_Rig
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Root
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Hips
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Chest
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Head
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/UpperArm.L
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/LowerArm.L
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Hand.L
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/UpperArm.R
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/LowerArm.R
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Hand.R
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/UpperLeg.L
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/LowerLeg.L
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Foot.L
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/UpperLeg.R
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/LowerLeg.R
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Foot.R
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Attack Source
+PASS No missing script: Assets/Art/Prefabs/Enemies/Goblin.prefab/Attack Telegraph
+PASS Inherited settings round trip: Assets/Art/Prefabs/Enemies/Goblin.prefab
+PASS One controller: Assets/Art/Prefabs/Enemies/GoblinElite.prefab
+PASS Settings and damage source: Assets/Art/Prefabs/Enemies/GoblinElite.prefab
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/GoblinElite
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Visual
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Combat Trim
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Belt
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Buckle
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Shoulder
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Pupil
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Brow
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Shoulder
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Pupil
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Brow
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/ConceptGoblin
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Goblin_Concept_Mesh
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Goblin_Rig
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Root
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Hips
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Chest
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Head
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/UpperArm.L
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/LowerArm.L
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Hand.L
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/UpperArm.R
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/LowerArm.R
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Hand.R
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/UpperLeg.L
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/LowerLeg.L
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Foot.L
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/UpperLeg.R
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/LowerLeg.R
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Foot.R
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Attack Source
+PASS No missing script: Assets/Art/Prefabs/Enemies/GoblinElite.prefab/Attack Telegraph
+PASS Inherited settings round trip: Assets/Art/Prefabs/Enemies/GoblinElite.prefab
+PASS Legacy close slash
+PASS Legacy midrange charge
+PASS Charge cooldown blocks pressure attack
+PASS Charge cooldown expires
+PASS Projectile minimum range and selection
+PASS Cooldown includes all action phases
+PASS Projectile cooldown expires
+PASS Missing projectile visual is ineligible
+PASS New life clears action clocks
+PASS Existing CombatFeedbackChecks passed, including combo immunity, posture, parry and death
+PASS Existing EnemyAnimationChecks passed

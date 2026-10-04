@@ -1,0 +1,201 @@
+PASS New family starts without skills or unlock points
+PASS Cannot unlock/equip without earning a point
+PASS Level 2 does not unlock a skill
+PASS Level 3 unlocks any skill; attribute points remain independent
+PASS No duplicate or overspent unlocks
+PASS Unlocked skill equips into an empty slot
+PASS Levels 4 and 5 do not add unlock points
+PASS Equipping an existing selection swaps the slots
+PASS Transaction copy cannot mutate original unlocks or slots
+PASS Legacy selection and all earned legacy unlocks survive migration
+PASS Legacy level 1 retains three skills without gaining free spending points
+PASS Legacy player follows the new interval
+PASS Legacy player earns a new point at level 3
+PASS Milestones reach three points at level 9 and six at level 20
+PASS Modifier cannot be selected before skill mastery
+PASS Mastery unlocks optional modifier training at rank zero
+PASS One use does not complete a two-use modifier rank
+PASS Effective use trains the chosen modifier
+PASS Alternative modifiers retain independent progress
+PASS No equipped modifier means no modifier training
+PASS Unity JSON roundtrip retains unlocks, slots and modifier ranks
+PASS Transaction copy isolates nested modifier progress
+PASS Reject duplicate persisted unlocks
+PASS Reject nonfinite persisted damage remainder
+PASS Stamina participates in the character point budget and copy
+PASS Reject overspending character attributes
+PASS Cooldown shares the weapon mastery point budget
+PASS Reject overspending mastery cooldown
+PASS Fractional damage XP survives repeated small hits
+PASS Ignore nonfinite damage
+PASS Cooldown attribute is capped at 40 percent (0,4 / 0,4)
+PASS Real inventory starts with basic only
+PASS Fresh profile persists schema 9
+PASS Starting stamina is 80 (80 / 80)
+PASS Only the contributing family gains a skill point
+PASS Stamina attributes can be committed
+PASS Character upgrades do not reduce skill cooldown (10 / 10)
+PASS Cooldown spends a weapon mastery point
+PASS Sword cooldown investment does not affect bow skills (10 / 10)
+PASS Mastery batches reject overflow and negative cooldown
+PASS Failed save cannot spend a cooldown point
+PASS Stamina capacity increases by allocated points (90 / 90)
+PASS Investing in capacity gives no free refill (80 / 80)
+PASS Regeneration reaches the upgraded capacity (90 / 90)
+PASS HUD length increases with capacity
+PASS Cooldown attribute affects skill cooldown (9,8 / 9,8)
+PASS Basic attack cooldown keeps attack-speed rules (4 / 4)
+PASS Unlock and equip through real inventory
+PASS Empty slots never fall back to default skills
+PASS Runtime selection rejects unmastered modifier
+PASS Nonlethal real damage grants weapon XP immediately after flush
+PASS Confirmed monster hit trains skill mastery
+PASS Repeated pulses add damage XP but count one skill use
+PASS Multiple monsters in one cast count as one use
+PASS Mastered skill offers an optional modifier
+PASS Untrained modifier has no free effect (1 / 1)
+PASS Two effective casts train rank one and apply power (1,05 / 1,05)
+PASS Modifier is optional and can be disabled outside combat
+PASS Disabling a modifier removes its effect (1 / 1)
+PASS Reequipping retains trained rank
+PASS Invulnerable/rejected hits grant neither XP nor training
+PASS Ordinary damage receivers without monster rewards do not grant progression
+PASS Failed save retains pending damage without mutating committed XP
+PASS Retry saves pending damage exactly once
+PASS Second flush cannot duplicate XP
+PASS Delayed hit credits originating family after swap: sword=10, expected=10, bow=0, health=55, outcome=Hit
+PASS Lethal overkill grants only remaining health damage, with no fixed mastery reward
+PASS Dead monsters cannot grant duplicate XP
+PASS Protected inventory load validates and restores new progression
+PASS Real version 6 migration persists and restores implicit skills
+PASS Schema 7 refunds character cooldown points
+PASS Schema 7 keeps a level-2 unlock and selection without free additional points
+PASS Migration preserves optional modifier training
+PASS Legacy character cooldown has no effect on weapons (10 / 10)
+PASS Schema 8 reload does not duplicate refunds or migration credit
+PASS Unlocked equipped skill executes through AbilityRunner
+PASS Runtime captures reduced cooldown for HUD (9,8 / 9,8)
+PASS Cooldown calculation never mutates shared ability assets (10 / 10)
+PASS Cancel cannot clear the captured cooldown
+PASS Alternative modifier is selectable after mastery
+PASS Trained recovery modifier combines multiplicatively with weapon mastery cooldown reduction (9,309999 / 9,31)
+PASS Choosing recovery preserves power training
+PASS Next three-level milestone allows an independently chosen skill
+PASS Defensive skill can be activated
+PASS Casting a defense in the air gives no mastery
+PASS Blocking a monster attack trains the defensive skill
+PASS Defense does not manufacture weapon damage XP
+PASS Repeated blocks in one activation count once
+PASS Projectile retains the source skill and cast identity
+PASS Real area pulses after swapping credit the original skill once
+PASS Poison preserves cast identity and cannot duplicate area/direct-hit training
+PASS Modifier switch flushes pending combat progress
+PASS Pending use trains the previous modifier, never the newly chosen modifier
+PASS Failed pending save cannot change the selected modifier
+PASS Retry flushes pending uses before disabling the modifier
+PASS Weapon VFX resolves explicit sockets and the model-root fallback
+PASS Missing socket never emits an effect at the character origin
+PASS Charged skill creates preparation VFX only on the chosen weapon
+PASS Particle prefab starts even with Play On Awake disabled and uses gameplay time
+PASS Charge effect follows the weapon socket and configured offset
+PASS Charge controls visual scale without changing the shared prefab (1,5 / 1,5)
+PASS Source prefab scale remains unchanged (1 / 1)
+PASS Pause freezes charge particles
+PASS Resume continues existing particles without spawning copies
+PASS Release removes charging VFX and starts execution plus active VFX
+PASS Active VFX ends with the active phase while the release burst remains
+PASS Release burst can finish after the ability completes
+PASS Release burst expires and removes its runtime object
+PASS Trained modifier can supply its own weapon VFX
+PASS Ability and selected modifier VFX coexist on their configured hands
+PASS Cancellation clears VFX from both weapons
+PASS Disabling the optional modifier removes its VFX from subsequent casts
+PASS Both-hands binding emits once on each weapon
+PASS Maximum charge auto-releases and clears both charging effects
+PASS Interruption removes charging effects
+PASS Weapon swap clears outstanding execution VFX
+PASS Death immediately removes all weapon VFX
+PASS Cheat fixture increases maximum health through actual character attributes
+PASS Failed max-mastery save leaves every family unchanged
+PASS Max-mastery cheat commits successfully
+PASS Cheat maximizes owned weapon and combination families
+PASS Max mastery leaves unowned weapons and character level unchanged
+PASS Max mastery preserves allocations and leaves skill choices unspent
+PASS Repeated max-mastery cheat is idempotent
+PASS Cheat mastery persists on reload
+PASS New commands require F8 cheat mode
+PASS Enabling cheat mode retains flight and full-arsenal behavior
+PASS Max command reaches newly obtained weapons through PlayerCheats
+PASS Heal command succeeds while cheat mode is active
+PASS Heal command restores the current full health capacity (145 / 145)
+PASS Disabling cheat mode disables flight
+PASS Heal command is inert after disabling cheat mode
+PASS Healing cannot bypass the death and respawn flow
+PASS Death switches off cheat mode
+PASS Basic starts in evolution fixture
+PASS Blocked basics do not train mastery
+PASS Basic starts in evolution fixture
+PASS A real combo hit trains the always-available M1 skill
+PASS Basic mastery costs no skill-unlock points
+PASS Mastered M1 accepts an optional behavior evolution
+PASS Behavior is active immediately on selection at rank zero
+PASS Holding evolved M1 starts preparation
+PASS Charging does not open a damage window or spend a combo hit early
+PASS Charged basic exposes a preparation pose
+PASS Damage interruption cancels a charged basic
+PASS Basic starts in evolution fixture
+PASS Full charge opens with the heavy step
+PASS Charged contact breaks the guard and applies increased posture damage
+PASS Charged swing charges stamina exactly once on release (59 / 59)
+PASS Basic starts in evolution fixture
+PASS Early release remains the ordinary opening cut
+PASS A tap cannot break a guard
+PASS Evolutions never mutate the shared basic asset
+PASS Basic mastery and its selected evolution survive save reload
+PASS Basic can switch to the optional dodge-chain evolution
+PASS Real belt dash starts
+PASS Basic starts in evolution fixture
+PASS Even a belt dodge cannot activate the weapon chain
+PASS A different belt special starts
+PASS Basic starts in evolution fixture
+PASS An invulnerable belt special cannot activate the weapon chain
+PASS Weapon evasion can be equipped independently in R
+PASS Weapon evasion starts from its equipped slot
+PASS Basic starts in evolution fixture
+PASS Completing the weapon evasion opens M1 while a different belt special is equipped
+PASS Dodge chain automatically begins its second authored cut
+PASS Dodge chain pays each actual swing separately (66 / 66)
+PASS Basic starts in evolution fixture
+PASS The dodge opportunity is consumed by one combo
+PASS Weapon evasion starts from its equipped slot
+PASS Basic starts in evolution fixture
+PASS Expired dodge opportunities do not alter M1
+PASS Weapon evasion starts before cancellation
+PASS Basic starts in evolution fixture
+PASS A canceled weapon evasion does not grant a followup
+PASS Weapon evasion starts from its equipped slot
+PASS Basic starts in evolution fixture
+PASS Insufficient stamina stops the automatic second swing
+PASS Earned unlocks equip the parry and approach skill
+PASS Mastered parry and approach skill accept behavioral modifiers
+PASS Parrying empty air cannot open a riposte
+PASS An incoming attack is actually parried
+PASS Confirmed parry opens an immediate heavy M1 riposte
+PASS Basic starts in evolution fixture
+PASS Riposte opportunity is single-use
+PASS A missed approach skill cannot open a finisher
+PASS A confirmed monster hit lets the approach skill chain into heavy M1
+PASS Weapon evasion starts from its equipped slot
+PASS Equipment can swap after the evolution checks
+PASS Basic starts in evolution fixture
+PASS Weapon swaps clear contextual opportunities
+PASS Disabling a basic modifier retains the unevolved attack
+PASS Basic starts in evolution fixture
+PASS Basic begins normally with no modifier
+PASS Above-head binding emits once, without requiring a weapon socket or duplicating both hands
+PASS Above-head effect clears the character height
+PASS Above-head effect faces the viewing camera
+PASS Character effect follows movement
+PASS Character charge keeps growth feedback (2 / 2)
+PASS Character effects clean up on cancellation
+PASS ALL 200 checks

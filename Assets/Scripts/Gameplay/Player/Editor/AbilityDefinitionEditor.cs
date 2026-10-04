@@ -13,6 +13,7 @@ namespace Mismo.Gameplay.Player.Editor
         {
             serializedObject.Update();
             var definition = (AbilityDefinition)target;
+            EditorGUILayout.HelpBox("VFX: Anchor permite emitir desde Weapon (socket), Character o Above Head. Face Camera orienta el efecto hacia la cámara, sin modificarla. Preparation acompaña la carga; Execution aparece al soltar; Active dura la fase activa. Los modificadores pueden agregar sus propios efectos. Estas fases corresponden a habilidades activas, no a pasivas.", MessageType.Info);
             if (definition.usesSwordCombo)
             {
                 EditorGUILayout.HelpBox("Golpes del combo: duración en segundos; ventanas de impacto y encadenado en porcentajes (0–100). Mayor duración reproduce el clip más lento. El volumen sigue al personaje durante el avance. Los clips y su desplazamiento se configuran en las animaciones de la familia. Cambiar este asset afecta a todas las armas que lo comparten.", MessageType.Info);

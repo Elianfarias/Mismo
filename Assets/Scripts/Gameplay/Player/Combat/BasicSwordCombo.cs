@@ -107,7 +107,7 @@ namespace Mismo.Gameplay.Combat
         /// Recibe una pulsación de ataque. En la ventana configurada la conserva para enlazar
         /// la siguiente etapa; fuera de ella no altera el estado actual.
         /// </summary>
-        public bool RequestAttack(Mismo.Gameplay.Player.Equipment.AbilityDefinition definition = null)
+        public bool RequestAttack(Mismo.Gameplay.Player.Equipment.AbilityDefinition definition = null,int openingStep=0,bool chainNext=false)
         {
             if (phase == Phase.Idle)
             {
@@ -117,7 +117,10 @@ namespace Mismo.Gameplay.Combat
                 staminaCost=Mathf.Max(0,definition.staminaCost);
                 steps = definition.comboSteps;
                 order = definition.comboOrder;
-                return BeginStep(Next(-1));
+                // A requested opening step (counter/finisher) wins; otherwise the combo order picks the first step.
+                if(!BeginStep(openingStep>0?Mathf.Clamp(openingStep,0,steps.Length-1):Next(-1)))return false;
+                queuedNext=chainNext&&HasNext;
+                return true;
             }
             if (!CanQueue || queuedNext || !HasNext || !CanPay) return false;
             queuedNext = true;

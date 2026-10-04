@@ -36,7 +36,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
     [Serializable]
     public sealed class InventoryProfile
     {
-        public int version = 6;
+        public int version = 9;
         public List<Mismo.Gameplay.Player.Quests.QuestProgress> quests=new List<Mismo.Gameplay.Player.Quests.QuestProgress>();
         public List<string> learnedRecipes=new List<string>();
         public string trackedQuest;
@@ -212,7 +212,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 foreach(var loot in pendingLoot)
                 {
                     if(loot==null||!Guid.TryParseExact(loot.id,"N",out _)||!lootIds.Add(loot.id)||
-                        !Finite(loot.x)||!Finite(loot.y)||!Finite(loot.z)||!ValidStacks(loot.materials))return false;
+                        !Finite(loot.x)||!Finite(loot.y)||!Finite(loot.z)||double.IsNaN(loot.expiresAt)||double.IsInfinity(loot.expiresAt)||loot.expiresAt<0||loot.expiresAt>1e12||!ValidStacks(loot.materials))return false;
                     if(!loot.HasWeapon&&loot.weapon!=null&&!string.IsNullOrEmpty(loot.weapon.definitionId))return false;
                     var w=loot.HasWeapon?loot.weapon:null;
                     if(w!=null&&(!Guid.TryParseExact(w.instanceId,"N",out _)||!pendingWeaponIds.Add(w.instanceId)||
@@ -235,7 +235,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             worldIds.Clear();
             if(defeatedEnemies!=null){if(defeatedEnemies.Count>16384)return false;foreach(var id in defeatedEnemies)
                 if(string.IsNullOrEmpty(id)||id.Length>160||!worldIds.Add(id))return false;}
-            if ((version < 1 || version > 6) || weapons == null || weapons.Count < 2 || weapons.Count > 256 ||
+            if ((version < 1 || version > 9) || weapons == null || weapons.Count < 2 || weapons.Count > 256 ||
                 equipped == null || equipped.Length != 2 || activeSlot < 0 || activeSlot > 1 ||
                 claimedRewards == null || claimedRewards.Count > 256) return false;
             var ids = new HashSet<string>(StringComparer.Ordinal);
@@ -244,6 +244,9 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                     !ids.Add(item.instanceId) || item.definitionId == null || !definitions.Contains(item.definitionId) ||
                     version>=2 && (item.tier<1 || item.tier>5 || (int)item.variant<0 || (int)item.variant>3)) return false;
             if (version>=2 && (progression==null || !progression.IsValid())) return false;
+            if(version>=7)foreach(var mastery in progression.masteries)
+                if(mastery.equippedAbilities!=null)foreach(var id in mastery.equippedAbilities)
+                    if(!string.IsNullOrEmpty(id)&&!mastery.IsUnlocked(id))return false;
             var equippedIds=new HashSet<string>(StringComparer.Ordinal);
             foreach(var id in equipped)if(!string.IsNullOrEmpty(id)&&(!ids.Contains(id)||Find(id).inChest||!equippedIds.Add(id)))return false;
             if(ids.Overlaps(pendingWeaponIds))return false;
@@ -276,12 +279,30 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             foreach(var weapon in weapons) { weapon.tier=1; weapon.variant=WeaponVariant.Balanced; }
             version=2;
         }
-        public void UpgradeToCurrent()
+        public void UpgradeToCurrent(int abilityInterval=3)
         {
-            UpgradeFromVersionOne();if(version>=2&&version<6)version=6;
+            UpgradeFromVersionOne();
+            if(version>=2&&version<8)
+            {
+                // Return obsolete character cooldown purchases to the character budget.
+                progression.cooldownPoints=0;
+                foreach(var mastery in progression.masteries)
+                    mastery.legacyAbilityCredit=Math.Max(mastery.legacyAbilityCredit,
+                        (mastery.unlockedAbilities?.Count??0)-mastery.EarnedAbilityPoints(abilityInterval));
+                version=8;
+            }
+            if(version==8)version=9; // Basic-attack mastery is stored independently of unlocked skills.
             if(harvestedNodes==null)harvestedNodes=new List<HarvestState>();
             if(quests==null)quests=new List<Mismo.Gameplay.Player.Quests.QuestProgress>();
             if(learnedRecipes==null)learnedRecipes=new List<string>();
+        }
+        public bool NormalizePendingLootExpiry(double lifetimeSeconds)
+        {
+            if(pendingLoot==null)return false;
+            bool changed=false;double lifetime=Math.Max(1,lifetimeSeconds);
+            foreach(var loot in pendingLoot)
+                if(loot!=null&&string.IsNullOrEmpty(loot.rewardId)&&loot.expiresAt<=0){loot.expiresAt=worldPlaySeconds+lifetime;changed=true;}
+            return changed;
         }
     }
 }

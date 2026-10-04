@@ -23,6 +23,18 @@ namespace Mismo.Gameplay.Enemies
         public RuntimeAnimatorController controllerOverride;
         [Header("Animaciones base opcionales")]
         public AnimationClip idleClip,walkClip,runClip,hitClip;
+        [Header("Movimiento mirando al objetivo (opcional)")]
+        public AnimationClip strafeLeftClip,strafeRightClip,backwardClip;
+        [Min(.1f)] public float directionalReferenceSpeed = 3.2f;
+
+        public AnimationClip DirectionalMovement(Vector3 localVelocity)
+        {
+            if (localVelocity.sqrMagnitude < .01f) return null;
+            if (localVelocity.z < -Mathf.Abs(localVelocity.x) * .8f) return backwardClip;
+            if (Mathf.Abs(localVelocity.x) > Mathf.Abs(localVelocity.z))
+                return localVelocity.x < 0 ? strafeLeftClip : strafeRightClip;
+            return null;
+        }
         [Tooltip("Cuerpo completo, sincronizado con la duración de la postura rota. Vacío conserva la reacción actual.")]
         public AnimationClip postureBreakClip;
         [Tooltip("Vacío reutiliza Hit. Nunca utiliza el clip de postura rota.")]

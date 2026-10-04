@@ -31,6 +31,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public int Count => profile != null ? profile.weapons.Count : 0;
         public string Notice { get; private set; }
         public bool HasSaveProblem { get; private set; }
+        internal double GroundLootLifetimeSeconds=>Math.Max(1,InventorySettings.Current.groundLootLifetimeSeconds);
         public event Action Changed;
         public event Action<ProgressionData,ProgressionData,string> Committed;
         public string MasteryDisplayName(string id) => FindFamily(id)?.DisplayName ?? (catalog?.weapons == null ? "Maestría" : MasteryWeaponName(id));
@@ -72,14 +73,15 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 writable = result != ProfileReadResult.Invalid;
                 profile = payload != null ? JsonUtility.FromJson<InventoryProfile>(payload) : CreateStartingProfile();
                 if (!profile.IsValid(definitions, rewards)) throw new InvalidDataException("Invalid starting profile.");
-                bool migrated=profile.version<6;
-                profile.UpgradeToCurrent();profile.UpgradeMountCollection();NormalizeGrid(profile);
+                bool migrated=profile.version<9;
+                MigrateAbilityUnlocks(profile);
+                profile.UpgradeToCurrent(Rules.masteryLevelsPerAbilityPoint);bool migratedLoot=profile.NormalizePendingLootExpiry(GroundLootLifetimeSeconds);profile.UpgradeMountCollection();NormalizeGrid(profile);
                 if (result == ProfileReadResult.Invalid)
                 { Notice = "No se pudo recuperar el guardado. Tus archivos se conservaron; no se guardarán cambios."; HasSaveProblem = true; }
                 else if (result == ProfileReadResult.Recovered)
                 { Notice = "Se recuperó la copia de respaldo del inventario."; }
                 else Notice = "Inventario guardado automáticamente.";
-                if (result == ProfileReadResult.Missing || migrated && writable) repository.Write(JsonUtility.ToJson(profile));
+                if (result == ProfileReadResult.Missing || (migrated||migratedLoot) && writable) repository.Write(JsonUtility.ToJson(profile));
                 ApplyEquipment();
                 ApplyStats();
                 var startingHealth=GetComponent<Mismo.Gameplay.Combat.Health>();
@@ -89,7 +91,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             {
                 writable = false;
                 if(profile==null||!profile.IsValid(definitions,rewards))profile=CreateStartingProfile();
-                profile.UpgradeToCurrent();profile.UpgradeMountCollection();NormalizeGrid(profile);
+                MigrateAbilityUnlocks(profile);profile.UpgradeToCurrent(Rules.masteryLevelsPerAbilityPoint);profile.UpgradeMountCollection();NormalizeGrid(profile);
                 ApplyEquipment();ApplyStats();
                 Notice = "No se pudo acceder al guardado. Tus archivos se conservaron; no se guardarán cambios.";
                 HasSaveProblem = true;
@@ -132,13 +134,15 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 if(loaded.version>=2)foreach(var mastery in loaded.progression.masteries)
                 {
                     if(!HasFamily(mastery.familyId))return false;
-                    if(mastery.equippedAbilities==null||mastery.equippedAbilities.Length==0)continue;
                     var family=FindFamily(mastery.familyId);
+                    if(loaded.version>=7&&!ValidateAbilityProgress(mastery,family,loaded.version))return false;
+                    if(mastery.equippedAbilities==null||mastery.equippedAbilities.Length==0)continue;
                     if(family==null)return false;
                     foreach(var id in mastery.equippedAbilities)
                     {
+                        if(loaded.version>=7&&string.IsNullOrEmpty(id))continue;
                         int skill=family.FindSkill(id);
-                        if(skill<0||mastery.level<family.UnlockLevel(skill))return false;
+                        if(skill<0||loaded.version<7&&mastery.level<family.UnlockLevel(skill)||loaded.version>=7&&!mastery.IsUnlocked(id))return false;
                     }
                 }
                 return true;
@@ -223,6 +227,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             var health=GetComponent<Mismo.Gameplay.Combat.Health>();
             float max=Mathf.Max(1,baseMaximum+profile.progression.lifePoints*Rules.lifePerPoint+first.life+second.life+offhandLife);
             if(health!=null&&!Mathf.Approximately(max,health.Maximum))health.ConfigureMaximum(max);
+            GetComponent<Movement.Stamina>()?.SetCapacityBonus(profile.progression.staminaPoints*Rules.staminaPerPoint);
         }
         public bool TrySpend(CharacterAttribute attribute)
         {
@@ -233,16 +238,18 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 case CharacterAttribute.Life:next.progression.lifePoints++;break;
                 case CharacterAttribute.Attack:next.progression.attackPoints++;break;
                 case CharacterAttribute.Armor:next.progression.armorPoints++;break;
+                case CharacterAttribute.Stamina:next.progression.staminaPoints++;break;
                 default:return false;
             }
             return Commit(next,"Atributo guardado.",false);
         }
-        public bool TrySpendAttributes(int life,int attack,int armor)
+        public bool TrySpendAttributes(int life,int attack,int armor,int stamina=0)
         {
-            long total=(long)life+attack+armor;
-            if(!CanManage||life<0||attack<0||armor<0||total<=0||total>profile.progression.Available)return false;
+            long total=(long)life+attack+armor+stamina;
+            if(!CanManage||life<0||attack<0||armor<0||stamina<0||total<=0||total>profile.progression.Available)return false;
             var next=profile.Copy();
             next.progression.lifePoints+=life;next.progression.attackPoints+=attack;next.progression.armorPoints+=armor;
+            next.progression.staminaPoints+=stamina;
             return Commit(next,"Atributos guardados.",false);
         }
         public bool TrySpendMastery(WeaponDefinition weapon,MasteryAttribute attribute)
@@ -251,16 +258,20 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             var next=profile.Copy();var mastery=next.progression.Find(weapon.MasteryId);
             if(mastery==null||mastery.Available<=0)return false;
             if(attribute==MasteryAttribute.Damage)mastery.damagePoints++;
-            else if(attribute==MasteryAttribute.Speed)mastery.speedPoints++;else return false;
+            else if(attribute==MasteryAttribute.Speed)mastery.speedPoints++;
+            else if(attribute==MasteryAttribute.Cooldown)
+            {if(Rules.CooldownReduction(mastery.cooldownPoints)>=Rules.maximumCooldownReduction)return false;mastery.cooldownPoints++;}
+            else return false;
             return Commit(next,"Maestría guardada.",false);
         }
-        public bool TrySpendMasteryPoints(WeaponDefinition weapon,int damage,int speed)
+        public bool TrySpendMasteryPoints(WeaponDefinition weapon,int damage,int speed,int cooldown=0)
         {
-            long total=(long)damage+speed;
-            if(!CanManage||weapon==null||damage<0||speed<0||total<=0)return false;
+            long total=(long)damage+speed+cooldown;
+            if(!CanManage||weapon==null||damage<0||speed<0||cooldown<0||total<=0)return false;
             var next=profile.Copy();var mastery=next.progression.Find(weapon.MasteryId);
             if(mastery==null||total>mastery.Available)return false;
-            mastery.damagePoints+=damage;mastery.speedPoints+=speed;
+            if(cooldown>0&&Rules.CooldownReduction(mastery.cooldownPoints+cooldown-1)>=Rules.maximumCooldownReduction)return false;
+            mastery.damagePoints+=damage;mastery.speedPoints+=speed;mastery.cooldownPoints+=cooldown;
             return Commit(next,"Maestría guardada.",false);
         }
         // Experience and ground loot are saved together. Items enter the backpack only through interaction.
@@ -294,7 +305,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                     }
                 }
             }
-            var pending=new PendingInventoryLoot{id=Guid.NewGuid().ToString("N")};
+            var pending=new PendingInventoryLoot{id=Guid.NewGuid().ToString("N"),expiresAt=WorldPlaySeconds+GroundLootLifetimeSeconds};
             var position=lootPosition??transform.position;pending.x=position.x;pending.y=position.y;pending.z=position.z;
             if(materialLoot!=null)foreach(var entry in materialLoot)
             {
@@ -368,6 +379,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
 
         bool Commit(InventoryProfile next, string notice, bool updateEquipment = true, GameSound? sound = null)
         {
+            ApplyPendingCombatProgress(next.progression);
             next.worldPlaySeconds=System.Math.Max(next.worldPlaySeconds,worldClock);
             NormalizeGrid(next);
             if (!writable || !next.IsValid(definitions, rewards)) return false;
@@ -381,6 +393,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 return false;
             }
             var previousProgression = profile.progression.Copy();
+            ClearPendingCombatProgress();
             profile = next; Notice = notice; HasSaveProblem = false;
             if (updateEquipment) ApplyEquipment();
             ApplyStats();

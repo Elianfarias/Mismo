@@ -14,8 +14,9 @@ namespace Mismo.Gameplay.Player.Equipment
             progressionId=="sword.onehand" || name=="OneHandSword" ? "Arma a una mano" :
             progressionId=="bow" || name=="Bow" ? "Arco" : "Familia de arma";
         public AbilityDefinition[] abilities = new AbilityDefinition[4];
-        [Tooltip("Tres iniciales y tres desbloqueables. El básico permanece fuera de esta lista.")]
+        [Tooltip("Habilidades que el jugador puede desbloquear en cualquier orden. El básico permanece fuera de esta lista.")]
         public AbilityDefinition[] repertoire = new AbilityDefinition[0];
+        [Tooltip("Intervalo histórico; se usa exclusivamente para migrar guardados anteriores a los desbloqueos elegidos.")]
         [Min(1)] public int masteryLevelsPerUnlock = 3;
         public int SkillCount => repertoire != null && repertoire.Length > 0 ? repertoire.Length : Mathf.Max(0, (abilities?.Length ?? 0)-1);
         public AbilityDefinition Skill(int index) => index < 0 || index >= SkillCount ? null :

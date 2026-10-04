@@ -34,10 +34,10 @@ namespace Mismo.Gameplay.Player.Equipment
                 if(!(collider.GetComponentInParent<IDamageReceiver>() is Component target)||target.transform.IsChildOf(c.Owner.transform)||!seen.Add(target))continue;
                 Vector3 point=collider.ClosestPoint(origin);
                 if(Physics.Linecast(origin,point,out var wall,~0,QueryTriggerInteraction.Ignore)&&!wall.transform.IsChildOf(c.Owner.transform)&&wall.collider.GetComponentInParent<IDamageReceiver>()!=(target as IDamageReceiver))continue;
-                if(!((IDamageReceiver)target).ReceiveDamage(new DamageInfo(damage*c.DamageMultiplier,c.Owner,point,c.Direction,id,weaponFamilyId:c.WeaponFamilyId,focusGainOnHit:c.Definition.focusGainOnHit)))continue;
+                if(!((IDamageReceiver)target).ReceiveDamage(new DamageInfo(damage*c.DamageMultiplier,c.Owner,point,c.Direction,id,weaponFamilyId:c.WeaponFamilyId,focusGainOnHit:c.Definition.focusGainOnHit,abilityId:c.Definition.Id,abilityUseId:c.AttackId)))continue;
                 if(slowSeconds>0)CombatAilment.Slow(target.gameObject,slow,slowSeconds);
                 if(stunSeconds>0)target.GetComponent<CombatState>()?.Stagger(stunSeconds);
-                if(bleedSeconds>0)CombatAilment.Poison(target.gameObject,c.Owner,c.WeaponFamilyId,bleedDamage*c.DamageMultiplier,bleedSeconds);
+                if(bleedSeconds>0)CombatAilment.Poison(target.gameObject,c.Owner,c.WeaponFamilyId,bleedDamage*c.DamageMultiplier,bleedSeconds,c.Definition.Id,c.AttackId);
                 if(pushDistance>0)
                 {
                     var agent=target.GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -50,10 +50,11 @@ namespace Mismo.Gameplay.Player.Equipment
     public sealed class StepAction : AbilityAction
     {
         public float distance=2;
+        public override bool IsEvasion => true;
         public override void Begin(AbilityExecution c)
         {
             c.Owner.GetComponent<DefenseWindow>()?.OpenDodge(c.Definition.active);
-            c.Owner.GetComponent<WeaponSkillEffects>()?.Empower();
+            c.Owner.GetComponent<WeaponSkillEffects>()?.Empower(c);
         }
         public override void Tick(AbilityExecution c,float dt)=>c.Motor.RequestControlledDisplacement(Vector3.ProjectOnPlane(c.Direction,Vector3.up).normalized*(distance*dt/c.Definition.active),c.Motor.Facing,10);
         public override void End(AbilityExecution c)=>c.Owner.GetComponent<DefenseWindow>()?.CloseDodge();
@@ -61,7 +62,7 @@ namespace Mismo.Gameplay.Player.Equipment
     [Serializable]
     public sealed class TwoTimesAction : AbilityAction
     {
-        public override void Begin(AbilityExecution c)=>c.Owner.GetComponent<WeaponSkillEffects>()?.TwoTimes();
+        public override void Begin(AbilityExecution c)=>c.Owner.GetComponent<WeaponSkillEffects>()?.TwoTimes(c);
     }
     [Serializable]
     public sealed class PoisonArrowAction : AbilityAction
@@ -72,7 +73,8 @@ namespace Mismo.Gameplay.Player.Equipment
         {
             var origin=WeaponAim.Muzzle(c.Owner);
             var arrow=ProjectileInstance.Spawn(c.Owner,origin,c.AimPoint.HasValue?(c.AimPoint.Value-origin).normalized:c.Direction,damage*c.DamageMultiplier,28,c.Definition.range,.09f,visual,c.AttackId,weaponFamilyId:c.WeaponFamilyId,focusGainOnHit:c.Definition.focusGainOnHit);
-            arrow.OnImpact=(target,point)=>{if(target!=null)CombatAilment.Poison(target.gameObject,c.Owner,c.WeaponFamilyId,poisonDamage*c.DamageMultiplier,duration);};
+            arrow.AbilityId=c.Definition.Id;arrow.AbilityUseId=c.AttackId;
+            arrow.OnImpact=(target,point)=>{if(target!=null)CombatAilment.Poison(target.gameObject,c.Owner,c.WeaponFamilyId,poisonDamage*c.DamageMultiplier,duration,c.Definition.Id,c.AttackId);};
         }
     }
     [Serializable]
@@ -82,7 +84,7 @@ namespace Mismo.Gameplay.Player.Equipment
     }
     public sealed class HunterTrap : MonoBehaviour
     {
-        GameObject owner;string family;float damage,expires,armed;
+        GameObject owner;string family,abilityId;long useId;float damage,expires,armed;
         public static void Spawn(AbilityExecution c)
         {
             var traps=UnityEngine.Object.FindObjectsByType<HunterTrap>(FindObjectsSortMode.None);
@@ -92,6 +94,7 @@ namespace Mismo.Gameplay.Player.Equipment
             var go=GameObject.CreatePrimitive(PrimitiveType.Cylinder);go.name="Trampa de cazador";
             Destroy(go.GetComponent<Collider>());go.transform.position=c.GroundPoint+Vector3.up*.05f;go.transform.localScale=new Vector3(.9f,.05f,.9f);
             var effect=go.AddComponent<HunterTrap>();effect.owner=c.Owner;effect.family=c.WeaponFamilyId;effect.damage=12*c.DamageMultiplier;effect.expires=Time.time+30;effect.armed=Time.time+.4f;
+            effect.abilityId=c.Definition.Id;effect.useId=c.AttackId;
         }
         void Update()
         {
@@ -101,7 +104,7 @@ namespace Mismo.Gameplay.Player.Equipment
             {
                 if(!(collider.GetComponentInParent<IDamageReceiver>() is Component target)||target.transform.IsChildOf(owner.transform))continue;
                 var receiver=(IDamageReceiver)target;
-                if(receiver.ReceiveDamage(new DamageInfo(damage,owner,target.transform.position,Vector3.zero,AttackIdentity.Next(),0,area:true,weaponFamilyId:family)))CombatAilment.Slow(target.gameObject,0,1.5f);
+                if(receiver.ReceiveDamage(new DamageInfo(damage,owner,target.transform.position,Vector3.zero,AttackIdentity.Next(),0,area:true,weaponFamilyId:family,abilityId:abilityId,abilityUseId:useId)))CombatAilment.Slow(target.gameObject,0,1.5f);
                 enabled=false;Destroy(gameObject);return;
             }
         }

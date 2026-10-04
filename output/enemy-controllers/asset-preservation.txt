@@ -1,0 +1,10 @@
+PASS Boar_Dark_Fur.prefab: controller script migrated; serialized configuration preserved
+PASS Boar_Forest_Moss.prefab: controller script migrated; serialized configuration preserved
+PASS Boar_Standard.prefab: controller script migrated; serialized configuration preserved
+PASS Forest_Golem_Stylized.prefab: controller script migrated; serialized configuration preserved; Unity materialized unchanged EnemyGroundSupport defaults (0.8, 0.0325)
+PASS Imp.prefab: controller script migrated; serialized configuration preserved
+PASS Spider_Albino.prefab: controller script migrated; serialized configuration preserved
+PASS Spider_Dark_Cave.prefab: controller script migrated; serialized configuration preserved
+PASS Spider_Forest_Moss.prefab: controller script migrated; serialized configuration preserved
+PASS Spider_Standard.prefab: controller script migrated; serialized configuration preserved
+PASS all enemy settings assets byte-identical to pre-refactor snapshot

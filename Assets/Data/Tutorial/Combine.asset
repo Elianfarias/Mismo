@@ -15,5 +15,5 @@ MonoBehaviour:
   id: demo.combine
   pages:
   - title: "Ponelo en pr\xE1ctica"
-    body: "Dos goblins custodian el \xFAltimo tramo. Altern\xE1 espada y arco, esquiv\xE1, aprovech\xE1 el stagger y us\xE1 tus habilidades cuando est\xE9n disponibles."
+    body: "Dos goblins custodian el último tramo. Alterná espada y arco, esquivá y aprovechá el stagger. Usá las habilidades que hayas elegido. Al dominarlas con usos efectivos contra monstruos podrás elegir un modificador opcional en K. Usarlas al aire no da progreso."
     highlight: 3

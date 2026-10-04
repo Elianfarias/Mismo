@@ -1,0 +1,1 @@
+PASS: left mouse held and moved through the real Input System UI module rotates the animated character; release stops rotation.

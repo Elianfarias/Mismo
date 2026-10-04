@@ -16,6 +16,7 @@ namespace Mismo.Gameplay.Enemies
         }
         private void OnGUI()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
             if(Mismo.Gameplay.Player.Presentation.PlayerHUD.Active!=null)return;
             GUILayout.BeginArea(new Rect(16, 16, 420, 165), GUI.skin.box);
             GoblinEliteVisual elite = goblin != null ? goblin.GetComponent<GoblinEliteVisual>() : null;
@@ -24,7 +25,7 @@ namespace Mismo.Gameplay.Enemies
             GUILayout.Label("Click combo · Q estocada · R giro · Shift correr");
             if (player != null) GUILayout.Label($"Vida: {player.Current:0} / {player.Maximum:0}");
             if (goblin != null) GUILayout.Label("Goblin: " + goblin.State);
-            if ((player != null && player.IsDead) || (goblin != null && goblin.State == GoblinState.Dead))
+            if ((player != null && player.IsDead) || (goblin != null && goblin.State == EnemyState.Dead))
                 GUILayout.Label("Salí y volvé a entrar en Play para repetir el encuentro.");
             GUILayout.EndArea();
         }

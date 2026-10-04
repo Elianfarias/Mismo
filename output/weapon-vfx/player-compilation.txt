@@ -1,0 +1,1 @@
+PASS Windows runtime scripts without UNITY_EDITOR

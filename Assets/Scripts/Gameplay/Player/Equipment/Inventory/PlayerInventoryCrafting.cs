@@ -10,19 +10,29 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
     {
         double worldClock;
         float clockSaveAt;
+        float pendingLootCleanupAt;
         public double WorldPlaySeconds=>Math.Max(worldClock,profile?.worldPlaySeconds??0);
         public double NodeReadyAt(string id)=>profile?.harvestedNodes?.Find(n=>n.id==id)?.readyAt??0;
         void Update()
         {
             if(!IsReady)return;
+            TickCombatProgress();
             worldClock+=Time.deltaTime;
+            if(Time.unscaledTime>=pendingLootCleanupAt){pendingLootCleanupAt=Time.unscaledTime+1;RemoveExpiredPendingLoot();}
             if(Time.unscaledTime>=clockSaveAt){clockSaveAt=Time.unscaledTime+15;SaveClock();}
+        }
+        void RemoveExpiredPendingLoot()
+        {
+            if(profile?.pendingLoot==null||!profile.pendingLoot.Exists(loot=>loot==null||loot.IsExpired(WorldPlaySeconds)))return;
+            var next=profile.Copy();next.pendingLoot.RemoveAll(loot=>loot==null||loot.IsExpired(WorldPlaySeconds));
+            Commit(next,"",false);
         }
         void OnApplicationPause(bool paused){if(paused)SaveClock();}
         void OnApplicationQuit()=>SaveClock();
         void OnDestroy(){SaveClock();ReleaseComposedWeapons();}
         void SaveClock()
         {
+            if(!FlushCombatProgress())return;
             if(!IsReady||!writable||WorldPlaySeconds-profile.worldPlaySeconds<.1)return;
             var next=profile.Copy();next.worldPlaySeconds=WorldPlaySeconds;
             // Keep the clock and all inventory mutations in the same protected file.

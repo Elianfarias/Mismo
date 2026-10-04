@@ -18,5 +18,8 @@ MonoBehaviour:
     body: "Tab alterna entre tus dos conjuntos de armas. Al cambiar, tambi\xE9n cambian sus habilidades. Equip\xE1 el arco para el pr\xF3ximo tramo."
     highlight: 3
   - title: Habilidades del arma
-    body: "M1 es tu ataque b\xE1sico. Q, E y R son los espacios de habilidades del arma equipada. Sus iconos muestran recarga y disponibilidad."
+    body: "Empezás con el ataque básico M1 y sin habilidades en Q, E o R. El daño real a monstruos aumenta la maestría de esa familia de arma. Ganás 1 punto de habilidad cada 3 niveles de maestría (3, 6, 9…): abrí K, elegí cualquiera, desbloqueala y arrastrala a un espacio. Hacelo fuera de combate."
     highlight: 4
+  - title: Mejorar tu arma
+    body: "Cada nivel ganado da 1 punto de maestría para mejorar daño, velocidad o recarga de habilidades en la pestaña Armas. Las mejoras son propias de esa familia. Los puntos para desbloquear habilidades se obtienen aparte, cada 3 niveles."
+    highlight: 3

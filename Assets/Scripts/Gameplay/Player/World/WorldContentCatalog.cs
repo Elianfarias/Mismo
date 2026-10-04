@@ -38,6 +38,8 @@ namespace Mismo.Gameplay.Player.World
         public WorldBiome[] biomes=Array.Empty<WorldBiome>();
         public GameObject prefab,elitePrefab;
         [Min(0)] public float weight=1;
+        [Range(0f,100f), Tooltip("Porcentaje de probabilidad de que esta entrada participe en la selección cuando es elegible. 0 = nunca, 100 = siempre.")]
+        public float appearanceChancePercent=100f;
         [Range(1,5)] public int minimumCount=2,maximumCount=3;
         [Range(0,1)] public float eliteChance=.025f;
         public bool guaranteedElite;
@@ -123,9 +125,18 @@ namespace Mismo.Gameplay.Player.World
         }
         public WorldEncounterEntry Encounter(WorldSiteKind site,WorldBiome biome,int level,float height,int seed)
         {
-            double total=0;foreach(var e in encounters)if(Eligible(e,site,biome,level,height))total+=e.weight;
-            double roll=new System.Random(seed).NextDouble()*total;
-            foreach(var e in encounters)if(Eligible(e,site,biome,level,height)){roll-=e.weight;if(roll<0)return e;}
+            var random=new System.Random(seed);
+            var candidates=new System.Collections.Generic.List<WorldEncounterEntry>();
+            foreach(var e in encounters)
+            {
+                if(!Eligible(e,site,biome,level,height))continue;
+                float chance=Mathf.Clamp01(e.appearanceChancePercent/100f);
+                if(chance>=1f||random.NextDouble()<chance)candidates.Add(e);
+            }
+
+            double total=0;foreach(var e in candidates)total+=e.weight;
+            double roll=random.NextDouble()*total;
+            foreach(var e in candidates)if(e.weight>0){roll-=e.weight;if(roll<0)return e;}
             return null;
         }
         static bool Eligible(WorldEncounterEntry e,WorldSiteKind site,WorldBiome biome,int level,float height)=>

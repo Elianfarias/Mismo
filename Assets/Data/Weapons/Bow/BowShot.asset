@@ -17,6 +17,8 @@ MonoBehaviour:
   abilityId: 
   animationSource: {fileID: 0}
   passive: 0
+  masteryUsesRequired: 25
+  masteryModifiers: []
   description: Dispara una flecha hacia donde apuntas.
   localizationKey: ability.bow.bowshot
   preparation: 0.4
@@ -87,8 +89,32 @@ MonoBehaviour:
   executionSfx: {fileID: 8300000, guid: d9428a10b26a3794eb9a60e7e565a09a, type: 3}
   executionSfxVolume: 0.5
   comboStepSfx: []
+  weaponVfx:
+  - prefab: {fileID: 3787133516064557248, guid: e0f6b9bfeef7bb2429f7ad72b7e6dd92, type: 3}
+    phase: 0
+    hand: 0
+    anchor: 2
+    faceCamera: 1
+    socketId: bowstring
+    localOffset: {x: 0, y: 0, z: 0}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 1, z: 1}
+    fullChargeScale: 1.6
+    lifetime: 1
+  - prefab: {fileID: 7579047131745148805, guid: a7053d94286780d47a5c4144d523e006, type: 3}
+    phase: 1
+    hand: 0
+    anchor: 2
+    faceCamera: 1
+    socketId: bowstring
+    localOffset: {x: 0, y: 0, z: 0}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 1, z: 1}
+    fullChargeScale: 1
+    lifetime: 0.45
   pose: 4
   usesSwordCombo: 0
+  comboSteps: []
   targetsGround: 0
   aimFromCamera: 1
   range: 22

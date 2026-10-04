@@ -40,6 +40,7 @@ namespace Mismo.Gameplay.Player.Quests
         }
         void OnGUI()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
             if(markerSettings==null||npc==null||InventoryPanel.AnyOpen||Presentation.WorldMapPanel.AnyOpen||GameplayPause.BlocksInput)return;
             if(markerPlayer==null)markerPlayer=FindAnyObjectByType<PlayerInventory>();
             if(markerCamera==null)markerCamera=UnityEngine.Camera.main;

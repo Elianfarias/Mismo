@@ -5,11 +5,12 @@ using UnityEngine;
 namespace Mismo.Gameplay.Player.Equipment
 {
     [DisallowMultipleComponent]
-    public sealed class AbilityRunner : MonoBehaviour
+    public sealed partial class AbilityRunner : MonoBehaviour
     {
         readonly Dictionary<AbilityDefinition,float> readyAt=new Dictionary<AbilityDefinition,float>();
         AudioSource preparationAudio;
         bool preparationAudioPaused;
+        Presentation.WeaponAbilityVfx weaponVfx;
         BasicSwordCombo combo;Health health;Stamina stamina;CombatState state;EquipmentLoadout loadout;
         AbilitySlot? pending;Vector3 pendingDirection,pendingPoint;Vector3? pendingAim;float pendingUntil;bool pendingDash;
         public AbilityExecution Current {get;private set;}
@@ -17,8 +18,8 @@ namespace Mismo.Gameplay.Player.Equipment
         public SwordParry Parry {get;private set;}
         public bool IsBusy=>Current!=null;
         public bool IsMoving=>Current!=null&&Current.Began&&!Current.Ended&&System.Array.Exists(Current.Definition.actions,a=>a is MoveCasterAction);
-        public float Mobility=>Current==null?1:!Current.Began?Current.Definition.preparationMobility:!Current.Ended?Current.Definition.activeMobility:1;
-        public float Normalized=>Current==null?0:Mathf.Clamp01(Current.Elapsed/(Current.Definition.Duration+(Current.Definition.chargeable?Current.Definition.maximumCharge:0)));
+        public float Mobility=>Current==null?1:Current.ChargedCombo&&!Current.Began ? .35f : !Current.Began?Current.Definition.preparationMobility:!Current.Ended?Current.Definition.activeMobility:1;
+        public float Normalized=>Current==null?0:Mathf.Clamp01(Current.Elapsed/(Current.Definition.Duration+(Current.Chargeable?Current.MaximumCharge:0)));
         public event System.Action<AbilityDefinition> Started;
         // Read-only presentation snapshot. Gameplay remains the owner of all clocks.
         public bool TryGetAnimationFrame(out Presentation.CombatAnimationFrame frame)
@@ -28,6 +29,8 @@ namespace Mismo.Gameplay.Player.Equipment
             var definition=cast.Definition;
             if(definition.usesSwordCombo)
             {
+                if(cast.ChargedCombo&&!cast.Began)
+                {frame=new Presentation.CombatAnimationFrame(definition,Presentation.CombatAnimationPhase.Preparation,cast.Charge,definition.comboSteps.Length-1,cast.AttackId);return true;}
                 if(combo==null || !combo.IsActive && !combo.IsRecovering)return false;
                 var effects=GetComponent<WeaponSkillEffects>();
                 if(effects!=null&&effects.BucklerAnimating)
@@ -56,13 +59,18 @@ namespace Mismo.Gameplay.Player.Equipment
             state=GetComponent<CombatState>()??gameObject.AddComponent<CombatState>();
             combo=GetComponentInChildren<BasicSwordCombo>(true);Parry=GetComponentInChildren<SwordParry>(true);
             if(GetComponent<WeaponSkillEffects>()==null)gameObject.AddComponent<WeaponSkillEffects>();
+            weaponVfx=GetComponent<Presentation.WeaponAbilityVfx>()??gameObject.AddComponent<Presentation.WeaponAbilityVfx>();
+            loadout.Changed-=ResetOpportunities;loadout.Changed+=ResetOpportunities;
         }
         public float Remaining(AbilityDefinition definition)=>definition!=null&&readyAt.TryGetValue(definition,out float time)?Mathf.Max(0,time-Time.time):0;
+        readonly Dictionary<AbilityDefinition,float> cooldownDurations=new Dictionary<AbilityDefinition,float>();
+        public float CooldownDuration(AbilityDefinition definition)=>definition!=null&&cooldownDurations.TryGetValue(definition,out var duration)?duration:definition?.cooldown??0;
         public bool CanCancel
         {
             get
             {
                 if(Current==null)return true;
+                if(Current.ChargedCombo&&!Current.Began)return true;
                 if(Current.Definition.usesSwordCombo)return combo!=null&&combo.CanBranch;
                 return !Current.Began?Current.Definition.cancelPreparation:Current.Ended&&Current.Definition.cancelRecovery;
             }
@@ -71,25 +79,44 @@ namespace Mismo.Gameplay.Player.Equipment
         {
             var weapon=loadout.ActiveDefinition;var definition=loadout.GetAbility(slot);
             if(definition==null||definition.IsPassive||health!=null&&health.IsDead||loadout.Belt!=null&&loadout.Belt.ControlsMovement)return false;
-            if(Remaining(definition)>0&&!(Current!=null&&definition.usesSwordCombo&&Current.Definition==definition))return false;
+            bool followup=slot==AbilitySlot.Basic&&CanFollowup(weapon);
+            if(Remaining(definition)>0&&!followup&&!(Current!=null&&definition.usesSwordCombo&&Current.Definition==definition))return false;
             if(stamina!=null&&stamina.Current<stamina.Cost(definition.staminaCost)||state.Focus<definition.focusCost)return false;
             if(Current!=null)
             {
-                if(definition.usesSwordCombo&&Current.Definition==definition&&combo!=null&&combo.RequestAttack())return true;
-                if(!CanCancel||!CanBranchInto(slot))
+                if(definition.usesSwordCombo&&Current.Definition==definition)
+                {if(!Current.Began)return false;if(combo!=null&&combo.RequestAttack())return true;}
+                if(!followup&&(!CanCancel||!CanBranchInto(slot)))
                 {
                     pending=slot;pendingDirection=direction;pendingPoint=groundPoint;pendingAim=aimPoint;pendingDash=false;pendingUntil=Time.time+.14f;return false;
                 }
                 Cancel();
             }
-            if(definition.usesSwordCombo&&(combo==null||!combo.RequestAttack(definition)))return false;
+            if(definition.usesSwordCombo&&combo==null)return false;
             // Combos pay at the start of each actual step, including the first.
             if(!definition.usesSwordCombo)stamina?.TrySpend(definition.staminaCost);
+            // A sword combo enters its active phase immediately. Keeping Began false would make
+            // PlayerController refresh the camera aim every frame while the animated weapon moves,
+            // which can rotate the character unpredictably at close range.
+            Current=new AbilityExecution(this,weapon,definition,direction.sqrMagnitude>.001f?direction.normalized:Motor.Facing,groundPoint)
+            {
+                AimPoint=aimPoint,
+                Held=held,
+                Began=false
+            };
+            ConfigureOpening(Current,followup);
+            if(definition.usesSwordCombo&&(!Current.ChargedCombo||Current.CounterOpener))
+            {
+                if(!StartCombo(Current)){Current=null;return false;}
+            }
             state.Spend(definition.focusCost);
-            Current=new AbilityExecution(this,weapon,definition,direction.sqrMagnitude>.001f?direction.normalized:Motor.Facing,groundPoint){AimPoint=aimPoint,Held=held};
-            if(definition.usesSwordCombo)PlayExecutionSound(definition,combo.CurrentStepIndex);
+            if(Current.Began)ConsumeOpening(Current);
+            weaponVfx.Begin(Current);
+            if(Current.Began)PlayExecutionSound(definition,combo.CurrentStepIndex);
             else StartPreparationSound(definition);
-            readyAt[definition]=Time.time+definition.cooldown/(slot==AbilitySlot.Basic?Current.AttackSpeed:1);loadout.MarkCombat();Started?.Invoke(definition);return true;
+            var inventory=GetComponent<Inventory.PlayerInventory>();
+            float cooldown=inventory!=null?inventory.AbilityCooldown(weapon,definition,slot==AbilitySlot.Basic):definition.cooldown/(slot==AbilitySlot.Basic?Current.AttackSpeed:1);
+            cooldownDurations[definition]=cooldown;readyAt[definition]=Time.time+cooldown;loadout.MarkCombat();Started?.Invoke(definition);return true;
         }
         public bool TryDash(Vector3 direction)
         {
@@ -98,11 +125,11 @@ namespace Mismo.Gameplay.Player.Equipment
             if(!CanCancel){pendingDash=true;pending=null;pendingDirection=direction;pendingUntil=Time.time+.14f;return false;}
             Cancel();return belt.TryStart(direction,Motor.IsGrounded);
         }
-        public void SetHeld(bool held){if(Current!=null&&Current.Definition.chargeable)Current.Held=held;}
+        public void SetHeld(bool held){if(Current!=null&&Current.Chargeable)Current.Held=held;}
         public void Tick(float dt)
         {
             Parry?.Tick(dt);
-            if(health!=null&&health.IsDead){Cancel();return;}
+            if(health!=null&&health.IsDead){ResetOpportunities();Cancel();return;}
             Advance(dt);
             if(Time.time>pendingUntil){pending=null;pendingDash=false;}
             if(pendingDash&&CanCancel){Vector3 direction=pendingDirection;pendingDash=false;TryDash(direction);}
@@ -118,10 +145,20 @@ namespace Mismo.Gameplay.Player.Equipment
             var c=Current;var d=c.Definition;dt*=c.AttackSpeed;c.Elapsed+=dt;
             if(d.usesSwordCombo)
             {
+                if(!c.Began)
+                {
+                    c.Charge=Mathf.Clamp01(c.Elapsed/Mathf.Max(.01f,c.MaximumCharge));weaponVfx.SetCharge(c.Charge);
+                    if(c.Held&&c.Elapsed<c.MaximumCharge)return;
+                    c.OpeningStep=c.BreaksGuard?d.comboSteps.Length-1:0;
+                    if(!StartCombo(c)){Cancel();return;}
+                    c.Elapsed=0;ConsumeOpening(c);weaponVfx.Release();StopPreparationSound();PlayExecutionSound(d,combo.CurrentStepIndex);
+                    return;
+                }
                 int previousStep=combo.StepSerial;
                 combo.Tick(dt);
                 if(combo.IsActive&&combo.StepSerial!=previousStep){c.RefreshAttackSpeed();PlayExecutionSound(d,combo.CurrentStepIndex);}
-                if(!combo.IsActive&&!combo.IsRecovering)Current=null;
+                if(!combo.IsActive)weaponVfx.EndActive();
+                if(!combo.IsActive&&!combo.IsRecovering){weaponVfx.Complete();Current=null;}
                 return;
             }
             float start=Mathf.Max(0,d.preparation);
@@ -130,17 +167,18 @@ namespace Mismo.Gameplay.Player.Equipment
                 if(!c.Began)
                 {
                     c.Charge=Mathf.Clamp01((c.Elapsed-start)/Mathf.Max(.01f,d.maximumCharge-start));
+                    weaponVfx.SetCharge(c.Charge);
                     if(c.Elapsed<start||c.Held&&c.Elapsed<d.maximumCharge)return;
                     c.ReleasedAt=Mathf.Max(start,Mathf.Min(c.Elapsed,d.maximumCharge));
                 }
                 start=c.ReleasedAt;
             }
             float end=start+Mathf.Max(.01f,d.active);
-            if(!c.Began&&c.Elapsed>=start){c.Began=true;StopPreparationSound();PlayExecutionSound(d);foreach(var action in d.actions)action?.Begin(c);}
+            if(!c.Began&&c.Elapsed>=start){c.Began=true;weaponVfx.Release();StopPreparationSound();PlayExecutionSound(d);foreach(var action in d.actions)action?.Begin(c);}
             float activeDt=Mathf.Max(0,Mathf.Min(c.Elapsed,end)-Mathf.Max(c.Elapsed-dt,start));
             if(c.Began&&!c.Ended&&activeDt>0)foreach(var action in d.actions)action?.Tick(c,activeDt);
-            if(c.Began&&!c.Ended&&c.Elapsed>=end)EndActions(c);
-            if(c.Elapsed>=end+d.recovery)Current=null;
+            if(c.Began&&!c.Ended&&c.Elapsed>=end){EndActions(c);weaponVfx.EndActive();}
+            if(c.Elapsed>=end+d.recovery){weaponVfx.Complete();Current=null;}
         }
         static void PlayExecutionSound(AbilityDefinition definition, int comboStep = -1)
         {
@@ -188,10 +226,14 @@ namespace Mismo.Gameplay.Player.Equipment
             if(paused&&!preparationAudioPaused){preparationAudio.Pause();preparationAudioPaused=true;}
             else if(!paused&&preparationAudioPaused){preparationAudio.UnPause();preparationAudioPaused=false;}
         }
-        static void EndActions(AbilityExecution c){c.Ended=true;foreach(var action in c.Definition.actions)action?.End(c);}
+        static void EndActions(AbilityExecution c,bool cancelled=false)
+        {
+            c.Ended=true;foreach(var action in c.Definition.actions)action?.End(c);
+            if(!cancelled&&System.Array.Exists(c.Definition.actions,a=>a?.IsEvasion==true))c.Runner.OnWeaponEvasionCompleted(c);
+        }
         public bool Interrupt()
         {
-            if(Current==null||Current.Began||!Current.Definition.interruptible)return false;
+            if(Current==null||Current.Began||!Current.Definition.interruptible&&!Current.ChargedCombo)return false;
             state.Reward(0,"INTERRUMPIDO");Cancel();return true;
         }
         // Choque lateral: corta sólo el avance si la acción lo permite; si no, cancela la habilidad.
@@ -203,14 +245,15 @@ namespace Mismo.Gameplay.Player.Equipment
         }
         public void Cancel()
         {
+            weaponVfx?.Clear();
             StopPreparationSound();
             pending=null;pendingDash=false;
             if(Current==null)return;
             if(Current.Definition.usesSwordCombo)combo?.Cancel();
-            if(Current.Began&&!Current.Ended)EndActions(Current);
+            if(Current.Began&&!Current.Ended)EndActions(Current,true);
             Parry?.Cancel();GetComponent<DefenseWindow>()?.CloseParry();Motor?.ClearControlledMovement();Current=null;
         }
-        void OnDisable()=>Cancel();
-        void OnDestroy(){if(preparationAudio!=null)Destroy(preparationAudio);}
+        void OnDisable(){ResetOpportunities();Cancel();}
+        void OnDestroy(){if(loadout!=null)loadout.Changed-=ResetOpportunities;if(preparationAudio!=null)Destroy(preparationAudio);}
     }
 }

@@ -8,14 +8,15 @@ namespace Mismo.Gameplay.Player.Presentation
     /// <summary>Quiet fantasy menus: shared typography, monochrome icons and restrained focus states.</summary>
     public static class QuietFantasyUI
     {
-        public static readonly Color Ink=new Color(.91f,.89f,.82f),Muted=new Color(.64f,.66f,.60f),Amber=new Color(.87f,.70f,.37f);
+        // Secondary copy still carries instructions and requirements: keep it bright enough to read.
+        public static readonly Color Ink=new Color(.91f,.89f,.82f),Muted=new Color(.82f,.84f,.80f),Amber=new Color(.87f,.70f,.37f);
         public static readonly Color Surface=new Color(.047f,.071f,.082f,.86f),Rule=new Color(.88f,.90f,.88f,.7f);
         public static readonly Rect MenuWindow=new Rect(28,20,1224,760);
         public static readonly Rect MenuBackButton=new Rect(1090,38,52,47);
         public static readonly Rect MenuCloseButton=new Rect(1162,38,52,47);
         public static void MenuBackground(Mismo.Gameplay.Player.Equipment.Inventory.InventoryUIIcons icons)
         {
-            float opacity=icons!=null?Mathf.Clamp01(icons.panelOpacity)*Mathf.Clamp01(icons.inventoryBackgroundOpacity):.7f;
+            float opacity=icons!=null?Mathf.Clamp01(icons.panelOpacity)*Mathf.Clamp01(icons.inventoryBackgroundOpacity):.96f;
             FantasyUI.Panel(MenuWindow,opacity);
         }
         public static void MenuDivider()=>Border(new Rect(64,94,1150,1),new Color(.78f,.70f,.51f,.35f));

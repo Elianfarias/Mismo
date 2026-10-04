@@ -62,7 +62,7 @@ namespace Mismo.Gameplay.Player.Presentation
             celebration.title.fontSize = 33; celebration.title.fontSizeMax = 33; celebration.title.fontSizeMin = 26; celebration.title.rectTransform.anchoredPosition = new Vector2(0, 17);
             celebration.title.rectTransform.sizeDelta = new Vector2(478,44);
             celebration.body.rectTransform.anchoredPosition = new Vector2(0,-24);
-            notice = CreateCard("Rewards", new Vector2(1,.5f), new Vector2(-215, -30), new Vector2(380, 96), true, 3.5f);
+            notice = CreateCard("Rewards", new Vector2(1,.5f), new Vector2(-215, -105), new Vector2(380, 96), true, 3.5f);
             notice.title.gameObject.SetActive(false); notice.title.fontSize = 15; notice.title.fontSizeMax = 15; notice.title.fontSizeMin = 12;
             notice.body.rectTransform.sizeDelta = new Vector2(344,52); notice.body.rectTransform.anchoredPosition = Vector2.zero;
             lastNotice = inventory.Notice;
@@ -141,8 +141,17 @@ namespace Mismo.Gameplay.Player.Presentation
             foreach (var mastery in after.masteries)
             {
                 int previous = before.Find(mastery.familyId)?.level ?? 1;
-                if (mastery.level <= previous) continue;
-                celebrations.Enqueue(new Celebration { title = "Maestría mejorada", body = L.Format(mastery.level-previous==1 ? "{0} · Nivel {1} · +{2} punto" : "{0} · Nivel {1} · +{2} puntos", L.Text(inventory.MasteryDisplayName(mastery.familyId)), mastery.level, mastery.level-previous) });
+                if (mastery.level > previous)
+                    celebrations.Enqueue(new Celebration { title = "Maestría mejorada", body = L.Format("{0} · Nivel {1} · +{2} puntos de arma\nHabilidades: {3} puntos disponibles [K]", L.Text(inventory.MasteryDisplayName(mastery.familyId)), mastery.level, mastery.level-previous,mastery.AbilityPoints(inventory.Rules.masteryLevelsPerAbilityPoint)) });
+                if(mastery.abilityProgress==null)continue;
+                foreach(var skill in mastery.abilityProgress)
+                {
+                    var definition=inventory.ProgressAbility(mastery.familyId,skill.abilityId);
+                    if(definition==null)continue;
+                    var old=before.Find(mastery.familyId)?.SkillProgress(skill.abilityId);
+                    if(skill.IsMastered(definition.masteryUsesRequired)&&old?.IsMastered(definition.masteryUsesRequired)!=true)
+                        celebrations.Enqueue(new Celebration{title="Habilidad dominada",body=definition.DisplayName+"\nElegí un modificador opcional en K."});
+                }
             }
             // At most 24 celebrations can be pending; repeated rewards cannot grow the HUD without bound.
             while (celebrations.Count > 24) celebrations.Dequeue();

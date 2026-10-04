@@ -25,6 +25,7 @@ namespace Mismo.Gameplay.Combat
         private float damageMultiplier;
         private string family;
         private float focusGain;
+        private string abilityId;private long abilityUseId;private float postureMultiplier;private bool breaksGuard;
         private readonly BladeHistory[] blades = { new BladeHistory(), new BladeHistory() };
         private sealed class BladeHistory { public Transform visual; public Vector3 a,b; public bool valid; }
         private Vector3? bladeContact;
@@ -69,6 +70,11 @@ namespace Mismo.Gameplay.Combat
             var loadout = GetComponentInParent<EquipmentLoadout>();
             var weapon = loadout != null ? loadout.ActiveDefinition : null;
             damageMultiplier = inventory != null ? inventory.DamageMultiplier(weapon) : 1;
+            var cast=GetComponentInParent<AbilityRunner>()?.Current;
+            var ability=cast?.Definition??loadout?.GetAbility(AbilitySlot.Basic);
+            if(inventory!=null)damageMultiplier*=inventory.AbilityDamageMultiplier(weapon,ability);
+            abilityId=ability?.Id;abilityUseId=cast?.AttackId??AttackIdentity.Next();
+            postureMultiplier=cast?.PostureMultiplier??1;breaksGuard=cast?.BreaksGuard??false;
             family = weapon != null ? weapon.MasteryId : null;
             focusGain = GetComponentInParent<AbilityRunner>()?.Current?.Definition.focusGainOnHit
                 ?? loadout?.GetAbility(AbilitySlot.Basic)?.focusGainOnHit ?? 0;
@@ -106,7 +112,7 @@ namespace Mismo.Gameplay.Combat
                 if (!damageConfigured)
                 {
                     rangedBasic = GetComponentInParent<WeaponSkillEffects>()?.TryThrowBuckler(motor != null ? motor.Facing : owner.forward) == true;
-                    damageDealer.Configure(step.Damage * damageMultiplier, family, focusGain);
+                    damageDealer.Configure(step.Damage * damageMultiplier, family, focusGain,abilityId,abilityUseId,postureMultiplier,breaksGuard);
                     damageConfigured = true;
                 }
                 if (!rangedBasic)

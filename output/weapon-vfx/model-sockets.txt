@@ -1,0 +1,8 @@
+Sword/Sword scale=(0.60, 0.60, 0.60) bounds=Center: (0.00, 0.00, 0.01), Extents: (0.31, 0.89, 0.07)
+  tip (0.00, 0.89, 0.01)
+  blade (0.00, 0.44, 0.01)
+Sword/GuardianSword scale=(1.00, 1.00, 1.00) bounds=Center: (0.01, 0.00, 0.00), Extents: (0.15, 0.55, 0.04)
+  tip (0.01, 0.55, 0.00)
+  blade (0.01, 0.27, 0.00)
+Bow/Bow scale=(1.00, 1.00, 1.00) bounds=Center: (0.00, 0.00, 0.12), Extents: (0.05, 0.58, 0.21)
+  bowstring (0.00, 0.00, 0.12)

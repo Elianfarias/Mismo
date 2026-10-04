@@ -1,0 +1,25 @@
+Mode: built-in image_gen tool.
+Reference order:
+1. User frog illustration: C:/Users/elian/AppData/Local/Temp/codex-clipboard-6f577e92-6d69-45e1-b830-8b78df0b542c.png
+2. Mage: output/arcane-mage/Hero.png
+3. Warrior: output/ashen-warrior/Hero.png
+Final image: Assets/Art/Textures/Concepts/Player/NinjaFrog_Voxel_Concept_v1.png
+
+Use case: stylized-concept.
+Asset type: production character concept sheet for the voxel game MISMO.
+
+INPUT IMAGES AND ROLES:
+Image 1 is the SUBJECT AND COSTUME reference: the illustrated green frog ninja. Translate this frog and its outfit into true volumetric voxel art; remove the katana completely.
+Images 2 and 3 are ART STYLE references only: the actual mage and warrior characters from the same game. Match their small square-faced cubic construction, stepped silhouettes, readable layered clothes, compact humanoid proportions and studio presentation. Do not include the mage or warrior in the output.
+
+PRIMARY REQUEST: Create one polished landscape 3:2 concept sheet for an unarmed anthropomorphic frog ninja that convincingly belongs beside those two characters. Every visible form must be sculpted from clearly readable small axis-aligned cubes: skin, eyes, cheeks, cloth folds, cords, hands and frog toes. Three-dimensional physical voxel sculpture, not a pixelated filter over a smooth model. Keep the cube density close to the reference characters. Avoid giant plain Minecraft blocks, smooth rounded anatomy, beveled polygon models, realistic fabric textures, painted brush strokes and noisy microvoxel glitter.
+
+DESIGN: Preserve the frog reference's recognizable broad green head, two raised golden-amber eyes with dark pupils, pale sage lower jaw, wide quiet horizontal mouth, narrow amphibian shoulders and agile stance. Shape the bulging eyes with stepped cubes; pupils and highlights should be small square patches flush with the eye surfaces. Olive and moss green skin with restrained darker green square markings. Burnt orange scarf, tied snugly around the actual neck with two visible fabric tails. Loose worn pale gray-green short jacket with broad short sleeves, torn square-step hems and a few simple darker patches, over dark olive clothing. Muted burgundy cloth sash knotted around the waist, short hanging sash ends and subtle simple brown ties. Baggy dark desaturated green ninja trousers gathered below the knees, natural frog lower legs and splayed webbed three-toed feet; sculpt toes as connected stepped blocks, not boots. Block-built amphibian hands. Retain the lively wandering-ninja personality of image 1 without copying its painted medium. Clear separation of head, torso, waist, trousers and feet; balanced proportions and generous volume without oversized shins. Clothing attaches convincingly to the body.
+
+ABSOLUTE WEAPON EXCLUSION: No katana, sword, sheath, scabbard, sword handle, blade, dagger, kunai, shuriken, staff or any other weapon anywhere, including the back and waist and all small reference views. Empty hands only.
+
+COMPOSITION: A large full-body front three-quarter hero view on the left, one empty hand held near the chest in a relaxed ninja gesture and the other visible at the side; friendly but focused expression. Entire head, scarf tails and toes visible, soles supported by the floor. On the right, three smaller clean modeling views of the EXACT SAME character and clothing: straight FRONT T-POSE with arms horizontal and hands empty, SIDE PROFILE, and BACK view showing the scarf knot and jacket. Keep the clothes, palette, body proportions and cube scale consistent across all four views. Back and side must remain completely unarmed. Comfortable negative space between views. Small unobtrusive palette swatches along the lower edge.
+
+PRESENTATION: Muted dark slate blue studio gradient matching images 2 and 3, soft contact shadows, warm soft key and cool fill, bright enough to read every green and cloth layer. Premium clean voxel game concept art. No scenery, floating particles, dramatic effects, base platform or extra characters.
+TEXT: only the understated title "MISMO / RANA NINJA" and small labels "POSE T", "PERFIL", "ESPALDA". No other text, logos or watermark.
+

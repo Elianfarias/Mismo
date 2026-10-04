@@ -8,7 +8,7 @@ namespace Mismo.Gameplay.Player.Equipment
     [Serializable]
     public sealed class PrimeBleedAction : AbilityAction
     {
-        public override void Begin(AbilityExecution c)=>c.Owner.GetComponent<WeaponSkillEffects>()?.PrimeBleed();
+        public override void Begin(AbilityExecution c)=>c.Owner.GetComponent<WeaponSkillEffects>()?.PrimeBleed(c);
     }
 
     [Serializable]
@@ -26,7 +26,7 @@ namespace Mismo.Gameplay.Player.Equipment
                 if(!(receiver is Component target)||target.transform.root==c.Owner.transform.root||!c.HitTargets.Add(target))continue;
                 Vector3 point=other.ClosestPoint(origin);
                 if(Physics.Linecast(origin,point,out var wall,~0,QueryTriggerInteraction.Ignore)&&wall.transform.root!=c.Owner.transform.root&&wall.collider.GetComponentInParent<IDamageReceiver>()!=receiver)continue;
-                if(!receiver.ReceiveDamage(new DamageInfo(damage*c.DamageMultiplier,c.Owner,point,(target.transform.position-c.Owner.transform.position).normalized,c.AttackId,postureDamage,weaponFamilyId:c.WeaponFamilyId,focusGainOnHit:c.Definition.focusGainOnHit)))continue;
+                if(!receiver.ReceiveDamage(new DamageInfo(damage*c.DamageMultiplier,c.Owner,point,(target.transform.position-c.Owner.transform.position).normalized,c.AttackId,postureDamage,weaponFamilyId:c.WeaponFamilyId,focusGainOnHit:c.Definition.focusGainOnHit,abilityId:c.Definition.Id,abilityUseId:c.AttackId)))continue;
                 CombatAilment.WeakenArmor(target.gameObject,armorMultiplier,armorDuration);
             }
         }
@@ -70,7 +70,7 @@ namespace Mismo.Gameplay.Player.Equipment
                 if(!(collider.GetComponentInParent<IDamageReceiver>() is Component target)||target.transform.IsChildOf(c.Owner.transform)||!seen.Add(target))continue;
                 Vector3 point=collider.ClosestPoint(origin);
                 if(Physics.Linecast(origin,point,out var wall,~0,QueryTriggerInteraction.Ignore)&&!wall.transform.IsChildOf(c.Owner.transform)&&wall.collider.GetComponentInParent<IDamageReceiver>()!=(target as IDamageReceiver))continue;
-                if(!((IDamageReceiver)target).ReceiveDamage(new DamageInfo(damage*multiplier*c.DamageMultiplier,c.Owner,point,c.Direction,id,postureDamage,weaponFamilyId:c.WeaponFamilyId,focusGainOnHit:c.Definition.focusGainOnHit)))continue;
+                if(!((IDamageReceiver)target).ReceiveDamage(new DamageInfo(damage*multiplier*c.DamageMultiplier,c.Owner,point,c.Direction,id,postureDamage,weaponFamilyId:c.WeaponFamilyId,focusGainOnHit:c.Definition.focusGainOnHit,abilityId:c.Definition.Id,abilityUseId:c.AttackId)))continue;
                 landed.TryGetValue(target,out int count);
                 landed[target]=++count;
                 if(stunSeconds>0&&count>=hits.Length)target.GetComponent<CombatState>()?.Stagger(stunSeconds);
@@ -91,6 +91,7 @@ namespace Mismo.Gameplay.Player.Equipment
             Vector3 origin=c.Owner.transform.position+Vector3.up*1.2f;
             Vector3 direction=c.AimPoint.HasValue?(c.AimPoint.Value-origin).normalized:c.Direction;
             var projectile=ProjectileInstance.Spawn(c.Owner,origin,direction,damage*c.DamageMultiplier,speed,c.Definition.range,radius,c.Weapon.SecondaryVisualPrefab,c.AttackId,postureDamage,c.WeaponFamilyId,c.Definition.focusGainOnHit);
+            projectile.AbilityId=c.Definition.Id;projectile.AbilityUseId=c.AttackId;
             // Weapon prefabs carry colliders; the projectile would hit its own visual.
             foreach(var collider in projectile.GetComponentsInChildren<Collider>())collider.enabled=false;
             if(spinsPerSecond>0)projectile.gameObject.AddComponent<SpinningVisual>().turnsPerSecond=spinsPerSecond;
@@ -122,6 +123,6 @@ namespace Mismo.Gameplay.Player.Equipment
         public float armorMultiplier=.45f;
         [Tooltip("Fracción del daño de los básicos que cura mientras dura (0.15 = 15 %). Habilidades y sangrado no curan.")]
         [Range(0,1)] public float lifeSteal=.15f;
-        public override void Begin(AbilityExecution c)=>c.Owner.GetComponent<WeaponSkillEffects>()?.Berserk(this);
+        public override void Begin(AbilityExecution c)=>c.Owner.GetComponent<WeaponSkillEffects>()?.Berserk(this,c);
     }
 }

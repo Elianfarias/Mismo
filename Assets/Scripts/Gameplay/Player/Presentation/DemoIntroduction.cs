@@ -113,6 +113,7 @@ namespace Mismo.Gameplay.Player.Presentation
         }
         void OnGUI()
         {
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
             if(introducing)
             {
                 var matrix=GUI.matrix;GUI.depth=-400;

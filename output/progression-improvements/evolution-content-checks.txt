@@ -1,0 +1,14 @@
+PASS Sword/SwordCombo VFX reference complete prefab roots
+PASS Sword/SwordParry VFX reference complete prefab roots
+PASS Sword/SwordLunge VFX reference complete prefab roots
+PASS Bow/BowShot VFX reference complete prefab roots
+PASS Bow/BowPower VFX reference complete prefab roots
+PASS Bow/BowShot all bindings above head and face camera
+PASS Bow/BowPower all bindings above head and face camera
+PASS Sword/SwordCombo expected mechanical evolutions serialized
+PASS Sword/SwordParry expected mechanical evolutions serialized
+PASS Sword/SwordLunge expected mechanical evolutions serialized
+PASS Old lunge recovery remains for save compatibility
+PASS AbilityRunner.Evolutions.cs.meta has Unity GUID
+PASS ProgressionEvolutionChecks.cs.meta has Unity GUID
+PASS ALL 13 serialized-content checks

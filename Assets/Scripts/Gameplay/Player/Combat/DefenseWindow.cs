@@ -18,7 +18,8 @@ namespace Mismo.Gameplay.Combat
             if(guard>0&&!damage.Area)
             {
                 var motor=GetComponent<Mismo.Gameplay.Player.Movement.PlayerMotor>();
-                if(Vector3.Dot(motor!=null?motor.Facing:transform.forward,-damage.Direction)>.1f)return HitOutcome.Block;
+                if(Vector3.Dot(motor!=null?motor.Facing:transform.forward,-damage.Direction)>.1f)
+                {if(damage.BreaksGuard)guard=0;else return HitOutcome.Block;}
             }
             if(parry>0 && damage.Parryable && !damage.Area)
             {

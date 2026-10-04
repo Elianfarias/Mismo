@@ -1,0 +1,15 @@
+Real Play Mode — serialized weapon VFX
+PASS Real bow charge starts
+PASS Authored BowCharge prefab emits visible particles from the bow socket
+PASS Gameplay pause freezes authored charge effect
+PASS Particle clock stays frozen across real frames
+PASS Releasing replaces charge with the authored release burst
+PASS Release burst leaves no live particles after its lifetime
+PASS Swap to real sword definition
+PASS Real Estocada starts
+PASS Authored amber blade release emits at the sword socket
+PASS Cancel removes the real blade effect immediately
+PASS Real Parry starts
+PASS Authored ParryHalo is active during defense
+PASS Death clears real authored effects
+PASS ALL real VFX playback checks

@@ -18,8 +18,11 @@ MonoBehaviour:
     body: "Esta barra muestra cu\xE1nta vida te queda. Los golpes enemigos la reducen. En esta demo, si ca\xE9s, volv\xE9s a comenzar en la cueva."
     highlight: 1
   - title: Tu estamina
-    body: "Correr, esquivar y algunas acciones gastan estamina. Dej\xE1 de gastarla un momento para recuperarla; reserv\xE1 un poco para defenderte."
+    body: "Correr, esquivar y atacar gastan estamina. Empezás con 80. En Personaje (P) podés invertir puntos para aumentar su capacidad: la barra se alarga. Dejá de gastar estamina un momento para recuperarla."
     highlight: 2
+  - title: Doble salto
+    body: "Presioná Espacio para saltar. Mientras estás en el aire, soltá y volvé a presionar Espacio para hacer un doble salto. Al tocar el suelo recuperás ambos saltos."
+    highlight: 0
   - title: "Sal\xED de la cueva"
     body: "Movete con WASD y mir\xE1 alrededor con el mouse. Segu\xED el sendero: al fondo te espera el primer pueblo."
     highlight: 0

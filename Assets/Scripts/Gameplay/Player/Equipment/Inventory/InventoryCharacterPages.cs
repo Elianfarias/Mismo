@@ -8,15 +8,17 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
     public sealed partial class InventoryPanel
     {
         int selectedAbilityIndex;
-        readonly int[] pendingMastery=new int[2];
+        readonly int[] pendingMastery=new int[3];
+        int PendingMasteryCount=>pendingMastery[0]+pendingMastery[1]+pendingMastery[2];
         WeaponDefinition pendingMasteryWeapon;
         string pendingMasteryFamily;
-        void ResetMasteryDraft(){System.Array.Clear(pendingMastery,0,2);pendingMasteryWeapon=null;pendingMasteryFamily=null;}
+        void ResetMasteryDraft(){System.Array.Clear(pendingMastery,0,pendingMastery.Length);pendingMasteryWeapon=null;pendingMasteryFamily=null;}
         int skillDragIndex=-1,skillDragControl;
         bool skillDragging;
         Vector2 skillDragOrigin,detailScroll;
         WeaponDefinition skillDragWeapon;
-        readonly int[] pendingAttributes=new int[3];
+        readonly int[] pendingAttributes=new int[4];
+        int PendingAttributeCount { get { int total=0;foreach(int points in pendingAttributes)total+=points;return total; } }
         void OnApplicationFocus(bool focused){if(!focused){CancelSkillDrag();CancelInventoryDrag();rotatingPreview=false;if(IsOpen&&page==Page.Menu)Close();}}
         bool IsQuietPage=>page==Page.Character||page==Page.Weapons||page==Page.Skills||page==Page.Bestiary||page==Page.Mounts;
         WeaponDefinition CurrentMenuWeapon=>skillsWeapon==loadout.GetSlot(0)||skillsWeapon==loadout.GetSlot(1)?skillsWeapon??loadout.ActiveDefinition:loadout.ActiveDefinition;
@@ -58,32 +60,33 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         void DrawCharacterSheet()
         {
             var p=inventory.Progression;var rules=inventory.Rules;
+            U.Text(new Rect(456,121,369,36),PlayerAppearance.DisplayName,24,U.Ink,true,TextAnchor.MiddleCenter);
             U.Text(new Rect(65,165,320,45),"ATRIBUTOS",28,null,true);
-            int pending=pendingAttributes[0]+pendingAttributes[1]+pendingAttributes[2];
-            if(pending>p.Available){System.Array.Clear(pendingAttributes,0,3);pending=0;}
+            int pending=PendingAttributeCount;
+            if(pending>p.Available){System.Array.Clear(pendingAttributes,0,pendingAttributes.Length);pending=0;}
             U.Text(new Rect(65,208,320,32),L.Format("Puntos disponibles: {0}",p.Available-pending),20,U.Muted);
-            string[] names={"Vida","Ataque","Armadura"},icons={"heart-inside","broadsword","checked-shield"};
-            string[] bonus={L.Format("+{0:0.#}",rules.lifePerPoint),L.Format("+{0:0.#}%",rules.attackPerPoint*100),L.Format("+{0:0.#}",rules.armorPerPoint)};
-            int[] spent={p.lifePoints,p.attackPoints,p.armorPoints};
-            for(int i=0;i<3;i++)
+            string[] names={"Vida","Ataque","Armadura","Estamina"},icons={"heart-inside","broadsword","checked-shield","wingfoot"};
+            string[] bonus={L.Format("+{0:0.#}",rules.lifePerPoint),L.Format("+{0:0.#}%",rules.attackPerPoint*100),L.Format("+{0:0.#}",rules.armorPerPoint),L.Format("+{0:0.#}",rules.staminaPerPoint)};
+            int[] spent={p.lifePoints,p.attackPoints,p.armorPoints,p.staminaPoints};
+            for(int i=0;i<4;i++)
             {
-                float y=270+i*111;
-                var row=new Rect(57,y-7,342,100);
+                float y=253+i*91;
+                var row=new Rect(57,y-3,342,73);
                 if(pendingAttributes[i]>0)PlayerHUD.Fill(row,new Color(.66f,.57f,.35f,.09f));
                 U.DrawIcon(new Rect(68,y+15,39,39),icons[i]);
-                U.Text(new Rect(118,y+8,145,32),names[i],22,U.Ink);
-                U.Text(new Rect(118,y+45,130,30),bonus[i]+" / punto",17,U.Muted);
+                U.Text(new Rect(118,y+3,138,30),names[i],21,U.Ink);
+                U.Text(new Rect(118,y+35,210,30),bonus[i]+" / punto",16,U.Muted);
                 bool enabled=GUI.enabled;
                 GUI.enabled=enabled&&pendingAttributes[i]>0;
                 if(U.Button(new Rect(254,y+6,38,38),"−"))pendingAttributes[i]--;
                 U.Text(new Rect(294,y+10,48,30),(spent[i]+pendingAttributes[i]).ToString(),21,pendingAttributes[i]>0?U.Amber:U.Ink,false,TextAnchor.MiddleCenter);
-                GUI.enabled=enabled&&loadout.CanChangeEquipment&&p.Available>pendingAttributes[0]+pendingAttributes[1]+pendingAttributes[2];
+                GUI.enabled=enabled&&loadout.CanChangeEquipment&&p.Available>PendingAttributeCount;
                 if(U.Button(new Rect(345,y+6,38,38),"+"))pendingAttributes[i]++;
                 GUI.enabled=enabled;
-                QuietLine(67,y+97,322);
+                QuietLine(67,y+71,322);
             }
-            bool was=GUI.enabled;GUI.enabled=was&&loadout.CanChangeEquipment&&pendingAttributes[0]+pendingAttributes[1]+pendingAttributes[2]>0;
-            if(U.Button(new Rect(65,647,322,47),"Aplicar")&&inventory.TrySpendAttributes(pendingAttributes[0],pendingAttributes[1],pendingAttributes[2]))System.Array.Clear(pendingAttributes,0,3);
+            bool was=GUI.enabled;GUI.enabled=was&&loadout.CanChangeEquipment&&PendingAttributeCount>0;
+            if(U.Button(new Rect(65,647,322,47),"Aplicar")&&inventory.TrySpendAttributes(pendingAttributes[0],pendingAttributes[1],pendingAttributes[2],pendingAttributes[3]))System.Array.Clear(pendingAttributes,0,pendingAttributes.Length);
             GUI.enabled=was;
             PlayerHUD.Fill(new Rect(422,180,1,525),U.Rule);
             U.Text(new Rect(456,165,369,38),L.Format("Nivel {0}",p.level),24,U.Ink,true,TextAnchor.MiddleCenter);
@@ -91,18 +94,19 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             DrawPreview(new Rect(445,252,391,459));
             PlayerHUD.Fill(new Rect(855,180,1,525),U.Rule);
             U.Text(new Rect(894,165,300,45),"TOTALES",28,null,true);
-            DrawTotal(894,263,"heart-inside","Vida máxima",health.Maximum.ToString("0.#",L.Culture));
-            DrawTotal(894,403,"broadsword","Ataque total",L.Format("{0:0.#}%",inventory.DamageMultiplier(loadout.ActiveDefinition)*100));
-            DrawTotal(894,543,"checked-shield","Armadura total",inventory.Armor.ToString("0.#",L.Culture));
-            U.Text(new Rect(894,678,309,67),"Incluye atributos y equipo.\nAtaque: 100% = daño base del arma activa.",17,U.Muted);
+            DrawTotal(894,245,"heart-inside","Vida máxima",health.Maximum.ToString("0.#",L.Culture));
+            DrawTotal(894,329,"broadsword","Ataque total",L.Format("{0:0.#}%",inventory.DamageMultiplier(loadout.ActiveDefinition)*100));
+            DrawTotal(894,413,"checked-shield","Armadura total",inventory.Armor.ToString("0.#",L.Culture));
+            DrawTotal(894,497,"wingfoot","Estamina máxima",(GetComponent<Movement.Stamina>()?.Maximum??0).ToString("0.#",L.Culture));
+            U.Text(new Rect(894,612,309,90),"Incluye atributos y equipo.\nAtaque: 100% = daño base del arma activa.",17,U.Muted);
             if(!loadout.CanChangeEquipment)U.Text(new Rect(65,728,720,29),"Salí de combate para mejorar atributos.",17,U.Amber);
         }
         void DrawTotal(float x,float y,string icon,string name,string value)
         {
             U.DrawIcon(new Rect(x,y+4,39,39),icon);
             U.Text(new Rect(x+58,y,250,31),name,21,U.Muted);
-            U.Text(new Rect(x+58,y+35,250,65),value,43,null,true);
-            QuietLine(x,y+113,307);
+            U.Text(new Rect(x+58,y+30,250,43),value,32,null,true);
+            QuietLine(x,y+77,307);
         }
         void DrawWeaponTabs()
         {
@@ -117,7 +121,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             DrawWeaponTabs();var weapon=CurrentMenuWeapon;if(weapon==null)return;
             var mastery=inventory.Mastery(weapon);if(mastery==null)return;
-            if(pendingMasteryWeapon!=weapon||pendingMasteryFamily!=weapon.MasteryId||pendingMastery[0]+pendingMastery[1]>mastery.Available)
+            if(pendingMasteryWeapon!=weapon||pendingMasteryFamily!=weapon.MasteryId||PendingMasteryCount>mastery.Available)
             {ResetMasteryDraft();pendingMasteryWeapon=weapon;pendingMasteryFamily=weapon.MasteryId;}
             var rules=inventory.Rules;
             U.Text(new Rect(65,234,460,45),weapon.DisplayName,29,null,true);
@@ -126,35 +130,38 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(U.Button(new Rect(115,689,330,40),"Ver equipo en inventario"))OpenPage(Page.Inventory);
             PlayerHUD.Fill(new Rect(595,228,1,482),U.Rule);
             U.Text(new Rect(649,235,540,45),"MAESTRÍA DEL ARMA",29,null,true);
-            U.Text(new Rect(649,293,510,37),L.Format("Nivel {0} · Puntos disponibles: {1}",mastery.level,mastery.Available-pendingMastery[0]-pendingMastery[1]),23);
+            U.Text(new Rect(649,293,510,37),L.Format("Nivel {0} · Puntos disponibles: {1}",mastery.level,mastery.Available-PendingMasteryCount),23);
             PlayerHUD.Fill(new Rect(650,345,529,3),U.Rule);
             float progress=mastery.level>=rules.masteryMaxLevel?1:(float)mastery.experience/Mathf.Max(1,rules.Needed(mastery.level,true));
             PlayerHUD.Fill(new Rect(650,345,529*Mathf.Clamp01(progress),3),U.Amber);
             U.Text(new Rect(650,360,520,30),mastery.level>=rules.masteryMaxLevel?"Maestría máxima":L.Format("{0} / {1} EXP",mastery.experience,rules.Needed(mastery.level,true)),18,U.Muted);
-            for(int i=0;i<2;i++)
+            for(int i=0;i<3;i++)
             {
-                float y=414+i*91;
-                U.DrawIcon(new Rect(650,y+6,38,38),i==0?"broadsword":"wingfoot");
-                U.Text(new Rect(705,y+5,225,32),i==0?"Daño":"Velocidad",22,U.Ink);
-                U.Text(new Rect(705,y+43,260,28),L.Format("+{0:0.#}% / punto",100*(i==0?rules.masteryDamagePerPoint:rules.masterySpeedPerPoint)),17,U.Muted);
+                float y=400+i*76;
+                int spent=i==0?mastery.damagePoints:i==1?mastery.speedPoints:mastery.cooldownPoints;
+                bool capped=i==2&&rules.CooldownReduction(spent+pendingMastery[i])>=rules.maximumCooldownReduction;
+                U.DrawIcon(new Rect(650,y+6,38,38),i==0?"broadsword":i==1?"wingfoot":"sprint");
+                U.Text(new Rect(705,y+2,285,32),i==0?"Daño":i==1?"Velocidad":"Recarga",22,U.Ink);
+                string bonus=i==2?L.Format("−{0:0.#}% / punto · Total {1:0.#}%",100*rules.cooldownReductionPerPoint,100*rules.CooldownReduction(spent+pendingMastery[i])):
+                    L.Format("+{0:0.#}% / punto",100*(i==0?rules.masteryDamagePerPoint:rules.masterySpeedPerPoint));
+                U.Text(new Rect(705,y+35,300,28),capped?"Límite alcanzado":bonus,16,U.Muted);
                 bool enabled=GUI.enabled;GUI.enabled=enabled&&pendingMastery[i]>0;
                 if(U.Button(new Rect(1010,y+5,38,38),"−"))pendingMastery[i]--;
-                U.Text(new Rect(1052,y+9,70,30),((i==0?mastery.damagePoints:mastery.speedPoints)+pendingMastery[i]).ToString(),21,pendingMastery[i]>0?U.Amber:U.Ink,false,TextAnchor.MiddleCenter);
-                GUI.enabled=enabled&&loadout.CanChangeEquipment&&mastery.Available>pendingMastery[0]+pendingMastery[1];
+                U.Text(new Rect(1052,y+9,70,30),(spent+pendingMastery[i]).ToString(),21,pendingMastery[i]>0?U.Amber:U.Ink,false,TextAnchor.MiddleCenter);
+                GUI.enabled=enabled&&loadout.CanChangeEquipment&&mastery.Available>PendingMasteryCount&&!capped;
                 if(U.Button(new Rect(1135,y+5,38,38),"+"))pendingMastery[i]++;
                 GUI.enabled=enabled;
-                QuietLine(650,y+78,529);
+                QuietLine(650,y+69,529);
             }
-            bool was=GUI.enabled;GUI.enabled=was&&loadout.CanChangeEquipment&&pendingMastery[0]+pendingMastery[1]>0;
-            if(U.Button(new Rect(650,613,529,45),"Aplicar")&&inventory.TrySpendMasteryPoints(weapon,pendingMastery[0],pendingMastery[1]))ResetMasteryDraft();
+            bool was=GUI.enabled;GUI.enabled=was&&loadout.CanChangeEquipment&&PendingMasteryCount>0;
+            if(U.Button(new Rect(650,634,250,43),"Aplicar")&&inventory.TrySpendMasteryPoints(weapon,pendingMastery[0],pendingMastery[1],pendingMastery[2]))ResetMasteryDraft();
             GUI.enabled=was;
             if(U.Button(new Rect(650,684,250,43),"Ver habilidades")){OpenPage(Page.Skills);skillsWeapon=weapon;}
             U.Text(new Rect(950,680,252,63),"Progreso compartido por familia de arma.",17,U.Muted);
             if(!loadout.CanChangeEquipment)U.Text(new Rect(650,734,550,26),"Salí de combate para mejorar el arma.",17,U.Amber);
         }
-        AbilityDefinition MenuAbility(WeaponDefinition weapon,int index)=>weapon.family!=null&&!weapon.overrideFamilyAbilities?weapon.family.Skill(index):weapon.GetAbility((AbilitySlot)(index+1));
-        int MenuUnlock(WeaponDefinition weapon,int index)=>weapon.family!=null&&!weapon.overrideFamilyAbilities?weapon.family.UnlockLevel(index):1;
-        bool CanDragSkill(WeaponDefinition weapon,int index)=>weapon!=null&&weapon.family!=null&&!weapon.overrideFamilyAbilities&&loadout.CanChangeEquipment&&MenuAbility(weapon,index)!=null&&(inventory.Mastery(weapon)?.level??1)>=MenuUnlock(weapon,index);
+        AbilityDefinition MenuAbility(WeaponDefinition weapon,int index)=>index==-1?weapon.GetAbility(AbilitySlot.Basic):weapon.family!=null&&!weapon.overrideFamilyAbilities?weapon.family.Skill(index):weapon.GetAbility((AbilitySlot)(index+1));
+        bool CanDragSkill(WeaponDefinition weapon,int index)=>index>=0&&weapon!=null&&weapon.family!=null&&!weapon.overrideFamilyAbilities&&loadout.CanChangeEquipment&&MenuAbility(weapon,index)!=null&&inventory.IsAbilityUnlocked(weapon,index);
         void StartSkillDrag(WeaponDefinition weapon,int index,int control)
         {
             if(!CanDragSkill(weapon,index))return;
@@ -165,46 +172,36 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         {
             DrawWeaponTabs();var weapon=CurrentMenuWeapon;if(weapon==null)return;
             int count=weapon.family!=null&&!weapon.overrideFamilyAbilities?weapon.family.SkillCount:3;
-            selectedAbilityIndex=Mathf.Clamp(selectedAbilityIndex,0,Mathf.Max(0,count-1));
+            selectedAbilityIndex=Mathf.Clamp(selectedAbilityIndex,-1,Mathf.Max(0,count-1));
             int control=GUIUtility.GetControlID("MismoSkillDrag".GetHashCode(),FocusType.Passive);
             if(skillDragIndex>=0&&(!CanDragSkill(skillDragWeapon,skillDragIndex)||weapon!=skillDragWeapon))CancelSkillDrag();
             var e=Event.current;
             if(skillDragIndex>=0&&e.type==EventType.MouseDrag)
             {if(Vector2.Distance(GUIUtility.GUIToScreenPoint(e.mousePosition),skillDragOrigin)>6)skillDragging=true;e.Use();}
             int level=inventory.Mastery(weapon)?.level??1;
-            U.Text(new Rect(65,207,650,29),L.Format("Maestría {0} · Colección de habilidades",level),18,U.Muted);
+            U.Text(new Rect(65,207,1140,29),L.Format("Maestría {0} · Puntos de habilidad: {1} · Elegí qué desbloquear",level,inventory.AvailableAbilityPoints(weapon)),18,U.Muted);
             var viewport=new Rect(65,254,683,321);
-            skillsScroll=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.BeginScrollView(viewport,skillsScroll,new Rect(0,0,657,Mathf.Max(315,Mathf.CeilToInt(count/3f)*157)));
-            for(int i=0;i<count;i++)
+            skillsScroll=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.BeginScrollView(viewport,skillsScroll,new Rect(0,0,657,Mathf.Max(315,Mathf.CeilToInt((count+1)/3f)*157)));
+            for(int i=-1;i<count;i++)
             {
                 var ability=MenuAbility(weapon,i);if(ability==null)continue;
-                int unlock=MenuUnlock(weapon,i);bool unlocked=level>=unlock;
-                var tile=new Rect(8+i%3*216,i/3*157+3,112,110);
+                bool unlocked=inventory.IsAbilityUnlocked(weapon,i);
+                int tileIndex=i+1;
+                var tile=new Rect(8+tileIndex%3*216,tileIndex/3*157+3,112,110);
                 bool selected=selectedAbilityIndex==i,hover=tile.Contains(e.mousePosition);
                 FantasyUI.FillSurface(tile,U.Surface);U.Border(tile,selected?U.Amber:hover?U.Ink:U.Rule);
                 float alpha=unlocked?1:.28f;if(skillDragging&&skillDragIndex==i)alpha=.25f;
                 U.DrawIcon(new Rect(tile.x+15,tile.y+15,82,80),U.AbilityIcon(ability),new Color(U.Ink.r,U.Ink.g,U.Ink.b,alpha));
                 if(!unlocked)U.DrawIcon(new Rect(tile.xMax-27,tile.yMax-27,22,22),"locked-chest",U.Muted);
-                if(ability.IsPassive)U.Text(new Rect(tile.x+5,tile.y+3,95,22),"PASIVA",12,U.Muted);
-                U.Text(new Rect(tile.x-3,tile.yMax+6,193,36),unlocked?ability.DisplayName:L.Format("Nivel {0} · {1}",unlock,ability.DisplayName),17,unlocked?U.Ink:U.Muted);
+                if(i==-1||ability.IsPassive)U.Text(new Rect(tile.x+5,tile.y+3,95,22),i==-1?"BÁSICO · M1":"PASIVA",12,U.Muted);
+                U.Text(new Rect(tile.x-3,tile.yMax+6,193,36),ability.DisplayName,17,unlocked?U.Ink:U.Muted);
                 if(e.type==EventType.MouseDown&&e.button==0&&tile.Contains(e.mousePosition))
                 {selectedAbilityIndex=i;detailScroll=Vector2.zero;StartSkillDrag(weapon,i,control);e.Use();}
             }
             GUI.EndScrollView();
             PlayerHUD.Fill(new Rect(774,254,1,315),U.Rule);
             var chosen=MenuAbility(weapon,selectedAbilityIndex);
-            if(chosen!=null)
-            {
-                U.DrawIcon(new Rect(816,253,43,43),U.AbilityIcon(chosen),U.Amber);
-                U.Text(new Rect(878,252,330,60),chosen.DisplayName,26,null,true);
-                U.Text(new Rect(815,320,385,34),(chosen.IsPassive?"Pasiva":"Activa")+" · "+weapon.DisplayName,19,U.Muted);
-                var style=new GUIStyle(GUI.skin.label){font=U.Body,fontSize=21,wordWrap=true};
-                float height=Mathf.Max(101,style.CalcHeight(new GUIContent(chosen.Description),359));
-                detailScroll=Mismo.Gameplay.Player.Presentation.QuietFantasyUI.BeginScrollView(new Rect(815,368,390,112),detailScroll,new Rect(0,0,364,height));
-                U.Text(new Rect(0,0,359,height),chosen.Description,21);GUI.EndScrollView();
-                U.Text(new Rect(815,500,386,31),chosen.IsPassive?"Efecto activo mientras está equipada":L.Format("Recarga {0:0.#} s",chosen.cooldown),20,U.Muted);
-                if(level<MenuUnlock(weapon,selectedAbilityIndex))U.Text(new Rect(815,538,390,32),L.Format("Requiere maestría {0}",MenuUnlock(weapon,selectedAbilityIndex)),19,U.Amber);
-            }
+            if(chosen!=null)DrawSkillDetails(weapon,chosen);
             QuietLine(65,596,1140);
             U.Text(new Rect(65,611,430,30),"HABILIDADES EQUIPADAS",21,null,true);
             U.Text(new Rect(633,612,571,30),loadout.CanChangeEquipment?"Arrastrá una habilidad a Q, E o R":"Salí de combate para cambiar habilidades.",19,loadout.CanChangeEquipment?U.Muted:U.Amber,false,TextAnchor.UpperRight);
@@ -236,6 +233,55 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 U.DrawIcon(new Rect(ghost.x+5,ghost.y+5,52,52),U.AbilityIcon(MenuAbility(skillDragWeapon,skillDragIndex)),U.Ink);
             }
             if(skillDragIndex>=0&&e.rawType==EventType.MouseUp){CancelSkillDrag();if(e.type!=EventType.Used)e.Use();}
+        }
+        void DrawSkillDetails(WeaponDefinition weapon,AbilityDefinition chosen)
+        {
+            bool unlocked=inventory.IsAbilityUnlocked(weapon,selectedAbilityIndex);
+            var progress=inventory.Mastery(weapon)?.SkillProgress(chosen.Id);
+            var style=new GUIStyle(GUI.skin.label){font=U.Body,fontSize=18,wordWrap=true};
+            float descriptionHeight=Mathf.Max(60,style.CalcHeight(new GUIContent(chosen.Description),359));
+            float extra=unlocked?130+(chosen.masteryModifiers?.Length??0)*210:140;
+            detailScroll=U.BeginScrollView(new Rect(805,252,406,326),detailScroll,new Rect(0,0,380,120+descriptionHeight+extra));
+            U.DrawIcon(new Rect(7,3,40,40),U.AbilityIcon(chosen),U.Amber);
+            U.Text(new Rect(57,0,311,58),chosen.DisplayName,24,null,true);
+            U.Text(new Rect(7,62,360,descriptionHeight),chosen.Description,18);
+            float y=72+descriptionHeight;
+            U.Text(new Rect(7,y,360,30),selectedAbilityIndex==-1?"Básico M1 · Siempre disponible":chosen.IsPassive?"Pasiva · Activa mientras está equipada":L.Format("Recarga {0:0.#} s",inventory.AbilityCooldown(weapon,chosen)),17,U.Muted);y+=38;
+            bool was=GUI.enabled;
+            if(!unlocked)
+            {
+                GUI.enabled=was&&loadout.CanChangeEquipment&&inventory.AvailableAbilityPoints(weapon)>0;
+                if(U.Button(new Rect(7,y,359,40),"Desbloquear · 1 punto"))inventory.TryUnlockAbility(weapon,selectedAbilityIndex);
+                GUI.enabled=was;U.Text(new Rect(7,y+46,359,78),L.Format("Ganás 1 punto cada {0} niveles de maestría. Después, arrastrá la habilidad a Q, E o R.",inventory.Rules.masteryLevelsPerAbilityPoint),17,U.Muted);
+            }
+            else
+            {
+                int required=Mathf.Max(1,chosen.masteryUsesRequired),uses=progress?.effectiveUses??0;
+                bool mastered=uses>=required;
+                U.Text(new Rect(7,y,359,30),mastered?"HABILIDAD DOMINADA":L.Format("Maestría de habilidad: {0} / {1}",uses,required),18,U.Amber);y+=34;
+                U.Text(new Rect(7,y,359,48),"Solo cuentan usos efectivos contra monstruos. Un lanzamiento cuenta una vez.",16,U.Muted);y+=57;
+                if(chosen.masteryModifiers==null||chosen.masteryModifiers.Length==0)U.Text(new Rect(7,y,359,50),"Todavía no hay modificadores para esta habilidad.",17,U.Muted);
+                else
+                {
+                    foreach(var modifier in chosen.masteryModifiers)
+                    {
+                        if(modifier==null||modifier.retired)continue;
+                        var training=progress?.Modifier(modifier.id);bool selected=progress?.selectedModifierId==modifier.id;
+                        GUI.enabled=was&&mastered&&loadout.CanChangeEquipment;
+                        if(U.Button(new Rect(7,y,359,35),modifier.displayName+(selected?" · Elegido":""),selected))
+                            inventory.TrySelectModifier(weapon,selectedAbilityIndex,modifier.id);
+                        GUI.enabled=was;
+                        U.Text(new Rect(7,y+40,359,78),modifier.description,16,U.Muted);
+                        U.Text(new Rect(7,y+121,359,28),L.Format("Rango {0}/{1} · {2}/{3} usos",training?.level??0,modifier.maxLevel,training?.effectiveUses??0,modifier.effectiveUsesPerLevel),16,U.Amber);y+=157;
+                        if(modifier.behavior!=AbilityModifierBehavior.None)
+                        {U.Text(new Rect(7,y,359,40),"La nueva mecánica se activa al elegirla. Los rangos mejoran su ventana o carga.",15,U.Muted);y+=45;}
+                    }
+                    GUI.enabled=was&&loadout.CanChangeEquipment&&!string.IsNullOrEmpty(progress?.selectedModifierId);
+                    if(U.Button(new Rect(7,y,359,35),"Sin modificador"))inventory.TryClearModifier(weapon,selectedAbilityIndex);
+                    GUI.enabled=was;
+                }
+            }
+            GUI.EndScrollView();
         }
     }
 }

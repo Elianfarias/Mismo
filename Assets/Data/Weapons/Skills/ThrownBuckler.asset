@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbaed6838d1a4d369404166107b9bbf5, type: 3}
   m_Name: ThrownBuckler
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: power
+    displayName: "Potencia"
+    description: "Cada rango mejora un 5% el daño de la habilidad o la magnitud de su efecto."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0.05
+    cooldownReductionPerLevel: 0
   displayName: "Broquel arrojadizo"
   description: "Cada 8 s, tu próximo básico lanza el escudo con alcance adicional. Recogelo del suelo antes de 5 s para obtener una barrera de 25 durante 4 s."
   abilityId: ThrownBuckler

@@ -50,11 +50,11 @@ namespace Mismo.Gameplay.Player.Editor
         {
             UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/VoxelRegion_7319.unity");
             Physics.SyncTransforms();
-            foreach(var enemy in UnityEngine.Object.FindObjectsByType<GoblinController>().Take(12))
+            foreach(var enemy in UnityEngine.Object.FindObjectsByType<EnemyController>().Take(12))
             {
                 if(!UnityEngine.AI.NavMesh.SamplePosition(enemy.transform.position,out var nav,3,UnityEngine.AI.NavMesh.AllAreas))continue;
                 var hits=Physics.RaycastAll(nav.position+Vector3.up,Vector3.down,3,~0,QueryTriggerInteraction.Ignore)
-                    .Where(h=>!h.collider.transform.IsChildOf(enemy.transform)&&h.collider.GetComponentInParent<GoblinController>()==null).OrderBy(h=>h.distance).ToArray();
+                    .Where(h=>!h.collider.transform.IsChildOf(enemy.transform)&&h.collider.GetComponentInParent<EnemyController>()==null).OrderBy(h=>h.distance).ToArray();
                 if(hits.Length>0)Debug.Log("TERRAIN_GAP "+enemy.name+" nav="+nav.position+" floor="+hits[0].point+" gap="+(nav.position.y-hits[0].point.y));
             }
             EditorApplication.Exit(0);
@@ -77,7 +77,7 @@ namespace Mismo.Gameplay.Player.Editor
         }
         const BindingFlags Private=BindingFlags.Instance|BindingFlags.NonPublic;
         static void Check(bool ok,string message){if(!ok)throw new Exception(message);count++;Debug.Log("ENEMY_RIG_CHECK "+message);}
-        static void Set(object instance,string name,object value)=>instance.GetType().GetField(name,Private).SetValue(instance,value);
+        static void Set(object instance,string name,object value)=>(instance is EnemyController ? typeof(EnemyController) : instance.GetType()).GetField(name,Private).SetValue(instance,value);
         public static void RunBatch()
         {
             try
@@ -131,7 +131,7 @@ namespace Mismo.Gameplay.Player.Editor
                     foreach(float progress in new[]{.1f,.85f})
                     {
                         if(isBoss){Set(owner,"state",BossState.Telegraph);Set(owner,"stateTimer",windup*(1-progress));}
-                        else{Set(owner,"<State>k__BackingField",GoblinState.Telegraph);Set(owner,"duration",windup);Set(owner,"timer",windup*(1-progress));}
+                        else{Set(owner,"<State>k__BackingField",EnemyState.Telegraph);Set(owner,"duration",windup);Set(owner,"timer",windup*(1-progress));}
                         driver.GetType().GetMethod("Update",Private).Invoke(driver,null);
                         var inner=typeof(EnemyActionPlayback).GetField("playback",Private).GetValue(playback);
                         var graph=(PlayableGraph)typeof(WeaponActionPlayback).GetField("graph",Private).GetValue(inner);
