@@ -23,17 +23,18 @@ namespace Mismo.Gameplay.Enemies
         }
         private void OnGUI()
         {
-            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.InterfaceHidden) return;
             if (Mismo.Gameplay.Player.Equipment.Inventory.InventoryPanel.AnyOpen) return;
             var hud=PlayerHUD.Active;var camera=Camera.main;
             if(hud==null || camera==null || health==null || health.IsDead)return;
             float distance=Vector3.Distance(hud.transform.position,transform.position);
-            if(distance>28)return;
+            bool activeSoulEater=soulEater!=null&&soulEater.IsFightingPlayer(hud.transform);
+            if(distance>28&&!activeSoulEater)return;
             float headHeight=goblin != null ? goblin.NameplateHeight : 2.05f*transform.lossyScale.y;
             Vector3 head=transform.position+Vector3.up*headHeight;
             Vector3 screen=camera.WorldToScreenPoint(head);
-            if(screen.z<=0 || screen.x<0 || screen.x>Screen.width || screen.y<0 || screen.y>Screen.height)return;
-            if(Physics.Linecast(camera.transform.position,head,out var hit,~(1<<2),QueryTriggerInteraction.Ignore) && !hit.transform.IsChildOf(transform) && !hit.transform.IsChildOf(hud.transform))return;
+            if(!activeSoulEater&&(screen.z<=0 || screen.x<0 || screen.x>Screen.width || screen.y<0 || screen.y>Screen.height))return;
+            if(!activeSoulEater&&Physics.Linecast(camera.transform.position,head,out var hit,~(1<<2),QueryTriggerInteraction.Ignore) && !hit.transform.IsChildOf(transform) && !hit.transform.IsChildOf(hud.transform))return;
             float scale=PlayerHUD.Scale;Matrix4x4 old=GUI.matrix;GUI.matrix=Matrix4x4.Scale(Vector3.one*scale);
             bool isBoss=boss!=null||dragon!=null||soulEater!=null||goblin?.Settings?.isBoss==true;
             float width=isBoss?440:180;
@@ -43,7 +44,7 @@ namespace Mismo.Gameplay.Enemies
             if(goblin?.Settings != null && !string.IsNullOrWhiteSpace(goblin.Settings.displayName))
                 name=goblin.Settings.displayName;
             if(dragon!=null&&dragon.Settings!=null)name=dragon.Settings.displayName;
-            if(soulEater!=null&&soulEater.Settings!=null)name=soulEater.Settings.displayName;
+            if(soulEater!=null&&soulEater.Settings!=null)name=soulEater.Settings.displayName+" · FASE "+soulEater.Phase;
             var identity=GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>();
             if(identity!=null)
             {

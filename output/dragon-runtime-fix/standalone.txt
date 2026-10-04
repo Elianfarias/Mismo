@@ -1,0 +1,1 @@
+PASS: 9 quests, original village NPCs and dialogue, three beacon objectives, dragon flyby/landing/roar references, ritual encounter and J/F controls load in Windows player.

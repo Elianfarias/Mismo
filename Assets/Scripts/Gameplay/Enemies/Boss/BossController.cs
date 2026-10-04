@@ -27,7 +27,7 @@ namespace Mismo.Gameplay.Enemies
     /// </summary>
     [RequireComponent(typeof(NavMeshAgent), typeof(Health), typeof(DamageReceiver))]
     [DisallowMultipleComponent]
-    public sealed class BossController : MonoBehaviour, IParryResponder, Mismo.Gameplay.Player.Presentation.IBossMusicThreat
+    public sealed class BossController : MonoBehaviour, IEnemyDamageTarget, IParryResponder, Mismo.Gameplay.Player.Presentation.IBossMusicThreat
     {
         [SerializeField] private BossSettings settings;
         [SerializeField] private DamageDealer weapon;

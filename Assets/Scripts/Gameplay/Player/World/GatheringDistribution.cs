@@ -13,7 +13,7 @@ namespace Mismo.Gameplay.Player.World
         }
         public static GameObject PlaceAsset(WorldAssetEntry asset,string id,Vector3 point,Quaternion rotation,Transform parent)
         {
-            if(asset.decorativeOnly)return VegetationMotionBinding.Attach(Object.Instantiate(asset.prefab,point,rotation,parent),asset);
+            if(asset.decorativeOnly)return WorldDestructible.Attach(VegetationMotionBinding.Attach(Object.Instantiate(asset.prefab,point,rotation,parent),asset),asset.kind);
             var settings=Mismo.Core.ProjectAssets.Load<GatheringSettings>("GatheringSettings");
             var definition=asset.gatheringNode;
             if(definition==null&&settings!=null)
@@ -22,7 +22,7 @@ namespace Mismo.Gameplay.Player.World
                 else if(asset.kind==WorldAssetKind.Rock)definition=settings.stone;
                 else if(asset.kind==WorldAssetKind.Flower||asset.kind==WorldAssetKind.Bush)definition=settings.herb;
             }
-            if(definition==null)return VegetationMotionBinding.Attach(Object.Instantiate(asset.prefab,point,rotation,parent),asset);
+            if(definition==null)return WorldDestructible.Attach(VegetationMotionBinding.Attach(Object.Instantiate(asset.prefab,point,rotation,parent),asset),asset.kind);
             var node=Place(definition,id,point,parent);node.UseWorldPrefab(asset.prefab);node.transform.rotation=rotation;
             return VegetationMotionBinding.Attach(node.gameObject,asset);
         }
@@ -30,7 +30,8 @@ namespace Mismo.Gameplay.Player.World
         {
             if(definition==null)return null;
             var go=new GameObject(definition.displayName);go.transform.SetParent(parent,true);go.transform.position=point;
-            var node=go.AddComponent<GatheringNode>();node.Configure(definition,id);return node;
+            var node=go.AddComponent<GatheringNode>();node.Configure(definition,id);
+            if(definition.kind!=ResourceNodeKind.Herb)WorldDestructible.Attach(go,definition.kind==ResourceNodeKind.Tree?WorldAssetKind.Tree:WorldAssetKind.Rock);return node;
         }
         public static bool Clear(Vector3 point)
         {

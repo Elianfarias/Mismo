@@ -35,6 +35,16 @@ namespace Mismo.Gameplay.Player.Editor
                 library.surface.sharedMesh = baseMesh;
                 generated = VoxelArticulationRebuilder.Build(source, library, library.clips.First(c => c.name == "Scream"),
                     .5f, new[] { Head + "Jaw", Head + "UpperMouth" }, Head + "Jaw");
+                var mouthBones = new System.Collections.Generic.HashSet<int>(library.surface.bones.Select((bone, i) => (bone, i))
+                    .Where(p => p.bone.name == "Jaw" || p.bone.name == "JawTip" || p.bone.name == "UpperMouth").Select(p => p.i));
+                var chin=library.surface.transform.InverseTransformPoint(library.surface.bones.First(b=>b.name=="JawTip").position);
+                int jaw=Array.FindIndex(library.surface.bones,b=>b.name=="Jaw");
+                var upperLipBones=new System.Collections.Generic.HashSet<int>(library.surface.bones.Select((bone,i)=>(bone,i))
+                    .Where(p=>p.bone.name=="UpperMouth" || p.bone.name=="Head" || p.bone.name.StartsWith("Eye_")).Select(p=>p.i));
+                var preserved = VoxelArticulationRebuilder.PreserveRestSurface(baseMesh, generated, mouthBones,jaw,chin.y,upperLipBones);
+                Object.DestroyImmediate(generated); generated = preserved;
+                var wings=SoulEaterWingRepair.Patch(source,library,generated);
+                Object.DestroyImmediate(generated);generated=wings;
                 var eyes = SoulEaterEyeDetail.Add(source, library, generated);
                 var saved = AssetDatabase.LoadAssetAtPath<Mesh>(MeshPath);
                 if (saved == null) { generated.name = "SoulEater_Articulated"; AssetDatabase.CreateAsset(generated, MeshPath); saved = generated; generated = null; }

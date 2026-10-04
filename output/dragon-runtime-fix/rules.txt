@@ -1,0 +1,100 @@
+PASS Datos: dos fases; arte de faros pendiente
+PASS No hay faros ni ritual antes de la audiencia
+PASS Llegada persistente y única
+PASS El vigía explica la amenaza antes del rey
+PASS Audiencia completa y misión principal en una transacción
+PASS Activación en orden 0,1,2 / 0
+PASS Repetir un faro no suma progreso
+PASS Guardar/continuar conserva activaciones y valida tres requisitos
+PASS Activación en orden 0,1,2 / 1
+PASS Repetir un faro no suma progreso
+PASS Guardar/continuar conserva activaciones y valida tres requisitos
+PASS Activación en orden 0,1,2 / 2
+PASS Repetir un faro no suma progreso
+PASS Guardar/continuar conserva activaciones y valida tres requisitos
+PASS La misión termina en el ritual, sin acreditar victoria del jefe
+PASS Reintento disponible sin duplicar misión ni recompensas
+PASS Invocar no concede derrota ni botín
+PASS No hay faros ni ritual antes de la audiencia
+PASS Llegada persistente y única
+PASS El vigía explica la amenaza antes del rey
+PASS Audiencia completa y misión principal en una transacción
+PASS Activación en orden 0,2,1 / 0
+PASS Repetir un faro no suma progreso
+PASS Guardar/continuar conserva activaciones y valida tres requisitos
+PASS Activación en orden 0,2,1 / 1
+PASS Repetir un faro no suma progreso
+PASS Guardar/continuar conserva activaciones y valida tres requisitos
+PASS Activación en orden 0,2,1 / 2
+PASS Repetir un faro no suma progreso
+PASS Guardar/continuar conserva activaciones y valida tres requisitos
+PASS La misión termina en el ritual, sin acreditar victoria del jefe
+PASS Reintento disponible sin duplicar misión ni recompensas
+PASS Invocar no concede derrota ni botín
+PASS No hay faros ni ritual antes de la audiencia
+PASS Llegada persistente y única
+PASS El vigía explica la amenaza antes del rey
+PASS Audiencia completa y misión principal en una transacción
+PASS Activación en orden 1,0,2 / 0
+PASS Repetir un faro no suma progreso
+PASS Guardar/continuar conserva activaciones y valida tres requisitos
+PASS Activación en orden 1,0,2 / 1
+PASS Repetir un faro no suma progreso
+PASS Guardar/continuar conserva activaciones y valida tres requisitos
+PASS Activación en orden 1,0,2 / 2
+PASS Repetir un faro no suma progreso
+PASS Guardar/continuar conserva activaciones y valida tres requisitos
+PASS La misión termina en el ritual, sin acreditar victoria del jefe
+PASS Reintento disponible sin duplicar misión ni recompensas
+PASS Invocar no concede derrota ni botín
+PASS No hay faros ni ritual antes de la audiencia
+PASS Llegada persistente y única
+PASS El vigía explica la amenaza antes del rey
+PASS Audiencia completa y misión principal en una transacción
+PASS Activación en orden 1,2,0 / 0
+PASS Repetir un faro no suma progreso
+PASS Guardar/continuar conserva activaciones y valida tres requisitos
+PASS Activación en orden 1,2,0 / 1
+PASS Repetir un faro no suma progreso
+PASS Guardar/continuar conserva activaciones y valida tres requisitos
+PASS Activación en orden 1,2,0 / 2
+PASS Repetir un faro no suma progreso
+PASS Guardar/continuar conserva activaciones y valida tres requisitos
+PASS La misión termina en el ritual, sin acreditar victoria del jefe
+PASS Reintento disponible sin duplicar misión ni recompensas
+PASS Invocar no concede derrota ni botín
+PASS No hay faros ni ritual antes de la audiencia
+PASS Llegada persistente y única
+PASS El vigía explica la amenaza antes del rey
+PASS Audiencia completa y misión principal en una transacción
+PASS Activación en orden 2,0,1 / 0
+PASS Repetir un faro no suma progreso
+PASS Guardar/continuar conserva activaciones y valida tres requisitos
+PASS Activación en orden 2,0,1 / 1
+PASS Repetir un faro no suma progreso
+PASS Guardar/continuar conserva activaciones y valida tres requisitos
+PASS Activación en orden 2,0,1 / 2
+PASS Repetir un faro no suma progreso
+PASS Guardar/continuar conserva activaciones y valida tres requisitos
+PASS La misión termina en el ritual, sin acreditar victoria del jefe
+PASS Reintento disponible sin duplicar misión ni recompensas
+PASS Invocar no concede derrota ni botín
+PASS No hay faros ni ritual antes de la audiencia
+PASS Llegada persistente y única
+PASS El vigía explica la amenaza antes del rey
+PASS Audiencia completa y misión principal en una transacción
+PASS Activación en orden 2,1,0 / 0
+PASS Repetir un faro no suma progreso
+PASS Guardar/continuar conserva activaciones y valida tres requisitos
+PASS Activación en orden 2,1,0 / 1
+PASS Repetir un faro no suma progreso
+PASS Guardar/continuar conserva activaciones y valida tres requisitos
+PASS Activación en orden 2,1,0 / 2
+PASS Repetir un faro no suma progreso
+PASS Guardar/continuar conserva activaciones y valida tres requisitos
+PASS La misión termina en el ritual, sin acreditar victoria del jefe
+PASS Reintento disponible sin duplicar misión ni recompensas
+PASS Invocar no concede derrota ni botín
+PASS 32 semillas: destinos accesibles en primer bioma, terreno reservado y plano
+PASS No se inyecta el arco en mundos anteriores al tutorial
+PASS Sobrevuelo visual sin IA/daño; invocación referencia el boss correcto

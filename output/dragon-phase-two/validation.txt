@@ -1,0 +1,11 @@
+Validación final de Soul Eater · fase 2
+
+32 pruebas de segunda fase y persistencia.
+100 comprobaciones de reglas y datos del arco.
+39 comprobaciones del arco en el mundo real.
+46 comprobaciones de regresión de primera fase.
+Build Windows: Succeeded. Ver build.txt.
+Ejecutable: comprobación de catálogo y dependencias aprobada. Ver standalone.txt.
+Código y datos de gameplay coinciden con el proyecto aislado validado.
+Capturas fase2-*.png: fotogramas del encuentro real en Unity, con una cámara de verificación. Camera.Render no incluye los elementos IMGUI.
+La auditoría de organización conserva incidencias previas en assets de terceros; no son fallos nuevos de compilación (detalle: arc-organization.txt).

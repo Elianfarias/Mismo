@@ -371,6 +371,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1834046657181121683}
+  - component: {fileID: 7492581039648212001}
   - component: {fileID: 5089356639277943430}
   - component: {fileID: 2069870430501072464}
   - component: {fileID: 5999178586911558135}
@@ -429,10 +430,31 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.4
-  m_Height: 2.8
+  m_Radius: 2.8
+  m_Height: 5.6
   m_Direction: 1
-  m_Center: {x: 0, y: 1.4, z: 0}
+  m_Center: {x: 0, y: 2.8, z: 0}
+--- !u!65 &7492581039648212001
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6671681863742486700}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.8, y: 4.4, z: 8.6}
+  m_Center: {x: -0.1, y: 2.2, z: 2.75}
 --- !u!54 &2069870430501072464
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -554,7 +576,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6671681863742486700}
   m_Enabled: 0
   m_AgentTypeID: 0
-  m_Radius: 1.4
+  m_Radius: 2.8
   m_Speed: 3.5
   m_Acceleration: 10
   avoidancePriority: 50
@@ -563,7 +585,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2.8
+  m_Height: 5.6
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -589,6 +611,7 @@ MonoBehaviour:
   - {fileID: 2403973133789985316}
   - {fileID: 4135515060607225404}
   headCollider: {fileID: 8273499801916376205}
+  groundBody: {fileID: 7492581039648212001}
   effects: {fileID: 6622015021855470901}
   autoEngage: 1
 --- !u!114 &8949624688680722984
@@ -3024,7 +3047,7 @@ Transform:
   m_GameObject: {fileID: 8111094931074566761}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.05810051, y: 2.595881, z: 3.7086897}
+  m_LocalPosition: {x: -0.11620102, y: 5.166762, z: 7.4173794}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3049,7 +3072,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.15
+  m_Radius: 2.3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5648942513590525148
 PrefabInstance:
@@ -3241,15 +3264,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2393558878879453656, guid: 8a73bafe8074a9e4c98834f052e1e665, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.8
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 2393558878879453656, guid: 8a73bafe8074a9e4c98834f052e1e665, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.8
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 2393558878879453656, guid: 8a73bafe8074a9e4c98834f052e1e665, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.8
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 2393558878879453656, guid: 8a73bafe8074a9e4c98834f052e1e665, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3257,7 +3280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2393558878879453656, guid: 8a73bafe8074a9e4c98834f052e1e665, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.361438
+      value: 3.4285944
       objectReference: {fileID: 0}
     - target: {fileID: 2393558878879453656, guid: 8a73bafe8074a9e4c98834f052e1e665, type: 3}
       propertyPath: m_LocalPosition.z

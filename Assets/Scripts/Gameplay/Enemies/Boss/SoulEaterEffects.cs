@@ -23,9 +23,9 @@ namespace Mismo.Gameplay.Enemies
             if(mouthLight!=null){mouthLight.transform.position=p;mouthLight.intensity=heat*2;mouthLight.enabled=heat>.02f;}
             if(heat>0)EyeIntensity(1+heat);
         }
-        public void Breath(Vector3 p, Vector3 d, float reach, float angle, float dt)
+        public void Breath(Vector3 p, Vector3 d, float reach, float angle, float dt, float floorY=float.NaN, float baseWidth=0, float backreach=0)
         {
-            flame?.Show(p,d,reach,angle,1,dt);
+            flame?.Show(p,d,reach,angle,1,dt,floorY,baseWidth,backreach);
             if(mouthLight!=null){mouthLight.transform.position=p+d*.3f;mouthLight.intensity=2.8f;mouthLight.enabled=true;}
             if(fire!=null&&!fire.isPlaying&&!audioPaused)fire.Play();
         }

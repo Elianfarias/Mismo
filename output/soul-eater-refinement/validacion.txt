@@ -1,0 +1,6 @@
+Verificado en Unity 6000.6.0f1, D3D11, en copia aislada.
+Fuentes/arte del proyecto coinciden con la copia probada: 20/20 archivos.
+Malla: 17 clips, 11 poses por clip; cavidad oral y cobertura del cuello de frente y costados.
+Fase 1: seguimiento hasta emisión, dirección fija después, persecución sin radio y apoyo de patas.
+Fase 2: seguimiento continuo, salida del cráter, ajustes de vuelo y telegrafía, persecución fuera de la arena y persistencia al recargar.
+Build Windows: Succeeded. La auditoría conserva incidencias previas de organización de assets (ver organizacion.txt).

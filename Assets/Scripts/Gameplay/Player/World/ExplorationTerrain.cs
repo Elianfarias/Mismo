@@ -17,6 +17,7 @@ namespace Mismo.Gameplay.Player.World
         readonly ExplorationWorldSettings settings;
         public FiniteWorldPlan Plan {get;}
         public WorldIntroductionLayout Introduction {get;}
+        public DragonArcLayout DragonArc {get;}
         public GroveWorldStyle GroveStyle=>settings.content!=null?settings.content.groveStyle:null;
         public int SiteSpacing=>Plan!=null?Plan.SiteSpacing:Mathf.Max(64,settings.siteSpacing);
         readonly System.Collections.Generic.Dictionary<Vector2Int,WorldSite> sites=new System.Collections.Generic.Dictionary<Vector2Int,WorldSite>();
@@ -29,6 +30,8 @@ namespace Mismo.Gameplay.Player.World
             settings=s;Plan=s.UsesFiniteWorld?new FiniteWorldPlan(s):null;
             if(s.introductionVersion==1&&Plan!=null&&s.content?.introduction!=null)
                 Introduction=new WorldIntroductionLayout(Plan.Start,s.content.introduction,s.content.VillageArrivalOffset);
+            if(Introduction!=null && s.generationVersion==2 && s.content.dragonArc!=null)
+                DragonArc=new DragonArcLayout(Introduction,s.content.dragonArc);
             iceStructure=FindIceStructure();woodlandStructure=FindWoodlandStructure();
         }
         WorldSite? FindWoodlandStructure()
@@ -41,6 +44,7 @@ namespace Mismo.Gameplay.Player.World
             {
                 var cell=new Vector2Int(x,z);var p=Plan.SitePosition(cell);var biome=Plan.Biome(p.x,p.y);
                 if(Introduction?.Reserved(p.x,p.y,radius+30)==true)continue;
+                if(DragonArc?.Reserved(p.x,p.y,radius+30)==true)continue;
                 if(preference==0?biome!=WorldBiome.Forest:biome!=WorldBiome.Meadow)continue;
                 float roll=Unit(Hash(settings.seed,x,z,20));
                 if(IsVillageCell(cell)||Plan.ObjectiveStage(cell)>=0||roll>=.12f&&roll<.18f||iceStructure.HasValue&&iceStructure.Value.cell==cell||!Plan.Contains(p.x,p.y,radius+75)||Plan.BarrierDistance(p.x,p.y)<radius+75||Plan.RouteDistance(p.x,p.y,out _) <radius+30)continue;
@@ -171,6 +175,8 @@ namespace Mismo.Gameplay.Player.World
                 }
                 if(result.structure!=null)result.radius=Mathf.Clamp(result.structure.prefab.footprintRadius+3,12,36);
             }
+            if(cell!=Vector2Int.zero && DragonArc?.Reserved(x,z,result.radius+18)==true)
+            {result.kind=WorldSiteKind.Clearing;result.radius=0;result.structure=null;}
             if(sites.Count>=4096)sites.Clear();sites[cell]=result;return result;
         }
         public bool IsExterior(float x,float z)=>Plan!=null?Plan.Contains(x,z,80):!settings.preserveAuthoredCenter||Mathf.Max(Mathf.Abs(x),Mathf.Abs(z))>settings.authoredSize*.5f+Mathf.Max(64,settings.transitionWidth);
@@ -198,6 +204,7 @@ namespace Mismo.Gameplay.Player.World
                 reserved|=d<VillageHalfExtent+16;
             }
             if(Introduction!=null){y=Introduction.Flatten(x,z,y);reserved|=Introduction.Reserved(x,z);distance=Mathf.Min(distance,Introduction.RoadDistance(x,z));}
+            if(DragonArc!=null){y=DragonArc.Flatten(x,z,y);reserved|=DragonArc.Reserved(x,z);}
             return Plan.ApplyCoast(x,z,Plan.ApplyBarriers(x,z,y));
         }
         float Pass(float x,float z,out float distance,out bool reserved)
@@ -235,7 +242,27 @@ namespace Mismo.Gameplay.Player.World
             }
             reserved|=distance<7;return y;
         }
-        public override float Height(float x,float z)
+        readonly System.Collections.Generic.Dictionary<Vector2Int,System.Collections.Generic.List<WorldImpactRecord>> impacts = new System.Collections.Generic.Dictionary<Vector2Int,System.Collections.Generic.List<WorldImpactRecord>>();
+        public void SetImpacts(System.Collections.Generic.IEnumerable<WorldImpactRecord> records)
+        {
+            impacts.Clear();if(records==null)return;
+            foreach(var r in records)
+            {
+                if(!r.Valid)continue;
+                for(int z=Mathf.FloorToInt((r.z-r.radius)/32);z<=Mathf.FloorToInt((r.z+r.radius)/32);z++)
+                    for(int x=Mathf.FloorToInt((r.x-r.radius)/32);x<=Mathf.FloorToInt((r.x+r.radius)/32);x++)
+                    {var key=new Vector2Int(x,z);if(!impacts.TryGetValue(key,out var list))impacts[key]=list=new System.Collections.Generic.List<WorldImpactRecord>();list.Add(r);}
+            }
+        }
+        public float ImpactDepth(float x,float z)
+        {
+            float depth=0;
+            if(impacts.TryGetValue(new Vector2Int(Mathf.FloorToInt(x/32),Mathf.FloorToInt(z/32)),out var list))
+                foreach(var r in list)depth=Mathf.Max(depth,r.Depression(x,z));
+            return depth;
+        }
+        public override float Height(float x,float z)=>UndamagedHeight(x,z)-ImpactDepth(x,z);
+        public float UndamagedHeight(float x,float z)
         {
             if(Plan!=null&&!Plan.Contains(x,z,-28))return -8;
             if(!settings.preserveAuthoredCenter)
@@ -257,6 +284,7 @@ namespace Mismo.Gameplay.Player.World
         public override bool Reserved(float x,float z,float margin=0)
         {
             if(Introduction?.Reserved(x,z,margin)==true)return true;
+            if(DragonArc?.Reserved(x,z,margin)==true)return true;
             if(Plan!=null)
             {
                 if(!Plan.Contains(x,z,80+margin))return true;
@@ -283,6 +311,7 @@ namespace Mismo.Gameplay.Player.World
         {if(Plan!=null)return Mathf.Min(Plan.RouteDistance(x,z,out _),Introduction?.RoadDistance(x,z)??float.MaxValue);if(!IsExterior(x,z))return base.PathDistance(x,z);Pass(x,z,out float d,out _);return d;}
         public override Color Top(float x,float z,float height)
         {
+            if(ImpactDepth(x+.5f,z+.5f)>0)return Color.Lerp(new Color(.18f,.14f,.095f,0),new Color(.31f,.24f,.16f,0),Noise(x,z,2,4));
             if(settings.content!=null&&settings.content.groveStyle!=null&&GroveWorldStyle.Supports(Biome(x,z)))
                 return settings.content.groveStyle.Ground(Biome(x,z),x,z,PathDistance(x,z));
             if(Plan!=null)

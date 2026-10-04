@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82fd8a3c18a546eb929f133a008bdf6a, type: 3}
+  m_Name: Q-DRAGON-AWAKENING
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Quests.QuestDefinition
+  id: Q-DRAGON-AWAKENING
+  title: "El despertar de la monta\xF1a"
+  category: 2
+  description: "Los monstruos avanzan y Soul Eater ya no responde a las ofrendas. Reactiv\xE1 los tres faros antiguos en cualquier orden. Despu\xE9s, preparate y confirm\xE1 el ritual en el altar para llamar al drag\xF3n."
+  location: "Regi\xF3n del primer pueblo"
+  icon: {fileID: 0}
+  npc: {fileID: 11400000, guid: 74db841a9de23814aa0f1e94be72907f, type: 2}
+  prerequisites:
+  - {fileID: 11400000, guid: dc324e76f3545db42afd8f88633627df, type: 2}
+  offerInJournal: 0
+  objectives:
+  - id: forest
+    label: "Reactiv\xE1 el faro del bosque"
+    kind: 3
+    quantity: 1
+    material: {fileID: 0}
+    species: {fileID: 0}
+    recipe: {fileID: 0}
+    signal: dragon.beacon.forest
+    consumeOnDelivery: 0
+    requirePrevious: 0
+    icon: {fileID: 0}
+  - id: ruins
+    label: "Reactiv\xE1 el faro de las ruinas"
+    kind: 3
+    quantity: 1
+    material: {fileID: 0}
+    species: {fileID: 0}
+    recipe: {fileID: 0}
+    signal: dragon.beacon.ruins
+    consumeOnDelivery: 0
+    requirePrevious: 0
+    icon: {fileID: 0}
+  - id: gorge
+    label: "Reactiv\xE1 el faro de la quebrada"
+    kind: 3
+    quantity: 1
+    material: {fileID: 0}
+    species: {fileID: 0}
+    recipe: {fileID: 0}
+    signal: dragon.beacon.gorge
+    consumeOnDelivery: 0
+    requirePrevious: 0
+    icon: {fileID: 0}
+  - id: summon
+    label: "Invoc\xE1 a Soul Eater desde el altar"
+    kind: 3
+    quantity: 1
+    material: {fileID: 0}
+    species: {fileID: 0}
+    recipe: {fileID: 0}
+    signal: dragon.summoned
+    consumeOnDelivery: 0
+    requirePrevious: 1
+    icon: {fileID: 0}
+  clue: "El rey marc\xF3 las ubicaciones en tu mapa (M). Acercate a cada faro y presion\xE1 F. Los faros activos se conservan si ca\xE9s o continu\xE1s la partida. Entrar al claro no inicia el combate: confirm\xE1 el ritual en el altar."
+  clueAfterObjective: 
+  coins: 0
+  items: []
+  recipes: []
+  offerText: "Las ofrendas ya no bastan. Los antiguos encend\xEDan tres faros para llamar al drag\xF3n: el del bosque, el de las ruinas y el de la quebrada. Reactivalos en el orden que prefieras. Cuando los tres respondan, acercate al altar de la llamada. El ritual solo comenzar\xE1 cuando vos lo decidas. Prepar\xE1 tus armas antes de invocar a Soul Eater."
+  acceptedText: 
+  progressText: 
+  readyText: 
+  completedText: "El ritual funcion\xF3: Soul Eater respondi\xF3 a la llamada. Esta misi\xF3n registra la invocaci\xF3n; el combate todav\xEDa debe resolverse."

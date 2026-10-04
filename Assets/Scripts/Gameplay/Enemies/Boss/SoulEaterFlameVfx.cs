@@ -17,6 +17,7 @@ namespace Mismo.Gameplay.Enemies
         float time;
         public bool Emitting { get; private set; }
         public float Reach { get; private set; }
+        public Material Material => flameMaterial;
         public void Configure(Material material) { flameMaterial = material; GetComponent<MeshRenderer>().sharedMaterial = material; }
         void Awake()
         {
@@ -24,7 +25,7 @@ namespace Mismo.Gameplay.Enemies
             GetComponent<MeshFilter>().sharedMesh = mesh; surface = GetComponent<MeshRenderer>();
             surface.sharedMaterial = flameMaterial; surface.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; surface.receiveShadows = false; surface.enabled = false;
         }
-        public void Show(Vector3 origin, Vector3 direction, float reach, float halfAngle, float heat, float dt)
+        public void Show(Vector3 origin, Vector3 direction, float reach, float halfAngle, float heat, float dt, float floorY = float.NaN, float baseWidth = 0, float backreach = 0)
         {
             if (mesh == null) return;
             time += Mathf.Max(0, dt); Emitting = reach > .05f; Reach = Mathf.Max(0, reach);
@@ -35,6 +36,22 @@ namespace Mismo.Gameplay.Enemies
             vertices.Clear(); colors.Clear(); uv.Clear(); triangles.Clear();
             if (Emitting) BuildFlame(reach, Mathf.Tan(halfAngle * Mathf.Deg2Rad));
             else BuildHeat(heat);
+            if(Emitting && !float.IsNaN(floorY))
+            {
+                // Fan-shaped ground breath: its lower ribbons reach the floor beneath the mouth.
+                // The same width, backreach and floor are used by the damage volume.
+                float cone=Mathf.Tan(halfAngle*Mathf.Deg2Rad);
+                for(int i=0;i<vertices.Count;i++)
+                {
+                    var p=vertices[i];float envelope=.22f+Mathf.Max(0,p.z)*cone;
+                    float lower=Mathf.Clamp01(-p.y/envelope);
+                    p.x*=1+baseWidth/envelope;
+                    var world=transform.TransformPoint(p);
+                    world.y=Mathf.Lerp(world.y,floorY+.03f,lower);
+                    world-=Vector3.ProjectOnPlane(direction,Vector3.up).normalized*(backreach*lower);
+                    vertices[i]=transform.InverseTransformPoint(world);
+                }
+            }
             mesh.Clear(); mesh.SetVertices(vertices); mesh.SetColors(colors); mesh.SetUVs(0,uv); mesh.SetTriangles(triangles, 0); mesh.RecalculateBounds();
         }
         public void Hide() { Emitting = false; Reach = 0; if (surface != null) surface.enabled = false; }

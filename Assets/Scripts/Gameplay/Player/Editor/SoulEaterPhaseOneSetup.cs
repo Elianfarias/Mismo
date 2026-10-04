@@ -36,8 +36,10 @@ namespace Mismo.Gameplay.Player.Editor
                 if(Mathf.Approximately(settings.tailRange,7)||Mathf.Approximately(settings.tailRange,5))settings.tailRange=4;
                 settings.idle=Clip("Idle");settings.walk=Clip("Walk");settings.run=Clip("Run");settings.bite=Clip("Basic Attack");settings.tail=RearTail(Clip("Tail Attack"));
                 settings.breath=Clip("Fireball Shoot");settings.roar=Clip("Scream");settings.takeOff=Clip("Take Off");settings.land=Clip("Land");settings.hit=Clip("Get Hit");settings.die=Clip("Die");
+                settings.flight=Clip("Fly Forward");settings.hover=Clip("Fly Float");settings.glide=Clip("Fly Glide");settings.aerialBreath=Clip("Fly Fireball Shoot");
                 settings.chargePose=Extract(Clip("Defend"),.15f,.5f,1,"Charge_Anticipation");
                 settings.brake=Extract(Clip("Land"),.62f,1,1.3f,"Charge_Brake");
+                if(settings.groundFirePrefab==null)settings.groundFirePrefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/VFX/VFX_GroundFire_Circle_Green.prefab");
                 EditorUtility.SetDirty(settings);
                 var flame=Material("SoulFlame",Shader.Find("Mismo/SoulEater/Flowing Flame"),Color.white);
                 flame.SetFloat("_Intensity",1.25f);
@@ -51,19 +53,20 @@ namespace Mismo.Gameplay.Player.Editor
                 try
                 {
                     var visual=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/Voxelized/SoulEater_Green_Animated.prefab"));
-                    visual.transform.SetParent(root.transform,false);visual.transform.localScale=Vector3.one*.8f;
+                    visual.transform.SetParent(root.transform,false);visual.transform.localScale=Vector3.one*1.6f;
                     foreach(var collider in visual.GetComponentsInChildren<Collider>())Object.DestroyImmediate(collider);
                     var rig=visual.GetComponent<VoxelRigInstance>();
                     settings.idle.SampleAnimation(rig.animator.gameObject,0);
                     var baked=new Mesh();rig.surface.BakeMesh(baked);
-                    float minY=baked.vertices.Min(v=>rig.surface.transform.TransformPoint(v).y);
+                    float minY=baked.vertices.Min(v=>(rig.surface.transform.position+rig.surface.transform.rotation*v).y);
                     Object.DestroyImmediate(baked);visual.transform.position-=Vector3.up*minY;
                     Transform Bone(string name)=>visual.GetComponentsInChildren<Transform>().First(t=>t.name==name);
-                    var body=root.AddComponent<CapsuleCollider>();body.radius=1.4f;body.height=2.8f;body.center=Vector3.up*1.4f;
+                    var body=root.AddComponent<CapsuleCollider>();body.radius=2.8f;body.height=5.6f;body.center=Vector3.up*2.8f;
+                    var groundedBody=root.AddComponent<BoxCollider>();groundedBody.center=new Vector3(-.1f,2.2f,2.75f);groundedBody.size=new Vector3(5.8f,4.4f,8.6f);
                     var rigid=root.AddComponent<Rigidbody>();rigid.isKinematic=true;rigid.useGravity=false;
                     root.AddComponent<Health>();root.AddComponent<CombatState>();root.AddComponent<Invulnerability>();root.AddComponent<DamageReceiver>();
                     var head=new GameObject("HeadHurtbox");head.transform.SetParent(root.transform,false);
-                    var headCollider=head.AddComponent<SphereCollider>();headCollider.radius=1.15f;
+                    var headCollider=head.AddComponent<SphereCollider>();headCollider.radius=2.3f;
                     head.transform.position=(Bone("UpperMouth").position+Bone("JawTip").position)*.5f;
                     var flameObject=new GameObject("GreenFlame_FromScratch");flameObject.transform.SetParent(root.transform,false);
                     var vfx=flameObject.AddComponent<SoulEaterFlameVfx>();vfx.Configure(flame);
@@ -75,7 +78,7 @@ namespace Mismo.Gameplay.Player.Editor
                     particles.GetComponent<ParticleSystemRenderer>().sharedMaterial=dust;
                     var voice=Audio(root,"Voice");var loop=Audio(root,"BreathLoop");loop.clip=fire;loop.loop=true;loop.volume=.42f;
                     var effects=root.AddComponent<SoulEaterEffects>();effects.Configure(vfx,light,rig.surface,particles,voice,loop,clips);
-                    var nav=root.AddComponent<NavMeshAgent>();nav.enabled=false;nav.radius=1.4f;nav.height=2.8f;nav.acceleration=10;nav.angularSpeed=65;
+                    var nav=root.AddComponent<NavMeshAgent>();nav.enabled=false;nav.radius=2.8f;nav.height=5.6f;nav.acceleration=10;nav.angularSpeed=65;
                     root.AddComponent<SoulEaterPhaseOneController>().Configure(settings,rig,Bone("UpperMouth"),Bone("JawTip"),new[]{Bone("Tail01"),Bone("Tail02"),Bone("Tail03"),Bone("TailEnd")},headCollider,effects);
                     root.AddComponent<EnemyNameplate>();
                     prefab=PrefabUtility.SaveAsPrefabAsset(root,PrefabPath);
@@ -190,7 +193,7 @@ namespace Mismo.Gameplay.Player.Editor
                 Box("Arena floor",new Vector3(0,-.3f,0),new Vector3(66,.6f,66),ground);
                 for(int i=0;i<4;i++){bool x=i<2;float side=i%2==0?-33:33;Box("Arena boundary",new Vector3(x?side:0,1.2f,x?0:side),new Vector3(x?1:66,2.4f,x?66:1),border);}
                 var sources=new System.Collections.Generic.List<NavMeshBuildSource>{new NavMeshBuildSource{shape=NavMeshBuildSourceShape.Box,size=new Vector3(64,.6f,64),transform=Matrix4x4.TRS(new Vector3(0,-.3f,0),Quaternion.identity,Vector3.one),area=0}};
-                var navSettings=NavMesh.GetSettingsByIndex(0);navSettings.agentRadius=1.4f;navSettings.agentHeight=2.8f;
+                var navSettings=NavMesh.GetSettingsByIndex(0);navSettings.agentRadius=2.8f;navSettings.agentHeight=5.6f;
                 var navData=NavMeshBuilder.BuildNavMeshData(navSettings,sources,new Bounds(Vector3.zero,new Vector3(70,10,70)),Vector3.zero,Quaternion.identity);
                 string navPath="Assets/Data/Enemies/DragonBosses/SoulEater_ArenaNavMesh.asset";var existing=AssetDatabase.LoadAssetAtPath<NavMeshData>(navPath);
                 if(existing==null)AssetDatabase.CreateAsset(navData,navPath);else{EditorUtility.CopySerialized(navData,existing);Object.DestroyImmediate(navData);navData=existing;}

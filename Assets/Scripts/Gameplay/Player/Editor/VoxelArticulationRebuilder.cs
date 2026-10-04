@@ -101,6 +101,66 @@ namespace Mismo.Gameplay.Player.Editor
             finally { sourceRest.Restore(); targetRest.Restore(); }
         }
 
+        // Replacing the whole body with an open-mouth sample can erase torso voxels where
+        // the posed jaw overlaps the chest. Preserve the existing rest surface outside the
+        // articulation, including its UVs and skin weights. MeshBuilder emits 24 vertices per voxel.
+        public static Mesh PreserveRestSurface(Mesh rest, Mesh articulated, HashSet<int> articulationBones, int lowerJaw=-1, float chinHeight=float.NegativeInfinity, HashSet<int> upperLipBones=null)
+        {
+            if (rest.vertexCount % 24 != 0 || articulated.vertexCount % 24 != 0)
+                throw new InvalidOperationException("Expected complete voxel blocks before adding eye details.");
+            var vertices = new List<Vector3>(); var normals = new List<Vector3>();
+            var uvs = new List<Vector2>(); var colors = new List<Color>(); var weights = new List<BoneWeight>();
+            var triangles = Enumerable.Range(0, articulated.subMeshCount).Select(_ => new List<int>()).ToArray();
+            foreach (var mesh in new[] { rest, articulated })
+            {
+                var points = mesh.vertices; var sourceNormals = mesh.normals; var sourceUvs = mesh.uv;
+                var sourceColors = mesh.colors; var sourceWeights = mesh.boneWeights;
+                var remap = Enumerable.Repeat(-1, points.Length).ToArray();
+                for (int start = 0; start < points.Length; start += 24)
+                {
+                    float influence = 0;
+                    for (int i = start; i < start + 24; i++)
+                        influence = Mathf.Max(influence, Influence(sourceWeights[i], articulationBones));
+                    bool belongsToMouth = influence >= .5f;
+                    Vector3 center=Vector3.zero;
+                    for(int i=start;i<start+24;i++)center+=points[i]/24;
+                    bool throat=mesh==rest && belongsToMouth && lowerJaw>=0 && center.y<chinHeight;
+                    if(mesh==rest ? belongsToMouth && !throat : !belongsToMouth)continue;
+                    for (int i = start; i < start + 24; i++)
+                    {
+                        remap[i] = vertices.Count; vertices.Add(points[i]); normals.Add(sourceNormals[i]);
+                        uvs.Add(sourceUvs[i]); colors.Add(sourceColors.Length == points.Length ? sourceColors[i] : Color.white);
+                        var weight=sourceWeights[i];
+                        // Preserve the jaw/neck blend of the throat. Only remove upper-lip influence
+                        // from the lower lip: it must not bridge both sides of the opening.
+                        if(throat && upperLipBones!=null)
+                        {
+                            if(upperLipBones.Contains(weight.boneIndex0))weight.boneIndex0=lowerJaw;
+                            if(upperLipBones.Contains(weight.boneIndex1))weight.boneIndex1=lowerJaw;
+                            if(upperLipBones.Contains(weight.boneIndex2))weight.boneIndex2=lowerJaw;
+                            if(upperLipBones.Contains(weight.boneIndex3))weight.boneIndex3=lowerJaw;
+                        }
+                        weights.Add(weight);
+                    }
+                }
+                for (int sub = 0; sub < mesh.subMeshCount; sub++)
+                {
+                    var indices = mesh.GetTriangles(sub);
+                    for (int i = 0; i < indices.Length; i += 3)
+                    {
+                        int a = remap[indices[i]], b = remap[indices[i + 1]], c = remap[indices[i + 2]];
+                        if (a < 0 || b < 0 || c < 0) continue;
+                        triangles[sub].Add(a); triangles[sub].Add(b); triangles[sub].Add(c);
+                    }
+                }
+            }
+            var result = new Mesh { name = articulated.name, indexFormat = UnityEngine.Rendering.IndexFormat.UInt32 };
+            result.SetVertices(vertices); result.SetNormals(normals); result.SetUVs(0, uvs); result.SetColors(colors);
+            result.boneWeights = weights.ToArray(); result.bindposes = rest.bindposes; result.subMeshCount = triangles.Length;
+            for (int i = 0; i < triangles.Length; i++) result.SetTriangles(triangles[i], i);
+            result.RecalculateBounds(); return result;
+        }
+
         static float Influence(BoneWeight w, HashSet<int> bones) =>
             (bones.Contains(w.boneIndex0) ? w.weight0 : 0) + (bones.Contains(w.boneIndex1) ? w.weight1 : 0) +
             (bones.Contains(w.boneIndex2) ? w.weight2 : 0) + (bones.Contains(w.boneIndex3) ? w.weight3 : 0);

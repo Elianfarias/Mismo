@@ -25,7 +25,10 @@ namespace Mismo.Gameplay.Player.Editor
         static Mesh captureMesh;
         static readonly List<string> report=new List<string>();
         static int waitFrames;
+        static bool originalPhaseTwo;
         static SoulEaterPhaseOneChecks(){EditorApplication.playModeStateChanged+=Mode;}
+        public static void RunAndBuild(){SessionState.SetBool(Key+".Build",true);Run();}
+        public static void RunAndWorld(){SessionState.SetBool(Key+".World",true);Run();}
         [MenuItem("Mismo/Bosses/Soul Eater/Verificar fase 1 en Play")]
         public static void Run()
         {
@@ -39,6 +42,10 @@ namespace Mismo.Gameplay.Player.Editor
             if(mode==PlayModeStateChange.EnteredEditMode&&SessionState.GetInt(Key,0)>=2)
             {
                 int exit=SessionState.GetInt(Key,0)==2?0:1;SessionState.EraseInt(Key);
+                bool build=SessionState.GetBool(Key+".Build",false);SessionState.EraseBool(Key+".Build");
+                bool world=SessionState.GetBool(Key+".World",false);SessionState.EraseBool(Key+".World");
+                if(exit==0&&world){DragonArcChecks.Run();return;}
+                if(exit==0&&build){DragonArcBuild.Run();return;}
                 if(Application.isBatchMode)EditorApplication.Exit(exit);
             }
         }
@@ -47,12 +54,13 @@ namespace Mismo.Gameplay.Player.Editor
             if(++waitFrames<6)return;EditorApplication.update-=Wait;
             try{Check();SessionState.SetInt(Key,2);}
             catch(Exception e){report.Add("FAIL: "+e);Debug.LogException(e);SessionState.SetInt(Key,3);if(boss!=null&&target!=null)try{Capture();}catch(Exception captureError){Debug.LogException(captureError);}}
-            finally{File.WriteAllLines(Output+"/checks.txt",report);EditorApplication.ExitPlaymode();}
+            finally{if(boss!=null&&boss.Settings!=null)boss.Settings.enablePhaseTwo=originalPhaseTwo;File.WriteAllLines(Output+"/checks.txt",report);EditorApplication.ExitPlaymode();}
         }
         static void Check()
         {
             report.Clear();AudioListener.volume=0;
             boss=Object.FindFirstObjectByType<SoulEaterPhaseOneController>();
+            originalPhaseTwo=boss!=null&&boss.Settings!=null&&boss.Settings.enablePhaseTwo;
             Require(boss!=null&&boss.Health.Maximum>100,"Prefab, settings y rig inicializan en Play");
             foreach(var player in Object.FindObjectsByType<PlayerController>(FindObjectsSortMode.None))player.gameObject.SetActive(false);
             Object.FindFirstObjectByType<SoulEaterArena>().enabled=false;
@@ -67,34 +75,38 @@ namespace Mismo.Gameplay.Player.Editor
             target.GetComponent<Mismo.Gameplay.Player.Presentation.ActorCombatVisuals>().DelayDeathEffect(120);
             target.AddComponent<CombatState>();target.AddComponent<DefenseWindow>();target.AddComponent<DamageReceiver>();
 
-            Reset(new Vector3(0,0,4));Attack(SoulEaterAction.Bite);Advance(boss.Settings.biteWindup*.65f);
+            Reset(new Vector3(0,0,boss.Settings.biteRange*(4f/5.1f)));Attack(SoulEaterAction.Bite);Advance(boss.Settings.biteWindup*.65f);
             Require(health.Current==health.Maximum,"La anticipación de mordida no inflige daño");
             Advance(1);Require(health.Current<health.Maximum,"La mordida alcanza a un jugador a nivel del suelo");
             float after=health.Current;Advance(.3f);Require(health.Current==after,"Mordida: un impacto por objetivo");
-            Reset(new Vector3(5,0,4));Attack(SoulEaterAction.Bite);Advance(1.5f);Require(health.Current==health.Maximum,"El flanco queda fuera de la mordida");
+            Reset(new Vector3(boss.Settings.biteRange,0,boss.Settings.biteRange*(4f/5.1f)));Attack(SoulEaterAction.Bite);Advance(1.5f);Require(health.Current==health.Maximum,"El flanco queda fuera de la mordida");
 
-            Reset(new Vector3(0,0,4));target.transform.rotation=Quaternion.Euler(0,180,0);target.GetComponent<DefenseWindow>().OpenParry(5);
+            Reset(new Vector3(0,0,boss.Settings.biteRange*(4f/5.1f)));target.transform.rotation=Quaternion.Euler(0,180,0);target.GetComponent<DefenseWindow>().OpenParry(5);
             Attack(SoulEaterAction.Bite);Advance(1.25f);
             Require(health.Current==health.Maximum&&boss.State==SoulEaterState.Staggered,"Parry de mordida evita daño e interrumpe al jefe");
             CombatTimeFeedback.CancelForPause();Time.timeScale=1;
 
             Reset(new Vector3(0,0,10));Attack(SoulEaterAction.Breath);Advance(1.25f);
-            Vector3 locked=boss.LockedDirection;target.transform.position=new Vector3(6,0,10);Advance(.4f);
-            Require(Vector3.Angle(locked,boss.LockedDirection)<.1f,"Aliento deja de apuntar antes de exhalar");
-            Advance(2);Require(health.Current==health.Maximum,"Salir lateralmente evita todo el aliento");
-            Reset(new Vector3(0,0,10));Attack(SoulEaterAction.Breath);Advance(3.6f);
+            Vector3 preparing=boss.LockedDirection;target.transform.position=new Vector3(6,0,10);Advance(.2f);
+            Require(boss.State==SoulEaterState.Windup&&Vector3.Angle(preparing,boss.LockedDirection)>15,"Aliento sigue al jugador hasta el final de la anticipación");
+            Advance(.12f);Vector3 locked=boss.LockedDirection;target.transform.position=new Vector3(-7,0,10);Advance(.4f);
+            Require(Vector3.Angle(locked,boss.LockedDirection)<.1f,"Fase 1 fija la dirección al comenzar el primer tick de fuego");
+            Advance(1.5f);Require(health.Current==health.Maximum,"Salir lateralmente después de la primera llama evita el aliento");
+            Reset(new Vector3(0,0,18));Attack(SoulEaterAction.Breath);Advance(3.6f);
             Require(health.Current<=health.Maximum-boss.Settings.breathTickDamage*3,"Aliento sostenido causa daño periódico dentro del cono");
             Advance(.2f);after=health.Current;Advance(1.2f);Require(health.Current==after&&!boss.GetComponent<SoulEaterEffects>().Flame.Emitting,"La recuperación corta llamas y daño");
             Reset(new Vector3(0,0,10));
-            var wall=GameObject.CreatePrimitive(PrimitiveType.Cube);wall.transform.position=new Vector3(0,2,7);wall.transform.localScale=new Vector3(10,4,.6f);Physics.SyncTransforms();
+            target.transform.position=Vector3.ProjectOnPlane(boss.MouthPosition,Vector3.up)+Vector3.forward*(boss.Settings.breathRange*.65f);
+            float wallHeight=boss.MouthPosition.y+4;
+            var wall=GameObject.CreatePrimitive(PrimitiveType.Cube);wall.transform.position=new Vector3(0,wallHeight*.5f,(boss.MouthPosition.z+target.transform.position.z)*.5f);wall.transform.localScale=new Vector3(10,wallHeight,.6f);Physics.SyncTransforms();
             Attack(SoulEaterAction.Breath);Advance(3.6f);Require(health.Current==health.Maximum,"El fuego no daña a través de paredes");Object.DestroyImmediate(wall);
 
-            Reset(new Vector3(0,0,-3));Advance(1.5f);
+            Reset(new Vector3(0,0,-boss.Settings.tailRange*.75f));Advance(1.5f);
             Require(boss.Action==SoulEaterAction.Tail,"Permanecer detrás provoca coletazo");
             Advance(2.1f);
             Require(health.Current<health.Maximum,"El barrido de la cola alcanza al jugador detrás");
             Require(health.Maximum-health.Current<=boss.Settings.tailDamage*1.6f,"Coletazo: un impacto por objetivo");
-            Reset(new Vector3(0,0,4));Attack(SoulEaterAction.Tail);Advance(2);
+            Reset(new Vector3(0,0,boss.Settings.biteRange*(4f/5.1f)));Attack(SoulEaterAction.Tail);Advance(2);
             Require(health.Current==health.Maximum,"El frente queda fuera del barrido trasero");
 
             Reset(new Vector3(0,0,10));Attack(SoulEaterAction.Breath);DamageTo(.75f);Advance(1);
@@ -105,15 +117,28 @@ namespace Mismo.Gameplay.Player.Editor
             Advance(.5f);Require(boss.transform.position.y>1,"El salto tiene arco, no teletransporte");
             Until(SoulEaterState.Charging,4);Vector3 direction=boss.LockedDirection;Vector3 origin=boss.transform.position;
             target.transform.position=origin+direction*8;Physics.SyncTransforms();after=health.Current;
-            Until(SoulEaterState.Braking,3);Require(health.Current<after,"La carga inflige daño al atravesar al jugador");
+            Until(SoulEaterState.Braking,3);Require(health.Current<after,"La carga inflige daño al contactar al jugador");
             float chargeDamage=after-health.Current;Require(chargeDamage<=boss.Settings.chargeDamage*1.6f,"La carga no repite daño por cada frame");
             Require(Vector3.Angle(direction,boss.transform.forward)<.1f,"La carga mantiene una trayectoria recta");
             Advance(2);Require(boss.ChargeUsed&&boss.State!=SoulEaterState.SpecialRoar,"La carga especial no se repite bajo 75 %");
 
+            // This checks the leash, so extend the test floor and open its authored walls.
+            // The complete torso correctly collides with those walls before its root reaches them.
+            var arenaFloor=GameObject.Find("Arena floor");var originalFloorScale=arenaFloor.transform.localScale;
+            var boundaries=Object.FindObjectsByType<Collider>(FindObjectsSortMode.None).Where(c=>c.name=="Arena boundary"&&c.enabled).ToArray();
+            try
+            {
+                arenaFloor.transform.localScale=new Vector3(256,originalFloorScale.y,256);foreach(var boundary in boundaries)boundary.enabled=false;
+                Reset(new Vector3(0,0,90));boss.transform.position=new Vector3(0,0,25);Advance(2);
+                Require(boss.State!=SoulEaterState.Returning&&boss.State!=SoulEaterState.Dormant&&boss.Target==target.transform&&boss.transform.position.z>29,"Persigue fuera del radio original sin volver a casa ni reiniciar vida");
+            }
+            finally{arenaFloor.transform.localScale=originalFloorScale;foreach(var boundary in boundaries)boundary.enabled=true;}
+
+            bool phaseTwoEnabled=boss.Settings.enablePhaseTwo;boss.Settings.enablePhaseTwo=false;
             Reset(new Vector3(0,0,10));DamageTo(.5f);int transitions=0;boss.PhaseTwoRequested+=Finished;
             void Finished()=>transitions++;
             Advance(4);Require(boss.PhaseOneComplete&&transitions==1,"50 % termina en rugido y entrega la segunda fase una vez");
-            after=health.Current;Advance(4);Require(transitions==1&&health.Current==after,"La prueba completada no sigue atacando");boss.PhaseTwoRequested-=Finished;
+            after=health.Current;Advance(4);Require(transitions==1&&health.Current==after,"La prueba completada no sigue atacando");boss.PhaseTwoRequested-=Finished;boss.Settings.enablePhaseTwo=phaseTwoEnabled;
             Reset(new Vector3(0,0,10));Attack(SoulEaterAction.Breath);Advance(2);float progress=boss.Progress;after=health.Current;boss.Tick(0);
             Require(boss.Progress==progress&&health.Current==after,"Pausa: no avanza el ataque ni el daño");
             boss.Health.ApplyDamage(new DamageInfo(10000,target,Vector3.zero,Vector3.forward));Advance(.5f);
@@ -123,6 +148,46 @@ namespace Mismo.Gameplay.Player.Editor
             Require(boss.transform.position.y<.1f&&boss.State==SoulEaterState.Returning,"Perder al jugador durante el salto aterriza y abandona el ataque");
             Until(SoulEaterState.Dormant,10);Require(boss.Health.Current==boss.Health.Maximum,"El regreso a la arena reinicia el encuentro");
 
+            Reset(new Vector3(0,0,10));Advance(.1f);
+            var groundedSkin=boss.GetComponentInChildren<SkinnedMeshRenderer>();var feetMesh=new Mesh();groundedSkin.BakeMesh(feetMesh,false);
+            float floor=feetMesh.vertices.Select(v=>groundedSkin.transform.position+groundedSkin.transform.rotation*v).Min(v=>v.y);
+            var originalMesh=groundedSkin.sharedMesh;var originalPoints=originalMesh.vertices;var originalWeights=originalMesh.boneWeights;
+            var matrices=groundedSkin.bones.Select((b,i)=>b.localToWorldMatrix*originalMesh.bindposes[i]).ToArray();
+            float calculated=float.PositiveInfinity;int lowIndex=0;var bakedVertices=feetMesh.vertices;
+            for(int i=0;i<originalPoints.Length;i++)
+            {
+                var v=originalPoints[i];var w=originalWeights[i];var cp=matrices[w.boneIndex0].MultiplyPoint3x4(v)*w.weight0+matrices[w.boneIndex1].MultiplyPoint3x4(v)*w.weight1+matrices[w.boneIndex2].MultiplyPoint3x4(v)*w.weight2+matrices[w.boneIndex3].MultiplyPoint3x4(v)*w.weight3;
+                calculated=Mathf.Min(calculated,cp.y);if(bakedVertices[i].y<bakedVertices[lowIndex].y)lowIndex=i;
+            }
+            report.Add("GROUND_DIAGNOSTIC baked="+floor+" matrix="+calculated+" lowestBone="+groundedSkin.bones[originalWeights[lowIndex].boneIndex0].name+" visual="+groundedSkin.transform.position+" scale="+groundedSkin.transform.lossyScale+" rootBone="+groundedSkin.rootBone.name);
+            Require(floor>=-.03f,"Patas y suelas no quedan enterradas en la pose terrestre: "+floor);Object.DestroyImmediate(feetMesh);
+            boss.ResetEncounter();Physics.SyncTransforms();
+            var pedestrian=new GameObject("Ground collision probe");var controller=pedestrian.AddComponent<CharacterController>();
+            controller.height=1.8f;controller.radius=.35f;controller.center=Vector3.up*.9f;controller.stepOffset=.25f;
+            try
+            {
+                Require(boss.GroundBody!=null&&!boss.GroundBody.isTrigger,"El torso tiene un volumen sólido hasta el suelo");
+                var block=boss.GroundBody;
+                foreach(var approach in new[]{new Vector3(0,0,12),new Vector3(6,0,4.8f),new Vector3(-6,0,4.8f)})
+                {
+                    controller.enabled=false;pedestrian.transform.position=approach+Vector3.up*.04f;controller.enabled=true;Physics.SyncTransforms();
+                    var probeDirection=Vector3.ProjectOnPlane(new Vector3(0,0,4.8f)-approach,Vector3.up).normalized;
+                    CollisionFlags contacts=CollisionFlags.None;
+                    for(int i=0;i<140;i++){contacts|=controller.Move(probeDirection*.1f-Vector3.up*.01f);Physics.SyncTransforms();}
+                    var local=boss.transform.InverseTransformPoint(pedestrian.transform.position)-block.center;
+                    bool stayedOutside=Mathf.Abs(approach.x)>.1f?Mathf.Sign(approach.x)*local.x>=block.size.x*.5f+.2f:local.z>=block.size.z*.5f+.2f;
+                    Require(stayedOutside && (contacts&CollisionFlags.Sides)!=0,"CharacterController queda bloqueado del lado de entrada "+approach+"; posición final="+pedestrian.transform.position);
+                }
+            }
+            finally{Object.DestroyImmediate(pedestrian);}
+            Reset(new Vector3(0,0,18));Attack(SoulEaterAction.Breath);Advance(1.7f);
+            Require(Mathf.Abs(Mathf.Asin(boss.LockedDirection.y)*Mathf.Rad2Deg+boss.Settings.breathPitch)<.1f,"Aliento frontal mantiene su inclinación suave incluso con un objetivo bajo");
+            var flame=boss.GetComponent<SoulEaterEffects>().Flame;
+            Require(Vector3.Angle(flame.transform.forward,boss.LockedDirection)<.1f,"VFX y daño comparten la dirección frontal del aliento");
+            SoulEaterPolishChecks.Run(boss,target,Require,report.Add);
+            SoulEaterPursuitChecks.Run(boss,target,Require,report.Add);
+            Reset(new Vector3(0,0,10));DamageTo(.75f);Until(SoulEaterState.RetreatJump,4);
+            SoulEaterWingChecks.CheckRetreat(boss,Require);
             Capture();report.Add("SOUL_PHASE_ONE_CHECKS_OK");Debug.Log(report.Last());
         }
         static void Reset(Vector3 position)
@@ -152,7 +217,10 @@ namespace Mismo.Gameplay.Player.Editor
             try
             {
             var camera=Object.FindFirstObjectByType<UnityEngine.Camera>();
+            float framingScale=boss.GetComponent<CapsuleCollider>().radius/1.4f;
             camera.GetComponent<Mismo.Gameplay.Player.Camera.ThirdPersonCamera>().enabled=false;
+            camera.transform.position=new Vector3(18,11,18);camera.transform.LookAt(new Vector3(0,2,3));camera.fieldOfView=43;
+            Reset(new Vector3(0,0,11));Advance(.1f);camera.transform.position=new Vector3(7,2.6f,12)*framingScale;camera.transform.LookAt(boss.transform.position+new Vector3(0,2,1)*framingScale);camera.fieldOfView=46;Shot(camera,Output+"/cuello-y-patas.png");
             camera.transform.position=new Vector3(18,11,18);camera.transform.LookAt(new Vector3(0,2,3));camera.fieldOfView=43;
             Directory.CreateDirectory(Output+"/flame-frames");Directory.CreateDirectory(Output+"/charge-frames");
             Reset(new Vector3(0,0,11));Attack(SoulEaterAction.Breath);
@@ -160,7 +228,7 @@ namespace Mismo.Gameplay.Player.Editor
             Reset(new Vector3(0,0,12));DamageTo(.75f);
             camera.transform.position=new Vector3(25,19,27);camera.transform.LookAt(new Vector3(0,1,-2));camera.fieldOfView=52;
             for(int i=0;i<72;i++){Advance(.12f);Shot(camera,Output+"/charge-frames/"+i.ToString("000")+".png");}
-            Directory.CreateDirectory(Output+"/tail-frames");Reset(new Vector3(0,0,-3));Attack(SoulEaterAction.Tail);
+            Directory.CreateDirectory(Output+"/tail-frames");Reset(new Vector3(0,0,-boss.Settings.tailRange*.75f));Attack(SoulEaterAction.Tail);
             camera.transform.position=new Vector3(11,8,-13);camera.transform.LookAt(new Vector3(0,1,0));camera.fieldOfView=43;
             for(int i=0;i<26;i++){Advance(.12f);Shot(camera,Output+"/tail-frames/"+i.ToString("000")+".png");}
             report.Add("Capturas Unity: aliento y secuencia del 75 %");
@@ -171,7 +239,7 @@ namespace Mismo.Gameplay.Player.Editor
         {
             if(captureSkin!=null)
             {
-                captureSkin.BakeMesh(captureMesh,true);captureMesh.RecalculateBounds();
+                captureSkin.BakeMesh(captureMesh,false);captureMesh.RecalculateBounds();
                 captureObject.transform.SetPositionAndRotation(captureSkin.transform.position,captureSkin.transform.rotation);
             }
             var rt=RenderTexture.GetTemporary(960,600,24);var old=RenderTexture.active;camera.targetTexture=rt;camera.Render();RenderTexture.active=rt;

@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 094969f9930004c43bae7bbc200510f4, type: 3}
+  m_Name: DragonArc
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.World.DragonArcDefinition
+  audience: {fileID: 11400000, guid: dc324e76f3545db42afd8f88633627df, type: 2}
+  awakening: {fileID: 11400000, guid: 0bc5434164c3ff14eb77257f4c70daae, type: 2}
+  lookout: {fileID: 5248876136628191352, guid: 3c5b4b4f2df7acb41a80ceb5d0abd4b3, type: 3}
+  king: {fileID: 9219778215856305375, guid: 8efccfef1a2a0ad4db38cd6e4eb63bc3, type: 3}
+  flyingVisual: {fileID: 2266067107926277534, guid: 8a73bafe8074a9e4c98834f052e1e665, type: 3}
+  encounterPrefab: {fileID: 6020054251016882308, guid: 7ed7f610bfbc31944aee5b16c57e6e5f, type: 3}
+  altar: {fileID: 223194739764155521, guid: f4051d626ab65374e9bc2104e867611a, type: 3}
+  flight: {fileID: 7400000, guid: e7817498e061e6145957a0b0cdc97031, type: 2}
+  flyingVisualScale: 1.6
+  flybyStartOffset: {x: -140, y: 55, z: 165}
+  flybyDirection: {x: 1, y: 0.035, z: 0.16}
+  flybySpeed: 48
+  flybyCinematicTime: 6.5
+  flybyCameraReturnTime: 1.1
+  flybyCameraFov: 34
+  flybyCleanupDistance: 260
+  beacon: {fileID: 0}
+  beaconOffsets:
+  - {x: -160, y: 80}
+  - {x: 155, y: -135}
+  - {x: 185, y: 230}
+  arenaOffset: {x: 370, y: 80}
+  arenaRadius: 46
+  beaconNames:
+  - Faro del bosque
+  - Faro de las ruinas
+  - Faro de la quebrada
+  warning: "Ese drag\xF3n es Soul Eater. Desde que empez\xF3 a sobrevolar la regi\xF3n, los monstruos se acercan cada vez m\xE1s al pueblo. Ya no responde a nuestras ofrendas. Algo cambi\xF3 en las tierras del interior. El rey est\xE1 aqu\xED, ayud\xE1ndonos a proteger el camino. Habl\xE1 con \xE9l antes de seguir."
+  audienceText: "Las ofrendas ya no bastan. Los antiguos encend\xEDan tres faros para llamar al drag\xF3n: el del bosque, el de las ruinas y el de la quebrada. Reactivalos en el orden que prefieras. Cuando los tres respondan, acercate al altar de la llamada. El ritual solo comenzar\xE1 cuando vos lo decidas. Prepar\xE1 tus armas antes de invocar a Soul Eater."

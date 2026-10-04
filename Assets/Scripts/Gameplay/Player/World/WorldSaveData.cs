@@ -20,14 +20,22 @@ namespace Mismo.Gameplay.Player.World
         public bool hasTimeOfDay;
         public float timeOfDay;
         public float x,y,z,yaw,spawnX,spawnY,spawnZ;
-        public WorldSaveData Copy()=>(WorldSaveData)MemberwiseClone();
+        public System.Collections.Generic.List<WorldImpactRecord> dragonImpacts = new System.Collections.Generic.List<WorldImpactRecord>();
+        public System.Collections.Generic.List<WorldFelledTreeRecord> dragonFelledTrees = new System.Collections.Generic.List<WorldFelledTreeRecord>();
+        public WorldSaveData Copy()
+        {
+            var copy=(WorldSaveData)MemberwiseClone();
+            copy.dragonImpacts=dragonImpacts==null?new System.Collections.Generic.List<WorldImpactRecord>():new System.Collections.Generic.List<WorldImpactRecord>(dragonImpacts);
+            copy.dragonFelledTrees=dragonFelledTrees==null?new System.Collections.Generic.List<WorldFelledTreeRecord>():new System.Collections.Generic.List<WorldFelledTreeRecord>(dragonFelledTrees);
+            return copy;
+        }
         public static int FreshSeed(int previous)
         {
             int seed=(int)(BitConverter.ToUInt32(Guid.NewGuid().ToByteArray(),0)&0x7fffffff);
             if(seed==0)seed=1;
             return seed==previous?(seed==int.MaxValue?1:seed+1):seed;
         }
-        public bool IsValid()=>PinsValid()&&version==1&&(legacy?id=="legacy":Guid.TryParseExact(id,"N",out _))&&seed>0&&
+        public bool IsValid()=>WorldImpactRecord.ValidList(dragonImpacts)&&WorldFelledTreeRecord.ValidList(dragonFelledTrees)&&PinsValid()&&version==1&&(legacy?id=="legacy":Guid.TryParseExact(id,"N",out _))&&seed>0&&
             !string.IsNullOrEmpty(settingsJson)&&settingsJson.Length<64000&&
             Finite(x)&&Finite(y)&&Finite(z)&&Finite(yaw)&&Finite(spawnX)&&Finite(spawnY)&&Finite(spawnZ)&&(!hasTimeOfDay||Finite(timeOfDay)&&timeOfDay>=0&&timeOfDay<24);
         bool PinsValid()

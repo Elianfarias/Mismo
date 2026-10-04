@@ -58,6 +58,9 @@ namespace Mismo.Gameplay.Combat
         bool ReceiveDamage(DamageInfo damage);
     }
 
+    /// <summary>Identifica enemigos dañables sin acoplar el combate a sus controladores de IA.</summary>
+    public interface IEnemyDamageTarget { }
+
     /// <summary>Reacción opcional de la fuente cuando su ataque es rechazado.</summary>
     public interface IParryResponder
     {

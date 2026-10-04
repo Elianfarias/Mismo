@@ -106,7 +106,7 @@ namespace Mismo.Gameplay.Voxels
         }
         private void OnGUI()
         {
-            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.InterfaceHidden) return;
             GUILayout.BeginArea(new Rect(10, 10, 290, Screen.height - 20), GUI.skin.box);
             GUILayout.Label("TALLER VOXEL · PLAY MODE");
             if (model == null || model.Asset == null)

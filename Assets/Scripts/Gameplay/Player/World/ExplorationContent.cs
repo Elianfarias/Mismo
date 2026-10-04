@@ -44,6 +44,7 @@ namespace Mismo.Gameplay.Player.World
             {
                 var site=terrain.Site(new Vector2Int(x+dx,z+dz));
                 if(site.kind!=WorldSiteKind.Village&&terrain.Introduction?.Reserved(site.position.x,site.position.z,40)==true)continue;
+                if(terrain.DragonArc?.Reserved(site.position.x,site.position.z,site.radius+18)==true)continue;
                 if(ExplorationChunks.Coordinate(site.position)==chunk&&terrain.IsExterior(site.position.x,site.position.z))yield return site;
             }
         }

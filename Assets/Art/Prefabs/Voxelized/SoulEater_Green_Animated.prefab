@@ -58,11 +58,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6909579225798274969, guid: f0f2de3903854b4479451b373071c287, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.031552628
+      value: -0.031552654
       objectReference: {fileID: 0}
     - target: {fileID: 6909579225798274969, guid: f0f2de3903854b4479451b373071c287, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.05377095
+      value: -0.053770974
       objectReference: {fileID: 0}
     - target: {fileID: 7285570884534996849, guid: f0f2de3903854b4479451b373071c287, type: 3}
       propertyPath: m_Name
@@ -82,23 +82,23 @@ PrefabInstance:
       objectReference: {fileID: 4300000, guid: 21a4399f6a0d751498867db5fbfb2044, type: 2}
     - target: {fileID: 9102598067743145099, guid: f0f2de3903854b4479451b373071c287, type: 3}
       propertyPath: m_AABB.m_Center.x
-      value: 0.009312987
+      value: 0.023715258
       objectReference: {fileID: 0}
     - target: {fileID: 9102598067743145099, guid: f0f2de3903854b4479451b373071c287, type: 3}
       propertyPath: m_AABB.m_Center.y
-      value: 0.03142762
+      value: 0.0028162003
       objectReference: {fileID: 0}
     - target: {fileID: 9102598067743145099, guid: f0f2de3903854b4479451b373071c287, type: 3}
       propertyPath: m_AABB.m_Center.z
-      value: 0.028760672
+      value: 0.028760433
       objectReference: {fileID: 0}
     - target: {fileID: 9102598067743145099, guid: f0f2de3903854b4479451b373071c287, type: 3}
       propertyPath: m_AABB.m_Extent.x
-      value: 2.2764196
+      value: 2.2908218
       objectReference: {fileID: 0}
     - target: {fileID: 9102598067743145099, guid: f0f2de3903854b4479451b373071c287, type: 3}
       propertyPath: m_AABB.m_Extent.y
-      value: 2.1586742
+      value: 2.1300623
       objectReference: {fileID: 0}
     - target: {fileID: 9102598067743145099, guid: f0f2de3903854b4479451b373071c287, type: 3}
       propertyPath: m_AABB.m_Extent.z

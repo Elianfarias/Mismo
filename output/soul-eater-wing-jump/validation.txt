@@ -1,0 +1,12 @@
+Soul Eater: alas y salto de retirada
+
+Aplicado: malla de alas reconstruida desde Fly Glide a 0.5 conservando el resto del cuerpo, materiales, esqueleto y GUID.
+Salto: Take Off 0-0.4, Land 0.8-1, cambio a mitad del arco y compensación del desplazamiento vertical interno del clip.
+
+Validación: Unity 6000.6.0f1, D3D11, proyecto aislado.
+17 clips x 21 poses. Las pruebas de boca, combate, persecución y retirada pasaron.
+El encuentro real, fase 2, destrucción y persistencia también pasaron con la salvedad de configuración indicada abajo.
+
+CONFIGURACIÓN PREEXISTENTE: Telegraph Prefab está vacío tanto en el archivo original previo a esta corrección como en el proyecto principal. DragonRegionalEncounter.Ready requiere esa referencia, por lo que la invocación no está disponible mientras permanezca vacía. Se asignó SoulEater_Telegraph solamente en la copia aislada para las pruebas del mundo; no se modificó este ajuste en el proyecto principal.
+
+Capturas antes/después de carga, defensa y vuelo incluidas, junto con tres fotogramas del salto corregido.

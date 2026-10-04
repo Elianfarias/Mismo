@@ -22,7 +22,7 @@ namespace Mismo.Gameplay.Enemies
         void Start()
         {
             spawn=player.transform.position;facing=player.transform.rotation;playerHealth=player.GetComponent<Health>();
-            boss.PhaseTwoRequested+=Complete;
+            boss.Defeated+=Complete;
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
             var args=System.Environment.GetCommandLineArgs();
             for(int i=0;i+1<args.Length;i++)if(args[i]=="-soul-smoke-check")smokePath=args[i+1];
@@ -44,18 +44,17 @@ namespace Mismo.Gameplay.Enemies
             smokeFlame|=boss.GetComponent<SoulEaterEffects>().Flame.Emitting;
             if(smokeTime>5&&!smoke75){smoke75=true;Threshold(.75f);}
             if(smokeCharge&&boss.State==SoulEaterState.Hunting&&!smoke50){smoke50=true;Threshold(.5f);}
-            if(!finished&&smokeTime<45)return;
-            bool passed=finished&&smokeJump&&smokeCharge&&smokeFlame;
+            if(boss.Phase!=2&&smokeTime<45)return;
+            bool passed=boss.Phase==2&&smokeJump&&smokeCharge&&smokeFlame;
             System.IO.File.WriteAllText(smokePath,$"{(passed?"PASS":"FAIL")} standalone arena\nFlame: {smokeFlame}\nJump: {smokeJump}\nCharge: {smokeCharge}\nPhase one complete: {finished}\n");
             smokePath=null;Application.Quit(passed?0:1);
 #endif
         }
-        void OnDestroy(){if(boss!=null)boss.PhaseTwoRequested-=Complete;}
+        void OnDestroy(){if(boss!=null)boss.Defeated-=Complete;}
         void Complete()
         {
             finished=true;
-            // Protect the completed workshop while leaving the actual handoff event reusable.
-            boss.GetComponent<Invulnerability>().StartWindow(36000);
+
         }
         public void Restart()
         {
@@ -76,10 +75,10 @@ namespace Mismo.Gameplay.Enemies
         }
         void OnGUI()
         {
-            if(boss==null||playerHealth==null||Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode)return;
+            if(boss==null||playerHealth==null||Mismo.Gameplay.Player.Presentation.GameplayPause.InterfaceHidden)return;
             GUILayout.BeginArea(new Rect(Screen.width-400,110,384,164),GUI.skin.box);
-            GUILayout.Label("SOUL EATER · PRUEBA DE FASE 1 (100–50 %)");
-            string status=finished?"Fase 1 completada · segunda fase pendiente":playerHealth.IsDead?"Has caído · reiniciá la prueba":Status();
+            GUILayout.Label("SOUL EATER · DOS FASES (100–0 %)");
+            string status=finished?"Soul Eater derrotado":playerHealth.IsDead?"Has caído · reiniciá la prueba":Status();
             GUILayout.Label(status);
             GUILayout.Label("WASD · Click atacar · E parry · C esquivar");
             GUILayout.Label("F5 reinicia · F6 prueba 75 % · F7 prueba 50 %");
@@ -101,7 +100,12 @@ namespace Mismo.Gameplay.Enemies
                 case SoulEaterState.ChargeWindup:return "Está apuntando la carga";
                 case SoulEaterState.Charging:return "¡Carga! Esquivá hacia un costado";
                 case SoulEaterState.Recovery:case SoulEaterState.Braking:case SoulEaterState.Staggered:return "Expuesto: aprovechá para atacar";
-                case SoulEaterState.PhaseTransition:return "Rugido del 50 %: termina la primera fase";
+                case SoulEaterState.PhaseTransition:return "Rugido del 50 %: comienza la segunda fase";
+                case SoulEaterState.Ascending:return "¡Levanta vuelo! Mirá la marca del suelo";
+                case SoulEaterState.AerialAim:return "Objetivo fijado: salí de la marca";
+                case SoulEaterState.Diving:return "¡Picada devastadora!";
+                case SoulEaterState.AerialBreath:return "Pasada de fuego: buscá un costado";
+                case SoulEaterState.ImpactRecovery:return "Agotado: castigá la cabeza";
                 default:return "Buscá sus aperturas y evitá el frente";
             }
         }

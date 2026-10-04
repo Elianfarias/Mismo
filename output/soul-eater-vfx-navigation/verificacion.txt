@@ -1,0 +1,14 @@
+Validado el 04/10/2026 en Unity 6000.6.0f1 con D3D11, en una copia aislada.
+66 comprobaciones de fase 1; 39 de fase 2; 44 del arco tutorial; 100 de reglas: 249 aprobadas.
+Se comprobó A* con un árbol, collider sin penetración, aliento dañino y visible hasta el suelo,
+pool fijo y reutilización del VFX del usuario, recuperación en Idle y persistencia del mundo.
+22 archivos comparados coinciden exactamente con la copia probada.
+Build Windows: Succeeded. Ejecutable: QUEST_PLAYER_OK.
+El reporte de la build confirma inclusión del prefab, los 3 materiales y las 3 texturas del VFX.
+La auditoría de organización conserva incidencias previas en assets de FireStylized, Explosions,
+GatheringGroup y otros proveedores, ajenos a esta integración; están detalladas en organization.txt.
+
+Rendimiento C# aislado, 8 charcos, 300 llamadas a Tick:
+Anterior: 1170.2252 ms total (~3.901 ms por paso).
+Nuevo: 0.1517 ms total (~0.000506 ms por paso), 0 bytes de asignación C#.
+Esta comparación excluye render y partículas nativas; no equivale a medir FPS totales del juego.

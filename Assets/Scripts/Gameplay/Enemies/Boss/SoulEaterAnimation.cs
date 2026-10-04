@@ -7,6 +7,8 @@ namespace Mismo.Gameplay.Enemies
     // Manual clip time keeps anticipation, collision and sustained exhalation on the same clock.
     public sealed class SoulEaterAnimation : System.IDisposable
     {
+        readonly Animator animator;
+        readonly RuntimeAnimatorController previousController;
         PlayableGraph graph;
         AnimationMixerPlayable mixer;
         AnimationClipPlayable current, previous;
@@ -14,6 +16,10 @@ namespace Mismo.Gameplay.Enemies
         float blend = 1;
         public SoulEaterAnimation(Animator animator)
         {
+            this.animator = animator;
+            previousController = animator.runtimeAnimatorController;
+            // The sample controller otherwise evaluates after Update and overwrites this pose.
+            animator.runtimeAnimatorController = null;
             animator.applyRootMotion = false; animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
             graph = PlayableGraph.Create("SoulEater combat"); graph.SetTimeUpdateMode(DirectorUpdateMode.Manual);
             mixer = AnimationMixerPlayable.Create(graph, 2);
@@ -37,6 +43,11 @@ namespace Mismo.Gameplay.Enemies
             mixer.SetInputWeight(0, blend); mixer.SetInputWeight(1, 1 - blend); graph.Evaluate(0);
             if (blend >= 1 && previous.IsValid()) { graph.Disconnect(mixer, 1); graph.DestroyPlayable(previous); previous = default; }
         }
-        public void Dispose() { if (graph.IsValid()) graph.Destroy(); }
+        public void Dispose()
+        {
+            if (!graph.IsValid()) return;
+            graph.Destroy();
+            if (animator != null) animator.runtimeAnimatorController = previousController;
+        }
     }
 }

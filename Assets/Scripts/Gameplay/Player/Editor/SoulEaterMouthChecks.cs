@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Mismo.Gameplay.Player.Voxels;
@@ -42,6 +43,7 @@ namespace Mismo.Gameplay.Player.Editor
                 }
                 return mesh.vertices;
             }
+            public Vector3 Chin => bones.First(t => t.name == "JawTip").position;
             public Vector3 MouthCenter => (bones.First(t => t.name == "UpperMouth").position + bones.First(t => t.name == "JawTip").position) * .5f;
             public float Depth(Ray ray)
             {
@@ -82,10 +84,56 @@ namespace Mismo.Gameplay.Player.Editor
             Require(saved.surface.sharedMaterials.Last() == AssetDatabase.LoadAssetAtPath<Material>(SoulEaterEyeDetail.MaterialPath), "Visible eye material assigned");
             Require(saved.surface.sharedMesh.boneWeights.Skip(saved.surface.sharedMesh.vertexCount - 48).All(w =>
                 Mathf.Abs(w.weight0 + w.weight1 + w.weight2 + w.weight3 - 1) < .0001f && w.weight0 > 0), "Both eye details retain normalized surface weights");
+            var restMesh = original.surface.sharedMesh; var correctedMesh = saved.surface.sharedMesh;
+            var restPoints = restMesh.vertices; var restWeights = restMesh.boneWeights;
+            var correctedPoints = correctedMesh.vertices; var correctedWeights = correctedMesh.boneWeights;
+            var retained = new HashSet<(Vector3, BoneWeight)>(correctedPoints.Select((point, i) => (point, correctedWeights[i])));
+            bool IsMouth(int bone) => new[] { "Jaw", "JawTip", "UpperMouth" }.Contains(original.surface.bones[bone].name);
+            var wingBones=new HashSet<int>(original.surface.bones.Select((bone,i)=>(bone,i)).Where(p=>p.bone.name.StartsWith("Wing")).Select(p=>p.i));
+            int bodyCorners = 0;
+            bool MouthCorner(BoneWeight w) => w.weight0 > 0 && IsMouth(w.boneIndex0) || w.weight1 > 0 && IsMouth(w.boneIndex1) ||
+                w.weight2 > 0 && IsMouth(w.boneIndex2) || w.weight3 > 0 && IsMouth(w.boneIndex3);
+            for (int start = 0; start < restPoints.Length; start += 24)
+            {
+                if (Enumerable.Range(start, 24).Any(i => MouthCorner(restWeights[i]) || SoulEaterWingRepair.WingWeight(restWeights[i],wingBones))) continue;
+                for (int i = start; i < start + 24; i++)
+                {
+                    Require(retained.Contains((restPoints[i], restWeights[i])), "Articulation repair must retain the original non-mouth/non-wing body surface and its weights");
+                    bodyCorners++;
+                }
+            }
+            Require(bodyCorners > 1000, "Non-mouth body surface checked against original geometry");
             var target = Object.Instantiate(prefab); var rig = target.GetComponent<VoxelRigInstance>();
             var report = new StringBuilder();
+            report.AppendLine("PASS chest/body: "+bodyCorners+" original non-mouth/non-wing corners preserved exactly, including skin weights");
             using (var voxel = new Fixture(target, rig.animator.transform, rig.surface))
             {
+                var referenceRoot=Object.Instantiate(originalPrefab);var referenceRig=referenceRoot.GetComponent<VoxelRigInstance>();
+                using(var reference=new Fixture(referenceRoot,referenceRig.animator.transform,referenceRig.surface))
+                {
+                    int throatRays=0;var idle=rig.clips.First(c=>c.name=="Idle");
+                    foreach(float time in new[]{0f,.5f,.8f})
+                    {
+                        reference.Sample(idle,idle.length*time,true);voxel.Sample(idle,idle.length*time,true);
+                        foreach(float down in new[]{.2f,.4f,.6f,.8f})foreach(float x in new[]{-.35f,0f,.35f})
+                        {
+                            var ray=new Ray(voxel.Chin-Vector3.up*down+Vector3.right*x+Vector3.forward*3,Vector3.back);
+                            float expected=reference.Depth(ray);if(expected>=9)continue;
+                            Require(voxel.Depth(ray)<=expected+.18f,"Front throat must not open a hole under the chin in Idle "+time+" offset "+down+","+x);
+                            throatRays++;
+                        }
+                        foreach(float down in new[]{.15f,.35f,.55f})foreach(float behind in new[]{.25f,.5f,.75f})foreach(float side in new[]{-1f,1f})
+                        {
+                            var centre=voxel.Chin-Vector3.up*down-Vector3.forward*behind;
+                            var ray=new Ray(centre+Vector3.right*side*3,Vector3.left*side);
+                            float expected=reference.Depth(ray);if(expected>=9)continue;
+                            Require(voxel.Depth(ray)<=expected+.18f,"Neck underside must remain closed at both jaw hinges in Idle "+time);
+                            throatRays++;
+                        }
+                    }
+                    Require(throatRays>=30,"Throat coverage uses real original surface intersections");
+                    report.AppendLine("PASS throat: "+throatRays+" side rays across 3 idle poses retain the original neck surface");
+                }
                 foreach (var clip in rig.clips)
                 {
                     Vector3[] baseline = null; bool moved = false; float eyeGap = 0;

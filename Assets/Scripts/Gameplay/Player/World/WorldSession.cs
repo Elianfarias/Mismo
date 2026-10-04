@@ -163,6 +163,32 @@ namespace Mismo.Gameplay.Player.World
             if(Current==null)return false;
             var next=Current.Copy();next.mapDiscovery=blocks;return Commit(next);
         }
+        public static bool SaveDragonFelledTrees(System.Collections.Generic.IReadOnlyList<WorldFelledTreeRecord> trees)
+        {
+            if(Current==null||trees==null)return false;
+            var next=Current.Copy();bool changed=false;
+            foreach(var tree in trees)
+            {
+                if(!tree.Valid)return false;
+                bool exists=false;foreach(var old in next.dragonFelledTrees)if(old.Matches(new Vector3(tree.x,0,tree.z))){exists=true;break;}
+                if(exists)continue;
+                if(next.dragonFelledTrees.Count>=8192){LastError="El mundo alcanzó el límite de árboles derribados.";return false;}
+                next.dragonFelledTrees.Add(tree);changed=true;
+            }
+            // One transaction per contact group. A failed write leaves every collider intact.
+            return !changed||Commit(next);
+        }
+        public static bool SaveDragonImpact(WorldImpactRecord impact)
+        {
+            if(Current==null || !impact.Valid)return false;
+            var next=Current.Copy();
+            foreach(var old in next.dragonImpacts)
+                if(Mathf.Abs(old.x-impact.x)<.05f && Mathf.Abs(old.z-impact.z)<.05f && old.radius>=impact.radius && old.depth>=impact.depth)return true;
+            if(next.dragonImpacts.Count>=1024){LastError="El mundo alcanzó el límite de impactos guardados.";return false;}
+            next.dragonImpacts.Add(impact);
+            // Persist first: a write failure must not remove terrain, colliders or resources.
+            return Commit(next);
+        }
         public static void Respawn()
         {if(Current!=null)Checkpoint(new Vector3(Current.spawnX,Current.spawnY,Current.spawnZ),0);}
         static bool Commit(WorldSaveData next)

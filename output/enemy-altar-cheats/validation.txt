@@ -1,0 +1,3 @@
+53 gameplay checks passed in isolated Unity Play Mode.
+The full suite additionally found existing project-organization violations (for example Assets/Art/Prefabs/VFX/FireStylized/Textures/Tx_Ember_01.png). The organization audit remains enabled in RunBatch; RunGameplayBatch only runs gameplay checks.
+No Windows build was rebuilt for this code-only change.
