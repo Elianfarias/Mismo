@@ -119,7 +119,7 @@ namespace Mismo.Gameplay.Enemies
             if(n==pathObstacles.Length)return false;
             for(int i=0;i<n;i++)
             {
-                var obstacle=pathObstacles[i];if(OwnOrTarget(obstacle.transform)||TreeCanBeCleared(obstacle))continue;
+                var obstacle=pathObstacles[i];if(OwnOrTarget(obstacle.transform)||PropCanBeCleared(obstacle))continue;
                 var nearest=obstacle.ClosestPoint(center);float distance=Planar(nearest-center).magnitude;
                 if(distance>=radius)continue;
                 // A newly blocked start can escape its existing overlap, but never move deeper into it.
@@ -140,7 +140,7 @@ namespace Mismo.Gameplay.Enemies
         bool TryPursuitCharge(Vector3 delta)
         {
             if(!settings.enablePursuitCharge || clock<nextPursuitCharge || delta.magnitude<settings.pursuitChargeTriggerDistance)return false;
-            // Trees fall on contact. Solid obstacles and protected trees still require an A* detour.
+            // Natural props break on contact. Buildings and protected props still require an A* detour.
             if(clock<nextPursuitProbe)return false;
             nextPursuitProbe=clock+.2f;
             var heading=Quaternion.LookRotation(delta);

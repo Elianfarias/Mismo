@@ -15,6 +15,11 @@ namespace Mismo.Gameplay.Enemies
         bool audioPaused;
         float groundTimer;
         public SoulEaterFlameVfx Flame => flame;
+        public SoulEaterDustVfx Dust {get;private set;}
+        public void ConfigureDust(SoulEaterPhaseOneSettings settings)
+        {Dust=GetComponent<SoulEaterDustVfx>()??gameObject.AddComponent<SoulEaterDustVfx>();Dust.Configure(settings);}
+        public void DustImpact(Vector3 point,SoulEaterDustKind kind)
+        {Dust?.Play(point,kind);if(Time.time>=groundTimer){Cue(SoulEaterCue.Land);groundTimer=Time.time+.3f;}}
         public void Configure(SoulEaterFlameVfx f, Light light, SkinnedMeshRenderer skin, ParticleSystem dust, AudioSource vocal, AudioSource loop, AudioClip[] clips)
         { flame=f;mouthLight=light;body=skin;groundDust=dust;voice=vocal;fire=loop;cues=clips; }
         public void Prepare(Vector3 p, Vector3 d, float heat, float dt)
@@ -43,7 +48,7 @@ namespace Mismo.Gameplay.Enemies
             if(groundDust!=null){groundDust.transform.position=position+Vector3.up*.12f;groundDust.Emit(Mathf.RoundToInt(22*strength));}
             if(Time.time>=groundTimer){Cue(SoulEaterCue.Land);groundTimer=Time.time+.3f;}
         }
-        public void StopAll(){StopBreath();if(voice!=null)voice.Stop();if(groundDust!=null)groundDust.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);EyeIntensity(1);}
+        public void StopAll(){Dust?.Clear();StopBreath();if(voice!=null)voice.Stop();if(groundDust!=null)groundDust.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);EyeIntensity(1);}
         void Update()
         {
             bool paused=Time.timeScale<=0;

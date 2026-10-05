@@ -26,8 +26,8 @@ MonoBehaviour:
   pathReplanInterval: 1
   pathNodesPerFrame: 16
   decisionPause: 0.2
-  crushTrees: 1
-  treeBreakReach: 0.6
+  crushWorldProps: 1
+  propBreakReach: 0.6
   enablePursuitCharge: 1
   pursuitChargeTriggerDistance: 28
   pursuitChargeWindup: 0.75
@@ -62,8 +62,9 @@ MonoBehaviour:
   breathTickDamage: 6
   breathCooldown: 8
   breathTickInterval: 0.4
-  breathPropagationSpeed: 24
-  breathTurnSpeed: 80
+  breathPropagationSpeed: 20
+  breathTurnSpeed: 65
+  phaseTwoBreathTrackingSpeed: 60
   breathHeadYaw: 55
   breathHeadPitch: 35
   breathPitch: 8
@@ -71,6 +72,8 @@ MonoBehaviour:
   breathGroundBackreach: 1.5
   breath: {fileID: 7400000, guid: 28ba9acc58b1d314b8febcb522500402, type: 2}
   breathMaterial: {fileID: 2100000, guid: 932b792ada318bc45843d24b17dd6ac6, type: 2}
+  breathPrefab: {fileID: 8330006320348072208, guid: 6e4b6c99591848e4ca95111a6f384e71, type: 3}
+  breathParticleBudget: 72
   chargeThreshold: 0.75
   specialRoar: 1.65
   chargeWindup: 1
@@ -94,6 +97,19 @@ MonoBehaviour:
   land: {fileID: 7400000, guid: 95ee20ac26f47bb4ab03f726f92fd7aa, type: 2}
   chargePose: {fileID: 7400000, guid: 20e3ad3da700599499c6b35c7ad78a37, type: 2}
   brake: {fileID: 7400000, guid: 85ab052c11bbdff43ad961c4b3fea6a9, type: 2}
+  dustExplosionPrefab: {fileID: 1025285306637258, guid: d8f0099df63275647a8bcf646df1ca00, type: 3}
+  diveDustScale: 2.2
+  landingDustScale: 1.2
+  chargeDustScale: 0.55
+  diveDustDensity: 1.5
+  landingDustDensity: 1
+  chargeDustDensity: 0.45
+  dustMaxParticlesPerSystem: 96
+  dustMaximumLifetime: 5
+  dustGroundOffset: 0.08
+  dustWaveOpacity: 0.45
+  chargeDustLiftHeight: 0.6
+  chargeDustContactHeight: 0.15
   arrivalImpactRadius: 8
   arrivalCraterDepth: 0.4
   enablePhaseTwo: 1

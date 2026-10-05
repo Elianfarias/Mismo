@@ -210,6 +210,8 @@ namespace Mismo.Gameplay.Player.Editor
             yield return Until(()=>Object.FindFirstObjectByType<SoulEaterPhaseOneController>()?.Target!=null,"inicio combate",30);
             var boss=Object.FindFirstObjectByType<SoulEaterPhaseOneController>();
             Require(Object.FindObjectsByType<SoulEaterPhaseOneController>(FindObjectsSortMode.None).Length==1&&!GameplayPause.BlocksInput&&!GameplayPause.InterfaceHidden,"Un jefe, IA activa después del aterrizaje y control restaurado");
+            var arrivalDust=((DragonRegionalEncounter)arc.Encounter).GetComponent<SoulEaterDustVfx>();
+            Require(arrivalDust!=null&&arrivalDust.BurstCount==1&&arrivalDust.LastKind==SoulEaterDustKind.Dive,"Invocación emite una sola nube grande de DustExplosion al aterrizar");
             Require(!landingObstacle.activeSelf && WorldImpactRecord.Destroyed(landingObstacle.transform.position),"El aterrizaje rompe el árbol que bloqueaba el pecho y guarda su destrucción");
             Require(WorldSession.Current.dragonImpacts.Any(i=>Vector2.Distance(new Vector2(i.x,i.z),new Vector2(arc.Layout.Arena.x,arc.Layout.Arena.z))<.1f),"La invocación deja un impacto persistente antes de habilitar la IA");
             Require(inventory.QuestState(d.awakening).completed&&arc.CanSummon,"Ritual completado permite reintentos");
@@ -222,6 +224,7 @@ namespace Mismo.Gameplay.Player.Editor
             double skipRequested=Time.realtimeSinceStartupAsDouble;skipped.Skip();
             yield return Until(()=>skipped.Boss?.Target!=null&&!GameplayPause.BlocksInput,"Omitir restaura combate",5);
             double skipLatency=Time.realtimeSinceStartupAsDouble-skipRequested;
+            Require(skipped.GetComponent<SoulEaterDustVfx>().BurstCount==1,"Omitir conserva un único impacto de polvo, sin duplicarlo al crear el boss");
             Require(skipLatency<1,"Omitir devuelve control con jefe activo sin congelamiento: "+(skipLatency*1000).ToString("F1")+" ms");
             Require(!GameplayPause.InterfaceHidden&&Object.FindObjectsByType<SoulEaterPhaseOneController>(FindObjectsSortMode.None).Length==1&&WorldSession.Current.dragonImpacts.Count==impactCount,"Omitir restaura HUD, conserva destrucción y no duplica jefe/impacto");
             boss=skipped.Boss;

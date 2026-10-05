@@ -66,6 +66,10 @@ namespace Mismo.Gameplay.Player.Editor
             yield return Until(()=>boss.State==SoulEaterState.Diving&&boss.Progress>.45f);
             Check(Vector3.Distance(crater,boss.ImpactPoint)<.001f,"Moving after the warning locks cannot move the impact target");capture("fase2-03-picada");
             yield return Until(()=>boss.State==SoulEaterState.ImpactRecovery);
+            var dust=boss.GetComponent<SoulEaterEffects>().Dust;int diveDustCount=dust.BurstCount;
+            Check(dust.LastKind==SoulEaterDustKind.Dive&&Vector3.Distance(dust.LastPosition,boss.transform.position)<.1f,"La picada emite DustExplosion grande sobre el suelo del cráter");
+            yield return new WaitForSeconds(.18f);
+            Check(dust.BurstCount==diveDustCount,"La recuperación de picada no repite la explosión de polvo");
             Check(world.SurfaceHeight(crater)<originalHeight-.6f&& !tree.gameObject.activeSelf,"Dive physically lowers terrain and destroys the baited tree");
             Check(boss.Battlefield.FireCount==0&&!boss.Battlefield.MarkerVisible&&boss.Combat.Recovering,"Impact has a clear recovery window and clears its target marker");capture("fase2-04-crater");
             yield return Until(()=>boss.State==SoulEaterState.ImpactRecovery&&boss.Progress>.28f);
@@ -105,6 +109,29 @@ namespace Mismo.Gameplay.Player.Editor
             Warp(arc,boss.transform.position+boss.transform.forward*breathForward);Check(boss.TryStartAttack(SoulEaterAction.Breath),"Tracking breath starts in phase two");
             yield return Until(()=>boss.State==SoulEaterState.Active&&boss.Progress>.1f);var initialDirection=boss.LockedDirection;
             var breathCenter=boss.transform.position+boss.transform.forward*breathForward;var breathRight=boss.transform.right;
+            float trackingSpeed=boss.Settings.phaseTwoBreathTrackingSpeed,bodySpeed=boss.Settings.breathTurnSpeed;bool bossEnabled=boss.enabled;
+            var flame=boss.GetComponent<SoulEaterEffects>().Flame;
+            try
+            {
+                boss.enabled=true;boss.Settings.phaseTwoBreathTrackingSpeed=0;boss.Settings.breathTurnSpeed=180;
+                Warp(arc,breathCenter-breathRight*6);Physics.SyncTransforms();
+                var beforeAim=boss.LockedDirection;var beforeBody=boss.transform.rotation;boss.Tick(.2f);
+                Check((beforeAim-boss.LockedDirection).sqrMagnitude<.000001f&&Quaternion.Angle(beforeBody,boss.transform.rotation)>1,
+                    "Zero fire tracking freezes the damage direction even while the body turns");
+                Check(flame.Emitting&&Vector3.Angle(flame.transform.forward,boss.LockedDirection)<.05f,
+                    "Zero fire tracking also freezes the visible VFX direction");
+                boss.Settings.breathTurnSpeed=0;boss.Settings.phaseTwoBreathTrackingSpeed=30;
+                Warp(arc,breathCenter+breathRight*6);Physics.SyncTransforms();beforeAim=boss.LockedDirection;beforeBody=boss.transform.rotation;boss.Tick(.02f);
+                float slowTurn=Vector3.Angle(beforeAim,boss.LockedDirection);
+                Check(slowTurn>.1f&&slowTurn<=.65f,"Phase two tracking is bounded by the configured 30 degrees/second");
+                Check(Quaternion.Angle(beforeBody,boss.transform.rotation)<.05f,
+                    "Zero body speed holds the dragon still without overriding fire tracking");
+                Check(Vector3.Angle(flame.transform.forward,boss.LockedDirection)<.05f,
+                    "Slow fire uses the same VFX and damage direction");
+                boss.Settings.phaseTwoBreathTrackingSpeed=180;beforeAim=boss.LockedDirection;boss.Tick(.02f);
+                Check(Vector3.Angle(beforeAim,boss.LockedDirection)>slowTurn*3&&Vector3.Angle(beforeAim,boss.LockedDirection)<=3.65f,"Increasing tracking speed changes the actual flame direction, not only the body");
+            }
+            finally{boss.Settings.phaseTwoBreathTrackingSpeed=trackingSpeed;boss.Settings.breathTurnSpeed=bodySpeed;boss.enabled=bossEnabled;}
             Warp(arc,breathCenter-breathRight*6);
             yield return Until(()=>boss.State==SoulEaterState.Active&&boss.Progress>.4f);
             Check(Vector3.Angle(Vector3.ProjectOnPlane(boss.LockedDirection,Vector3.up),Vector3.ProjectOnPlane(arc.transform.position-boss.MouthPosition,Vector3.up))<1,"Phase two follows a leftward player movement while exhaling");
@@ -119,7 +146,8 @@ namespace Mismo.Gameplay.Player.Editor
             yield return Until(()=>boss.State==SoulEaterState.AerialBreath&&boss.Progress>.5f);
             Check(Mathf.Abs(Vector3.ProjectOnPlane(boss.transform.position-passPosition,Vector3.up).magnitude-28*(boss.Progress-passProgress))<.2f && Mathf.Approximately(boss.Settings.AerialPassDuration,2),"Flight uses configured 28m distance and 14m/s speed in the actual movement");
             Check(boss.GetComponent<SoulEaterEffects>().Flame.Emitting&&boss.Battlefield.FireCount>0,"Low pass emits the existing flame VFX and scorches the ground");capture("fase2-06-pasada");
-            yield return Until(()=>boss.State==SoulEaterState.ImpactRecovery);Check(boss.Combat.Recovering,"Aerial pass ends on the ground with a punish window");boss.Settings.aerialPassDistance=oldDistance;boss.Settings.aerialPassSpeed=oldSpeed;
+            yield return Until(()=>boss.State==SoulEaterState.ImpactRecovery);Check(boss.Combat.Recovering,"Aerial pass ends on the ground with a punish window");
+            Check(dust.LastKind==SoulEaterDustKind.Landing&&Vector3.Distance(dust.LastPosition,boss.transform.position)<.1f,"El camino de fuego termina con DustExplosion al tocar suelo");boss.Settings.aerialPassDistance=oldDistance;boss.Settings.aerialPassSpeed=oldSpeed;
             yield return Until(()=>boss.State==SoulEaterState.Hunting);boss.Battlefield.Tick(5);Check(boss.Battlefield.FireCount==0,"Temporary fire expires instead of permanently filling the arena");Check(boss.TryStartAerial(SoulEaterAction.Dive),"Subsequent aerial attacks remain available");
             yield return Until(()=>boss.State==SoulEaterState.AerialAim);
             Warp(arc,arc.Layout.Arena+Vector3.forward*(arc.Data.arenaRadius+70));yield return null;yield return null;

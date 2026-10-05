@@ -184,8 +184,16 @@ namespace Mismo.Gameplay.Player.Editor
             Require(Mathf.Abs(Mathf.Asin(boss.LockedDirection.y)*Mathf.Rad2Deg+boss.Settings.breathPitch)<.1f,"Aliento frontal mantiene su inclinación suave incluso con un objetivo bajo");
             var flame=boss.GetComponent<SoulEaterEffects>().Flame;
             Require(Vector3.Angle(flame.transform.forward,boss.LockedDirection)<.1f,"VFX y daño comparten la dirección frontal del aliento");
+            Require(boss.Settings.breathPrefab!=null&&boss.Settings.breathPrefab.name=="VFX_Fire_Green"&&flame.PrefabInstance!=null,"El prefab solicitado está referenciado e instanciado para el aliento");
+            var stream=flame.PrefabInstance;var particles=stream.GetComponentsInChildren<ParticleSystem>(true);
+            Require(stream.activeSelf&&particles.Sum(p=>p.particleCount)>0&&!flame.GetComponent<MeshRenderer>().enabled,"La llamarada usa partículas visibles y apaga las cintas antiguas");
+            Require(particles.Sum(p=>p.main.maxParticles)<=boss.Settings.breathParticleBudget,"El VFX respeta el presupuesto total de partículas");
+            Require(stream.GetComponentInChildren<ParticleSystemRenderer>().sharedMaterial==boss.Settings.breathPrefab.GetComponentInChildren<ParticleSystemRenderer>().sharedMaterial,"El aliento conserva el material del prefab del usuario");
+            Advance(.2f);Require(flame.PrefabInstance==stream,"Se reutiliza una sola instancia durante el ataque");
+            Advance(4);Require(!stream.activeSelf&&particles.All(p=>p.particleCount==0),"La recuperación limpia las partículas del prefab");
             SoulEaterPolishChecks.Run(boss,target,Require,report.Add);
             SoulEaterPursuitChecks.Run(boss,target,Require,report.Add);
+            SoulEaterDustChecks.Run(boss,target,Require);
             Reset(new Vector3(0,0,10));DamageTo(.75f);Until(SoulEaterState.RetreatJump,4);
             SoulEaterWingChecks.CheckRetreat(boss,Require);
             Capture();report.Add("SOUL_PHASE_ONE_CHECKS_OK");Debug.Log(report.Last());
@@ -231,7 +239,15 @@ namespace Mismo.Gameplay.Player.Editor
             Directory.CreateDirectory(Output+"/tail-frames");Reset(new Vector3(0,0,-boss.Settings.tailRange*.75f));Attack(SoulEaterAction.Tail);
             camera.transform.position=new Vector3(11,8,-13);camera.transform.LookAt(new Vector3(0,1,0));camera.fieldOfView=43;
             for(int i=0;i<26;i++){Advance(.12f);Shot(camera,Output+"/tail-frames/"+i.ToString("000")+".png");}
-            report.Add("Capturas Unity: aliento y secuencia del 75 %");
+            Reset(new Vector3(0,0,18));Advance(.05f);camera.transform.position=new Vector3(34,20,34);camera.transform.LookAt(new Vector3(0,3,2));camera.fieldOfView=55;
+            var dust=boss.GetComponent<SoulEaterEffects>().Dust;Directory.CreateDirectory("output/soul-dust");
+            foreach(var kind in new[]{SoulEaterDustKind.Dive,SoulEaterDustKind.Charge,SoulEaterDustKind.Landing})
+            {
+                dust.Clear();dust.Play(boss.transform.position+Vector3.forward*3,kind);
+                foreach(var ps in dust.LastCloud.GetComponentsInChildren<ParticleSystem>())ps.Simulate(.18f,false,false,false);
+                Shot(camera,"output/soul-dust/"+kind+".png");
+            }
+            dust.Clear();report.Add("Capturas Unity: aliento, polvo y secuencia del 75 %");
             }
             finally{captureSkin.enabled=true;Object.DestroyImmediate(captureObject);Object.DestroyImmediate(captureMesh);captureObject=null;captureMesh=null;captureSkin=null;}
         }

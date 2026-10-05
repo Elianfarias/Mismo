@@ -8,14 +8,28 @@ namespace Mismo.Gameplay.Player.World
         public static readonly HashSet<WorldDestructible> Loaded=new HashSet<WorldDestructible>();
         public WorldAssetKind Kind {get;private set;}
         public bool IsTree=>Kind==WorldAssetKind.Tree||Kind==WorldAssetKind.Deadwood;
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]static void Reset()=>Loaded.Clear();
-        void OnEnable()=>Loaded.Add(this);
-        void OnDisable()=>Loaded.Remove(this);
+        static readonly Dictionary<Vector2Int,HashSet<WorldDestructible>> cells=new Dictionary<Vector2Int,HashSet<WorldDestructible>>();
+        Vector2Int cell;
+        static Vector2Int Cell(Vector3 p)=>new Vector2Int(Mathf.FloorToInt(p.x/16),Mathf.FloorToInt(p.z/16));
+        public static bool Allowed(WorldAssetKind kind)=>kind==WorldAssetKind.Tree||kind==WorldAssetKind.Deadwood||kind==WorldAssetKind.Rock||kind==WorldAssetKind.Grass||kind==WorldAssetKind.Bush||kind==WorldAssetKind.Flower||kind==WorldAssetKind.Fence||kind==WorldAssetKind.Landmark||kind==WorldAssetKind.Ruin;
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]static void Reset(){Loaded.Clear();cells.Clear();}
+        void OnEnable()
+        {
+            Loaded.Add(this);cell=Cell(transform.position);
+            if(!cells.TryGetValue(cell,out var set)){set=new HashSet<WorldDestructible>();cells.Add(cell,set);}set.Add(this);
+        }
+        void OnDisable(){Loaded.Remove(this);if(cells.TryGetValue(cell,out var set)){set.Remove(this);if(set.Count==0)cells.Remove(cell);}}
+        public static void Query(Vector3 center,float radius,List<WorldDestructible> results)
+        {
+            results.Clear();var min=Cell(center-Vector3.one*radius);var max=Cell(center+Vector3.one*radius);
+            for(int z=min.y;z<=max.y;z++)for(int x=min.x;x<=max.x;x++)
+                if(cells.TryGetValue(new Vector2Int(x,z),out var set))foreach(var prop in set)if(prop!=null)results.Add(prop);
+        }
         public static GameObject Attach(GameObject root,WorldAssetKind kind)
         {
-            if(kind!=WorldAssetKind.Tree && kind!=WorldAssetKind.Deadwood && kind!=WorldAssetKind.Rock)return root;
+            if(!Allowed(kind))return root;
             var prop=root.GetComponent<WorldDestructible>()??root.AddComponent<WorldDestructible>();prop.Kind=kind;
-            if(WorldImpactRecord.Destroyed(root.transform.position)||prop.IsTree&&WorldFelledTreeRecord.Destroyed(root.transform.position))prop.Break(root.transform.position,false);
+            if(WorldImpactRecord.Destroyed(root.transform.position)||prop.IsTree&&WorldFelledTreeRecord.Destroyed(root.transform.position)||WorldDestroyedPropRecord.Destroyed(root.transform.position,kind))prop.Break(root.transform.position,false);
             return root;
         }
         public void Break(Vector3 origin,bool animate)
@@ -36,7 +50,9 @@ namespace Mismo.Gameplay.Player.World
                     }
                     falling.AddComponent<DragonFallingTree>().Initialize(origin);
                 }
-                WorldImpactDebris.Emit(transform.position+Vector3.up*.6f,Kind==WorldAssetKind.Rock?new Color(.42f,.4f,.34f):new Color(.33f,.25f,.13f),Kind==WorldAssetKind.Rock?48:24);
+                // Ground cover is cheap to crush: do not create a particle system/material for every blade.
+                if(IsTree||Kind==WorldAssetKind.Rock)
+                    WorldImpactDebris.Emit(transform.position+Vector3.up*.6f,Kind==WorldAssetKind.Rock?new Color(.42f,.4f,.34f):new Color(.33f,.25f,.13f),Kind==WorldAssetKind.Rock?24:16);
             }
             // A stored footprint suppresses this prop again after streaming or continuing a save.
             gameObject.SetActive(false);

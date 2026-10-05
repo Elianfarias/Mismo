@@ -3,11 +3,18 @@ using UnityEngine;
 
 namespace Mismo.Gameplay.Enemies
 {
-    /// <summary>Authored flowing flame ribbons and embers. No legacy voxel breath or cube emitter.</summary>
+    /// <summary>Reuses the configured particle prefab; procedural ribbons remain a fallback for older assets.</summary>
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
     public sealed class SoulEaterFlameVfx : MonoBehaviour
     {
         [SerializeField] Material flameMaterial;
+        PrefabBreath prefabBreath;
+        public GameObject PrefabInstance=>prefabBreath?.Root;
+        public void ConfigurePrefab(GameObject prefab,int budget)
+        {
+            if(prefabBreath!=null)Destroy(prefabBreath.Root);
+            prefabBreath=prefab!=null?new PrefabBreath(prefab,transform,budget):null;
+        }
         Mesh mesh;
         MeshRenderer surface;
         readonly List<Vector3> vertices = new List<Vector3>(2600);
@@ -30,9 +37,14 @@ namespace Mismo.Gameplay.Enemies
             if (mesh == null) return;
             time += Mathf.Max(0, dt); Emitting = reach > .05f; Reach = Mathf.Max(0, reach);
             surface.enabled = heat > .01f || Emitting;
-            if (!surface.enabled) return;
+            if (!surface.enabled) { prefabBreath?.Hide(); return; }
             if (direction.sqrMagnitude < .001f) direction = Vector3.forward;
             transform.SetPositionAndRotation(origin, Quaternion.LookRotation(direction));
+            if(prefabBreath!=null)
+            {
+                if(Emitting){surface.enabled=false;prefabBreath.Show(reach,halfAngle,dt,floorY,baseWidth,backreach);return;}
+                prefabBreath.Hide();
+            }
             vertices.Clear(); colors.Clear(); uv.Clear(); triangles.Clear();
             if (Emitting) BuildFlame(reach, Mathf.Tan(halfAngle * Mathf.Deg2Rad));
             else BuildHeat(heat);
@@ -54,7 +66,7 @@ namespace Mismo.Gameplay.Enemies
             }
             mesh.Clear(); mesh.SetVertices(vertices); mesh.SetColors(colors); mesh.SetUVs(0,uv); mesh.SetTriangles(triangles, 0); mesh.RecalculateBounds();
         }
-        public void Hide() { Emitting = false; Reach = 0; if (surface != null) surface.enabled = false; }
+        public void Hide() { prefabBreath?.Hide(); Emitting = false; Reach = 0; if (surface != null) surface.enabled = false; }
         void BuildFlame(float reach, float cone)
         {
             const int count = 24, segments = 28;
@@ -118,4 +130,73 @@ namespace Mismo.Gameplay.Enemies
         void OnDisable() => Hide();
         void OnDestroy() { if (mesh != null) Destroy(mesh); }
     }
+    /// <summary>One pooled emitter, no mesh rebuilding or allocations during an active breath.
+    /// Particle color, material and flipbook come from the authored prefab; positions fill the damage fan.</summary>
+    internal sealed class PrefabBreath
+    {
+        public GameObject Root {get;}
+        readonly ParticleSystem[] systems;
+        readonly ParticleSystem.Particle[][] particles;
+        readonly Transform parent;
+        bool active;
+        public PrefabBreath(GameObject prefab,Transform parent,int budget)
+        {
+            this.parent=parent;Root=Object.Instantiate(prefab,parent);Root.name=prefab.name+" (Soul Eater breath)";
+            Root.transform.localPosition=Vector3.zero;Root.transform.localRotation=Quaternion.identity;Root.transform.localScale=Vector3.one;
+            systems=Root.GetComponentsInChildren<ParticleSystem>(true);particles=new ParticleSystem.Particle[systems.Length][];
+            int perSystem=Mathf.Max(1,Mathf.Clamp(budget,16,128)/Mathf.Max(1,systems.Length));
+            for(int i=0;i<systems.Length;i++)
+            {
+                var ps=systems[i];ps.Stop(false,ParticleSystemStopBehavior.StopEmittingAndClear);
+                var main=ps.main;main.playOnAwake=false;main.loop=true;main.stopAction=ParticleSystemStopAction.None;
+                main.simulationSpace=ParticleSystemSimulationSpace.Local;main.scalingMode=ParticleSystemScalingMode.Hierarchy;
+                main.maxParticles=perSystem;main.startSpeed=0;main.gravityModifier=0;
+                var emission=ps.emission;emission.enabled=true;emission.rateOverTime=perSystem/Mathf.Max(.1f,main.startLifetime.constantMax);
+                var shape=ps.shape;shape.enabled=false;
+                var collision=ps.collision;collision.enabled=false;var lights=ps.lights;lights.enabled=false;
+                particles[i]=new ParticleSystem.Particle[perSystem];
+            }
+            Root.SetActive(false);
+        }
+        public void Show(float reach,float angle,float dt,float floor,float baseWidth,float backreach)
+        {
+            bool start=!active;active=true;if(start)Root.SetActive(true);
+            float cone=Mathf.Tan(angle*Mathf.Deg2Rad);
+            for(int s=0;s<systems.Length;s++)
+            {
+                var ps=systems[s];var buffer=particles[s];
+                // Explicit simulation also works in the editor's combat workshop and deterministic tests.
+                ps.Simulate(start?Mathf.Max(.1f,ps.main.startLifetime.constantMax):Mathf.Max(0,dt),false,start,false);
+                int count=ps.GetParticles(buffer);
+                for(int i=0;i<count;i++)
+                {
+                    var p=buffer[i];float t=Mathf.Clamp01(1-p.remainingLifetime/Mathf.Max(.01f,p.startLifetime));
+                    float seed=p.randomSeed%8191;float z=t*reach;
+                    float width=Mathf.Max(.3f,baseWidth)+z*cone;
+                    float x=(Hash(seed)*2-1)*width*.85f;
+                    float vertical=Hash(seed+19);
+                    var local=new Vector3(x,(vertical-.5f)*(.5f+z*cone),z);
+                    var world=parent.TransformPoint(local);
+                    if(!float.IsNaN(floor))
+                    {
+                        world.y=Mathf.Lerp(floor+.2f,Mathf.Max(floor+.3f,world.y+.4f),vertical);
+                        world-=Vector3.ProjectOnPlane(parent.forward,Vector3.up).normalized*backreach*(1-vertical)*(1-t);
+                    }
+                    p.position=ps.transform.InverseTransformPoint(world);p.velocity=Vector3.zero;
+                    float size=Mathf.Lerp(.8f,2.8f,t)*(.8f+Hash(seed+43)*.4f);
+                    p.startSize3D=new Vector3(size,size,size*1.65f);
+                    buffer[i]=p;
+                }
+                ps.SetParticles(buffer,count);
+            }
+        }
+        static float Hash(float n)=>Mathf.Repeat(Mathf.Sin(n*127.1f+311.7f)*43758.5453f,1);
+        public void Hide()
+        {
+            if(!active)return;active=false;
+            foreach(var ps in systems)ps.Stop(false,ParticleSystemStopBehavior.StopEmittingAndClear);
+            Root.SetActive(false);
+        }
+    }
+
 }

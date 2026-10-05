@@ -47,8 +47,14 @@ namespace Mismo.Gameplay.Player.Editor
             target.transform.position=new Vector3(boss.MouthPosition.x,0,boss.MouthPosition.z-.5f);Physics.SyncTransforms();float hp=target.GetComponent<Health>().Current;
             for(int i=0;i<28;i++){Physics.SyncTransforms();boss.Tick(1f/60);}
             check(target.GetComponent<Health>().Current<hp,"El aliento alcanza al jugador a ras del suelo bajo la boca");
-            var flame=boss.GetComponent<SoulEaterEffects>().Flame;var mesh=flame.GetComponent<MeshFilter>().sharedMesh;
-            check(mesh.vertices.Min(v=>flame.transform.TransformPoint(v).y)<.3f,"Las llamas visibles también alcanzan el suelo");
+            var flame=boss.GetComponent<SoulEaterEffects>().Flame;
+            float lowest=float.PositiveInfinity;
+            foreach(var ps in flame.PrefabInstance.GetComponentsInChildren<ParticleSystem>())
+            {
+                var particles=new ParticleSystem.Particle[ps.main.maxParticles];int count=ps.GetParticles(particles);
+                for(int i=0;i<count;i++)lowest=Mathf.Min(lowest,ps.transform.TransformPoint(particles[i].position).y-particles[i].startSize3D.y*.5f);
+            }
+            check(lowest<.3f,"Las partículas del nuevo prefab también alcanzan el suelo");
             Navigation(boss,target,check);
         }
         static void Navigation(SoulEaterPhaseOneController boss,GameObject target,Action<bool,string> check)

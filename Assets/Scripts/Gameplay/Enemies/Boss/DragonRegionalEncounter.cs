@@ -31,6 +31,7 @@ namespace Mismo.Gameplay.Enemies
         float savedFov;
         bool ownsInput;
         AudioSource voice;
+        SoulEaterDustVfx arrivalDust;
         public void Initialize(Transform player,Vector3 center,float arenaRadius)
         {target=player;targetHealth=player.GetComponent<Health>();arena=center;radius=arenaRadius;pending=true;skipRequested=false;}
         public void Skip()=>skipRequested=true;
@@ -54,6 +55,7 @@ namespace Mismo.Gameplay.Enemies
             foreach(var collider in visual.GetComponentsInChildren<Collider>())collider.enabled=false;
             animation=new SoulEaterAnimation(visual.GetComponentInChildren<Animator>());
             var settings=bossPrefab.Settings;
+            arrivalDust=gameObject.AddComponent<SoulEaterDustVfx>();arrivalDust.Configure(settings,1);
             float landTime=Mathf.Clamp(settings.land.length,.8f,2),roarTime=Mathf.Clamp(settings.roar.length,1.4f,2.5f);
             float duration=3+landTime+roarTime;
             bool landed=false,roared=false;
@@ -108,10 +110,11 @@ namespace Mismo.Gameplay.Enemies
         }
         bool ApplyArrivalImpact(ExplorationChunks world,SoulEaterPhaseOneSettings settings)
         {
-            if(arrivalImpactApplied || world==null)return true;
-            if(!world.TryDragonImpact(arena,settings.arrivalImpactRadius,settings.arrivalCraterDepth))
+            if(arrivalImpactApplied)return true;
+            if(world!=null&&!world.TryDragonImpact(arena,settings.arrivalImpactRadius,settings.arrivalCraterDepth))
             {Debug.LogWarning("No se pudo guardar o despejar el aterrizaje de Soul Eater. El ritual se puede reintentar.");return false;}
-            arrivalImpactApplied=true;arena.y=world.SurfaceHeight(arena);
+            arrivalImpactApplied=true;if(world!=null)arena.y=world.SurfaceHeight(arena);
+            arrivalDust?.Play(arena,SoulEaterDustKind.Dive);
             WorldImpactDebris.Emit(arena+Vector3.up*.3f,new Color(.3f,.24f,.16f),80);
             return true;
         }
@@ -128,7 +131,7 @@ namespace Mismo.Gameplay.Enemies
         }
         public void Abort()
         {
-            pending=false;StopAllCoroutines();ClearPresentation();
+            pending=false;StopAllCoroutines();ClearPresentation();arrivalDust?.Clear();
             if(Boss!=null){Boss.gameObject.SetActive(false);Destroy(Boss.gameObject);Boss=null;}
         }
         void ClearPresentation()

@@ -11,7 +11,7 @@ using UnityEngine.AI;
 namespace Mismo.Gameplay.Enemies
 {
     [DisallowMultipleComponent, RequireComponent(typeof(Health), typeof(DamageReceiver), typeof(CapsuleCollider))]
-    public sealed partial class SoulEaterPhaseOneController : MonoBehaviour, IEnemyDamageTarget, IParryResponder, IBossMusicThreat
+    public sealed partial class SoulEaterPhaseOneController : MonoBehaviour, IEnemyDamageTarget, IParryResponder, IBossMusicThreat, IBossPhaseCheatTarget
     {
         [SerializeField] SoulEaterPhaseOneSettings settings;
         [SerializeField] VoxelRigInstance rig;
@@ -94,7 +94,7 @@ namespace Mismo.Gameplay.Enemies
             ClearPhaseTwo();localPath?.Clear();routeMoving=followingTarget=pursuitCharge=false;nextPath=nextPursuitCharge=nextPursuitProbe=movingUntil=0;
             StopNavigation(); transform.SetPositionAndRotation(home, homeRotation); health.Revive(); combat.ResetCombat();
             target = null; targetHealth = null; ChargeUsed = phaseReported = pendingStagger = false;
-            treeRetryAt=0;
+            propRetryAt=0;
             clock = locomotionTime = nextBite = nextTail = nextBreath = rearTime = nextSearch = 0;
             lastAction = SoulEaterAction.None; repetitions = 0;
             body.enabled = true; if(groundBody!=null)groundBody.enabled=true; if (headCollider != null) headCollider.enabled = true;
@@ -181,7 +181,7 @@ namespace Mismo.Gameplay.Enemies
                     bool moved = MoveGround(chargeDirection * settings.chargeSpeed * dt);
                     chargeTravel += Vector3.Distance(old, transform.position);
                     ChargeHits(old, transform.position);
-                    if (State == SoulEaterState.Charging && (!moved || elapsed >= duration || chargeTravel >= chargeLimit)) { Enter(SoulEaterState.Braking, settings.brakeDuration); effects?.GroundImpact(transform.position, .65f); }
+                    if (State == SoulEaterState.Charging && (!moved || elapsed >= duration || chargeTravel >= chargeLimit)) { Enter(SoulEaterState.Braking, settings.brakeDuration); }
                     break;
                 case SoulEaterState.Braking:
                     if (Progress < settings.brakeTravelFraction) MoveGround(chargeDirection * (settings.chargeSpeed * settings.brakeSpeedFraction * (1 - Progress / Mathf.Max(.01f,settings.brakeTravelFraction)) * dt));
@@ -201,7 +201,7 @@ namespace Mismo.Gameplay.Enemies
             }
             AerialStep(dt);TrackBreathBody(dt);Pose(dt);
             rig.transform.localRotation=visualRest*Quaternion.Euler(State==SoulEaterState.Diving?Mathf.Lerp(20,65,Progress):0,0,0);
-            SupportFeet();AimBreathHead();
+            SupportFeet();AimBreathHead(dt);ChargeDustContact();
             if (headCollider != null) headCollider.transform.position = MouthPosition - transform.forward * (body.radius * (.25f / 1.4f));
             if (State == SoulEaterState.Active)
             {
@@ -270,6 +270,7 @@ namespace Mismo.Gameplay.Enemies
             routeMoving=false;movingUntil=0;
             StopNavigation(); effects?.StopBreath(); effects?.EyeIntensity(1);
             if(next!=SoulEaterState.Hunting && next!=SoulEaterState.Returning)localPath?.Clear();
+            if(next==SoulEaterState.ChargeWindup||next==SoulEaterState.Braking){chargeDustArmed=false;chargeDustDone=false;}
             State = next; elapsed = 0; duration = seconds;
             if (!keepAction) Action = SoulEaterAction.None;
             combat.Recovering = next == SoulEaterState.ImpactRecovery || next == SoulEaterState.Recovery || next == SoulEaterState.Braking || next == SoulEaterState.Staggered;
@@ -414,13 +415,13 @@ namespace Mismo.Gameplay.Enemies
             if(step.sqrMagnitude<.000001f)return true;
             Vector3 destination=transform.position+step;
             if(!Ground(destination,out var ground) || Mathf.Abs(ground.y-transform.position.y)>settings.groundStepHeight)return false;
-            ClearTreesForStep(step,ground.y);
+            ClearPropsForStep(step,ground.y);
             if(!GroundSweep(step,ground.y))return false;
             transform.position=ground;
             if(Navigating)agent.nextPosition=ground;
             return true;
         }
-        bool GroundSweep(Vector3 step,float groundY,bool includeTarget=true,bool allowTrees=false)
+        bool GroundSweep(Vector3 step,float groundY,bool includeTarget=true,bool allowProps=false)
         {
             // Planning can pass through eligible trees. Actual movement still requires their colliders to be removed.
             float baseY=Mathf.Max(transform.position.y,groundY)+settings.groundStepHeight;
@@ -437,7 +438,7 @@ namespace Mismo.Gameplay.Enemies
                 n=Physics.CapsuleCastNonAlloc(bottom,top,body.radius*.9f,step.normalized,hits,step.magnitude+.05f,~0,QueryTriggerInteraction.Ignore);
             }
             if(n==hits.Length)return false;
-            for(int i=0;i<n;i++)if(!hits[i].transform.IsChildOf(transform) && (includeTarget || target==null || !hits[i].transform.IsChildOf(target)) && hits[i].normal.y<.6f && !(allowTrees&&TreeCanBeCleared(hits[i].collider)))return false;
+            for(int i=0;i<n;i++)if(!hits[i].transform.IsChildOf(transform) && (includeTarget || target==null || !hits[i].transform.IsChildOf(target)) && hits[i].normal.y<.6f && !(allowProps&&PropCanBeCleared(hits[i].collider)))return false;
             return true;
         }
         bool TryRetreat(out Vector3 destination)
@@ -472,11 +473,11 @@ namespace Mismo.Gameplay.Enemies
             return battlefield!=null && battlefield.TryTerrainPoint(p,out ground);
         }
         bool OwnOrTarget(Transform t) => t.IsChildOf(transform) || target != null && t.IsChildOf(target);
-        bool ClearLine(Vector3 a, Vector3 b, Transform recipient,bool allowTrees=false)
+        bool ClearLine(Vector3 a, Vector3 b, Transform recipient,bool allowProps=false)
         {
             Vector3 delta = b - a; int n = Physics.RaycastNonAlloc(a, delta.normalized, hits, delta.magnitude, ~0, QueryTriggerInteraction.Ignore);
             if(n==hits.Length)return false;
-            for (int i = 0; i < n; i++) if (!hits[i].transform.IsChildOf(transform) && (recipient == null || !hits[i].transform.IsChildOf(recipient)) && !(allowTrees&&TreeCanBeCleared(hits[i].collider))) return false;
+            for (int i = 0; i < n; i++) if (!hits[i].transform.IsChildOf(transform) && (recipient == null || !hits[i].transform.IsChildOf(recipient)) && !(allowProps&&PropCanBeCleared(hits[i].collider))) return false;
             return true;
         }
         void LandSafely() { var probe=transform.position;probe.y=home.y;if (Ground(probe, out var p)) transform.position = p; else if (Ground(home, out p)) transform.position = p; RestoreNavigation(); }

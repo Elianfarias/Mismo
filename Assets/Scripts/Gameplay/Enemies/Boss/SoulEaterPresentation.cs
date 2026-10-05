@@ -10,10 +10,12 @@ namespace Mismo.Gameplay.Enemies
         bool breathReleased;
         void InitializePresentation()
         {
+            effects?.ConfigureDust(settings);
             visualPosition=rig.transform.localPosition;
             foreach(var bone in rig.surface.bones)if(bone.name=="Head")head=bone;
             if(head!=null)headForward=head.InverseTransformDirection(transform.forward);
             if(settings.breathMaterial!=null)effects?.Flame?.Configure(settings.breathMaterial);
+            effects?.Flame?.ConfigurePrefab(settings.breathPrefab,settings.breathParticleBudget);
             footSupport=new SoulEaterFootSupport(rig,SupportGroundHeight);
         }
         float SupportGroundHeight(Vector3 point)
@@ -29,12 +31,23 @@ namespace Mismo.Gameplay.Enemies
             if(Airborne || State==SoulEaterState.Dead)return;
             footSupport?.Apply(settings.soleClearance);
         }
+        bool chargeDustArmed,chargeDustDone;
+        void ChargeDustContact()
+        {
+            bool rearing=State==SoulEaterState.ChargeWindup||State==SoulEaterState.Braking;
+            bool settling=State==SoulEaterState.Charging||State==SoulEaterState.Hunting&&elapsed<.4f;
+            if(footSupport==null||(!rearing&&!settling)){chargeDustArmed=false;return;}
+            if(chargeDustDone)return;
+            if(rearing&&footSupport.FrontClearance>=settings.chargeDustLiftHeight)chargeDustArmed=true;
+            if(chargeDustArmed&&footSupport.FrontClearance<=settings.chargeDustContactHeight)
+            {chargeDustDone=true;chargeDustArmed=false;effects?.DustImpact(footSupport.FrontContactPoint,SoulEaterDustKind.Charge);}
+        }
         bool GroundBreath=>Action==SoulEaterAction.Breath && (State==SoulEaterState.Windup || State==SoulEaterState.Active);
         void TrackBreathBody(float dt)
         {
             if(!GroundBreath || target==null || !phaseTwo&&breathReleased)return;
             var d=Planar(target.position-transform.position);
-            if(d.sqrMagnitude>.001f)transform.rotation=Quaternion.RotateTowards(transform.rotation,Quaternion.LookRotation(d),settings.breathTurnSpeed*dt);
+            if(d.sqrMagnitude>.001f)transform.rotation=Quaternion.RotateTowards(transform.rotation,Quaternion.LookRotation(d),Mathf.Max(0,settings.breathTurnSpeed)*dt);
         }
         Vector3 GroundBreathDirection()
         {
@@ -42,11 +55,16 @@ namespace Mismo.Gameplay.Enemies
             if(flat.sqrMagnitude<.001f)flat=transform.forward;
             return Quaternion.LookRotation(flat.normalized)*Quaternion.Euler(settings.breathPitch,0,0)*Vector3.forward;
         }
-        void AimBreathHead()
+        void AimBreathHead(float dt)
         {
             if(!GroundBreath)return;
             bool tracking=phaseTwo||!breathReleased;
-            Vector3 desired=tracking?GroundBreathDirection():aim;
+            if(tracking)
+            {
+                var desiredAim=GroundBreathDirection();
+                aim=phaseTwo?Vector3.RotateTowards(aim,desiredAim,Mathf.Max(0,settings.phaseTwoBreathTrackingSpeed)*Mathf.Deg2Rad*dt,0).normalized:desiredAim;
+            }
+            Vector3 desired=aim;
             if(head!=null)
             {
                 var local=transform.InverseTransformDirection(desired);
@@ -55,7 +73,6 @@ namespace Mismo.Gameplay.Enemies
                 var direction=transform.rotation*Quaternion.Euler(pitch,yaw,0)*Vector3.forward;
                 head.rotation=Quaternion.FromToRotation(head.TransformDirection(headForward),direction)*head.rotation;
             }
-            if(tracking)aim=GroundBreathDirection();
         }
     }
     internal sealed class SoulEaterFootSupport
@@ -113,6 +130,8 @@ namespace Mismo.Gameplay.Enemies
             }
             return new Geometry{soles=result.ToArray(),bindPoses=mesh.bindposes,feet=feet.ToArray()};
         }
+        public float FrontClearance {get;private set;}
+        public Vector3 FrontContactPoint {get;private set;}
         public void Apply(float clearance)=>ApplySupport(clearance,false,0);
         public void ApplyAtHeight(float clearance,float height)=>ApplySupport(clearance,true,height);
         void ApplySupport(float clearance,bool usePlane,float height)
@@ -130,12 +149,15 @@ namespace Mismo.Gameplay.Enemies
                 if(p.y<supports[sector].y)supports[sector]=p;
             }
             float lift=float.NegativeInfinity;
-            foreach(var p in supports)
+            FrontClearance=float.PositiveInfinity;
+            for(int i=0;i<supports.Length;i++)
             {
-                if(float.IsPositiveInfinity(p.y))continue;float ground=usePlane?height:groundHeight(p);
-                if(!float.IsNaN(ground)&&!float.IsInfinity(ground))lift=Mathf.Max(lift,ground+clearance-p.y);
+                var p=supports[i];if(float.IsPositiveInfinity(p.y))continue;float ground=usePlane?height:groundHeight(p);
+                if(float.IsNaN(ground)||float.IsInfinity(ground))continue;
+                lift=Mathf.Max(lift,ground+clearance-p.y);
+                if(i<8&&p.y-ground<FrontClearance){FrontClearance=p.y-ground;FrontContactPoint=new Vector3(p.x,ground,p.z);}
             }
-            if(!float.IsNegativeInfinity(lift))rig.transform.position+=Vector3.up*lift;
+            if(!float.IsNegativeInfinity(lift)){rig.transform.position+=Vector3.up*lift;FrontClearance+=lift;}
         }
     }
 }

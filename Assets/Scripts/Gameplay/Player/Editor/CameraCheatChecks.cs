@@ -163,7 +163,7 @@ namespace Mismo.Gameplay.Player.Editor
             Check(all.equipped.SequenceEqual(initial.equipped) && all.claimedRewards.SequenceEqual(initial.claimedRewards), "The arsenal preserves equipped items and boss reward progress");
 
             var profileField = typeof(PlayerInventory).GetField("profile", Private);
-            Check(!cheats.ToggleOneHitKills() && !cheats.OneHitKills && !cheats.ActivateDragonAltars(), "New cheats require F8 mode");
+            Check(!cheats.ToggleOneHitKills() && !cheats.OneHitKills && !cheats.ActivateDragonAltars() && !cheats.AdvanceSoulEaterPhase(), "New cheats require F8 mode");
             Check(cheats.SetActive(true) && !cheats.OneHitKills, "One-hit kills start off even in cheat mode");
             Check(!cheats.ActivateDragonAltars(), "Missing dragon arc is handled without changing progress");
             var arc = player.gameObject.AddComponent<DragonArcCoordinator>(); arc.enabled = false;
@@ -225,6 +225,28 @@ namespace Mismo.Gameplay.Player.Editor
                 new DamageInfo(amount, source != null ? source : attackSource, boss.transform.position, Vector3.forward, AttackIdentity.Next(), ranged: ranged, area: area);
             Check(receiver.Resolve(Strike()).HealthDamage < 10 && !life.IsDead, "Ordinary attacks retain normal damage with cheats off");
             Check(cheats.SetActive(true) && cheats.ToggleOneHitKills() && cheats.OneHitKills, "One-hit kills can be enabled explicitly");
+            Check(!cheats.AdvanceSoulEaterPhase() && !life.IsDead, "Phase cheat does not activate a dormant boss");
+            boss.BeginEncounter(player.transform);
+            var inputOwner=new object();
+            Check(Presentation.GameplayPause.TryBlockInput(inputOwner), "Cinematic input lock acquired for phase cheat check");
+            Check(!cheats.AdvanceSoulEaterPhase() && boss.Phase==1, "Phase cheat respects cinematic input ownership");
+            Presentation.GameplayPause.ReleaseInput(inputOwner);yield return null;
+            int transitions=0;boss.PhaseTwoRequested+=()=>transitions++;
+            Check(cheats.AdvanceSoulEaterPhase() && boss.State==SoulEaterState.PhaseTransition && !life.IsDead &&
+                Mathf.Approximately(life.Normalized,boss.Settings.phaseThreshold) && deaths==0 && defeated==0,
+                "Phase cheat starts the roar at the configured health threshold without triggering one-hit death or rewards");
+            Check(!cheats.AdvanceSoulEaterPhase(), "Repeated input cannot restart the transition");
+            for(int i=0;i<600 && boss.Phase!=2;i++)boss.Tick(1f/60);
+            Check(boss.Phase==2 && transitions==1 && boss.Target==player.transform && !life.IsDead,
+                "Normal roar completion starts phase two once and preserves the combat target");
+            float phaseLife=life.Current;
+            Check(!cheats.AdvanceSoulEaterPhase() && life.Current==phaseLife && transitions==1, "Phase two input does not reset health or repeat the transition");
+            boss.ResetEncounter();boss.BeginEncounter(player.transform);
+            life.ApplyDamage(new DamageInfo(life.Maximum*.7f,null,boss.transform.position,Vector3.zero));float lowLife=life.Current;
+            Check(boss.TryStartAttack(SoulEaterAction.Breath) && cheats.AdvanceSoulEaterPhase() &&
+                boss.State==SoulEaterState.PhaseTransition && boss.Action==SoulEaterAction.None && life.Current==lowLife,
+                "Phase cheat interrupts an attack without healing an already weakened boss");
+            boss.ResetEncounter();
             var invulnerable = boss.GetComponent<Invulnerability>() ?? boss.gameObject.AddComponent<Invulnerability>();
             typeof(DamageReceiver).GetField("invulnerability", Private).SetValue(receiver, invulnerable);
             invulnerable.StartWindow(60);

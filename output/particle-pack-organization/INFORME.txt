@@ -1,0 +1,35 @@
+Particle Pack — informe de organización
+
+Alcance: Particle Pack 3.1, 447 archivos importados desde Assets/UnityTechnologies/ParticlePack.
+Los traslados se hicieron dentro de Unity con AssetDatabase.MoveAsset, conservando todos los GUID.
+El manifiesto manifest.json registra origen, destino, tipo y dependencias de cada archivo.
+
+Destinos principales:
+- Assets/Art/<tipo>/VFX/ParticlePack: prefabs, materiales, texturas, sprites, UI, modelos y animaciones.
+- Assets/Art/Shaders/TextMeshPro: shaders TMP junto a sus includes existentes.
+- Assets/Art/Fonts/ParticlePack: fuente y licencia OFL.
+- Assets/Data/VFX/ParticlePack: perfiles, ajustes y ScriptableObjects del pack.
+- Assets/Scripts/ThirdParty/ParticlePack: código y herramientas en subcarpetas Editor.
+- Assets/Scenes/Examples/ParticlePack: escena de ejemplo y sus datos de iluminación.
+- Assets/Documentation/ParticlePack: documentación y atribuciones.
+
+Ajustes de compatibilidad:
+- Eliminada la carpeta Resources al distribuir sus archivos por tipo. El juego conserva sus propios ajustes de texto registrados en el catálogo.
+- Se fijaron referencias externas de materiales en los importadores FBX antes de separarlos de sus carpetas originales.
+- RampAssetEditor guarda las nuevas texturas en Art/Textures/VFX/ParticlePack/Shared/Ramps; crea el destino y conserva la opción de sobrescritura del proveedor.
+- ReadmeEditor usa la ruta organizada de documentación y omite el layout opcional si no existe.
+- ProjectOrganizationChecks ahora también reconoce TIFF y archivos auxiliares de shaders CGINC/HLSL.
+
+Dependencias del Package Manager:
+Se conservaron Packages/manifest.json y Packages/packages-lock.json exactamente como estaban al comenzar. ProGrids y Visual Studio Code Editor permanecen gestionados por Unity en Packages. Los avisos de firma que muestran las capturas no se corrigen cambiando carpetas de Assets. No se editó Library/PackageCache.
+
+Validación:
+- 447 GUID y todas las dependencias de AssetDatabase conservados; sin nuevos scripts faltantes.
+- Solo se modificó el contenido de los dos scripts de editor descritos arriba; el arte, materiales, prefabs y escenas del pack conservan su contenido original.
+- Los cambios de importador se detallan en importer-audit.json.
+- No quedan carpetas Resources del proyecto ni Assets/UnityTechnologies.
+- ProjectOrganizationChecks.Run se ejecutó. Detectó 117 infracciones ajenas al pack, ya presentes en output/dragon-arc/organization.txt. La comparación no encontró infracciones nuevas.
+- La build Windows terminó en Succeeded. Unity registra un error por esas infracciones preexistentes; no es una validación global limpia. Detalle en build.txt. Ejecutable: .validation/ParticlePackBuild/Mismo.exe.
+- Las escenas, ProjectSettings, el catálogo runtime y los archivos que el usuario ya tenía modificados conservaron su contenido.
+
+La build se realizó después de retirar Resources. El ajuste final de categorías de sprites, UI, licencia y FBX de animación conserva los mismos GUID y dependencias, sin cambiar la inclusión de contenido.

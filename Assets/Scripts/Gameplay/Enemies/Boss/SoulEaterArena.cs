@@ -36,7 +36,7 @@ namespace Mismo.Gameplay.Enemies
             {
                 if(keys.f5Key.wasPressedThisFrame)Restart();
                 if(keys.f6Key.wasPressedThisFrame)Threshold(.75f);
-                if(keys.f7Key.wasPressedThisFrame)Threshold(.5f);
+                if(keys.f7Key.wasPressedThisFrame&&player.GetComponent<PlayerCheats>()?.Active!=true)Threshold(.5f);
             }
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
             if(smokePath==null)return;smokeTime+=Time.unscaledDeltaTime;

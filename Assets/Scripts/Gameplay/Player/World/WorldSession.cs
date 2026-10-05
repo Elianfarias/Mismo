@@ -178,6 +178,33 @@ namespace Mismo.Gameplay.Player.World
             // One transaction per contact group. A failed write leaves every collider intact.
             return !changed||Commit(next);
         }
+        public static bool SaveDragonDestroyedProps(System.Collections.Generic.IReadOnlyList<WorldDestructible> props)
+        {
+            if(Current==null||props==null)return false;
+            var next=Current.Copy();bool changed=false;
+            foreach(var prop in props)
+            {
+                if(prop==null)return false;
+                var p=prop.transform.position;var record=new WorldDestroyedPropRecord(p,prop.Kind);
+                if(!record.Valid)return false;
+                // Continue storing trees in their original list so old worlds and saves stay compatible.
+                if(prop.IsTree)
+                {
+                    if(next.dragonFelledTrees.Exists(r=>r.Matches(p)))continue;
+                    if(next.dragonFelledTrees.Count>=8192){LastError="El mundo alcanzó el límite de árboles derribados.";return false;}
+                    next.dragonFelledTrees.Add(new WorldFelledTreeRecord(p));
+                }
+                else
+                {
+                    if(next.dragonDestroyedProps.Exists(r=>r.Matches(p,prop.Kind)))continue;
+                    if(next.dragonDestroyedProps.Count>=32768){LastError="El mundo alcanzó el límite de objetos destruidos.";return false;}
+                    next.dragonDestroyedProps.Add(record);
+                }
+                changed=true;
+            }
+            // Persist the entire contact group before removing anything, including no-collider foliage.
+            return !changed||Commit(next);
+        }
         public static bool SaveDragonImpact(WorldImpactRecord impact)
         {
             if(Current==null || !impact.Valid)return false;

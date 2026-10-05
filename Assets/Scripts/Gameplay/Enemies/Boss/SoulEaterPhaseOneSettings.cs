@@ -27,11 +27,11 @@ namespace Mismo.Gameplay.Enemies
         [Range(4,64)] public int pathNodesPerFrame = 16;
         [Min(.05f)] public float decisionPause = .55f;
 
-        [Header("Árboles durante la persecución · ambas fases")]
-        [Tooltip("Derriba árboles al caminar o cargar contra ellos. Rocas, construcciones y zonas protegidas siguen usando A*.")]
-        public bool crushTrees = true;
+        [Header("Vegetación, rocas y decoración · ambas fases")]
+        [Tooltip("Derriba vegetación, rocas y decoración al caminar o cargar. Conserva edificios y zonas de misiones; los obstáculos protegidos usan A*.")]
+        [UnityEngine.Serialization.FormerlySerializedAs("crushTrees")] public bool crushWorldProps = true;
         [Tooltip("Distancia adicional delante del cuerpo para iniciar la caída, en metros. No cambia el radio de daño.")]
-        [Range(0,2)] public float treeBreakReach = .6f;
+        [Range(0,2)] [UnityEngine.Serialization.FormerlySerializedAs("treeBreakReach")] public float propBreakReach = .6f;
 
         [Header("Carga de persecución · ambas fases")]
         public bool enablePursuitCharge = true;
@@ -70,8 +70,12 @@ namespace Mismo.Gameplay.Enemies
         [Min(.05f)] public float breathTickInterval = .4f;
         [Tooltip("Avance de la llama en metros/segundo desde la boca.")]
         [Min(1)] public float breathPropagationSpeed = 24;
-        [Tooltip("Giro del cuerpo al seguir al jugador, en grados/segundo. Fase 1 fija la dirección al comenzar a emitir; fase 2 sigue durante todo el ataque.")]
-        [Min(1)] public float breathTurnSpeed = 90;
+        [InspectorName("Giro del cuerpo (°/s)")]
+        [Tooltip("Rotación del cuerpo durante el aliento. 0 mantiene el cuerpo quieto. Para cambiar cómo te sigue el fuego en fase 2, usar Giro del fuego F2. Fase 1 fija la dirección al comenzar a emitir.")]
+        [Min(0)] public float breathTurnSpeed = 90;
+        [InspectorName("Giro del fuego F2 (°/s)")]
+        [Tooltip("Velocidad de seguimiento del fuego, la cabeza y la dirección del daño en fase 2, independiente del giro del cuerpo. 0 mantiene la dirección inicial del ataque; 30 permite un seguimiento lento; 120 es rápido.")]
+        [Min(0)] public float phaseTwoBreathTrackingSpeed = 120;
         [Tooltip("Giro máximo adicional de la cabeza respecto al cuerpo, en grados.")]
         [Range(0,80)] public float breathHeadYaw = 55;
         [Range(0,60)] public float breathHeadPitch = 35;
@@ -83,6 +87,9 @@ namespace Mismo.Gameplay.Enemies
         [Min(.1f)] public float breathGroundBackreach = 1.5f;
         public AnimationClip breath;
         public Material breathMaterial;
+        [Tooltip("VFX de la llamarada. Se reutiliza una instancia; conserva el material, textura y animación de partículas del prefab.")]
+        public GameObject breathPrefab;
+        [Range(16,128)] public int breathParticleBudget = 72;
 
         [Header("Rugido, salto y carga · 75 % y repetición en fase 2")]
         [Range(0,1)] public float chargeThreshold = .75f;
@@ -101,6 +108,22 @@ namespace Mismo.Gameplay.Enemies
         [Range(0,1)] public float chargeAimLock = .72f;
         [Range(0,1)] public float brakeTravelFraction = .35f, brakeSpeedFraction = .3f;
         public AnimationClip roar, takeOff, land, chargePose, brake;
+
+        [Header("Polvo de impacto · DustExplosion")]
+        public GameObject dustExplosionPrefab;
+        [Tooltip("Multiplica la escala original del prefab. Picada e invocación comparten la nube grande.")]
+        [Min(.1f)] public float diveDustScale = 2.2f;
+        [Min(.1f)] public float landingDustScale = 1.2f, chargeDustScale = .55f;
+        [Tooltip("Multiplicador de partículas por explosión, limitado por Dust Max Particles Per System.")]
+        [Range(.1f,3)] public float diveDustDensity = 1.5f, landingDustDensity = 1, chargeDustDensity = .45f;
+        [Range(16,128)] public int dustMaxParticlesPerSystem = 96;
+        [Min(1)] public float dustMaximumLifetime = 5;
+        [Min(0)] public float dustGroundOffset = .08f;
+        [Tooltip("Opacidad de la onda del prefab, orientada paralela al suelo.")]
+        [Range(0,1)] public float dustWaveOpacity = .45f;
+        [Tooltip("Altura de ambas patas delanteras que arma el polvo de la carga; se emite cuando una vuelve a tocar el suelo.")]
+        [Min(.1f)] public float chargeDustLiftHeight = .6f;
+        [Range(.03f,.5f)] public float chargeDustContactHeight = .15f;
 
         [Header("Impacto al invocarlo · destrucción persistente") ]
         [Range(2,8)] public float arrivalImpactRadius = 8;

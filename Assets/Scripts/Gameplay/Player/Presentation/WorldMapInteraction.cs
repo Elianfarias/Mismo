@@ -67,7 +67,8 @@ namespace Mismo.Gameplay.Player.Presentation
             if(WorldSession.Current!=null&&!WorldSession.Checkpoint(arrival,yaw)){error=WorldSession.LastError;return false;}
             GetComponent<TreeClimbing>()?.Release();var equipment=GetComponent<Equipment.EquipmentLoadout>();equipment?.Runner.Cancel();equipment?.Belt?.Cancel();
             var motor=GetComponent<PlayerMotor>();if(motor!=null){motor.ResetPosition(arrival);motor.Face(Quaternion.Euler(0,yaw,0)*Vector3.forward);}else transform.position=arrival;
-            world.RefreshResourceNavigation();selectedVillage=null;Recenter();Close();ReleaseMini();return true;
+            world.RefreshResourceNavigation();selectedVillage=null;Recenter();Close();ReleaseMini();
+            GetComponent<PlayerArrivalVfx>()?.Play();return true;
         }
         void ReleaseMini()
         {

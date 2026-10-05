@@ -1,0 +1,84 @@
+PASS Save failure leaves trees, rocks, grass and world data intact
+PASS Protected altar trees cannot be destroyed by pursuit
+PASS Existing worlds without felled-tree data remain valid
+PASS Non-finite tree coordinates are rejected
+PASS Rocks can be cleared by contact
+PASS Generated buildings are never registered as breakable decoration
+PASS Mission areas protect rocks and decoration too
+PASS Legacy saves without prop destruction data remain valid
+PASS Save validation rejects destruction records for buildings
+PASS Planning does not fell a distant tree: scenario 0
+PASS Boss crosses the fallen tree: walking, moving target; contact=62; position=(417.12, 10.50, 321.72); tree=(417.16, 10.75, 318.67); state=Hunting
+PASS Pursuit stays direct and preserves trees outside its path: scenario 0
+PASS Contact clears rocks and no-collider vegetation/decoration: scenario 0
+PASS Persistent removal: Rock scenario 0
+PASS Persistent removal: Grass scenario 0
+PASS Persistent removal: Bush scenario 0
+PASS Persistent removal: Flower scenario 0
+PASS Persistent removal: Fence scenario 0
+PASS Persistent removal: Landmark scenario 0
+PASS Persistent removal: Ruin scenario 0
+PASS Felling does not dig a crater or replace terrain meshes: scenario 0
+PASS Tree contact persists before removing the collider: scenario 0
+PASS Planning does not fell a distant tree: scenario 1
+PASS Boss crosses the fallen tree: charge phase 1; contact=97; position=(417.16, 10.50, 334.00); tree=(417.16, 10.75, 330.67); state=Charging
+PASS Pursuit stays direct and preserves trees outside its path: scenario 1
+PASS Contact clears rocks and no-collider vegetation/decoration: scenario 1
+PASS Persistent removal: Rock scenario 1
+PASS Persistent removal: Grass scenario 1
+PASS Persistent removal: Bush scenario 1
+PASS Persistent removal: Flower scenario 1
+PASS Persistent removal: Fence scenario 1
+PASS Persistent removal: Landmark scenario 1
+PASS Persistent removal: Ruin scenario 1
+PASS Charge starts through tree cover: phase 1
+PASS Felling does not dig a crater or replace terrain meshes: scenario 1
+PASS Tree contact persists before removing the collider: scenario 1
+PASS Planning does not fell a distant tree: scenario 2
+PASS Boss crosses the fallen tree: charge phase 2; contact=104; position=(417.16, 10.25, 336.92); tree=(417.16, 10.75, 333.67); state=Charging
+PASS Pursuit stays direct and preserves trees outside its path: scenario 2
+PASS Contact clears rocks and no-collider vegetation/decoration: scenario 2
+PASS Persistent removal: Rock scenario 2
+PASS Persistent removal: Grass scenario 2
+PASS Persistent removal: Bush scenario 2
+PASS Persistent removal: Flower scenario 2
+PASS Persistent removal: Fence scenario 2
+PASS Persistent removal: Landmark scenario 2
+PASS Persistent removal: Ruin scenario 2
+PASS Charge starts through tree cover: phase 2
+PASS Felling does not dig a crater or replace terrain meshes: scenario 2
+PASS Tree contact persists before removing the collider: scenario 2
+PASS Continue loads every felled tree from the actual world file
+PASS Restreaming suppresses the felled tree
+PASS A saved tree position does not remove a rock
+PASS Restreaming suppresses the felled tree
+PASS A saved tree position does not remove a rock
+PASS Restreaming suppresses the felled tree
+PASS A saved tree position does not remove a rock
+PASS Continue preserves every kind of destroyed decoration
+PASS Restreaming suppresses destroyed Rock
+PASS Restreaming suppresses destroyed Grass
+PASS Restreaming suppresses destroyed Bush
+PASS Restreaming suppresses destroyed Flower
+PASS Restreaming suppresses destroyed Fence
+PASS Restreaming suppresses destroyed Landmark
+PASS Restreaming suppresses destroyed Ruin
+PASS Restreaming suppresses destroyed Rock
+PASS Restreaming suppresses destroyed Grass
+PASS Restreaming suppresses destroyed Bush
+PASS Restreaming suppresses destroyed Flower
+PASS Restreaming suppresses destroyed Fence
+PASS Restreaming suppresses destroyed Landmark
+PASS Restreaming suppresses destroyed Ruin
+PASS Restreaming suppresses destroyed Rock
+PASS Restreaming suppresses destroyed Grass
+PASS Restreaming suppresses destroyed Bush
+PASS Restreaming suppresses destroyed Flower
+PASS Restreaming suppresses destroyed Fence
+PASS Restreaming suppresses destroyed Landmark
+PASS Restreaming suppresses destroyed Ruin
+PASS World copies own their prop destruction list
+PASS World copies own their tree destruction list
+PASS Scene reload preserves rocks, vegetation and decoration
+PASS Scene reload retains all pursuit tree removals
+PASS Reloaded world contains no active felled trees

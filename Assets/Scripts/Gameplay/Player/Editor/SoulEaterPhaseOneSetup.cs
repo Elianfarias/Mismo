@@ -39,6 +39,8 @@ namespace Mismo.Gameplay.Player.Editor
                 settings.flight=Clip("Fly Forward");settings.hover=Clip("Fly Float");settings.glide=Clip("Fly Glide");settings.aerialBreath=Clip("Fly Fireball Shoot");
                 settings.chargePose=Extract(Clip("Defend"),.15f,.5f,1,"Charge_Anticipation");
                 settings.brake=Extract(Clip("Land"),.62f,1,1.3f,"Charge_Brake");
+                if(settings.dustExplosionPrefab==null)settings.dustExplosionPrefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/VFX/ParticlePack/Fire & Explosion Effects/DustExplosion.prefab");
+                if(settings.breathPrefab==null)settings.breathPrefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/VFX/VFX_Fire_Green.prefab");
                 if(settings.groundFirePrefab==null)settings.groundFirePrefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/VFX/VFX_GroundFire_Circle_Green.prefab");
                 EditorUtility.SetDirty(settings);
                 var flame=Material("SoulFlame",Shader.Find("Mismo/SoulEater/Flowing Flame"),Color.white);

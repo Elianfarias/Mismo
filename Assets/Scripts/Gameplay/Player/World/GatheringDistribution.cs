@@ -24,14 +24,14 @@ namespace Mismo.Gameplay.Player.World
             }
             if(definition==null)return WorldDestructible.Attach(VegetationMotionBinding.Attach(Object.Instantiate(asset.prefab,point,rotation,parent),asset),asset.kind);
             var node=Place(definition,id,point,parent);node.UseWorldPrefab(asset.prefab);node.transform.rotation=rotation;
-            return VegetationMotionBinding.Attach(node.gameObject,asset);
+            return WorldDestructible.Attach(VegetationMotionBinding.Attach(node.gameObject,asset),asset.kind);
         }
         public static GatheringNode Place(ResourceNodeDefinition definition,string id,Vector3 point,Transform parent)
         {
             if(definition==null)return null;
             var go=new GameObject(definition.displayName);go.transform.SetParent(parent,true);go.transform.position=point;
             var node=go.AddComponent<GatheringNode>();node.Configure(definition,id);
-            if(definition.kind!=ResourceNodeKind.Herb)WorldDestructible.Attach(go,definition.kind==ResourceNodeKind.Tree?WorldAssetKind.Tree:WorldAssetKind.Rock);return node;
+            WorldDestructible.Attach(go,definition.kind==ResourceNodeKind.Tree?WorldAssetKind.Tree:definition.kind==ResourceNodeKind.Herb?WorldAssetKind.Flower:WorldAssetKind.Rock);return node;
         }
         public static bool Clear(Vector3 point)
         {

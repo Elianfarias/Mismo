@@ -58,7 +58,7 @@ namespace Mismo.Gameplay.Player.World
                     var prefab=drop>=2.8f?longVines:shortVines;if(prefab==null)break;
                     var go=Instantiate(prefab,new Vector3(px,high-.08f,pz)+direction*.68f,Quaternion.LookRotation(-direction),root);
                     go.name="Grove ledge vines";float length=drop>=2.8f?2.52f:1.47f;
-                    go.transform.localScale=new Vector3(.85f,Mathf.Min(1,(drop-.2f)/length),.85f);count++;break;
+                    go.transform.localScale=new Vector3(.85f,Mathf.Min(1,(drop-.2f)/length),.85f);WorldDestructible.Attach(go,WorldAssetKind.Bush);count++;break;
                 }
             }
         }

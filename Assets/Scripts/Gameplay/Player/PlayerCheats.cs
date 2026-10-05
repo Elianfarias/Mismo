@@ -32,6 +32,7 @@ namespace Mismo.Gameplay.Player
             if (!Active) return;
             if (keys.f3Key.wasPressedThisFrame) ToggleOneHitKills();
             if (keys.f4Key.wasPressedThisFrame) ActivateDragonAltars();
+            if (keys.f7Key.wasPressedThisFrame) AdvanceSoulEaterPhase();
             if (keys.f9Key.wasPressedThisFrame)
             {
                 if (World.CompanionPlayer.IsRiding(gameObject)) Notify("Desmontá antes de activar el vuelo.");
@@ -77,6 +78,24 @@ namespace Mismo.Gameplay.Player
             return true;
         }
 
+        public bool AdvanceSoulEaterPhase()
+        {
+            if (!Active || !isActiveAndEnabled || MenusOpen || GetComponent<Mismo.Gameplay.Combat.Health>()?.IsDead == true) return false;
+            Mismo.Gameplay.Combat.IBossPhaseCheatTarget boss=null;float nearest=float.PositiveInfinity;
+            foreach(var candidateHealth in FindObjectsByType<Mismo.Gameplay.Combat.Health>(FindObjectsSortMode.None))
+            {
+                var candidate=candidateHealth.GetComponent<Mismo.Gameplay.Combat.IBossPhaseCheatTarget>();
+                if(candidate==null || !candidate.IsFightingPlayer(transform))continue;
+                float distance=(candidateHealth.transform.position-transform.position).sqrMagnitude;
+                if(distance<nearest){boss=candidate;nearest=distance;}
+            }
+            if(boss==null){Notify("Invocá a Soul Eater antes de pasar a la segunda fase.");return false;}
+            if(boss.Phase==2)
+            {Notify("Soul Eater ya está en segunda fase.");return false;}
+            if(!boss.TryCheatPhaseTwo()){Notify("Soul Eater no puede cambiar de fase en este momento.");return false;}
+            Notify("Cheat: Soul Eater inicia la segunda fase.");return true;
+        }
+
         private void GrantWeapons()
         {
             var inventory = GetComponent<PlayerInventory>();
@@ -108,7 +127,7 @@ namespace Mismo.Gameplay.Player
             if (Active)
                 GUI.Box(new Rect((Screen.width - width) / 2, 42, width, 92),
                     "CHEAT · [F8] Salir · [F9] Vuelo " + (motor.IsFlying ? "ON" : "OFF") + " · [F10] Todas las armas\n" +
-                    "[F3] Un golpe: " + (OneHitKills ? "ON" : "OFF") + " · [F4] Activar los 3 altares\n" +
+                    "[F3] Un golpe: " + (OneHitKills ? "ON" : "OFF") + " · [F4] Activar los 3 altares · [F7] Soul Eater: fase 2\n" +
                     "[F11] Maestrías al máximo · [F12] Recuperar toda la vida\n" +
                     "WASD: mover · Espacio: subir · Ctrl: bajar · Shift: acelerar");
             if (Time.unscaledTime < noticeUntil)

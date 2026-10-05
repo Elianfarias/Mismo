@@ -17,6 +17,7 @@ namespace Mismo.Gameplay.Player.Editor
         const BindingFlags Private=BindingFlags.Instance|BindingFlags.NonPublic;
         static readonly List<string> results=new List<string>();
         static readonly List<Vector3> fallen=new List<Vector3>();
+        static readonly List<WorldDestroyedPropRecord> destroyedProps=new List<WorldDestroyedPropRecord>();
         static void Check(bool ok,string label){if(!ok)throw new Exception(label);results.Add("PASS "+label);Debug.Log("TREE_CHECK "+label);}
         static void Set(SoulEaterPhaseOneController b,string key,object value)=>typeof(SoulEaterPhaseOneController).GetField(key,Private).SetValue(b,value);
         sealed class FailedSave:IProfileRepository
@@ -44,7 +45,7 @@ namespace Mismo.Gameplay.Player.Editor
         }
         public static IEnumerator Play(DragonArcCoordinator arc,SoulEaterPhaseOneController b,Action<string> capture)
         {
-            results.Clear();fallen.Clear();var world=Object.FindFirstObjectByType<ExplorationChunks>();var originalTarget=arc.transform.position;
+            results.Clear();fallen.Clear();destroyedProps.Clear();var world=Object.FindFirstObjectByType<ExplorationChunks>();var originalTarget=arc.transform.position;
             bool enabled=b.enabled,charge=b.Settings.enablePursuitCharge;var created=new List<GameObject>();b.enabled=true;arc.GetComponent<Invulnerability>().StartWindow(300);
             try
             {
@@ -53,18 +54,31 @@ namespace Mismo.Gameplay.Player.Editor
                     b.ResetEncounter();var start=Lane(world,arc,scenario);b.transform.SetPositionAndRotation(start,Quaternion.identity);
                     var tree=Prop(start+Vector3.forward*(scenario==0?13:22+scenario*3),WorldAssetKind.Tree);created.Add(tree.gameObject);
                     var flank=Prop(start+new Vector3(11,0,13),WorldAssetKind.Tree);created.Add(flank.gameObject);
+                    var extras=new List<WorldDestructible>();
+                    foreach(var kind in new[]{WorldAssetKind.Rock,WorldAssetKind.Grass,WorldAssetKind.Bush,WorldAssetKind.Flower,WorldAssetKind.Fence,WorldAssetKind.Landmark,WorldAssetKind.Ruin})
+                    {
+                        var prop=Prop(tree.transform.position+Vector3.right*(.5f+extras.Count*.1f),kind);created.Add(prop.gameObject);extras.Add(prop);
+                        if(kind!=WorldAssetKind.Rock)foreach(var collider in prop.GetComponentsInChildren<Collider>())Object.DestroyImmediate(collider);
+                    }
                     var treePoint=tree.transform.position;float height=world.SurfaceHeight(treePoint);int impacts=WorldSession.Current.dragonImpacts.Count;
                     var terrain=Object.FindObjectsByType<MeshCollider>(FindObjectsSortMode.None).Select(c=>c.sharedMesh).Where(m=>m!=null).ToArray();
                     if(scenario==0)
                     {
                         var repository=typeof(WorldSession).GetField("repository",BindingFlags.Static|BindingFlags.NonPublic);object previous=repository.GetValue(null);string before=JsonUtility.ToJson(WorldSession.Current);
-                        try{repository.SetValue(null,new FailedSave());Check(!world.TryDragonFellTrees(new[]{tree},start)&&tree.gameObject.activeSelf&&before==JsonUtility.ToJson(WorldSession.Current),"Save failure leaves the tree and world data intact");}
+                        try{repository.SetValue(null,new FailedSave());Check(!world.TryDragonDestroyProps(new[]{tree,extras[0],extras[1]},start)&&tree.gameObject.activeSelf&&extras.All(p=>p.gameObject.activeSelf)&&before==JsonUtility.ToJson(WorldSession.Current),"Save failure leaves trees, rocks, grass and world data intact");}
                         finally{repository.SetValue(null,previous);}
                         var protectedTree=Prop(arc.Layout.Altar+Vector3.right,WorldAssetKind.Tree);created.Add(protectedTree.gameObject);
                         Check(!world.TryDragonFellTrees(new[]{protectedTree},start)&&protectedTree.gameObject.activeSelf,"Protected altar trees cannot be destroyed by pursuit");
                         var legacy=WorldSession.Current.Copy();legacy.dragonFelledTrees=null;Check(legacy.IsValid(),"Existing worlds without felled-tree data remain valid");
                         var corrupt=WorldSession.Current.Copy();corrupt.dragonFelledTrees.Add(new WorldFelledTreeRecord(new Vector3(float.NaN,0,0)));Check(!corrupt.IsValid(),"Non-finite tree coordinates are rejected");
-                        var rock=Prop(start+new Vector3(-11,0,13),WorldAssetKind.Rock);created.Add(rock.gameObject);Check(!b.Battlefield.CanFellTree(rock),"Rocks stay solid for walking and charging");
+                        var rock=Prop(start+new Vector3(-11,0,13),WorldAssetKind.Rock);created.Add(rock.gameObject);Check(b.Battlefield.CanDestroyProp(rock),"Rocks can be cleared by contact");
+                        var house=new GameObject("Protected building");created.Add(house);WorldDestructible.Attach(house,WorldAssetKind.House);
+                        Check(house.GetComponent<WorldDestructible>()==null&&house.activeSelf,"Generated buildings are never registered as breakable decoration");
+                        var protectedRock=Prop(arc.Layout.Altar+Vector3.right*2,WorldAssetKind.Rock);created.Add(protectedRock.gameObject);
+                        Check(!world.TryDragonDestroyProps(new[]{protectedRock},start)&&protectedRock.gameObject.activeSelf,"Mission areas protect rocks and decoration too");
+                        legacy.dragonDestroyedProps=null;Check(legacy.IsValid(),"Legacy saves without prop destruction data remain valid");
+                        corrupt=WorldSession.Current.Copy();corrupt.dragonDestroyedProps.Add(new WorldDestroyedPropRecord(start,WorldAssetKind.House));
+                        Check(!corrupt.IsValid(),"Save validation rejects destruction records for buildings");
                     }
                     b.Settings.enablePursuitCharge=scenario>0;Warp(arc,start+Vector3.forward*45);b.BeginEncounter(arc.transform);
                     Set(b,"nextBite",float.MaxValue);Set(b,"nextBreath",float.MaxValue);Set(b,"nextTail",float.MaxValue);
@@ -81,6 +95,12 @@ namespace Mismo.Gameplay.Player.Editor
                     }
                     Check(contact>=0&&b.transform.position.z>treePoint.z+3,"Boss crosses the fallen tree: "+(scenario==0?"walking, moving target":"charge phase "+scenario)+"; contact="+contact+"; position="+b.transform.position+"; tree="+treePoint+"; state="+b.State);
                     Check(lateral<5&&flank.gameObject.activeSelf,"Pursuit stays direct and preserves trees outside its path: scenario "+scenario);
+                    Check(extras.All(p=>!p.gameObject.activeSelf),"Contact clears rocks and no-collider vegetation/decoration: scenario "+scenario);
+                    foreach(var prop in extras)
+                    {
+                        var record=new WorldDestroyedPropRecord(prop.transform.position,prop.Kind);destroyedProps.Add(record);
+                        Check(WorldDestroyedPropRecord.Destroyed(prop.transform.position,prop.Kind),"Persistent removal: "+prop.Kind+" scenario "+scenario);
+                    }
                     if(scenario>0)Check(charging,"Charge starts through tree cover: phase "+scenario);
                     Check(world.SurfaceHeight(treePoint)==height&&WorldSession.Current.dragonImpacts.Count==impacts&&terrain.All(m=>m!=null),"Felling does not dig a crater or replace terrain meshes: scenario "+scenario);
                     Check(WorldFelledTreeRecord.Destroyed(treePoint),"Tree contact persists before removing the collider: scenario "+scenario);fallen.Add(treePoint);
@@ -98,6 +118,14 @@ namespace Mismo.Gameplay.Player.Editor
                     var tree=Prop(p,WorldAssetKind.Tree);created.Add(tree.gameObject);Check(!tree.gameObject.activeSelf,"Restreaming suppresses the felled tree");
                     var rock=Prop(p,WorldAssetKind.Rock);created.Add(rock.gameObject);Check(rock.gameObject.activeSelf,"A saved tree position does not remove a rock");
                 }
+                Check(destroyedProps.All(r=>WorldDestroyedPropRecord.Destroyed(new Vector3(r.x,0,r.z),r.kind)),"Continue preserves every kind of destroyed decoration");
+                foreach(var record in destroyedProps)
+                {
+                    var prop=Prop(new Vector3(record.x,world.SurfaceHeight(new Vector3(record.x,0,record.z)),record.z),record.kind);created.Add(prop.gameObject);
+                    Check(!prop.gameObject.activeSelf,"Restreaming suppresses destroyed "+record.kind);
+                }
+                var propsSnapshot=WorldSession.Current;var propsCopy=propsSnapshot.Copy();propsCopy.dragonDestroyedProps.Clear();
+                Check(propsSnapshot.dragonDestroyedProps.Count>=destroyedProps.Count,"World copies own their prop destruction list");
                 var snapshot=WorldSession.Current;var copy=snapshot.Copy();copy.dragonFelledTrees.Clear();Check(snapshot.dragonFelledTrees.Count==count,"World copies own their tree destruction list");
             }
             finally
@@ -109,6 +137,7 @@ namespace Mismo.Gameplay.Player.Editor
         }
         public static void VerifyReload()
         {
+            Check(destroyedProps.Count==21&&destroyedProps.All(r=>WorldDestroyedPropRecord.Destroyed(new Vector3(r.x,0,r.z),r.kind)),"Scene reload preserves rocks, vegetation and decoration");
             Check(fallen.Count==3&&fallen.All(WorldFelledTreeRecord.Destroyed),"Scene reload retains all pursuit tree removals");
             Check(!WorldDestructible.Loaded.Any(p=>p.IsTree&&WorldFelledTreeRecord.Destroyed(p.transform.position)),"Reloaded world contains no active felled trees");
             File.WriteAllLines("output/soul-tree-clearing/checks.txt",results);

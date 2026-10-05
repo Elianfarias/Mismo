@@ -41,17 +41,21 @@ namespace Mismo.Gameplay.Player.World
                 if(prop!=null && impact.Contains(prop.transform.position))prop.Break(center,true);
             Physics.SyncTransforms();RefreshResourceNavigation();return true;
         }
-        readonly System.Collections.Generic.List<WorldFelledTreeRecord> felledTrees=new System.Collections.Generic.List<WorldFelledTreeRecord>(16);
-        public bool CanDragonFellTree(WorldDestructible tree)=>tree!=null&&tree.IsTree&&tree.gameObject.activeInHierarchy&&CanDragonImpact(tree.transform.position,2);
+        public bool CanDragonDestroyProp(WorldDestructible prop)=>prop!=null&&WorldDestructible.Allowed(prop.Kind)&&prop.gameObject.activeInHierarchy&&CanDragonImpact(prop.transform.position,2);
+        public bool CanDragonFellTree(WorldDestructible tree)=>tree!=null&&tree.IsTree&&CanDragonDestroyProp(tree);
         public bool TryDragonFellTrees(System.Collections.Generic.IReadOnlyList<WorldDestructible> trees,Vector3 origin)
         {
-            if(trees==null||trees.Count==0)return false;
-            felledTrees.Clear();
-            foreach(var tree in trees)
-            {if(!CanDragonFellTree(tree))return false;felledTrees.Add(new WorldFelledTreeRecord(tree.transform.position));}
-            if(!WorldSession.SaveDragonFelledTrees(felledTrees))return false;
-            foreach(var tree in trees)tree.Break(origin,true);
-            // Tree contact never changes the heightfield or rebuilds terrain meshes.
+            if(trees==null)return false;
+            foreach(var tree in trees)if(!CanDragonFellTree(tree))return false;
+            return TryDragonDestroyProps(trees,origin);
+        }
+        public bool TryDragonDestroyProps(System.Collections.Generic.IReadOnlyList<WorldDestructible> props,Vector3 origin)
+        {
+            if(props==null||props.Count==0)return false;
+            foreach(var prop in props)if(!CanDragonDestroyProp(prop))return false;
+            if(!WorldSession.SaveDragonDestroyedProps(props))return false;
+            foreach(var prop in props)prop.Break(origin,true);
+            // Contact never changes the heightfield or rebuilds terrain meshes.
             Physics.SyncTransforms();RefreshResourceNavigation();return true;
         }
         void DecorateDragonArena(Vector2Int chunk,Transform root)

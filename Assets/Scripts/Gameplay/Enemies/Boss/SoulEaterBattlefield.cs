@@ -46,12 +46,13 @@ namespace Mismo.Gameplay.Enemies
             line.shadowCastingMode=UnityEngine.Rendering.ShadowCastingMode.Off;line.receiveShadows=false;line.enabled=false;return line;
         }
         public bool CanFellTree(WorldDestructible tree)=>tree!=null&&tree.IsTree&&tree.gameObject.activeInHierarchy&&(world==null||world.CanDragonFellTree(tree));
-        public bool TryFellTrees(IReadOnlyList<WorldDestructible> trees,Vector3 origin)
+        public bool CanDestroyProp(WorldDestructible prop)=>prop!=null&&WorldDestructible.Allowed(prop.Kind)&&prop.gameObject.activeInHierarchy&&(world==null||world.CanDragonDestroyProp(prop));
+        public bool TryDestroyProps(IReadOnlyList<WorldDestructible> trees,Vector3 origin)
         {
             if(world!=null)
             {
-                if(world.TryDragonFellTrees(trees,origin))return true;
-                saveError="No se pudo guardar la caída de los árboles. "+WorldSession.LastError;errorUntil=Time.unscaledTime+8;return false;
+                if(world.TryDragonDestroyProps(trees,origin))return true;
+                saveError="No se pudo guardar la destrucción de los objetos. "+WorldSession.LastError;errorUntil=Time.unscaledTime+8;return false;
             }
             foreach(var tree in trees)tree.Break(origin,true);
             Physics.SyncTransforms();return true;

@@ -22,6 +22,17 @@ namespace Mismo.Gameplay.Enemies
         }
         void ClearPhaseTwo()
         {phaseTwo=false;nextDive=true;nextAerial=nextRepeatCharge=nextFire=0;battlefield?.Clear();if(rig!=null)rig.transform.localRotation=visualRest;}
+        public bool TryCheatPhaseTwo()
+        {
+            if(!initialized || !isActiveAndEnabled || health.IsDead || !settings.enablePhaseTwo || phaseTwo ||
+                State==SoulEaterState.PhaseTransition || target==null || !IsFightingPlayer(target))return false;
+            // Bypass attack damage modifiers: the one-hit cheat must never turn this into a kill.
+            float remaining=health.Maximum*Mathf.Clamp(settings.phaseThreshold,.01f,.99f);
+            if(health.Current>remaining)health.ApplyDamage(new DamageInfo(health.Current-remaining,null,transform.position,Vector3.zero,postureDamage:0));
+            pendingStagger=false;ChargeUsed=true;battlefield?.Clear();rig.transform.localRotation=visualRest;
+            LandSafely();Enter(SoulEaterState.PhaseTransition,settings.phaseRoar);effects?.Cue(SoulEaterCue.Roar);
+            return true;
+        }
         void BeginPhaseTwo()
         {
             phaseTwo=true;nextAerial=clock+settings.firstAerialDelay;nextRepeatCharge=clock+settings.phaseTwoChargeCooldown;
@@ -78,7 +89,7 @@ namespace Mismo.Gameplay.Enemies
                 if(elapsed>=duration)
                 {
                     battlefield.Impact(impactPoint);impactPoint.y=battlefield.GroundY(impactPoint);transform.position=impactPoint;
-                    effects?.GroundImpact(impactPoint,2.5f);Enter(SoulEaterState.ImpactRecovery,settings.diveRecovery);pendingStagger=false;
+                    effects?.DustImpact(impactPoint,SoulEaterDustKind.Dive);Enter(SoulEaterState.ImpactRecovery,settings.diveRecovery);pendingStagger=false;
                 }
             }
             else if(State==SoulEaterState.AerialBreath)
@@ -90,7 +101,7 @@ namespace Mismo.Gameplay.Enemies
             else if(State==SoulEaterState.Landing)
             {
                 transform.position=Vector3.Lerp(airStart,impactPoint,Mathf.SmoothStep(0,1,Progress));
-                if(elapsed>=duration){transform.position=impactPoint;effects?.GroundImpact(impactPoint,1.5f);Enter(SoulEaterState.ImpactRecovery,settings.diveRecovery);pendingStagger=false;}
+                if(elapsed>=duration){transform.position=impactPoint;effects?.DustImpact(impactPoint,SoulEaterDustKind.Landing);Enter(SoulEaterState.ImpactRecovery,settings.diveRecovery);pendingStagger=false;}
             }
             else if(State==SoulEaterState.ImpactRecovery && elapsed>=duration)
             {
