@@ -1,0 +1,13 @@
+Unity 6000.6.0f1, D3D11, proyecto aislado.
+
+{
+  "combat-checks.txt": 82,
+  "phase-two-checks.txt": 39,
+  "tree-checks.txt": 32,
+  "world-checks.txt": 49,
+  "world-rules.txt": 100
+}
+
+Comprobado: perseguidor con objetivo lateral, árboles derribados al contacto, carga continua en ambas fases, árboles laterales conservados, terreno sin modificaciones, rocas sólidas, altar protegido, fallos de escritura sin destrucción parcial, formatos anteriores, datos no finitos, Continuar y recarga de escena/chunks.
+
+No se importaron nuevos assets visuales ni se modificaron referencias de contenido. Se reutilizan caída y partículas existentes.

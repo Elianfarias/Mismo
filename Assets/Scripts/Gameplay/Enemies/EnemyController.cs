@@ -23,7 +23,7 @@ namespace Mismo.Gameplay.Enemies
 
     [RequireComponent(typeof(NavMeshAgent), typeof(Health), typeof(DamageReceiver))]
     [DisallowMultipleComponent]
-    public abstract partial class EnemyController : MonoBehaviour, IParryResponder
+    public abstract partial class EnemyController : MonoBehaviour, IEnemyDamageTarget, IParryResponder
     {
         [SerializeField] private EnemySettings settings;
         [SerializeField] private DamageDealer weapon;

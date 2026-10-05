@@ -1,0 +1,15 @@
+Assets/Data/Enemies/DragonBosses/SoulEater_PhaseOne.asset
+Assets/Scripts/Gameplay/Enemies/Boss/DragonRegionalEncounter.cs
+Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterDustVfx.cs
+Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterDustVfx.cs.meta
+Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterEffects.cs
+Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterPhaseOneController.cs
+Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterPhaseOneSettings.cs
+Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterPhaseTwo.cs
+Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterPresentation.cs
+Assets/Scripts/Gameplay/Player/Editor/DragonArcChecks.cs
+Assets/Scripts/Gameplay/Player/Editor/SoulEaterDustChecks.cs
+Assets/Scripts/Gameplay/Player/Editor/SoulEaterDustChecks.cs.meta
+Assets/Scripts/Gameplay/Player/Editor/SoulEaterPhaseOneChecks.cs
+Assets/Scripts/Gameplay/Player/Editor/SoulEaterPhaseOneSetup.cs
+Assets/Scripts/Gameplay/Player/Editor/SoulEaterPhaseTwoChecks.cs

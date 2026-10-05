@@ -54,7 +54,7 @@ namespace Mismo.Menu
         void LateUpdate()
         {
             if(GameplayPause.CameraMode)HideCameraModeCanvases();
-            backgroundBlur.Update(!GameplayPause.CameraMode&&icons!=null&&icons.menuBackgroundBlur&&
+            backgroundBlur.Update(!GameplayPause.InterfaceHidden&&icons!=null&&icons.menuBackgroundBlur&&
                 (opened||InventoryPanel.AnyOpen||WorldMapPanel.AnyOpen),icons!=null?icons.menuBlurRadius:1.5f);
         }
         public void Open()
@@ -63,7 +63,7 @@ namespace Mismo.Menu
             // Let the crafting window handle Escape before opening pause.
             foreach(var gathering in Object.FindObjectsByType<Mismo.Gameplay.Player.World.GatheringPlayer>())
                 if(gathering.BlocksGameplay)return;
-            GameplayPause.Pause();opened=true;options=false;confirmExit=false;ReadSettings();GameAudio.Play(GameSound.MenuOpen);
+            if(!GameplayPause.TryPause(null))return;opened=true;options=false;confirmExit=false;ReadSettings();GameAudio.Play(GameSound.MenuOpen);
         }
         public void Resume()
         {if(!opened)return;EndCameraMode();if(uiEditor)EndUIEditor();if(revertAt>0)RevertDisplay();opened=false;GameplayPause.Resume();PlayerPrefs.Save();GameAudio.Play(GameSound.MenuClose);}
@@ -118,7 +118,7 @@ namespace Mismo.Menu
         }
         void OnGUI()
         {
-            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.InterfaceHidden) return;
             if(!opened)return;var matrix=GUI.matrix;int depth=GUI.depth;GUI.depth=-100;
             float opacity=icons!=null?Mathf.Clamp01(icons.panelOpacity):1;
             float scale=Mathf.Min(Screen.width/1280f,Screen.height/800f)*.9f;

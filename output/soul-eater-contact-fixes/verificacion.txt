@@ -1,0 +1,7 @@
+Validado el 04/10/2026 con Unity 6000.6.0f1, en una copia aislada del proyecto y usando D3D11.
+fase-1.txt: 56 comprobaciones aprobadas.
+fase-2.txt: 38 comprobaciones aprobadas.
+arco-tutorial.txt: 44 comprobaciones aprobadas.
+reglas.txt: 100 comprobaciones aprobadas.
+15 archivos de código y assets coinciden exactamente con la copia probada.
+Las capturas proceden de Unity. No se generó una build nueva para este ajuste.

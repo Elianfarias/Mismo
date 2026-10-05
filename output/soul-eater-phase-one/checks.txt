@@ -1,0 +1,48 @@
+PASS: Prefab, settings y rig inicializan en Play
+PASS: Iniciar Bite
+PASS: La anticipación de mordida no inflige daño
+PASS: La mordida alcanza a un jugador a nivel del suelo
+PASS: Mordida: un impacto por objetivo
+PASS: Iniciar Bite
+PASS: El flanco queda fuera de la mordida
+PASS: Iniciar Bite
+PASS: Parry de mordida evita daño e interrumpe al jefe
+PASS: Iniciar Breath
+PASS: Aliento deja de apuntar antes de exhalar
+PASS: Salir lateralmente evita todo el aliento
+PASS: Iniciar Breath
+PASS: Aliento sostenido causa daño periódico dentro del cono
+PASS: La recuperación corta llamas y daño
+PASS: Iniciar Breath
+PASS: El fuego no daña a través de paredes
+PASS: Permanecer detrás provoca coletazo
+PASS: El barrido de la cola alcanza al jugador detrás
+PASS: Coletazo: un impacto por objetivo
+PASS: Iniciar Tail
+PASS: El frente queda fuera del barrido trasero
+PASS: Iniciar Breath
+PASS: 75 % espera a que termine el ataque actual
+PASS: 75 % inicia su secuencia después de la recuperación
+PASS: Estado RetreatJump
+PASS: El salto se aleja del jugador
+PASS: El salto tiene arco, no teletransporte
+PASS: Estado Charging
+PASS: Estado Braking
+PASS: La carga inflige daño al atravesar al jugador
+PASS: La carga no repite daño por cada frame
+PASS: La carga mantiene una trayectoria recta
+PASS: La carga especial no se repite bajo 75 %
+PASS: 50 % termina en rugido y entrega la segunda fase una vez
+PASS: La prueba completada no sigue atacando
+PASS: Iniciar Breath
+PASS: Pausa: no avanza el ataque ni el daño
+PASS: Morir cancela el ataque y el efecto
+PASS: Reiniciar restaura vida y umbrales
+PASS: Estado RetreatJump
+PASS: Perder al jugador durante el salto aterriza y abandona el ataque
+PASS: Estado Dormant
+PASS: El regreso a la arena reinicia el encuentro
+PASS: Iniciar Breath
+PASS: Iniciar Tail
+Capturas Unity: aliento y secuencia del 75 %
+SOUL_PHASE_ONE_CHECKS_OK

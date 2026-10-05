@@ -1,0 +1,166 @@
+[
+  {
+    "path": "Assets/Data/System/RuntimeAssetCatalog.asset",
+    "hash": "2A1EE4632FB0391DEBCCA7822FB2BA4A1BFDDC648C61405CA166C0D72B424AE3"
+  },
+  {
+    "path": "ProjectSettings/AudioManager.asset",
+    "hash": "F2ED914F70919B6434C647BD820850BE731B408F0F0C31E3BF7F98C8CAFB617F"
+  },
+  {
+    "path": "ProjectSettings/ClusterInputManager.asset",
+    "hash": "40E65DD214BF254955D2C8829CA8CE2130FD3510485560CE012E9A1DDD93E623"
+  },
+  {
+    "path": "ProjectSettings/DynamicsManager.asset",
+    "hash": "80BA5565BEEFDDABBA07863F19983C62409753FB36BFF400FE36CF9A7DB94690"
+  },
+  {
+    "path": "ProjectSettings/EditorBuildSettings.asset",
+    "hash": "5CD08E79DBABD1216B58CE1C1ACD1645C9D6BF1742EC5AB2574163A0AC68335F"
+  },
+  {
+    "path": "ProjectSettings/EditorSettings.asset",
+    "hash": "32D6A9BE4C9AA9795A96BD951820A2D9BE1BFEFAB82ED05A5DB111AF0863938F"
+  },
+  {
+    "path": "ProjectSettings/GraphicsSettings.asset",
+    "hash": "39F69664D08EB67A88FE6B48BC11FCC4B76C0DB9291D2D9C7DE880E5AF037A4C"
+  },
+  {
+    "path": "ProjectSettings/InputManager.asset",
+    "hash": "1FB1C30F8A1615CF9A4220BE6D18A33ECCD3A09CC4CD0A3C7CD0A38A7C083134"
+  },
+  {
+    "path": "ProjectSettings/MemorySettings.asset",
+    "hash": "1E8379A461B10AE09F3F696911088C16875D63E87ED5F2D95DF9E1892703F9FD"
+  },
+  {
+    "path": "ProjectSettings/MultiplayerManager.asset",
+    "hash": "CE4075D7A7DD8AC7FFE55DE2427692C63F90DAE398208BD80CEC0F27CBE09F4B"
+  },
+  {
+    "path": "ProjectSettings/NavMeshAreas.asset",
+    "hash": "80106CFA7E6181A1928B142C075F3E510D527441E3D79BC83590E4AC91E7CD66"
+  },
+  {
+    "path": "ProjectSettings/PackageManagerSettings.asset",
+    "hash": "F938E3D41A777C6512557712AF98F5213D1024C59BA31A15E34484635F04F231"
+  },
+  {
+    "path": "ProjectSettings/Physics2DSettings.asset",
+    "hash": "D57A0FE55659C33879E8B70BC01C5EA9CDF082069DAB649905C6C5138531E6EB"
+  },
+  {
+    "path": "ProjectSettings/PhysicsCoreProjectSettings2D.asset",
+    "hash": "6356FF823CF80282A698FE03796EA05F52EA16D948027399A638082E07469558"
+  },
+  {
+    "path": "ProjectSettings/PresetManager.asset",
+    "hash": "29C125923FE6E29F90190D4FCE1C82D660E7051546E2C9D02908D18C9CF2436C"
+  },
+  {
+    "path": "ProjectSettings/ProjectAuditorSettings.asset",
+    "hash": "9E68444B9BDA981E2927A98DF9EDF69EA88362F0C6B7F3C81B39B9D515D2A416"
+  },
+  {
+    "path": "ProjectSettings/ProjectSettings.asset",
+    "hash": "8FC3E125DB85527354F819E4783969E1B13C96201DECB5D75EE03A80E3ABA6C1"
+  },
+  {
+    "path": "ProjectSettings/ProjectVersion.txt",
+    "hash": "8230A7E02F29DAA150B79C2F98E7400D5F5B3AAF46D0E165FD5646DC7EEFA892"
+  },
+  {
+    "path": "ProjectSettings/QualitySettings.asset",
+    "hash": "D9A6F49B149F63C6DA606CBCF60E820B61F9AEBDFF286917DE1E6030925B8587"
+  },
+  {
+    "path": "ProjectSettings/SceneTemplateSettings.json",
+    "hash": "BB9098B3BFCDE78D93E264B96F7B77B5430E64E8C57A7AAD7F5A5D9C3945E16A"
+  },
+  {
+    "path": "ProjectSettings/ScriptableBuildPipeline.json",
+    "hash": "3BB1F2F633C111045634BAB34F3BD189B9D9B95223C49B26D0F6F041F48BA8BA"
+  },
+  {
+    "path": "ProjectSettings/ShaderGraphSettings.asset",
+    "hash": "6FEAD5A816C4EED70F224D5472340ECF1EA0B4DE4F87D5926BB17FA10FFB3DC9"
+  },
+  {
+    "path": "ProjectSettings/TagManager.asset",
+    "hash": "8E18B1C820E9C09E16BBD1F1B7842E9FB3B0158A0921B0964E0B8FA12C6E2C01"
+  },
+  {
+    "path": "ProjectSettings/TimeManager.asset",
+    "hash": "96137D2FB1B3CBA1643098DE4A9C87EB34657CCE7BF848F315C5F9D10DFFEC65"
+  },
+  {
+    "path": "ProjectSettings/UnityConnectSettings.asset",
+    "hash": "98F142992D8A623501C99648E1B7363ADCA08B67BB50390B566DF368D00BC9A0"
+  },
+  {
+    "path": "ProjectSettings/URPProjectSettings.asset",
+    "hash": "68D75E5E1502DD7A4C18B7306430916B5EE8DADFDB0FBB588893FE38EAA2C056"
+  },
+  {
+    "path": "ProjectSettings/VersionControlSettings.asset",
+    "hash": "E7BDA45BF7A394745FEE1316E6C71FA676004D591AD1F3AA247FD3E4CEB86071"
+  },
+  {
+    "path": "ProjectSettings/VFXManager.asset",
+    "hash": "F066C6483919961332415EE64204F74FE52F38C02E82892EB02B7A5B2E381F0E"
+  },
+  {
+    "path": "ProjectSettings/XRSettings.asset",
+    "hash": "EDD2BEB4A2E388312B4B7DA241AA51070434005D82C59363F1237DD2E567585F"
+  },
+  {
+    "path": "Assets/Scenes/BossArena.unity",
+    "hash": "7C1EF94EDD7324623126C5E480F9A852593A7EB7B4C60D26D478F9D2551B1EA8"
+  },
+  {
+    "path": "Assets/Scenes/DemoIntroduction.unity",
+    "hash": "EEF834C0788724EAC5CA68E1A80D6CB5EF03FE2E1A6C0FC7A15DE91742E6E2FE"
+  },
+  {
+    "path": "Assets/Scenes/ForestCreaturesTest.unity",
+    "hash": "55E0C178DE7D53B738F4E4D3C34F723BAF45460ECB2FC10C739C164BA2602634"
+  },
+  {
+    "path": "Assets/Scenes/GoblinArena.unity",
+    "hash": "6A5BE202A87E1A4F522BD2C19994316C45D0FE5E1E2C4C7663B1CEFB1001E460"
+  },
+  {
+    "path": "Assets/Scenes/GoblinEliteArena.unity",
+    "hash": "A4957C390E2E1992977E9AEC0E4F2091F3F4836E444B1FBE51C321A6B5B4251A"
+  },
+  {
+    "path": "Assets/Scenes/InitialRegion.unity",
+    "hash": "16EEA81485E829036A751C9489AF4F4589D1846AA8B4B6E700225B1C2F4D281A"
+  },
+  {
+    "path": "Assets/Scenes/MainMenu.unity",
+    "hash": "8C43062A0A9FB364EDE8DF8852702B5868921C8E90C15B7A87198638C73D0621"
+  },
+  {
+    "path": "Assets/Scenes/MovementPrototype.unity",
+    "hash": "557364BA7761670F82179218DD2322EB6CADEFF8FA8B9BB46EDE30C70413F62E"
+  },
+  {
+    "path": "Assets/Scenes/SampleScene.unity",
+    "hash": "F40D0BC3CD04D6804A095A4FC9EFBE84158E610424CA0157AFC158F3B6A3CB54"
+  },
+  {
+    "path": "Assets/Scenes/SoulEaterPhaseOneArena.unity",
+    "hash": "BC0C259999855A145FCE4FE64EF9919D5DFE73AC894436C164D0E45BAD812E29"
+  },
+  {
+    "path": "Assets/Scenes/VoxelRegion_7319.unity",
+    "hash": "114972E4147413A508E06BB1F34AEB9DC6F15B08CF7C654FC79F52B76F5F9056"
+  },
+  {
+    "path": "Assets/Scenes/VoxelWorkshop.unity",
+    "hash": "0857F347DE5E7C610BD5AD47EB462C1BBEB698A91BC666A23F8B32B8770E5ECE"
+  }
+]

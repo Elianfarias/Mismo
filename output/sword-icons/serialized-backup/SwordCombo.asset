@@ -1,0 +1,187 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbaed6838d1a4d369404166107b9bbf5, type: 3}
+  m_Name: SwordCombo
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
+  displayName: COMBO
+  icon: {fileID: 2800000, guid: bdf2153159732a34487b20771d9420ba, type: 3}
+  fullColorIcon: 1
+  abilityId: 
+  animationSource: {fileID: 0}
+  passive: 0
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: charged_cut
+    displayName: Corte cargado
+    description: "Manten\xE9 M1 y solt\xE1 para atacar. Con carga completa ejecut\xE1s el golpe pesado: rompe guardias frontales y castiga la postura. Un toque conserva el corte inicial."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 1
+    retired: 0
+    chargeSeconds: 0.7
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    weaponVfx:
+    - prefab: {fileID: 7012119529295474499, guid: dc6e0bab45ccf964598ea73144bc4dd1, type: 3}
+      phase: 0
+      hand: 0
+      anchor: 0
+      faceCamera: 0
+      socketId: blade
+      localOffset: {x: 0, y: 0, z: 0}
+      localRotation: {x: 0, y: 0, z: 0}
+      localScale: {x: 1, y: 1, z: 1}
+      fullChargeScale: 1.7
+      lifetime: 0.4
+    - prefab: {fileID: 6496479300713825514, guid: 14b97246008f6d3489163eedbf6154da, type: 3}
+      phase: 1
+      hand: 0
+      anchor: 0
+      faceCamera: 0
+      socketId: blade
+      localOffset: {x: 0, y: 0, z: 0}
+      localRotation: {x: 0, y: 0, z: 0}
+      localScale: {x: 1, y: 1, z: 1}
+      fullChargeScale: 1.7
+      lifetime: 0.4
+  - id: dodge_chain
+    displayName: Cadena evasiva
+    description: "Tras completar Paso lateral de la espada, presion\xE1 M1: encaden\xE1s los dos cortes. Equip\xE1 Paso lateral en Q, E o R. Cada golpe consume su estamina; si no alcanza, la cadena se corta."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 2
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    weaponVfx: []
+  description: Encadena ataques de espada contra los enemigos que tengas delante.
+  localizationKey: ability.sword.swordcombo
+  preparation: 0
+  active: 1
+  recovery: 0.16
+  cooldown: 0.45
+  staminaCost: 15
+  chargeable: 0
+  maximumCharge: 0.9
+  chargeDamageMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0.70000005
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1.7
+      inSlope: 0.70000005
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  chargePostureMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 2
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  preparationMobility: 1
+  activeMobility: 1
+  interruptible: 0
+  cancelPreparation: 0
+  cancelRecovery: 0
+  focusCost: 0
+  focusGainOnHit: 5
+  preparationSfx: {fileID: 0}
+  preparationSfxVolume: 1
+  loopPreparationSfx: 0
+  executionSfx: {fileID: 0}
+  executionSfxVolume: 1
+  comboStepSfx:
+  - clip: {fileID: 8300000, guid: eec22285c386e884791b851e07691afe, type: 3}
+    volume: 0.5
+  - clip: {fileID: 8300000, guid: 3856c6cb7f14b404585da8646e5bcbbc, type: 3}
+    volume: 0.5
+  weaponVfx: []
+  pose: 0
+  usesSwordCombo: 1
+  comboSteps:
+  - id: slash_2
+    duration: 1
+    inputStartPercent: 60
+    inputEndPercent: 80
+    branchPercent: 65
+    transitionDuration: 0
+    recoveryDuration: 0
+    impactStartPercent: 0
+    impactEndPercent: 100
+    damage: 12
+    shape: 2
+    center: {x: 0, y: 1, z: 0.65}
+    size: {x: 0.9, y: 1.4, z: 1.4}
+    radius: 0.7
+    bladeRadius: 0.035
+  - id: heavy_slash
+    duration: 1
+    inputStartPercent: 35
+    inputEndPercent: 80
+    branchPercent: 65
+    transitionDuration: 0
+    recoveryDuration: 0
+    impactStartPercent: 0
+    impactEndPercent: 100
+    damage: 20
+    shape: 2
+    center: {x: 0, y: 1, z: 0.65}
+    size: {x: 0.9, y: 1.4, z: 1.4}
+    radius: 0.7
+    bladeRadius: 0.035
+  targetsGround: 0
+  aimFromCamera: 1
+  range: 25
+  actions: []
+  references:
+    version: 2
+    RefIds: []

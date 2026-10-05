@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82fd8a3c18a546eb929f133a008bdf6a, type: 3}
+  m_Name: Q-DRAGON-AUDIENCE
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Quests.QuestDefinition
+  id: Q-DRAGON-AUDIENCE
+  title: Una sombra sobre el pueblo
+  category: 2
+  description: "Despu\xE9s de despejar la entrada, viste a Soul Eater sobrevolar el pueblo. Escuch\xE1 al vig\xEDa y habl\xE1 con el rey para entender qu\xE9 amenaza a la regi\xF3n."
+  location: Primer pueblo
+  icon: {fileID: 0}
+  npc: {fileID: 11400000, guid: 74db841a9de23814aa0f1e94be72907f, type: 2}
+  prerequisites: []
+  offerInJournal: 0
+  objectives:
+  - id: warning
+    label: "Escuch\xE1 al vig\xEDa junto a la entrada"
+    kind: 3
+    quantity: 1
+    material: {fileID: 0}
+    species: {fileID: 0}
+    recipe: {fileID: 0}
+    signal: dragon.warning
+    consumeOnDelivery: 0
+    requirePrevious: 0
+    icon: {fileID: 0}
+  - id: audience
+    label: "Habl\xE1 con el rey"
+    kind: 3
+    quantity: 1
+    material: {fileID: 0}
+    species: {fileID: 0}
+    recipe: {fileID: 0}
+    signal: dragon.audience
+    consumeOnDelivery: 0
+    requirePrevious: 1
+    icon: {fileID: 0}
+  clue: 
+  clueAfterObjective: 
+  coins: 0
+  items: []
+  recipes: []
+  offerText: "Ese drag\xF3n es Soul Eater. Desde que empez\xF3 a sobrevolar la regi\xF3n, los monstruos se acercan cada vez m\xE1s al pueblo. Ya no responde a nuestras ofrendas. Algo cambi\xF3 en las tierras del interior. El rey est\xE1 aqu\xED, ayud\xE1ndonos a proteger el camino. Habl\xE1 con \xE9l antes de seguir."
+  acceptedText: 
+  progressText: 
+  readyText: 
+  completedText: "El rey te confi\xF3 el ritual de los tres faros."

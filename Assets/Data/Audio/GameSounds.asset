@@ -94,7 +94,7 @@ MonoBehaviour:
     cooldown: 0.3
   - sound: 17
     clip: {fileID: 8300000, guid: 29bd300e976c5da41a9562ff573fd53e, type: 3}
-    volume: 0.2
+    volume: 0.1
     cooldown: 0.08
   - sound: 18
     clip: {fileID: 8300000, guid: c8f0ba4a9cd858344a33c3c3b090a0a0, type: 3}

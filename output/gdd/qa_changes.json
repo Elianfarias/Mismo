@@ -1,0 +1,541 @@
+{
+  "source_sha256": "6dd9b056207c74a8a44f8c716e6e77625f9e096e3a3804c02c78a50f9dce9f8a",
+  "output": "C:\\Users\\elian\\Mismo\\output\\gdd\\Mismo_GDD_v0.9.docx",
+  "changes": [
+    {
+      "paragraph": 0,
+      "before": "Mismo Game Design Document",
+      "after": "Mismo Game Design Document"
+    },
+    {
+      "paragraph": 1,
+      "before": "Versión 0.7 consolidada · 13 de septiembre de 2026",
+      "after": "Versión 0.9 consolidada · 3 de octubre de 2026"
+    },
+    {
+      "paragraph": 2,
+      "before": "Documento de diseño de Mismo. Integra combate, progresión, inventario espacial, recolección, crafting de superficie, idiomas, bestiario y monturas. Esta versión incorpora equipamiento por mano, cuatro familias de combate, seis habilidades por familia con tres seleccionables y desbloqueos por maestría. El objetivo es construir estilos propios de combate dentro del circuito de explorar, obtener recursos y preparar la siguiente salida en el pueblo.",
+      "after": "La primera versión completa de Mismo será una aventura individual con cuatro biomas, progresión por familias de armas y un boss por bioma. Este documento define el circuito de exploración, combate y preparación, registra los sistemas actuales y ordena las decisiones y tareas necesarias para completar esa versión. El online, incluido el PvP 3 vs. 3, queda para una etapa posterior."
+    },
+    {
+      "paragraph": 3,
+      "before": "Mismo es un juego de fantasía en tercera persona donde el jugador explora con un mismo personaje y construye su estilo mediante sus armas. La base actual permite probar espada y arco, crear oportunidades mediante defensas y posicionamiento, y recorrer una región completa de prueba.",
+      "after": "Mismo es un juego de fantasía voxel en tercera persona y sin clases fijas. Las armas determinan las habilidades disponibles. El jugador explora, reúne materiales, fabrica mejoras y consumibles, progresa con sus familias de armas y se prepara para invocar y derrotar al boss de cada bioma. Hay cuatro tipos de bioma: bosque, desierto, nieve y montañas; su contenido y las mazmorras incorporan generación procedural."
+    },
+    {
+      "paragraph": 4,
+      "before": "Esta versión diferencia tres estados: implementado en el prototipo, pendiente de validación o balance, y expansión futura. Las decisiones anteriores sobre combate y personalización se conservan salvo actualización expresa; los valores numéricos siguen siendo configuraciones de prueba.",
+      "after": "Se distinguen sistemas actuales, trabajo pendiente, decisiones de diseño abiertas y referencias previas que requieren validación. Hay skins, enemigos, mazmorras, monturas, bestiario, teletransporte desde el mapa y tutorial. Las misiones introductorias y el recorrido de la primera región siguen en construcción. Todavía no hay bosses implementados; el del bosque está en diseño. Los valores numéricos de combate se mantienen como referencias de prueba."
+    },
+    {
+      "paragraph": 7,
+      "before": "Estado al cierre",
+      "after": "Estado y trabajo pendiente"
+    },
+    {
+      "paragraph": 11,
+      "before": "Dos conjuntos con manos principal y secundaria, cuatro familias, seis habilidades por familia y tres seleccionables. Focus, Posture y defensas perfectas.",
+      "after": "Equipamiento por mano y repertorios por familia. El detalle de cuatro estilos, seis habilidades y tres espacios se conserva como referencia a validar. Falta pulir armas y animaciones."
+    },
+    {
+      "paragraph": 13,
+      "before": "Exploración por semilla y sectores, contenido recolectable y estado persistente del mundo. Accesibilidad y balance pendientes de recorrido en varias semillas.",
+      "after": "Cuatro tipos de bioma definidos, con contenido, mazmorras y distribución de enemigos procedurales. Primera región en construcción. Geografía fija o variable y alcance de cada bioma por cerrar."
+    },
+    {
+      "paragraph": 15,
+      "before": "Menú, audio, minimapa y feedback existentes; veinte clips adaptados para los tres estilos de espada. Revisión en combate real pendiente.",
+      "after": "Menú, audio, minimapa y feedback existentes. Skins y tutorial presentes. Pendientes principales: animaciones de armas, lectura de ataques enemigos, iconos y sonidos."
+    },
+    {
+      "paragraph": 17,
+      "before": "Inventario, objetos, materiales, progresión y estado del mundo con guardado. Transmog, tienda y cierre del diseño de heridas siguen pendientes.",
+      "after": "Experiencia por contribución de daño al derrotar monstruos, persistente por familia. Puntos de habilidad cada tres niveles de arma y mejoras de habilidades mediante uso. Inventario y guardado conservan su base previa."
+    },
+    {
+      "paragraph": 19,
+      "before": "Existe un ZIP anterior; hay que generar otro para incluir los últimos cambios de combate.",
+      "after": "Hay una build pública para Windows en itch.io. Cada entrega debe indicar versión y contenido y comprobarse después de los cambios; los paquetes históricos no describen el estado actual."
+    },
+    {
+      "paragraph": 23,
+      "before": "Plantas, árboles, piedras, minerales visuales, regeneración, ungüento y mejora T1 a T2.",
+      "after": "Recolección y fabricación de mejoras, bufos, pociones y un consumible para curarse fuera de combate. Catálogo, costos y balance por completar."
+    },
+    {
+      "paragraph": 25,
+      "before": "Bestiario por avistamiento, reconocimiento al vencer, jabalí montable y taller de poses. Falta afinar navegación y movimiento.",
+      "after": "Enemigos, bestiario y monturas presentes. Jabalíes y arañas necesitan mejor anticipación y recuperación de ataques. Navegación y poses requieren validación en terreno real."
+    },
+    {
+      "paragraph": 28,
+      "before": "Las secciones de funcionamiento describen el prototipo existente. Las reglas acordadas aún sin interfaz y las propuestas se identifican expresamente. Los valores numéricos son ajustes de prueba, no compromisos de balance definitivo. El último apartado ordena los siguientes pasos y sus criterios de cierre.",
+      "after": "Las reglas vigentes de alcance, progresión y mundo sustituyen las referencias anteriores que entren en conflicto. Los repertorios, números y detalles técnicos conservados ayudan a implementar y probar; no fijan por sí mismos el alcance final. Las decisiones abiertas y los criterios de cierre se reúnen en las secciones 18 y 20."
+    },
+    {
+      "paragraph": 33,
+      "before": "La exploración debe despertar curiosidad por el paisaje y recompensar desvíos. No depende de una lista de quests. Cube World clásico orienta cámara, volúmenes y sensación de exploración; Dark Souls, Battlerite, World of Warcraft, Pokémon y Alundra son referencias conceptuales, sin adoptar sus sistemas completos.",
+      "after": "La exploración debe despertar curiosidad por el paisaje y recompensar desvíos. El tutorial explica lo básico y las misiones introductorias guían el aprendizaje de recolección, fabricación y progresión. Cube World clásico orienta cámara, volúmenes y sensación de exploración; Dark Souls, Battlerite, World of Warcraft, Pokémon y Alundra son referencias conceptuales, sin adoptar sus sistemas completos."
+    },
+    {
+      "paragraph": 34,
+      "before": "Loop de la región actual",
+      "after": "Circuito de aventura y progresión"
+    },
+    {
+      "paragraph": 35,
+      "before": "Comenzar → aparecer en el pueblo → explorar, recolectar y combatir → administrar el espacio de la mochila → regresar para guardar, fabricar o mejorar → salir nuevamente. Bosses y secretos conservan recompensas propias y objetivos opcionales de exploración.",
+      "after": "Comenzar y aprender lo básico → explorar el bioma y sus mazmorras → recolectar y combatir → fabricar, mejorar y elegir habilidades → reunir las condiciones para invocar al boss → vencerlo y avanzar al siguiente bioma. Pueblos, almacenamiento y preparación sostienen las salidas. El orden entre desierto, nieve y montañas queda por confirmar."
+    },
+    {
+      "paragraph": 36,
+      "before": "El secreto y el boss siguen dando motivos para desviarse y avanzar. La muerte devuelve al jugador al punto de recuperación sin eliminar materiales, equipo ni progreso persistido. Los nodos agotados, recompensas reclamadas y enemigos registrados como derrotados se consultan por identidad; recargar una zona no debe duplicar sus premios. El recorrido histórico de la región manual se conserva como referencia de combate.",
+      "after": "Cada bioma tendrá un boss que debe invocarse y derrotarse para avanzar. Aún no hay bosses jugables. Se conserva como regla previa por validar que la muerte devuelve al jugador al punto de recuperación sin eliminar materiales, equipo ni progreso persistido. Nodos, botín y recompensas necesitan identidad estable para que cargar o revisitar una zona no duplique premios."
+    },
+    {
+      "paragraph": 38,
+      "before": "La entrega vigente combina dos conjuntos de equipamiento alternables, exploración procedural por sectores, inventario persistente y recolección y crafting en superficie. Cada conjunto tiene arma principal y, cuando corresponde, mano secundaria. Incluye una primera montura de jabalí y fichas de criaturas descubiertas. La prioridad es validar movilidad, los cuatro estilos de combate, acceso a recursos y retorno al pueblo antes de ampliar cuevas o contenido avanzado.",
+      "after": "El objetivo de la primera versión completa es la aventura individual de los cuatro biomas. La prioridad de producción es cerrar una primera región jugable, desde el tutorial y las misiones iniciales hasta el boss del bosque y su recompensa. El catálogo final de armas, enemigos, mazmorras y recursos de cada bioma debe definirse antes de multiplicar contenido."
+    },
+    {
+      "paragraph": 40,
+      "before": "Se conserva la dirección de atributos, maestría, tiers, apariencias, nuevas regiones y secretos. Comercio, refinado avanzado y colección de criaturas requieren entregas propias. El almacenamiento personal y el crafting básico ya forman parte del circuito actual. Las secciones 8 a 12 conservan las reglas de progresión y personalización; las secciones 13 a 18 detallan la ampliación vigente.",
+      "after": "El online y el PvP 3 vs. 3 se posponen. El cooperativo con anfitrión también queda fuera de la primera versión individual y necesitará un alcance propio. Comercio, refinado avanzado, heridas, transmog, tienda de skins y colección de varias monturas se conservan como propuestas para revisar, sin incorporarlas automáticamente a esta entrega."
+    },
+    {
+      "paragraph": 41,
+      "before": "El juego debe funcionar completamente en single-player antes de cooperativo con anfitrión. PvP opcional, incluida una posible arena 3v3, queda fuera de esta etapa. También quedan fuera mundo infinito, terreno destructible, cuevas volumétricas, economía y crafting complejos, árboles de talentos y un catálogo amplio de armas. No se incorporan clases ni armaduras tradicionales que solo añadan estadísticas.",
+      "after": "Se mantiene una aventura sin clases tradicionales. Mundo infinito, terreno destructible, cuevas volumétricas excavables, economía compleja y un catálogo amplio de armas no forman parte del alcance confirmado. Las mazmorras procedurales sí están presentes; no requieren asumir terreno excavable. Las skins actuales se documentan por separado de cualquier futura venta de cosméticos."
+    },
+    {
+      "paragraph": 73,
+      "before": "El modelo se inclina suavemente 6 grados al avanzar y 12 durante sprint, sin inclinar la colisión ni alterar la autoridad de giro del motor. El dash conserva dirección y respeta paredes. La ruta principal no debe requerir doble salto ni dash para llegar al boss.",
+      "after": "El modelo se inclina suavemente 6 grados al avanzar y 12 durante sprint, sin inclinar la colisión ni alterar la autoridad de giro del motor. El dash conserva dirección y respeta paredes. Como criterio de recorrido, el acceso al futuro boss no debe exigir doble salto ni dash salvo que se diseñe y enseñe expresamente esa condición."
+    },
+    {
+      "paragraph": 102,
+      "before": "Posture es una defensa enemiga separada de la vida. Goblins comienzan con 70 y el boss con 150. Regenera 9 por segundo después de tres segundos sin daño de Posture. Al llegar a cero provoca una vulnerabilidad de dos segundos; golpes adicionales no prolongan esa ruptura. Al terminar se restaura la barra.",
+      "after": "Posture es una defensa enemiga separada de la vida. Como referencia de balance previa, los goblins comienzan con 70, regenera 9 por segundo después de tres segundos sin daño de Posture y al llegar a cero provoca una vulnerabilidad de dos segundos. Golpes adicionales no prolongan esa ruptura; al terminar se restaura la barra. El valor histórico de 150 para un boss es solo una hipótesis de balance: aún no hay bosses implementados."
+    },
+    {
+      "paragraph": 125,
+      "before": "Cada familia tiene seis habilidades y el básico permanece fijo fuera del repertorio. Se equipan exactamente tres opciones en Q, E y R: pueden ser tres activas, tres pasivas o cualquier mezcla. Una pasiva solo funciona cuando ocupa uno de estos espacios del estilo activo. La asignación inicial ofrece tres activas; no existe una cuota obligatoria de pasivas.",
+      "after": "El catálogo previo contempla seis habilidades por familia, un básico fijo y tres espacios Q, E y R, con selección de activas y pasivas. Se conserva como base de repertorio a validar. La regla vigente de desbloqueo es gastar puntos obtenidos cada tres niveles de arma. Los costos, habilidades disponibles al empezar y selección inicial quedan por fijar; las tablas ya no asignan desbloqueos automáticos en niveles 3, 6 y 9."
+    },
+    {
+      "paragraph": 127,
+      "before": "El básico conserva el combo de tres golpes. Los primeros dos permiten ramificar hacia una habilidad compatible o C desde el 65 % de su etapa y durante la transición correspondiente. El buffer de intención es de 0,14 segundos. El golpe final conserva su recuperación. Q, E y R indican la selección inicial; después pueden contener cualquiera de las seis opciones desbloqueadas, sin repetir una habilidad.",
+      "after": "El básico conserva el combo de tres golpes. Los primeros dos permiten ramificar hacia una habilidad compatible o C desde el 65 % de su etapa y durante la transición correspondiente. El buffer de intención es de 0,14 segundos. El golpe final conserva su recuperación. Las referencias históricas Q, E y R orientan la prueba del kit, pero la asignación inicial y los costos de desbloqueo deben revisarse con la progresión por puntos."
+    },
+    {
+      "paragraph": 209,
+      "before": "Daño antes de carga y modificadores. Un toque del básico completa la tensión mínima; mantener incrementa daño y Posture hasta liberar automáticamente a 1,20 s. Su recuperación es 0,35 s. Disparo potente tiene 45 de daño base a Posture y cuesta 12 stamina más 20 Focus. Retirada cuesta 12 stamina y tiene 0,30 s de recuperación; el disparo y el retroceso esperan el final de su preparación. Lluvia de flechas cuesta 20 stamina. Las teclas de la tabla son las asignaciones iniciales.",
+      "after": "Daño antes de carga y modificadores. Un toque del básico completa la tensión mínima; mantener incrementa daño y Posture hasta liberar automáticamente a 1,20 s. Su recuperación es 0,35 s. Disparo potente tiene 45 de daño base a Posture y cuesta 12 stamina más 20 Focus. Retirada cuesta 12 stamina y tiene 0,30 s de recuperación; el disparo y el retroceso esperan el final de su preparación. Lluvia de flechas cuesta 20 stamina. Las teclas de la tabla son referencias históricas de prueba, pendientes de confirmar como asignación inicial."
+    },
+    {
+      "paragraph": 279,
+      "before": "La IA del goblin y su variante observa preparaciones ranged al decidir una acción: prioriza una carga disponible si está en rango y cierra más distancia antes de posicionarse. Conserva aviso y dirección fijada; no recibe daño o velocidad extra ocultos por enfrentar al arco. El boss conserva sus patrones y agresividad, con Posture y aperturas integrados.",
+      "after": "La IA del goblin y su variante observa preparaciones ranged al decidir una acción: prioriza una carga disponible si está en rango y cierra más distancia antes de posicionarse. Conserva aviso y dirección fijada; no recibe daño o velocidad extra ocultos por enfrentar al arco. Jabalíes y arañas necesitan mejorar la lectura de preparación y recuperación mediante animación y sonido. Los futuros bosses deberán definir cómo interactúan con Posture y las aperturas."
+    },
+    {
+      "paragraph": 280,
+      "before": "Mundo procedural y escenas de referencia",
+      "after": "Cuatro biomas y contenido procedural"
+    },
+    {
+      "paragraph": 281,
+      "before": "La exploración actual distribuye contenido y recursos por semilla y sectores cargados durante la partida. La identidad persistente incorpora la versión del generador, la semilla y la ubicación lógica. VoxelRegion_7319 y la región guardada desde el editor son antecedentes de prueba; ya no describen por sí solos todo el funcionamiento del mundo actual.",
+      "after": "El mundo contiene cuatro tipos de bioma: bosque, desierto, nieve y montañas. El contenido de cada bioma, las mazmorras y las proporciones de aparición de enemigos incorporan generación procedural. Aún debe precisarse qué ocurre con forma, posición y extensión de los biomas entre partidas. La existencia de cuatro tipos fijos no implica por sí sola un mapa idéntico. La semilla, los sectores y las identidades persistentes conservan su función técnica."
+    },
+    {
+      "paragraph": 282,
+      "before": "La estética voxel no implica terreno excavable. La base de terreno emplea alturas escalonadas y mallas con colisión; no necesita un objeto por cubito ni permite editar bloques. Los tamaños, sectores y densidades se ajustan en la configuración del generador. Las cuevas requieren una solución de geometría y acceso específica.",
+      "after": "La estética voxel no implica terreno excavable. La referencia de terreno utiliza alturas escalonadas y mallas con colisión. Hay mazmorras procedurales, cuyo acceso, reglas de generación, recompensas y reinicio deben documentarse. La generación busca variar recorridos y reducir la memorización de una ruta única; no garantiza impedir que se compartan o extraigan contenidos del juego."
+    },
+    {
+      "paragraph": 284,
+      "before": "Secreto muerte y victoria",
+      "after": "Bosses secretos muerte y avance"
+    },
+    {
+      "paragraph": 285,
+      "before": "La ruina abierta recompensa el desvío con una restauración del 40 % de vida máxima, una vez por intento. No se consume con vida completa. El acceso es opcional y debe permitir volver sin quedar atrapado. No existe dungeon volumétrico bajo el terreno.",
+      "after": "El boss del bosque está en diseño y los cuatro bosses de bioma están pendientes de implementación. Para cada uno se deben definir invocación, encuentro, recompensa y condición de avance. El antiguo secreto de una ruina con restauración del 40 % de vida se conserva solo como referencia de prototipo; su vigencia debe revisarse con el contenido actual y no representa el diseño de las mazmorras."
+    },
+    {
+      "paragraph": 286,
+      "before": "La arena del boss conserva su progresión de encuentro y salida. Morir no impone pérdida de materiales ni equipo; el perfil conserva las operaciones confirmadas. La desintegración visual es presentación y no determina por sí misma el botín. La restauración de cada escena debe respetar las identidades y recompensas ya registradas.",
+      "after": "El diseño prevé invocar y derrotar un boss por bioma para continuar. El mecanismo concreto que habilita el siguiente bioma, la posibilidad de repetir bosses y el cierre tras el cuarto quedan abiertos. No hay un boss adicional confirmado. Las reglas de muerte y restauración deben preservar recompensas e identidades ya registradas."
+    },
+    {
+      "paragraph": 288,
+      "before": "Horizonte abierto, sin una gran pared rectangular dominando la región; referencias para orientarse; grupos que no se unan accidentalmente; rutas sin saltos obligatorios constantes, grietas ni escapes. La duración deseada de 8 a 12 minutos sigue siendo orientativa, no un resultado medido. Rendimiento y ritmo deben verificarse en una build actual y hardware conocido.",
+      "after": "El recorrido debe conservar orientación, accesibilidad, separación comprensible de encuentros y salidas seguras. Recursos y decoración no deben ocultar ataques ni bloquear caminos. Falta fijar y medir la duración de la primera región y de la aventura completa; el antiguo objetivo de 8 a 12 minutos correspondía a una región de prueba. Rendimiento y ritmo se verifican en una build actual y hardware conocido."
+    },
+    {
+      "paragraph": 297,
+      "before": "Se integraron veinte clips adaptados al esqueleto del personaje para espada sola, dos espadas y espada con escudo. Incluyen ataques, defensa, avance y lanzamiento, con variantes que alternan brazos o mantienen la guardia del escudo. Cada familia referencia su conjunto de animaciones; el arco conserva sus animaciones previas.",
+      "after": "El documento previo registra veinte clips adaptados para espada sola, dos espadas y espada con escudo, con ataques, defensa, avance y lanzamiento. Ese inventario es un antecedente técnico; las animaciones siguen siendo el principal pendiente de producción y acabado. Cada familia debe cerrar sus acciones antes de confirmar qué clips se reutilizan, adaptan o necesitan producirse."
+    },
+    {
+      "paragraph": 299,
+      "before": "Menú principal y opciones",
+      "after": "Menú skins tutorial y opciones"
+    },
+    {
+      "paragraph": 300,
+      "before": "MainMenu permite comenzar, abrir opciones y salir. Durante la partida, el menú general da acceso a Pertenencias, Personaje, Habilidades y Bestiario. La apertura de paneles gestiona el cursor y bloquea las acciones de gameplay correspondientes; no debe confundirse bloqueo de entrada con pausa real del reloj del mundo.",
+      "after": "MainMenu permite comenzar, abrir opciones y salir. Existen distintas skins; su catálogo, método de selección, desbloqueo y persistencia deben quedar documentados. Durante la partida, el menú general da acceso a Pertenencias, Personaje, Habilidades y Bestiario. Hay un tutorial para lo básico y misiones que guían recolección, fabricación y aprendizaje; las misiones introductorias siguen en construcción. Abrir paneles gestiona cursor y acciones de gameplay, sin equivaler necesariamente a pausa real."
+    },
+    {
+      "paragraph": 302,
+      "before": "AudioManager, AudioEvents y MusicController se integraron desde el proyecto anterior. Los sonidos existentes se enrutan a efectos. Incorporar la estructura de audio no significa que ya exista una selección final de música o nuevos clips asignados.",
+      "after": "AudioManager, AudioEvents y MusicController conservan la estructura de audio del proyecto. Los sonidos existentes se enrutan a efectos. Faltan sonidos de enemigos y revisar la selección de clips, música y señales de combate; disponer de la estructura no certifica una presentación terminada."
+    },
+    {
+      "paragraph": 304,
+      "before": "Existe Mismo-Playtest-2026-09-07.zip para Windows, con menú y región. Ese paquete es anterior al nuevo combate y a los ajustes del 8 de septiembre. No debe usarse como evidencia de esta versión: el siguiente envío requiere compilar y comprobar una build actualizada.",
+      "after": "Mismo tiene una build pública descargable para Windows en itch.io. Mismo-Playtest-2026-09-07.zip queda como antecedente histórico. Antes de distribuir cada actualización se debe generar y comprobar una build que incluya sus cambios, identificar la versión y describir el contenido disponible."
+    },
+    {
+      "paragraph": 332,
+      "before": "Assets/Data/Weapons contiene armas y habilidades; Assets/Data/WeaponFamilies define el repertorio de seis habilidades de cada familia, el intervalo de desbloqueo y sus animaciones. Assets/Resources/CombatRules.asset contiene reglas comunes y StartingWeapons el equipo inicial. Assets/Art/Animations/WeaponCombat conserva clips de espada y su fuente licenciada.",
+      "after": "Las definiciones de armas, familias, habilidades y reglas pertenecen a Assets/Data, agrupadas por sistema. El arte y las animaciones pertenecen a Assets/Art. Las referencias se configuran mediante campos serializados y el catálogo de Data/System; las búsquedas globales utilizan Mismo.Core.ProjectAssets. Las antiguas referencias a carpetas Resources quedan retiradas de esta documentación."
+    },
+    {
+      "paragraph": 333,
+      "before": "8 Personaje maestría y roles",
+      "after": "8 Personaje familias de armas y dominio de habilidades"
+    },
+    {
+      "paragraph": 334,
+      "before": "La progresión distingue atributos generales del personaje, calidad del ejemplar y maestría de familia. Existen datos, reglas y guardado de progresión en el prototipo; los criterios siguientes conservan la dirección de diseño y no certifican que todo su balance o todas las variantes estén cerrados.",
+      "after": "La progresión distingue atributos generales del personaje, calidad del ejemplar, nivel de la familia y dominio de cada habilidad. Mejorar el objeto mediante crafting, desbloquear habilidades con puntos y obtener una mejora por uso son mecanismos distintos. Los detalles heredados de atributos y tiers se conservan como referencias por validar."
+    },
+    {
+      "paragraph": 345,
+      "before": "Elegir daño o velocidad y seleccionar tres habilidades entre las desbloqueadas.",
+      "after": "Ganar experiencia y niveles de familia, obtener puntos cada tres niveles y elegir habilidades para desbloquear."
+    },
+    {
+      "paragraph": 348,
+      "before": "Cada nivel permite elegir aumentos de atributos, inicialmente vida máxima, ataque y defensa o armadura. El catálogo final, los puntos por nivel, las fórmulas y la redistribución están pendientes. Defensa y armadura deben unificarse como término si representan la misma estadística.",
+      "after": "El diseño previo permite elegir atributos al subir de nivel, inicialmente vida máxima, ataque y defensa o armadura. Deben confirmarse su vigencia, catálogo, puntos, fórmulas y redistribución. Este sistema se documenta aparte de los puntos de habilidad obtenidos por niveles de familia. Defensa y armadura deben unificarse como término si representan la misma estadística."
+    },
+    {
+      "paragraph": 349,
+      "before": "Maestría de armas",
+      "after": "Experiencia niveles y puntos por familia"
+    },
+    {
+      "paragraph": 350,
+      "before": "La maestría se aprende por familia de combate: arco, espada sola, dos espadas y espada con escudo. Cada una conserva experiencia, puntos y selección al cambiar de ejemplar o volver a ese estilo; usar otra combinación no hereda automáticamente su maestría. Los identificadores persistentes son bow, sword.onehand, sword.dual y sword.shield.",
+      "after": "Las armas suben de nivel al derrotar monstruos. La experiencia atribuida a cada arma es proporcional al daño que hizo a ese monstruo y se acumula en su familia. Cambiar una espada por otra de la misma familia conserva el progreso. El catálogo previo diferencia arco, espada sola, dos espadas y espada con escudo; debe revisarse la lista final de familias y sus identificadores al cerrar el catálogo de lanzamiento."
+    },
+    {
+      "paragraph": 351,
+      "before": "Al subir maestría se sigue eligiendo entre daño y velocidad de ataque. Además, las tres opciones iniciales están disponibles desde nivel 1 y las restantes se desbloquean en niveles 3, 6 y 9. Desbloquear amplía el repertorio; no aumenta los tres espacios equipables ni consume los puntos destinados a estadísticas. El intervalo inicial de tres niveles es configurable por familia.",
+      "after": "Cada tres niveles de arma se otorgan puntos para desbloquear habilidades de su familia. El jugador decide en qué habilidades invertirlos. Este sistema sustituye el desbloqueo automático por alcanzar niveles 3, 6 y 9. Quedan por documentar la cantidad de puntos otorgada en cada hito, costos, requisitos, habilidades iniciales y posibilidad de redistribución. La antigua elección de daño o velocidad mediante puntos debe revisarse antes de conservarla como una regla adicional."
+    },
+    {
+      "paragraph": 352,
+      "before": "La selección se guarda por familia mediante identificadores estables. Los guardados anteriores sin selección usan las tres habilidades iniciales. Se conserva la dirección de reconocer la contribución efectiva del estilo que actúa; llevar un arma guardada no basta. Curva de experiencia, atribución defensiva y balance global siguen sujetos a validación. La velocidad afecta las acciones ofensivas reconocidas por el sistema; deben comprobarse carga, ventanas de daño y frecuencia de pasivas en combate real.",
+      "after": "La experiencia, nivel, puntos y desbloqueos pertenecen a la familia, no al ejemplar físico. La selección de habilidades también debe conservarse por familia. La atribución de experiencia necesita reglas explícitas para daño periódico, sobreletalidad, enemigos que se curan y otros casos especiales; no se fijan aquí fórmulas aún no acordadas. Los guardados deben preservar el progreso al sustituir un arma, alternar conjuntos y continuar una partida."
+    },
+    {
+      "paragraph": 353,
+      "before": "Rol de la combinación",
+      "after": "Mejoras de habilidad por uso y rol de la combinación"
+    },
+    {
+      "paragraph": 354,
+      "before": "Las armas y su combinación definen acciones, ritmo, alcance y oportunidades. La selección libre de tres activas o pasivas permite especializar el estilo sin clases tradicionales. Las gemas continúan como posibilidad futura; el repertorio seleccionable ya forma parte del prototipo.",
+      "after": "Usar repetidamente una habilidad permite desbloquear una mejora para esa habilidad. Falta definir qué acciones cuentan como uso válido, los umbrales, el efecto de cada mejora y si existen alternativas excluyentes. El diseño debe premiar la práctica útil y evitar incentivar repeticiones vacías. Las armas y sus combinaciones siguen determinando acciones, ritmo, alcance y oportunidades; las gemas conservan el estado de posibilidad futura."
+    },
+    {
+      "paragraph": 377,
+      "before": "El balance debe evaluar en conjunto ataque del personaje, daño del ejemplar y maestría. La velocidad necesita revisar daño por segundo, exposición y frecuencia de efectos; su valor no debe compararse con daño solo por el porcentaje visible.",
+      "after": "El balance debe evaluar en conjunto atributos del personaje, calidad del ejemplar, habilidades desbloqueadas y mejoras por uso. La velocidad necesita revisar daño por segundo, exposición y frecuencia de efectos. Cualquier bonificación directa de daño o velocidad por maestría queda sujeta a la revisión indicada en la sección 8."
+    },
+    {
+      "paragraph": 378,
+      "before": "10 Transmog y skins pagas",
+      "after": "10 Skins actuales y propuestas de personalización"
+    },
+    {
+      "paragraph": 379,
+      "before": "Diseño acordado, pendiente de implementación. La personalización de armas incluye apariencias desbloqueadas mediante destrucción de ejemplares y skins compradas con dinero real. Ambas vías son cosméticas y conservan las estadísticas y el alcance real del arma equipada.",
+      "after": "Hay distintas skins en el juego. Falta consolidar su catálogo, selección, condiciones de acceso y persistencia, y dejar explícito si todas son exclusivamente cosméticas. El transmog de armas y las skins pagas que figuran a continuación son propuestas previas por revisar; no se consideran implementados ni comprometidos para la primera versión."
+    },
+    {
+      "paragraph": 380,
+      "before": "Desbloquear una apariencia mediante un arma",
+      "after": "Propuesta previa de apariencias mediante armas"
+    },
+    {
+      "paragraph": 381,
+      "before": "El jugador entrega y destruye un ejemplar para aprender permanentemente su apariencia. El arma consumida no produce materiales ni oro. La elección enfrenta tres destinos posibles del objeto: conservar su apariencia, convertirlo en materiales o venderlo, cuando esos servicios estén disponibles.",
+      "after": "La propuesta previa consiste en entregar y destruir un ejemplar para aprender permanentemente su apariencia, sin recibir materiales ni oro. Su adopción debe confirmarse junto con las alternativas de conservar, reciclar o vender objetos; estas últimas no se dan por implementadas."
+    },
+    {
+      "paragraph": 383,
+      "before": "Skins compradas con dinero real",
+      "after": "Propuesta previa de skins pagas"
+    },
+    {
+      "paragraph": 384,
+      "before": "El término pagos se refiere expresamente a skins pagas con dinero real, no a una tarifa de oro. La compra desbloquea una apariencia cosmética; no aumenta tier, atributos, maestría ni alcance. No se exige destruir un arma para obtener una skin comprada.",
+      "after": "La propuesta anterior contemplaba compras de apariencias cosméticas con dinero real, sin aumentar tier, atributos, maestría ni alcance. No se confirma una tienda para la primera versión. Debe resolverse la vigencia de esta propuesta antes de diseñar su catálogo o integraciones."
+    },
+    {
+      "paragraph": 388,
+      "before": "No se ha acordado cobrar oro por aplicar una apariencia. El costo confirmado de la vía obtenida jugando es destruir el ejemplar; la vía comercial utiliza dinero real.",
+      "after": "Los costos de aplicación y desbloqueo de apariencias siguen abiertos. La destrucción del ejemplar y las compras con dinero real pertenecen a las propuestas anteriores y requieren confirmación antes de integrarse al alcance vigente."
+    },
+    {
+      "paragraph": 389,
+      "before": "11 Contraataque curación y heridas",
+      "after": "11 Contraataque y propuestas de curación y heridas"
+    },
+    {
+      "paragraph": 391,
+      "before": "Cambio solicitado, pendiente de implementación: después de aplicar un parry, el jugador debe poder atacar y cortar la animación defensiva. La regla propuesta para probarlo habilita la cancelación de recuperación tras un parry exitoso; un intento fallido conserva su recuperación.",
+      "after": "Propuesta previa por revisar: después de aplicar un parry exitoso, permitir atacar y cortar la recuperación defensiva. Un intento fallido conservaría su recuperación. Su necesidad debe contrastarse con el combate actual antes de declararla parte del cierre."
+    },
+    {
+      "paragraph": 394,
+      "before": "Diseño acordado, pendiente de implementación: una fracción del daño recibido se acumula como herida y deja de ser recuperable mediante curación normal. El 10 % es un ejemplo de prueba. El objetivo es limitar la curación sostenida y dar peso al daño acumulado.",
+      "after": "Propuesta previa por revisar, pendiente de implementación: acumular una fracción del daño recibido como herida que la curación normal no recupera. El 10 % era un ejemplo de prueba. Su vigencia debe decidirse junto con pociones, bufos, curación fuera de combate y retorno al pueblo."
+    },
+    {
+      "paragraph": 409,
+      "before": "12 Niveles de monstruos por región",
+      "after": "12 Progresión de biomas y escalado enemigo"
+    },
+    {
+      "paragraph": 410,
+      "before": "La dirección de escalado usa un mínimo regional persistente y el nivel del personaje. El perfil actual dispone de regiones descubiertas y mínimos guardados. Deben validarse los valores y disparadores del mundo procedural; no se considera cerrado el balance regional por disponer del guardado.",
+      "after": "La regla vigente de avance es invocar y derrotar al boss de cada bioma. La cantidad y proporción de enemigos también varían mediante generación procedural. Esto debe distinguirse de su nivel y estadísticas. El antiguo escalado por nivel del personaje se conserva como propuesta para revisar, porque no debe anular la preparación ni la sensación de progreso entre biomas."
+    },
+    {
+      "paragraph": 411,
+      "before": "Asignación inicial y persistencia",
+      "after": "Referencia previa de mínimo regional"
+    },
+    {
+      "paragraph": 412,
+      "before": "Mínimo regional = nivel del personaje al descubrir la región + incremento regional.",
+      "after": "Fórmula previa por revisar: mínimo regional = nivel del personaje al descubrir la región + incremento regional."
+    },
+    {
+      "paragraph": 414,
+      "before": "Escalado posterior",
+      "after": "Referencia previa de escalado posterior"
+    },
+    {
+      "paragraph": 415,
+      "before": "Nivel de los monstruos = máximo entre el mínimo regional guardado y el nivel actual del personaje. Cuando el personaje supera el mínimo, los monstruos lo acompañan. La referencia es el nivel de PERSONAJE; tier y maestría no determinan este escalado.",
+      "after": "Fórmula previa por revisar: nivel de los monstruos = máximo entre el mínimo regional guardado y el nivel actual del personaje. Su uso no queda confirmado por el nuevo avance mediante bosses. La maestría de armas y los tiers requieren balance propio."
+    },
+    {
+      "paragraph": 425,
+      "before": "Debe existir una identidad persistente por región y un evento único de descubrimiento. Falta definir si una precarga distante cuenta como descubrimiento o si se requiere proximidad o entrada. Un chunk adicional de una región conocida nunca crea otro mínimo.",
+      "after": "Debe definirse cómo se identifica cada bioma o región, cuándo se considera descubierto y cómo afecta el avance tras un boss a sus encuentros. La precarga técnica de sectores no debe decidir accidentalmente la progresión. La persistencia tiene que conservar descubrimientos, requisitos de invocación, bosses vencidos y accesos habilitados cuando esos sistemas se implementen."
+    },
+    {
+      "paragraph": 426,
+      "before": "Faltan nivel de la región inicial, incrementos por región, conversión de niveles a estadísticas y momento de actualización de enemigos ya presentes. El comportamiento cooperativo también está pendiente, incluida la referencia de nivel al descubrir una región.",
+      "after": "Faltan orden y barreras de avance, niveles o bandas de dificultad, pesos de aparición por bioma y reglas de actualización de enemigos. El escalado cooperativo queda fuera de esta versión individual. Las fórmulas y ejemplos previos no sustituyen estas decisiones."
+    },
+    {
+      "paragraph": 427,
+      "before": "El escalado debe mantener relevantes regiones anteriores sin borrar la utilidad de progresar. La exploración ya carga sectores; extender el contenido y demostrar todas las condiciones de descubrimiento regional requiere pruebas específicas. El streaming de un sector adicional no equivale a descubrir otra región.",
+      "after": "El balance debe permitir reconocer la mejora del personaje y preparar al jugador para el siguiente boss. La generación de encuentros necesita límites de densidad, combinaciones comprensibles y acceso fiable a recursos esenciales. Su variación no debe bloquear una partida por falta de un ingrediente o condición de avance."
+    },
+    {
+      "paragraph": 439,
+      "before": "Habilidades muestra ambos conjuntos, básico fijo, los tres espacios Q/E/R y seis tarjetas con nombre, descripción, tipo y requisito de maestría. Elegir un espacio y una tarjeta desbloqueada guarda la asignación. Si ya ocupa otro espacio, se intercambian para impedir duplicados. Las bloqueadas muestran su nivel requerido y no pueden equiparse.",
+      "after": "Habilidades muestra repertorios por familia, las opciones equipadas y los requisitos de desbloqueo. La regla actual utiliza puntos obtenidos cada tres niveles de arma; las tarjetas deben indicar costos y condiciones vigentes. Se conserva como referencia la selección de tres espacios Q/E/R y el intercambio de tarjetas para evitar duplicados. Falta validar la presentación de puntos, progreso de uso y mejoras de cada habilidad."
+    },
+    {
+      "paragraph": 483,
+      "before": "Se buscan ubicaciones coherentes con bioma, terreno y espacio libre, respetando caminos, edificios y encuentros. La colocación por semilla debe conservar identidad. Se intentan fuentes iniciales de hierba, madera y piedra cerca del comienzo y un banco accesible. Falta demostrar esa garantía en varias semillas y recorridos reales; la colocación válida geométricamente no prueba por sí sola que el jugador pueda llegar.",
+      "after": "La distribución debe ser coherente con cada bioma y respetar terreno, caminos, pueblos, mazmorras y encuentros. La semilla y las identidades conservan los estados persistentes. Hay que garantizar recursos iniciales y materiales necesarios para fabricar, preparar e invocar bosses; generar una posición geométricamente válida no demuestra que el jugador pueda llegar."
+    },
+    {
+      "paragraph": 485,
+      "before": "Implementado en superficie. Un banco accesible en el pueblo presenta recetas conocidas, descripción del resultado, cantidades necesarias y disponibles, y acción Crear o Mejorar. G abre la estación dentro de alcance. Salir de rango cierra o invalida la fabricación; no se permite estando muerto o durante recolección.",
+      "after": "Existe fabricación de mejoras, bufos, pociones y un consumible para curarse fuera de combate. El banco y las recetas de superficie conservan su función de preparación. Deben documentarse recetas, cantidades, efectos, restricciones de uso y fuentes de ingredientes de cada bioma. Las recetas de la tabla siguiente son referencias iniciales del sistema, no el catálogo completo actual."
+    },
+    {
+      "paragraph": 497,
+      "before": "El ungüento se usa desde el inventario fuera de combate: recupera inicialmente 40 de vida durante 5 segundos sin superar la vida máxima. Con vida llena o el mismo efecto activo no se consume. Recibir daño interrumpe la curación sin devolver la unidad. Estas cifras son de prueba. La interacción con un futuro sistema de heridas deberá respetar su máximo curable antes de dar ese sistema por integrado.",
+      "after": "Está confirmado un consumible de curación fuera de combate. El ungüento conserva como referencia previa 40 de vida durante 5 segundos, sin superar el máximo, sin consumo con vida llena o efecto idéntico activo y con interrupción al recibir daño. Deben comprobarse estos valores y distinguir sus reglas de las pociones y bufos. Las heridas continúan como propuesta por revisar."
+    },
+    {
+      "paragraph": 499,
+      "before": "Expansión posterior",
+      "after": "Mazmorras recursos y ampliación de recetas"
+    },
+    {
+      "paragraph": 500,
+      "before": "Cuevas y minerales avanzados quedan fuera del cierre de superficie. Primero se elegirá una solución compatible con el terreno: módulos de meshes conectados o interiores separados, sin asumir excavación volumétrica por la estética voxel. Toda cueva debe tener recorrido continuo, entradas válidas, espacio para menas y un diseño de respaldo si la generación falla.",
+      "after": "Las mazmorras procedurales forman parte del juego actual. Falta consolidar su propósito, acceso, estructura, variedad, recompensas y reglas de persistencia o regeneración. También debe definirse su relación con los materiales y requisitos de invocación de bosses. El diseño necesita recorridos alcanzables y una salida segura; la estética voxel no exige excavación volumétrica."
+    },
+    {
+      "paragraph": 501,
+      "before": "El escudo básico T1 ya es fabricable mediante REC-09, con 2 maderas y 4 hierros, para usarlo en la mano secundaria de una espada. Las recetas de armas permiten obtener ejemplares individuales; el estilo combinado resulta del equipamiento, no de fabricar una pareja indivisible. Antídotos, cinturones y cadenas extensas siguen requiriendo sus mecánicas y balance. Crafting no debe reemplazar todas las recompensas de bosses y secretos.",
+      "after": "El escudo básico T1 figuraba como fabricable mediante REC-09, con 2 maderas y 4 hierros; sus costos y el resto del catálogo deben revisarse. Las combinaciones de armas resultan del equipamiento de ejemplares individuales. El catálogo actual de mejoras, bufos y pociones requiere consolidación sin sustituir todas las recompensas propias de bosses, mazmorras y secretos."
+    },
+    {
+      "paragraph": 504,
+      "before": "La domesticación ocurre por una probabilidad configurable al vencer a una criatura elegible: puede reconocer al jugador como su amo y habilitarse como montura. Esta decisión reemplaza tanto alimentos y confianza del instructivo como el desbloqueo por acumular una cantidad de bajas. No todas las especies son domesticables. El contador de victorias es informativo y no constituye un umbral de desbloqueo.",
+      "after": "Monturas y bestiario están presentes. La regla previa de domesticación usa una probabilidad configurable al vencer a una criatura elegible. Deben confirmarse su vigencia, especies habilitadas y condiciones actuales. Se conserva la distinción entre contar victorias y cumplir una condición de desbloqueo."
+    },
+    {
+      "paragraph": 509,
+      "before": "Existen fichas iniciales de jabalí, araña, goblin, gólem y guardián. Solo el jabalí está habilitado como montura inicialmente. Agregar una ficha al catálogo no debe hacerla visible antes de ser descubierta; habilitar otra montura requiere ajustar pose y comprobar navegación y movimiento.",
+      "after": "El catálogo previo incluía jabalí, araña, goblin, gólem y guardián, con el jabalí como primera montura. Hay distintas especies y monturas en el estado actual; falta consolidar el catálogo real y las especies habilitadas. Una ficha de guardián no demuestra que exista un boss jugable. Las fichas deben revelarse al descubrir la criatura según la regla de exploración vigente."
+    },
+    {
+      "paragraph": 517,
+      "before": "El taller de monturas permite previsualizar personaje y criatura en una escena aislada, editar posición y rotación del asiento, escala, clip y tiempo de muestra, y rotaciones de huesos. Guardar escribe el asset de pose sin modificar el prefab del personaje o enemigo. La pose de jabalí es inicial y requiere revisión en movimiento y pendientes. Se accede desde Mismo → Criaturas → Taller de poses de montura en el editor.",
+      "after": "El taller de monturas permite previsualizar personaje y criatura en una escena aislada y ajustar asiento, escala, clip y huesos. La pose inicial de jabalí requiere revisión en movimiento y pendientes. El catálogo actual de monturas debe indicar qué poses están resueltas y cuáles faltan; conservar un taller no equivale a tener todas las animaciones finales."
+    },
+    {
+      "paragraph": 526,
+      "before": "Assets/Resources/Materials y definiciones de armas; tamaño, apilado, iconos y modelos.",
+      "after": "Assets/Data, agrupado por sistema; definiciones de objetos, armas, tamaños, apilado e iconos."
+    },
+    {
+      "paragraph": 528,
+      "before": "Assets/Resources/Gathering y GatheringSettings.asset; nodos, tiempos, recompensas y distribución.",
+      "after": "Assets/Data, sistema de recolección; nodos, tiempos, recompensas y distribución."
+    },
+    {
+      "paragraph": 530,
+      "before": "Assets/Resources/Recipes; costos, producto y transición de tier.",
+      "after": "Assets/Data, sistema de recetas; costos, productos y mejoras."
+    },
+    {
+      "paragraph": 534,
+      "before": "Assets/Resources/Bestiary y BestiaryBook.asset; especies, elegibilidad y páginas.",
+      "after": "Assets/Data, sistema de criaturas y bestiario; especies, elegibilidad y páginas."
+    },
+    {
+      "paragraph": 538,
+      "before": "Assets/Resources/Localization; Translations.json y tablas español e inglés.",
+      "after": "Assets/Data, sistema de idiomas; tablas de español e inglés y claves estables."
+    },
+    {
+      "paragraph": 539,
+      "before": "Los assets compartidos definen contenido y balance; el perfil conserva cantidades, grilla, principales y secundarias de ambos conjuntos, selección de habilidades por familia, progreso, cofre, recompensas, nodos, descubrimientos y vínculo de montura. Los cambios de versión deben preservar partidas compatibles. El estilo se compone en una copia de ejecución sin modificar la definición compartida del objeto.",
+      "after": "Las definiciones compartidas contienen configuración; el guardado conserva objetos, familias de armas, puntos y desbloqueos, progreso de uso de habilidades, selección, cofre, nodos, descubrimientos y monturas. Debe documentarse y validarse además la persistencia de skins, tutorial, misiones, pueblos de viaje, mazmorras y futuros bosses. Las migraciones deben preservar partidas compatibles."
+    },
+    {
+      "paragraph": 541,
+      "before": "18 Estado de entrega y criterios de cierre",
+      "after": "18 Prioridades de producción y criterios de cierre"
+    },
+    {
+      "paragraph": 542,
+      "before": "La base funcional de superficie está implementada. El cierre de esta entrega depende de aceptación en mundo real y acabado, no de iniciar cuevas. Las decisiones comerciales, heridas, personalización y otras expansiones de la versión 0.5 siguen su propio alcance; esta actualización no las declara completas.",
+      "after": "La prioridad es definir y completar una primera región individual representativa. Faltan todos los bosses y el del bosque está en diseño. El principal bloqueo de producción son las animaciones, junto con el acabado de combate, iconos y sonido. Las decisiones pendientes deben resolverse antes de ampliar el repertorio o prometer la aventura completa."
+    },
+    {
+      "paragraph": 548,
+      "before": "Obtener todos los ingredientes, volver al banco, curarse y mejorar sin intervención de desarrollo; fuentes iniciales accesibles.",
+      "after": "Fijar objetivo, tutorial, misiones, recursos, mazmorra, preparación e invocación del boss del bosque, con inicio y cierre comprensibles."
+    },
+    {
+      "paragraph": 547,
+      "before": "Recorrido de superficie en varias semillas",
+      "after": "Definir el recorrido de la primera región"
+    },
+    {
+      "paragraph": 550,
+      "before": "Balance del retorno al pueblo",
+      "after": "Diseñar e implementar el boss del bosque"
+    },
+    {
+      "paragraph": 551,
+      "before": "Medir primera fabricación, abundancia, capacidad y trayectos; ajustar densidad, rendimientos y costos.",
+      "after": "Cerrar invocación, ataques, respuestas del jugador, recompensa y condición de avance; después verificar el encuentro completo."
+    },
+    {
+      "paragraph": 553,
+      "before": "Montura en terreno real",
+      "after": "Cerrar armas y enemigos de la región"
+    },
+    {
+      "paragraph": 554,
+      "before": "Seguir y desmontar en pendientes y pasos estrechos; recuperar atascos de forma segura sin saltar barreras de progresión.",
+      "after": "Definir el repertorio necesario y verificar diferencias de juego. Jabalíes y arañas deben anunciar ataques y ofrecer recuperaciones legibles."
+    },
+    {
+      "paragraph": 556,
+      "before": "Persistencia y presentación",
+      "after": "Completar animaciones iconos y sonido"
+    },
+    {
+      "paragraph": 557,
+      "before": "Resolver punto de espera, revisar restauración visible, agotados, poses, sonidos y efectos con assets definitivos.",
+      "after": "Revisar anticipación, impacto, recuperación, agarres y transiciones; asignar iconos y sonidos que comuniquen acciones y estados."
+    },
+    {
+      "paragraph": 559,
+      "before": "Validación de interfaz e idiomas",
+      "after": "Validar el recorrido en una build"
+    },
+    {
+      "paragraph": 560,
+      "before": "Sin conflictos entre controles de combate y menús; rotación contenida, textos legibles en español e inglés y descripciones completas.",
+      "after": "Un jugador nuevo aprende, recolecta, fabrica, progresa, guarda, continúa y supera la región sin asistencia del desarrollador."
+    },
+    {
+      "paragraph": 562,
+      "before": "Cuevas y expansión de recursos",
+      "after": "Completar los otros tres biomas y bosses"
+    },
+    {
+      "paragraph": 563,
+      "before": "Definir acceso, geometría, materiales distintos, recetas y balance antes de multiplicar contenido.",
+      "after": "Cada bioma tiene identidad, recursos, encuentros, contenido procedural y boss propios; los cuatro forman una progresión completa."
+    },
+    {
+      "paragraph": 565,
+      "before": "Armas habilidades y animaciones",
+      "after": "Alcance y calidad de la entrega"
+    },
+    {
+      "paragraph": 566,
+      "before": "Probar los cuatro estilos en Play Mode, selección persistente y desbloqueos; validar agarres, impactos y balance comparativo.",
+      "after": "Comprobar familias, puntos, mejoras por uso, viaje, monturas, misiones y persistencia; medir rendimiento y comunicar contenido y versión."
+    },
+    {
+      "paragraph": 574,
+      "before": "Probar desbloqueos en maestría 3, 6 y 9, intercambio de espacios y tres activas o tres pasivas. Confirmar que las pasivas no se ejecutan por tecla, no funcionan desde un estilo guardado y no se reinician abusivamente al reequipar.",
+      "after": "Verificar que cada hito de tres niveles de arma otorga los puntos definidos, que desbloquear una habilidad descuenta el costo correcto y que la experiencia por contribución de daño se conserva por familia. Validar también uso, mejora, selección y guardado sin repetir premios al cargar."
+    },
+    {
+      "paragraph": 576,
+      "before": "Evidencia y límites",
+      "after": "Antecedentes de validación"
+    },
+    {
+      "paragraph": 577,
+      "before": "La ampliación de armas registra 105 comprobaciones aprobadas de inventario y guardado, 15 de desbloqueo y selección de habilidades y 150 de importación de assets en Unity aislado, además de compilación de jugador y enemigos sin errores. Los assets comprobados incluyen cuatro repertorios, acciones, clips y modelo del escudo. Las veinte animaciones se adaptaron a 60 fps y se revisaron en capturas. Esto no certifica todavía transiciones, agarres, balance o sincronización de impactos en combate real.",
+      "after": "El GDD anterior registra 105 comprobaciones de inventario y guardado, 15 de desbloqueo y selección y 150 de importación de assets, además de compilación y revisión de veinte clips. Son antecedentes de la versión anterior y no certifican la nueva progresión por puntos, las mejoras por uso, las mazmorras o el avance mediante bosses."
+    },
+    {
+      "paragraph": 578,
+      "before": "La versión 0.6 conserva como antecedentes 52 comprobaciones de integración de recolección y 21 de criaturas en Play Mode aislado, realizadas con Unity 6000.3.11. La ampliación de armas se comprobó con Unity 6000.6. La versión 0.7 sustituye los kits fijos por selección y combinaciones por mano; mantiene las decisiones de superficie, bestiario y reconocimiento de la 0.6. Ninguna comprobación aislada sustituye una build actual, rendimiento medido o recorridos en varias semillas.",
+      "after": "También se conservan los antecedentes de recolección y criaturas de las versiones 0.6 y 0.7. La versión 0.9 reemplaza las reglas anteriores de desbloqueo y alcance que contradigan sus secciones vigentes. El cierre requiere una build actual y recorridos reales; los números históricos no se presentan como pruebas ejecutadas para esta actualización."
+    },
+    {
+      "paragraph": 580,
+      "before": "Diseño en borrador, pendiente de implementación. El hacha se suma como nuevo objeto de arma principal. Hacha con mano secundaria vacía resuelve Hacha sola; hacha con otra hacha resuelve Dos hachas, cada una con maestría e identificadores propios (axe.onehand y axe.dual) siguiendo la misma regla de selección de la sección 4: seis habilidades por familia, tres equipables en Q, E y R, en cualquier combinación de activas y pasivas.",
+      "after": "Diseño previo en borrador, pendiente de implementación y de confirmar dentro del catálogo de la primera versión. Hacha sola y Dos hachas se conservarían como familias distintas con identificadores propios. Si se incorporan, deben aplicar la progresión vigente por contribución de daño, puntos cada tres niveles y mejoras por uso. Las habilidades siguientes son propuestas de repertorio; no fijan costos ni niveles automáticos de desbloqueo."
+    }
+  ]
+}

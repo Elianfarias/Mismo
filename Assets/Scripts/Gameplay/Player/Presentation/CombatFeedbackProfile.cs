@@ -16,6 +16,8 @@ namespace Mismo.Gameplay.Player.Presentation
         public Vector3 rotation;
         [Tooltip("Color para materiales Mismo/Combat Impact; no modifica el material compartido.")]
         public Color tint = Color.white;
+        [Tooltip("En un parry confirmado, sitúa las chispas sobre la hoja defensora y usa su color de estela.")]
+        public bool useDefenderBlade;
         public AudioClip sound;
         [Range(0, 1)] public float volume = .7f;
         [Range(0, .08f)] public float hitStop;

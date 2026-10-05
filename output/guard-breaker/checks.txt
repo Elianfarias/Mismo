@@ -1,0 +1,9 @@
+PASS Mage: 59 held-grip samples, maximum retargeting drift 0,06 cm
+PASS Mage: cutting plane alignment 1,0000 across the entire downswing
+PASS Warrior: 59 held-grip samples, maximum retargeting drift 0,06 cm
+PASS Warrior: cutting plane alignment 1,0000 across the entire downswing
+PASS NinjaFrog: 59 held-grip samples, maximum retargeting drift 0,06 cm
+PASS NinjaFrog: cutting plane alignment 1,0000 across the entire downswing
+PASS real player: impact at 0,51 s; one hit; 80 posture broken by existing 90 posture damage; pause/resume; recovery; in-place capsule; max grip drift 0,06 cm
+PASS real player: edge-first downswing, alignment 1,0000; no preparation ring
+PASS cancellation releases the action clip

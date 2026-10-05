@@ -167,7 +167,7 @@ namespace Mismo.Gameplay.Player.Presentation
         {Fill(new Rect(x,y,width,12),new Color(.11f,.14f,.17f));Fill(new Rect(x,y,width*Mathf.Clamp01(value),12),color);}
         private void OnGUI()
         {
-            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.InterfaceHidden) return;
             if (WorldMapPanel.AnyOpen || Equipment.Inventory.InventoryPanel.AnyOpen || GetComponent<World.GatheringPlayer>()?.BlocksGameplay==true) return;
             if(health==null)return;
             Matrix4x4 old=GUI.matrix;float scale=Scale;GUI.matrix=Matrix4x4.Scale(Vector3.one*scale);

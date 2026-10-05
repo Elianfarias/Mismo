@@ -3,6 +3,10 @@ using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Mismo.Gameplay.Combat;
+using Mismo.Gameplay.Enemies;
+using Mismo.Gameplay.Player.World;
+using Mismo.Gameplay.Player.Quests;
 using Mismo.Gameplay.Player.Camera;
 using Mismo.Gameplay.Player.Equipment;
 using Mismo.Gameplay.Player.Equipment.Inventory;
@@ -22,7 +26,9 @@ namespace Mismo.Gameplay.Player.Editor
         static double deadline;
         static int frame = -1, count;
         static readonly BindingFlags Private = BindingFlags.Instance | BindingFlags.NonPublic;
-        public static void RunBatch()
+        public static void RunBatch() => StartBatch(true);
+        public static void RunGameplayBatch() => StartBatch(false);
+        static void StartBatch(bool checkOrganization)
         {
             if (!Application.isBatchMode || !Directory.GetCurrentDirectory().Replace('\\', '/').Contains("/.validation/"))
                 throw new InvalidOperationException("Run in the isolated validation project.");
@@ -31,6 +37,7 @@ namespace Mismo.Gameplay.Player.Editor
             Object.DestroyImmediate(player.GetComponent<World.RegionRespawn>());
             player.transform.position = new Vector3(0, 100, 0);
             new GameObject("Camera").AddComponent<UnityEngine.Camera>().tag = "MainCamera";
+            SessionState.SetBool(Key + ".Organization", checkOrganization);
             SessionState.SetBool(Key, true);
             EditorApplication.EnterPlaymode();
         }
@@ -156,6 +163,42 @@ namespace Mismo.Gameplay.Player.Editor
             Check(all.equipped.SequenceEqual(initial.equipped) && all.claimedRewards.SequenceEqual(initial.claimedRewards), "The arsenal preserves equipped items and boss reward progress");
 
             var profileField = typeof(PlayerInventory).GetField("profile", Private);
+            Check(!cheats.ToggleOneHitKills() && !cheats.OneHitKills && !cheats.ActivateDragonAltars() && !cheats.AdvanceSoulEaterPhase(), "New cheats require F8 mode");
+            Check(cheats.SetActive(true) && !cheats.OneHitKills, "One-hit kills start off even in cheat mode");
+            Check(!cheats.ActivateDragonAltars(), "Missing dragon arc is handled without changing progress");
+            var arc = player.gameObject.AddComponent<DragonArcCoordinator>(); arc.enabled = false;
+            var data = AssetDatabase.LoadAssetAtPath<DragonArcDefinition>("Assets/Data/World/DragonArc/DragonArc.asset");
+            typeof(DragonArcCoordinator).GetField("<Data>k__BackingField", Private).SetValue(arc, data);
+            typeof(DragonArcCoordinator).GetField("inventory", Private).SetValue(arc, inventory);
+            string beforeAltars = JsonUtility.ToJson(profileField.GetValue(inventory));
+            string savedBeforeAltars = storage.Payload;
+            storage.Fail = true;
+            Check(!cheats.ActivateDragonAltars() && arc.LitCount == 0 && !arc.CanSummon &&
+                storage.Payload == savedBeforeAltars && JsonUtility.ToJson(profileField.GetValue(inventory)) == beforeAltars,
+                "Failed altar save leaves all quest progress unchanged");
+            storage.Fail = false; writes = storage.Writes;
+            Check(cheats.ActivateDragonAltars() && arc.LitCount == 3 && arc.CanSummon && storage.Writes == writes + 1,
+                "Three altars and missing story prerequisites commit in one save");
+            var savedAltars = JsonUtility.FromJson<InventoryProfile>(storage.Payload);
+            Check(DragonArcRules.CanSummon(savedAltars, data) && QuestRules.ValidSave(savedAltars) &&
+                !DragonArcRules.Has(savedAltars, data.awakening, 3) && arc.Encounter == null,
+                "Saved altars survive serialization and still require manual summoning");
+            var preserved = JsonUtility.FromJson<InventoryProfile>(beforeAltars);
+            Check(savedAltars.equipped.SequenceEqual(preserved.equipped) && savedAltars.claimedRewards.SequenceEqual(preserved.claimedRewards) &&
+                savedAltars.weapons.Count == preserved.weapons.Count && savedAltars.questCoins == preserved.questCoins,
+                "Altar cheat preserves equipment, inventory and rewards");
+            writes = storage.Writes;
+            Check(cheats.ActivateDragonAltars() && storage.Writes == writes, "Repeated altar activation does not write or duplicate progress");
+            profileField.SetValue(inventory, JsonUtility.FromJson<InventoryProfile>(beforeAltars));
+            Check(inventory.TryAdvanceDragonArc(data, DragonArcStep.Arrival) && inventory.TryAdvanceDragonArc(data, DragonArcStep.Warning) &&
+                inventory.TryAdvanceDragonArc(data, DragonArcStep.Audience) && inventory.TryAdvanceDragonArc(data, DragonArcStep.Forest), "Prepare partially activated altars");
+            writes = storage.Writes;
+            Check(cheats.ActivateDragonAltars() && arc.LitCount == 3 && storage.Writes == writes + 1, "Altar cheat resumes partial quest progress");
+            Check(inventory.TryAdvanceDragonArc(data, DragonArcStep.Summoned), "Normal summoning completes the cheat-unlocked quest");
+            writes = storage.Writes;
+            Check(cheats.ActivateDragonAltars() && storage.Writes == writes && inventory.QuestState(data.awakening).completed,
+                "Altar cheat preserves an already completed ritual");
+            cheats.SetActive(false); Object.DestroyImmediate(arc);
             var full = initial.Copy();
             while (full.weapons.Count < 256) full.weapons.Add(new OwnedWeapon { instanceId = Guid.NewGuid().ToString("N"), definitionId = initial.weapons[0].definitionId });
             profileField.SetValue(inventory, full);
@@ -167,8 +210,77 @@ namespace Mismo.Gameplay.Player.Editor
             Check(overflow.pendingLoot.All(p => p.y < 100), "Weapons requested in flight fall back to loot at ground level");
             writes = storage.Writes;
             Check(inventory.TryGrantCheatWeapons() && storage.Writes == writes, "Pending weapons are not duplicated by repeat grants");
+            Check(typeof(IEnemyDamageTarget).IsAssignableFrom(typeof(EnemyController)) &&
+                typeof(IEnemyDamageTarget).IsAssignableFrom(typeof(BossController)) &&
+                typeof(IEnemyDamageTarget).IsAssignableFrom(typeof(DragonBossController)), "All enemy controller families support one-hit kills");
+            var bossObject = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Prefabs/DragonBosses/SoulEater_PhaseOne.prefab"), new Vector3(800, 100, 800), Quaternion.identity);
+            yield return null;
+            var boss = bossObject.GetComponent<SoulEaterPhaseOneController>();
+            var receiver = boss.GetComponent<DamageReceiver>(); var life = boss.GetComponent<Health>();
+            int deaths = 0, defeated = 0; GameObject credited = null;
+            life.Died += hit => { deaths++; credited = hit.Source; }; boss.Defeated += () => defeated++;
+            life.GetComponent<Presentation.ActorCombatVisuals>().DelayDeathEffect(120);
+            var attackSource = new GameObject("Player weapon source"); attackSource.transform.SetParent(player.transform, false);
+            DamageInfo Strike(bool ranged = false, bool area = false, GameObject source = null, float amount = 1) =>
+                new DamageInfo(amount, source != null ? source : attackSource, boss.transform.position, Vector3.forward, AttackIdentity.Next(), ranged: ranged, area: area);
+            Check(receiver.Resolve(Strike()).HealthDamage < 10 && !life.IsDead, "Ordinary attacks retain normal damage with cheats off");
+            Check(cheats.SetActive(true) && cheats.ToggleOneHitKills() && cheats.OneHitKills, "One-hit kills can be enabled explicitly");
+            Check(!cheats.AdvanceSoulEaterPhase() && !life.IsDead, "Phase cheat does not activate a dormant boss");
+            boss.BeginEncounter(player.transform);
+            var inputOwner=new object();
+            Check(Presentation.GameplayPause.TryBlockInput(inputOwner), "Cinematic input lock acquired for phase cheat check");
+            Check(!cheats.AdvanceSoulEaterPhase() && boss.Phase==1, "Phase cheat respects cinematic input ownership");
+            Presentation.GameplayPause.ReleaseInput(inputOwner);yield return null;
+            int transitions=0;boss.PhaseTwoRequested+=()=>transitions++;
+            Check(cheats.AdvanceSoulEaterPhase() && boss.State==SoulEaterState.PhaseTransition && !life.IsDead &&
+                Mathf.Approximately(life.Normalized,boss.Settings.phaseThreshold) && deaths==0 && defeated==0,
+                "Phase cheat starts the roar at the configured health threshold without triggering one-hit death or rewards");
+            Check(!cheats.AdvanceSoulEaterPhase(), "Repeated input cannot restart the transition");
+            for(int i=0;i<600 && boss.Phase!=2;i++)boss.Tick(1f/60);
+            Check(boss.Phase==2 && transitions==1 && boss.Target==player.transform && !life.IsDead,
+                "Normal roar completion starts phase two once and preserves the combat target");
+            float phaseLife=life.Current;
+            Check(!cheats.AdvanceSoulEaterPhase() && life.Current==phaseLife && transitions==1, "Phase two input does not reset health or repeat the transition");
+            boss.ResetEncounter();boss.BeginEncounter(player.transform);
+            life.ApplyDamage(new DamageInfo(life.Maximum*.7f,null,boss.transform.position,Vector3.zero));float lowLife=life.Current;
+            Check(boss.TryStartAttack(SoulEaterAction.Breath) && cheats.AdvanceSoulEaterPhase() &&
+                boss.State==SoulEaterState.PhaseTransition && boss.Action==SoulEaterAction.None && life.Current==lowLife,
+                "Phase cheat interrupts an attack without healing an already weakened boss");
+            boss.ResetEncounter();
+            var invulnerable = boss.GetComponent<Invulnerability>() ?? boss.gameObject.AddComponent<Invulnerability>();
+            typeof(DamageReceiver).GetField("invulnerability", Private).SetValue(receiver, invulnerable);
+            invulnerable.StartWindow(60);
+            Check(receiver.Resolve(Strike(amount: 0)).Outcome == HitOutcome.Ignored && !life.IsDead, "Zero-damage contacts cannot kill");
+            var attack = Strike();
+            float remaining = life.Current;
+            var result = receiver.Resolve(attack);
+            Check(life.IsDead && result.HealthDamage == remaining && deaths == 1 && defeated == 1 && credited == attackSource && boss.State == SoulEaterState.Dead,
+                "One melee hit defeats the real Soul Eater through invulnerability with normal death attribution");
+            Check(receiver.Resolve(attack).Outcome == HitOutcome.Ignored && deaths == 1, "Repeated contacts cannot duplicate death or boss rewards");
+            boss.enabled = false;
+            foreach (bool area in new[] { false, true })
+            { life.Revive(); Check(receiver.Resolve(Strike(ranged: !area, area: area)).Outcome == HitOutcome.Hit && life.IsDead, "Ranged/area hits honor one-hit mode"); }
+            life.Revive();
+            Check(cheats.ToggleOneHitKills() && !cheats.OneHitKills && receiver.Resolve(Strike()).Outcome == HitOutcome.Invulnerable && !life.IsDead,
+                "Turning one-hit off restores ordinary defenses immediately");
+            cheats.ToggleOneHitKills();
+            var neutral = new GameObject("Non-enemy health"); neutral.AddComponent<Health>(); var neutralReceiver = neutral.AddComponent<DamageReceiver>();
+            Check(neutralReceiver.Resolve(Strike()).HealthDamage < 10 && !neutral.GetComponent<Health>().IsDead, "One-hit cheat does not amplify damage against non-enemies");
+            Check(receiver.Resolve(Strike(source: neutral)).Outcome == HitOutcome.Invulnerable && !life.IsDead, "Other attack sources do not inherit player cheats");
+            cheats.SetActive(false); cheats.SetActive(true);
+            Check(!cheats.OneHitKills, "Leaving F8 mode clears one-hit kills");
+            cheats.ToggleOneHitKills(); cheats.enabled = false; cheats.enabled = true;
+            Check(!cheats.Active && !cheats.OneHitKills, "Disabling the player resets the cheat");
+            cheats.SetActive(true); cheats.ToggleOneHitKills();
+            var playerHealth = player.GetComponent<Health>(); player.GetComponent<Presentation.ActorCombatVisuals>().DelayDeathEffect(120);
+            playerHealth.ApplyDamage(new DamageInfo(playerHealth.Current, neutral, player.transform.position, Vector3.zero));
+            Check(!cheats.OneHitKills && !cheats.ToggleOneHitKills(), "Death immediately disables one-hit damage before the next Update");
+            Invoke(cheats, "Update"); playerHealth.Revive();
+            Check(!cheats.Active && !cheats.OneHitKills && !motor.IsFlying, "Respawn starts with cheats disabled");
+            Object.DestroyImmediate(bossObject); Object.DestroyImmediate(neutral); Object.DestroyImmediate(attackSource);
             Object.DestroyImmediate(floor);
-            Type.GetType("ProjectOrganizationChecks, Assembly-CSharp-Editor", true).GetMethod("Run").Invoke(null, null);
+            if (SessionState.GetBool(Key + ".Organization", true))
+                Type.GetType("ProjectOrganizationChecks, Assembly-CSharp-Editor", true).GetMethod("Run").Invoke(null, null);
             yield break;
         }
     }

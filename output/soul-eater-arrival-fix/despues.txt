@@ -1,0 +1,5 @@
+Cold initialization: 27,042 ms
+Second rig initialization: 0,0812 ms
+120 support updates: 49,1619 ms
+Mesh vertices: 305376; bones: 57
+PASS: shared geometry and bounded preparation.

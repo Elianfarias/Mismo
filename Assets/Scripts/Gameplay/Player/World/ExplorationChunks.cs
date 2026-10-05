@@ -8,7 +8,7 @@ namespace Mismo.Gameplay.Player.World
 {
     public interface IStaticWorldNavigation { void StopNavigation(); }
     /// <summary>Keeps the authored centre, streams deterministic terrain outside it.</summary>
-    public sealed class ExplorationChunks : MonoBehaviour
+    public sealed partial class ExplorationChunks : MonoBehaviour
     {
         public const int ChunkSize=32;
         public ExplorationWorldSettings Settings { get; private set; }
@@ -51,6 +51,7 @@ namespace Mismo.Gameplay.Player.World
         public void Initialize(ExplorationWorldSettings settings,Transform target)
         {
             Settings=settings;player=target;field=new ExplorationTerrain(settings);
+            if(WorldSession.Current?.seed==settings.seed)field.SetImpacts(WorldSession.Current.dragonImpacts);
             var vegetation = GetComponent<VegetationMotionWorld>() ?? gameObject.AddComponent<VegetationMotionWorld>();
             vegetation.Initialize(settings.content, target);
             var motor=target.GetComponent<Movement.PlayerMotor>();
@@ -134,6 +135,8 @@ namespace Mismo.Gameplay.Player.World
             {
                 var root=new GameObject("World introduction");root.transform.SetParent(transform,false);
                 introduction=root.AddComponent<WorldIntroduction>();introduction.Initialize(this,field.Introduction,target.GetComponent<PlayerController>());
+                if(field.DragonArc!=null && field.DragonArc.Definition.Valid)
+                    target.gameObject.AddComponent<DragonArcCoordinator>().Initialize(this,introduction,field.DragonArc,transform);
             }
             if(WorldSession.Current!=null)
             {
@@ -257,7 +260,7 @@ namespace Mismo.Gameplay.Player.World
                 GatheringDistribution.WrapTree(tree,"gather-tree-v1:"+Settings.seed+":"+id.x+":"+id.y+":"+x+":"+z);
             }
             if(field.Plan!=null)CreateSea(id,root.transform);
-            content.Decorate(id,root.transform,material);GatheringDistribution.Decorate(Settings,field,id,root.transform);chunks.Add(id,root);if(finiteHorizon!=null)finiteHorizon.SetChunkLoaded(id,true);return root;
+            content.Decorate(id,root.transform,material);GatheringDistribution.Decorate(Settings,field,id,root.transform);DecorateDragonArena(id,root.transform);chunks.Add(id,root);if(finiteHorizon!=null)finiteHorizon.SetChunkLoaded(id,true);return root;
         }
         public bool CanCreateChunk(Vector2Int id)=>field?.Plan==null||field.Plan.ContainsChunk(id);
         void CreateSea(Vector2Int id,Transform root)

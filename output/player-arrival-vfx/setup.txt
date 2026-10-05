@@ -1,0 +1,1 @@
+PASS: Player prefab references the one-shot effect derived from EllenRespawn.

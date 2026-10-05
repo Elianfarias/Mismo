@@ -1,0 +1,8 @@
+Validacion en Unity 6000.6.0f1, copia aislada .validation/SwordTrail.
+PASS: compilacion de scripts, agarre Humanoid y corte con el filo en tres skins, ausencia del circulo de carga, reproduccion del Player real, un solo golpe de postura a 0.51 s, pausa/reanudacion, recuperacion, cancelacion y build/recarga del bundle.
+ProjectOrganizationChecks.Run: PASS en la copia aislada con su catalogo de prueba. No representa una auditoria global del proyecto completo.
+No se ejecuto una build completa del juego.
+Diagnosticos del editor ajenos a las aserciones: ArgumentOutOfRangeException en UnityEditor.Search.SearchDatabase.GetDefaultSearchDatabase al indexar; avisos JobTempAlloc al cerrar. No se considera una sesion de editor libre de avisos.
+Log completo local: Logs/GuardBreakerEdgeChecks.log.
+El GIF muestra capturas reales de Play Mode: 30 ms por fotograma, con pausas agregadas al principio y final del bucle.
+

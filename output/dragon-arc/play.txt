@@ -1,0 +1,32 @@
+PASS Nueva partida entra al arco después de completar la introducción
+PASS Sobrevuelo bloquea input sin pausar mundo
+PASS Terminar restaura cámara/control y guarda llegada
+PASS Presentación puede iniciar con input libre
+PASS Omitir restaura lente y control
+PASS Interrumpir restaura lente y control
+PASS No se activa un faro antes de la audiencia
+PASS Conversación con vigía
+PASS Fallo de escritura no adelanta la historia ni cierra el diálogo
+PASS Reintento del guardado de la explicación
+PASS Audiencia disponible después del vigía
+PASS Rey inicia misión de los tres faros
+PASS Dos NPCs, tres activaciones y un altar; sin guardianes
+PASS Activación de ruinas primero
+PASS Ritual bloqueado con solo un faro
+PASS Recargar escena recupera misión/faro sin repetir sobrevuelo
+PASS Streaming/recarga no duplica contactos
+PASS Activación independiente 2
+PASS Activación independiente 0
+PASS Tres faros habilitan el altar
+PASS Entrar en arena no invoca automáticamente
+PASS Confirmación explícita del ritual
+PASS Fallo de guardado impide crear un jefe
+PASS Invocación y punto de reintento guardados
+PASS No hay invocación duplicada
+PASS Vuelo/aterrizaje/rugido animan durante el bloqueo de control
+PASS Un jefe, IA activa después del aterrizaje y control restaurado
+PASS Ritual completado permite reintentos
+PASS Muerte: retorno al altar, faros conservados y sin jefe duplicado
+PASS Recarga no deja bloqueados cámara ni controles
+DRAGON_ARC_CHECKS_OK
+PASS Sin excepciones de ejecución: 

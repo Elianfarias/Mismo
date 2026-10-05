@@ -4,7 +4,8 @@
   "references": [
     "Mismo.Gameplay.Player",
     "Mismo.Core",
-    "Mismo.Audio"
+    "Mismo.Audio",
+    "Unity.InputSystem"
   ],
   "autoReferenced": true
 }

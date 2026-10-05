@@ -1,0 +1,3 @@
+PASS MageSkin: reveal, restart, pause, completion and disable restore all original material references.
+PASS WarriorSkin: reveal, restart, pause, completion and disable restore all original material references.
+PASS NinjaFrogSkin: reveal, restart, pause, completion and disable restore all original material references.

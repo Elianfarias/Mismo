@@ -14,6 +14,9 @@ namespace Mismo.Gameplay.Player
         private string notice;
         private float noticeUntil;
         public bool Active { get; private set; }
+        private bool oneHitKills;
+        public bool OneHitKills => Active && oneHitKills && isActiveAndEnabled &&
+            GetComponent<Mismo.Gameplay.Combat.Health>()?.IsDead != true;
 
         private void Awake() => motor = GetComponent<PlayerMotor>();
         private bool MenusOpen => Presentation.GameplayPause.BlocksInput || Presentation.WorldMapPanel.BlocksGameplay ||
@@ -22,11 +25,14 @@ namespace Mismo.Gameplay.Player
         private void Update()
         {
             var health = GetComponent<Mismo.Gameplay.Combat.Health>();
-            if (health != null && health.IsDead) { Active = false; if (motor.IsFlying) motor.SetFlight(false); return; }
+            if (health != null && health.IsDead) { Active = false; oneHitKills = false; if (motor != null && motor.IsFlying) motor.SetFlight(false); return; }
             if (MenusOpen || Keyboard.current == null) return;
             var keys = Keyboard.current;
             if (keys.f8Key.wasPressedThisFrame) SetActive(!Active);
             if (!Active) return;
+            if (keys.f3Key.wasPressedThisFrame) ToggleOneHitKills();
+            if (keys.f4Key.wasPressedThisFrame) ActivateDragonAltars();
+            if (keys.f7Key.wasPressedThisFrame) AdvanceSoulEaterPhase();
             if (keys.f9Key.wasPressedThisFrame)
             {
                 if (World.CompanionPlayer.IsRiding(gameObject)) Notify("Desmontá antes de activar el vuelo.");
@@ -43,6 +49,7 @@ namespace Mismo.Gameplay.Player
             if (motor == null || active && (health != null && health.IsDead || World.CompanionPlayer.IsRiding(gameObject)))
             { Notify("Desmontá antes de activar el modo cheat."); return false; }
             Active = active;
+            if (!active) oneHitKills = false;
             var loadout = GetComponent<EquipmentLoadout>();
             loadout?.Runner?.Cancel(); loadout?.Belt?.Cancel();
             GetComponent<TreeClimbing>()?.Release();
@@ -50,6 +57,43 @@ namespace Mismo.Gameplay.Player
             if (active) GrantWeapons();
             else Notify("Modo cheat desactivado. Las armas obtenidas permanecen en el inventario.");
             return true;
+        }
+
+        public bool ToggleOneHitKills()
+        {
+            if (!Active || !isActiveAndEnabled || GetComponent<Mismo.Gameplay.Combat.Health>()?.IsDead == true) return false;
+            oneHitKills = !oneHitKills;
+            Notify("Cheat: enemigos de un golpe " + (oneHitKills ? "ACTIVADO (incluye jefes)." : "DESACTIVADO."));
+            return true;
+        }
+        public bool ActivateDragonAltars()
+        {
+            if (!Active || !isActiveAndEnabled || MenusOpen || GetComponent<Mismo.Gameplay.Combat.Health>()?.IsDead == true) return false;
+            var arc = GetComponent<World.DragonArcCoordinator>();
+            if (arc?.Data == null) { Notify("Este mundo no tiene los altares del dragón disponibles."); return false; }
+            var inventory = GetComponent<PlayerInventory>();
+            if (inventory == null || !inventory.TryActivateCheatDragonAltars(arc.Data))
+            { Notify("No se pudieron guardar los altares. Reintentá con F4 fuera de combate."); return false; }
+            Notify(inventory.Notice);
+            return true;
+        }
+
+        public bool AdvanceSoulEaterPhase()
+        {
+            if (!Active || !isActiveAndEnabled || MenusOpen || GetComponent<Mismo.Gameplay.Combat.Health>()?.IsDead == true) return false;
+            Mismo.Gameplay.Combat.IBossPhaseCheatTarget boss=null;float nearest=float.PositiveInfinity;
+            foreach(var candidateHealth in FindObjectsByType<Mismo.Gameplay.Combat.Health>(FindObjectsSortMode.None))
+            {
+                var candidate=candidateHealth.GetComponent<Mismo.Gameplay.Combat.IBossPhaseCheatTarget>();
+                if(candidate==null || !candidate.IsFightingPlayer(transform))continue;
+                float distance=(candidateHealth.transform.position-transform.position).sqrMagnitude;
+                if(distance<nearest){boss=candidate;nearest=distance;}
+            }
+            if(boss==null){Notify("Invocá a Soul Eater antes de pasar a la segunda fase.");return false;}
+            if(boss.Phase==2)
+            {Notify("Soul Eater ya está en segunda fase.");return false;}
+            if(!boss.TryCheatPhaseTwo()){Notify("Soul Eater no puede cambiar de fase en este momento.");return false;}
+            Notify("Cheat: Soul Eater inicia la segunda fase.");return true;
         }
 
         private void GrantWeapons()
@@ -74,19 +118,20 @@ namespace Mismo.Gameplay.Player
             health.Heal(health.Maximum);Notify("Cheat: vida recuperada al máximo.");return true;
         }
         private void Notify(string message) { notice = message; noticeUntil = Time.unscaledTime + 8; }
-        private void OnDisable() { Active = false; if (motor != null && motor.IsFlying) motor.SetFlight(false); }
+        private void OnDisable() { Active = false; oneHitKills = false; if (motor != null && motor.IsFlying) motor.SetFlight(false); }
         private void OnGUI()
         {
-            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.InterfaceHidden) return;
             if (MenusOpen) return;
             float width = Mathf.Min(650, Screen.width - 24);
             if (Active)
-                GUI.Box(new Rect((Screen.width - width) / 2, 42, width, 72),
+                GUI.Box(new Rect((Screen.width - width) / 2, 42, width, 92),
                     "CHEAT · [F8] Salir · [F9] Vuelo " + (motor.IsFlying ? "ON" : "OFF") + " · [F10] Todas las armas\n" +
+                    "[F3] Un golpe: " + (OneHitKills ? "ON" : "OFF") + " · [F4] Activar los 3 altares · [F7] Soul Eater: fase 2\n" +
                     "[F11] Maestrías al máximo · [F12] Recuperar toda la vida\n" +
                     "WASD: mover · Espacio: subir · Ctrl: bajar · Shift: acelerar");
             if (Time.unscaledTime < noticeUntil)
-                GUI.Box(new Rect((Screen.width - width) / 2, Active ? 118 : 42, width, 48), notice);
+                GUI.Box(new Rect((Screen.width - width) / 2, Active ? 138 : 42, width, 48), notice);
         }
     }
 }

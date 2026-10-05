@@ -1,0 +1,24 @@
+Efecto de llegada del jugador - EllenRespawn
+
+Integracion:
+- TP a pueblo: se reproduce despues de validar el destino y trasladar al jugador.
+- Respawn: se reproduce en el personaje nuevo despues de recargar y restaurar su posicion.
+- Aparicion gradual de 3 segundos sobre la skin activa, con los aros, humo y chispas de EllenRespawn.
+- Restaura materiales y bloques de propiedades originales; elimina materiales temporales y particulas al terminar.
+- Respeta la pausa y reinicia limpiamente ante otro TP.
+
+Assets:
+Assets/Art/Prefabs/Player/Player.prefab (componente PlayerArrivalVfx)
+Assets/Art/Prefabs/Player/VFX/PlayerArrivalParticles.prefab
+Assets/Art/Materials/Player/VFX/PlayerArrival.mat
+Assets/Art/Shaders/Player/PlayerArrival.shader
+
+Validacion:
+- editor-checks.txt: mago, caballero y rana ninja; avance, reinicio, pausa y restauracion de materiales.
+- play-checks.txt: TP real, segundo TP, pausa, desactivacion, muerte y recarga real, limpieza y consumo de bandera de respawn.
+- dependencies.txt: dependencias serializadas, sin el modelo ni el bucle de demo de Ellen.
+- organization.txt: mismas 117 incidencias previas que output/dragon-arc/organization.txt, sin incidencias nuevas.
+- build.txt: resultado de la build completa para Windows.
+
+Las escenas y la lista de build se restauran tras la prueba temporal; el inventario de prueba usa .validation/PlayerArrivalProfiles.
+Ajustes: Duration en PlayerArrivalVfx y Arrival glow en PlayerArrival.mat.

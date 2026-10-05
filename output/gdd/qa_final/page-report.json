@@ -1,0 +1,302 @@
+[
+  {
+    "page": 1,
+    "lines": 46,
+    "start": [
+      "Mismo Game Design Document  ",
+      "Versión 0.9 consolidada · 3 de octubre de 2026 "
+    ],
+    "end": [
+      "Bosses y avance Un boss previsto por bioma. Ninguno implementado; bosque en diseño. Invocación, ",
+      "encuentros, recompensas y cierre pendientes. "
+    ]
+  },
+  {
+    "page": 2,
+    "lines": 36,
+    "start": [
+      "Área Estado y trabajo pendiente ",
+      "Mapa y viaje Teletransporte al pulsar un pueblo en el mapa. Descubrimiento, costos, restricciones "
+    ],
+    "end": [
+      "bosque y su recompensa. El catálogo final de armas, enemigos, mazmorras y recursos de cada bioma debe ",
+      "definirse antes de multiplicar contenido. "
+    ]
+  },
+  {
+    "page": 3,
+    "lines": 35,
+    "start": [
+      "Visión futura conservada ",
+      "El online y el PvP 3 vs. 3 se posponen. El cooperativo con anfitrión también queda fuera de la primera "
+    ],
+    "end": [
+      "acceso al futuro boss no debe exigir doble salto ni dash salvo que se diseñe y enseñe expresamente esa ",
+      "condición. "
+    ]
+  },
+  {
+    "page": 4,
+    "lines": 37,
+    "start": [
+      "Dos conjuntos y equipamiento por mano ",
+      "El conjunto activo aporta un básico fijo y tres espacios Q, E y R. Cada conjunto conserva un arma principal y "
+    ],
+    "end": [
+      "restaura la barra. El valor histórico de 150 para un boss es solo una hipótesis de balance: aún no hay bosses ",
+      "implementados. "
+    ]
+  },
+  {
+    "page": 5,
+    "lines": 36,
+    "start": [
+      "Este mecanismo sustituye el stagger automático por umbral de daño de vida. La recuperación de ataques ",
+      "enemigos y la ruptura son aperturas aprovechables; Opening expresa esa condición, no una tercera barra. "
+    ],
+    "end": [
+      "prueba del kit, pero la asignación inicial y los costos de desbloqueo deben revisarse con la progresión por ",
+      "puntos. "
+    ]
+  },
+  {
+    "page": 6,
+    "lines": 37,
+    "start": [
+      "Habilidad Tipo Desbloqueo Función ",
+      "Estocada Activa Costo por definir Avance corto con golpe para entrar en alcance. "
+    ],
+    "end": [
+      "cuesta 20 stamina. Las teclas de la tabla son referencias históricas de prueba, pendientes de confirmar ",
+      "como asignación inicial. "
+    ]
+  },
+  {
+    "page": 7,
+    "lines": 40,
+    "start": [
+      "Los disparos del arco conservan preparación y compromiso: durante ella, la movilidad solicitada baja al 40 ",
+      "% y recibir daño válido interrumpe antes de liberar. C puede cancelarla. Interrumpir o cancelar conserva "
+    ],
+    "end": [
+      "Guardia firme Activa Costo por definir Bloquea ataques frontales durante 2 s, con ",
+      "movimiento lento y sin atacar. "
+    ]
+  },
+  {
+    "page": 8,
+    "lines": 41,
+    "start": [
+      "Habilidad Tipo Desbloqueo Función ",
+      "Barrido bajo Activa Costo por definir Corte frontal amplio que ralentiza 50 % durante 3 s. "
+    ],
+    "end": [
+      "una ruina con restauración del 40 % de vida se conserva solo como referencia de prototipo; su vigencia ",
+      "debe revisarse con el contenido actual y no representa el diseño de las mazmorras. "
+    ]
+  },
+  {
+    "page": 9,
+    "lines": 40,
+    "start": [
+      "El diseño prevé invocar y derrotar un boss por bioma para continuar. El mecanismo concreto que habilita el ",
+      "siguiente bioma, la posibilidad de repetir bosses y el cierre tras el cuarto quedan abiertos. No hay un boss "
+    ],
+    "end": [
+      "https://quaternius.com/packs/universalanimationlibrary2.html. La fuente y licencia se conservan junto a ",
+      "los assets. Los clips se muestrean según preparación, actividad y recuperación del combate; queda validar "
+    ]
+  },
+  {
+    "page": 10,
+    "lines": 39,
+    "start": [
+      "en Play Mode el agarre, las transiciones y la coincidencia del golpe visual con el daño. La trampa conserva ",
+      "una representación geométrica provisional. "
+    ],
+    "end": [
+      "aperturas. Health conserva vida. ",
+      "Movimiento PlayerMotor mantiene autoridad sobre desplazamiento, colisiones y rotación.  "
+    ]
+  },
+  {
+    "page": 11,
+    "lines": 40,
+    "start": [
+      "Responsabilidad Pieza actual ",
+      "Efectos persistentes "
+    ],
+    "end": [
+      "documenta aparte de los puntos de habilidad obtenidos por niveles de familia. Defensa y armadura deben ",
+      "unificarse como término si representan la misma estadística. "
+    ]
+  },
+  {
+    "page": 12,
+    "lines": 38,
+    "start": [
+      "Experiencia niveles y puntos por familia ",
+      "Las armas suben de nivel al derrotar monstruos. La experiencia atribuida a cada arma es proporcional al "
+    ],
+    "end": [
+      "Los nombres y combinaciones de la tabla son ejemplos de balance, no un catálogo definitivo. Una misma ",
+      "variante puede existir en distintos tiers. "
+    ]
+  },
+  {
+    "page": 13,
+    "lines": 37,
+    "start": [
+      "Estadísticas de conjuntos y manos ",
+      "Las bonificaciones de vida máxima y armadura de las dos armas principales permanecen activas como en el "
+    ],
+    "end": [
+      "Precios, catálogo, plataforma de venta, vinculación de compras y disponibilidad permanecen pendientes. ",
+      "La tienda y el sistema de compras no forman parte del prototipo existente. "
+    ]
+  },
+  {
+    "page": 14,
+    "lines": 35,
+    "start": [
+      "Aplicación y lectura del combate ",
+      "La propuesta inicial es aplicar apariencias dentro de la misma familia de arma. Falta confirmar esta "
+    ],
+    "end": [
+      "variante útil en solitario son opciones para probar. Las heridas no sustituyen el balance de recursos, ",
+      "frecuencia y cantidad de curación. "
+    ]
+  },
+  {
+    "page": 15,
+    "lines": 38,
+    "start": [
+      "12 Progresión de biomas y escalado enemigo ",
+      "La regla vigente de avance es invocar y derrotar al boss de cada bioma. La cantidad y proporción de "
+    ],
+    "end": [
+      "inspirada en Skyrim con organización espacial de objetos inspirada en Resident Evil. No adopta un listado ",
+      "infinito ni peso como límite principal. "
+    ]
+  },
+  {
+    "page": 16,
+    "lines": 41,
+    "start": [
+      "Grilla y capacidad ",
+      "• Cada objeto define ancho, alto, posibilidad de giro y límite de apilado mediante su asset. Una espada "
+    ],
+    "end": [
+      "Implementado. La definición del nodo del mundo es independiente de los objetos que recompensa. Un ",
+      "árbol, una mena o una planta referencia una tabla de botín; esa misma definición de objeto puede "
+    ]
+  },
+  {
+    "page": 17,
+    "lines": 38,
+    "start": [
+      "proceder de otra fuente o de un monstruo. Duración, alcance, rendimiento, regeneración, visuales, sonidos ",
+      "y recompensas son configurables. El estado mutable pertenece al guardado, no al asset compartido. "
+    ],
+    "end": [
+      "no avanza con el juego cerrado ni con pausa real. Cada nodo tiene identidad estable. Guardar, cargar o ",
+      "visitar sectores en otro orden no reinicia el plazo, y esperar varios períodos no acumula varias cosechas. "
+    ]
+  },
+  {
+    "page": 18,
+    "lines": 38,
+    "start": [
+      "Nodo Regeneración inicial Rendimiento de referencia ",
+      "Hierba 5 minutos 1 hierba "
+    ],
+    "end": [
+      "Las mazmorras procedurales forman parte del juego actual. Falta consolidar su propósito, acceso, ",
+      "estructura, variedad, recompensas y reglas de persistencia o regeneración. También debe definirse su "
+    ]
+  },
+  {
+    "page": 19,
+    "lines": 43,
+    "start": [
+      "relación con los materiales y requisitos de invocación de bosses. El diseño necesita recorridos alcanzables y ",
+      "una salida segura; la estética voxel no exige excavación volumétrica. "
+    ],
+    "end": [
+      "recuperación automática de atascos sigue pendiente. No hay todavía colección, reemplazo de ",
+      "monturas o almacenamiento de varias criaturas. "
+    ]
+  },
+  {
+    "page": 20,
+    "lines": 37,
+    "start": [
+      "El límite de una montura, ausencia de salto y combate montado y reglas de seguir o esperar son ",
+      "referencias previas que requieren comprobarse frente al catálogo actual. No se amplían ni eliminan "
+    ],
+    "end": [
+      "dependencias y sistema de entrada requieren una revisión de compatibilidad para que menú y personaje ",
+      "sigan respondiendo. "
+    ]
+  },
+  {
+    "page": 21,
+    "lines": 57,
+    "start": [
+      "18 Prioridades de producción y criterios de cierre ",
+      "La prioridad es definir y completar una primera región individual representativa. Faltan todos los bosses y "
+    ],
+    "end": [
+      "ralentizaciones, veneno y sangrado. Comparar daño, velocidad y supervivencia de espada sola, dual y ",
+      "escudo. "
+    ]
+  },
+  {
+    "page": 22,
+    "lines": 44,
+    "start": [
+      "• Validar que tutorial y misiones registren el progreso una sola vez y se conserven al continuar. ",
+      "Comprobar que teletransporte, monturas y mazmorras no omitan requisitos de avance. Cuando "
+    ],
+    "end": [
+      "Tajo sangrante reutiliza el sistema de sangrado ya existente (CombatAilment), sin crear una cuarta capa de ",
+      "estado. Desgarre, Golpe partidor y Verdugo comparten la misma condición de objetivo debilitado, pensada "
+    ]
+  },
+  {
+    "page": 23,
+    "lines": 35,
+    "start": [
+      "para premiar leer al enemigo antes de comprometer el golpe cargado. Los porcentajes y tiempos son ",
+      "configuraciones de prueba, con el mismo estatus que el resto del repertorio. "
+    ],
+    "end": [
+      "esta sección son valores de partida para probar sensación de combate, no un balance cerrado; se ajustan ",
+      "junto con el resto de familias antes de la entrega. "
+    ]
+  },
+  {
+    "page": 24,
+    "lines": 41,
+    "start": [
+      "20 Decisiones para cerrar la primera versión ",
+      "La aventura individual de cuatro biomas es el alcance confirmado. Esta lista permite completar sus reglas "
+    ],
+    "end": [
+      "Definir una secuencia que enseñe movimiento y combate, recolección, fabricación, elección de habilidades ",
+      "y preparación para el boss del bosque. Las misiones deben orientar con objetivos y recompensas "
+    ]
+  },
+  {
+    "page": 25,
+    "lines": 23,
+    "start": [
+      "comprensibles. Cerrar el objetivo de la región y medir su duración en pruebas antes de prometer tiempos ",
+      "de juego. "
+    ],
+    "end": [
+      "monturas y el repertorio de hachas conservan su historial de diseño. Hay que decidir cuáles siguen vigentes ",
+      "y cuáles se posponen. Online, cooperativo y PvP 3 vs. 3 quedan para después de la aventura individual. "
+    ]
+  }
+]

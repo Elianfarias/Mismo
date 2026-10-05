@@ -153,7 +153,7 @@ namespace Mismo.Gameplay.Player.World
         }
         void OnGUI()
         {
-            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.InterfaceHidden) return;
             if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
             if(companion==null||InventoryPanel.AnyOpen||Presentation.WorldMapPanel.AnyOpen)return;
             if(Riding||Vector3.Distance(transform.position,companion.transform.position)<4)

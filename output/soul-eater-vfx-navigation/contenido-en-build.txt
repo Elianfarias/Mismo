@@ -1,0 +1,7 @@
+ 5.3 mb	 0.6% Assets/Art/Textures/VFX/a_VFX_flame.png
+ 5.3 mb	 0.6% Assets/Art/Textures/VFX/A_Smoke_2.png
+ 5.3 mb	 0.6% Assets/Art/Textures/VFX/A_Smoke.png
+ 22.7 kb	 0.0% Assets/Art/Prefabs/VFX/VFX_GroundFire_Circle_Green.prefab
+ 0.8 kb	 0.0% Assets/Art/Materials/VFX/A_SmokeAlpha_1.mat
+ 0.8 kb	 0.0% Assets/Art/Materials/VFX/A_SmokeAdd.mat
+ 0.8 kb	 0.0% Assets/Art/Materials/VFX/A_FlameAdd 1.mat

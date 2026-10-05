@@ -58,6 +58,17 @@ namespace Mismo.Gameplay.Combat
         bool ReceiveDamage(DamageInfo damage);
     }
 
+    /// <summary>Permite probar fases sin acoplar los cheats del jugador a la IA enemiga.</summary>
+    public interface IBossPhaseCheatTarget
+    {
+        bool IsFightingPlayer(Transform player);
+        int Phase { get; }
+        bool TryCheatPhaseTwo();
+    }
+
+    /// <summary>Identifica enemigos dañables sin acoplar el combate a sus controladores de IA.</summary>
+    public interface IEnemyDamageTarget { }
+
     /// <summary>Reacción opcional de la fuente cuando su ataque es rechazado.</summary>
     public interface IParryResponder
     {

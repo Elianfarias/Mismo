@@ -44,6 +44,7 @@ namespace Mismo.Gameplay.Player.World
             {
                 var site=terrain.Site(new Vector2Int(x+dx,z+dz));
                 if(site.kind!=WorldSiteKind.Village&&terrain.Introduction?.Reserved(site.position.x,site.position.z,40)==true)continue;
+                if(terrain.DragonArc?.Reserved(site.position.x,site.position.z,site.radius+18)==true)continue;
                 if(ExplorationChunks.Coordinate(site.position)==chunk&&terrain.IsExterior(site.position.x,site.position.z))yield return site;
             }
         }
@@ -175,7 +176,7 @@ namespace Mismo.Gameplay.Player.World
                     spread=Mathf.Max(spread,Mathf.Abs(terrain.Height(p.x+dx,p.z+dz)-p.y));
                 if(Mathf.Atan2(spread,Mathf.Max(.5f,Mathf.Min(asset.footprint.x,asset.footprint.y)*.5f))*Mathf.Rad2Deg>asset.maxSlope)return;
                 float yaw=asset.rotations!=null&&asset.rotations.Length>0?asset.rotations[new System.Random(seed).Next(asset.rotations.Length)]:0;
-                Object.Instantiate(asset.prefab,p,Quaternion.Euler(0,yaw,0),root);return;
+                WorldDestructible.Attach(Object.Instantiate(asset.prefab,p,Quaternion.Euler(0,yaw,0),root),asset.kind);return;
             }
             // Ruins stay empty until an authored camp/ruin prefab is assigned.
             // Do not substitute the old grey block arch when the catalog has none.

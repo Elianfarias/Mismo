@@ -1,0 +1,88 @@
+PASS: Prefab, settings y rig inicializan en Play
+PASS: Iniciar Bite
+PASS: La anticipación de mordida no inflige daño
+PASS: La mordida alcanza a un jugador a nivel del suelo
+PASS: Mordida: un impacto por objetivo
+PASS: Iniciar Bite
+PASS: El flanco queda fuera de la mordida
+PASS: Iniciar Bite
+PASS: Parry de mordida evita daño e interrumpe al jefe
+PASS: Iniciar Breath
+PASS: Aliento sigue al jugador hasta el final de la anticipación
+PASS: Fase 1 fija la dirección al comenzar el primer tick de fuego
+PASS: Salir lateralmente después de la primera llama evita el aliento
+PASS: Iniciar Breath
+PASS: Aliento sostenido causa daño periódico dentro del cono
+PASS: La recuperación corta llamas y daño
+PASS: Iniciar Breath
+PASS: El fuego no daña a través de paredes
+PASS: Permanecer detrás provoca coletazo
+PASS: El barrido de la cola alcanza al jugador detrás
+PASS: Coletazo: un impacto por objetivo
+PASS: Iniciar Tail
+PASS: El frente queda fuera del barrido trasero
+PASS: Iniciar Breath
+PASS: 75 % espera a que termine el ataque actual
+PASS: 75 % inicia su secuencia después de la recuperación
+PASS: Estado RetreatJump
+PASS: El salto se aleja del jugador
+PASS: El salto tiene arco, no teletransporte
+PASS: Estado Charging
+PASS: Estado Braking
+PASS: La carga inflige daño al contactar al jugador
+PASS: La carga no repite daño por cada frame
+PASS: La carga mantiene una trayectoria recta
+PASS: La carga especial no se repite bajo 75 %
+PASS: Persigue fuera del radio original sin volver a casa ni reiniciar vida
+PASS: 50 % termina en rugido y entrega la segunda fase una vez
+PASS: La prueba completada no sigue atacando
+PASS: Iniciar Breath
+PASS: Pausa: no avanza el ataque ni el daño
+PASS: Morir cancela el ataque y el efecto
+PASS: Reiniciar restaura vida y umbrales
+PASS: Estado RetreatJump
+PASS: Perder al jugador durante el salto aterriza y abandona el ataque
+PASS: Estado Dormant
+PASS: El regreso a la arena reinicia el encuentro
+GROUND_DIAGNOSTIC baked=0,02500081 matrix=0,0250001 lowestBone=Feet_Right visual=(0.00, 3.44, 0.00) scale=(1.60, 1.60, 1.60) rootBone=DragonSoulEaterMesh(Clone)
+PASS: Patas y suelas no quedan enterradas en la pose terrestre: 0,02500081
+PASS: El torso tiene un volumen sólido hasta el suelo
+PASS: CharacterController queda bloqueado del lado de entrada (0.00, 0.00, 12.00); posición final=(0.00, 0.08, 10.93)
+PASS: CharacterController queda bloqueado del lado de entrada (6.00, 0.00, 4.80); posición final=(3.23, 0.08, 4.80)
+PASS: CharacterController queda bloqueado del lado de entrada (-6.00, 0.00, 4.80); posición final=(-3.43, 0.08, 4.80)
+PASS: Iniciar Breath
+PASS: Aliento frontal mantiene su inclinación suave incluso con un objetivo bajo
+PASS: VFX y daño comparten la dirección frontal del aliento
+PASS: Los charcos usan el prefab verde del usuario
+PASS: Pool acotado: se reutilizan los charcos sin crear mallas de aliento
+PASS: Cada charco conserva los 3 sistemas y hasta 60 partículas del prefab
+PASS: Mover el dragón no arrastra el fuego del suelo
+GROUND_FIRE_CPU: 8 charcos, 300 Tick = 0,145 ms; asignación C#=0 bytes (no incluye render/partículas nativas)
+PASS: Los charcos no asignan memoria C# ni reconstruyen geometría por fotograma
+GROUND_FIRE_OLD_CPU: mismos 8 charcos, 300 Tick = 1270,6641 ms
+PASS: Expirar y volver a generar fuego conserva las mismas instancias
+PASS: Al caducar, todos los charcos vuelven al pool
+PASS: El aliento alcanza al jugador a ras del suelo bajo la boca
+PASS: Las llamas visibles también alcanzan el suelo
+PASS: A* rodea un árbol con el cuerpo completo y llega al jugador sin atravesarlo; lateral=9,99998, posición=(-8.70, 0.00, 21.13), penetración=False
+PASS: La distancia activa carga a vida completa sin consumir el especial del 75 %
+PASS: Carga de persecución anticipa antes de desplazarse
+PASS: La persecución carga con velocidad configurada y animación Run continua
+PASS: Carga lejana usa su recorrido de 60 m y no el límite corto del especial
+PASS: La carga respeta el enfriamiento después de frenar aunque el jugador siga lejos
+PASS: Puede repetir carga al seguir lejos, sin quedar limitada al 75 %
+PASS: El tiempo de reacción editado en settings se aplica a la persecución
+PASS: Recorrido configurable y dirección fijada: se puede esquivar hacia un costado
+PASS: Cerrar distancia con carga también funciona en fase 2
+PASS: En rango cercano mantiene la persecución normal
+PASS: Un árbol delante impide iniciar una carga contra el obstáculo
+MOVING_TARGET_PATH: walk-to-idle=0; lateral=9,298462; reached=True; penetration=False; position=(-0.01, 0.00, 31.95)
+PASS: A* rodea el árbol y alcanza a un objetivo que cambia de posición mientras recalcula
+PASS: Replanificar hacia un objetivo móvil no alterna caminar/Idle continuamente
+PASS: Oscilar 10 cm en el borde del alcance no provoca espasmos de locomoción
+PASS: Estado RetreatJump
+PASS: Salto de retirada: las patas siguen el arco sin la altura extra del vuelo vertical; offset máximo=0,02500081 m
+PASS: Iniciar Breath
+PASS: Iniciar Tail
+Capturas Unity: aliento y secuencia del 75 %
+SOUL_PHASE_ONE_CHECKS_OK

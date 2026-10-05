@@ -1,0 +1,12 @@
+Assets/Art/Materials/VFX/ParticlePack/Fire & Explosion Effects/Embers.mat
+Assets/Art/Textures/VFX/ParticlePack/Misc Effects/Ramp01.png
+Packages/com.unity.render-pipelines.universal/Shaders/Particles/ParticlesLit.shader
+Assets/Art/Prefabs/Player/VFX/PlayerArrivalParticles.prefab
+Packages/com.unity.render-pipelines.universal/Shaders/Particles/ParticlesUnlit.shader
+Packages/com.unity.render-pipelines.universal/Editor/AssetVersion.cs
+Assets/Art/Materials/VFX/ParticlePack/Misc Effects/SmokePuff.mat
+Assets/Art/Textures/VFX/ParticlePack/Misc Effects/SmokePuff.png
+Assets/Art/Materials/VFX/ParticlePack/Misc Effects/SpawnTrail.mat
+Assets/Art/Shaders/Player/PlayerArrival.shader
+Assets/Art/Materials/Player/VFX/PlayerArrival.mat
+Assets/Art/Textures/VFX/ParticlePack/Misc Effects/Stripes.png

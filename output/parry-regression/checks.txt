@@ -1,8 +1,9 @@
-Real player parry / 2026-10-01T08:36:08
+Real player parry / 2026-10-03T03:58:14
+PASS lunge activation, cancellation, pause, unchanged materials; parry whoosh without contact or metallic sound on a miss
 Ability=SwordParry actions=1 active=0,5 animator=Voxel_Reference_Mage
-VFX=True t=0,04 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=PerfectParry damage=0 particles=8
-VFX=True t=0,2 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=Parry damage=0 particles=7
-VFX=True t=0,4 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=Parry damage=0 particles=8
+VFX=True t=0,04 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=PerfectParry damage=0 particles=0
+VFX=True t=0,2 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=Parry damage=0 particles=0
+VFX=True t=0,4 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=Parry damage=0 particles=0
 VFX=False t=0,04 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=PerfectParry damage=0 particles=0
 VFX=False t=0,2 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=Parry damage=0 particles=0
 VFX=False t=0,4 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=Parry damage=0 particles=0

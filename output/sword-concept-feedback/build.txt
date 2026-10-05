@@ -1,0 +1,1 @@
+PASS: build y recarga de efectos, shader y audio.

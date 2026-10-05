@@ -24,12 +24,12 @@ public static class ProjectOrganizationChecks
                 case ".anim": case ".controller": case ".overridecontroller": case ".mask": expected = "Assets/Art/Animations/"; break;
                 case ".wav": case ".mp3": case ".ogg": case ".mixer": expected = "Assets/Art/Audio/"; break;
                 case ".ttf": case ".otf": expected = "Assets/Art/Fonts/"; break;
-                case ".shader": case ".shadergraph": case ".compute": expected = "Assets/Art/Shaders/"; break;
+                case ".shader": case ".shadergraph": case ".compute": case ".cginc": case ".hlsl": expected = "Assets/Art/Shaders/"; break;
                 case ".cs": case ".asmdef": expected = "Assets/Scripts/"; break;
                 case ".unity": expected = "Assets/Scenes/"; break;
                 case ".fbx": expected = path.StartsWith("Assets/Art/Animations/") ? "Assets/Art/Animations/" : "Assets/Art/FBX/"; break;
                 case ".obj": case ".mtl": case ".glb": case ".dae": expected = "Assets/Art/Models/"; break;
-                case ".png": case ".jpg": case ".jpeg": case ".exr": case ".psd": case ".tga":
+                case ".png": case ".jpg": case ".jpeg": case ".exr": case ".psd": case ".tga": case ".tif": case ".tiff":
                     if (!(path.StartsWith("Assets/Art/Textures/") || path.StartsWith("Assets/Art/UI/") || path.StartsWith("Assets/Art/Sprites/"))) errors.Add("Imagen fuera de Art/Textures, UI o Sprites: " + path);
                     break;
                 case ".asset":

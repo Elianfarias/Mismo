@@ -1,0 +1,15 @@
+Real player parry / 2026-10-03T05:39:35
+PASS lunge activation, cancellation, pause, unchanged materials; parry whoosh without contact or metallic sound on a miss
+Ability=SwordParry actions=1 active=0,5 animator=Voxel_Reference_Mage
+Parry motion: max 10ms blade step=4,582811 degrees, held drift=0 m / 0 degrees
+PASS single deflection and stable guard through the defense window
+VFX=True t=0,04 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=PerfectParry damage=0 particles=0
+VFX=True t=0,2 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=Parry damage=0 particles=0
+VFX=True t=0,4 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=Parry damage=0 particles=0
+VFX=False t=0,04 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=PerfectParry damage=0 particles=0
+VFX=False t=0,2 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=Parry damage=0 particles=0
+VFX=False t=0,4 defense=True cast=True facing=(0.00, 0.00, 1.00) outcome=Parry damage=0 particles=0
+GOBLIN defending=False outcome=Hit damage=12 enemy=Attack
+GOBLIN defending=True outcome=PerfectParry damage=0 enemy=Stagger
+PASS ALL real player frontal parries, VFX playback and goblin melee contact
+COMPLETE

@@ -1,0 +1,142 @@
+{
+    "prefab": "Assets/Art/Prefabs/Voxelized/SoulEater_Green_Animated.prefab",
+    "fps": 20,
+    "clips": [
+        {
+            "name": "Basic Attack",
+            "slug": "basic-attack",
+            "duration": 1.0,
+            "frames": 20,
+            "loop": true,
+            "deforms": true
+        },
+        {
+            "name": "Defend",
+            "slug": "defend",
+            "duration": 1.533333420753479,
+            "frames": 31,
+            "loop": true,
+            "deforms": true
+        },
+        {
+            "name": "Die",
+            "slug": "die",
+            "duration": 1.5000001192092896,
+            "frames": 31,
+            "loop": false,
+            "deforms": true
+        },
+        {
+            "name": "Fireball Shoot",
+            "slug": "fireball-shoot",
+            "duration": 1.0,
+            "frames": 20,
+            "loop": true,
+            "deforms": true
+        },
+        {
+            "name": "Fly Fireball Shoot",
+            "slug": "fly-fireball-shoot",
+            "duration": 1.100000023841858,
+            "frames": 22,
+            "loop": true,
+            "deforms": true
+        },
+        {
+            "name": "Fly Float",
+            "slug": "fly-float",
+            "duration": 1.100000023841858,
+            "frames": 22,
+            "loop": true,
+            "deforms": true
+        },
+        {
+            "name": "Fly Forward",
+            "slug": "fly-forward",
+            "duration": 1.100000023841858,
+            "frames": 22,
+            "loop": true,
+            "deforms": true
+        },
+        {
+            "name": "Fly Glide",
+            "slug": "fly-glide",
+            "duration": 1.3333333730697632,
+            "frames": 27,
+            "loop": true,
+            "deforms": true
+        },
+        {
+            "name": "Get Hit",
+            "slug": "get-hit",
+            "duration": 1.3333333730697632,
+            "frames": 27,
+            "loop": true,
+            "deforms": true
+        },
+        {
+            "name": "Idle",
+            "slug": "idle",
+            "duration": 1.3333333730697632,
+            "frames": 27,
+            "loop": true,
+            "deforms": true
+        },
+        {
+            "name": "Land",
+            "slug": "land",
+            "duration": 2.6000001430511475,
+            "frames": 53,
+            "loop": true,
+            "deforms": true
+        },
+        {
+            "name": "Run",
+            "slug": "run",
+            "duration": 1.3333333730697632,
+            "frames": 27,
+            "loop": true,
+            "deforms": true
+        },
+        {
+            "name": "Scream",
+            "slug": "scream",
+            "duration": 2.3333334922790527,
+            "frames": 47,
+            "loop": true,
+            "deforms": true
+        },
+        {
+            "name": "Sleeping",
+            "slug": "sleeping",
+            "duration": 1.6666667461395264,
+            "frames": 34,
+            "loop": true,
+            "deforms": true
+        },
+        {
+            "name": "Tail Attack",
+            "slug": "tail-attack",
+            "duration": 1.3333333730697632,
+            "frames": 27,
+            "loop": true,
+            "deforms": true
+        },
+        {
+            "name": "Take Off",
+            "slug": "take-off",
+            "duration": 2.6666667461395264,
+            "frames": 54,
+            "loop": true,
+            "deforms": true
+        },
+        {
+            "name": "Walk",
+            "slug": "walk",
+            "duration": 1.3333333730697632,
+            "frames": 27,
+            "loop": true,
+            "deforms": true
+        }
+    ]
+}

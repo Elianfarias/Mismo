@@ -50,7 +50,7 @@ namespace Mismo.Gameplay.Player.World.Structures
         }
         void OnGUI()
         {
-            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.InterfaceHidden) return;
             if(structure==null)return;
             GUI.Box(new Rect(16,16,510,74),structure.title+"\nWASD: caminar · F: abrir, recoger o extraer · Ratón: cámara\nPrueba en memoria: no modifica tu partida.");
             var reward=structure.GetComponentInChildren<StructureReward>(true);

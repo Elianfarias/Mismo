@@ -1,0 +1,60 @@
+before vertices=296280
+RAY before Basic Attack 0 depth=4,6523 center=(-0.073, 1.543, 4.636)
+RAY before Basic Attack 5 depth=4,5291 center=(-0.294, -0.125, 5.346)
+RAY before Basic Attack 8 depth=4,6310 center=(-0.421, 0.727, 5.316)
+PASS Basic Attack finite moving poses, bounds=13,04676
+PASS Defend finite moving poses, bounds=14,81559
+PASS Die finite moving poses, bounds=13,04154
+RAY before Fireball Shoot 0 depth=4,6523 center=(-0.073, 1.543, 4.636)
+RAY before Fireball Shoot 5 depth=4,6659 center=(-0.077, 0.825, 4.309)
+RAY before Fireball Shoot 8 depth=4,6473 center=(-0.009, 0.948, 4.974)
+PASS Fireball Shoot finite moving poses, bounds=13,02979
+PASS Fly Fireball Shoot finite moving poses, bounds=15,93067
+PASS Fly Float finite moving poses, bounds=15,93479
+PASS Fly Forward finite moving poses, bounds=15,12712
+PASS Fly Glide finite moving poses, bounds=14,43631
+PASS Get Hit finite moving poses, bounds=13,80211
+RAY before Idle 0 depth=4,6523 center=(-0.073, 1.543, 4.636)
+RAY before Idle 5 depth=4,6555 center=(-0.073, 1.318, 4.627)
+RAY before Idle 8 depth=4,6533 center=(-0.073, 1.426, 4.628)
+PASS Idle finite moving poses, bounds=12,11592
+PASS Land finite moving poses, bounds=15,493
+PASS Run finite moving poses, bounds=13,11667
+RAY before Scream 0 depth=4,6523 center=(-0.073, 1.543, 4.636)
+RAY before Scream 5 depth=4,5789 center=(-0.366, 1.069, 5.198)
+RAY before Scream 8 depth=4,5428 center=(0.514, 0.871, 5.203)
+PASS Scream finite moving poses, bounds=14,60534
+PASS Sleeping finite moving poses, bounds=12,0976
+PASS Tail Attack finite moving poses, bounds=12,31581
+PASS Take Off finite moving poses, bounds=15,48347
+PASS Walk finite moving poses, bounds=12,37831
+fixed vertices=312720
+RAY fixed Basic Attack 0 depth=4,6675 center=(-0.073, 1.543, 4.636)
+RAY fixed Basic Attack 5 depth=5,4195 center=(-0.294, -0.125, 5.346)
+RAY fixed Basic Attack 8 depth=4,6422 center=(-0.421, 0.727, 5.316)
+PASS Basic Attack finite moving poses, bounds=12,99271
+PASS Defend finite moving poses, bounds=14,83197
+PASS Die finite moving poses, bounds=12,95681
+RAY fixed Fireball Shoot 0 depth=4,6675 center=(-0.073, 1.543, 4.636)
+RAY fixed Fireball Shoot 5 depth=4,9475 center=(-0.077, 0.825, 4.309)
+RAY fixed Fireball Shoot 8 depth=5,5397 center=(-0.009, 0.948, 4.974)
+PASS Fireball Shoot finite moving poses, bounds=13,00782
+PASS Fly Fireball Shoot finite moving poses, bounds=15,89925
+PASS Fly Float finite moving poses, bounds=15,9127
+PASS Fly Forward finite moving poses, bounds=15,07994
+PASS Fly Glide finite moving poses, bounds=14,39377
+PASS Get Hit finite moving poses, bounds=13,80237
+RAY fixed Idle 0 depth=4,6675 center=(-0.073, 1.543, 4.636)
+RAY fixed Idle 5 depth=4,6712 center=(-0.073, 1.318, 4.627)
+RAY fixed Idle 8 depth=4,6685 center=(-0.073, 1.426, 4.628)
+PASS Idle finite moving poses, bounds=12,1322
+PASS Land finite moving poses, bounds=15,49568
+PASS Run finite moving poses, bounds=13,04893
+RAY fixed Scream 0 depth=4,6675 center=(-0.073, 1.543, 4.636)
+RAY fixed Scream 5 depth=5,4726 center=(-0.366, 1.069, 5.198)
+RAY fixed Scream 8 depth=5,4564 center=(0.514, 0.871, 5.203)
+PASS Scream finite moving poses, bounds=14,58284
+PASS Sleeping finite moving poses, bounds=12,05319
+PASS Tail Attack finite moving poses, bounds=12,2954
+PASS Take Off finite moving poses, bounds=15,48385
+PASS Walk finite moving poses, bounds=12,32027

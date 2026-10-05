@@ -20,6 +20,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fa4c4695a5aa2294f99dee852d457865, type: 2}
   - {fileID: 11400000, guid: e7b35b3f692b0614cbd0469e82f406ca, type: 2}
   - {fileID: 11400000, guid: 34f3e9d4e3d88e94696a6bf9abb9b289, type: 2}
+  - {fileID: 11400000, guid: dc324e76f3545db42afd8f88633627df, type: 2}
+  - {fileID: 11400000, guid: 0bc5434164c3ff14eb77257f4c70daae, type: 2}
   journalContacts: 0
   villageNpcs: {fileID: 11400000, guid: 4f1f9755544587b43af7e3011e33390f, type: 2}
   journalKey: 24

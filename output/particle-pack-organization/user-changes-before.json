@@ -1,0 +1,118 @@
+[
+  {
+    "path": "Assets/Art/Shaders/TextMeshPro/TMP_SDF-Mobile.shader.meta",
+    "hash": "DAF68FCC0B7AF68C55922529E9D9DCCB5F0533ED849BAFD6B2E3D801C936211C"
+  },
+  {
+    "path": "Assets/Art/Shaders/TextMeshPro/TMPro_Properties.cginc.meta",
+    "hash": "6B32EBFE01E802141FEDE8AF86FA45D57DE1E8BDB5208838972D1AE270DAE336"
+  },
+  {
+    "path": "Assets/Data/Enemies/DragonBosses/SoulEater_PhaseOne.asset",
+    "hash": "6852229C8ED3F2CC6B8B1CB7F7407F62674941F7BAC71D1BE0A990D9F60CF1AD"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterArena.cs",
+    "hash": "F295AB8D620336D6B81BA421710E4BB22298CA91FD4BF328B78D78548708339E"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterBattlefield.cs",
+    "hash": "6C3725E1A8069D4837E7A02289AD31E337BC7B7C3DA1C2D946F72B94A83F1AF5"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterFlameVfx.cs",
+    "hash": "F047C015D7BE1B47DCF92982CE668F90A58D7B7DD1DACD456947DC4FA7331CB8"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterPathfinding.cs",
+    "hash": "AB5D18E19C183C044E5DE3C2FB34DE7C45347DCEB39D4E6F1BEF491430453968"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterPhaseOneController.cs",
+    "hash": "CC0E664AA878ADDC8CD9BA11E72BB807D3D5403C14512E6123609E7283B0E777"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterPhaseOneSettings.cs",
+    "hash": "E37365FCDFB7FA4B45B026935E6B21C1F2C0EC9EF7C15AEC2433B23FCC2E15F7"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterPhaseTwo.cs",
+    "hash": "B56A4E2AC93C1AE5599A057F192257FC1AD02240555FF7D4E2341E872FEB7C1D"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterPresentation.cs",
+    "hash": "674266471FC342F82716FAFE5148562F43895CBA5293C55275766C5C1D265F4F"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterTreeClearing.cs",
+    "hash": "DA92BBA959941416E0F14F36DB3EEAC8B07B60EF0FF8E362D03E322019BD998C"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Player/Combat/DamageContracts.cs",
+    "hash": "E9FA3F9A1387F4F90FD34B6FDC0B20593CD962BB34B5BEAEF6114A7803A1B2CD"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Player/Editor/CameraCheatChecks.cs",
+    "hash": "3129FD518CD296F5C35AF900BF5FDE5FC7650A53FC9F548A075E1C6377B407EC"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Player/Editor/SoulEaterPhaseOneChecks.cs",
+    "hash": "BB1E4CC04232E511EFCE2F6EB64E45A5D97C5E18C93FD8285143A2F68EB2E389"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Player/Editor/SoulEaterPhaseOneSetup.cs",
+    "hash": "FC612E535D869C4A1833226323E6BCD767896F870150DFA30D61C0C5E5CED57F"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Player/Editor/SoulEaterPhaseTwoChecks.cs",
+    "hash": "5F99A6079EA66E5F025E46D2C0393C2061943C4DF51B1504E42A01470C1CF6DB"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Player/Editor/SoulEaterPolishChecks.cs",
+    "hash": "FD312A6CF30D093984CFAAC952B81693DCC5C1F17E2B7141AB509CD7E926737A"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Player/Editor/SoulEaterTreeChecks.cs",
+    "hash": "3FDC9DD931EBBFF48405EFF6FEDE8597631191AB9DF17E75AF73096ADA6A6E74"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Player/PlayerCheats.cs",
+    "hash": "6D8A7D33C77E7F0379BF0AFA23DF3DCA5C7094E6FF309152FFBB4BABDB465F01"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Player/World/ExplorationContent.cs",
+    "hash": "4F9867CC97500E8B65AE589E8C845846CF93735EB51524246CCF0D10C1AB4A45"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Player/World/ExplorationDestruction.cs",
+    "hash": "C53463600A2A20EEA34D4001FE472B53741C78129AF1824455E85050A0034EAD"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Player/World/GatheringDistribution.cs",
+    "hash": "30259B79058F9D5489506C2817E630BB83B11BB4EE438FACD3A8FAAD482C87D7"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Player/World/GroveWorldStyle.cs",
+    "hash": "3A5581D7583EA4359317E443870B4D9FD0BE036B7A03C6268783969E5894E349"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Player/World/WorldDestructible.cs",
+    "hash": "1DDAE79EF02D0244F2EB46C1E4B7D133954EF1BFF9A9A862F7A9FB3A2FCCBD83"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Player/World/WorldSaveData.cs",
+    "hash": "348B909D5E0B778624C854714592BBE0A43BCE442AF855E0CFFA124AC585B72B"
+  },
+  {
+    "path": "Assets/Scripts/Gameplay/Player/World/WorldSession.cs",
+    "hash": "791032F9C5454917E4E4FAA16338C7E959A100CEAD4C80A1BCF38474CBEE27E2"
+  },
+  {
+    "path": "Packages/manifest.json",
+    "hash": "911FADB8426A2D3E590489DAE56E3934EC3E75E9D2D7C8CDE460A4522F25596B"
+  },
+  {
+    "path": "Packages/packages-lock.json",
+    "hash": "FCBC13C4C49608D9CE6FB41B316A407896C3A37FB71D83DCC1146AFF10056838"
+  }
+]

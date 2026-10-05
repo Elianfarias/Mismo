@@ -1,0 +1,52 @@
+[
+  {
+    "file": "Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterPhaseOneController.cs",
+    "sha256": "25803bf6aa03beaed9fa856bd9827b67a7a970a68bcfa333f50067ccdfecf424",
+    "matches_tested": true
+  },
+  {
+    "file": "Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterPathfinding.cs",
+    "sha256": "93f95410b1e5ce6cdff21e62a491636ae7f9d4b34dd1e49233c64b003557de0d",
+    "matches_tested": true
+  },
+  {
+    "file": "Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterPhaseOneSettings.cs",
+    "sha256": "93eac6ec5906e163a66769e57cc4f2d780050ce45606f0daa2e52b6ef9c09d38",
+    "matches_tested": true
+  },
+  {
+    "file": "Assets/Data/Enemies/DragonBosses/SoulEater_PhaseOne.asset",
+    "sha256": "9fc40dd1e3c6908a4bd4705b606087697c0da293f3c4d46d403edae18d46f143",
+    "matches_tested": true
+  },
+  {
+    "file": "Assets/Scripts/Gameplay/Player/Editor/SoulEaterPhaseOneChecks.cs",
+    "sha256": "e2360c27c7bf966553344a85566555f23b49bbbd94018fffa24d6e194b67918c",
+    "matches_tested": true
+  },
+  {
+    "file": "Assets/Scripts/Gameplay/Player/Editor/SoulEaterPolishChecks.cs",
+    "sha256": "189061029ce683d4a2e462c6a438b084b8df966d56c206a376fb90625adb2b94",
+    "matches_tested": true
+  },
+  {
+    "file": "Assets/Scripts/Gameplay/Player/Editor/SoulEaterPursuitChecks.cs",
+    "sha256": "03e4b5653bc9ccb3a92b9a87ee1e41441bd69c3c5ce457e9969d0cf5e7883512",
+    "matches_tested": true
+  },
+  {
+    "file": "Assets/Scripts/Gameplay/Player/Editor/SoulEaterPursuitChecks.cs.meta",
+    "sha256": "5d52189e4c2aba93635fa27ad42be81e7c7008a075240af6bf0e7849c57a89e6",
+    "matches_tested": true
+  },
+  {
+    "file": "Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterPresentation.cs",
+    "sha256": "eee851f97e53dbf121d95c1ffb8c32e3fc7ff8170c5edd1fbb5f1c25e0805085",
+    "matches_tested": true
+  },
+  {
+    "file": "Assets/Scripts/Gameplay/Enemies/Boss/SoulEaterPhaseTwo.cs",
+    "sha256": "ac4bb15b4ed1adbcb09fdd76a4e99a33deb99fbd2de590d35536ddbb38cedc4e",
+    "matches_tested": true
+  }
+]

@@ -1,0 +1,34 @@
+PASS Basic Attack: 11 finite moving poses, eye/surface distance <= 0,0378
+PASS Defend: 11 finite moving poses, eye/surface distance <= 0,0378
+PASS Die: 11 finite moving poses, eye/surface distance <= 0,0378
+PASS Fireball Shoot: 11 finite moving poses, eye/surface distance <= 0,0378
+PASS Fly Fireball Shoot: 11 finite moving poses, eye/surface distance <= 0,0378
+PASS Fly Float: 11 finite moving poses, eye/surface distance <= 0,0378
+PASS Fly Forward: 11 finite moving poses, eye/surface distance <= 0,0378
+PASS Fly Glide: 11 finite moving poses, eye/surface distance <= 0,0378
+PASS Get Hit: 11 finite moving poses, eye/surface distance <= 0,0378
+PASS Idle: 11 finite moving poses, eye/surface distance <= 0,0378
+PASS Land: 11 finite moving poses, eye/surface distance <= 0,0378
+PASS Run: 11 finite moving poses, eye/surface distance <= 0,0378
+PASS Scream: 11 finite moving poses, eye/surface distance <= 0,0378
+PASS Sleeping: 11 finite moving poses, eye/surface distance <= 0,0378
+PASS Tail Attack: 11 finite moving poses, eye/surface distance <= 0,0378
+PASS Take Off: 11 finite moving poses, eye/surface distance <= 0,0378
+PASS Walk: 11 finite moving poses, eye/surface distance <= 0,0378
+MOUTH Idle t=0,00: surface depth=4,6675
+MOUTH Idle t=0,50: surface depth=4,6712
+MOUTH Idle t=0,80: surface depth=4,6685
+MOUTH Idle t=1,00: surface depth=4,6675
+MOUTH Scream t=0,00: surface depth=4,6675
+MOUTH Scream t=0,50: surface depth=5,4726
+MOUTH Scream t=0,80: surface depth=5,4564
+MOUTH Scream t=1,00: surface depth=4,6675
+MOUTH Basic Attack t=0,00: surface depth=4,6675
+MOUTH Basic Attack t=0,50: surface depth=5,4195
+MOUTH Basic Attack t=0,80: surface depth=4,6422
+MOUTH Basic Attack t=1,00: surface depth=4,6675
+MOUTH Fireball Shoot t=0,00: surface depth=4,6675
+MOUTH Fireball Shoot t=0,50: surface depth=4,9475
+MOUTH Fireball Shoot t=0,80: surface depth=5,5397
+MOUTH Fireball Shoot t=1,00: surface depth=4,6675
+PASS: original rig/controller/clips retained, green body and two eye details; open mouth rays reach inside the cavity, closed lips return to the front.

@@ -1,0 +1,41 @@
+PASS Second-phase clips are included in the actual boss asset
+PASS Arena contains sparse destructible trees and rocks
+PASS Failed save cannot partially deform terrain or destroy resources
+PASS Altar and access remain protected
+PASS Corrupt non-finite impacts are rejected without changing the active save
+PASS Existing saves without destruction data still load
+PASS 50% transition starts phase two once, preserving remaining health
+PASS Regional encounter no longer shields the boss at 50%
+PASS Dive starts in the live regional encounter
+PASS Dive warning locks before the descent
+PASS Warning instantiates the editable prefab and uses configured material, width and locked color (actual=RGBA(1.000, 0.220, 0.039, 0.949), material=SoulTelegraph, width=0,18)
+PASS Moving after the warning locks cannot move the impact target
+PASS Dive physically lowers terrain and destroys the baited tree
+PASS Impact has a clear recovery window and clears its target marker
+PASS After impact the boss settles into grounded Idle instead of holding the aerial end of Land
+PASS Crater mesh collider matches the visible depression
+PASS A timed dodge avoids impact damage
+PASS Direct impact deals bounded damage once per attack
+PASS Outer shockwave does not hit before reaching the player
+PASS Expanding outer wave deals a single lower-damage hit
+PASS Repeated impact is idempotent and cannot dig an inescapable pit
+PASS Rocks break and their destruction is saved
+PASS Physical movement climbs out across the fresh crater before navigation rebakes (travel=7,498199m)
+PASS Pursuit impacts can persist outside the original arena
+PASS Continue reads real saved impacts from the isolated world file
+PASS Tracking breath starts in phase two
+PASS Phase two tracking is bounded by the configured 30 degrees/second
+PASS Increasing tracking speed changes the actual flame direction, not only the body
+PASS Phase two follows a leftward player movement while exhaling
+PASS Breath reverses with the player and leaves bounded ground flames (turn=41,99905, aim error=0,276953, fire=4)
+PASS Aerial fire pass starts with its own readable warning
+PASS Flight uses configured 28m distance and 14m/s speed in the actual movement
+PASS Low pass emits the existing flame VFX and scorches the ground
+PASS Aerial pass ends on the ground with a punish window
+PASS Temporary fire expires instead of permanently filling the arena
+PASS Subsequent aerial attacks remain available
+PASS Regional boss stays alive and engaged when the player leaves the old leash radius
+PASS Death in flight lands safely, clears hazards and does not repeat phase transitions
+PASS Defeating the boss preserves destruction without creating another impact
+PASS Death and scene reload preserve the same physical crater
+PASS Destroyed props do not return after reloading the scene

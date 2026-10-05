@@ -16,7 +16,9 @@ namespace Mismo.Gameplay.Player.Quests
             try
             {
                 var catalog=QuestCatalog.Load();
-                if(catalog==null||catalog.quests.Length!=7||catalog.radialSelected.Length!=8||catalog.radialSelected.Any(t=>t==null)||catalog.radialSurface==null||catalog.radialOutline==null||catalog.journalIcon==null)throw new Exception("Quest catalog or radial dependencies missing from build");
+                if(catalog==null||catalog.quests.Length<7||catalog.radialSelected.Length!=8||catalog.radialSelected.Any(t=>t==null)||catalog.radialSurface==null||catalog.radialOutline==null||catalog.journalIcon==null)throw new Exception("Quest catalog or radial dependencies missing from build");
+                foreach(string id in new[]{"Q-ALTAR","Q-RAID","Q-PREPARE","Q-IRON","Q-HERBS","Q-BOARS","Q-ANOMALY"})if(catalog.Find(id)==null)throw new Exception("Original quest missing: "+id);
+                if(catalog.quests.Select(q=>q.id).Distinct().Count()!=catalog.quests.Length)throw new Exception("Duplicate quest IDs");
                 if(catalog.journalKey!=UnityEngine.InputSystem.Key.J||catalog.interactKey!=UnityEngine.InputSystem.Key.F)throw new Exception("Unexpected default quest controls");
                 if(catalog.journalContacts||catalog.villageNpcs==null||catalog.villageNpcs.residents.Length!=5)throw new Exception("Physical NPC contacts not configured");
                 foreach(var resident in catalog.villageNpcs.residents)
@@ -33,7 +35,9 @@ namespace Mismo.Gameplay.Player.Quests
                     foreach(var o in q.objectives)if(o.kind==QuestObjectiveKind.Material&&o.material.icon==null)throw new Exception("Material icon missing: "+q.id);
                     foreach(var r in q.recipes)if(!recipes.Contains(r))throw new Exception("Reward recipe absent from book: "+r.id);
                 }
-                File.WriteAllText(output,"PASS: 7 quests, 5 voxelized NPC prefabs with rigs/materials, physical quest contacts, material icons, 8 radial sectors, learned recipes and J/T controls load in Windows player.");Debug.Log("QUEST_PLAYER_OK");Application.Quit(0);
+                var arc=ProjectAssets.Load<ExplorationWorldSettings>("ExplorationWorldSettings")?.content?.dragonArc;
+                if(arc==null||!arc.Valid||!catalog.Contains(arc.audience)||!catalog.Contains(arc.awakening)||arc.encounterPrefab.GetComponent<IDragonEncounter>()?.Ready!=true||arc.flight==null||arc.flyingVisual==null||arc.king==null||arc.lookout==null||arc.altar==null)throw new Exception("Dragon arc dependencies missing from build");
+                File.WriteAllText(output,"PASS: "+catalog.quests.Length+" quests, original village NPCs and dialogue, three beacon objectives, dragon flyby/landing/roar references, ritual encounter, editable Soul Eater telegraph/flame assets and J/F controls load in Windows player.");Debug.Log("QUEST_PLAYER_OK");Application.Quit(0);
             }
             catch(Exception e){File.WriteAllText(output,"FAIL: "+e);Debug.LogException(e);Application.Quit(1);}
         }

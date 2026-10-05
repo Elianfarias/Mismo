@@ -1,0 +1,1 @@
+PASS: build de contenido y recarga de las siete habilidades con sus iconos y paleta.

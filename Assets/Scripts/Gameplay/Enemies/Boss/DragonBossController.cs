@@ -8,7 +8,7 @@ using UnityEngine.AI;
 namespace Mismo.Gameplay.Enemies
 {
     [DisallowMultipleComponent, RequireComponent(typeof(Health), typeof(DamageReceiver), typeof(CapsuleCollider))]
-    public sealed class DragonBossController : MonoBehaviour, IParryResponder, IBossMusicThreat
+    public sealed class DragonBossController : MonoBehaviour, IEnemyDamageTarget, IParryResponder, IBossMusicThreat
     {
         [SerializeField] DragonBossSettings settings;
         [SerializeField] Animator animator;
