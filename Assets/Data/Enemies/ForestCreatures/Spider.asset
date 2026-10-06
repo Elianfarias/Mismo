@@ -25,6 +25,9 @@ MonoBehaviour:
   comboHitStun: 1
   maxConsecutiveInterrupts: 2
   interruptImmunityDuration: 2
+  comboResponseStun: 0.12
+  comboBackstepDistance: 2.6
+  comboBackstepDuration: 0.28
   staggerDamageThreshold: 15
   staggerDuration: 0.45
   staggerResistance: 0.75
@@ -66,6 +69,23 @@ MonoBehaviour:
     projectileSpeed: 12
     projectileRange: 30
     projectileRadius: 0.6
+    preparationSfx: {fileID: 0}
+    preparationSfxVolume: 1
+    executionSfx: {fileID: 0}
+    executionSfxVolume: 1
+    projectileImpactVfx: {fileID: 0}
+    projectileImpactVfxLifetime: 3
+    projectileImpactSfx: {fileID: 0}
+    projectileImpactSfxVolume: 1
+    spawnGroundPool: 0
+    groundPoolPrefab: {fileID: 0}
+    groundPoolLifetime: 5
+    groundPoolScale: 1
+    groundPoolMinUpDot: 0.7
+    groundPoolDealsDamage: 0
+    groundPoolDamagePerTick: 0
+    groundPoolDamageTickInterval: 0.5
+    groundPoolDamageRadius: 1.25
   charge:
     label: Carga
     resistComboInterrupt: 0
@@ -103,6 +123,23 @@ MonoBehaviour:
     projectileSpeed: 12
     projectileRange: 30
     projectileRadius: 0.6
+    preparationSfx: {fileID: 0}
+    preparationSfxVolume: 1
+    executionSfx: {fileID: 0}
+    executionSfxVolume: 1
+    projectileImpactVfx: {fileID: 0}
+    projectileImpactVfxLifetime: 3
+    projectileImpactSfx: {fileID: 0}
+    projectileImpactSfxVolume: 1
+    spawnGroundPool: 0
+    groundPoolPrefab: {fileID: 0}
+    groundPoolLifetime: 5
+    groundPoolScale: 1
+    groundPoolMinUpDot: 0.7
+    groundPoolDealsDamage: 0
+    groundPoolDamagePerTick: 0
+    groundPoolDamageTickInterval: 0.5
+    groundPoolDamageRadius: 1.25
   displayName: "ARA\xD1A DEL BOSQUE"
   isBoss: 0
   posture: 50
@@ -113,20 +150,20 @@ MonoBehaviour:
   - label: Attack_Bite
     resistComboInterrupt: 0
     range: 2.2
-    windup: 0.5
-    active: 0.3
-    recovery: 0.43666667
+    windup: 0.48
+    active: 0.14
+    recovery: 0.07
     damage: 11
     travel: 0
     halfExtents: {x: 0.8, y: 0.55, z: 1}
     forwardOffset: 1.1
     animation:
-      clip: {fileID: -2080255520724580793, guid: 65dba043440db23459206c76969231e5, type: 3}
+      clip: {fileID: 5809737614462345826, guid: b440c736de85431459466675215d6ba6, type: 3}
       compatibleClip: {fileID: 0}
       compatibleSource: {fileID: 0}
       mask: {fileID: 0}
-      activeStartsAt: 0.43333334
-      recoveryStartsAt: 0.56333333
+      activeStartsAt: 0.6
+      recoveryStartsAt: 0.88
       blendSeconds: 0.025
     enabled: 1
     minimumRange: 0
@@ -134,7 +171,7 @@ MonoBehaviour:
     weight: 1
     kind: 0
     hitHeight: 0.5
-    damageStartsAt: 0
+    damageStartsAt: 0.45
     preparationClip: {fileID: 0}
     recoveryClip: {fileID: 0}
     preparationDuration: 0
@@ -146,23 +183,40 @@ MonoBehaviour:
     projectileSpeed: 12
     projectileRange: 30
     projectileRadius: 0.6
+    preparationSfx: {fileID: 0}
+    preparationSfxVolume: 1
+    executionSfx: {fileID: 0}
+    executionSfxVolume: 1
+    projectileImpactVfx: {fileID: 0}
+    projectileImpactVfxLifetime: 3
+    projectileImpactSfx: {fileID: 0}
+    projectileImpactSfxVolume: 1
+    spawnGroundPool: 0
+    groundPoolPrefab: {fileID: 0}
+    groundPoolLifetime: 5
+    groundPoolScale: 1
+    groundPoolMinUpDot: 0.7
+    groundPoolDealsDamage: 0
+    groundPoolDamagePerTick: 0
+    groundPoolDamageTickInterval: 0.5
+    groundPoolDamageRadius: 1.25
   - label: Jump
     resistComboInterrupt: 0
     range: 7
-    windup: 0.2
-    active: 0.5
-    recovery: 0.36666676
+    windup: 0.6
+    active: 0.48
+    recovery: 0.08
     damage: 18
     travel: 4.5
     halfExtents: {x: 1, y: 0.7, z: 1.2}
     forwardOffset: 0.9
     animation:
-      clip: {fileID: -4337111577487656491, guid: 65dba043440db23459206c76969231e5, type: 3}
+      clip: {fileID: 3187564335987871500, guid: b440c736de85431459466675215d6ba6, type: 3}
       compatibleClip: {fileID: 0}
       compatibleSource: {fileID: 0}
       mask: {fileID: 0}
-      activeStartsAt: 0.23809522
-      recoveryStartsAt: 0.73809516
+      activeStartsAt: 0.5
+      recoveryStartsAt: 0.92
       blendSeconds: 0.025
     enabled: 1
     minimumRange: 3
@@ -170,7 +224,7 @@ MonoBehaviour:
     weight: 1
     kind: 0
     hitHeight: 0.55
-    damageStartsAt: 0.98
+    damageStartsAt: 0.9
     preparationClip: {fileID: 0}
     recoveryClip: {fileID: 0}
     preparationDuration: 0
@@ -182,6 +236,23 @@ MonoBehaviour:
     projectileSpeed: 12
     projectileRange: 30
     projectileRadius: 0.6
+    preparationSfx: {fileID: 0}
+    preparationSfxVolume: 1
+    executionSfx: {fileID: 0}
+    executionSfxVolume: 1
+    projectileImpactVfx: {fileID: 0}
+    projectileImpactVfxLifetime: 3
+    projectileImpactSfx: {fileID: 0}
+    projectileImpactSfxVolume: 1
+    spawnGroundPool: 0
+    groundPoolPrefab: {fileID: 0}
+    groundPoolLifetime: 5
+    groundPoolScale: 1
+    groundPoolMinUpDot: 0.7
+    groundPoolDealsDamage: 0
+    groundPoolDamagePerTick: 0
+    groundPoolDamageTickInterval: 0.5
+    groundPoolDamageRadius: 1.25
   - label: Spit_Web
     resistComboInterrupt: 0
     range: 10
@@ -218,3 +289,20 @@ MonoBehaviour:
     projectileSpeed: 12
     projectileRange: 30
     projectileRadius: 0.6
+    preparationSfx: {fileID: 0}
+    preparationSfxVolume: 1
+    executionSfx: {fileID: 0}
+    executionSfxVolume: 1
+    projectileImpactVfx: {fileID: 0}
+    projectileImpactVfxLifetime: 3
+    projectileImpactSfx: {fileID: 0}
+    projectileImpactSfxVolume: 1
+    spawnGroundPool: 0
+    groundPoolPrefab: {fileID: 0}
+    groundPoolLifetime: 5
+    groundPoolScale: 1
+    groundPoolMinUpDot: 0.7
+    groundPoolDealsDamage: 0
+    groundPoolDamagePerTick: 0
+    groundPoolDamageTickInterval: 0.5
+    groundPoolDamageRadius: 1.25

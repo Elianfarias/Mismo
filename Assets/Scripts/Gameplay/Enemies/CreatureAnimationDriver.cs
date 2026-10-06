@@ -70,10 +70,23 @@ namespace Mismo.Gameplay.Enemies
             }
             else if(clip!=null)
             {
-                float mainTime=elapsed-action.preparationDuration;
-                if(action.recoveryClip!=null&&mainTime>=clip.length)
-                {mainTime-=clip.length;clip=action.recoveryClip;}
-                normalized=mainTime/Mathf.Max(.01f,clip.length);
+                if(action.preparationClip==null&&action.recoveryClip==null)
+                {
+                    // The AI owns each phase's duration. Sampling by elapsed seconds
+                    // skips anticipation (or landing) when an attack is retimed.
+                    var phase=controller.State==EnemyState.Telegraph?EnemyAttackPhase.Preparation:
+                        controller.State==EnemyState.Attack?EnemyAttackPhase.Active:EnemyAttackPhase.Recovery;
+                    normalized=action.animation.Sample(phase,controller.StateProgress);
+                }
+                else
+                {
+                    // Multi-clip actions (e.g. the golem's rock throw) retain their
+                    // authored pickup/release/recovery timeline.
+                    float mainTime=elapsed-action.preparationDuration;
+                    if(action.recoveryClip!=null&&mainTime>=clip.length)
+                    {mainTime-=clip.length;clip=action.recoveryClip;}
+                    normalized=mainTime/Mathf.Max(.01f,clip.length);
+                }
             }
             sample.clip=clip;sample.blendSeconds=action.animation.blendSeconds;
             playback.Tick(animator,sample,EnemyAttackPhase.Active,Mathf.Clamp01(normalized),0,0,speed,Time.deltaTime);

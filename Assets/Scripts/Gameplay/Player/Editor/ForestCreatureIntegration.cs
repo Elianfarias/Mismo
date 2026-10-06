@@ -160,6 +160,7 @@ namespace Mismo.Gameplay.Player.Editor
                 foreach(var action in new[]{slam,sweep,throwing}){action.recoveryClip=Clip(species,"Recover");action.recovery+=action.recoveryClip.length;}
                 settings.attacks=new[]{slam,sweep,throwing};
             }
+            if(species=="Boar"||species=="Spider")ForestCreatureAttackPolish.Configure(settings,species);
             AssetDatabase.CreateAsset(settings,path);return settings;
         }
         static T GetOrAdd<T>(GameObject go) where T:Component
