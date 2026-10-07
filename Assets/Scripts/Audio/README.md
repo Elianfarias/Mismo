@@ -63,7 +63,37 @@ efectos del mundo. El intervalo usa tiempo real y funciona durante una pausa.
 Las recompensas reproducen éxito solamente después de confirmar el guardado.
 Una recompensa ya reclamada no vuelve a sonar.
 
-## Ampliar
+## Sonidos del goblin
+
+Los siete efectos originales están en `Assets/Art/Audio/Enemies/Goblin`:
+preparación y ejecución de Golpe/Carga, y tres gruñidos cortos de hit. Son WAV
+mono PCM de 16 bits a 48 kHz, sintetizados localmente sin muestras externas.
+El gruñido de hit acompaña al impacto del arma del perfil de feedback existente.
+
+`Assets/Data/Enemies/BaseGoblin.asset` referencia los clips directamente; el
+goblin normal y el élite comparten esta configuración. En el taller de enemigos,
+abrir cada ataque y ajustar `Preparation Sfx`, `Execution Sfx` y sus volúmenes.
+En el Inspector de BaseGoblin, `Hit Sfx` y `Hit Sfx Volume` controlan la reacción
+al daño. Todos usan el canal Efectos existente.
+
+Las tomas de hit alternan sin modificar la aleatoriedad de la IA, con un mínimo
+de 80 ms entre voces. Sólo suenan al recibir daño directo, incluido el golpe
+letal; no por bloqueo, parry, esquiva ni ticks de estados. Los enemigos sin
+clips de hit asignados mantienen su comportamiento anterior.
+
+Para regenerar las siete tomas y la muestra de escucha, ejecutar
+`python Assets/Scripts/Audio/Editor/GenerateGoblinSounds.py` (requiere NumPy).
+Conserva los GUID existentes. La muestra queda en
+`output/goblin-audio/Goblin_Audio_Preview.wav`: cuatro sonidos de habilidades,
+tres hits y dos secuencias con la preparación de 0,5 s del juego.
+
+**Mismo > Audio > Verificar sonidos del goblin** comprueba la importación,
+los eventos de daño, las regresiones existentes de combate y la organización,
+y construye/recarga un bundle Windows desde BaseGoblin para verificar sus
+dependencias de audio. El informe queda en `output/goblin-audio/checks.txt`.
+Es una build de contenido; no reemplaza una build completa del jugador.
+
+## Ampliar eventos de interfaz
 
 Para botones nuevos de Unity UI, agregar **UISoundFeedback** al objeto con el
 Selectable/Button. Para interfaces IMGUI, usar `GameAudio.Button(rect, text, style)`.

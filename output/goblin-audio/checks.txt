@@ -1,0 +1,62 @@
+PASS Goblin settings load
+PASS Original attack selection and damage preserved
+PASS Three configured hit takes
+PASS Seven distinct serialized clips
+PASS Short mono 48 kHz clip: Goblin_Hit_01
+PASS Non-silent PCM, no clipping: Goblin_Hit_01
+PASS Short mono 48 kHz clip: Goblin_Hit_02
+PASS Non-silent PCM, no clipping: Goblin_Hit_02
+PASS Short mono 48 kHz clip: Goblin_Hit_03
+PASS Non-silent PCM, no clipping: Goblin_Hit_03
+PASS Short mono 48 kHz clip: Goblin_Slash_Prepare
+PASS Non-silent PCM, no clipping: Goblin_Slash_Prepare
+PASS Short mono 48 kHz clip: Goblin_Slash_Execute
+PASS Non-silent PCM, no clipping: Goblin_Slash_Execute
+PASS Short mono 48 kHz clip: Goblin_Charge_Prepare
+PASS Non-silent PCM, no clipping: Goblin_Charge_Prepare
+PASS Short mono 48 kHz clip: Goblin_Charge_Execute
+PASS Non-silent PCM, no clipping: Goblin_Charge_Execute
+PASS Preparations fit existing telegraph timing
+PASS Goblin.prefab inherits the configured sounds
+PASS GoblinElite.prefab inherits the configured sounds
+PASS Golpe preparation uses the SFX volume channel
+PASS Golpe execution uses the SFX volume channel
+PASS Carga preparation uses the SFX volume channel
+PASS Carga execution uses the SFX volume channel
+PASS Confirmed hit cycles take 0
+PASS Confirmed hit cycles take 1
+PASS Confirmed hit cycles take 2
+PASS Confirmed hit cycles take 3
+PASS Simultaneous hits do not stack vocal reactions
+PASS Status ticks stay silent
+PASS Block, dodge and parry have no hurt voice
+PASS Repeated collision for one attack has no duplicate voice
+PASS Zero hit volume is silent
+PASS Empty variant slots are skipped
+PASS Unconfigured enemies stay silent
+PASS Lethal confirmed hit retains its voice
+PASS Dead enemies cannot emit another hurt reaction
+PASS Existing sword/goblin combat regression checks
+WARN Global asset organization has issues; see organization.txt. Content build is checked independently.
+PASS Windows content bundle builds
+PASS Windows content bundle reloads
+PASS Goblin settings load
+PASS Original attack selection and damage preserved
+PASS Three configured hit takes
+PASS Seven distinct serialized clips
+PASS Short mono 48 kHz clip: Goblin_Hit_01
+PASS Non-silent PCM, no clipping: Goblin_Hit_01
+PASS Short mono 48 kHz clip: Goblin_Hit_02
+PASS Non-silent PCM, no clipping: Goblin_Hit_02
+PASS Short mono 48 kHz clip: Goblin_Hit_03
+PASS Non-silent PCM, no clipping: Goblin_Hit_03
+PASS Short mono 48 kHz clip: Goblin_Slash_Prepare
+PASS Non-silent PCM, no clipping: Goblin_Slash_Prepare
+PASS Short mono 48 kHz clip: Goblin_Slash_Execute
+PASS Non-silent PCM, no clipping: Goblin_Slash_Execute
+PASS Short mono 48 kHz clip: Goblin_Charge_Prepare
+PASS Non-silent PCM, no clipping: Goblin_Charge_Prepare
+PASS Short mono 48 kHz clip: Goblin_Charge_Execute
+PASS Non-silent PCM, no clipping: Goblin_Charge_Execute
+PASS Preparations fit existing telegraph timing
+PASS All seven clips remain readable through settings in built content

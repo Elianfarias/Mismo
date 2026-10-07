@@ -1,0 +1,87 @@
+{
+  "sample_rate": 48000,
+  "channels": 1,
+  "bits": 16,
+  "clips": [
+    {
+      "name": "Goblin_Slash_Prepare",
+      "seconds": 0.4,
+      "peak_dbfs": -7.54,
+      "rms_dbfs": -23.11
+    },
+    {
+      "name": "Goblin_Slash_Execute",
+      "seconds": 0.34,
+      "peak_dbfs": -3.35,
+      "rms_dbfs": -16.73
+    },
+    {
+      "name": "Goblin_Charge_Prepare",
+      "seconds": 0.46,
+      "peak_dbfs": -5.04,
+      "rms_dbfs": -19.09
+    },
+    {
+      "name": "Goblin_Charge_Execute",
+      "seconds": 0.43,
+      "peak_dbfs": -2.85,
+      "rms_dbfs": -17.4
+    },
+    {
+      "name": "Goblin_Hit_01",
+      "seconds": 0.27,
+      "peak_dbfs": -4.29,
+      "rms_dbfs": -16.02
+    },
+    {
+      "name": "Goblin_Hit_02",
+      "seconds": 0.31,
+      "peak_dbfs": -4.29,
+      "rms_dbfs": -15.92
+    },
+    {
+      "name": "Goblin_Hit_03",
+      "seconds": 0.25,
+      "peak_dbfs": -4.29,
+      "rms_dbfs": -15.54
+    }
+  ],
+  "preview": [
+    {
+      "at": 0.0,
+      "name": "Goblin_Slash_Prepare"
+    },
+    {
+      "at": 0.95,
+      "name": "Goblin_Slash_Execute"
+    },
+    {
+      "at": 1.84,
+      "name": "Goblin_Charge_Prepare"
+    },
+    {
+      "at": 2.85,
+      "name": "Goblin_Charge_Execute"
+    },
+    {
+      "at": 3.83,
+      "name": "Goblin_Hit_01"
+    },
+    {
+      "at": 4.65,
+      "name": "Goblin_Hit_02"
+    },
+    {
+      "at": 5.51,
+      "name": "Goblin_Hit_03"
+    },
+    {
+      "at": 6.31,
+      "name": "Sequence_Slash"
+    },
+    {
+      "at": 7.96,
+      "name": "Sequence_Charge"
+    }
+  ]
+}
