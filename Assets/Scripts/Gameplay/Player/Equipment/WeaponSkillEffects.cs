@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Mismo.Gameplay.Combat;
+using Mismo.Gameplay.Player.Presentation;
 using UnityEngine;
 
 namespace Mismo.Gameplay.Player.Equipment
@@ -16,25 +17,28 @@ namespace Mismo.Gameplay.Player.Equipment
         int hits, rhythm, sameTargetHits, twoTimes;
         UnityEngine.Object lastTarget;
         float rhythmUntil, empoweredUntil, twoTimesUntil, bucklerReady;
+        float thirdArrowUntil;
         float bucklerThrownAt=-100,bucklerAbsentUntil;
         public bool BucklerAbsent=>Has(WeaponPassive.Buckler)&&Time.time<bucklerAbsentUntil;
         public bool BucklerAnimating=>BucklerAbsent&&Time.time-bucklerThrownAt<.5f;
         public float BucklerAnimationProgress=>Mathf.Clamp01((Time.time-bucklerThrownAt)/.5f);
         public float Barrier {get;private set;}
         float barrierUntil;
+        float barrierDuration;
         AbilityExecution empoweredCast,twoTimesCast;
         void Awake()
         {
             loadout=GetComponent<EquipmentLoadout>();health=GetComponent<Health>();
             if(loadout!=null)loadout.Changed+=ResetEffects;
             if(health!=null)health.Died+=OnDeath;
+            ActorBuffFeedback.For(gameObject);
         }
         void OnDestroy(){if(loadout!=null)loadout.Changed-=ResetEffects;if(health!=null)health.Died-=OnDeath;}
         void OnDeath(DamageInfo damage)=>ResetEffects();
         public void ResetEffects()
         {
             hits=rhythm=sameTargetHits=twoTimes=0;lastTarget=null;
-            rhythmUntil=empoweredUntil=twoTimesUntil=0;Barrier=0;basics.Clear();basicOrder.Clear();
+            rhythmUntil=empoweredUntil=twoTimesUntil=thirdArrowUntil=0;Barrier=0;basics.Clear();basicOrder.Clear();
             bucklerAbsentUntil=0;
             empoweredCast=twoTimesCast=null;
             // Keep buckler cooldown across equipment changes.
@@ -58,8 +62,36 @@ namespace Mismo.Gameplay.Player.Equipment
         public float SpeedBonus => Has(WeaponPassive.Rhythm)&&Time.time<rhythmUntil?rhythm*.04f*Power(Passive(WeaponPassive.Rhythm)):0;
         public void Empower(AbilityExecution cast=null){empoweredUntil=Time.time+4;empoweredCast=cast;}
         public void TwoTimes(AbilityExecution cast=null){twoTimes=2;twoTimesUntil=Time.time+5;twoTimesCast=cast;}
+        float ThirdArrowWindow=>Mathf.Max(.1f,Passive(WeaponPassive.ThirdArrow)?.thirdArrowResetSeconds??5);
+        void ExpireThirdArrow(){if(hits>0&&Time.time>=thirdArrowUntil)hits=0;}
+        // Presentation reads the same counters and clocks as damage; a miss never advances them.
+        public void CollectBuffViews(List<BuffView> result)
+        {
+            if(health!=null&&health.IsDead)return;
+            ExpireThirdArrow();
+            if(Has(WeaponPassive.ThirdArrow))
+            {
+                int progress=hits%3;
+                result.Add(new BuffView(BuffKind.Damage,"TERCER IMPACTO",progress==2?"LISTO":"ACERTÁ 2 GOLPES",progress==2,progress==2,
+                    progress>0?thirdArrowUntil-Time.time:-1,ThirdArrowWindow,Passive(WeaponPassive.ThirdArrow),progress,2));
+            }
+            if(Time.time<empoweredUntil)
+                result.Add(new BuffView(BuffKind.Damage,"PASO LATERAL","PRÓXIMO GOLPE",true,true,empoweredUntil-Time.time,4,empoweredCast?.Definition));
+            if(Time.time<twoTimesUntil&&twoTimes>0)
+                result.Add(new BuffView(BuffKind.Damage,"DOS TIEMPOS",twoTimes==1?"REMATE LISTO":"PRIMER GOLPE: LENTITUD",twoTimes==1,twoTimes==1,
+                    twoTimesUntil-Time.time,5,twoTimesCast?.Definition,2-twoTimes,1));
+            if(Has(WeaponPassive.Rhythm)&&Time.time<rhythmUntil&&rhythm>0)
+                result.Add(new BuffView(BuffKind.Speed,"RITMO","VELOCIDAD DE ATAQUE",true,true,rhythmUntil-Time.time,2,Passive(WeaponPassive.Rhythm),rhythm,5));
+            if(Has(WeaponPassive.Finisher)&&sameTargetHits>0&&lastTarget is Component target&&target!=null&&target.GetComponentInParent<Health>()?.IsDead!=true)
+                result.Add(new BuffView(BuffKind.Damage,"REMATADOR","MISMO ENEMIGO",sameTargetHits>=3,false,ability:Passive(WeaponPassive.Finisher),progress:sameTargetHits,goal:3));
+            if(Barrier>0&&Time.time<barrierUntil)
+                result.Add(new BuffView(BuffKind.Shield,"BARRERA","BROQUEL",true,true,barrierUntil-Time.time,barrierDuration,Passive(WeaponPassive.Buckler)));
+            if(Has(WeaponPassive.Coverage)&&loadout.Runner?.Current?.Definition.usesSwordCombo==true)
+                result.Add(new BuffView(BuffKind.Defense,"COBERTURA","SOLO FRONTAL",true,true,ability:Passive(WeaponPassive.Coverage)));
+        }
         public float BasicMultiplier(long attack,Vector3 target,Component receiver=null)
         {
+            ExpireThirdArrow();
             float value=1;
             if(Has(WeaponPassive.SwordTip)&&Vector3.ProjectOnPlane(target-transform.position,Vector3.up).magnitude>=1.25f)value*=1+.25f*Power(Passive(WeaponPassive.SwordTip));
             if(Has(WeaponPassive.ThirdArrow)&&(hits+1)%3==0)value*=1+.8f*Power(Passive(WeaponPassive.ThirdArrow));
@@ -72,13 +104,14 @@ namespace Mismo.Gameplay.Player.Equipment
         {
             if(target is DamageReceiver receiver&&receiver.LastResult.HealthDamage<=0)return;
             if(!basics.Add(attack))return;
+            ExpireThirdArrow();
             basicOrder.Enqueue(attack);if(basicOrder.Count>128)basics.Remove(basicOrder.Dequeue());
             if((hits+1)%3==0)Credit(target,Passive(WeaponPassive.ThirdArrow),attack);
             if(Vector3.ProjectOnPlane(target.transform.position-transform.position,Vector3.up).magnitude>=1.25f)Credit(target,Passive(WeaponPassive.SwordTip),attack);
             if(sameTargetHits>=3&&lastTarget==target)Credit(target,Passive(WeaponPassive.Finisher),attack);
             Credit(target,Passive(WeaponPassive.Rhythm),attack);
             if(Time.time<empoweredUntil&&empoweredCast!=null)Credit(target,empoweredCast.Definition,empoweredCast.AttackId,empoweredCast.WeaponFamilyId);
-            hits++;empoweredUntil=0;
+            hits=(hits+1)%3;thirdArrowUntil=Time.time+ThirdArrowWindow;empoweredUntil=0;
             if(Time.time<twoTimesUntil&&twoTimes>0)
             {
                 if(twoTimesCast!=null)Credit(target,twoTimesCast.Definition,twoTimesCast.AttackId,twoTimesCast.WeaponFamilyId);
@@ -109,6 +142,7 @@ namespace Mismo.Gameplay.Player.Equipment
             if(health==null||health.IsDead||!Has(WeaponPassive.Buckler))return;
             bucklerAbsentUntil=0;
             Barrier=Mathf.Max(Barrier,amount*Power(Passive(WeaponPassive.Buckler)));barrierUntil=Time.time+duration;
+            barrierDuration=duration;
             GetComponent<CombatState>()?.Reward(0,"BROQUEL · BARRERA");
         }
         public float Absorb(float damage,Vector3 direction,GameObject source=null,long attackId=0)

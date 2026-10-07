@@ -1,0 +1,23 @@
+PASS Runtime catalog resolves the serialized status presentation
+PASS Shader compiles: Assets/Art/Shaders/StatusPoisonOverlay.shader
+PASS Shader compiles: Assets/Art/Shaders/CombatParticles.shader
+PASS Shader compiles: Assets/Art/Shaders/StatusPoisonMist.shader
+PASS Poison creates an overlay and aura on the target
+PASS Original body materials are untouched
+PASS Reapplication does not duplicate the aura or overlay
+PASS No immediate tick on application
+PASS Existing poison ticks through contact invulnerability and dodge
+PASS Receiver preserves status, weapon and refreshed cast identity through Health.Damaged
+PASS Actual floating number uses the configured poison green
+PASS Three-second poison applies all three ticks and removes its visuals at expiry
+PASS Poison, bleed and burn coexist and each deal one independently identified tick
+PASS Ticks do not create contact immunity that would swallow another state
+PASS Curing poison removes only its own state and visuals
+PASS Bleed never starts a poison aura
+PASS Poison, bleed, burn and ordinary hits have independent colors
+PASS Disable clears status and visuals for pooled targets
+PASS Re-enable starts clean
+PASS Death removes the aura immediately
+PASS Revive cannot inherit a previous poison
+PASS Destroyed source releases orphaned status visuals
+EXISTING PROJECT ORGANIZATION ISSUES: see organization.txt

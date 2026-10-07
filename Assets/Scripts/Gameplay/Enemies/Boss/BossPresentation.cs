@@ -59,7 +59,7 @@ namespace Mismo.Gameplay.Enemies
             if (health != null) health.Damaged -= OnDamaged;
         }
 
-        private void OnDamaged(DamageInfo _) => flash = 0.12f;
+        private void OnDamaged(DamageInfo damage) { if(!damage.IsStatusTick)flash = 0.12f; }
 
         private void LateUpdate()
         {

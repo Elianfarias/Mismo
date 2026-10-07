@@ -502,7 +502,7 @@ namespace Mismo.Gameplay.Enemies
 
         private void OnDamaged(DamageInfo damage)
         {
-            if (combat.UsesPosture || settings == null || health == null || health.IsDead || staggerResistanceTimer > 0f) return;
+            if (damage.IsStatusTick || combat.UsesPosture || settings == null || health == null || health.IsDead || staggerResistanceTimer > 0f) return;
             if ((state == BossState.Approach || state == BossState.Position) && damage.Amount >= settings.staggerDamageThreshold)
                 StartStagger(settings.staggerDuration);
         }

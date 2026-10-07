@@ -2,6 +2,8 @@ using UnityEngine;
 
 namespace Mismo.Gameplay.Combat
 {
+    public enum StatusEffectType { None = 0, Poison = 1, Bleed = 2, Burn = 3 }
+
     /// <summary>Datos inmutables de un impacto, sin acoplar al receptor a un arma concreta.</summary>
     public readonly struct DamageInfo
     {
@@ -17,14 +19,17 @@ namespace Mismo.Gameplay.Combat
         public readonly string WeaponFamilyId;
         public readonly string AbilityId;
         public readonly long AbilityUseId;
+        public readonly StatusEffectType StatusEffect;
+        public bool IsStatusTick => StatusEffect != StatusEffectType.None;
         public readonly Mismo.Gameplay.Player.Presentation.CombatFeedbackProfile FeedbackProfile;
 
-        public DamageInfo(float amount, GameObject source, Vector3 hitPoint, Vector3 direction, long attackId = 0, float postureDamage = -1, bool ranged = false, bool area = false, Vector3? origin = null, bool parryable = true, string weaponFamilyId = null, float focusGainOnHit = 0, Mismo.Gameplay.Player.Presentation.CombatFeedbackProfile feedbackProfile = null,string abilityId=null,long abilityUseId=0,bool breaksGuard=false)
+        public DamageInfo(float amount, GameObject source, Vector3 hitPoint, Vector3 direction, long attackId = 0, float postureDamage = -1, bool ranged = false, bool area = false, Vector3? origin = null, bool parryable = true, string weaponFamilyId = null, float focusGainOnHit = 0, Mismo.Gameplay.Player.Presentation.CombatFeedbackProfile feedbackProfile = null,string abilityId=null,long abilityUseId=0,bool breaksGuard=false,StatusEffectType statusEffect=StatusEffectType.None)
         {
             Amount = Mathf.Max(0f, amount);
             FocusGainOnHit = Mathf.Max(0f, focusGainOnHit);
             WeaponFamilyId=weaponFamilyId;
             AbilityId=abilityId;AbilityUseId=abilityUseId;
+            StatusEffect=statusEffect;
             BreaksGuard=breaksGuard;
             FeedbackProfile = feedbackProfile != null ? feedbackProfile : source != null ? source.GetComponentInParent<Mismo.Gameplay.Player.Equipment.EquipmentLoadout>()?.ActiveDefinition?.FeedbackProfile : null;
             PostureDamage = postureDamage < 0 ? amount * .65f : postureDamage;
@@ -34,6 +39,10 @@ namespace Mismo.Gameplay.Combat
             HitPoint = hitPoint;
             Direction = direction.sqrMagnitude > 0.0001f ? direction.normalized : Vector3.zero;
         }
+        // Keep attribution and presentation when mitigation changes only the amount.
+        public DamageInfo WithAmount(float amount) => new DamageInfo(amount, Source, HitPoint, Direction, AttackId,
+            PostureDamage, Ranged, Area, Origin, Parryable, WeaponFamilyId, FocusGainOnHit, FeedbackProfile,
+            AbilityId, AbilityUseId, BreaksGuard, StatusEffect);
     }
 
     public enum HitOutcome { Ignored, Hit, Invulnerable, Parry, PerfectParry, Dodge, PerfectDodge, Block }

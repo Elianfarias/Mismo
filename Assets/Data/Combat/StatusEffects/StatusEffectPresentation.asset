@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40f668dc8deff14c815d6206035eafa, type: 3}
+  m_Name: StatusEffectPresentation
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Presentation.StatusEffectPresentation
+  damageColors:
+  - status: 1
+    color: {r: 0.48, g: 1, b: 0.12, a: 1}
+  - status: 2
+    color: {r: 1, g: 0.18, b: 0.27, a: 1}
+  - status: 3
+    color: {r: 1, g: 0.48, b: 0.08, a: 1}
+  poisonOverlay: {fileID: 2100000, guid: c78eaafcc3f2b1e449ef0fff83141051, type: 2}
+  poisonParticles: {fileID: 5855259197113129071, guid: 926870da2748ac348b1b47d294694a2a, type: 3}
+  overlayIntensity: 0.6

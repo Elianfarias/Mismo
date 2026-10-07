@@ -9,7 +9,7 @@ namespace Mismo.Gameplay.Enemies
         public static bool IsPreparingAimedAction(Transform target)
         {
             var casting = target != null ? target.GetComponent<AbilityRunner>() : null;
-            return casting != null && casting.IsBusy && !casting.Current.Began && casting.Current.Definition.aimFromCamera;
+            return casting != null && casting.Current != null && !casting.Current.Began && casting.Current.Definition.aimFromCamera;
         }
 
         public static bool HasSight(Transform actor, Transform target, float sightHeight)

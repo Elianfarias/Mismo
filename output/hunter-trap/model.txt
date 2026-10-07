@@ -1,0 +1,9 @@
+Base and chain: 3810 voxels, 4302 triangles.
+PASS Front jaw: every tooth and band voxel is connected; no gaps in the semicircle.
+PASS Back jaw: every tooth and band voxel is connected; no gaps in the semicircle.
+Front jaw: 3431 voxels, 5538 triangles.
+Back jaw: 3401 voxels, 5578 triangles.
+Pressure plate: 996 voxels, 1176 triangles.
+Four shared rigid meshes, one material, no visual colliders or runtime mesh generation.
+Voxel pitch 0.0125 m; jaws form two connected semicircles across two common hinge blocks.
+Serialized reference: HunterTrap ability -> TrapAction.prefab -> model, meshes and palette.

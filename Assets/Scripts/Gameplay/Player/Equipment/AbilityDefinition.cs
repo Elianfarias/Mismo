@@ -18,6 +18,8 @@ namespace Mismo.Gameplay.Player.Equipment
         [Tooltip("Reutiliza la animación de otra habilidad de esta familia, sin copiar su comportamiento.")]
         public AbilityDefinition animationSource;
         public WeaponPassive passive;
+        [Tooltip("Tercer impacto: segundos sin acertar un básico antes de perder las cargas. El tiempo se detiene durante la pausa.")]
+        [Min(.1f)] public float thirdArrowResetSeconds=5;
         public bool IsPassive => passive != WeaponPassive.None;
         public string Id => string.IsNullOrEmpty(abilityId) ? name : abilityId;
         [Header("Maestría de habilidad")]
@@ -71,6 +73,8 @@ namespace Mismo.Gameplay.Player.Equipment
         [Tooltip("La duración controla la velocidad del clip; las ventanas se expresan de 0 a 100 %. El estado de ejecución pertenece a cada personaje.")]
         public Mismo.Gameplay.Combat.ComboStep[] comboSteps = Array.Empty<Mismo.Gameplay.Combat.ComboStep>();
         public bool targetsGround;
+        [Tooltip("Material del indicador al mantener la tecla. Trampas muestran trayectoria; áreas muestran su radio real.")]
+        public Material groundIndicatorMaterial;
         public bool aimFromCamera;
         [Tooltip("Alcance de apuntado y proyectiles. Los golpes cuerpo a cuerpo configuran su área en Actions (Radius y Forward), o en Golpes del combo.")]
         [Min(1)] public float range = 22;

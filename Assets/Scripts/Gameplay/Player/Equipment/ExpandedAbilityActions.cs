@@ -37,7 +37,7 @@ namespace Mismo.Gameplay.Player.Equipment
                 if(!((IDamageReceiver)target).ReceiveDamage(new DamageInfo(damage*c.DamageMultiplier,c.Owner,point,c.Direction,id,weaponFamilyId:c.WeaponFamilyId,focusGainOnHit:c.Definition.focusGainOnHit,abilityId:c.Definition.Id,abilityUseId:c.AttackId)))continue;
                 if(slowSeconds>0)CombatAilment.Slow(target.gameObject,slow,slowSeconds);
                 if(stunSeconds>0)target.GetComponent<CombatState>()?.Stagger(stunSeconds);
-                if(bleedSeconds>0)CombatAilment.Poison(target.gameObject,c.Owner,c.WeaponFamilyId,bleedDamage*c.DamageMultiplier,bleedSeconds,c.Definition.Id,c.AttackId);
+                if(bleedSeconds>0)CombatAilment.Bleed(target.gameObject,c.Owner,c.WeaponFamilyId,bleedDamage*c.DamageMultiplier,bleedSeconds,c.Definition.Id,c.AttackId);
                 if(pushDistance>0)
                 {
                     var agent=target.GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -80,33 +80,14 @@ namespace Mismo.Gameplay.Player.Equipment
     [Serializable]
     public sealed class TrapAction : AbilityAction
     {
-        public override void Begin(AbilityExecution c)=>HunterTrap.Spawn(c);
-    }
-    public sealed class HunterTrap : MonoBehaviour
-    {
-        GameObject owner;string family,abilityId;long useId;float damage,expires,armed;
-        public static void Spawn(AbilityExecution c)
+        [Tooltip("Modelo de la trampa, con HunterTrap y sus mandíbulas articuladas.")]
+        public GameObject prefab;
+        [Min(.2f)] public float arcHeight=1;
+        [Min(1)] public float throwSpeed=8;
+        public override void Begin(AbilityExecution c)
         {
-            var traps=UnityEngine.Object.FindObjectsByType<HunterTrap>(FindObjectsSortMode.None);
-            HunterTrap oldest=null;int count=0;
-            foreach(var trap in traps)if(trap.owner==c.Owner){count++;if(oldest==null||trap.expires<oldest.expires)oldest=trap;}
-            if(count>=2&&oldest!=null){oldest.enabled=false;Destroy(oldest.gameObject);}
-            var go=GameObject.CreatePrimitive(PrimitiveType.Cylinder);go.name="Trampa de cazador";
-            Destroy(go.GetComponent<Collider>());go.transform.position=c.GroundPoint+Vector3.up*.05f;go.transform.localScale=new Vector3(.9f,.05f,.9f);
-            var effect=go.AddComponent<HunterTrap>();effect.owner=c.Owner;effect.family=c.WeaponFamilyId;effect.damage=12*c.DamageMultiplier;effect.expires=Time.time+30;effect.armed=Time.time+.4f;
-            effect.abilityId=c.Definition.Id;effect.useId=c.AttackId;
-        }
-        void Update()
-        {
-            if(owner==null||Time.time>=expires){Destroy(gameObject);return;}
-            if(Time.time<armed)return;
-            foreach(var collider in Physics.OverlapSphere(transform.position+Vector3.up*.4f,.65f,~0,QueryTriggerInteraction.Ignore))
-            {
-                if(!(collider.GetComponentInParent<IDamageReceiver>() is Component target)||target.transform.IsChildOf(owner.transform))continue;
-                var receiver=(IDamageReceiver)target;
-                if(receiver.ReceiveDamage(new DamageInfo(damage,owner,target.transform.position,Vector3.zero,AttackIdentity.Next(),0,area:true,weaponFamilyId:family,abilityId:abilityId,abilityUseId:useId)))CombatAilment.Slow(target.gameObject,0,1.5f);
-                enabled=false;Destroy(gameObject);return;
-            }
+            if(c.GroundThrow.HasValue)HunterTrap.Launch(c,prefab,c.GroundThrow.Value);
+            else HunterTrap.Spawn(c,prefab);
         }
     }
 }

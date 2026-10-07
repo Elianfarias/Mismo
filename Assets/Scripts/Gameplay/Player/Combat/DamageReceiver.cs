@@ -41,14 +41,12 @@ namespace Mismo.Gameplay.Combat
                 damage.Source?.GetComponentInParent<Mismo.Gameplay.Player.PlayerCheats>()?.OneHitKills == true)
             {
                 float remaining = health.Current;
-                health.ApplyDamage(new DamageInfo(remaining, damage.Source, damage.HitPoint, damage.Direction, damage.AttackId,
-                    damage.PostureDamage, damage.Ranged, damage.Area, damage.Origin, damage.Parryable, damage.WeaponFamilyId,
-                    damage.FocusGainOnHit, damage.FeedbackProfile, damage.AbilityId, damage.AbilityUseId, damage.BreaksGuard));
+                health.ApplyDamage(damage.WithAmount(remaining));
                 return Publish(damage, new HitResult(HitOutcome.Hit, remaining - health.Current));
             }
             var rules=CombatRules.Current;
             var attacker=damage.Source!=null?damage.Source.GetComponentInParent<CombatState>():null;
-            var outcome=defense.Resolve(damage);
+            var outcome=damage.IsStatusTick?HitOutcome.Ignored:defense.Resolve(damage);
             if(outcome==HitOutcome.Block){RecordSkillDefense(damage);state.Reward(0,"BLOQUEO");return Publish(damage,new HitResult(outcome));}
             if(outcome==HitOutcome.Parry||outcome==HitOutcome.PerfectParry)
             {
@@ -77,9 +75,9 @@ namespace Mismo.Gameplay.Combat
                 return Publish(damage,new HitResult(outcome));
             }
             // Compatibility for old scenes that open the sword's legacy window directly.
-            if(!defense.HasParry&&swordParry!=null&&swordParry.TryParry(damage))
+            if(!damage.IsStatusTick&&!defense.HasParry&&swordParry!=null&&swordParry.TryParry(damage))
             {state.Reward(0,"PARRY");return Publish(damage,new HitResult(HitOutcome.Parry));}
-            if(invulnerability!=null&&invulnerability.IsInvulnerable)return Publish(damage,new HitResult(HitOutcome.Invulnerable));
+            if(!damage.IsStatusTick&&invulnerability!=null&&invulnerability.IsInvulnerable)return Publish(damage,new HitResult(HitOutcome.Invulnerable));
             bool opening=state.Opening,back=false;float multiplier=1;
             if(state.UsesPosture&&!damage.Area)
             {
@@ -94,14 +92,17 @@ namespace Mismo.Gameplay.Combat
             var skillEffects=GetComponent<Mismo.Gameplay.Player.Equipment.WeaponSkillEffects>();
             if(skillEffects!=null)amount=skillEffects.Absorb(amount,damage.Direction,damage.Source,damage.AttackId);
             float previousHealth=health.Current;
-            health.ApplyDamage(new DamageInfo(amount,damage.Source,damage.HitPoint,damage.Direction,damage.AttackId));
+            health.ApplyDamage(damage.WithAmount(amount));
             float healthDamage=previousHealth-health.Current;
             bool wasBroken = state.Broken;
             float posture=state.DamagePosture(damage.PostureDamage*(back?rules.backPosture:1)*(opening?rules.openingPosture:1));
             if(healthDamage>0 && damage.FocusGainOnHit>0)attacker?.Reward(damage.FocusGainOnHit,"IMPACTO");
             if(attacker!=null&&(back||opening))attacker.Reward(back?rules.backFocus:rules.openingFocus,back?"ESPALDA":"APERTURA");
-            GetComponent<Mismo.Gameplay.Player.Equipment.AbilityRunner>()?.Interrupt();
-            if(invulnerability!=null)invulnerability.StartWindow(invulnerabilityAfterHit);
+            if(!damage.IsStatusTick)
+            {
+                GetComponent<Mismo.Gameplay.Player.Equipment.AbilityRunner>()?.Interrupt();
+                if(invulnerability!=null)invulnerability.StartWindow(invulnerabilityAfterHit);
+            }
             return Publish(damage,new HitResult(HitOutcome.Hit,healthDamage,posture,back,!wasBroken && state.Broken));
         }
         HitResult Publish(DamageInfo damage,HitResult result)

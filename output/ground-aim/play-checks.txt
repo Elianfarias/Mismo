@@ -1,0 +1,37 @@
+PASS Both serialized abilities enable hold-to-aim
+PASS Serialized indicator material and URP shader resolve
+PASS Isolated bow loadout, no player saves
+PASS R starts a valid trap preview
+PASS Holding beyond normal charge time spends nothing and spawns nothing
+PASS Nearby AI can query the held preview without mistaking it for an executing cast
+PASS Silhouette is cosmetic with no colliders or gameplay scripts
+PASS Trap preview has its arc and landing ring
+PASS Cancel hides the indicator without cooldown
+PASS A hit cancels aiming without a throw
+PASS Pause cancels the gesture, so resume cannot throw unexpectedly
+PASS Can aim again after pause
+PASS Release commits one cast and starts cooldown
+PASS Real trap launches from the preview origin and cannot trigger in flight
+PASS Pause freezes flight
+PASS Observed flight positions match the preview curve
+PASS Lands exactly on preview and starts its arming delay on arrival; exists=True position=(0.00, 0.01, 4.00) expected=(0.00, 0.01, 4.00) armed=False
+PASS Trap arms after landing
+PASS The parabolic path detects a wall before the destination
+PASS Area target behind a wall is rejected
+PASS A trap cannot be placed hanging off a ledge
+PASS Steep landing normals are rejected
+PASS Missing ground is invalid
+PASS A supported gentle slope remains valid and aligns the landing normal
+PASS Rain begins its own held targeting gesture
+PASS Rain shows only its ground ring
+PASS Rain indicator radius equals GroundAreaAction.radius (2.5 m)
+PASS Holding rain does not spend stamina or start damage, preparation or cooldown
+PASS AI still detects the real rain preparation after release
+PASS Releasing rain spawns the actual area at the marked point
+PASS Rain release creates one area
+PASS Rain pays its real 20-stamina cost once, on release
+PASS An obstacle entering after release stops the real trap rather than letting it pass through
+PASS Invalid release cancels without spending cooldown
+PASS Death clears the aim indicator
+PASS Indicator roots are released with their owner
+PASS Ground aiming, flight and area checks passed

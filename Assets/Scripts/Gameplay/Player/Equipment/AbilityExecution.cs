@@ -27,6 +27,7 @@ namespace Mismo.Gameplay.Player.Equipment
         public readonly List<Collider> IgnoredColliders=new List<Collider>();
         public readonly long AttackId = Mismo.Gameplay.Combat.AttackIdentity.Next();
         public Vector3? AimPoint;
+        public GroundThrowPath? GroundThrow;
         public bool Held;
         public float Charge, ReleasedAt = -1;
         public float Elapsed;

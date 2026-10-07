@@ -328,7 +328,7 @@ namespace Mismo.Gameplay.Enemies
                 }
             }
 
-            if (combat.UsesPosture)
+            if (damage.IsStatusTick || combat.UsesPosture)
                 return;
 
             if (
@@ -376,6 +376,7 @@ namespace Mismo.Gameplay.Enemies
             DamageInfo damage,
             HitResult result)
         {
+            if (damage.IsStatusTick) return;
             if (
                 settings == null ||
                 health.IsDead ||

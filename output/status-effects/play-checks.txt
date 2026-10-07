@@ -1,0 +1,10 @@
+Real projectile / runtime status checks
+PASS The existing PoisonArrow asset hits the real goblin and starts its poison aura
+PASS Real Update tick retains ability attribution and poison type
+PASS Real poison tick creates a green damage number
+PASS Overlay follows the moving animated goblin
+PASS Pausing freezes poison ticks
+PASS Full duration produces all ticks and releases the aura
+PASS A dodged projectile cannot apply poison
+PASS Disable/pooling removes runtime overlays and status
+PASS All real projectile / runtime status checks passed

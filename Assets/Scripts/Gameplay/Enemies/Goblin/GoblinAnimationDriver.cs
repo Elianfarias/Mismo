@@ -22,7 +22,7 @@ namespace Mismo.Gameplay.Enemies
         private void Awake(){goblin=GetComponent<GoblinController>();agent=GetComponent<NavMeshAgent>();health=GetComponent<Health>();if(animator==null)animator=GetComponentInChildren<Animator>();hitClip=Mismo.Core.ProjectAssets.Load<AnimationClip>("CombatPresentation/Human_Goblin_CombatDamage01");hitMask=Mismo.Core.ProjectAssets.Load<AvatarMask>("CombatPresentation/GoblinUpperBody");}
         private void OnEnable(){if(health!=null)health.Damaged+=OnHit;}
         private void OnDisable(){if(health!=null)health.Damaged-=OnHit;hitAt=-10;playback.Dispose();}
-        private void OnHit(DamageInfo _) => hitAt=Time.time;
+        private void OnHit(DamageInfo damage) { if(!damage.IsStatusTick)hitAt=Time.time; }
         private void Update()
         {
             if(animator==null||goblin==null){playback.Dispose();return;}

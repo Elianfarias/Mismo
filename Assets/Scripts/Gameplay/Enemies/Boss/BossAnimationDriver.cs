@@ -33,7 +33,7 @@ namespace Mismo.Gameplay.Enemies
             if(boss!=null)boss.StateChanged-=OnState;
             playback.Dispose();
         }
-        private void OnHit(DamageInfo _) => hitAt=Time.time;
+        private void OnHit(DamageInfo damage) { if(!damage.IsStatusTick)hitAt=Time.time; }
         private void OnState(BossState state){if(state==BossState.Stagger)staggerAt=Time.time;}
         private void Update()
         {
