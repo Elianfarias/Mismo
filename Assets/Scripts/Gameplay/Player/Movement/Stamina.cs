@@ -18,6 +18,18 @@ namespace Mismo.Gameplay.Player.Movement
             capacityBonus=float.IsNaN(bonus)||float.IsInfinity(bonus)?0:Mathf.Max(0,bonus);
             Current=Mathf.Min(Current,Maximum);
         }
+        /// <summary>Multiplica todo gasto de stamina (habilidades y sprint). Lo asignan efectos temporales como Modo Berserker.</summary>
+        public float CostMultiplier { get; set; } = 1f;
+
+        /// <summary>Coste real de un gasto puntual tras aplicar el multiplicador vigente.</summary>
+        public float Cost(float amount) => Mathf.Max(0f, amount) * Mathf.Max(0f, CostMultiplier);
+
+        /// <summary>Devuelve stamina sin superar el máximo, por ejemplo al activar una pasiva.</summary>
+        public void Restore(float amount)
+        {
+            if (settings == null || amount <= 0f) return;
+            Current = Mathf.Min(Maximum, Current + amount);
+        }
 
         /// <summary>Asigna la configuración al construir el personaje.</summary>
         public void Configure(StaminaSettings configuration) { settings=configuration;Current=Maximum;recoveryDelay=0;exhausted=false; }
@@ -25,7 +37,7 @@ namespace Mismo.Gameplay.Player.Movement
         /// <summary>Consume un coste puntual como una habilidad de arma.</summary>
         public bool TrySpend(float amount)
         {
-            amount = Mathf.Max(0f, amount);
+            amount = Cost(amount);
             if (amount <= 0f) return true;
             if (settings == null || Current < amount) return false;
             Current -= amount;
@@ -46,7 +58,7 @@ namespace Mismo.Gameplay.Player.Movement
             bool sprint = requested && !exhausted && Current > 0f;
             if (sprint)
             {
-                Current = Mathf.Max(0f, Current - settings.SprintCostPerSecond * dt);
+                Current = Mathf.Max(0f, Current - Cost(settings.SprintCostPerSecond) * dt);
                 recoveryDelay = settings.RegenerationDelay;
                 exhausted = Current <= 0f;
                 return !exhausted;

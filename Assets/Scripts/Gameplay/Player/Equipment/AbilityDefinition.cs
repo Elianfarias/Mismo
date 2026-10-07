@@ -5,7 +5,9 @@ namespace Mismo.Gameplay.Player.Equipment
 {
     public enum AbilitySlot { Basic, Q, E, R }
     public enum AbilityPose { None, Lunge, Parry, Spin, Bow }
-    public enum WeaponPassive { None, ThirdArrow, SwordTip, Rhythm, Finisher, Coverage, Buckler }
+    // Serialized by index: append new passives at the end.
+    public enum WeaponPassive { None, ThirdArrow, SwordTip, Rhythm, Finisher, Coverage, Buckler, FiloCruel, Verdugo, Bloodthirst, DoubleEdge }
+    public enum ComboOrder { Sequential, AlternateHands }
 
     [CreateAssetMenu(menuName = "Mismo/Combat/Ability")]
     public sealed class AbilityDefinition : ScriptableObject
@@ -18,9 +20,14 @@ namespace Mismo.Gameplay.Player.Equipment
         [Tooltip("Reutiliza la animación de otra habilidad de esta familia, sin copiar su comportamiento.")]
         public AbilityDefinition animationSource;
         public WeaponPassive passive;
+        [Tooltip("Magnitud de la pasiva. Verdugo: daño extra de los básicos contra objetivos sangrando (0,2 = 20 %). Filo cruel: Focus por básico contra objetivos sangrando. Doble filo: probabilidad de golpe doble (0,5 = 50 %). Sed de sangre: fracción de estamina y Focus máximos que restaura (0,2 = 20 %). Potencia la multiplica por rango.")]
+        public float passiveValue;
         [Tooltip("Tercer impacto: segundos sin acertar un básico antes de perder las cargas. El tiempo se detiene durante la pausa.")]
         [Min(.1f)] public float thirdArrowResetSeconds=5;
         public bool IsPassive => passive != WeaponPassive.None;
+        // Passives whose magnitude is authored in passiveValue; the rest still use their coded constants.
+        public bool UsesPassiveValue => passive == WeaponPassive.Verdugo || passive == WeaponPassive.FiloCruel ||
+            passive == WeaponPassive.DoubleEdge || passive == WeaponPassive.Bloodthirst;
         public string Id => string.IsNullOrEmpty(abilityId) ? name : abilityId;
         [Header("Maestría de habilidad")]
         [Tooltip("Usos efectivos contra monstruos necesarios para habilitar modificadores. Un uso cuenta una vez aunque alcance varios blancos o haga varios pulsos.")]
@@ -37,8 +44,16 @@ namespace Mismo.Gameplay.Player.Equipment
         [Min(.01f)] public float active = .15f;
         [Min(0)] public float recovery = .2f;
         [Min(0)] public float cooldown = .5f;
-        [Tooltip("Coste de estamina por ejecución; en combos se cobra por cada golpe que comienza, no al encolarlo.")]
+        [Tooltip("Coste de estamina por ejecución; en combos se cobra por cada golpe que comienza, no al encolarlo. Con reactivación se cobra sólo en la primera pulsación, igual que el Focus.")]
         [Min(0)] public float staminaCost;
+        [Header("Reactivación")]
+        [InspectorName("Etapas por pulsación")]
+        [Tooltip("Cada elemento es una pulsación, como la Q de Riven: volver a pulsar ejecuta la etapa siguiente con sus propios tiempos y el clip de combo del mismo índice en las animaciones de la familia. Focus y estamina se cobran en la primera; el cooldown empieza en la última o al vencer la ventana. Vacío o un solo elemento = una ejecución normal. No se combina con combos de espada ni con carga.")]
+        public AbilityRecastStage[] recastStages = Array.Empty<AbilityRecastStage>();
+        [InspectorName("Ventana para volver a pulsar (segundos)")]
+        [Tooltip("Corre desde que termina la animación de una pulsación. Si vence sin volver a pulsar, la habilidad se reinicia y empieza el cooldown.")]
+        [Min(.1f)] public float recastWindow = 4;
+        public int RecastCount => !usesSwordCombo && !chargeable && recastStages != null && recastStages.Length > 1 ? recastStages.Length : 0;
         [Header("Commitment")]
         public bool chargeable;
         [Min(0)] public float maximumCharge = .9f;
@@ -47,6 +62,8 @@ namespace Mismo.Gameplay.Player.Equipment
         [Range(0,1)] public float preparationMobility = 1;
         [Range(0,1)] public float activeMobility = 1;
         public bool interruptible;
+        [Tooltip("El daño recibido no corta la animación de esta habilidad. No afecta al daño ni a la postura.")]
+        public bool unstoppable;
         public bool cancelPreparation;
         public bool cancelRecovery;
         [Min(0)] public float focusCost;
@@ -72,6 +89,9 @@ namespace Mismo.Gameplay.Player.Equipment
         [InspectorName("Golpes del combo")]
         [Tooltip("La duración controla la velocidad del clip; las ventanas se expresan de 0 a 100 %. El estado de ejecución pertenece a cada personaje.")]
         public Mismo.Gameplay.Combat.ComboStep[] comboSteps = Array.Empty<Mismo.Gameplay.Combat.ComboStep>();
+        [InspectorName("Orden de los golpes")]
+        [Tooltip("Secuencial: cada golpe lleva al siguiente y la cadena termina en el último. Alternar manos: 0 derecha, 1 izquierda, 2 doble que abre la derecha, 3 doble que abre la izquierda; se repite mientras se encadene y los dobles salen con Doble filo.")]
+        public ComboOrder comboOrder;
         public bool targetsGround;
         [Tooltip("Material del indicador al mantener la tecla. Trampas muestran trayectoria; áreas muestran su radio real.")]
         public Material groundIndicatorMaterial;
@@ -102,11 +122,48 @@ namespace Mismo.Gameplay.Player.Equipment
         [Min(.1f)] public float followupWindow=1.4f;
         [Tooltip("Cada rango entrenado amplía la ventana para encadenar y reduce la carga en 0,05 segundos.")]
         [Min(0)] public float windowPerRank=.15f;
+        [Tooltip("Valor de la evolución en rango 0, ya activa. Su significado depende del comportamiento (daño extra, reducción de armadura, probabilidad, curación, segundos...). Cada rango suma Amount por rango.")]
+        public float amount;
+        [Tooltip("Se suma a Amount por cada rango entrenado.")]
+        public float amountPerRank;
+        [Tooltip("Cuarto corte: golpes básicos seguidos al mismo objetivo que aplican el sangrado.")]
+        [Min(1)] public int hitsRequired=4;
+        [Tooltip("Cuarto corte: segundos sin golpear que reinician la cuenta.")]
+        [Min(.1f)] public float streakResetSeconds=3;
+        [Tooltip("Daño por segundo del sangrado que aplica esta evolución, antes del multiplicador del arma.")]
+        [Min(0)] public float bleedDamagePerSecond=3;
+        [Tooltip("Duración del sangrado en rango 0.")]
+        [Min(0)] public float bleedSeconds=3;
+        [Tooltip("Segundos de sangrado que suma cada rango entrenado.")]
+        [Min(0)] public float bleedSecondsPerRank=1;
+        [Tooltip("Torbellino: cuántas veces seguidas puede repetirse el giro.")]
+        [Min(1)] public int maxRepeats=3;
+        [Tooltip("Hacha errante: distancia máxima del siguiente enemigo, en metros.")]
+        [Min(.5f)] public float distance=6;
+        [Tooltip("Daño de sangrado por segundo que suma cada rango entrenado (Cuarto corte, Carne viva).")]
+        [Min(0)] public float bleedDamagePerRank;
+        [Tooltip("Cantidad fija de la evolución: golpes extra de Ráfaga o rebotes máximos de Hacha errante.")]
+        [Min(1)] public int count=2;
+        [Tooltip("Ráfaga: segundos entre un golpe extra y el siguiente.")]
+        [Min(.02f)] public float interval=.12f;
+        [Tooltip("Valor fijo de la evolución que no crece con el rango: bono de Ejecución (0,4 = +40 %).")]
+        [Min(0)] public float bonus=.4f;
+        [Tooltip("Sed insaciable: la vida por debajo de la cual cura (0,5 = 50 % de la vida máxima).")]
+        [Range(0,1)] public float threshold=.5f;
+        [Tooltip("Barrido: cuánto más ancha es el área del golpe (2 = el doble de radio).")]
+        [Min(1)] public float width=2;
+        // Every evolution is active at rank 0; each rank only improves its numbers: value = base + perRank × rank.
+        public float Amount(int rank)=>amount+amountPerRank*Mathf.Max(0,rank);
+        public float BleedSeconds(int rank)=>bleedSeconds+bleedSecondsPerRank*Mathf.Max(0,rank);
+        public float BleedDamage(int rank)=>bleedDamagePerSecond+bleedDamagePerRank*Mathf.Max(0,rank);
         [Tooltip("VFX adicionales a los de la habilidad. Se reproducen si este modificador está elegido y tiene al menos un rango entrenado.")]
         public WeaponVfxDefinition[] weaponVfx = Array.Empty<WeaponVfxDefinition>();
     }
 
-    public enum AbilityModifierBehavior { None, ChargedCut, DodgeChain, ParryRiposte, LungeFinisher }
+    // Serialized by index: append new behaviors at the end.
+    public enum AbilityModifierBehavior { None, ChargedCut, DodgeChain, ParryRiposte, LungeFinisher, FourthCut, DeepRend, RawFlesh, RustyEdge, Escalation, Shatter,
+        LandingStrike, Whirlwind, Burst, WanderingAxe, Slaughter, RisingFury,
+        Reopen, Sweep, ColdBlood, Execution, CrossCut, Insatiable }
 
     public enum WeaponVfxPhase { Preparation, Execution, Active }
     public enum WeaponVfxHand { Main, Offhand, Both }
@@ -132,6 +189,16 @@ namespace Mismo.Gameplay.Player.Equipment
         [Min(.01f)] public float fullChargeScale = 1;
         [Tooltip("Sólo Execution: duración del efecto, en segundos de juego. Permanece unido al arma; cancelar o cambiar de arma lo retira.")]
         [Min(.01f)] public float lifetime = 1;
+    }
+
+    // Tiempos de una pulsación de una habilidad con reactivación; reemplazan Preparation, Active y Recovery de la habilidad.
+    [Serializable]
+    public sealed class AbilityRecastStage
+    {
+        [Min(0)] public float preparation;
+        [Min(.01f)] public float active = .15f;
+        [Min(0)] public float recovery;
+        public float Duration => Mathf.Max(0, preparation) + Mathf.Max(.01f, active) + Mathf.Max(0, recovery);
     }
 
     [Serializable]

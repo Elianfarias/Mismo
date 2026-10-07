@@ -91,8 +91,8 @@ namespace Mismo.Gameplay.Player
             if (belt!=null&&belt.IsActive) { Vector3 displacement = belt.Step(dt); if(special)motor.RequestControlledDisplacement(displacement, displacement, 0); }
             IsSprinting = stamina.Tick(input.SprintHeld && move.sqrMagnitude > .01f && motor.Speed > .05f && motor.IsGrounded && !special && !runner.IsBusy, dt);
             var collisions = motor.Tick(direction * runner.Mobility, IsSprinting, input.WasJumpPressedThisFrame(), input.JumpHeld, dt);
-            if ((collisions & CollisionFlags.Sides) != 0) { if (special) belt.Cancel(); if (weaponMovement || runner.IsMoving) runner.Cancel(); }
-            if (runner.Current!=null && runner.Current.Definition.aimFromCamera) motor.Face(runner.Current.Direction);
+            if ((collisions & CollisionFlags.Sides) != 0) { if (special) belt.Cancel(); if (weaponMovement || runner.IsMoving) runner.BlockMovement(); }
+            if (runner.Current != null && runner.Current.Definition.aimFromCamera) motor.Face(runner.Current.Direction);
         }
         bool Held(AbilitySlot slot)=>slot==AbilitySlot.Basic?input.AttackHeld:slot==AbilitySlot.Q?input.LungeHeld:slot==AbilitySlot.E?input.ParryHeld:input.SpinAttackHeld;
         private void RefreshAim(AbilityExecution cast)

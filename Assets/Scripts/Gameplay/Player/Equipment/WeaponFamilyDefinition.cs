@@ -29,6 +29,10 @@ namespace Mismo.Gameplay.Player.Equipment
         }
         public WeaponAnimationSet animations;
         public CombatFeedbackProfile feedback;
+        [Header("Rasgo de familia")]
+        [InspectorName("Daño adicional de los básicos")]
+        [Tooltip("0,15 = +15 %. Sólo afecta al ataque básico de esta familia; las habilidades conservan su daño.")]
+        [Range(0,1)] public float basicDamageBonus;
         public AbilityDefinition GetAbility(AbilitySlot slot)
         {
             int index=(int)slot;

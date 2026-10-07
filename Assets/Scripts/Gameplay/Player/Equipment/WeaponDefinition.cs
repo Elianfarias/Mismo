@@ -18,6 +18,8 @@ namespace Mismo.Gameplay.Player.Equipment
         public bool isShield;
         public WeaponFamilyDefinition dualSwordFamily;
         public WeaponFamilyDefinition swordShieldFamily;
+        [Tooltip("Familia al acompañar esta hacha con otra hacha. Solo combina con armas que apunten a la misma familia.")]
+        public WeaponFamilyDefinition dualAxeFamily;
         [System.NonSerialized] public float styleDamageMultiplier=1;
         [System.NonSerialized] public float styleSpeedBonus;
         [Tooltip("Activar sólo para armas con habilidades distintas de su familia.")]

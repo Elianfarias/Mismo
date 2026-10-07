@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: OneHandSwordAnimations
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Presentation.WeaponAnimationSet
   locomotion: {fileID: 0}
+  actionMask: {fileID: 0}
   actions:
   - ability: {fileID: 11400000, guid: e2e0ba6f12d861e4a918f20a0ca3d45b, type: 2}
     clip: {fileID: 0}
@@ -34,6 +35,7 @@ MonoBehaviour:
     activeStartsAt: 0.3
     recoveryStartsAt: 0.65
     blendSeconds: 0.08
+    torsoUprightDegrees: 0
   - ability: {fileID: 11400000, guid: e7555c6d155e93448b2c9f2f131ceec1, type: 2}
     clip: {fileID: 7400000, guid: 5f6fa533fb1d4237815945c56a470c9b, type: 2}
     maskMode: 0
@@ -42,6 +44,7 @@ MonoBehaviour:
     activeStartsAt: 0.3
     recoveryStartsAt: 0.65
     blendSeconds: 0.08
+    torsoUprightDegrees: 0
   - ability: {fileID: 11400000, guid: c21a4fd366079564f9927dda16544232, type: 2}
     clip: {fileID: 7400000, guid: 8386fa99223c4ec4ba2493c37bfe3409, type: 2}
     maskMode: 0
@@ -50,6 +53,7 @@ MonoBehaviour:
     activeStartsAt: 0.3
     recoveryStartsAt: 0.65
     blendSeconds: 0.08
+    torsoUprightDegrees: 0
   - ability: {fileID: 11400000, guid: 99a87b5a63da526f9201ed93faf31c23, type: 2}
     clip: {fileID: 7400000, guid: 5f6fa533fb1d4237815945c56a470c9b, type: 2}
     maskMode: 0
@@ -58,6 +62,7 @@ MonoBehaviour:
     activeStartsAt: 0.3
     recoveryStartsAt: 0.65
     blendSeconds: 0.08
+    torsoUprightDegrees: 0
   - ability: {fileID: 11400000, guid: 70e5207d373d5e6098e1ab54e04da3be, type: 2}
     clip: {fileID: 7400000, guid: b3f28ec7e01e4922a4b232687305be89, type: 2}
     maskMode: 0
@@ -66,7 +71,8 @@ MonoBehaviour:
     activeStartsAt: 0.3
     recoveryStartsAt: 0.65
     blendSeconds: 0.08
-  - ability: {fileID: 11400000, guid: 7e4da6df4b3e5b969eb93cbdf5cf8d60, type: 2}
+    torsoUprightDegrees: 0
+  - ability: {fileID: 11400000, guid: 63fec9d0fa7d41b794bf0a90d4886400, type: 2}
     clip: {fileID: 7400000, guid: 5f6fa533fb1d4237815945c56a470c9b, type: 2}
     maskMode: 0
     customMask: {fileID: 0}
@@ -74,3 +80,4 @@ MonoBehaviour:
     activeStartsAt: 0.3
     recoveryStartsAt: 0.65
     blendSeconds: 0.08
+    torsoUprightDegrees: 0

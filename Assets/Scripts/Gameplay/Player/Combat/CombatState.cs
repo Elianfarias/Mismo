@@ -6,6 +6,7 @@ namespace Mismo.Gameplay.Combat
     public sealed class CombatState : MonoBehaviour
     {
         [SerializeField] float maximumPosture=70, regeneration=9, regenerationDelay=3, breakDuration=2;
+        public const float MaximumFocus=100;
         public bool UsesPosture {get;private set;}
         public bool Recovering {get;set;}
         public float Focus {get;private set;}
@@ -46,6 +47,13 @@ namespace Mismo.Gameplay.Combat
             if(health!=null&&health.IsDead)return;
             brokenRemaining=Mathf.Max(brokenRemaining,duration);PostureBroken?.Invoke(duration);
         }
+        // A skill that breaks posture outright: empties the bar like a natural break, even during break recovery.
+        public void BreakPosture(float duration)
+        {
+            if(health!=null&&health.IsDead)return;
+            if(UsesPosture){Posture=0;sinceHit=0;}
+            Stagger(duration);
+        }
         public float DamagePosture(float amount)
         {
             if(!UsesPosture||Broken||RecoveringFromBreak||amount<=0||health!=null&&health.IsDead)return 0;
@@ -53,7 +61,7 @@ namespace Mismo.Gameplay.Combat
             if(Posture<=0){brokenRemaining=breakDuration;PostureBroken?.Invoke(breakDuration);}
             return applied;
         }
-        public void Reward(float amount,string reason){if(health!=null&&health.IsDead)return;Focus=Mathf.Clamp(Focus+amount,0,100);Rewarded?.Invoke(reason);}
+        public void Reward(float amount,string reason){if(health!=null&&health.IsDead)return;Focus=Mathf.Clamp(Focus+amount,0,MaximumFocus);Rewarded?.Invoke(reason);}
         public bool Spend(float amount){if(Focus<amount)return false;Focus-=amount;return true;}
         void Update()=>Tick(Time.deltaTime);
         public void Tick(float dt)

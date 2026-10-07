@@ -210,6 +210,9 @@ namespace Mismo.Gameplay.Enemies
                 )
             );
 
+            (GetComponent<CombatAilment>() ?? gameObject.AddComponent<CombatAilment>())
+                .ConfigureArmor(settings.armor);
+
             health.Revive();
 
             ResetLife();
