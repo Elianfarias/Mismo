@@ -11,29 +11,32 @@ namespace Mismo.Gameplay.Enemies
         private EnemyController goblin;
         private BossController boss;
         private DragonBossController dragon;
+        private SoulEaterPhaseOneController soulEater;
         private bool elite;
         private void Start()
         {
             health=GetComponent<Health>();goblin=GetComponent<EnemyController>();boss=GetComponent<BossController>();elite=GetComponent<GoblinEliteVisual>()!=null;
             dragon=GetComponent<DragonBossController>();
+            soulEater=GetComponent<SoulEaterPhaseOneController>();
             GetComponent<GoblinPresentation>()?.HideLegacyStatus();
             GetComponent<BossPresentation>()?.HideLegacyStatus();
         }
         private void OnGUI()
         {
-            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.InterfaceHidden) return;
             if (Mismo.Gameplay.Player.Equipment.Inventory.InventoryPanel.AnyOpen) return;
             var hud=PlayerHUD.Active;var camera=Camera.main;
             if(hud==null || camera==null || health==null || health.IsDead)return;
             float distance=Vector3.Distance(hud.transform.position,transform.position);
-            if(distance>28)return;
+            bool activeSoulEater=soulEater!=null&&soulEater.IsFightingPlayer(hud.transform);
+            if(distance>28&&!activeSoulEater)return;
             float headHeight=goblin != null ? goblin.NameplateHeight : 2.05f*transform.lossyScale.y;
             Vector3 head=transform.position+Vector3.up*headHeight;
             Vector3 screen=camera.WorldToScreenPoint(head);
-            if(screen.z<=0 || screen.x<0 || screen.x>Screen.width || screen.y<0 || screen.y>Screen.height)return;
-            if(Physics.Linecast(camera.transform.position,head,out var hit,~(1<<2),QueryTriggerInteraction.Ignore) && !hit.transform.IsChildOf(transform) && !hit.transform.IsChildOf(hud.transform))return;
+            if(!activeSoulEater&&(screen.z<=0 || screen.x<0 || screen.x>Screen.width || screen.y<0 || screen.y>Screen.height))return;
+            if(!activeSoulEater&&Physics.Linecast(camera.transform.position,head,out var hit,~(1<<2),QueryTriggerInteraction.Ignore) && !hit.transform.IsChildOf(transform) && !hit.transform.IsChildOf(hud.transform))return;
             float scale=PlayerHUD.Scale;Matrix4x4 old=GUI.matrix;GUI.matrix=Matrix4x4.Scale(Vector3.one*scale);
-            bool isBoss=boss!=null||dragon!=null||goblin?.Settings?.isBoss==true;
+            bool isBoss=boss!=null||dragon!=null||soulEater!=null||goblin?.Settings?.isBoss==true;
             float width=isBoss?440:180;
             float x=isBoss?(Screen.width/scale-width)/2:screen.x/scale-width/2;
             float y=isBoss?26:(Screen.height-screen.y)/scale-40;
@@ -41,6 +44,7 @@ namespace Mismo.Gameplay.Enemies
             if(goblin?.Settings != null && !string.IsNullOrWhiteSpace(goblin.Settings.displayName))
                 name=goblin.Settings.displayName;
             if(dragon!=null&&dragon.Settings!=null)name=dragon.Settings.displayName;
+            if(soulEater!=null&&soulEater.Settings!=null)name=soulEater.Settings.displayName+" · FASE "+soulEater.Phase;
             var identity=GetComponent<Mismo.Gameplay.Player.World.WorldEnemyIdentity>();
             if(identity!=null)
             {
@@ -51,6 +55,7 @@ namespace Mismo.Gameplay.Enemies
             }
             Color accent=boss!=null?new Color(.85f,.35f,.32f):elite?new Color(.72f,.48f,.93f):new Color(.85f,.35f,.32f);
             if(dragon!=null&&dragon.Settings!=null)accent=dragon.Settings.accent;
+            if(soulEater!=null&&soulEater.Settings!=null)accent=soulEater.Settings.accent;
             PlayerHUD.Fill(new Rect(x-6,y-4,width+12,isBoss?65:49),PlayerHUD.Panel);
             hud.Label(new Rect(x,y,width,20),name,isBoss?16:12,elite?new Color(.84f,.65f,1):PlayerHUD.Gold,TextAnchor.MiddleCenter);
             PlayerHUD.Fill(new Rect(x,y+25,width,7),new Color(.18f,.20f,.23f));

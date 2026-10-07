@@ -49,7 +49,7 @@ namespace Mismo.Gameplay.Player.Presentation
         }
         void OnGUI()
         {
-            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.InterfaceHidden) return;
             if (Hidden) return;
             var camera = UnityEngine.Camera.main; if (camera == null) return;
             if (style == null) style = new GUIStyle(GUI.skin.label){font=QuietFantasyUI.Body, alignment=TextAnchor.MiddleCenter, fontStyle=FontStyle.Bold};

@@ -1,0 +1,5 @@
+PASS standalone arena
+Flame: True
+Jump: True
+Charge: True
+Phase one complete: True

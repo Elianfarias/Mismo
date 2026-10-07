@@ -1,0 +1,3854 @@
+[
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/DefaultVolumeProfile.asset",
+    "hash": "40E9223DDEF87219925B93870D3516A6581C29FA281B67FD2DF76A3DA39F8954"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/DefaultVolumeProfile.asset.meta",
+    "hash": "43C5A391F0BFCA7CC7D03F08951A1CAD75B29B0B5BFC4821AEC47268F3A8DDD8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples.meta",
+    "hash": "7890630F7ED1384E1946977DF0715ACF482B33A9C384A2AF24C7A4BAD5F2E8F2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Main Camera Profile.asset",
+    "hash": "6353972A99B6B2CEB1896C6BA7412E2906A53D67B33966144A444FE10DB8C23E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Main Camera Profile.asset.meta",
+    "hash": "D3DAB58336D1E90323550EA475EE66A0AB3B8BAFF89E7E36ABEF407E1A2F72C6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Main Camera Profile(URP).asset",
+    "hash": "84B6D9FDAD45CE196DD5234C8F43C23E8D1F0E20354A1EAA64A3CA1361DBBC1C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Main Camera Profile(URP).asset.meta",
+    "hash": "00BD387348066B65FC5546E4AF24682FBFCB5EAE10C955BB19E1F1D77586315C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Readme.asset",
+    "hash": "95B7509AD175F2D302C91FC164FAFD1F77EB7A4E234891C253C088A515A6DA23"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Readme.asset.meta",
+    "hash": "B23B73AD15AFF7AC85EB92C4F8C0444CA416E0C6D02834AB960353D8D250D88F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes.meta",
+    "hash": "5841520BF39E4560EE9702B90ABDB5BD5E6A86EE05E86CF1A7198569B3EE297B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings.meta",
+    "hash": "1AC545D71CEE3172C1AE94936214CFE1EE712654AB2B4395232565B6DCEF5BE7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared.meta",
+    "hash": "88CE4DB888F4C514CB9550569A74C5A1BD408D754FE0566362ADC0A6CD678FBD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro.meta",
+    "hash": "8529D84D190A68AEB1A16E0A90308081BD30A738DBCC63C63B2A93C53B9A11B3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TutorialInfo.meta",
+    "hash": "700CF58BBA97B744E9D4D7EFE27744845FB9F325AD0D78503D41C96EEF4CC8A7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/UniversalRenderPipelineGlobalSettings.asset",
+    "hash": "E1865489537712FDE7BD6452B68ADD0D1BB5A7EBC07281B645B4565466A3673D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/UniversalRenderPipelineGlobalSettings.asset.meta",
+    "hash": "4367F7858D56E9956BC8995D5BC4D9C2B782169B2B2C222D0F5B5447F4325E53"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/URP_Renderer.asset",
+    "hash": "9024527AB406418E72BFC3C98C37511A3181DAA283ADF4AFF82E79008620C81A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/URP_Renderer.asset.meta",
+    "hash": "46CCB95482601A349151D0DD4CE26AA7AD953B18DFAAAB1DDC526F03EA2C8DA8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/URP.asset",
+    "hash": "2876E80BF3BD84C6E341F1E7DF67866EA9CFF983C0D06CCE0FE1760CFB58C5FE"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/URP.asset.meta",
+    "hash": "69F6E2818CA3FEFFFDDE9B1B45BE14E9665331EB67930A32D5C75BECA8CF4F04"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects.meta",
+    "hash": "8F9A0D11D59D88BD97F8744A1FA8E34EE0704E3B07ACBA084400C6A3718B8084"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects.meta",
+    "hash": "8C3CCEB82AC9545D863E5FFD4B822AA711C258B6A5102E5DD20B712B79C1E24E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles.meta",
+    "hash": "8739617E927F3D22E251AACCA3D8C105675A94762F1261C5F9574E9E4E842E97"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects.meta",
+    "hash": "DF0BD3422C384C4D85EC144A7DC03541A99D63EC48B412FD212323B2ACD2B1FE"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects.meta",
+    "hash": "7CE530539381C36B19B0D12811755C6E88CDF923FE0F2FC5F4B79C90040AD51A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects.meta",
+    "hash": "BC0F94CD3ADDB9160E6C882431CEA162FE193BB2F1528605263C9E536B2A313E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects.meta",
+    "hash": "B6B15B9E678C11A62CF5CA1736A9300DF6D12F97567C84590193A4C19E65B7D2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects.meta",
+    "hash": "01656D09ABBEF6B5AA4BBF9D65624B652EB1E0406F32E9F4689A6718A2D1763F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials.meta",
+    "hash": "36A7F87E4471968B54B3017C8FBEF7A7EFBDD08E0544C420AC396F6759434D87"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs.meta",
+    "hash": "B2ED92BBE7C190A3E221F8258E7831C1AA860F18652A7F0CC96DC6049D75B1E5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures.meta",
+    "hash": "DEC81D7EAEDCD40851E940F71B149D78745DB30F8191A1E69485ED40DA8A408A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/DebrisParticle.mat",
+    "hash": "C7EBD3A6D6991AD6D947726AE697147248AEED1A8D44CD5998758744520F4BCC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/DebrisParticle.mat.meta",
+    "hash": "821C03F8C17FE46A2C3259CE21F7942BF4AA431846CF8533D37083437D135F28"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/Dust.mat",
+    "hash": "C5572FDDCE92082A909CE9DF314BE3BED72D6D9BC05B73A6C92BF3074A1EDC50"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/Dust.mat.meta",
+    "hash": "993C1BFBE2FC23B9ABD39BFB3DC4DCD9C103853659E638948E3EB01AF13AFCA3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/Embers.mat",
+    "hash": "7435A8EE7A5BB0B503BF934BD4BCBBD9D26B17C69AE455A6540308FDBEDFFCB4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/Embers.mat.meta",
+    "hash": "38E7F478A473022CE7E09C4445D5526896965CFBFFEE7885635980ABD21C4C30"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/EnergyExplosion.mat",
+    "hash": "F640AF2383D492A658A041C641AC8D0F0B3CDEDE042BC2C624F06A0FF31BB2F1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/EnergyExplosion.mat.meta",
+    "hash": "36CD71C28A3662441171E65A9A5C39E4264B0957609E6884ECD22E82591AC1B5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/EnergyShockwave.mat",
+    "hash": "0D954C1B805E2B4110FD7647B1B159E59B02435D592A6263E297CA35B07F5711"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/EnergyShockwave.mat.meta",
+    "hash": "667F3B22DF2DE2ACE8B1A2AAE9F02E485525674331862E257F752EC5F913C31B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/Explosion.mat",
+    "hash": "70043C22B2A10D34FB14A4FC451C2A4B96DF61DD24D364BB3A1DB286E7066A36"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/Explosion.mat.meta",
+    "hash": "09A7FDB85957FBD916BF99C2DB1136BD3CB65084CAE9DBE62ADFA64F3E00359D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/ExplosionDistortion.mat",
+    "hash": "1C01CB0F0E269AF9FA3B6CC7F4331206B575A47287252D9CA56EF90034D79C72"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/ExplosionDistortion.mat.meta",
+    "hash": "5FAB528DBCFCE8AC29C2157DB4115329BFC1FCD40D86ECC298689825E15C39D0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/fireball.mat",
+    "hash": "F4A24422F507F8E7E79240741D4B1EEE6D580AF961E1DBF7A8E00FC2CECFA6F9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/fireball.mat.meta",
+    "hash": "897C0BC7B306C33CF200A3DCE355C64BC35B2EB1D4EF97380D246839BC1777D4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/FireExplosion.mat",
+    "hash": "56908CC75C28FBD7678243B289DAA929A0F3798EB1265F4D793B0FFF080999C0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/FireExplosion.mat.meta",
+    "hash": "30975E58707D8A665322B78EDCF3F364B18FF14E10C858CD787A20D59F4F0375"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/Flame02.mat",
+    "hash": "09724423E269FAD6759A7584F399E6211FCD32B080F3CAC05408597C92A37646"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/Flame02.mat.meta",
+    "hash": "57752BA255662BDB741348C86BAF0DABAF314B0F717E4E87A87BD43F00F51C65"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/Flame03.mat",
+    "hash": "0F982F9C4AD8F4994EF9D86ADD03771E795D539B66F6CDF2883C3C88D083F5A9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/Flame03.mat.meta",
+    "hash": "0AA5B9300E4EE29575D0DF85A5ABCC9D094F99FF2342AFD2405232D8ED43ECF9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/Flame04.mat",
+    "hash": "D97766722825E208ABF770D39650C384A4D146ED24357F43CC98A56EDF7A1CC9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/Flame04.mat.meta",
+    "hash": "DFA1A5EF421A9FC2C39EB267AD8F0128B0665111A829F926ACF9EB7E613FBCD3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/LargeFlame01.mat",
+    "hash": "A52FF20715699FA64316BF5A580A031C7ED69411E8170A55FF6D638BBAAEDA1A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/LargeFlame01.mat.meta",
+    "hash": "6DBA89F56708485CECA0F421E2ADC2D3CEC0198C1C960704D578788E06BC157D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/LargeFlame02.mat",
+    "hash": "0D0B15F28EE057B1CB9297E2765E185A2114B290E57E53D832E29BB2618E46EF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/LargeFlame02.mat.meta",
+    "hash": "9285BBB3B7FBE0308C725837AD88BD6A00E4428C0BEC4F4EDBAA6CE3BC5B176C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/Lightning.mat",
+    "hash": "F9089E67F66F31237D67DEF7B72C6205FAC4F544A671B353515B68028A46D5C5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/Lightning.mat.meta",
+    "hash": "3AF9D0175A89385177FF269A225084DD12D278C3F34FBC664C54826F497BE930"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/LightningTrail.mat",
+    "hash": "2BA6E75EDCB63C9F1BB4EEFF58C35A8B2E179A114A883828C032FB06AEDD1F76"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/LightningTrail.mat.meta",
+    "hash": "388313FE1674367BDFA591024C48F03C84D87DDA4A8DC7DFEA9B23C8DC1B9AB8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/MediumFlame01.mat",
+    "hash": "663887A3F314A3174633459FB8B548214C1C161E52C15523A0A8369B84FC662B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/MediumFlame01.mat.meta",
+    "hash": "EAF1073C1F48B115BED8EE52F26D4856753F23C0349772A710E785771C3680EA"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/MediumFlame02.mat",
+    "hash": "8E13DD9AF1C7DCEAFF549C9F91062F9CB027129D27048EEEBC8FA9C03B66A306"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/MediumFlame02.mat.meta",
+    "hash": "92EA640C020599583BD84EAF3AB7A4A86884A145AB383E3B5535FDBB80B9BDD3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/MediumFlame03.mat",
+    "hash": "3A58D4035F5786AE0DB882266DE2191393E2C70FB489C31270CCC783A437ECC3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/MediumFlame03.mat.meta",
+    "hash": "0C402F1DECB5B95F87346A7A9DE017188078450E3D54498329B69F35150AD8C8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/PlasmaExplosion.mat",
+    "hash": "9CD75503CA81E23002570416FF40E87BE37B7516BB3015B10C1D047A28CCC04C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/PlasmaExplosion.mat.meta",
+    "hash": "D44929C3D122D5757DE157FD86E5A7E0C7805386BF1A2DE2B0805C1D32DD8909"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/PlasmaFire.mat",
+    "hash": "52C046D03AC58C6B911C6FD6643F8BE5437F60770817F57EB2AFF9EBA20B3AD2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/PlasmaFire.mat.meta",
+    "hash": "098587395152BD65F38D5592EE280CDF2C59023859056D0908CBCB8B9D170A46"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/SandParticle.mat",
+    "hash": "102831797C929432284A03D3D725870B255E3E9DEBDE09EB8B1DEE423EF3F4BE"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/SandParticle.mat.meta",
+    "hash": "E0FD3B6F0223C796CAD5118EB82B3EED2CD37D3D1B4B8307042A0AE343705D81"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/SmokeDark.mat",
+    "hash": "09A478A18699818FB56AB71D32EDFF51BC419E3B0B7519FBE0532EFF21A24A8D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/SmokeDark.mat.meta",
+    "hash": "D7364E6D95CC031D13FAC2F8F05886AD96F16ABF74453F407B1FD14A72F41E8B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/TinyFlame.mat",
+    "hash": "2A4A35D0F5383E55538CD072E53EE5C1731A006E571F4F26C849952A76A20725"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Materials/TinyFlame.mat.meta",
+    "hash": "2A5587683CBC3F34BB537F30434AF6E018E918E3DAF5B813448280D5DBD1FCA2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/BigExplosion.prefab",
+    "hash": "FD72C2DCB9CA95A8ADFF8B5A1B7F6ECFE3C6C85749800ABEFA571BE684FE162A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/BigExplosion.prefab.meta",
+    "hash": "33D01A9782372136412B9AA3D98C8FE9B77260D728736A92E27CDB19EE383084"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/DustExplosion.prefab",
+    "hash": "A080560B22D3E27C7CCA106EAEDA8917FD2630DC7B209451FACFE4D0B1CBE265"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/DustExplosion.prefab.meta",
+    "hash": "36916D99E2B3645B81560EFEB65661D6333397817D538E2D760FD37EC916BA73"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/EnergyExplosion.prefab",
+    "hash": "CD754A4CDF06CB89BF4B48C9CAC01B81867833FC73CF92F2D2422C5FF8B610CF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/EnergyExplosion.prefab.meta",
+    "hash": "7E1BD8D77A05974630277CF2335E0EAE994B48B4BE089E4E8F51F1E71468C3D9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/FireBall.prefab",
+    "hash": "AA7914AF196834644F4C9F7FC4DF4A3C530C3D92CCB2AFC2CC07D02AA91B7E35"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/FireBall.prefab.meta",
+    "hash": "C746CCC5DE22105E2367D1701A40567F5F3026662B2C996266D4219E7E5C8B6E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/FlameStream.prefab",
+    "hash": "7D0D9633219A91520989E2E061A2F5E358201BF014B9439ADB4DD17CB6E479BD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/FlameStream.prefab.meta",
+    "hash": "B0DC9CCE1BDAED7B2D0FF642F6B2CF93E9EABAFECE0CF43391DACD53AFD03D72"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/FlameThrower.prefab",
+    "hash": "E301A31757471A3B03A38DBEE0D5E8194CF503F9F11FD6B3D6EF8736C66E73A3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/FlameThrower.prefab.meta",
+    "hash": "E774CC1A7DA02F1A78E69C430624BE57F57D41D5DC38FB8A468F4184DAE2514B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/LargeFlames.prefab",
+    "hash": "E8A09EC16E74F48BCE891054B6381DAA22A9E8C962448F7772930FEC62DA220B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/LargeFlames.prefab.meta",
+    "hash": "5390D59394A5A380EA8B138B70833D7BB848EC93D4835E31835E81DC3D1247ED"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/MediumFlames.prefab",
+    "hash": "252E3D5E6F042CCD84253C0E99D9252135886357CC8DAC9F2DDB441D8E99EFD8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/MediumFlames.prefab.meta",
+    "hash": "6334454BA4BE506FE99B6EC249DEDC9382CF06FBB1A01192CD97F78A2350D23D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/ParticlesLight.prefab",
+    "hash": "39705781D7491EF2A86978B893F91D2225DD03000CFDFDC0501564A56AD61534"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/ParticlesLight.prefab.meta",
+    "hash": "EDEFA8468B171627EEA8C5C2DFD91013AF2AD74178AF39C2D0E41A73CB059841"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/SmallExplosion.prefab",
+    "hash": "955491201717051188E2E44408C2ABB4D7BCFD23E9387A75E28758AE6EDB07BC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/SmallExplosion.prefab.meta",
+    "hash": "B1FCFA2515159938C263871DBFB7B3DA859D25D13EA3723EE04D692091373064"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/TinyExplosion.prefab",
+    "hash": "71EB7645149C025446BCCC5C77F5EBD8D1D5217A4D820A673AF5C671635442F6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/TinyExplosion.prefab.meta",
+    "hash": "65B921E18CDF6EB111DF5B6C933902442127BD5B3C727C57028651B926819C31"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/TinyFlames.prefab",
+    "hash": "E96672997C7351234A98AC0B2942D3D878D70C7EFFF037F8DB853CE627F88776"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/TinyFlames.prefab.meta",
+    "hash": "18243973AF3C5B88E6DEE6AF1F813A40716BAC436C3F240E06C0B48A9EEAE9CA"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/WildFire.prefab",
+    "hash": "2EE1EB64261664997D3FED45EB862CFB7B4034AC1582232A52FDAD92CB4770F3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Prefabs/WildFire.prefab.meta",
+    "hash": "AB80E3E1E07ED4AF3102535A945C6664311C596F63D9D7AD6FEA1C38AE59449F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/Debris.png",
+    "hash": "51CD2BA539EB581FAC869021E9CF11CC982EE901B8B62451B79B1C03FAAD1A4F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/Debris.png.meta",
+    "hash": "8A605FF3C23008D7C1C2CD8D52CAE6A7470769DCCF9C7901DA9796B2450A6F34"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/EnergyEffect.tif",
+    "hash": "BFEE2B441F653F6EFEDA85480876A32236433E4E8C61144E072F1FCE32AF6255"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/EnergyEffect.tif.meta",
+    "hash": "4BB1549FAC165009A13E4C0C2BA47C3575A305F913412E0D6FD7E03E1B78C26C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/Explosion.tif",
+    "hash": "D02E3ED5DD70EE4C5A0859F4F97BEC71CAE4DF59385D307FCF62FB3ECAC6E303"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/Explosion.tif.meta",
+    "hash": "E87F57283770C7648B87DEF8444E732C7CA7673F660422E21C95B0D337E0ECA0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/ExplosionEmission.tif",
+    "hash": "8BDE81D213AE5067E05866C1FADAC2A36DD693AC6B2D5AB3EDFCDCB0F07F98BD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/ExplosionEmission.tif.meta",
+    "hash": "310671ECF4BC2C60B7430CB8E04F9D828175ADE88730DACEE8F96EBAD8080E54"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/Fireball.tif",
+    "hash": "E4C55D751390481A3E9BD92A7CCA0DB4B5BD58E812E9F1FEC6406C6DCC51D9C7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/Fireball.tif.meta",
+    "hash": "933A9423D5C4750957BE1F15662D966182CB850C94CB5C46925F8C49B1740ACD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/FireBallEmission.tif",
+    "hash": "CBD43BD1FE4A7D957EC0778C3E19806F59AD4FBC93E3D37D1D28A3E28150595D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/FireBallEmission.tif.meta",
+    "hash": "DED85C2341C31F6DDE984F5B7D36C9B5DF9184EC723DCBFE837869296F34DF7E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/FireExplosion.tif",
+    "hash": "C6B442DAA2828F61DC304849966C6A3C2C95928668737C030E15BAEF26511023"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/FireExplosion.tif.meta",
+    "hash": "F0832B64D5304D8D119404C95068B71D4B2A55876F82A1611E15FA924CFC7B76"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/Flame02.tif",
+    "hash": "1006EB0C2B007B64F7B45F466A26F61A4C402762A9F29FC9EEA2A46891FE8CFC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/Flame02.tif.meta",
+    "hash": "A25EA4902C8E6EAC4C755D681CB737C915FB9C2BF2903108F699FDDABEAFE590"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/Flame03.tif",
+    "hash": "43E6A6C4A5551B70942A909FF4AD29E7D7E2E563666099569D190CB4232F9194"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/Flame03.tif.meta",
+    "hash": "A329D9FDA62F5B46844F97A4D3B9944D3E90844A70F0175D36CB82A908D05773"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/Flame04.tif",
+    "hash": "4D508227FA2C4891F0C33A63A686937895B125CAA7D7FAE848CE760FEB5DEC66"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/Flame04.tif.meta",
+    "hash": "08D0C12EC6BFEFB81425772CC09C5A6339CE93405997329E41631C782A79ED4C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/LargeFlame01.tif",
+    "hash": "0C54578941C275D2878D8F8F85A7A7B9A457E6833C31A9FBA5C6E27C55E1F125"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/LargeFlame01.tif.meta",
+    "hash": "F11B3CB8619494DCAB13DF31BAD91E6F77E0572134F91F89262CF9D6F40AC16C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/LargeFlame02.tif",
+    "hash": "7C7F5951BFF24D3F7701A57CF712846D404F058354DB64EACF16539AF7ED8241"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/LargeFlame02.tif.meta",
+    "hash": "899C7EA8C673B879B258DCCB283BE9371D1F999F150C9F503EF7EE80FE691669"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/Lightning.tif",
+    "hash": "2FFE16C4AA522361B7FBEB0FB8B5B204BCBBCBB74B6582E2270E432263B2B44E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/Lightning.tif.meta",
+    "hash": "F8CBC78137BE1E84280261FA5CCD3E84E56A361BF757DC3915CF717152B34A78"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/LightningTrail.tif",
+    "hash": "CA90DE8D235ECC6815BE55AD513D3F8325483CE350543553BB96B0FD9DC652FB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/LightningTrail.tif.meta",
+    "hash": "3BCAA5FE8C68B28AE71966B598E0A33EEAF9453B996981DC92E957846A98A782"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/MediumFlame01.tif",
+    "hash": "2A51174FCCFC4BF21191C51CD74A9830A667B3ED3E9A67F3398779FD32F89DEC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/MediumFlame01.tif.meta",
+    "hash": "CEA74D0AFFD6999D0591D2A10201DE9943E2E3EBA43A2A30D8B02F431E6E388A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/MediumFlame01Emission.tif",
+    "hash": "526E6DE8071D32C5A64115D35636A3DF80F89B075C4222813BFE94F13D54772A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/MediumFlame01Emission.tif.meta",
+    "hash": "086995E3CD67B9065FD8A68D2963BEC4B09ED77AFD9AFF2FCF51911629B7C1B4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/MediumFlame03.tif",
+    "hash": "B887A2C464DF2452BB6E400E6E105958F74A3226ACD0764DBD823533D923AEAF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/MediumFlame03.tif.meta",
+    "hash": "AA684DA13E3D09018FD3EA28F76B2E92B9516E08EDF25F08328929915E69B75F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/MedumFlame02.tif",
+    "hash": "EF1B4002AC9C0EDA262A0C6132EE5FA58A667854718544AD646DF4B96AC30DF8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/MedumFlame02.tif.meta",
+    "hash": "837FC4DB988F8EDA0683D505E14E3879362B2741E6C5ED56CAB664A05F613951"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/ramp01.png",
+    "hash": "7EB79560CB9996F6175F9A74E5766121DE6CC0C401CCAFFB265C32C03E3A3411"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/ramp01.png.meta",
+    "hash": "B3FC5FBF58638F2A3C52306DCC4F7D485F61E67462234D7CDA52D45C1F4F8D7C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/Ramp02.png",
+    "hash": "BF52A5973083CEEA0AFC4C4D5C2794B679064962DD2CF1DB04A4EA841A1189AC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/Ramp02.png.meta",
+    "hash": "303D30D6302E0B7862509C3E27A5507188F36A51CD2C1F35F6ACDF9405C18673"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/Ramp03.png",
+    "hash": "D1A498EBEAA9BF3BB30F219A93FBCF9214AA20F57B2EB3F2C3FFB41425790981"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/Ramp03.png.meta",
+    "hash": "6725D8C1759C2CBD76BEAD36793E3809F5781EFA2AD18CA031E105007DDF3738"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/RoundSoftParticle.tif",
+    "hash": "1C802DEAA123C7DF2D2B69704DFA67F6697FFBE4E2E14E5CD5474A5112991F4B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/RoundSoftParticle.tif.meta",
+    "hash": "1A372321729257A95E80D989D6A7B7910C673E15AB24E7ACFF8C26A57F5029B4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/shockwave.tif",
+    "hash": "3EC7A0B38EB15302055B2A80E042CF5B04AFC8C14286EE33FDD43D53EA695782"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/shockwave.tif.meta",
+    "hash": "41F404F8AAB02039CD4E8217E2F62C07FBA9EE1D1D464C04096D658074E35876"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/SmokePuff01.tif",
+    "hash": "6A1CEF79AAE6409BBEBBE1320B28764D43B41F1BC5DC1754FF15C08A7ACD046E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/SmokePuff01.tif.meta",
+    "hash": "2B4C3E908AAFF7BDEFBD81616CB793D94ACA9A7A59C0AAAB66C20D0A5DB3B351"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/SmokePuff02.png",
+    "hash": "252F26E03114A3C6E9B830442253E73759E34E8A5AAA0A7932BA4863CF403A10"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/SmokePuff02.png.meta",
+    "hash": "32F2C7FB0FF87654BCDC362513742D14F07E99272F628B731E5816952E45943D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/SmokePuffNormal.tif",
+    "hash": "A366669119EACA567D860B6A0261B8B3E714C792BAAC2FD56634AE17A1541A22"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/SmokePuffNormal.tif.meta",
+    "hash": "EF516BF9D1D40D1ED1839F35BF83B5AB6ED487219ACDA399FAD4F43331C70471"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/SphereNormal.tif",
+    "hash": "53600196C52D80BFA02C8CF1808C32B76C41DF981AA5C90FD6A5973A9F387AC2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/SphereNormal.tif.meta",
+    "hash": "309CB1BAC76D2614CF3E7C3F4D986520F166003E62A028D0A5511C5C7D24476F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/TinyFlame.tif",
+    "hash": "F85C0F71AD62DE912B10DD33B8E6C83FE38B86DAD8C74AEE9A916E64D6CBE110"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/TinyFlame.tif.meta",
+    "hash": "3149A35355DDD1988742EF9C60C74908F1CBE3EF342B6EC00AB881BA983C331F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/TinyStones.png",
+    "hash": "BF77084E0CB00D83AC8CB2D1B6D21DE8375F4DCE775D2FF72959428A056E1437"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Fire & Explosion Effects/Textures/TinyStones.png.meta",
+    "hash": "91D71A6F6CCA660EB759FF4487B02FD4A5F79837DBF3986DEBF697CEC791E618"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Materials.meta",
+    "hash": "ED6239AAB833B1C0D618AAE8EB4151B2AA529D138B91FF5E40D7B9DAF78CE576"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Prefabs.meta",
+    "hash": "C729BE926E99FC3282DC53366B6C975C660CF3D8FA55D7068003776F7A5E14EC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Textures.meta",
+    "hash": "67CEADE138EFF77A46A58BF495F919856CF02556549D38D85543C40A9C0F9EF7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Materials/GoopPoolParticle.mat",
+    "hash": "210EEA851C4A31667266286209EEC85C0B79062EFE9BA32E7E78EC996C3BBF2E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Materials/GoopPoolParticle.mat.meta",
+    "hash": "ACAA31E3F37632039BCC87048A7A767876A5AF287A8D8A7F6FADBBEC001C1FA9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Materials/GoopSplashParticle.mat",
+    "hash": "BB8E3B60CEAA7DC83403E623F39C2E21CF5FC28A729BD7F8106444F20A129FA2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Materials/GoopSplashParticle.mat.meta",
+    "hash": "A40640251505F061684A9FBB87E112BCD765B16E2AC1B4DBB3DC19199A08FE11"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Materials/GoopSplatParticle.mat",
+    "hash": "64E2168A80A2576718E76093911D4C325FDBE8871AD6DE41553D6AE981438249"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Materials/GoopSplatParticle.mat.meta",
+    "hash": "EEAAEC011ACD2C7E14CA6B7457169F85C3664A23E04B3EF0492E0A66D7813CED"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Materials/GoopStreamParticle.mat",
+    "hash": "DF1C635D61854AC694D89628801913BFBBAF67441C8D3B20496FAF9E07F232E9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Materials/GoopStreamParticle.mat.meta",
+    "hash": "B66C40FCF6A7F2590CC91CD7EB98A7F52D183C65C86C02C3B8168AD25E2006A5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Prefabs/GoopSpray.prefab",
+    "hash": "7FCBDC9E34E61C1D5E283AB5647647C2724FB928457628084EF9B9059C083326"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Prefabs/GoopSpray.prefab.meta",
+    "hash": "D5376491CB061BA8028D05BC640FEE34BF6B2B2B3959E1304461465AB4D4649E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Prefabs/GoopSprayEffect.prefab",
+    "hash": "D58B2E21CC56E485500C894BC9430BB74C98E0AC54F6A02409141C89F89511DC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Prefabs/GoopSprayEffect.prefab.meta",
+    "hash": "CCCED3D5C27BA46E8D328419B268C314CF8664E1A34B724FA4D32B562241123D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Prefabs/GoopStreamEffect.prefab",
+    "hash": "95F49B556EA4843C384FF9E403889F3CA069FA52F0FE70A110FD0CF96ACC50B5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Prefabs/GoopStreamEffect.prefab.meta",
+    "hash": "D9C746D31076C2D76ADC353C31F7F9C22E0FF95C844A6893592BD8F1990DA42F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Textures/GoopDropAlbedo.tif",
+    "hash": "D7B2BD69B3DCDBE1C0583ACB081876E471F00F5D5E9C6AE817053D96B8B70469"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Textures/GoopDropAlbedo.tif.meta",
+    "hash": "8E0F65D8C7E87A22E726A70980E7B68D07B4F93B4462F17933BC0A0BEC47F736"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Textures/GoopDropNormals.tif",
+    "hash": "F6090633084C96474A777BDFAD5DD42938CB47E58293A58973266008CD7D867C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Textures/GoopDropNormals.tif.meta",
+    "hash": "A18104EB7DF8A9C18DA7D3C593216D0A6E69DC34FADD84BF5664787C01E2A197"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Textures/GoopPoolAlbedo.tif",
+    "hash": "578355E1A137A498EDE686AEB94F0DB2B0C4825F985143777015F1DFCC4DDDF8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Textures/GoopPoolAlbedo.tif.meta",
+    "hash": "8559098317441B6453DD5938A63FFB7A601820CE23FB575564677556BFBB6A28"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Textures/GoopPoolNormals.tif",
+    "hash": "A3FC83A205A90A2C5F40C32E56C8E7E6AF4D236D0FDE793F7D64BED23E4B1E3E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Textures/GoopPoolNormals.tif.meta",
+    "hash": "14F50F7C9B0D3D1F3FAB92F2F58B404F386171EE88F23D3E905A7EE7D041FAA1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Textures/GoopSprayAlbedo.tif",
+    "hash": "DEC7A822FAB859A15892C6E9BFDBE4441724D8BD59AC7A6B6FE49C119F5B0881"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Textures/GoopSprayAlbedo.tif.meta",
+    "hash": "E47A046BC447E9D4178C96D8BB2EE0811B3788A2A2083CE9D024289C761E18EF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Textures/GoopSprayNormals.tif",
+    "hash": "3D4FAFF0077D0D36A59D9AED41E630DD241A21C87B919AC2E036407E0680CBCC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Textures/GoopSprayNormals.tif.meta",
+    "hash": "6E4325B561FC3473EAA5DB1830C180C8230C2A2BF216F656D03FAB88DE7A2D6E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Textures/GoopStreamAlbedo.tif",
+    "hash": "6094BDFEDC740EC6CFB82E6BA663E1DE371082A8DA7C0739D2F4D1A7F52106EF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Textures/GoopStreamAlbedo.tif.meta",
+    "hash": "9261B2C9B0E17A6C2D60254FAF02011B5DE0F49622323A4F8A1D5E1EFB774D0E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Textures/SplatAlbedo.tif",
+    "hash": "CB6EEB9B6BEFC35E9C02DA043F9E5A96CF4BB58D07222DC2273329895895C0A2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Goop Effects/Textures/SplatAlbedo.tif.meta",
+    "hash": "9C60A06CA698A288F76BF310EB660890EC8C3AC4D8CEE235B96CB168E4D63E17"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials.meta",
+    "hash": "14AAC1A76BD4EA1FB582750B3207DFF43DAF2AA9E80F78D5F11D088BC7C22E32"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Prefabs.meta",
+    "hash": "2FF6CC4AB49FE7DFB945FCF356C28D588662584F60F87847535E5DBB56EFF188"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Textures.meta",
+    "hash": "EB2653B0F50E4BFDD80139F39AD3739878A4F625CE965645E780B36E9BD1E2C6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/ImpactSplashParticle.mat",
+    "hash": "095196A2B53B14E08CFB49A6060063AC74B0A9C4D19907424A10DDB3E2633286"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/ImpactSplashParticle.mat.meta",
+    "hash": "D9AC2A73DB9BD72E15F5C1AD52CFABF250EB58E7F3AA65BF5EF4C0C56160ADC1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/SparkParticle.mat",
+    "hash": "829FAD6D6329670DE1C5763F2F22F6D612CB86F9E00250B13C6A395E1645FB44"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/SparkParticle.mat.meta",
+    "hash": "44925C33F1B4C37CAAC74FBBA4A3C36AF9FA49CB7D13CDECEE81568F688C7130"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/StormCloudParticle.mat",
+    "hash": "7A7A247520130F32FC0861E2E2A9EB34964A1F05000D46CAF6A1A955B958670F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/StormCloudParticle.mat.meta",
+    "hash": "55FEE00F20F8E9455D1F060267FBCF81158CA7AC20234235825231A1BF631A06"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/WaterDropParticle.mat",
+    "hash": "68ABBECB14AD0D5F1E6FD09E534704F892CEF3805ABF57B7716A43A7DDDB1CF9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/WaterDropParticle.mat.meta",
+    "hash": "6E211671B6EDD8786C346DD3D3BBEBBDE47A1A1C73C05DC5FF6C94ABC9E1FB80"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/WaterfallMain Spray.mat",
+    "hash": "7E9524FD1B33786BD0000F551073E4FA98ACA9E7D3693B5010F1B2400DA2661A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/WaterfallMain Spray.mat.meta",
+    "hash": "6DA6F5E8B16E4F6157D80B7F3A4900E16E70ACC5709EF2E8BE7C775AA9F190E1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/WaterfallMain.mat",
+    "hash": "CB6851DE227BDCBAF05C58D8012C929D881446911A423DB19303C799957840E0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/WaterfallMain.mat.meta",
+    "hash": "BF426A688DADD7871D4859B3B880E32367BA1B836AA6151B66640A42CF1809C6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/WaterFallRipple.mat",
+    "hash": "C77A34F54F6AA8C019C274E8137948C22438D42679B6C91D5DCB092EE26062EC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/WaterFallRipple.mat.meta",
+    "hash": "DD7EE4184ACB016A000180AAD56393270E85C78F01ACEC94E6E2F7CEEDBE27C2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/WaterfallSplash.mat",
+    "hash": "C14F228479C3E83B70819ADD21F6801A6E79525C301ACB0E90277CD9A371F31A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/WaterfallSplash.mat.meta",
+    "hash": "E57F3661118D1B9D93D7B8D8507144C819D2EFA8A1C14AC8D84AE27E10BC79A5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/WaterFallTop.mat",
+    "hash": "A71B029F17DFF7EEB0ACF3064EFEE6B76A86DFCC27F17BF04E915C75FD6F97BD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/WaterFallTop.mat.meta",
+    "hash": "38CFDE344F8366638F474328F49D5379C509A53C62A87E2D6D6FC2F4AEB92B58"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/WaterRipplesParticle.mat",
+    "hash": "50E9C506C9D57C5838290A587CD7855AE7BFE258F201E3063C1D3B3391A2A9CE"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Materials/WaterRipplesParticle.mat.meta",
+    "hash": "AF68BD585AE758B9DF19FD69226A48ECBA7028C31AB32F64BE7BF39D2696F10F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Prefabs/ElectricalSparksEffect.prefab",
+    "hash": "B6BE6C8674FF7B0C1C83B0801F18D994639C157599FCEC70595323FBA1539724"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Prefabs/ElectricalSparksEffect.prefab.meta",
+    "hash": "4743F071D483F855C0B5470B2D563915F02220B1147E865273DDC8D4583930DD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Prefabs/LightnigStormCloud.prefab",
+    "hash": "C2C40239B1F100B821CCB3FE0D55679017C5333B26AC497BFB7C4BB10D8D9C53"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Prefabs/LightnigStormCloud.prefab.meta",
+    "hash": "7BA1F07326E2712AA0D79649FB81BC1D0940CDF8807C964350C3EFA8E673C820"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Prefabs/PlasmaExplosionEffect.prefab",
+    "hash": "02D4D97240F0787717A070DCFC926AFBF5F328F0AB5338CCC6D1E3D2511466F9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Prefabs/PlasmaExplosionEffect.prefab.meta",
+    "hash": "E7942E62D79C906D1E8A8AEBD6ACCDEA63110BF1FA8991688644035D23E45B45"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Prefabs/RainEffect.prefab",
+    "hash": "F02B9111691CFD98BAB892204B2761E3BCFF94F1B3236FFBE41844DE868375B6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Prefabs/RainEffect.prefab.meta",
+    "hash": "DE5430040ADD2F00D42E13223B7A34FA567A9CAAA8121AF0A0DD7ABAE4627A9A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Prefabs/SparksEffect.prefab",
+    "hash": "902BF6F638545ADCAEAEA36FF769A512F68C49345EFC7C7B72C4D7E2537638BA"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Prefabs/SparksEffect.prefab.meta",
+    "hash": "7C1510A705FC62DDC7A58EA4545E4E8BD62FB84706094428A94DFC18DD1F24D1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Prefabs/WaterFall.prefab",
+    "hash": "C058B0492E6BBF95D1552FD1C75CA6A0AC5BB14325630339E58C1A2F57AE16D3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Prefabs/WaterFall.prefab.meta",
+    "hash": "57EDE72911B7CB437EC58FEEAF69460EF0BE143B78B44D5AA89815FBA79A9B88"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Textures/FlameRoundGreyParticleSheet.tif",
+    "hash": "E708BC4973AD54657CBE1771C3D63B5029391B264870962BD8746391F6B61290"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Textures/FlameRoundGreyParticleSheet.tif.meta",
+    "hash": "51C1F9F361DC90FD61CC1401954EDDB8F4DC187E511983A31905637E7065BA00"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Textures/ImpactSplashParticle.tif",
+    "hash": "9434593ADDA719998FB14A59CB75F3F0281CB093F4A03A59DC8466671953D41E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Textures/ImpactSplashParticle.tif.meta",
+    "hash": "2BF4F5FC7BE9A9A555ECDF14139083D391A4C676042EA3A1EA2CE14E61091848"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Textures/WaterDropParticle.tif",
+    "hash": "8AF52110ABADCC86E953B20B95E6EF1C5CCC74C3C13CEE4B68B3F5472C1F66C3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Textures/WaterDropParticle.tif.meta",
+    "hash": "40FF6A7D2C925CA95475C43937272A55E9997E1CEBA64A814DB1FFEE4AB4D149"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Textures/WaterfallDropTexture.tif",
+    "hash": "3868E20E7EAA66D66A5B565E0914402B61DBE748DD552F749A0246A585C4A09F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Textures/WaterfallDropTexture.tif.meta",
+    "hash": "6FCCC020568B165D135C52DED3B0330170A3A0A314B9B5F366341E142D896485"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Textures/WaterMistSoftParticle.tif",
+    "hash": "55E9179DE884BD341BD5E67D89DCFDD62BA172A782F6F6FA314A826B4064A87E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Textures/WaterMistSoftParticle.tif.meta",
+    "hash": "1A8CD6964A6D02C2F873FBD0A143F47740CB66007AB9EA4E128A6C794B96F38F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Textures/WaterRippleEdgeParticle.tif",
+    "hash": "B0A5BEBBC81EA1D3B07BE792628AB219C922B88C9B5636358F7ECBA5B89CE6EB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Textures/WaterRippleEdgeParticle.tif.meta",
+    "hash": "D84CD8B2F4516C99D500016CF88696E359384BB157D9A57812A6AF188EC83DC6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Textures/WaterRipplesParticle.tif",
+    "hash": "AEB0F8F0CAEAD764016DAB29843E00D2ED5E157072F69A0A58CF67A151555C36"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Legacy Particles/Textures/WaterRipplesParticle.tif.meta",
+    "hash": "6FBC487E90E60E2AD04103B800E18A9186F75C7855E9EB1D29A9B94AC8769200"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials.meta",
+    "hash": "EE845F008470BF456DF9179063FEF10AD703315E57EB5C128F9DB7BB82831DFC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Models.meta",
+    "hash": "8188C4D47DE98378E330FEDA7A5525D0E0460FA37490A310C64D8C81A73C77DE"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Prefabs.meta",
+    "hash": "81379485819075CE858813A0398C0EBB390E935B30B41133A774A7C0A6373035"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Shaders.meta",
+    "hash": "9CCDE262D1147E60A2C5BFC9317FDE7A7068EBB1F391F44B887EF9812FC107BF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures.meta",
+    "hash": "CDF72AAEDC8144BF5AFDFEB528D80C3E0493FFBB5E5269945C85304D4ADEB80F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials/EarthCrack.mat",
+    "hash": "656129F26E622EF474A91F43913C021A419E272C3F40B575B4C38D46BD0F9D28"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials/EarthCrack.mat.meta",
+    "hash": "6D72E64C19CE286AB7955FE63FDCEC739EE9A4484410005AE964E5014184C303"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials/Embers.mat",
+    "hash": "397D9F75DEE52B9A14A404FF0D3D0DE7DB6B65AFC46693486DB61B7F2E76DE63"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials/Embers.mat.meta",
+    "hash": "72E3B0698C10271C49E175BC01F8CE608537B4D454AFF0DD279896A6F3900152"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials/Fireball.mat",
+    "hash": "8D2C433596AC332B103BE9BE8B994B08C0AC268FFCB88502774EAD145AA7B810"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials/Fireball.mat.meta",
+    "hash": "C60603895DE5DC51A0AAB42258D92474507CE67579B6596D0C93CC0530CF20E5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials/Ice.mat",
+    "hash": "C4C5E9BB19F59E936F7640CB2627D792AD9E5C28868819038AD87A3D624D951F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials/Ice.mat.meta",
+    "hash": "D96D24509958E88C4DC45A4A4589A3C50A636C572209C3F2DCD2FCCA84CFB9EE"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials/IceBall.mat",
+    "hash": "AE214746BA851C7CB4C18F349E46C940BB15660E7B8554B34D4E732BA22B4D9C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials/IceBall.mat.meta",
+    "hash": "E01173746AB2562DB434732C3684A5C0C20B2AF6486E5E47018683869BC10C73"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials/IceMist.mat",
+    "hash": "CB2FC9B4718D6658224EC328C0BAE4D3B905B3E2B7EB11753C22252A3E0AB5A1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials/IceMist.mat.meta",
+    "hash": "0E32296A4B9387B719B85BE041CA4BD84554A4038DCC676AE407A43EDB058B21"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials/IceTrail.mat",
+    "hash": "87846B509C4BFC724D2A4D95C3B22095D3148E7B171A82B5CA57F806FF831A2B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials/IceTrail.mat.meta",
+    "hash": "08BB8D77A4EC3CF5DB6DBCE607921C8CCA43D391B1C428334F6960835FEEFF09"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials/RockDust.mat",
+    "hash": "71ED63DEDA6EFAE77FB107065640839FC89D457B27F056349CC1855A9997DBBC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials/RockDust.mat.meta",
+    "hash": "401120E7B81E3C1D8821B54B94E404493167853B91681B189458B01337D148F6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials/RockSpike.mat",
+    "hash": "E5DC04B57293238FF199DA11C889D515E4473A7AE2A1FB1B0CADA403D9EA5E43"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Materials/RockSpike.mat.meta",
+    "hash": "B6D658D801E8408FDAAA715D258AD834F2634B9E1550B01B6155AE377FEEDC89"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Models/IceLance.FBX",
+    "hash": "2E809DE3B9BFE5610136805D141C0A74F492B513AF6666629A597A4EC6BDBF2F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Models/IceLance.FBX.meta",
+    "hash": "2AAAF1797B085E62D81CC19C970DCEC0C7489A5C8B2225EA8B5E07FF2A414E81"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Models/IceShard.FBX",
+    "hash": "7996B75EB94435B93900017EB2080DD07F64B0CFEF03DBFFC4D71FA3284C0E7E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Models/IceShard.FBX.meta",
+    "hash": "7C321AF75E6F54E0F785D4A9A432C1DBD8337FA2BFCDBD66E333CCA9AAF74C2B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Models/RockDebris.FBX",
+    "hash": "AEFB7CABC19A25906BAF1E93778AD810576560AE8D3A2D45500C71AECA7BFF84"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Models/RockDebris.FBX.meta",
+    "hash": "55C3FCE0F64B138EB8F700EEFBC0C04DC5701E12A80DD1FFE8C025FCF5A73777"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Models/RockSpike.FBX",
+    "hash": "4F66D6FCFB6C657F43EB54CD6F75600E1CB8850D868406384AB383310F4D83FD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Models/RockSpike.FBX.meta",
+    "hash": "A4DBB75BFA85C55C52F889ADAEEB6F3A9988BDBE6751B5A58AAA3A5F3B52895F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Prefabs/EarthShatter.prefab",
+    "hash": "57BEBAF16E87DB56337930D7AA8D5C32D60D6EBCFC760A066A4BD0A7AB32C83D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Prefabs/EarthShatter.prefab.meta",
+    "hash": "626F09952909B8569DBA5D9F447063FE993CD884C6324904F3E0BE1E4905D40F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Prefabs/IceLance.prefab",
+    "hash": "B636A0CD095523ACBBD9900579CE59D7C7E9E7B8D75DE09D97298D32D4E4FFFF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Prefabs/IceLance.prefab.meta",
+    "hash": "1325F6306FAFE75AED7256F48917DA80E5682D8F399EA9A1B61F8014F0D480DD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Shaders/Ice Ball.shadergraph",
+    "hash": "6A58FA4D42964FDF4E6977D7E61300E4213310213CA78164F3AFAD40E5577161"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Shaders/Ice Ball.shadergraph.meta",
+    "hash": "EAA3099E80E6B611FA025FAAA68608CA33B4CAF6C0BE16D0AECA44632B7BA3EE"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Shaders/Ice Shapes.shadergraph",
+    "hash": "E7C02535565AA2F5721B253D63267F5C294360EC48DB2BCF5730734FC3125028"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Shaders/Ice Shapes.shadergraph.meta",
+    "hash": "99039D5BC009E69EDCBED7FE0367779E19C9BA483DD8530E86727C192BE51BD7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Shaders/Ice.shader",
+    "hash": "E0C89621CCC555B443E102F924E690D6EC92A88BCCA4F7B45F6208D393E09023"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Shaders/Ice.shader.meta",
+    "hash": "7CE4D2CB49DAECDFBB99F97C646E740B194B3062223042868538315A7324FA4D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/DustPuffSmall.png",
+    "hash": "AC9E88B867DCE6E8EEF7B8392233437230DAA4E850747B857DFF7E9FEF28C690"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/DustPuffSmall.png.meta",
+    "hash": "54CCDE23174E2D873F1E2EAA7BE337C30FECA6A19722F25AC81A45EC9D281DE7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/EarthCrackAlbedo.tif",
+    "hash": "743BD61DA057A99A67212D27DB892314D2C15E6C232FE75DBD7B250C294126C5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/EarthCrackAlbedo.tif.meta",
+    "hash": "E9E9B6FD2EAE66F8070A4A27BF8A23868CB8A8BB652E2AEDDA8D0AB13E755651"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/EarthCrackEmissive.tif",
+    "hash": "8537D56607D0A93A715BEE9D63A79BB8A87D388F761DD6930B10CEC7F8F06A74"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/EarthCrackEmissive.tif.meta",
+    "hash": "A239BDB530120410AD7049D1E34A806196227093FDDD4014994F712C47583A16"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/EarthCrackNormal.tif",
+    "hash": "DB18EFC424BAC49800982524A01DAF477D17AD1935AF722BD41333651B20A236"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/EarthCrackNormal.tif.meta",
+    "hash": "F271DEC5C82EF71BCD2C72B83E84B42DA10339F52680BE65D2954D2A6F8861BF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/Fireball.tif",
+    "hash": "27FAF5F13FE8191D38037475B1421981FD6380B32F2362E82FD113E48CF97EA9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/Fireball.tif.meta",
+    "hash": "EE69F577E4344A264582CD8079BDF5714994B75C24381563C97DF76D07F29029"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/FireBallEmission.tif",
+    "hash": "34B9B8642037AAC089D0FE1E87541E1163AE1ECA0C526086C73DA5B0ADC57E3C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/FireBallEmission.tif.meta",
+    "hash": "50F70698EE052DAE72779A61AE775658A8CC441052B3C406F0C464EF2AB62F74"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/IceCurvature.tif",
+    "hash": "19DD1A0B472AB27178D5F5526BAA86BDD5CEDDCC84A75B4C910EF50C183F72A0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/IceCurvature.tif.meta",
+    "hash": "957096CB90830667C556F1737A3D9075CF3C26335957961DE36195E38F4DA171"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/IceGrey.png",
+    "hash": "23727E221C3610B249DAF0662A32BEDF8041F78B150D12B2720E3C5C8030F832"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/IceGrey.png.meta",
+    "hash": "2F70BE8A2DB56D6E604A796BFD7C5F6A4D7B2EF5E39A935022854EECB459A79E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/IceNormals.tif",
+    "hash": "4BAB728F6012DFEED2BE6CD15AE17D6048547A113613DA69353B76EB787196E5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/IceNormals.tif.meta",
+    "hash": "99FEB386EED993A3FB76A4820C2A7CD4CF5B30AF6D9F48524EE00579F8AD27C9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/Ramp01.png",
+    "hash": "1EC8AA9A93C708DE523D03B9C699AD07166F163214FCA687C7435920343B577A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/Ramp01.png.meta",
+    "hash": "8C7181BC655A99F459C37D6BBF5A0A84FB7E897EBAA71BAE40F358DBB1FECDB3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/Ramp02.png",
+    "hash": "E4FCB5265594A24AE379C5C2BD0CDFFC2FF4E3FED663786884D86D6F6C2B2687"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/Ramp02.png.meta",
+    "hash": "C19C006ACC5054B58F44F4957A71C8E800AFD466D23252FDCE7061BFB45FD91D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/Ramp03.png",
+    "hash": "047FC58B8B531743D1711B33755B1F5F1D5086656E667D6403D9AD81B5374501"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/Ramp03.png.meta",
+    "hash": "6E90B8EAE83447E65B2260CBC31C06598AD9813F91C38BDDE768C961B9DA0B75"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/RockNormal.tga",
+    "hash": "60B9743AD0BEF219EA60FB28BFCF34FBF7D18EA86E2F5CA1F48390E44AD07795"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/RockNormal.tga.meta",
+    "hash": "041697ABF51B5B18747A21D361D712F258B76424E9B2364575B82D149537615E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/RocksAlbedo.tga",
+    "hash": "B675B204A807C768F83A0B09BB4844E0B261AF41C04AA10814FC6F02A3CDB790"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/RocksAlbedo.tga.meta",
+    "hash": "519D5DFA20C336D8005100E1CFE686017BA5AF7BE2A971CFF83210CB3575B5FD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/RocksAlbedoEmissive.tif",
+    "hash": "AB2B62A9871616EF471364395C176DBEC0F98062C8987AF245905162FB9704D0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/RocksAlbedoEmissive.tif.meta",
+    "hash": "EC30DF51F0B16904C93EA835825CE7D91456286973B99126FFBBEDCCE7F31BCC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/RocksSpecGloss.tga",
+    "hash": "9811E4D57A61CD4142CD7DD4F05C8B61FA2AFAD7F2D8A83FCCE08B4E990DF6B5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/RocksSpecGloss.tga.meta",
+    "hash": "D69DD581966325BC9D7B2FD73DC143309D3A1D6A940F58ABE9D5848DD46D6624"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/SmokePuff.png",
+    "hash": "E0677593DB49291A68DCB1CD1042565693F7A9A440D701B2B2D188CCF553D245"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Magic Effects/Textures/SmokePuff.png.meta",
+    "hash": "AE9F1EFC59A0C2AB86865191723F702D41CA259C279411B84ECCC382F68EB2D3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Animations.meta",
+    "hash": "25459DFCE6170FB41475592DA59DFD42843BA3638C66110189A5346EFAF2CF08"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials.meta",
+    "hash": "487769F7882D9558F66F7DF2303E8B037FD94077EFD55F873DA7987C27759E7E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Models.meta",
+    "hash": "5A1A9D678390238EE8FABB7748C5CF804DE822D6E326F368B54748A7B68790C3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs.meta",
+    "hash": "F62FE5841BDF520D957A4CD54C5044EBBDCBD80CD918B9744F294BA40BF31183"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Scripts.meta",
+    "hash": "F93EA57BECAF254E8D21B465A0A2845D2C42871D1833054E37671CD99DC05CA2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Shaders.meta",
+    "hash": "7B2CA17148D6E206205BC92324D89A9087A3D61055FDC949FF6D7717A8A7E9A9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures.meta",
+    "hash": "B786D28B6C439F9666FD725BFA51B76ADEFE0C531B9ED8640829C7BCFF175F2D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Animations/@EllenIdle.fbx",
+    "hash": "124DDF0B6A5C8FAA24A014F3FE09A014F60D54ADF36D5CAF8E18388ED0E27928"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Animations/@EllenIdle.fbx.meta",
+    "hash": "4AC244F4BEB332BB3969155AC677A87A8FA9D8E9B24332BE8BECC55B02BD8674"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Animations/Ellen.controller",
+    "hash": "BDB091BEEF4A60CDF606170631BAF4C7E40D6F23B7B0A554EA77F6472828F0DA"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Animations/Ellen.controller.meta",
+    "hash": "AD53C53BA833504B20AEDE0928A724CE3347C8FB664395C74272425A8A0C7992"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/candle.mat",
+    "hash": "D0575941AA64D802363C16959AD5C7DEDED76E6E2003F06A9E78D8DCF835798A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/candle.mat.meta",
+    "hash": "24463CAD4C7B1BCC4576484BDE11E918DA72AAA868BFCE1CD2961946F76E25A9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/CandleFlame.mat",
+    "hash": "80477C20D6D6552798F177D8F38ED97894BC9F0671662605FF40F411D8F0BBE2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/CandleFlame.mat.meta",
+    "hash": "7170ED3A7D9387934DF0E352054C63CF17E63E877DEAFE92903DBFC6FB32CEBF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/Dissolve.mat",
+    "hash": "0FE16D31A8BCB193C6AA2D4C26222D9EE49511CFFA37ED3E6BF9D4BDF41AAAAB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/Dissolve.mat.meta",
+    "hash": "38CA8A6FCCE7EFC9E1FB7622ECAA3BD9E5D0B173C4E7D561E074461BFD472821"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/DissolveChunks.mat",
+    "hash": "2A4390ECAF61A8A7926D9144ED7CB85E5E52887F2F44DB5DCB7959462C31C9E5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/DissolveChunks.mat.meta",
+    "hash": "33F93DCEE3C4D95FD870955C12F9AE79BAEC41DE6158A9915C2F8A6BB7E8B3BA"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/DissolveLineHorizontal.mat",
+    "hash": "BA219FF4F2BFEFDB607029AD0DDAB9B5E8E1AE520AB8078BCD2F9F91CFE94383"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/DissolveLineHorizontal.mat.meta",
+    "hash": "193A86299C416D21C8D4FF4DEF1C50134F56AD3E42EA33A2FC321213263C10CF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/DustMote.mat",
+    "hash": "933AAF04D656ACF9907235ACCD1C882305EAAE53B0D403C26DC84D5461567CB3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/DustMote.mat.meta",
+    "hash": "AC54D2DEDDF0BD7D77337E22F10F690A3C2AC55F8E114F42C3C3E893E03C35DD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/ElectricalSparks.mat",
+    "hash": "EA77980367791B6E1675B1FE5559E50C218846F029AF70C68ADD2770681BAF05"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/ElectricalSparks.mat.meta",
+    "hash": "6B7997EC15FF5292B1BCC38AB7460D72A22BBB481FA24E5091D8995D9A31479B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/Embers.mat",
+    "hash": "99B3BDFCE34F173B3CCD622BD5EB175AE3479F741CFF7692C40BAC5E7840A3D3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/Embers.mat.meta",
+    "hash": "BC38A19B25EFDAC5B908B05D6934563283011C412A3559A35945BDE5E9E0DDD1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/FireFly.mat",
+    "hash": "6F05C3C0B8211989A8103501208FC23D52DAFEFDFE85031868228C0C14B1D0E5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/FireFly.mat.meta",
+    "hash": "3EA6A6AF904F7E3B2634B71A9C3903A28E17DBBD36E499E1EB0CB8E49E2FAF54"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/FireFlyTrail.mat",
+    "hash": "76027F59F29A3380E5F94933C165F4089BE11D0031D16E1DA9DD66976B627F6B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/FireFlyTrail.mat.meta",
+    "hash": "3B8D501B5BB09B479C54E2C9C3154AF0D66E2E08C5E51012AC2A2466EC8E4974"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/HeatWobble.mat",
+    "hash": "961BC4884E85DFAC9E2673118B1FCF79D41DBAD3BC3030CBA55D37268B820B24"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/HeatWobble.mat.meta",
+    "hash": "C2A6B9405A76C4972E4CF4F5E3015604B7E0E04E2E7E8A28DF536117D229A735"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/Respawn.mat",
+    "hash": "C2D2665F914BC070DAEFE9207D894E7552B413316AE01AD8B5F87DD192C9484F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/Respawn.mat.meta",
+    "hash": "7BBB7F34DB73D74CAEE124DB5719236151B15A62721FDBDDB8B056602AF10980"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/SandSwirls.mat",
+    "hash": "C314EC670CA7AB971AB221458EB6AD1EF1A4CE5FBAA9F248DE666E2AAE96E7E7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/SandSwirls.mat.meta",
+    "hash": "B81B8CCDA0A9D3C9AE984A9C6CBC344526652C8C2B11C0576C1C651D82503E44"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/SmokePuff.mat",
+    "hash": "EFF811193E3694DA868C1A207F757DCCA2FEF4ADEE3E94AC8BC1726DA478296B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/SmokePuff.mat.meta",
+    "hash": "0D6D443CEA16B924A3C8B88B89E099D9817A8C2B39DED184F2D6482491862817"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/Sparks.mat",
+    "hash": "21B015D4FD7702F2A91E6F66BCE91751ED55EC27EAE3D432C591060B99D2AB70"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/Sparks.mat.meta",
+    "hash": "9D55D30939A1FA8041E20F7A25CF86A14F89AEEACD41B47FB3EF78A30D14FC4D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/SpawnTrail.mat",
+    "hash": "4DB222A665FDC3BB5BAFC19CDF1A52342FC506577F4EB792CF341BC4321C4B18"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Materials/SpawnTrail.mat.meta",
+    "hash": "2C00101148C0B3C992EDE35A49711BD1926F9178313A19129244C04C727E4956"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Models/Candle.fbx",
+    "hash": "D418F9B364B356B664344987A7043B868F15CA34D599C4CA91CD28A20C25F38F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Models/Candle.fbx.meta",
+    "hash": "6EA8F75247F3ED5856893B82F359C6346C4C50C54424549632709BFB188BE0F9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Models/Ellen.fbx",
+    "hash": "DC775069B0C4239BFF34DC3AC1BCD9A46363C4DCFF7AA04AA9B76BD558F776A7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Models/Ellen.fbx.meta",
+    "hash": "A302EECFAC7C8AC744D98F55572A209447B2B56EC4074E608413B462AD9AEB07"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Models/FireFly.fbx",
+    "hash": "A22B4CCA641DACD4F388E43B15A996B3214C9D12E6C441BDD3C5B1751968C0C6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Models/FireFly.fbx.meta",
+    "hash": "ACDB28B6A8C72C41D3066CEA792EB2730856C04249067EFB73F6317B3C3D6FF2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Models/Flakes.fbx",
+    "hash": "76C7164DE148ED933D4B6BBB74B27449A1704DB31000D71EA93461BD6C4E36C0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Models/Flakes.fbx.meta",
+    "hash": "94DE5C3A5B316241B8647A4A56DA8EE240C168CA4014587047CE01181CDBD8DD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/Candles.prefab",
+    "hash": "301CA0A164F9B168418B88D5B5E817BECD7E9A473E4E6230C7D6D47EA9638D5A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/Candles.prefab.meta",
+    "hash": "20A5B82D116603B4891056AD2C29C2EF81665E95382DDB2A025C22D2FCD392AB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/Dissolve.prefab",
+    "hash": "CA4D61F0315D523B38912716F84E2DD27C9F0E534C1BD1AA3AAC82E9B6CF24D4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/Dissolve.prefab.meta",
+    "hash": "D4DEB3AF9B75E539DDC7EA12B680194A9FDD09EE791E38B65D194DF051D80337"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/DissolveSolidHorizontal.prefab",
+    "hash": "4D4D8B6FA5D92AF9F203CC6FE157350BB9B4FBFC4DF39AD25D600CFAEC3288F6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/DissolveSolidHorizontal.prefab.meta",
+    "hash": "7243DDC4E27F0CE0686643A0C57B561CF0F438A8A0A36192A08CFB8A461EABE5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/DustMotesEffect.prefab",
+    "hash": "B67A4F6F1ADB1ABADC070A12818BAE494016E7D583309B602D30BB0B5417BE89"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/DustMotesEffect.prefab.meta",
+    "hash": "4EFEF7B2DCA5D235D463C261BF7DE18D2D25701AE9A7AC963B6086685DB5185F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/ElectricalSparks.prefab",
+    "hash": "FC9FF76DDDC482DCF588D5EC474894C8082B4726721DB800C8D13182D3AEF09B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/ElectricalSparks.prefab.meta",
+    "hash": "6A0FB0A7A41C0C78E0DA1B3DB2B9665902359CC58EB1515C17C0530AD85F1BF0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/EllenDissolve.prefab",
+    "hash": "4287CD88BA3A97D58F96AAB18F4FAD8482B285B288DAD36130DAC947D377FEF1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/EllenDissolve.prefab.meta",
+    "hash": "266D5284A724937EACDC8C7C94F82BA9EB489B5D9696C65AE28640CA3F8C77A8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/EllenRespawn.prefab",
+    "hash": "413C2B63A04ECC0621B1EAC23B6699520C05A7E59B5C702FDDE08968F36C7E81"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/EllenRespawn.prefab.meta",
+    "hash": "0AFD1F9BD937E19A423863124D3F7865C271124F082B061FC30D1D832EB3767C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/FireFlies.prefab",
+    "hash": "4A4FA2358346BEEDD1CC9CC2DB89B344B69DD7C399BE395C016CC00363AE3BF4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/FireFlies.prefab.meta",
+    "hash": "B18E08E54626F2F77A36BBA03CA1CD93D1A7A0B7E7408F8EAB2EBFDFCB48C0A4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/HeatDistortion.prefab",
+    "hash": "A8020899BD3263A6D3B64FD0298C76DBC681DB08F14D2A3F5715E4EEAA4A2B56"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/HeatDistortion.prefab.meta",
+    "hash": "211B09B3081291122C780A484AC1F7F223D0B19D5B39622078FB28647D9CC4BA"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/ParticlesLight.prefab",
+    "hash": "D6C9159AEB25CF174A609443C205EF623BADD156A368C921E1DB772DA286CC70"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/ParticlesLight.prefab.meta",
+    "hash": "CC814BBE537C3E3B03F0B8C5EE6FFAC5A8D849CC358302E1681B15E207D3893D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/Readme_Dissolve_Respawn_.txt",
+    "hash": "2F302C62D542FDF29DCC6597828C494ADBF0A2B55B6A94D7DA5894CEE89597CE"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/Readme_Dissolve_Respawn_.txt.meta",
+    "hash": "AB21C4DDA4910C00630D41AEA803AB41B2FE93564089368BC6DCD13BD8BAE070"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/Respawn.prefab",
+    "hash": "F5C746D5F9EE72AAC22C50C8DEF8A1A4D9D493D98BC181BB8CD820812754E721"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/Respawn.prefab.meta",
+    "hash": "AC307AB07635FB0632E6DF0859EAB4ADD66CA24F41402973B7EE31F6C6D54E20"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/SandSwirlsEffect.prefab",
+    "hash": "82955D7846B33294A647FACC58D9EE8D74CD08BCEA07723187C8145A8B8D1D8C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/SandSwirlsEffect.prefab.meta",
+    "hash": "D244182A96C860B2E44D9A4E66B1F24B5D29571129FB074959778097E80C2EB7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/SparksEffect.prefab",
+    "hash": "0D05C3255996D249995FF52397BF1D887D0F892566AC170F3FE3452DEFC1DBC9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Prefabs/SparksEffect.prefab.meta",
+    "hash": "85A7A408DE19FEB60A11011BF92C0646449B8EE47434E6B05D4750A076BADC35"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Scripts/SpawnEffect.cs",
+    "hash": "169B3DAAC0B00F2DB698E1F6DC60873AD53E112EA2AABBB1336BE5B4A9030D19"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Scripts/SpawnEffect.cs.meta",
+    "hash": "6CDD45D7C55C38FF9AFC275B50DA9432A66EAB711D209D1D6598F4032E769993"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Shaders/Dissolve.shadergraph",
+    "hash": "5595E5F335A34640C8FA0AED384DA5E3939950BF74E3E21D90AD270B64682700"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Shaders/Dissolve.shadergraph.meta",
+    "hash": "B19A30742FBF9F01230E77FF96ECEB1B21F46C5D9DA562B87C07A12A28C631FF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Shaders/DissolveLine.shadergraph",
+    "hash": "CA9BB9715299E0A35F0D2CE7EDA6133321C9959D659D17A9A484B613B3919A78"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Shaders/DissolveLine.shadergraph.meta",
+    "hash": "A75FE1EBFBB88A57B7F7B2E250428C9F04AF8F54A26CC43E864DD1BAA42AD2AF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Shaders/FireFly.shader",
+    "hash": "9000B7A9810EA29BCCAAB2668423B3D6365172441BA01E9AEC067AFF7FC12A29"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Shaders/FireFly.shader.meta",
+    "hash": "AAE633E009C575946573B79CA437DEFF68528878B2A434CD948C13A85A0A7EB5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Shaders/HeatDisstortionWobble.shadergraph",
+    "hash": "157627BB344CB6DD1C4181AC958436B7D9CE849E1FB5A8336D018ABF8303B732"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Shaders/HeatDisstortionWobble.shadergraph.meta",
+    "hash": "3898EDA6B81D3A83B214D27BE4FD94CAFF01D834DE4D4191C1C43929788B9D3D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Shaders/Respawn.shader",
+    "hash": "1DA340CA4CD876C579514266B073902CD29957E183D108B97EE12B565F69D0F1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Shaders/Respawn.shader.meta",
+    "hash": "7F909557D3DB00B73CBF98B9348AD3446462382B81692163572855364F07926C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Shaders/Respawn.shadergraph",
+    "hash": "BFB1D43968CA11B83D3D216862B2F1BFC16E77E3039D665275E6210C3A595E38"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Shaders/Respawn.shadergraph.meta",
+    "hash": "B3F3219C34A8EFBC59BBF5AED924761FDD1E06429B8212A76A05D06FE43B7677"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/CandleFlame.tif",
+    "hash": "53F712D7D0D030B33DE2CC452D2FC9C9F453FCBE4E246FF7D9B40F4D6B0FEDFA"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/CandleFlame.tif.meta",
+    "hash": "93374A0B810777E34D0F5A43A68A1219F64ED8CBCAB1738528ECB3B367C866F4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/Clouds01.tif",
+    "hash": "6BC08CF80CEBA563A5A43DD897BF742FD6A40EF43E19E5C5D7830CD47EFEE860"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/Clouds01.tif.meta",
+    "hash": "E3DFB499185C471D88561A86BE59E21E619CCAEDFC0CC6EB3A31535388FDCF2D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/Clouds02.png",
+    "hash": "E47224D4F1848558DCCACB088068D39FBB0C67A17A459B1E796A91E7D70F5576"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/Clouds02.png.meta",
+    "hash": "D35AF0287BB1389BF2CEF7EE5D54088B1BB49E726CFE9463085B630528C55B11"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/DissolveChunks.tif",
+    "hash": "FDCDC35BF0DF53E6CE4C399B4F355FEBCE58B8AB3495B9686D9D4334B3EB3E68"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/DissolveChunks.tif.meta",
+    "hash": "E62ACD747FFFE2782B2D6DD55536FD77E006D99641C9E15B98D6B91F79BB4735"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/DustMote.png",
+    "hash": "63E2D17A374141CFABE9A851A98BD8B165703BBFEA82B85E52BBC00EBE9E2364"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/DustMote.png.meta",
+    "hash": "74A1D9762249C219CFDC31003E8EB3E71705FC9EA323FA388108F476E22E95ED"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/DustPuffSmall.png",
+    "hash": "AC9E88B867DCE6E8EEF7B8392233437230DAA4E850747B857DFF7E9FEF28C690"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/DustPuffSmall.png.meta",
+    "hash": "443D60E19D2C3D805B997498DEB4E1D68E3EE00E835F0598351D113A97082C4E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/FireFlyAlbedo.tif",
+    "hash": "08BF761AF4E54D1A0CED5A6A327E5CF972F81C707113186B8BF3D09F4F6ACFFE"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/FireFlyAlbedo.tif.meta",
+    "hash": "BEB9D38FAC07D170FF4631E3EAF104C7C970C3E44C9963DD699354DBA768E223"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/FireFlyEmission.tif",
+    "hash": "B09E37DD9E8821456088E2F02526AA5408EAB2D54EC53B1E53731A6F867219D3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/FireFlyEmission.tif.meta",
+    "hash": "107AB1FF18F03F28904780D2D2BEF885EE1CFC18C8553AB3207644471B00E1E4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/FireFlyWings.png",
+    "hash": "894A487069C02A0A8DAF617163C1489AC6F4BB329E7E7A52C3C56B519615C9D3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/FireFlyWings.png.meta",
+    "hash": "A1D3F764F50343A60B92244438AB9EF52C605F465D4BA9DD4A970B3FC3EED45B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/HexagonPattern_Albedo.tif",
+    "hash": "033DDAED4F2ACD84DFAD9DCA0AF3F2A039EDA784EB1A8365E6A34E89610820B4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/HexagonPattern_Albedo.tif.meta",
+    "hash": "D14A6F578100FF23FFBB54E35097DC45F70FEB194394149BDB16AD86367F89F7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/HexagonPattern_Normal.tif",
+    "hash": "892B3D07DBBEB1C34C59934633B6F0A29203932F3B2B58C8B17A91248C0CAD39"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/HexagonPattern_Normal.tif.meta",
+    "hash": "523BB6F65910702C3F3AD4E537C27276461CA2CC2BCDA2D4DF4AD97BBA042260"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/HexagonPattern_Opt.tif",
+    "hash": "B2F96A0FE17A419047BE59BABC3E0C7B6D53111EEC7A7861AEDE4386F1FD5F5A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/HexagonPattern_Opt.tif.meta",
+    "hash": "EC02B8107B52CEA5BE01750CE5015E14613B62BF3C9174A5B52DF3F4B74DA0A4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/noise.tif",
+    "hash": "C5723945789550562DA1F714AB7F54F2BF0635A7FDF39568D3D36C9207A9C0D6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/noise.tif.meta",
+    "hash": "01CC5382AFE6C89EA6256CDFA6BA00B517ACA95A8C860A83196E3217DCB05FF4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/Ramp01.png",
+    "hash": "047FC58B8B531743D1711B33755B1F5F1D5086656E667D6403D9AD81B5374501"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/Ramp01.png.meta",
+    "hash": "E4EEEC368380B1297DC93F89F9152F77628C6D13AEA259F450C1AE8A3A2348A2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/SmokePuff.png",
+    "hash": "8E92C4DBF6C3C2807710D10602A66E71F8AA746309C8431714282372D0BDEFB9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/SmokePuff.png.meta",
+    "hash": "B9848B24C4383C9E21BEE80FD92B5A003FC55865949BBF28F2F20EFFE43044F3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/SmokeySteam.tif",
+    "hash": "162187F340271714C8B4A61AA72C0C9EC26E86181B65511FF8A97EDA7D9C9F21"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/SmokeySteam.tif.meta",
+    "hash": "982B2A2F22AA88E2DDF6CCF8D171AF8112538C68E81AB691E06CFEC90B971062"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/SparkParticle.tif",
+    "hash": "9C191C23C37057ED2C129808589B3ACE7E3117723DF92712802FF491F7462160"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/SparkParticle.tif.meta",
+    "hash": "DC489E55081E6BEEF6FEA8DC3C812604FCFEB45CF93D0D684CB14BCFDFA72043"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/Stripes.png",
+    "hash": "07153549A1CD8B38B7529132638FE563CBA91E7711EBDF40D6A969BA2F74F0D7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Textures/Stripes.png.meta",
+    "hash": "4F7EDC51942C8FAE438683F9D0F81F8021320B3690E9E49BAFA5383B5010A11E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials.meta",
+    "hash": "CF3311A347F9774679DD575E83F924BDCF5136EF7F67A53A1DD290EF5BE40F36"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Models.meta",
+    "hash": "2C6B2D0BAD35807E6AF29D623CD1A8D750E04B38C334BAA953C282F6A0A78152"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs.meta",
+    "hash": "C3AFAF38A553077F2C68FD70D51DE03A870B7653CAC6B5EA566C83D8C868CA1F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures.meta",
+    "hash": "F09511B1BDF772F80B53236B0AB9C584CF09A697BD65130AB3A105A48E90538A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/Dust.mat",
+    "hash": "AD6AE0E5BBDBB514188B604A493517C253AF8EFA421B987315AFCFE3F594CEE0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/Dust.mat.meta",
+    "hash": "30ACF7D2C0B6770AFDE86DB22546745477881F081F25768B2097110524723BEE"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/Embers.mat",
+    "hash": "2BFF739BE9BD00BE582D4F4C919C275FE7D02EA946A5EA69B14280EF1EE00A0E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/Embers.mat.meta",
+    "hash": "6DE5DBC77088951BEB830FFD80FD7D687F7CD46445E026FDDD9583BC212C2AC9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/Flame01.mat",
+    "hash": "2FC346B136691C6285A0B515C75A22392A8EE2E067BB767110D94CCD41EAB5A9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/Flame01.mat.meta",
+    "hash": "C4D61FDE39008687F36E375F3544F1134B972E38544B8E07E907E13AE1F50CE8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/GroundFog.mat",
+    "hash": "D3738841947FA005B46AA99AD8171654092EE0D6EE19998E577ABBEE0D9CFF16"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/GroundFog.mat.meta",
+    "hash": "7BB146D23A10EE377E90988E5ABE7502D78264A2E22C1F2900DA399DF9111199"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/RockDebris.mat",
+    "hash": "DD784EB17E4066180CE594AC1A213B602CED198DA90EBBBA5402543FFA6F942C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/RockDebris.mat.meta",
+    "hash": "35A82C3DF8BECA7C4BFD22A799911A3BAD4DF50BE03C93D408528BF1124984D9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/SandParticle.mat",
+    "hash": "E14A8F46C623CE2B2031E200B312BEA961A3E8513C242566178A956823B9DB1B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/SandParticle.mat.meta",
+    "hash": "506B3A9C0B2096571F038A14C9256945C57643FC4FBBA9E7B07144CFA209F0FA"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/Smoke02.mat",
+    "hash": "44926621A1DB19B722A1A7AECF8728A7DD74C6AA26641D58E7FB3ED51EC15FB1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/Smoke02.mat.meta",
+    "hash": "80AF772A45B49580102BB94BD98BC49912E398D1279992BBFC803FA3EB34CDFC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/SmokeLight.mat",
+    "hash": "76871C1F3319754A475265721E615340E385D8E02A9BF68C32A05BE892A04112"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/SmokeLight.mat.meta",
+    "hash": "DCD36636E8312E52B82262CB0472ADDEE2AE71212FC5E6F52C4ACF1D298FC5C8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/SmokeySteam01.mat",
+    "hash": "390652E89ECEDFA7FB905BAF711C78CD0CA082544BC273A8C8C379FF86238A41"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/SmokeySteam01.mat.meta",
+    "hash": "3546DD9311BD40276B60D474972A39A02D7D84C4D048BD82E4415958D857A675"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/SmokeySteam02.mat",
+    "hash": "ABCFE02E64C8251946F969C3E38DA0477B06139C5AEBAFD0FDB234609F97702F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/SmokeySteam02.mat.meta",
+    "hash": "899ABFF9FBB282E2F1F7C6CDA5D055BE54414F9FC3DB5D7DEAFF9728EE1A6666"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/SmokeySteam03.mat",
+    "hash": "0C4F3B9F12C1E8BDA7BC03D6C2F1149976295FF2A733B336AABE14A8873A46D0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/SmokeySteam03.mat.meta",
+    "hash": "D6E53E197ACB15A4140EB3D7D3B8B71BEC56B9E07D1DF8A14DF3E27C48373E7C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/Twinkle.mat",
+    "hash": "3C7099125957F8998EEB579D04CEFF8B94C9CB4791EBC6354C733C90E0570B8E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/Twinkle.mat.meta",
+    "hash": "42F50A89A310E0011C31F8DD2FE2A190F66391347E74B9B0849E52F007B4FD4E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/wispySmoke.mat",
+    "hash": "A181808E9BFCF83A59B430DE40333D0A651560C043B275943AB81B647C73A8CA"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Materials/wispySmoke.mat.meta",
+    "hash": "54EA2E71AC8EB70D96DDE130AD1B797F14D68F369C9C00B8A1070775B20D6F17"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Models/RockDebris.FBX",
+    "hash": "AEFB7CABC19A25906BAF1E93778AD810576560AE8D3A2D45500C71AECA7BFF84"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Models/RockDebris.FBX.meta",
+    "hash": "3944CCB93F534EF6352F8FCF5C675D8AFA47B9F47981A3315F57DDD363042FCD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs/DustStorm.prefab",
+    "hash": "61F9691EB58170D03B81CFC686B3303E4181B0C8CB2D85486903D6DA99CE6B2B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs/DustStorm.prefab.meta",
+    "hash": "B66A597C6872B13A6B75014CBBA81E9A995E918DB176B6216679C8D5B2C07635"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs/GroundFog.prefab",
+    "hash": "AC575A6017218771EA6560295A397E1606457A3EAEFF4810742ABB878B80FDD6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs/GroundFog.prefab.meta",
+    "hash": "E7638D562809FE5C1DEBA7F31BB0E06B849E94788E6B5EB0FEBCE6AD201A3324"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs/HeatDistortion.prefab",
+    "hash": "31A841461FAD6DA7649A1F6848499219DA0C1A0BB22FFC6911679C567988B96D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs/HeatDistortion.prefab.meta",
+    "hash": "CE7105385C275FB1ED3BED022BC5F61117150B43B0F10467BF38B87D83477112"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs/PoisonGas.prefab",
+    "hash": "936D33A6B42FB17B3CC4AAB41DE8E2711825C0B27B11C98DB801C4C98B1B500B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs/PoisonGas.prefab.meta",
+    "hash": "FB8AECA4D8968C28137076185C758AF75D20423BCA5A875A4EF3AFF9775A0F2D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs/PressurisedSteam.prefab",
+    "hash": "85C530020A4B736062CB9EFFB3299C91893D0123392B94212E2C5E49BB4C2A30"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs/PressurisedSteam.prefab.meta",
+    "hash": "8A06104BA7E5E37C3E256FC3A7F66CA03FF4EC01B4A69ADF1E1C1CCC116EF07E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs/RisingSteam.prefab",
+    "hash": "B3345D85BE09524C9942E41C46687A7680ACCC1ACD1885EB7F534428271EF366"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs/RisingSteam.prefab.meta",
+    "hash": "2A8D48F4CDC3B4EE643B9A26EF19F2FD0BB58C801675AB3DD7AFB442C5CCF765"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs/RocketTrail.prefab",
+    "hash": "2B818A66D72446BA4F314F5C96EEB0A254E42B8BB0A53F096F977450C065C405"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs/RocketTrail.prefab.meta",
+    "hash": "00F0F94493F6B4D73D6A6F70BD3153D5FCC153F8F5B2A73B79F2F2C0F41FFB43"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs/SmokeEffect.prefab",
+    "hash": "422683D6CE76BAA7BAC167F3EB1DA015393007B88F10B9777582D56B35E9F1C9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs/SmokeEffect.prefab.meta",
+    "hash": "444768E973AB5AA9359975D9B4A19A3FB21AF6FCE308B670AFDBA5830EE118D1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs/Steam.prefab",
+    "hash": "84DB4C20D4A564D915529197DD1643D18343C2656364B31653E935297E9B1FB7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Prefabs/Steam.prefab.meta",
+    "hash": "30021C1283213360012F03B4526194E804413FBFC7C0A27DA19A31EBA9A2F3E6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/Flame01.tif",
+    "hash": "6C3866FD854CB79EFE98A2560AEC5D640FFC19F2E2AFB4765910EBA382DA6A72"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/Flame01.tif.meta",
+    "hash": "5D1B0362370D0EC1BFCB6F8EA21863F88525D4F2F54E6A8E3B3B3EB06B948A72"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/SmokeLoop01.tif",
+    "hash": "0074AA3519EF969DB7AB122F24FA6A380537A989F0391C3FC2D9DC9692CA171F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/SmokeLoop01.tif.meta",
+    "hash": "35855E26F11A46A43E0DF6BEB75C3E6FC8F6D7A31AABDA3C2F52A1D2D8F0B58E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/SmokeLoop02.tif",
+    "hash": "F57444B5CED557278842F9CE5ED741AC3E67D2CE03D3EDB7F274BDC924CEB456"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/SmokeLoop02.tif.meta",
+    "hash": "328CE371757A7539C3279A19CDE330CB784CE5961DE776A2515682BCF6B2FD7C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/SmokePuff.png",
+    "hash": "A0BB9B8E46486AA40E8527D586B1A384645746858EB25978C3F61027106A03DC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/SmokePuff.png.meta",
+    "hash": "CBA7D86509EA5AE17AEDF9C65AAF7B23606B4E6E0C815FF9B1EC8798518DA3CF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/SmokePuffNormal.tif",
+    "hash": "56359DF614817B1331941661F852555FC6959D49AA59A42314FCB5C29E9833D4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/SmokePuffNormal.tif.meta",
+    "hash": "A161A48AF1B3F315CAEF65491CA7A83F4A55B57899C00BE14562AB044DB2C9BD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/smokeysteam.tif",
+    "hash": "B29351CFA8EA4828C9141CEA78D02C7BF401EBE0DB872E8D6AE7849AB0697E91"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/smokeysteam.tif.meta",
+    "hash": "4DC9AFBC47AECD30CD28B0687368B624277FD3FF9781E27BB55BFCAF607FACC0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/TinyStones.png",
+    "hash": "BF77084E0CB00D83AC8CB2D1B6D21DE8375F4DCE775D2FF72959428A056E1437"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/TinyStones.png.meta",
+    "hash": "D755290EF7C9E5F0167D3E1DB85C214D8B06948202646C3E1255D7C5553DD935"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/Twinkle.png",
+    "hash": "96CCF68F00EEC83D12405D2406D56911A4324BA134E184AC3B011438F1D26A53"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/Twinkle.png.meta",
+    "hash": "B3F32D5A301E8F19A7DC539E289F9FD3CB710C919369125D3C5B5251B28CCEA5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/wispySmoke.tif",
+    "hash": "1620685A6CA40465C734BD9F478DB23E146856BCA7F12225D189A7C0B07214F6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/wispySmoke.tif.meta",
+    "hash": "ACEA8AF96EF448DCFDC86A64D5F140F575A039B7FE7143862249BA643CCB2CCA"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/WispySmokeNormal.tif",
+    "hash": "9F8D957A50B4F97DA18EC12D32A0F996DEAF92A50E3A7F4883696BE58F3E392F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Smoke & Steam Effects/Textures/WispySmokeNormal.tif.meta",
+    "hash": "DFDC79EBD39C643443C40F4B5EBC1D6C2DF1FF27A7795521D9C0D2778C642BE2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Materials.meta",
+    "hash": "EE9B8542110E314922FBD35BB55C96B15123F54D37E19E475EB20AFF4D6D5E8F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Models.meta",
+    "hash": "35E21C329223F8469C18C623C1A8F31D7C5724D84AA28A8571BC273743C781BD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Prefabs.meta",
+    "hash": "4291D95757D2436B9970FF3BC9DF8A96F942A0CFABB04D4E160FCDF2416680E5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures.meta",
+    "hash": "C8E4401B2637921B392002FF08F6B55ECF216BD14EF81BDCAC10C0BA0E928BF6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Materials/Splash.mat",
+    "hash": "0D54A09F886062D6805214A03180D86405CB190DBD61BD69DB87EC9A68F0E073"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Materials/Splash.mat.meta",
+    "hash": "F95DB2D0C190C7A62304BD55BB7065C78EF48B2ACD2AD1DF7C4B2B8AFE47FF39"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Materials/SplashDrop.mat",
+    "hash": "54602DAFCD773BB97B7B59B267BB4E0381B7E1036E6FB71C702C96815CDE8096"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Materials/SplashDrop.mat.meta",
+    "hash": "804D7E707B6B4EE93F690B38CCB1E7ECBD1FFB4FD176DED40C6FEE2EE17DBD82"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Materials/Water.mat",
+    "hash": "DFFAB602BF647448DD4017C61021D6752C0FDD3C55D7A43A4646C18E25A7D668"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Materials/Water.mat.meta",
+    "hash": "BD9AAAB4673579E4984A0799B066EEA9B91C2018080667FDDBEB9F1FE1195EA5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Materials/WaterDropBig.mat",
+    "hash": "746215BD9F23206CB1DA2ACD97C26E8C681B58A787341481ACA33791B8DDBB14"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Materials/WaterDropBig.mat.meta",
+    "hash": "8ECC351EBEE6499E816E812EF389C285A9FD92624A5FD7F72094AF0BFA27AF49"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Materials/WaterDropSmall.mat",
+    "hash": "F9806FCC8E4BB3449C574B773C04F5EF628527272BD6376478AE67BA59DD9FAD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Materials/WaterDropSmall.mat.meta",
+    "hash": "B3EC5B20E535F65DF931A76F9543C8800A59BB869B8162DA6722EFBC2F90DB11"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Materials/WaterFog.mat",
+    "hash": "0B8371032B614F7378852F3ED8C148A06DFF95E4DB3DED1B3B7FB7E6ED7AC66D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Materials/WaterFog.mat.meta",
+    "hash": "017EDDAC05E53C82489E15E1A49D420A99CF5C1E372CE24E2574E78237FAD070"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Materials/WaterRipple.mat",
+    "hash": "93C9D33C5EC9A46AA1C32B818F6E317D8E54AE35A5EF2B5026AC9A0DCBDF0B79"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Materials/WaterRipple.mat.meta",
+    "hash": "DA63B574772EFB72F3372B6FE1E94C7566A4BA02B81FCA816A9F936C9D50BB6E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Models/DropSplash.fbx",
+    "hash": "65A2B84C7F51B5803EE23EA3443653ECB6B61E4D31495E7B423075B1C11D7E38"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Models/DropSplash.fbx.meta",
+    "hash": "2D3AFF0088F87CA66E5D95DA129CB3FC268ED8B89684D5D7035FC6F338698B9B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Prefabs/BigSplash.prefab",
+    "hash": "F7D76699CE7F6019AD9C8B39AB940275909AA05B46312D8A6A11D37DEBAA074A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Prefabs/BigSplash.prefab.meta",
+    "hash": "78AC41AA4B7778CFB74560AB2CB80025AAE1645A3917D1A3807FCCF9F406D49E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Prefabs/Shower.prefab",
+    "hash": "DDC0D403C0E059762D41B3F8638CAACF83657C56777622FCD56E9E3BA08F65C5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Prefabs/Shower.prefab.meta",
+    "hash": "F76CEF3AE0E16E047186716029AA6C3F0B2BD685D18E0F794E87230B5C45C194"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Prefabs/WaterLeak.prefab",
+    "hash": "325CDCD0B29A794ADEA479B3466517938B1C39CA92A4AC984A0B1DF55BF505C6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Prefabs/WaterLeak.prefab.meta",
+    "hash": "44729E616C35470E4BA4EF6A1478E31D11A9995C64DF36BA56518F74B97EF3AB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/RippleAlbedo.png",
+    "hash": "CA799F5176F8E7A8C889445955FC55790A1084A3ACC5217048ADB50FF38EE394"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/RippleAlbedo.png.meta",
+    "hash": "2DB91497DF058AD5452F17EC097A6724B28AE1C7640C2844D0CD42AE152CB3A8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/RippleNormal.tif",
+    "hash": "AA66F8B4FEC28091F5A444A01D1EE8211A59443D781E39C9F9A52D95A3AAF09B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/RippleNormal.tif.meta",
+    "hash": "0EB1171480AE7A91CD83868BFE9E9B5FDEED982C870B7E490E4CF1F90EB191F0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/SphereAlbedo.tif",
+    "hash": "59BFCCD7ABC19A0242E47CE22FA844EFFFA1B661C0F6AE1FB75272F61FD9B985"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/SphereAlbedo.tif.meta",
+    "hash": "E9B3759AA85A28F99FA52B398C959D70ABD9CB4FB2B77E04E0D3D7940EAA42E2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/SplashAlbedo.tif",
+    "hash": "0B2600129199047CEB7C79D0D5CE4182007EE03EAD9F5BC8825BDBE4361F1DE1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/SplashAlbedo.tif.meta",
+    "hash": "5B56D398703496314983E83BB8C19EB2A4DD696A1E944C8026386C29EBE60AB8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/SplashDropAlbedo.tif",
+    "hash": "2B45FA6C9BA688B4E394BD5643D5FF95AAD788DCD6660C44C83B666FB3D91F07"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/SplashDropAlbedo.tif.meta",
+    "hash": "60CED9320332A57A734AAFD0BFAE21F28521D9914279A8DA8B9EC911E846A9AE"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/SplashDropNormal.tif",
+    "hash": "7ABA98B6622BEFAF3F7182730D96FC23C7F8814AA4E61EC0A192C53628AE699E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/SplashDropNormal.tif.meta",
+    "hash": "994709129F600E29907F76B0B010CE37B4324E202AD8EAAD7C2748BCE22A6FF4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/SplashNormal.tif",
+    "hash": "51BA74A0DCC050770DA3F6AC8024D88BA8D712FA741AEACDAED2603E250B04ED"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/SplashNormal.tif.meta",
+    "hash": "09208F36ECD3712E9377A02438D8A45FA6051B004DB0382F70E7D699D0BF5FE6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/SplatAlbedo.tif",
+    "hash": "9570FE2B6FC9E3DA81B08B9333E9947820F36E58560ECC1858CDEF71D6D29373"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/SplatAlbedo.tif.meta",
+    "hash": "E8D72D1A19D7E65806A2A4043548730423866F4FB16491F75DCF760565CBCCB0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/SplatNormal.tif",
+    "hash": "63A124973EC9C5A7FCA227D2601BEC187DB09F9D5436039A25A993502FF2B687"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/SplatNormal.tif.meta",
+    "hash": "65218C662AA38C9BF1447D6624DD2855CDF6787301A0CFFBA4B02E76E98D4A74"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/WaterNormal.tif",
+    "hash": "9CF979465EB5503614BAA738B11CFE0E24798AEB8810AF3752E5B250CFE350F2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Water Effects/Textures/WaterNormal.tif.meta",
+    "hash": "394326023089CEA98BE87FDC9415C72994637E1C6A4BA0B1A2412C6759EA0E75"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials.meta",
+    "hash": "A20A59EBE952B07DB0174C638A6A6001717138F224D93A181282372D3EF2FBAF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Prefabs.meta",
+    "hash": "AA8F7F30723CA5B9E365C072AB4DC51C1669D16AACD7F6E38B01B65B7BF318B5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures.meta",
+    "hash": "BFE85AB865A4D5D12E0C456272C7244B091F52CC897176F406873A0B2A216CAF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/BulletDecalMetal.mat",
+    "hash": "F7526DEC7263CBC8A9812B1E666A75EE5671CAA01AE17EE1F787F38E56417368"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/BulletDecalMetal.mat.meta",
+    "hash": "964ABB62711C9DF586B4161CCF79A879127CD55BD7C0329A6F1115CE67C95632"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/BulletDecalSand.mat",
+    "hash": "CD298472BC445DF63EE2BB834110A665AD709716610FB7FCFE8E053B77E09B40"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/BulletDecalSand.mat.meta",
+    "hash": "53E030328873CE1A15C6078C5CDF19F2278A3F1AA5D5E94AA70DBC84E543EFD0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/BulletDecalStone.mat",
+    "hash": "B8C7423943C02F40AAF13D250CAB5769E7E757FA3D4EE7675D1959A7BFEB1CCC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/BulletDecalStone.mat.meta",
+    "hash": "FF37F2EC5BAE1D921DDA20FC813EC1867711421EDDFEE10D41DF203DB6B836F2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/BulletDecalWood.mat",
+    "hash": "9394DC29E619F15AE8262FABEA77557F4B51C57C38027547A0E4A9D697BA2C5F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/BulletDecalWood.mat.meta",
+    "hash": "2CC6E4E7D89F28CE482C19E31FFCB0F9AFD28421C8FF6848C8DB7E4D540FA8D5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/BulletFleshDecal.mat",
+    "hash": "3A978ECA765073F5AF8DE009FEC347E11F7FD90475FA14A34E788C487014AEC3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/BulletFleshDecal.mat.meta",
+    "hash": "E14CD55E2E8F0EDA3A4007A52FDF00FAA80BD533288EE0FD08681170C4F68AAD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/DustPuffParticle.mat",
+    "hash": "17A314852D88B6AC40317CFE00C30A76876EEA39315216F4EA2E5C1120BEF40E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/DustPuffParticle.mat.meta",
+    "hash": "CE32AA48306811041756C7265709183B8E6688EC458B2E35E1AFA0EB55CAFC75"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/FleshSurface.mat",
+    "hash": "FE17DCA92232F14E6DE299EA30AC4C2A747A92909DB6FD4F58B525F067AEB863"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/FleshSurface.mat.meta",
+    "hash": "5625D6E7A48BBD6AAF4F2B4966B6417B54ED6B07726DD325F8BCDA77B50115D1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/GoopMist.mat",
+    "hash": "05CE32176ABDD58F7A24FE66FCD084671B73A7D800C0FBE1989C6F7A6FCD984E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/GoopMist.mat.meta",
+    "hash": "DEDEEA38D8CB99043F0A1C4ED63E0B2CECBDCA8DF9EDCBAD06B2C582C53B02E7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/GoopSplat2.mat",
+    "hash": "09EE89B5DD51680289BAD596906C7163AF358DF44426D327B07E484E3D83E719"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/GoopSplat2.mat.meta",
+    "hash": "435810742BB86B0EEADEDA4156CA776884C40E9C3562B848AD91ED652DE3A668"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/GoopStreak.mat",
+    "hash": "30E4D82D6330CE7738A2B48189A6F2052706FF41ACB5F3345A6175786D151F2F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/GoopStreak.mat.meta",
+    "hash": "1D560F467231F5393417692A14C731EAE09ED689758A28E8E32895203EB28FB5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/MetalSparks.mat",
+    "hash": "A0783D14F5737E7011C3578E592A8D7FBA3C72794215E1FECE40703AE6CFBA22"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/MetalSparks.mat.meta",
+    "hash": "47E71A0AB47D517988133B48A058C6E5CC0CE5A75673D1F86AAAF2C10C65B964"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/MetalSurface.mat",
+    "hash": "295D0BA2EC17775DA39AD63B5958D4F5D07F34E2029D6CB538358000C6FE4BD4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/MetalSurface.mat.meta",
+    "hash": "64FBAE9CF9BEE8173FDC1A844C1039539F2CA3626DEE2E56808D55977545BE45"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/MuzzleFlash.mat",
+    "hash": "FCE620C693DB5767E87BB21BDF05FDD421DD8989216F7492DF4036B15688743A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/MuzzleFlash.mat.meta",
+    "hash": "DE3E41140C900B1D462FCD193D7DAE6EBA6519B2FAC10560787C04FA8AC6434A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/RockDebris.mat",
+    "hash": "64379DDBAABF874F39A89DBF9C7C5736B28E26174D75F85A977A1512A157C54A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/RockDebris.mat.meta",
+    "hash": "E75B25A82DAAFAC572C26F24A830D23ED552B6DB6522683E949942C88C673C3C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/SandSurface.mat",
+    "hash": "436246F68723C687778187842FFBD1FBA843B16ADFC45818D2039D932EA49724"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/SandSurface.mat.meta",
+    "hash": "D87087807F43F18269DA03A549A32E3A93F23F231EE631F74C9BF255F3056EFD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/StoneSurface.mat",
+    "hash": "47756E34172C0EC146D702BDFE2383472C4124193A220BE2F38F7AC15F3168D8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/StoneSurface.mat.meta",
+    "hash": "574794A0FCD32800CFDEFAC014B8D2C29CBC06D7693D190B673C56B3AE49BD70"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/TinyStonesParticle.mat",
+    "hash": "A56CEFCEF7EEB4EA94CF41192B4E7AA3C66CDD156399838F540F06201E870624"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/TinyStonesParticle.mat.meta",
+    "hash": "9F123662C8FA8191046E284F430B7AFFD6221A852F13AE268CFD04FA45D9BCF1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/WaterStreamParticle.mat",
+    "hash": "6E413B2AD18587F45B3B0C1EAB9B9A149D594FB195D692C3B1913D778BDFF980"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/WaterStreamParticle.mat.meta",
+    "hash": "9B3D0F6CA836590003EA3B17C63318537C6ECD1FD4D4600EC6D0AE1D8DC6C728"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/WoodSplintersParticle.mat",
+    "hash": "CA739E9FD448106E9A3A0AC88AE3DBC66C65DC84470AB3C73284DB7AC0E107E7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/WoodSplintersParticle.mat.meta",
+    "hash": "40E4F7B3350E7F57167DB19654D3120766B073850A313171F04EBD65245CFC08"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/WoodSurface.mat",
+    "hash": "787793D91C7FD4A91EB28EF6404CC642C88BDD8BF36707FA614F9C492A463095"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Materials/WoodSurface.mat.meta",
+    "hash": "1620B6BD92E6E5806D97A10D85CE9B1CC404BB05DDF89805B9951684F3D362A8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Prefabs/FleshImpacts.prefab",
+    "hash": "1DAB50E76FFF24325B9D420C1FFC42315C3922CDA4DC63E9CE47CDA95FB28222"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Prefabs/FleshImpacts.prefab.meta",
+    "hash": "D812DCC71FF3953BD29ABCBC1A9594759FE98D3FCA3C633B9B35050A77A68E92"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Prefabs/MetalImpacts.prefab",
+    "hash": "D8A771530A046EEF46E00BACE0DD68D347D9F8AF38C97330ADF5FD41E8573D7D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Prefabs/MetalImpacts.prefab.meta",
+    "hash": "90D705F4744793045D718A6F4FB1008F2200DCDA46B3B513AF127F2C61083A68"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Prefabs/MuzzleFlash.prefab",
+    "hash": "DAC67F17367D34F2DD2C2BE652F6921D27E9C767EAA494D0644AB16DE334AB88"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Prefabs/MuzzleFlash.prefab.meta",
+    "hash": "00CCF86E99380039C3995F9338D1CEE0CB5F939B049BFE4A048E2A6504C7C3CD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Prefabs/SandImpacts.prefab",
+    "hash": "886513D905B292FED40B323A24E752F415855DB661911BE0DFED94638C0ACC35"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Prefabs/SandImpacts.prefab.meta",
+    "hash": "CB38F2F63AB963413C3E205EBF48CD240893692FB25466B84D723D45922C81EB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Prefabs/StoneImpacts.prefab",
+    "hash": "27EA823728C13A33CA412A0BD7EB419D9EC1AB597777A2A8E015B3F527C8A410"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Prefabs/StoneImpacts.prefab.meta",
+    "hash": "D35046EA4769B5F6CAE9DE5A620A7B97A0B29979A3536BBAECB784A668575E5C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Prefabs/WoodImpacts.prefab",
+    "hash": "2A17D5C257E30429E2088B67D8CEF402D903FAC71BF89DB4CC5AF85D9ECAEC48"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Prefabs/WoodImpacts.prefab.meta",
+    "hash": "2DE788368D7CCD1DDED07D9CF28865F33EFA6F7D5EC8C2BD33BA1D9C73B47080"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/BulletHoleMetalThroughAlbedo.tif",
+    "hash": "5B9ECC085BBC3B44DE30C6F5AEFC979B559D4248AE4F7A98415E2EF3F7A1379A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/BulletHoleMetalThroughAlbedo.tif.meta",
+    "hash": "3A59FAF80FA6E4ADA472AE337FDBBB422EB3827538B6AFEC7B483E9B0D16E56A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/BulletHoleMetalThroughNormal.tif",
+    "hash": "FC8645B1E2994D011E754F4F800A15F96C6F7F1B4D9C43698B6F90D350E6E23F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/BulletHoleMetalThroughNormal.tif.meta",
+    "hash": "34BE1C24AE96D4C85DCB756E28463466616F6EDFF1CAE28C1856BCC452D15EE9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/BulletHoleRockAlbedo.tif",
+    "hash": "6E264D2AA4DF3AA0EB232BA71318BC79749B05414CAB39EE339DE4F627E06B4F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/BulletHoleRockAlbedo.tif.meta",
+    "hash": "49315F2795B935C906459BD9BD559D1B21B5A2B3DAA020D7601FC34C797BEF37"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/BulletHoleRockHeight.tif",
+    "hash": "7C4F9C7BE527AFEE5DCC2ED70697FB2C9E251AFC67033946BC5BB8AAC4EE66FD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/BulletHoleRockHeight.tif.meta",
+    "hash": "B98CA517949089697B424A8A717E2B06880A7EE6892FC653E32BDC9C7C8815A6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/BulletHoleRockNormal.tif",
+    "hash": "7D8FBDB9BEC7EF003938CE4884F26DAB1B4A088E94FAAB2D76A9A014F701EB0D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/BulletHoleRockNormal.tif.meta",
+    "hash": "FE51AE9CDDAF198E9FEFB0C269A6FF3DF117DBC25D5AAE8320C6A55CC80006E2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/DustPuffSmallParticleSheet.png",
+    "hash": "AC9E88B867DCE6E8EEF7B8392233437230DAA4E850747B857DFF7E9FEF28C690"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/DustPuffSmallParticleSheet.png.meta",
+    "hash": "3E1C39672B85297CA6A254ADD0EB27DEB455DEB63234326562222D10E31408D5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/FleshBulletHoleAlbedo.tif",
+    "hash": "4464949743087159B893A7C456A4C693554ADEEE5DC0D69DD6E481CD13BEA6F9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/FleshBulletHoleAlbedo.tif.meta",
+    "hash": "4A09C34CC52E1B06483BA46BE092E81CB400BD0A86D2BEF285A529CCF64ABDF3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/FleshBulletHoleHeight.tif",
+    "hash": "23A9FD4108BC455E50FF4F3F71E1A80CDF91FF15976A720B1B606B943C54034A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/FleshBulletHoleHeight.tif.meta",
+    "hash": "AFA53FA8973173F9366A78F09E9325A89FEB477D6A6C772FE9D2A66B9B92CA6A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/FleshBulletHoleNormal.tif",
+    "hash": "364D99FD39BBD64F58357FDB43E326BE3CF34DF0DBE1DF2DF0B44CE4111EF24E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/FleshBulletHoleNormal.tif.meta",
+    "hash": "3EE813543BDC773C5DAAFC3002FDA8E5B0F56BD7E81611DF2D1A861765FF52D0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/FleshNormals.tif",
+    "hash": "8CD154E64CED37D3E03FD6EAA236B258A9EFD4EDEDE3382FEA762706D9C31722"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/FleshNormals.tif.meta",
+    "hash": "C116455D081F4D836B443371EA6ADD749F27865E9DF52BB06F2EFCA40B231EF7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/GoopSprayAlbedo.tif",
+    "hash": "739E7B7ECF25FFF27A3C32BB40185081B4D1A8AC1524EE955A5C641A651ED1F0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/GoopSprayAlbedo.tif.meta",
+    "hash": "C2D45A526BAADF3D8D71486F9C2AA7FA064397E63E44005C95133B4EF7436C2F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/GoopSprayNormal.tif",
+    "hash": "B27C9EA6EB85D6867D2CF315CEF3460201481BABDEFED96F747DCEC9B4C80E52"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/GoopSprayNormal.tif.meta",
+    "hash": "A83F5C878E5C68B1C74CC816368B53197C77F141BD574CBD4AFEC8222BC46D07"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/GoopStreakAlbedo.tif",
+    "hash": "9635B5B478CD49F619AB570ED4ADF86BFF650677112643A8BFF05CB32E317D57"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/GoopStreakAlbedo.tif.meta",
+    "hash": "BD5D0986B021BBC9B5569318FC7FAAE450E9A358164DB04C47A44F2A9CBB58CD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/GoopStreakNormal.tif",
+    "hash": "0C3D7E100D036E53D561A78CC284BEBD804B32CB5544DF3D155BD776BC011E4B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/GoopStreakNormal.tif.meta",
+    "hash": "DAF992BFDDC3C6C62291E252ABC513E11C8F7A976C1455C8B1082176191C8FE3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/MuzzleFlashFront.tif",
+    "hash": "81C511E58DE2B5D2C40C1FEC71D2A453D578E9C25638DA0CB5EE407F840539EF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/MuzzleFlashFront.tif.meta",
+    "hash": "AAD2202B4859CCA3E244A79941A855004587BA479189558DECF41B14D8A6F1AC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/SandDecalAlbedo.tif",
+    "hash": "A0C4657F50FE634E325E2E1CC38B6EC4CC1BB5B0B2CCF5618638095BAC40E36D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/SandDecalAlbedo.tif.meta",
+    "hash": "29DD44418F723DC6CA74039976AD5376A00AC0184112F290240E6657D5D5C668"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/SandDecalNormal.tif",
+    "hash": "563AE5A8B2F1F8D62BFD803DCD53E5244B6AB408F566AFAF156E1BED9DFE15C4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/SandDecalNormal.tif.meta",
+    "hash": "6088E6EE4D5560D6CD4C6457312EC567C0BF602AD008B50E4B219EAAA51B0DB5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/SparkParticle.tif",
+    "hash": "9C191C23C37057ED2C129808589B3ACE7E3117723DF92712802FF491F7462160"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/SparkParticle.tif.meta",
+    "hash": "703D85CAF77C445945E3B04D28E56AB811635EFC9E349AFD70EF1EFDD865B4AC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/StoneAlbedo.tif",
+    "hash": "D25AA57A2DCC18E2412551AC7F58DBF0229E5139E0AC4729D97B845476829B8A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/StoneAlbedo.tif.meta",
+    "hash": "40EE8F5048E0BE7394DBE1C8E1B335B9FA7281A9A6D9C1AD91C88A93A303A4E3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/StoneNormal.tif",
+    "hash": "00BB8D868B1A34E2B9D1E1640E1B934364332AB37268491020C3F31EC6E88E80"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/StoneNormal.tif.meta",
+    "hash": "1E4C0C73695BDBBFA280006BFDD988D89AEA00A101E215CC1AC68A575F7D70A6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/StreamNormal.tif",
+    "hash": "9B18361EBA715673081BF03130F16F935A9D96A57538FE9D7ABBD85C78700D80"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/StreamNormal.tif.meta",
+    "hash": "F6496A1842A4D0511B447E5DC20641226E3040B9C1AF01257D9A3F1DE57E1AEB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/TinyStones.png",
+    "hash": "BF77084E0CB00D83AC8CB2D1B6D21DE8375F4DCE775D2FF72959428A056E1437"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/TinyStones.png.meta",
+    "hash": "650E823D29F17FB1B19AF2EB0C1EAD0DECFAA5033ECC8B42CC33A5660F01EA3A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/TinyStonesNormals.tif",
+    "hash": "BD627C10BB79B47B29D8FC340DB29BC40D2509479E238EDEA4D04ABBC921F5AA"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/TinyStonesNormals.tif.meta",
+    "hash": "377BE9B193474E403FB65CE0537B2885F4314380552826E039027DEEC15FB1B4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/WoodAlbedo.tif",
+    "hash": "1E699976768E29B379462147F3161540D7A71E9088DD756F4EE7EC5F9118C66E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/WoodAlbedo.tif.meta",
+    "hash": "3F009EF45A18E881FEB6A3EB6DABBA9F8FCEFF62FF649005D101D649CC82BBB4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/WoodBulletHoleAlbedo.tif",
+    "hash": "9CE20CE37DACEE3016E01D5BB92E3727CEFED175A7FB6C04A7C5AA8DFDF98CB8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/WoodBulletHoleAlbedo.tif.meta",
+    "hash": "1BC16615C23DC26E9725A5A2BFE9B098206D5C8E40553278038B91B658DAAAC6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/WoodBulletHoleDepth.tif",
+    "hash": "5B9B92D70F33AC30B4AA67B3D6BD45DBDE4E298138A694E7B867E3C1A7B80471"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/WoodBulletHoleDepth.tif.meta",
+    "hash": "DB00EF1CD69C362FD1AAAE6C3504B1FC374ECE1C4B4AD77EB3DEDEB85C543C32"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/WoodBulletHoleNormal.tif",
+    "hash": "9BD0D020138A7DBB3E3FDD7D513771DAB7DEAA5C81796467486A3DE78DA7A4F1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/WoodBulletHoleNormal.tif.meta",
+    "hash": "4C7778413B94D49FD7FD0B6EF918924BD1A9F7F0D7077E701D7228B5F1198CFA"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/WoodNormals.tif",
+    "hash": "1EF0123D3B2DD072AFA3507F7DD1F8AA2DB8AC61F22D7E7F0E61D29FFB08B581"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/WoodNormals.tif.meta",
+    "hash": "F57AFA27F285D77BDC2CDADD0809F4A82F913462027766EE7118EBE91912125C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/WoodOcclusion.tif",
+    "hash": "821D169E9274DB6D6E8CF98D3113640073C41B9EAA88A3CF77F55E9AC246075A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/WoodOcclusion.tif.meta",
+    "hash": "EB09C39A4836ADB081FD762ED09A828378368D297E8E21325B133E71DDC52E6A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/woodSplintersAlbedo.tif",
+    "hash": "048D53124B355488FFFC218580677A4DC7C7AA0F71AC2307DC862D57EEF6E8E3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/woodSplintersAlbedo.tif.meta",
+    "hash": "9ECC2728E088634CDFD333709923FBB27E4CF8A4E82747324AD090E961205311"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/woodSplintersNormal.tif",
+    "hash": "0C96813A87971AE2002474A7D4BC9581EC33A7D5FC54F8FD19F1C3FF2E55AE0D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/EffectExamples/Weapon Effects/Textures/woodSplintersNormal.tif.meta",
+    "hash": "D3B4F6217A49BF5F54F6773CB4CED94C3BCB3403225C234215DCB41BE33CA2CF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles.meta",
+    "hash": "9FEA141334023A0DA1043E829762DFB4CBC75DD84C8BCEA870ACC8C40E8303C5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles.unity",
+    "hash": "887F1A4E0555CAD5D715CE42F54C23A85EF2A9FA19E4190D269B5D1C439F0A98"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles.unity.meta",
+    "hash": "EE37AE993649ECD9658529D7C4F55809EA64FC336510698B67C73EA929C6F657"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Profiles.meta",
+    "hash": "2B4C46DD5D9A408BA162248887FB0F7253E40E39C4E1A098F4C7C96473D97DD3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/LightingData.asset",
+    "hash": "BEA04F52576BF8802F3B34ADF36939B5792A0C5985EB1DCFAACAD818E4B7D22A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/LightingData.asset.meta",
+    "hash": "C4200B9F6FBE4232D9DDF6E2E296F83FEBCF1A22DA41886CA15E678C43625CFB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/Lightmap-0_comp_dir.png",
+    "hash": "506C3D869084A11F707E61393640166B647439DE0A77E81794207846837E1412"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/Lightmap-0_comp_dir.png.meta",
+    "hash": "896C70BCD7301285CD14100A4B0947A58B1F6139A80C2697EAB6DA6365574A21"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/Lightmap-0_comp_light.exr",
+    "hash": "CDB28C5A65C1525C8AEB629A050F6AA2614783BC11403BECEF35272B72A9690C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/Lightmap-0_comp_light.exr.meta",
+    "hash": "4AF35D441F3FFE74E368A47B1CEAAE61933E0FC053D46B9CED52E101B742D5B4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/Lightmap-1_comp_dir.png",
+    "hash": "FD237FDC03A1DDE5EE20162B016F0C4B5F0235892EAB803A03970654A10F0E5E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/Lightmap-1_comp_dir.png.meta",
+    "hash": "4654D7B1E7DAADA71EFADC6EA73F2AA6671DD3362F49C986769DB17C42611243"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/Lightmap-1_comp_light.exr",
+    "hash": "D03B523B5E205331B51411764BCEAA9069178E399DC343FA616B5E2740950626"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/Lightmap-1_comp_light.exr.meta",
+    "hash": "9E5CE618D601C2D59D2C6EEB52CE83A501D624A54A90BCA285848223AACA54AA"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/Lightmap-2_comp_dir.png",
+    "hash": "2BD3B8550816910DCA10FD1870CB6BA4E62853F092E99CEED277B524F85FA321"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/Lightmap-2_comp_dir.png.meta",
+    "hash": "F23363576BE53FCB7798985989EF8BD503B3A801CACD7D20C803C0ADC57EF859"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/Lightmap-2_comp_light.exr",
+    "hash": "C924516ACA8D268BEB3CEF68D7D6B4F1B361C7F9752423EC187CF97BF58A7EDA"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/Lightmap-2_comp_light.exr.meta",
+    "hash": "C4A8BC57D21E902870212424AFD4E401EBB75BBE049997A73CB2CBAC5ED8AF4E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-0.exr",
+    "hash": "A6F94560D2A2C4593AAA3B7669B977D82F44F71EAFCD3FA50A3E87B8C1C995EE"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-0.exr.meta",
+    "hash": "5B6DF869254EFB681AFD36FD099E40D91520883AC4EC145368CF8ED517CEE2BB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-1.exr",
+    "hash": "54CA9A0D4D35575F7E00F9BE12B2104524F7E71B8763D5AB624956F70C4A2C3C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-1.exr.meta",
+    "hash": "8690F87EB7248D59F2DA7268FCCFE3F14823B1808147C5B58F31076E2D81E8C6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-10.exr",
+    "hash": "523478354D36AF9812EDFB181EFC7391AEFA79E1109DB0C52C783DDB688E5FB8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-10.exr.meta",
+    "hash": "4918ABB34C86E53488D5EA74210A4FE4949015D70268DDD04B77D9999FD41EBC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-2.exr",
+    "hash": "F37BEB5F2857EEA866F46E20B94D2999AB7BA5595FDFCE4586CAA4D49B10B665"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-2.exr.meta",
+    "hash": "1D82163FFF02D2FD5642AF70E9CF4CA96381796E89A6427B2961376AD204B273"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-3.exr",
+    "hash": "914A7354BC2F32294F2E6726F0DCC06B6DB0DC812400947E1C27FE272F89DE6F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-3.exr.meta",
+    "hash": "98F32CFB7F3430EBB559CA3A303F10C3ADB31422A7B79AFFC6F9CB16DB734806"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-4.exr",
+    "hash": "A7814F9592B0DCE85E79C6D0FDF66FB8176956819B8AA8CDC32BC29E1645D9A2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-4.exr.meta",
+    "hash": "A00DCB176223484FEA19CDA33FEE83915E35F0B3348927052F9E2125690E60FC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-5.exr",
+    "hash": "61EC2F0BD4218B85E1FABF7D0C7E901DB48DD188BF02422409BB81DF9AF5450C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-5.exr.meta",
+    "hash": "8AA64B93642FC33117BB7963AC03CB72657E0519FFBACEE6906F1F2942AF2201"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-6.exr",
+    "hash": "0FEBAE54664E079537829B462920B454308BCAD077F8C22E01FEAB2C783782EC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-6.exr.meta",
+    "hash": "BFE271F54BDED3714017AA3A0E813DFE64BB21F1F57034F1DC0D9A8A8A79DE25"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-7.exr",
+    "hash": "50E263A3A60EEE1E154E686962B63C888F11A95692A8A3EFD078980E9833292A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-7.exr.meta",
+    "hash": "D8D3EAB4EC3C915E44AC36EFF59F982F6EED8CFFA54C678719AE0AF29E4E74D1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-8.exr",
+    "hash": "8D50B103A725070E05546818309A4C1900F00D9443DBB60B2B2D2447947C29CA"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-8.exr.meta",
+    "hash": "1B31B853FC999D4103D9CE4B2E9E406112E6DD58B29ED7F6DDAA7D12457449FA"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-9.exr",
+    "hash": "18E2E155D7988DF5F7B73A6509897350B8F21F1E83987F5E8E3654DBD7382F1E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Main Scene with Legacy Particles/ReflectionProbe-9.exr.meta",
+    "hash": "7438D075948035C3FFC41CD7E26D40AA66E4CC0D878B6E151055EFF8CBB4A950"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Profiles/DefaultProfile.asset",
+    "hash": "23C78A4A220A528566CFDECA09B43A40DA01AB4DE832F0994D8055B30BF935FB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Profiles/DefaultProfile.asset.meta",
+    "hash": "F3C0C2F39F9972490442FDB8A909441541E999B596BA40182714C6A1D0563444"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Profiles/DefaultProfile(URP).asset",
+    "hash": "F9037D1F8F52BD4B911266754A819D778052FBA1109D4FF116AE775DBD7BC66D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Scenes/Profiles/DefaultProfile(URP).asset.meta",
+    "hash": "DE36EA5014C06127E5930E83183B2D26D1143FFBB42DE8031DC3D76F85896765"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Beautiful_PipelineAsset_DeferredRenderer.asset",
+    "hash": "1035C654C7516371165C588ED0440F6246BEDECE24DC988514EA52BC3B9B6645"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Beautiful_PipelineAsset_DeferredRenderer.asset.meta",
+    "hash": "DA154550B7FFC5C5C6DDEACE1BDFBE1D6C78A8E8AD374A5B1EA2C9802D0AB9AF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Beautiful_PipelineAsset.asset",
+    "hash": "B8FF7D47F71D9552263330DDCFC3791A4832C5D056C5E837FDB32EF8E1CEBAB7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Beautiful_PipelineAsset.asset.meta",
+    "hash": "82B9A87535C509779B6ED83884D3AEE65CFF9270E80C454FABEA99ABBAAE784B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Fast_PipelineAsset_DeferredRenderer.asset",
+    "hash": "20D80C0333312908F40FFB34A6D89BB9DFC2C8F5DBE616302EB5569AFEF5ECAC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Fast_PipelineAsset_DeferredRenderer.asset.meta",
+    "hash": "CDD95C342F440DE748B037B2C0F36EB0BF940D785F3CC47C3997EB600098D7D2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Fast_PipelineAsset.asset",
+    "hash": "7EC56A8B0F65919A398303F5660145F86000F357BE3EA7D17CEEBE41FA425B8C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Fast_PipelineAsset.asset.meta",
+    "hash": "422EB2D8409EA242124C18E10017CCA4846B416259E7C6D0D28A6FC3AC3CEDDE"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Fastest_PipelineAsset_DeferredRenderer.asset",
+    "hash": "4B685E012E25FDAF00A44B85F03201C2BBCF47E063C67F6BC3076B458639E4EB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Fastest_PipelineAsset_DeferredRenderer.asset.meta",
+    "hash": "13223E0A6AFAB680DDE0C481FF84E7327CCA6AD356C4A7C26A44283F014612C1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Fastest_PipelineAsset.asset",
+    "hash": "9829428844A8228E984669FB6576F6E254E7580C331CDAEC9476983CF4F3FCF5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Fastest_PipelineAsset.asset.meta",
+    "hash": "9CF185862D11230395753965F85B5F665F0B87190DFE86DEA5482BF71D049B66"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Good_PipelineAsset_DeferredRenderer.asset",
+    "hash": "D02C1F39196A86CEC99C90C3AC3D5B2BE5F7699B8BA9B919BC7301AB76425C67"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Good_PipelineAsset_DeferredRenderer.asset.meta",
+    "hash": "6D50915264838ACE70B7963F58A5407E943E53C27C6250EE1D3DCAA10D94B673"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Good_PipelineAsset.asset",
+    "hash": "00377997C37B82DDA97E289DF71DBB65EA7C3B7F96D0D6C65914478382B36C56"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Good_PipelineAsset.asset.meta",
+    "hash": "6401609306CE87692ACECE7EA6B40487C7A7B2B1488C9B0528699CA74174FBE1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Simple_PipelineAsset_DeferredRenderer.asset",
+    "hash": "CE2B53928770C30C6FA9C4864338CC5815EAB1CAFC81B17C4E1567AD32D50FCF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Simple_PipelineAsset_DeferredRenderer.asset.meta",
+    "hash": "536528A3BB4B4A895FEB7B3EA2D1C6894084B24ADBB0FDFBCE3FC2E62B924087"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Simple_PipelineAsset.asset",
+    "hash": "C5595CCFAB9BBC209EF940D066306C9B285F02833140CE6DE73B6E8D8B272E55"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Settings/Simple_PipelineAsset.asset.meta",
+    "hash": "4CEF06A0FDC20734F76667919603132B32CE0728F905F91869635EA27F975743"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment.meta",
+    "hash": "1D96D3331DB6E51B99A74D6619981BD8829B72F4F9974851AE03850A77F17603"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Prefabs.meta",
+    "hash": "500517809799BBBA72507AF1BA4160CA30F3DBFA24DB0245BFC9A4362483C79E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Ramps.meta",
+    "hash": "A6BD48B59433DA95EBD9E7267E75DF1B29A8C714B3E0F52260D7AB656EE50561"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Scripts.meta",
+    "hash": "D1D0211C5D6147A90B4C76D0EBEF18E21F1DBF1E9E39AEFA6EA4158DCC8E725B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Sprites.meta",
+    "hash": "F23DD6A66082475BD4ADAE47046D6BF641A7E77FBD3FF198DF840E311FD3D552"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials.meta",
+    "hash": "2C1FA4BA1A8E8709D36878A83259CF1CEFD6316D426801E1ED9576A4591E34E1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models.meta",
+    "hash": "29BBCB876215C71F38C289BF494E057B33A8C3826B097A92FE3570FE8C9D1788"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs.meta",
+    "hash": "AC42CCD6FC8754F796CDC21578D2B3F4DB2CD484F4746AC15F4356336B0CF836"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures.meta",
+    "hash": "A422D8A7B482FDCC0ED32B31BBBFEA2252DE660D2614004CAABBBD7B18358862"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials/ConcreteFloor.mat",
+    "hash": "B8B02E705C59CFD492A60CAE33E2B9EDAA8AD0F49D30A93C3558CA9CE5192C1C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials/ConcreteFloor.mat.meta",
+    "hash": "1DCCA5A6523757DFA71D3EE22FE946F0B9747DA63E1A740908BB4F9258FE32E0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials/ConcreteWall.mat",
+    "hash": "E24830FE10C1CBB1E7586FBBA13454A6170F55C20BB6930459FDB608CF15875F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials/ConcreteWall.mat.meta",
+    "hash": "3F8501E977C13D1B168F743966B0E72901909AC0FA68AFA73F45C01DB3D1B139"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials/Light.mat",
+    "hash": "B8966CF27C0A669449D944CFF61590F7D688104FF7F4F9C3D08C7AD47E00FD0E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials/Light.mat.meta",
+    "hash": "789CE410DF0D45866E20F42FE2E74F15E2A53F3788AE9F2FBA6F7706F852C36B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials/LinesWhite.mat",
+    "hash": "FF13099A95C03ED2255D5A0E25894931973D33CFA6314E027A69946F26D652FE"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials/LinesWhite.mat.meta",
+    "hash": "C5D825329A716D80BBD26871FDD84A3363FAFD46B5815B5122738F438D20544C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials/MetalRailing.mat",
+    "hash": "212FE79095AECF42B9C65F8F68E5104A5274AD4E9F25562315423BE39D79A645"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials/MetalRailing.mat.meta",
+    "hash": "8AF3E2BF6A23B8FFD131C6119E044AC6FBF5D8290C2C46A77B97E36DB5FB2C9B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials/MetalTrim.mat",
+    "hash": "9B5FDFCC1CC0769B496E8E46E088213DE300BA3F6D9F442F3F3454ED14EC41A1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials/MetalTrim.mat.meta",
+    "hash": "BF65CF4EA272CB349F131991F95FA861E6AD845886BC90391E65F7B0A7308DC2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials/ShadowCaster.mat",
+    "hash": "F2C2EE5AE7EA592FC54B1740C1162E31C1160ACE4AAC3A561043E1E771C4AB62"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials/ShadowCaster.mat.meta",
+    "hash": "41D9853C91936211F9E351497FBCAE4762033D71A6AB59908383058446D570CB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials/Skybox.mat",
+    "hash": "529137FF4CAD370FB30A6D49EE6F1620B4A6517DE7D006EF57BD97E35DFC5AF9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials/Skybox.mat.meta",
+    "hash": "7A6507D0D139BAE06A7BBF8279F290FC76CA4D32C47AFEC53B28A0A046BA7752"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials/UnityLogo.mat",
+    "hash": "BFC83C0437DA6BE93A4CD0066F4872DB717FB1F0702F9AF63F0C7E9E05D9493C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Materials/UnityLogo.mat.meta",
+    "hash": "51A9757514EA7ECFC470CF9E4BA3853292F1EF9840A58DB47C7DF000574B3869"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/AreaLine.fbx",
+    "hash": "E62D829D989749846BEB74AEECE453C4C0A1C3353676971459EBFF269F788150"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/AreaLine.fbx.meta",
+    "hash": "9A0EE605ED0AF81E39DD0188BF32524CD75A67C96D78E7BD6E51F6AB164F7F2B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/CornerWall.fbx",
+    "hash": "305BF634F6244FEED994A45B85B135DB5DE59FF959D4D48BD40B2861F73F596D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/CornerWall.fbx.meta",
+    "hash": "E85E555BFDD3AEAF748C0C096529D944FBD5E42885E7F7F00EF54D03B01F81D5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/EndWall.fbx",
+    "hash": "D6267A58AEA10CB12CBADAE4E6B3B0B1B89EE55E6CA7734F36A3E2E2F4CB988B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/EndWall.fbx.meta",
+    "hash": "2598B3A694D9A240B0643C2C6535B16B564A7CF0A278F8E3A40D76675CCE7E40"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/FloorLong.fbx",
+    "hash": "899EE89AF2DA7773A7D62D7417CC0AB44A308B06E7B2C86529BCC9A666BBDE9F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/FloorLong.fbx.meta",
+    "hash": "507ED1CCE0E9AF465CDB3797E38C265B723869FEAE13571FC39BBA94ABAA1C8A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/FloorMiddle.fbx",
+    "hash": "CD1B35B7D46378EE8F16A47DCBB00DD59BD905D6A5438EFB67F7ED456CD517FD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/FloorMiddle.fbx.meta",
+    "hash": "AE3A27AAE5469E6A5ED10C2AF5EACE84C87EF15C71DFAFDE1C531B0254E344D5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/FloorShort.fbx",
+    "hash": "3F161AF1D4E7365B83DD73D58A56DFFBA9EBDFDE49496BCE671DDDD995FA63CD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/FloorShort.fbx.meta",
+    "hash": "4E4F99B74798DE5B5A60502062E284CC00F3E162084CEEFFC5AC2134F39DB527"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/FloorTiny.fbx",
+    "hash": "F8976E6A85686E96D730F0049E6BA2040A1A1D80F4D417E17D7C01137D0C3C3B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/FloorTiny.fbx.meta",
+    "hash": "E2AAD173519A0C33F2B83B9329A00D96E5B8914CE6B69592BE418DFB4FDC591B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/LongOverhangWall.fbx",
+    "hash": "991744D64E609FCAD19564C64B93084AFE273AAF8CAAB063F3734086C4B766B1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/LongOverhangWall.fbx.meta",
+    "hash": "1997964181D71E683BA79D54B0C7BA4660AB6E8E8E05BCC206DE550C08DF21EE"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/Railing.fbx",
+    "hash": "39CDAA6478486A87A2E1D2F481952C894585DE2EFDAB3304F9CF55EC359CC942"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/Railing.fbx.meta",
+    "hash": "3A796EAD1A6D54C7FE2E8E311DE7ABD120582F7FBDA740F92810EAF45F1F915D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/SideWall.fbx",
+    "hash": "1314FFD4EC9602DEFFA479342AF63A2E4DDEF1EBB473526800ECDF39648DA39E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/SideWall.fbx.meta",
+    "hash": "661A8519743F083F28CB597728CDF2E72CC6353D51163ADA38351993D86365FA"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/SmallLight.fbx",
+    "hash": "EBBFE23F90A756E626CD97A8B090C59309E9D8AC3FEFD17D0017A348325C4434"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/SmallLight.fbx.meta",
+    "hash": "740F452A52779448FBBD14C92860DC80A14E9E9D39E9F6D62ED01D8CABD1673B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/Stairs.fbx",
+    "hash": "EC2F9E998D3371CE6AB86F62951E57726A01FAC9873C7FD52AFB830BCCCE639E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/Stairs.fbx.meta",
+    "hash": "3D381E52DEE48BC62DEE0DBBCB4F9B2E3486C72923892C3302ED2037146812BB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/Step.fbx",
+    "hash": "FFD1D3A19ABA9BBA5F292C68B5EE7297A4E4C07950BB21041BD91F27E6FB4B26"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Models/Step.fbx.meta",
+    "hash": "B818E2830EF93DC108E3482C530A22E1D5BEA9EF9BC517D11EEF38612E35E9DC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/CornerWall.prefab",
+    "hash": "1481A958DC5D380A2D3E59C6B7369674F8993ABE21735BCDA52A8A916CFC8CE1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/CornerWall.prefab.meta",
+    "hash": "7C38534C6EE2213CD0D0D8E7AEF5B9903391C58A3B2DC0A0851EB01AFD31AF65"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/EndWall.prefab",
+    "hash": "5FB027B6B0601F4C85EABAEA212F955F30BC863F5444A703028ADE749A6BF42B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/EndWall.prefab.meta",
+    "hash": "C78D09F9E0D8D763137F037980511B7E0F74C74010B3BF474B4D02D3FE766CCB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/FloorLong.prefab",
+    "hash": "2AF749E95982CA6D9B45DCB0B3F6FF2AC0ED667BE27FFDB9E54691223D0449FF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/FloorLong.prefab.meta",
+    "hash": "C89226A1BC86813F3863F21223E09DB3C1AD2A61E2713BC987649D7AF7F46B30"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/FloorMiddle.prefab",
+    "hash": "45A45E1A814DFBA5BA39FB7A0B2ABD5B7050F5E3FFDE980D504549A2238D23F6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/FloorMiddle.prefab.meta",
+    "hash": "DB967014AA9C39D174860405B37FA6026BEF2B2D4E3EE65FB8D70ED61E34FB42"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/FloorShort.prefab",
+    "hash": "F8B025F32C947F43D512AFE75D50630B46E1578417B206DDDE620DB73A53F634"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/FloorShort.prefab.meta",
+    "hash": "4ED160817661B4FA1838A58C2A1C34293C91E48A2466431C2A969E0B352BCE26"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/FloorTiny.prefab",
+    "hash": "78C764EB224F6AFFA580E751178C4B8F372D5C2FFDF0CE08C2E5C66FD6E1D3D5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/FloorTiny.prefab.meta",
+    "hash": "9A8CEDF3C997BC58DD091FB028E88239ACF8A105036522AF9281C2FCDCF3B499"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/LongOverhangWall.prefab",
+    "hash": "5FB6CAC8A1C41F2F144BB9F0690B1A298A36F0FD59CF3A5E498D825F47F7DF5C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/LongOverhangWall.prefab.meta",
+    "hash": "59E59A08277BC540627EDCB47ADB53AC65B65C07193FED53D77BD7067CCD2622"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/Railing.prefab",
+    "hash": "A7A97507188C93944A8211E7679C34048DA2330718FA94BA59A9CCE0B74333F8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/Railing.prefab.meta",
+    "hash": "55BF96A52CB54C96E22D8F88A20C5AE71BCBF81E1D3F46BAF102340D25617576"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/SideWall.prefab",
+    "hash": "6B9E50E1FB53434A7FD2D0A84D2182D8A92C5203ECBD79EAE408C847BD776FF9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/SideWall.prefab.meta",
+    "hash": "81A726E6152E3EA0CD96A1BF6709190DC10948594E2A34F923FDCA37AF729ADC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/SmallLight.prefab",
+    "hash": "CE3465372933B521BB62AF78A3D4B7E8852283E8C09869969788E1B798E5BD7F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/SmallLight.prefab.meta",
+    "hash": "5AE3C0E4EDDCC2C640EAA91A15DB4C9F2F527CE0482F1B9B8A6069DD636057A0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/Stairs.prefab",
+    "hash": "2E5BC52028D21640E480C21080CF944C903B7C36D28D4E99F1E785B4F1CE08F1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/Stairs.prefab.meta",
+    "hash": "DC1DCDD647816B9636277414D79B7E43E44AB49690DCC90D6A15365588E87EA3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/Step.prefab",
+    "hash": "FCAA11B6A4F3A942BFC66447DF29B9F73F2CCEA1E2A185B9C50D897B0B7313C3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Prefabs/Step.prefab.meta",
+    "hash": "C11BD3DCE0AE2D59CC767B143357946605F3295435E460D7CE9E34AE48DC4979"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/ConcreteFloor_Albedo.tif",
+    "hash": "BC365797002C452EA6D27A4FD9C0ABA7A3177FB612EADEC6B30827882792920A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/ConcreteFloor_Albedo.tif.meta",
+    "hash": "BF32AAF6DC66FC7B0BFFE5AA3468DAEFF7D02E1C923BD1D156E0A8E69D0D0E9E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/ConcreteFloor_AmbientOcclusion.tif",
+    "hash": "CDFCC39ED239F0E3267604F7ED7D44AACC7407F4B900299A3BD761724F76202D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/ConcreteFloor_AmbientOcclusion.tif.meta",
+    "hash": "BC9A3F3250BEC92ABD7D7699DF5B90C75C4DECA2FE1864DC7C67B49494016177"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/ConcreteFloor_MetallicSmooth.tif",
+    "hash": "ED8BBD929092B0C7898CE976D0FED51C1522C9B8A64567F11870CD2F16D58DB4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/ConcreteFloor_MetallicSmooth.tif.meta",
+    "hash": "959F84240698A34DCC50B7238082397FA87CEE7AB284F8AB253CB2A9228AFE52"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/ConcreteFloor_Normal.tif",
+    "hash": "ECA8957BDF53696124FDF4E9ECFAF75513709A07F1E48B82E4B8238B462F6612"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/ConcreteFloor_Normal.tif.meta",
+    "hash": "D3A9F79A3AEC91A6A57EBB20CC4B0CF89EC7214C4F0E83E349F846091879F62A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/ConcreteWall_Albedo.tif",
+    "hash": "9810C8063BC7A8C9F6F55FAC96CF24DD112229B85784BD59B7CF55CDDE68C90A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/ConcreteWall_Albedo.tif.meta",
+    "hash": "1606092E8AE152FE46FF59A2138ED3D3B5CF9E7AAB89648C14A12AEB28C60B4D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/ConcreteWall_AmbientOcclusion.tif",
+    "hash": "E9F8690BBC889698C93F735B657C92F79F2232DA495090293FC2EFBD4F62A9E4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/ConcreteWall_AmbientOcclusion.tif.meta",
+    "hash": "DA8917D16EE633A552FB2DAF155BDDB45AAC07E2DF559510024DDBF8D7E0261D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/ConcreteWall_MetallicSmooth.tif",
+    "hash": "22C61673E910A47513EA566956BE644BE42584C18FDEB332A9106ABC9058566E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/ConcreteWall_MetallicSmooth.tif.meta",
+    "hash": "722CA10559C9EA17A67395CFC323761946DE4869CE098BDB5FA596A258DEB56F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/ConcreteWall_normal.tif",
+    "hash": "D08FD8DAF9B9B1A5D935FFEDB7396E13831D0C41FCD3A45D437014B6AF9627E3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/ConcreteWall_normal.tif.meta",
+    "hash": "D04E06F97FDB38202C2E7AEBBC513855A5848B53244A86B665191A72210D92E7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/MetalTrim_Albedo.tif",
+    "hash": "7FD6B5880D3482813C29464AB9C5C7341DC9DEC3FE3133A90B46FF4169FCDB14"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/MetalTrim_Albedo.tif.meta",
+    "hash": "295A2695BF26EBD2F059FACBB1A9BB3275144BB5BD964FC5CC1D2426ACD00609"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/MetalTrim_MetallicSmooth.tif",
+    "hash": "E06C6A0CBCDC1BC4154E7B3671229459FDC0CE9AD5BE22477FD3E353B030C47A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/MetalTrim_MetallicSmooth.tif.meta",
+    "hash": "6728082E91281563D7DAE2DD81C0AEF80BADF359452DBA901059EC3E33E9721E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/MetalTrim_Normal.tif",
+    "hash": "1981BA3016D8EAF6547B2793E8E168164A363D573C1FF3D8BA78812BAA0B54FD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/MetalTrim_Normal.tif.meta",
+    "hash": "C4CD71CA65D62FDDC5967D3E8D0DAB69C1E00612C1F3321A1C4239FB49C0B7E3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/PaintLines_Albedo.tif",
+    "hash": "D32AA9C1FE6784BFB49A0A3A48C9C335203FFF9F6E6BEEF71C167B9477209EA4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/PaintLines_Albedo.tif.meta",
+    "hash": "AF613B81859039A5D92D63B8C3614E69C216D5D99588523EB0A89A9B65B98BE7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/PaintLines_normal.tif",
+    "hash": "3779B0677D8277B863C670FDD953CC3394C1536D82CAFAF8ECCEA285B8389166"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Environment/Textures/PaintLines_normal.tif.meta",
+    "hash": "5EDA37B1D4D1EA36837A708408CF26365744D118FAED70625DDC4CA10620E9CB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Prefabs/Player.prefab",
+    "hash": "A93AF3268F6981A52E31A0D62E8B6D5437E023DE0A976F563BE126A2D338BD15"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Prefabs/Player.prefab.meta",
+    "hash": "2719D6D72FFC8DBF7B506D8AB61B546B59D5BFE1D97F67AA412BBF6FCA522B17"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Prefabs/WorldSpaceLabel.prefab",
+    "hash": "2AA6ED66DF2B63FAB9A32C9C5D70350F5AF13034306A2577F31549515CEDDD52"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Prefabs/WorldSpaceLabel.prefab.meta",
+    "hash": "A695087A1A97B15E986E97A36620F2A4E81BB3F146A4509C8B96739A4F5ACAF5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Ramps/Editor.meta",
+    "hash": "DD793FD21F128EA04CF8FD0582355D9FCC95342AF9CE96EEC46C677CDA7BDE13"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Ramps/RampBaker.asset",
+    "hash": "A8B213742BD77698B9E18145970C3E20230310B00E80C0BD533E90B194F561C3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Ramps/RampBaker.asset.meta",
+    "hash": "2C23F6191152F54BC44D27EB8BA2BC04AE82C434F1146A7983D9C047A5E33784"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Ramps/Runtime.meta",
+    "hash": "AFB86AE1B299DD1A3B60932C6F23D4128D54489FF1F8C47CE659E98BFA7F1AF1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Ramps/Editor/RampAssetEditor.cs",
+    "hash": "392F1A0AFDD72B6EB432F573905D7857348F530C66E331A4B47B6351D544EDB1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Ramps/Editor/RampAssetEditor.cs.meta",
+    "hash": "2561D690039156BFB70238142C1AE8BFC1C389C9102AF3B89E9849FCFFD4FFC5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Ramps/Runtime/RampAsset.cs",
+    "hash": "9ACE6C9C4E0131EB4765DE9E42D291563F056C0B551B3D379592BAB7CD4D34E1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Ramps/Runtime/RampAsset.cs.meta",
+    "hash": "FFDDAC7215FE493B992933A3C96242B2AB7DCA8C2AC2FFDB1C2144F99C1D55AD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Scripts/AdjustTimeScale.cs",
+    "hash": "3F39A58727B36592F456D4FF6B56C2D37C6BAE022A938BCE91BC296B5372CA18"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Scripts/AdjustTimeScale.cs.meta",
+    "hash": "56D5FC910714B287B49CB942D4E12B7CBF53E4D1595C63DD049EB2F6AE18082E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Scripts/ProximityActivate.cs",
+    "hash": "924614AAB8D3C216CD4AA93FFE3D1523486299B5905DB5248802FFDE667CAADB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Scripts/ProximityActivate.cs.meta",
+    "hash": "08277E814BEA0F94EFB87CAB177FF3EB332B15738D23F2112A9D3491833A71E6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Scripts/SimpleCameraController.cs",
+    "hash": "56B5A553F59A635CC2292E466107BF1317C19CE12CE22004FFBA36C0EB188B1C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Scripts/SimpleCameraController.cs.meta",
+    "hash": "3E1E68810D0D7FF464988B291EF313ACD82CE85D2A2E066A509DA61F81993162"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Scripts/SimpleCharacterMotor.cs",
+    "hash": "329260563DAF259A63AFB3C87ABE3763000EE0C794A856AECB73F3524579ED69"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Scripts/SimpleCharacterMotor.cs.meta",
+    "hash": "2CED65935FA8DD8A427C407CD0FE05A2A4BF94287CB4934E6498FAD564D97927"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Sprites/Info.png",
+    "hash": "500960C985379B8447F9BD6CDDDAC2E3A3639F9A86678E5A67199565E10C1BF2"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Sprites/Info.png.meta",
+    "hash": "EE06EF50595566035B63BC10B4991117EF39342CBD745FC4C9B9377EE38112EC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Sprites/TitleBorder.png",
+    "hash": "6906354F4B6D26B94EA0C53EF8B333F1A287EEFA411709E7C628237F0843E116"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Sprites/TitleBorder.png.meta",
+    "hash": "AFFF068ED73BB01B230199CF88DB63589AEB4FE601639F4A353DC89DB14455F6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Sprites/UnityLogo.png",
+    "hash": "F09E0F5B6DCA595FB97CB071863D0A8F7A02FEDFBAC63C26F8A6536784FCDF57"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/Shared/Sprites/UnityLogo.png.meta",
+    "hash": "0A677997ECDE23806E5F5ED0970E97739393A65EF476F85A3E5052533D5C4886"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Fonts.meta",
+    "hash": "11E80153FA39B86EFADB8917ECDE12A0402FE0729F2C88F6F8D1999F3FB04748"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources.meta",
+    "hash": "167448559DB07C9857B206A0F5A0AEDCD6A6DAD900D618B35B0702D636573805"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders.meta",
+    "hash": "C109EB7E331AFFEDB377F7051DF3D4881F8529B65F9593234585713E6E94ED30"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Sprites.meta",
+    "hash": "41E002B97BA2235689FBA502D1EE4419F50EA0095CD3632CDC50BC90CA8A94DE"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Fonts/LiberationSans - OFL.txt",
+    "hash": "37F8552E9A874EC10710DC0EDE6A9ADF168E6609FBD02A507F35629373B85A48"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Fonts/LiberationSans - OFL.txt.meta",
+    "hash": "704A320D940E718E53DAF62B1E71FC6D16C189B766230110E2ADE5B367C7E479"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Fonts/LiberationSans.ttf",
+    "hash": "E5B0AF421EA2BFBC1AC8D251D647268087AE82786234C57F757D1F0B90FA8B49"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Fonts/LiberationSans.ttf.meta",
+    "hash": "B3B12A6D17E8696D2FD0CF00A28711D67CF7CC257D87A7D4C0FF55FD0F67EF9D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Fonts & Materials.meta",
+    "hash": "B3987F5CCE65362A0FA566816A566DCB71999C078E1B2956FE21958BBC645547"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/LineBreaking Following Characters.txt",
+    "hash": "3A73E5FFE2510756DD3C2E982FDC1218B4BE82C6E21ABDE88070D6860E1BC8E6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/LineBreaking Following Characters.txt.meta",
+    "hash": "BFF27954E97045E12D7FAA7DFF3F907122AC02431E292D1FCA7A48A4F0BFE9D6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/LineBreaking Leading Characters.txt",
+    "hash": "62D3F4D5F64AAF885692D2D13A8313F6918E6E4C5AEB3990A43F614652BFD89C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/LineBreaking Leading Characters.txt.meta",
+    "hash": "E8E2F48B185E0299091BC515F5D1612B19AEA43FBD89CD4D083BB5D1DBFF2306"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Sprite Assets.meta",
+    "hash": "6E9E04E65D5F3000C1D8DB0F691F290868F73A809A1A5FF710FCEAAC6035486C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Style Sheets.meta",
+    "hash": "C979F86AC44CD038EAEC34DB96FA8723ABC0BB1FA1C4708FBD6BB3AD6C0F40C6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/TMP Settings.asset",
+    "hash": "7BE438062CDC296835A1258B68BCBEB8E9FDC4B01EA27C05A24A1074260F7424"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/TMP Settings.asset.meta",
+    "hash": "A7648AB3A80963B1D9D062547E8C87CF232500AD2BC172CE06AEC496980D89B5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Drop Shadow.mat",
+    "hash": "B6B65C34E4907DD3006C2217FC8A4CEF81B6DA24DF0A3DE8E2288199EB6C5A9D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Drop Shadow.mat.meta",
+    "hash": "29C2252901C1B8D18E1D27E08C1B03175E4BA6BC32917ED60A8396C95CBE875E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset",
+    "hash": "4258BED1E28868571085FE493031136FA2DED7A885D7D38A7CD8183BA15ABE7D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset.meta",
+    "hash": "4DD1EABEF94CF6D178B0EC5A9E5812D206ADA468E0082AE3B13B6E4516700BB3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Outline.mat",
+    "hash": "25874340976D40E9F9E8ABF731B7F32E5A478541DEAD9288140BD60C7A3287D9"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Outline.mat.meta",
+    "hash": "049E19A94FDD8176ED0FF08075D5D9FC961A025A40C96F1744F689CDCE241F41"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset",
+    "hash": "C3FF50E3133D989180B187748FFC67903F1FEDE099A5B85B4FCBD8CB6E8BE958"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset.meta",
+    "hash": "D9A905B727049123E66748473FAA54D28EB2C99C2045961AF73BA6427FF8D162"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset",
+    "hash": "155FFF99F467BAA93DD2D0886DF466BD242CD5E3C8C60C9D43E9CDAD269F7F54"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset.meta",
+    "hash": "06BC431B9224B5787F51E14A3B230132AD3CA9562BBE09F0E2FA42EB0490FAEC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Sprite Assets/InlineIcons.png",
+    "hash": "A7E92F46133C23CB6748C6156EC3BD677175EBA4C1DF6BEEF82B98292BD19946"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Sprite Assets/InlineIcons.png.meta",
+    "hash": "19B76D40BA7305CDD706033BC63A1D68EA16E2C5D02B9FDB19738B8EAE187257"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Sprite Assets/MixedIndexTest.asset",
+    "hash": "2FC661347D2CCE9D1876B442F750564B0A84C4850103A9F51D23BCD800CB82B8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Sprite Assets/MixedIndexTest.asset.meta",
+    "hash": "0FEF40F5FDEC125955284787531A2FF45E733C82B71F3748B570A4EAA71531D4"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Style Sheets/Default Style Sheet.asset",
+    "hash": "93E073CDB91B7E3D2FA31E2DD13626D7B9D2F327904BA8C3C2B97A3EECFBABAC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Resources/Style Sheets/Default Style Sheet.asset.meta",
+    "hash": "9556D03D8066EF74AD3BF15E23BA4CF72E69404455418AC61F3EF08DE3133507"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/SDFFunctions.hlsl",
+    "hash": "88CF0F62E4000B71750C059D0886B19504CD1CF10F39BB61DDC11B77A882D417"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/SDFFunctions.hlsl.meta",
+    "hash": "63EC78ECD56ACD4EDC61E98577F31820674D2B8C2DFC6FE7E63B95F294089D93"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader",
+    "hash": "42892A52F22BDDE6D482CF2DA5F35E4B813063FC6FE42189EEE5562080079494"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader.meta",
+    "hash": "000792DB8F878FD2EFE9E5AB84745F893FFB7A7D875416218ABAE928FB48CC02"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader",
+    "hash": "B50AFC7EDC8A710F8B4159149B2391E7238B5E4076CC0EA2119090ED29E13B4A"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader.meta",
+    "hash": "9E9B738BAFE62BE1650980575A22DC0E39CBD49A80EE774B74AF26410F49031D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_Bitmap.shader",
+    "hash": "1D32F34C71276C1321AA0540A2410E15808743A38B2026923045A4DEC4A79B58"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_Bitmap.shader.meta",
+    "hash": "2EBA0878C754EEA260BAAAA04C800E133975B1295B94D4905FCEBC16E2A6F86D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF Overlay.shader",
+    "hash": "A0D318756CBA0F95A7052C387E629D0ADD3E9A4125C8333F1D1ED591AF5F17CB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF Overlay.shader.meta",
+    "hash": "1C377919DDA40539BE1189FDC5A224ECA8361F771552893A4AAF93B9F54D7A2E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF SSD.shader",
+    "hash": "2A991951B00B0C052363A1025F655450054325437B3D13C2623A987C8EC77C30"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF SSD.shader.meta",
+    "hash": "AC0BD2115947DDAB76CEF259E4CDE892285E5D024B4AF52FD9B809993FD2F90C"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-HDRP LIT.shadergraph",
+    "hash": "BF68062F68B38B588ABD1C354F64E905F824D9A2C47F92EBDD70A32989EB2097"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-HDRP LIT.shadergraph.meta",
+    "hash": "9D22EE31144A1456157BBAFD1A3FB1585B232F19146DB400B5E36849E103751F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-HDRP UNLIT.shadergraph",
+    "hash": "8A969C2D775079CCE4E1C45D5EB6D3964B27D44DC884178363050C74FD5E9742"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-HDRP UNLIT.shadergraph.meta",
+    "hash": "D4E4408F8C43E6965E7AE779CA7CE0966A5687DA4DD7A28D8479E4F98AF4B52F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader",
+    "hash": "41CFF58473557BF760D03513A8C098F43A24E4EEB4C8CCD7D828C045A338A9ED"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader.meta",
+    "hash": "4C5CB3DEC15AA6C643B3ABA6113B88D00B99D383079F150AE8F8C4EC086E27F3"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader",
+    "hash": "FB286386D0592CE6D63EB736F180B4B0F638EC538B0855AA54767A438EBD1173"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader.meta",
+    "hash": "15F02E53635A562E7F7AFEFAFCC736249FFB94094BB834CA46E3D316C667F5C0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader",
+    "hash": "8B30C140F6AF9134392FE6ECF4C0676DB73F873489AC52ADFB47BBD288CB51B8"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader.meta",
+    "hash": "65764333001FE765E96DE3037F6266B39790C2FC76019054A64377A6FB8C28B0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-Mobile-2-Pass.shader",
+    "hash": "4BC2DB64BEFBD0E37E23539F21096AD2FCD9D61B36D2174D208A7D831A0883F7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-Mobile-2-Pass.shader.meta",
+    "hash": "ECCF158E4A60D55ABDE35734F7B93C9E5371DC72825EE693AC58AAC57445515D"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader",
+    "hash": "F9FAE5906DD37D89298338953294459975DE58A5421E68DD9E82A79794B95509"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader.meta",
+    "hash": "E508741F6597EF12A63A729EA3D6D73088E72205E767EC9A09F217F04A0DD4E7"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-Surface.shader",
+    "hash": "5DADB68B56429547918B392626E9AF8FD5173936D20BB43CFCA58DFA00947257"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-Surface.shader.meta",
+    "hash": "710145D49BE6630C726DBD149F56F2D080B300E8DCB33A7BCB188CF774454704"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-URP Lit.shadergraph",
+    "hash": "E0148CE8E5904232A4E711376A45B7AF2A007FB9690C5A69C1CB4952A696CDBF"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-URP Lit.shadergraph.meta",
+    "hash": "523B32C4D276973EAC24BCE0A9DE1D43E8897A9C8C8A40304EAAEB1FB22C9848"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-URP Unlit.shadergraph",
+    "hash": "DC15B6819AD87A4B34ED888AE2C274624EFC0ADA902D1A9E7752D87922414DCC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-URP Unlit.shadergraph.meta",
+    "hash": "CAB40BDAF8B398BBE136CE29EC7743A2E5FDDCF7BF64CE0F60D05E6834D1540E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF.shader",
+    "hash": "10EFE6D4728474A09970B857FAF37913793E168DC13DBD4D7316B54B37615D97"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF.shader.meta",
+    "hash": "B731A0D96A4CFA5B7D11547BBB6EFD7B4060CE927245CC414159EA334B37C2C6"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_Sprite.shader",
+    "hash": "AF669BB9AE136C8099F8E0A94A6933FD2F1E1FB0A6842129939A319FAB4B8DBB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_Sprite.shader.meta",
+    "hash": "8A055E0E176623053168F2BAAFFE0271FB967149AE7AA6E866C440B938A55F05"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMPro_Mobile.cginc",
+    "hash": "D9D43DDD9810476162F21B42477D9CE2CDC4E6CC7571D354C3253AAFC6673EAD"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMPro_Mobile.cginc.meta",
+    "hash": "F4A3573E9EE10E63C0194CBA441C5A1B5C11832A2CB37D218702656145C26769"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMPro_Surface.cginc",
+    "hash": "244B442520282A66363D121C8D2AEEB30BB1E72CBBADBF41CE68D9100322ADE5"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMPro_Surface.cginc.meta",
+    "hash": "3178E29ACC1CB6B06CA114C30C75D99B0ED535E1C8C596620BBD1D4EBAB6EDFB"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMPro.cginc",
+    "hash": "14EDB7D7B88CAF2B82CAE68200ABE895E5B5B3474C3FFFBF0E9B4B09A4E2467E"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMPro.cginc.meta",
+    "hash": "DB8B9D679A6F7EF1A16F554D5882346B8C6E4FD665AD668600ABCDC984BB337B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Sprites/EmojiOne Attribution.txt",
+    "hash": "4B65F8960E4F4C5C8B35FD139E369265E9BB45667FC16461B2BA01188D464D93"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Sprites/EmojiOne Attribution.txt.meta",
+    "hash": "E243F84CFE2D947399C1CBEECC5147A7C1BBF8A9CB3BD7AB0981491C15AE2306"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TutorialInfo/Icons.meta",
+    "hash": "509A7E1244E389439C9343E3442DE6042BF04616FD9351D577AABF67D650AE5B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TutorialInfo/Scripts.meta",
+    "hash": "D14AF0E008FAE1B46AA48B032C3B7849218473F6574B3ED071B691CFBF8AAE0F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TutorialInfo/Icons/Help_Icon.png",
+    "hash": "E55F66566EF016B62465556BE0EA75B36EA1EC4C62660C1F226329A1CABC19D1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TutorialInfo/Icons/Help_Icon.png.meta",
+    "hash": "08CD32E7B2078F7CCE8A1B4C0E85C1AF7D2FD9CC182F952726CAAF778CEB50DC"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TutorialInfo/Icons/ReadmeLogo.png",
+    "hash": "4D64673C3FBF29C99E0955F4A892E131874A9EE2059CDC6DB8A663BC3E9CE835"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TutorialInfo/Icons/ReadmeLogo.png.meta",
+    "hash": "21B8B12ED199E32D26CEE49B8221E8E676A1F8B26A7B1E660E73CCFCA52019E0"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TutorialInfo/Scripts/Editor.meta",
+    "hash": "5C9DD52A37F665792E8AB3D022C85BA79E195B3B1F17D9DB3B06C9570A0EED4F"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TutorialInfo/Scripts/Readme.cs",
+    "hash": "F6134A8E6818BA252D3AF8102FB0F2FA1C01F11B56D120032AC3A9AA1A91DBC1"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TutorialInfo/Scripts/Readme.cs.meta",
+    "hash": "4F372FC592C9A5F00B113761E3D0AFCCD67512000A51DD8349189ED7A3BB826B"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TutorialInfo/Scripts/Editor/ReadmeEditor.cs",
+    "hash": "1FF220574F80E7877D623D0CC84C1169F642810A446F4375BCA0613B89CD9F98"
+  },
+  {
+    "path": "Assets/UnityTechnologies/ParticlePack/TutorialInfo/Scripts/Editor/ReadmeEditor.cs.meta",
+    "hash": "2835907924797E21516725958047F0312942E406139C9E4C2AE92B8CA2A58F0B"
+  }
+]

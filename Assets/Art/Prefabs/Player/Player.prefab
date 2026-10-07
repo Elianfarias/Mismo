@@ -458,6 +458,7 @@ GameObject:
   - component: {fileID: 4734037579532205185}
   - component: {fileID: 802370064558194752}
   - component: {fileID: 4643420922271759297}
+  - component: {fileID: 2251677355355830198}
   m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
@@ -912,6 +913,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d541a5bda693444b800d3c7fed820c52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Presentation.PlayerLocomotionLean
+--- !u!114 &2251677355355830198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314022178686786752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957c08a640d1eb54cbb870498f1791f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Presentation.PlayerArrivalVfx
+  revealMaterial: {fileID: 2100000, guid: b7551746c596d3544b1d2847d67738c0, type: 2}
+  particlesPrefab: {fileID: 8406717506664885176, guid: f6cb03999d82a9143a1de529829f7589, type: 3}
+  duration: 3
 --- !u!1 &1509950824425779030
 GameObject:
   m_ObjectHideFlags: 0

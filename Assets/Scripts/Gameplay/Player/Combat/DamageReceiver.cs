@@ -36,6 +36,16 @@ namespace Mismo.Gameplay.Combat
             }
             GetComponent<Mismo.Gameplay.Player.Equipment.EquipmentLoadout>()?.MarkCombat();
             damage.Source?.GetComponentInParent<Mismo.Gameplay.Player.Equipment.EquipmentLoadout>()?.MarkCombat();
+            // El cheat usa la muerte normal (botín, misiones y feedback), incluso en ventanas de invulnerabilidad.
+            if (GetComponent<IEnemyDamageTarget>() != null &&
+                damage.Source?.GetComponentInParent<Mismo.Gameplay.Player.PlayerCheats>()?.OneHitKills == true)
+            {
+                float remaining = health.Current;
+                health.ApplyDamage(new DamageInfo(remaining, damage.Source, damage.HitPoint, damage.Direction, damage.AttackId,
+                    damage.PostureDamage, damage.Ranged, damage.Area, damage.Origin, damage.Parryable, damage.WeaponFamilyId,
+                    damage.FocusGainOnHit, damage.FeedbackProfile, damage.AbilityId, damage.AbilityUseId, damage.BreaksGuard));
+                return Publish(damage, new HitResult(HitOutcome.Hit, remaining - health.Current));
+            }
             var rules=CombatRules.Current;
             var attacker=damage.Source!=null?damage.Source.GetComponentInParent<CombatState>():null;
             var outcome=defense.Resolve(damage);

@@ -67,7 +67,8 @@ namespace Mismo.Gameplay.Player.Presentation
             if(WorldSession.Current!=null&&!WorldSession.Checkpoint(arrival,yaw)){error=WorldSession.LastError;return false;}
             GetComponent<TreeClimbing>()?.Release();var equipment=GetComponent<Equipment.EquipmentLoadout>();equipment?.Runner.Cancel();equipment?.Belt?.Cancel();
             var motor=GetComponent<PlayerMotor>();if(motor!=null){motor.ResetPosition(arrival);motor.Face(Quaternion.Euler(0,yaw,0)*Vector3.forward);}else transform.position=arrival;
-            world.RefreshResourceNavigation();selectedVillage=null;Recenter();Close();ReleaseMini();return true;
+            world.RefreshResourceNavigation();selectedVillage=null;Recenter();Close();ReleaseMini();
+            GetComponent<PlayerArrivalVfx>()?.Play();return true;
         }
         void ReleaseMini()
         {
@@ -86,7 +87,7 @@ namespace Mismo.Gameplay.Player.Presentation
         bool InventoryBlocked()=>Equipment.Inventory.InventoryPanel.AnyOpen||GameplayPause.BlocksInput||GetComponent<Mismo.Gameplay.Combat.Health>()?.IsDead==true;
         void OnGUI()
         {
-            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.InterfaceHidden) return;
             if(mapCamera==null||InventoryBlocked())return;
             mapTooltip=null;
             HandleMiniResize();
@@ -161,6 +162,15 @@ namespace Mismo.Gameplay.Player.Presentation
                 if(interactive&&MapButton(r,symbol,pin.name,color,type?.icon)){draft=Clone(pin);selectedVillage=null;error=null;}
                 else if(!interactive)DrawIcon(r,symbol,color,type?.icon);
                 if(IsOpen)DrawName(p,pin.name);
+            }
+            var dragon=GetComponent<DragonArcCoordinator>();
+            if(dragon!=null)foreach(var marker in dragon.Markers())
+            {
+                // Story destinations are disclosed by the audience, including unexplored ground.
+                var p=Project(marker.Position,rect)-rect.position;if(!local.Contains(p))continue;
+                var color=marker.Complete?new Color(.5f,1,.65f):new Color(1,.8f,.35f);
+                DrawIcon(new Rect(p.x-12,p.y-12,24,24),MapSymbol.Flag,color);
+                if(IsOpen)DrawName(p,marker.Label);
             }
             var player=Project(transform.position,rect)-rect.position;
             if(local.Contains(player)&&VisibleOnMap(transform.position))

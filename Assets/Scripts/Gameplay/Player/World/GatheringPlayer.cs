@@ -81,7 +81,7 @@ namespace Mismo.Gameplay.Player.World
         }
         void OnGUI()
         {
-            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.InterfaceHidden) return;
             if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
             if(inventory==null||health==null||health.IsDead)return;
             if(stationOpen&&station!=null){int depth=GUI.depth;GUI.depth=-45;DrawStation();GUI.depth=depth;return;}

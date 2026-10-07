@@ -1,0 +1,50 @@
+PASS Nueva partida entra al arco después de completar la introducción
+PASS Sobrevuelo bloquea input sin pausar mundo
+PASS Primer vuelo lejos del pueblo y rápido: distancia mínima=93,99577 m, velocidad=48,00056 m/s
+PASS Aleteo visible en fotogramas reales: vuelo / 84,1 grados
+PASS Terminar restaura cámara/control y guarda llegada
+PASS Presentación puede iniciar con input libre
+PASS Cinemática oculta Canvas sin activar UI previamente deshabilitada
+PASS Otro dueño no libera la cinemática; Escape no abre pausa debajo
+PASS Devolver el control no elimina ni teletransporta al dragón
+PASS El dragón continúa volando después de omitir la cámara
+PASS Omitir restaura lente y control
+PASS Interrumpir restaura lente y control
+PASS 17 clips mantienen su pose de Update a LateUpdate sin controlador que los sobrescriba: 
+PASS No se activa un faro antes de la audiencia
+PASS Conversación con vigía
+PASS Fallo de escritura no adelanta la historia ni cierra el diálogo
+PASS Reintento del guardado de la explicación
+PASS Audiencia disponible después del vigía
+PASS Rey inicia misión de los tres faros
+PASS Dos NPCs, tres activaciones y un altar; sin guardianes
+PASS Activación de ruinas primero
+PASS Ritual bloqueado con solo un faro
+PASS Recargar escena recupera misión/faro sin repetir sobrevuelo
+PASS Streaming/recarga no duplica contactos
+PASS Activación independiente 2
+PASS Activación independiente 0
+PASS Tres faros habilitan el altar
+PASS Entrar en arena no invoca automáticamente
+PASS Confirmación explícita del ritual
+PASS Fallo de guardado impide crear un jefe
+PASS Invocación y punto de reintento guardados
+PASS No hay invocación duplicada
+PASS Inicio de invocación sin bloqueo de preparación: 140,1 ms
+PASS Vuelo/aterrizaje/rugido animan durante el bloqueo de control
+PASS Invocación y final sin congelamientos: pausa máxima entre fotogramas=335,2 ms
+PASS Aleteo visible en fotogramas reales: invocacion / 105,4 grados
+PASS Un jefe, IA activa después del aterrizaje y control restaurado
+PASS El aterrizaje rompe el árbol que bloqueaba el pecho y guarda su destrucción
+PASS La invocación deja un impacto persistente antes de habilitar la IA
+PASS Ritual completado permite reintentos
+PASS Reinvocación para probar Omitir
+PASS Omitir devuelve control con jefe activo sin congelamiento: 63,1 ms
+PASS Omitir restaura HUD, conserva destrucción y no duplica jefe/impacto
+PASS Combate usa exclusivamente la animación de sus ataques
+PASS Aliento real después de invocación
+PASS Aliento y recuperación en fotogramas normales del encuentro real; estado del HUD restaurado
+PASS Muerte: retorno al altar, faros conservados y sin jefe duplicado
+PASS Recarga no deja bloqueados cámara ni controles
+PASS Sin excepciones de ejecución: 
+DRAGON_ARC_CHECKS_OK

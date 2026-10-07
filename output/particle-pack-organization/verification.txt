@@ -1,0 +1,1 @@
+PASS: migracion de Particle Pack; 447 GUIDs, assets y dependencias conservados; sin nuevos scripts ausentes.

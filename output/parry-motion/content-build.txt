@@ -1,0 +1,1 @@
+PASS: imported Humanoid clip and timing; unchanged defense window; content build and reload with the new parry animation. Global organization: see organization.txt.

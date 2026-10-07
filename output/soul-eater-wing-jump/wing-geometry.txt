@@ -1,0 +1,17 @@
+PASS Basic Attack: 21 poses, both wings finite; longest triangle edge=0,2898 m
+PASS Defend: 21 poses, both wings finite; longest triangle edge=0,4341 m
+PASS Die: 21 poses, both wings finite; longest triangle edge=0,2973 m
+PASS Fireball Shoot: 21 poses, both wings finite; longest triangle edge=0,3656 m
+PASS Fly Fireball Shoot: 21 poses, both wings finite; longest triangle edge=0,4278 m
+PASS Fly Float: 21 poses, both wings finite; longest triangle edge=0,4060 m
+PASS Fly Forward: 21 poses, both wings finite; longest triangle edge=0,3149 m
+PASS Fly Glide: 21 poses, both wings finite; longest triangle edge=0,2285 m
+PASS Get Hit: 21 poses, both wings finite; longest triangle edge=0,2833 m
+PASS Idle: 21 poses, both wings finite; longest triangle edge=0,2684 m
+PASS Land: 21 poses, both wings finite; longest triangle edge=0,3615 m
+PASS Run: 21 poses, both wings finite; longest triangle edge=0,3243 m
+PASS Scream: 21 poses, both wings finite; longest triangle edge=0,2765 m
+PASS Sleeping: 21 poses, both wings finite; longest triangle edge=0,6182 m
+PASS Tail Attack: 21 poses, both wings finite; longest triangle edge=0,3039 m
+PASS Take Off: 21 poses, both wings finite; longest triangle edge=0,3859 m
+PASS Walk: 21 poses, both wings finite; longest triangle edge=0,2684 m

@@ -1,0 +1,7 @@
+Soul Eater: escala uniforme 1.6, exactamente el doble de 0.8.
+Raíz de combate en escala 1; colisiones corporales, cabeza, navegación y volúmenes de mordida/cola/carga adaptados.
+Sobrevuelo e invocación conservan el mismo tamaño.
+Verificado en Unity 6000.6.0f1 (Play, D3D11), copia aislada.
+Archivos probados coinciden con el proyecto: 11/11.
+Comprobaciones: {'fase-uno.txt': 49, 'fase-dos.txt': 38, 'arco-runtime.txt': 39, 'reglas.txt': 100}.
+Patas a 0.025 m del suelo; seguimiento de aliento, cráteres, vuelo y persistencia aprobados.

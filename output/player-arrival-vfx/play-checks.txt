@@ -1,0 +1,14 @@
+Running real teleport and death/scene reload checks.
+PASS Ordinary initial scene load does not play arrival
+PASS Actual WorldMapPanel.TravelTo succeeds
+PASS Teleport starts one effect after moving
+PASS Effect belongs to the village arrival position
+PASS Pause freezes the reveal
+PASS Second teleport restarts instead of stacking
+PASS Body materials restored after reveal
+PASS Disabling the player restores materials immediately
+PASS Real death reload restored health
+PASS Respawn starts exactly once on the replacement player
+PASS Respawn finishes and releases particles
+PASS Respawn flag is consumed; ordinary reload does not replay it
+PASS: real map teleport, repeated arrival, pause, cleanup, death reload and ordinary reload.

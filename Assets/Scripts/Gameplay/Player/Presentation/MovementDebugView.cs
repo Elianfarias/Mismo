@@ -37,7 +37,7 @@ namespace Mismo.Gameplay.Player.Presentation
         /// <summary>Muestra controles, stamina y disponibilidad del cinturón.</summary>
         private void OnGUI()
         {
-            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.InterfaceHidden) return;
             if(PlayerHUD.Active!=null)return;
             GUILayout.BeginArea(new Rect(16, 16, 390, 155), GUI.skin.box);
             GUILayout.Label("MOVEMENT PROTOTYPE");

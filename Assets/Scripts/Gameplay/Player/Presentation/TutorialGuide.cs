@@ -114,7 +114,7 @@ namespace Mismo.Gameplay.Player.Presentation
 
         void OnGUI()
         {
-            if (Mismo.Gameplay.Player.Presentation.GameplayPause.CameraMode) return;
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.InterfaceHidden) return;
             if(!IsOpen||hud==null)return;
             var matrix=GUI.matrix;var color=GUI.color;bool enabled=GUI.enabled;
             try

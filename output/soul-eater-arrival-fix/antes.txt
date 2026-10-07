@@ -1,0 +1,4 @@
+Cold initialization: 9795,841 ms / 0 managed bytes
+Second rig initialization: 6564,3134 ms / 0 managed bytes
+120 support updates: 82,0727 ms / 0 managed bytes
+Mesh vertices: 305376; bones: 57

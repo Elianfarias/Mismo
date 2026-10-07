@@ -1,0 +1,176 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d620794ca1a91c84b835cb8426606738, type: 3}
+  m_Name: SoulEater_PhaseOne
+  m_EditorClassIdentifier: Mismo.Gameplay.Enemies::Mismo.Gameplay.Enemies.SoulEaterPhaseOneSettings
+  displayName: SOUL EATER
+  accent: {r: 0.36, g: 0.85, b: 0.16, a: 1}
+  health: 1400
+  posture: 220
+  movementSpeed: 5
+  turnSpeed: 65
+  detectionRange: 22
+  arenaRadius: 28
+  groundStepHeight: 1.3
+  soleClearance: 0.025
+  pathCellSize: 2
+  pathReplanInterval: 1
+  pathNodesPerFrame: 16
+  decisionPause: 0.2
+  crushWorldProps: 1
+  propBreakReach: 0.6
+  enablePursuitCharge: 1
+  pursuitChargeTriggerDistance: 28
+  pursuitChargeWindup: 0.75
+  pursuitChargeMaxDistance: 60
+  pursuitChargeCooldown: 4
+  pursuitStopMargin: 0.75
+  locomotionStopDelay: 0.2
+  biteRange: 10.2
+  biteRadius: 2.5
+  biteWindup: 0.95
+  biteActive: 0.2
+  biteRecovery: 1
+  biteDamage: 22
+  biteCooldown: 2.6
+  parryRecovery: 0.7
+  biteAimLock: 0.72
+  bite: {fileID: 7400000, guid: e3582a06a0237b645925dc3918aa4c7c, type: 2}
+  tailRange: 8
+  tailRadius: 1.1
+  tailWindup: 1.1
+  tailActive: 0.3
+  tailRecovery: 1
+  tailDamage: 19
+  tailCooldown: 5
+  rearDwellTime: 0.8
+  tail: {fileID: 7400000, guid: 5b2c03f0232066b4994b3c0b51a27842, type: 2}
+  breathRange: 20
+  breathHalfAngle: 14
+  breathWindup: 1.5
+  breathActive: 2.2
+  breathRecovery: 1.7
+  breathTickDamage: 6
+  breathCooldown: 8
+  breathTickInterval: 0.4
+  breathPropagationSpeed: 20
+  breathTurnSpeed: 65
+  phaseTwoBreathTrackingSpeed: 60
+  breathHeadYaw: 55
+  breathHeadPitch: 35
+  breathPitch: 8
+  breathBaseHalfWidth: 1.8
+  breathGroundBackreach: 1.5
+  breath: {fileID: 7400000, guid: 28ba9acc58b1d314b8febcb522500402, type: 2}
+  breathMaterial: {fileID: 2100000, guid: 932b792ada318bc45843d24b17dd6ac6, type: 2}
+  breathPrefab: {fileID: 8330006320348072208, guid: 6e4b6c99591848e4ca95111a6f384e71, type: 3}
+  breathParticleBudget: 72
+  chargeThreshold: 0.75
+  specialRoar: 1.65
+  chargeWindup: 1
+  brakeDuration: 1.3
+  retreatDistance: 11
+  jumpHeight: 3
+  jumpDuration: 1
+  retreatTakeOffEnd: 0.4
+  retreatLandStart: 0.8
+  retreatPoseSwitch: 0.5
+  chargeSpeed: 25
+  chargeDistance: 34
+  chargeDamage: 30
+  chargeHitRadius: 2.5
+  chargeHitOffset: {x: 0, y: 2.2, z: 5.2}
+  chargeAimLock: 0.72
+  brakeTravelFraction: 0.35
+  brakeSpeedFraction: 0.3
+  roar: {fileID: 7400000, guid: 4b170173166a9e249aee502c5229640b, type: 2}
+  takeOff: {fileID: 7400000, guid: d51ac9afb5ad0a14991e4e0681115a59, type: 2}
+  land: {fileID: 7400000, guid: 95ee20ac26f47bb4ab03f726f92fd7aa, type: 2}
+  chargePose: {fileID: 7400000, guid: 20e3ad3da700599499c6b35c7ad78a37, type: 2}
+  brake: {fileID: 7400000, guid: 85ab052c11bbdff43ad961c4b3fea6a9, type: 2}
+  dustExplosionPrefab: {fileID: 1025285306637258, guid: d8f0099df63275647a8bcf646df1ca00, type: 3}
+  diveDustScale: 2.2
+  landingDustScale: 1.2
+  chargeDustScale: 0.55
+  diveDustDensity: 1.5
+  landingDustDensity: 1
+  chargeDustDensity: 0.45
+  dustMaxParticlesPerSystem: 96
+  dustMaximumLifetime: 5
+  dustGroundOffset: 0.08
+  dustWaveOpacity: 0.45
+  chargeDustLiftHeight: 0.6
+  chargeDustContactHeight: 0.15
+  arrivalImpactRadius: 8
+  arrivalCraterDepth: 0.4
+  enablePhaseTwo: 1
+  phaseThreshold: 0.5
+  phaseRoar: 2.6
+  phaseTwoDecisionPause: 0.35
+  phaseTwoChargeCooldown: 20
+  aerialCooldown: 25
+  firstAerialDelay: 3
+  chargeDelayAfterLanding: 5
+  ascentTime: 1
+  aerialAimTime: 0.4
+  flightHeight: 20
+  flight: {fileID: 7400000, guid: e7817498e061e6145957a0b0cdc97031, type: 2}
+  hover: {fileID: 7400000, guid: 1f9bfb388f6c4c844b5c3580b998d99d, type: 2}
+  glide: {fileID: 7400000, guid: 58dad48d718f5bd4b810276edec345cd, type: 2}
+  diveTime: 0.8
+  diveRecovery: 3
+  impactSettleTime: 0.35
+  impactLandPose: 0.58
+  impactRadius: 6
+  shockwaveRadius: 9
+  craterDepth: 1.2
+  diveDamage: 40
+  shockwaveDamage: 18
+  shockwaveTime: 0.6
+  shockwaveFadeTime: 0.1
+  impactDamageHeight: 3
+  aerialPassDistance: 20
+  aerialPassSpeed: 10
+  aerialPassHeight: 5
+  aerialStripHalfWidth: 3
+  landingTime: 1
+  aerialFlameAhead: 2
+  aerialFirePlacementInterval: 0.3
+  aerialBreath: {fileID: 7400000, guid: d6272a71e79fd3e42a2b63cbb3ab75ce, type: 2}
+  groundFirePrefab: {fileID: 1087034665551826729, guid: 8bbbb41a0749ed948b8e7c937a90b1d6, type: 3}
+  groundFirePrefabRadius: 1.5
+  groundFireDamage: 5
+  groundFireLifetime: 4
+  groundFireInterval: 0.65
+  groundFireRadius: 2.1
+  groundFireHeight: 1.65
+  groundFireSpacing: 2.5
+  groundFirePlacementInterval: 0.35
+  maximumGroundFires: 8
+  groundFireHalfAngle: 40
+  groundFireFadeTime: 0.7
+  telegraphPrefab: {fileID: 1424096214680368840, guid: 2562eead87e67324a88418b3ad67e4eb, type: 3}
+  telegraphMaterial: {fileID: 0}
+  telegraphSegments: 64
+  telegraphWidth: 0.18
+  shockwaveWidth: 0.3
+  groundFireOutlineWidth: 0.08
+  telegraphGroundOffset: 0.12
+  trackingTelegraphColor: {r: 1, g: 0.76, b: 0.14, a: 0.85}
+  lockedTelegraphColor: {r: 1, g: 0.22, b: 0.04, a: 0.95}
+  shockwaveColor: {r: 0.8, g: 0.65, b: 0.32, a: 0.85}
+  groundFireOutlineColor: {r: 0.45, g: 0.95, b: 0.06, a: 0.45}
+  idle: {fileID: 7400000, guid: 689049bae118d1f409f035177583abb4, type: 2}
+  walk: {fileID: 7400000, guid: ae76d2f162e4b734c8db298f7ac4cdc2, type: 2}
+  run: {fileID: 7400000, guid: 25a0462a53c59e7469d91f9916350e87, type: 2}
+  hit: {fileID: 7400000, guid: 6d32bc2df00c3484c838fff629a1dfad, type: 2}
+  die: {fileID: 7400000, guid: 36eb94a33802bc0448cde7fc6c9fd112, type: 2}

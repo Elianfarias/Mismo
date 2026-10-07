@@ -51,6 +51,7 @@ namespace Mismo.Gameplay.Player.World
     public sealed class WorldContentCatalog : ScriptableObject
     {
         public WorldIntroductionDefinition introduction;
+        public DragonArcDefinition dragonArc;
         [Header("Village arrival (new worlds)")]
         [Min(1)] public float villageSizeMultiplier=2.6f;
         public float villageGroundOffset=-.19670273f;

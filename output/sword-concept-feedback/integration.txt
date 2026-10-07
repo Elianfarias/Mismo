@@ -1,0 +1,1 @@
+PASS: Combo intacto, sonido Estocada intacto, VFX y audio Parry conectados; importación y regresión de datos correctas.

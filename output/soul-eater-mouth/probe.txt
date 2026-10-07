@@ -1,0 +1,122 @@
+SOURCE RIG
+Root_Pelvis/Spine/Chest/Neck/Head pos=(0.0000, 3.6499, 1.8721) local=(-86.9050, 0.0000, 0.0000) rot=(0.000, 0.000, 52.902)
+Root_Pelvis/Spine/Chest/Neck/Head/Jaw pos=(0.0000, 3.4677, 2.3079) local=(-41.1924, -23.1238, 0.0000) rot=(0.000, 0.000, 27.121)
+Root_Pelvis/Spine/Chest/Neck/Head/Jaw/JawTip pos=(0.0000, 3.5943, 2.9720) local=(-57.7734, 35.0997, 0.0000) rot=(334.156, 270.000, 0.000)
+Root_Pelvis/Spine/Chest/Neck/Head/UpperMouth pos=(0.0000, 3.6998, 2.8294) local=(-95.6741, -6.0932, 0.0000) rot=(6.633, 270.000, 0.000)
+BONE 0: Root_Pelvis
+BONE 1: Spine
+BONE 2: Chest
+BONE 3: Neck
+BONE 4: Head
+BONE 5: UpperMouth
+BONE 6: Jaw
+BONE 7: JawTip
+BONE 8: Eye_Left
+BONE 9: Eye_Right
+BONE 10: NeckFat_Left
+BONE 11: NeckFat_Right
+BONE 12: UpperArm_Left
+BONE 13: LowerArm_Left
+BONE 14: Hand_Left
+BONE 15: HandTip_Left
+BONE 16: UpperArm_Right
+BONE 17: LowerArm_Right
+BONE 18: Hand_Right
+BONE 19: HandTip_Right
+BONE 20: Wing01_Left
+BONE 21: Wing02_Left
+BONE 22: Wing03_Left
+BONE 23: WingHand_Left
+BONE 24: WingIndex01_Left
+BONE 25: WingIndex02_Left
+BONE 26: WingMiddle01_Left
+BONE 27: WingMiddle02_Left
+BONE 28: WingPinky01_Left
+BONE 29: WingPinky02_Left
+BONE 30: WingPinky03_Left
+BONE 31: ValleyFat
+BONE 32: Wing01_Right
+BONE 33: Wing02_Right
+BONE 34: Wing03_Right
+BONE 35: WingHand_Right
+BONE 36: WingIndex01_Right
+BONE 37: WingIndex02_Right
+BONE 38: WingMiddle01_Right
+BONE 39: WingMiddle02_Right
+BONE 40: WingPinky01_Right
+BONE 41: WingPinky02_Right
+BONE 42: WingPinky03_Right
+BONE 43: UpperLeg_Left
+BONE 44: LowerLeg_Left
+BONE 45: ReverseLeg_Left
+BONE 46: Feet_Left
+BONE 47: Toe_Left
+BONE 48: UpperLeg_Right
+BONE 49: LowerLeg_Right
+BONE 50: ReverseLeg_Right
+BONE 51: Feet_Right
+BONE 52: Toe_Right
+BONE 53: Tail01
+BONE 54: Tail02
+BONE 55: Tail03
+BONE 56: TailEnd
+POSE Basic Attack 0: Jaw rot=(0.0000, 0.0000, 27.1211) headspace=(-41.1924, -23.1238, 0.0000)
+POSE Basic Attack 0: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-108.6143, -18.2209, 0.0000)
+POSE Basic Attack 0: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-95.6741, -6.0932, 0.0000)
+POSE Basic Attack 0,25: Jaw rot=(0.0000, 0.0000, 30.0599) headspace=(-40.5522, -39.7938, 0.0000)
+POSE Basic Attack 0,25: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-110.3004, -55.0202, 0.0000)
+POSE Basic Attack 0,25: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-95.6379, -5.3626, 0.0000)
+POSE Basic Attack 0,5: Jaw rot=(0.0000, 0.0000, 32.3095) headspace=(-28.7743, -69.2155, 0.0000)
+POSE Basic Attack 0,5: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-79.5189, -135.2746, 0.0000)
+POSE Basic Attack 0,5: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-89.0177, 43.9058, 0.0000)
+POSE Basic Attack 0,75: Jaw rot=(0.0000, 0.0000, 27.1211) headspace=(-41.1925, -23.1238, 0.0000)
+POSE Basic Attack 0,75: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-108.6143, -18.2208, 0.0000)
+POSE Basic Attack 0,75: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-95.6741, -6.0932, 0.0000)
+POSE Basic Attack 1: Jaw rot=(0.0000, 0.0000, 27.1211) headspace=(-41.1924, -23.1238, 0.0000)
+POSE Basic Attack 1: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-108.6143, -18.2209, 0.0000)
+POSE Basic Attack 1: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-95.6741, -6.0932, 0.0000)
+POSE Fireball Shoot 0: Jaw rot=(0.0000, 0.0000, 27.1211) headspace=(-41.1924, -23.1238, 0.0000)
+POSE Fireball Shoot 0: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-108.6143, -18.2209, 0.0000)
+POSE Fireball Shoot 0: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-95.6742, -6.0932, 0.0000)
+POSE Fireball Shoot 0,25: Jaw rot=(0.0000, 0.0000, 27.1211) headspace=(-41.1924, -23.1238, 0.0000)
+POSE Fireball Shoot 0,25: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-108.6142, -18.2208, 0.0000)
+POSE Fireball Shoot 0,25: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-95.6740, -6.0932, 0.0000)
+POSE Fireball Shoot 0,5: Jaw rot=(0.0000, 0.0000, 29.7990) headspace=(-40.4886, -40.9265, 0.0000)
+POSE Fireball Shoot 0,5: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-110.3882, -56.9601, 0.0000)
+POSE Fireball Shoot 0,5: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-95.6321, -5.2437, 0.0000)
+POSE Fireball Shoot 0,75: Jaw rot=(0.0000, 0.0000, 32.9669) headspace=(-32.2077, -68.4456, 0.0000)
+POSE Fireball Shoot 0,75: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-87.0807, -127.6541, 0.0000)
+POSE Fireball Shoot 0,75: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-91.6708, 26.8711, 0.0000)
+POSE Fireball Shoot 1: Jaw rot=(0.0000, 0.0000, 27.1211) headspace=(-41.1924, -23.1238, 0.0000)
+POSE Fireball Shoot 1: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-108.6143, -18.2209, 0.0000)
+POSE Fireball Shoot 1: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-95.6742, -6.0932, 0.0000)
+POSE Idle 0: Jaw rot=(0.0000, 0.0000, 27.1211) headspace=(-41.1924, -23.1238, 0.0000)
+POSE Idle 0: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-108.6143, -18.2209, 0.0000)
+POSE Idle 0: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-95.6742, -6.0932, 0.0000)
+POSE Idle 0,25: Jaw rot=(0.0000, 0.0000, 27.1211) headspace=(-41.1645, -24.1815, 0.0000)
+POSE Idle 0,25: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-108.8439, -20.4327, 0.0000)
+POSE Idle 0,25: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-95.6741, -6.0932, 0.0000)
+POSE Idle 0,5: Jaw rot=(0.0000, 0.0000, 27.1211) headspace=(-41.1362, -25.1961, 0.0000)
+POSE Idle 0,5: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-109.0362, -22.4471, 0.0000)
+POSE Idle 0,5: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-95.6742, -6.0932, 0.0000)
+POSE Idle 0,75: Jaw rot=(0.0000, 0.0000, 27.1211) headspace=(-41.1711, -23.9447, 0.0000)
+POSE Idle 0,75: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-108.8095, -20.0171, 0.0000)
+POSE Idle 0,75: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-95.6741, -6.0932, 0.0000)
+POSE Idle 1: Jaw rot=(0.0000, 0.0000, 27.1211) headspace=(-41.1924, -23.1238, 0.0000)
+POSE Idle 1: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-108.6143, -18.2209, 0.0000)
+POSE Idle 1: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-95.6742, -6.0932, 0.0000)
+POSE Scream 0: Jaw rot=(0.0000, 0.0000, 27.1211) headspace=(-41.1924, -23.1238, 0.0000)
+POSE Scream 0: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-108.6143, -18.2209, 0.0000)
+POSE Scream 0: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-95.6741, -6.0932, 0.0000)
+POSE Scream 0,25: Jaw rot=(0.0000, 0.0000, 32.1140) headspace=(-36.8058, -65.2806, 0.0000)
+POSE Scream 0,25: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-100.3276, -111.9155, 0.0000)
+POSE Scream 0,25: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-94.7282, 5.5017, 0.0000)
+POSE Scream 0,5: Jaw rot=(0.0000, 0.0000, 38.2204) headspace=(-27.9256, -69.2692, 0.0000)
+POSE Scream 0,5: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-70.4224, -141.6725, 0.0000)
+POSE Scream 0,5: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-88.4028, 47.7788, 0.0000)
+POSE Scream 0,75: Jaw rot=(0.0000, 0.0000, 37.1011) headspace=(-29.1601, -69.1524, 0.0000)
+POSE Scream 0,75: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-74.7173, -138.5573, 0.0000)
+POSE Scream 0,75: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-89.2738, 42.2717, 0.0000)
+POSE Scream 1: Jaw rot=(0.0000, 0.0000, 27.1211) headspace=(-41.1924, -23.1238, 0.0000)
+POSE Scream 1: JawTip rot=(334.1556, 270.0000, 0.0000) headspace=(-108.6143, -18.2209, 0.0000)
+POSE Scream 1: UpperMouth rot=(6.6325, 270.0000, 0.0000) headspace=(-95.6741, -6.0932, 0.0000)

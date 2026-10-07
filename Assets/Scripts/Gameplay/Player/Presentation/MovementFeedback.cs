@@ -12,7 +12,6 @@ namespace Mismo.Gameplay.Player.Presentation
         [SerializeField] private bool animateVisualScale = true;
         public void UseAuthoredAnimations() => animateVisualScale = false;
         [SerializeField] private Color sprintColor = new Color(0.65f, 0.9f, 1f, 0.65f);
-        [SerializeField] private Color dashColor = new Color(1f, 0.62f, 0.15f, 0.9f);
         [SerializeField] private Color landingColor = new Color(0.8f, 0.9f, 1f, 0.75f);
 
         private PlayerMotor motor;
@@ -63,7 +62,7 @@ namespace Mismo.Gameplay.Player.Presentation
             if (motor == null || dash == null || visual == null) return;
             bool sprinting = controller != null && controller.IsSprinting;
             bool dashing = dash.IsActive;
-            if (sprinting && motor.IsGrounded)
+            if (sprinting && motor.IsGrounded && !dashing)
             {
                 sprintPulseRemaining -= Time.deltaTime;
                 if (sprintPulseRemaining <= 0f)
@@ -75,7 +74,6 @@ namespace Mismo.Gameplay.Player.Presentation
             else sprintPulseRemaining = 0f;
             if (dashing && !wasDashing)
             {
-                Emit(dashColor, 16, 1.2f, 0.28f);
                 Squash(0.10f);
             }
             wasDashing = dashing;

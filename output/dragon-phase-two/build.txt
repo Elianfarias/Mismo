@@ -1,0 +1,122 @@
+Succeeded
+Errors: 1
+Warnings: 510
+Scenes: Assets/Scenes/MainMenu.unity, Assets/Scenes/VoxelRegion_7319.unity, Assets/Scenes/DemoIntroduction.unity
+Build: .validation/DragonArcBuild/Mismo.exe
+Diagnostic: InvalidOperationException: Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/FireStylized/Textures/Tx_Ember_01.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Noise/Noise04.tga
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Point/Glow02.psd
+Assets/Art/Prefabs/VFX/FireStylized/Shader/SH_HunFX_common.shader debe estar en Assets/Art/Shaders/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Common/Square02.png
+Assets/Art/Prefabs/VFX/Explosions/AoeExplosions/Shaders/SH_Sequence.shadergraph debe estar en Assets/Art/Shaders/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Shader/MasterShader/SH_Base_Alp-DepthAlways.shadergraph debe estar en Assets/Art/Shaders/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/Etc/particles.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/FireStylized/Textures/Tx_Fire_seq_04.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/FireStylized/Textures/Tx_Ember_02.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/GatheringGroup/fang/textures/fang_textureShape.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Common/wind_trail01.tga
+Assets/Art/Prefabs/VFX/FireStylized/Meshes/ME_wind_03.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Common/gradient_horizontal.psd
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/PointMat/Point 3.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/GatheringGroup/Potions_pack_v1.0/textures/glass_normal.jpg
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/GatheringGroup/Gathering/Assets/fbx(unity)/resource_bits_texture.png
+Assets/Art/Prefabs/VFX/FireStylized/FX/BasicMaterial/M_Fire_directional_13.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/FireStylized/Meshes/ME_Tornado_03.fbx debe estar en Assets/Art/FBX/
+Assets/Art/Animations/WeaponCombat/Human Animations/Materials/HumanAnimations_Dummy-Purple.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Point/PointGlow02.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Common/TestSheet.psd
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/FireStylized/Textures/Tx_Scroll_seq_01.png
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/Shapes/square01.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Volume/Volume.asset debe estar en Assets/Data/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/LineMat/trail 4 1.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Trail/Trail04.psd
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Noise/Noise03.tga
+Assets/Art/Prefabs/VFX/FireStylized/FX/SmokeFX/Materials/M_Smoke_14.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Shader/MasterShader/SH_Base_Additive.shadergraph debe estar en Assets/Art/Shaders/
+Assets/Art/Prefabs/VFX/Explosions/AoeExplosions/Materials/Others/M_Wind_Flow_Alp.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/Flare/FlareSheet02_add.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Point/Point.tga
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/Flare/Flare.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/FireStylized/FX/FireFX_vol1/UniqueMaterials/M_FireFX_1.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Models/FX_Models/Shockwave02.fbx debe estar en Assets/Art/FBX/
+Assets/Art/Prefabs/VFX/FireStylized/FX/BasicMaterial/M_Fire_seq_01.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Common/toonsmoke02_dissolve.psd
+Assets/Art/Prefabs/VFX/FireStylized/FX/BasicMaterial/M_Scroll_seq_01.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/FireStylized/Textures/Tx_Flame_02.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Noise/Noise17.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Common/Square01.png
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Models/FX_Models/projectile_hemisphere.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Common/TestSheet_dissolve.psd
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Models/FX_Models/Lightning_Mesh.fbx debe estar en Assets/Art/FBX/
+Assets/Art/Prefabs/VFX/FireStylized/Shader/SH_HunFX_simple.shader debe estar en Assets/Art/Shaders/
+Assets/Art/Textures/Creatures/Imp/MI_Imp.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/FireStylized/Textures/Tx_Fire_ground_04.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Common/toonsmoke02.psd
+Assets/Art/Prefabs/VFX/Explosions/AoeExplosions/Materials/Others/M_Smoke.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/FireStylized/Textures/Tx_Fire_ground_01.png
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Models/FX_Models/Test.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Trail/Trail.tga
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/PointMat/Point 4.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/GatheringGroup/Potions_pack_v1.0/textures/cork_color.jpg
+Assets/Art/Prefabs/VFX/Explosions/AoeExplosions/Materials/Others/M_Wind_Explosion.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/Etc/prism01.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/Flare/Flare03 1.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/FireStylized/Textures/Tx_Fire_Ring_03.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/FireStylized/Textures/Tx_Checker_01.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Point/Point03.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/FireStylized/Textures/Tx_Fire_radial_07.png
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/Etc/Scifi.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/PointMat/Point 2_Alp 02.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/FireStylized/Meshes/ME_Cylinder_08.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Noise/noise12.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Noise/Noise06.tga
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Common/Gradient01.tga
+Assets/Art/Prefabs/VFX/FireStylized/FX/BasicMaterial/M_Fire_seq_02.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Flare/flaresheet02.psd
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/PointMat/Glow01.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/Flare/FlareSheet01_add.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/wind/Wind_Flat_Alp.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/PointMat/DA_Point_Alp01.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/GatheringGroup/mortar-mid-poly/textures/DefaultMaterial_BaseColor.png
+Assets/Art/Prefabs/VFX/FireStylized/FX/BasicMaterial/M_Fire_ring_03.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Noise/noiseTexture.png
+Assets/Art/Prefabs/VFX/FireStylized/Meshes/ME_Cylinder_02.fbx debe estar en Assets/Art/FBX/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/FireStylized/Textures/Tx_Fire_directional_13.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Point/point04.tga
+Assets/Art/Prefabs/VFX/FireStylized/FX/BasicMaterial/M_Fire_seq_04.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/LineMat/Trail 3.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/Shapes/square02.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Noise/noise11.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Noise/noise14.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Noise/noise15.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Animations/WeaponCombat/Human Animations/Textures/HumanAnimations_ColorPalette.png
+Assets/Art/Prefabs/VFX/Explosions/AoeExplosions/Shaders/SH_WindExplosion.shadergraph debe estar en Assets/Art/Shaders/
+Assets/Art/Prefabs/VFX/FireStylized/FX/BasicMaterial/M_Fire_ground_02.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/FireStylized/Textures/Tx_Smoke_Radial_06.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Trail/Trail03.psd
+Assets/Art/Prefabs/VFX/FireStylized/Meshes/ME_Sphere_04.fbx debe estar en Assets/Art/FBX/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/LineMat/Trail 1.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/Flare/Flare03.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/GatheringGroup/mortar-mid-poly/textures/DefaultMaterial_Roughness.png
+Assets/Art/Prefabs/VFX/FireStylized/FX/BasicMaterial/M_Fire_radial_07.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Common/glow01.psd
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/FireStylized/Textures/Tx_Fire_seq_02.png
+Assets/Art/Prefabs/VFX/FireStylized/FX/BasicMaterial/M_Fire_ground_01.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/Explosions/AoeExplosions/Materials/Others/M_Sequence.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/GatheringGroup/Gathering/Textures/resource_bits_texture.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Flare/flare04.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/FireStylized/Textures/Tx_Fire_ground_02.png
+Assets/Art/Prefabs/VFX/FireStylized/FX/FireFX_vol1/FireFX_vol1_demo.unity debe estar en Assets/Scenes/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/PointMat/Point 2.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/LineMat/M_no-tex-alp.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/FireStylized/FX/BasicMaterial/M_Fire_ground_04.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Flare/Flare03.png
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Flare/flaresheet01.psd
+Assets/Art/Prefabs/VFX/FireStylized/Meshes/ME_Curve_06_2.fbx debe estar en Assets/Art/FBX/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/Flare/Flare02 2.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/FBX/GatheringGroup/mortar-mid-poly/textures/DefaultMaterial_Normal.png
+Assets/Art/Prefabs/VFX/FireStylized/FX/BasicMaterial/M_Ember_01.mat debe estar en Assets/Art/Materials/
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Materials/Shapes/scifi.mat debe estar en Assets/Art/Materials/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Images/Flare/T_Point.tga
+Assets/Art/Prefabs/VFX/Explosions/_CommonAssets/Shader/MasterShader/SH_Base_Alp.shadergraph debe estar en Assets/Art/Shaders/
+Imagen fuera de Art/Textures, UI o Sprites: Assets/Art/Prefabs/VFX/FireStylized/Textures/Tx_Fire_seq_01.png
