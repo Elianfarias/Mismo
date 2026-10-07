@@ -77,7 +77,7 @@ namespace Mismo.Gameplay.Enemies
             if (auraMaterial != null) Destroy(auraMaterial);
         }
 
-        private void OnDamaged(DamageInfo _) => hitRemaining = health != null && health.IsDead ? 0 : Mathf.Max(0f, hitFeedbackDuration);
+        private void OnDamaged(DamageInfo damage) { if(!damage.IsStatusTick)hitRemaining = health != null && health.IsDead ? 0 : Mathf.Max(0f, hitFeedbackDuration); }
 
         private void OnHealthChanged(float current, float maximum) => SetAuraVisible(current > 0);
 

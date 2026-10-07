@@ -32,6 +32,8 @@ namespace Mismo.Gameplay.Player.Presentation
 
         public static void Confirm(DamageReceiver receiver, DamageInfo damage, HitResult result)
         {
+            // An existing ailment ticking is not a new weapon impact (Feel / hit stop / sound).
+            if (damage.IsStatusTick) return;
             var defense = result.Outcome == HitOutcome.Block || result.Outcome == HitOutcome.Parry || result.Outcome == HitOutcome.PerfectParry;
             var profile = defense ? receiver.GetComponent<Equipment.EquipmentLoadout>()?.ActiveDefinition?.FeedbackProfile : damage.FeedbackProfile;
             if (profile == null) profile = damage.FeedbackProfile;

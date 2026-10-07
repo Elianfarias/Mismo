@@ -22,6 +22,8 @@ namespace Mismo.Gameplay.Player.Equipment
         public WeaponPassive passive;
         [Tooltip("Magnitud de la pasiva. Verdugo: daño extra de los básicos contra objetivos sangrando (0,2 = 20 %). Filo cruel: Focus por básico contra objetivos sangrando. Doble filo: probabilidad de golpe doble (0,5 = 50 %). Sed de sangre: fracción de estamina y Focus máximos que restaura (0,2 = 20 %). Potencia la multiplica por rango.")]
         public float passiveValue;
+        [Tooltip("Tercer impacto: segundos sin acertar un básico antes de perder las cargas. El tiempo se detiene durante la pausa.")]
+        [Min(.1f)] public float thirdArrowResetSeconds=5;
         public bool IsPassive => passive != WeaponPassive.None;
         // Passives whose magnitude is authored in passiveValue; the rest still use their coded constants.
         public bool UsesPassiveValue => passive == WeaponPassive.Verdugo || passive == WeaponPassive.FiloCruel ||
@@ -91,6 +93,8 @@ namespace Mismo.Gameplay.Player.Equipment
         [Tooltip("Secuencial: cada golpe lleva al siguiente y la cadena termina en el último. Alternar manos: 0 derecha, 1 izquierda, 2 doble que abre la derecha, 3 doble que abre la izquierda; se repite mientras se encadene y los dobles salen con Doble filo.")]
         public ComboOrder comboOrder;
         public bool targetsGround;
+        [Tooltip("Material del indicador al mantener la tecla. Trampas muestran trayectoria; áreas muestran su radio real.")]
+        public Material groundIndicatorMaterial;
         public bool aimFromCamera;
         [Tooltip("Alcance de apuntado y proyectiles. Los golpes cuerpo a cuerpo configuran su área en Actions (Radius y Forward), o en Golpes del combo.")]
         [Min(1)] public float range = 22;

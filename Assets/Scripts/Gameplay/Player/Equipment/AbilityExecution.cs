@@ -43,6 +43,7 @@ namespace Mismo.Gameplay.Player.Equipment
         public readonly float Preparation, Active, Recovery;
         public float Duration => Preparation + Active + Recovery;
         public Vector3? AimPoint;
+        public GroundThrowPath? GroundThrow;
         public bool Held;
         public float Charge, ReleasedAt = -1;
         public float Elapsed;

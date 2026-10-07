@@ -25,6 +25,9 @@ MonoBehaviour:
   comboHitStun: 1
   maxConsecutiveInterrupts: 2
   interruptImmunityDuration: 2
+  comboResponseStun: 0.12
+  comboBackstepDistance: 2.6
+  comboBackstepDuration: 0.28
   staggerDamageThreshold: 15
   staggerDuration: 0.45
   staggerResistance: 0.75
@@ -66,6 +69,23 @@ MonoBehaviour:
     projectileSpeed: 12
     projectileRange: 30
     projectileRadius: 0.6
+    preparationSfx: {fileID: 0}
+    preparationSfxVolume: 1
+    executionSfx: {fileID: 0}
+    executionSfxVolume: 1
+    projectileImpactVfx: {fileID: 0}
+    projectileImpactVfxLifetime: 3
+    projectileImpactSfx: {fileID: 0}
+    projectileImpactSfxVolume: 1
+    spawnGroundPool: 0
+    groundPoolPrefab: {fileID: 0}
+    groundPoolLifetime: 5
+    groundPoolScale: 1
+    groundPoolMinUpDot: 0.7
+    groundPoolDealsDamage: 0
+    groundPoolDamagePerTick: 0
+    groundPoolDamageTickInterval: 0.5
+    groundPoolDamageRadius: 1.25
   charge:
     label: Carga
     resistComboInterrupt: 0
@@ -103,6 +123,23 @@ MonoBehaviour:
     projectileSpeed: 12
     projectileRange: 30
     projectileRadius: 0.6
+    preparationSfx: {fileID: 0}
+    preparationSfxVolume: 1
+    executionSfx: {fileID: 0}
+    executionSfxVolume: 1
+    projectileImpactVfx: {fileID: 0}
+    projectileImpactVfxLifetime: 3
+    projectileImpactSfx: {fileID: 0}
+    projectileImpactSfxVolume: 1
+    spawnGroundPool: 0
+    groundPoolPrefab: {fileID: 0}
+    groundPoolLifetime: 5
+    groundPoolScale: 1
+    groundPoolMinUpDot: 0.7
+    groundPoolDealsDamage: 0
+    groundPoolDamagePerTick: 0
+    groundPoolDamageTickInterval: 0.5
+    groundPoolDamageRadius: 1.25
   displayName: "JABAL\xCD"
   isBoss: 0
   posture: 90
@@ -113,24 +150,77 @@ MonoBehaviour:
   - label: Attack
     resistComboInterrupt: 0
     range: 2.2
-    windup: 0.4
+    windup: 0.55
     active: 0.16
-    recovery: 0.64000005
+    recovery: 0.08
     damage: 14
     travel: 0
     halfExtents: {x: 0.65, y: 0.65, z: 1}
     forwardOffset: 1.1
     animation:
-      clip: {fileID: 5245998875730980439, guid: 86d79e2e91c44744e962976068ba44a7, type: 3}
+      clip: {fileID: -7155844826811354171, guid: 6e054165e455d5a4f81a7495c83d7f6f, type: 3}
       compatibleClip: {fileID: 0}
       compatibleSource: {fileID: 0}
       mask: {fileID: 0}
-      activeStartsAt: 0.3333333
-      recoveryStartsAt: 0.46666664
+      activeStartsAt: 0.6
+      recoveryStartsAt: 0.88
       blendSeconds: 0.025
     enabled: 1
     minimumRange: 0
     cooldown: 1
+    weight: 1
+    kind: 0
+    hitHeight: 0.65
+    damageStartsAt: 0.4
+    preparationClip: {fileID: 0}
+    recoveryClip: {fileID: 0}
+    preparationDuration: 0
+    preparationEndNormalized: 1
+    loopActiveAnimation: 0
+    projectileVisual: {fileID: 0}
+    projectileSocket: Rock_Carry
+    grabAt: 0.833333
+    projectileSpeed: 12
+    projectileRange: 30
+    projectileRadius: 0.6
+    preparationSfx: {fileID: 0}
+    preparationSfxVolume: 1
+    executionSfx: {fileID: 0}
+    executionSfxVolume: 1
+    projectileImpactVfx: {fileID: 0}
+    projectileImpactVfxLifetime: 3
+    projectileImpactSfx: {fileID: 0}
+    projectileImpactSfxVolume: 1
+    spawnGroundPool: 0
+    groundPoolPrefab: {fileID: 0}
+    groundPoolLifetime: 5
+    groundPoolScale: 1
+    groundPoolMinUpDot: 0.7
+    groundPoolDealsDamage: 0
+    groundPoolDamagePerTick: 0
+    groundPoolDamageTickInterval: 0.5
+    groundPoolDamageRadius: 1.25
+  - label: Charge
+    resistComboInterrupt: 0
+    range: 9
+    windup: 0.72
+    active: 0.6
+    recovery: 0.1
+    damage: 24
+    travel: 6
+    halfExtents: {x: 0.7, y: 0.65, z: 1.1}
+    forwardOffset: 1.1
+    animation:
+      clip: {fileID: -7721595849972660482, guid: 6e054165e455d5a4f81a7495c83d7f6f, type: 3}
+      compatibleClip: {fileID: 0}
+      compatibleSource: {fileID: 0}
+      mask: {fileID: 0}
+      activeStartsAt: 0.6
+      recoveryStartsAt: 0.9
+      blendSeconds: 0.025
+    enabled: 1
+    minimumRange: 3
+    cooldown: 5
     weight: 1
     kind: 0
     hitHeight: 0.65
@@ -146,39 +236,20 @@ MonoBehaviour:
     projectileSpeed: 12
     projectileRange: 30
     projectileRadius: 0.6
-  - label: Charge
-    resistComboInterrupt: 0
-    range: 9
-    windup: 0.65
-    active: 0.7
-    recovery: 1.1
-    damage: 24
-    travel: 6
-    halfExtents: {x: 0.7, y: 0.65, z: 1.1}
-    forwardOffset: 1.1
-    animation:
-      clip: {fileID: -402153449965480477, guid: 86d79e2e91c44744e962976068ba44a7, type: 3}
-      compatibleClip: {fileID: 0}
-      compatibleSource: {fileID: 0}
-      mask: {fileID: 0}
-      activeStartsAt: 0.97499996
-      recoveryStartsAt: 2.0249999
-      blendSeconds: 0.025
-    enabled: 1
-    minimumRange: 3
-    cooldown: 5
-    weight: 1
-    kind: 0
-    hitHeight: 0.65
-    damageStartsAt: 0
-    preparationClip: {fileID: 5245998875730980439, guid: 86d79e2e91c44744e962976068ba44a7, type: 3}
-    recoveryClip: {fileID: 0}
-    preparationDuration: 0.65
-    preparationEndNormalized: 0.3
-    loopActiveAnimation: 1
-    projectileVisual: {fileID: 0}
-    projectileSocket: Rock_Carry
-    grabAt: 0.833333
-    projectileSpeed: 12
-    projectileRange: 30
-    projectileRadius: 0.6
+    preparationSfx: {fileID: 0}
+    preparationSfxVolume: 1
+    executionSfx: {fileID: 0}
+    executionSfxVolume: 1
+    projectileImpactVfx: {fileID: 0}
+    projectileImpactVfxLifetime: 3
+    projectileImpactSfx: {fileID: 0}
+    projectileImpactSfxVolume: 1
+    spawnGroundPool: 0
+    groundPoolPrefab: {fileID: 0}
+    groundPoolLifetime: 5
+    groundPoolScale: 1
+    groundPoolMinUpDot: 0.7
+    groundPoolDealsDamage: 0
+    groundPoolDamagePerTick: 0
+    groundPoolDamageTickInterval: 0.5
+    groundPoolDamageRadius: 1.25

@@ -1,0 +1,1 @@
+PASS: own procedural URP shaders, three particle layers, serialized profile in runtime catalog. Existing settings preserved.

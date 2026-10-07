@@ -35,7 +35,7 @@ MonoBehaviour:
     damagePerLevel: 0
     cooldownReductionPerLevel: 0.05
     weaponVfx: []
-  description: "Lanza una lluvia de flechas sobre el \xE1rea seleccionada."
+  description: "Manten\xE9 para elegir el \xE1rea y solt\xE1 para lanzar una lluvia de flechas sobre ella."
   localizationKey: ability.bow.bowarea
   preparation: 0.7
   active: 0.02
@@ -110,6 +110,7 @@ MonoBehaviour:
   usesSwordCombo: 0
   comboSteps: []
   targetsGround: 1
+  groundIndicatorMaterial: {fileID: 2100000, guid: ecaf254d88854099b62a31958dd21574, type: 2}
   aimFromCamera: 1
   range: 18
   actions:

@@ -38,20 +38,21 @@ namespace Mismo.Gameplay.Player
         }
         private void Update()
         {
-            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) return;
+            if (Mismo.Gameplay.Player.Presentation.GameplayPause.BlocksInput) {loadout.Runner.CancelGroundAim();return;}
             float dt = Time.deltaTime;
             var runner = loadout.Runner; var belt = loadout.Belt;
             if (inventoryPanel == null) inventoryPanel = GetComponent<Equipment.Inventory.InventoryPanel>();
             if (Presentation.WorldMapPanel.BlocksGameplay || inventoryPanel != null && inventoryPanel.BlocksGameplay || GetComponent<World.GatheringPlayer>()?.BlocksGameplay==true)
             {
                 climbing.Release();belt?.Cancel();
+                runner.CancelGroundAim();
                 runner.SetHeld(false); runner.Tick(dt); belt?.TickCooldown(dt);
                 IsSprinting = stamina.Tick(false, dt);
                 motor.Tick(Vector3.zero, false, false, false, dt);
                 return;
             }
             if (cameraBasis == null && UnityEngine.Camera.main != null) cameraBasis = UnityEngine.Camera.main.transform;
-            if (cameraBasis == null || !input.isActiveAndEnabled) { runner.Tick(dt); return; }
+            if (cameraBasis == null || !input.isActiveAndEnabled) { runner.CancelGroundAim();runner.Tick(dt); return; }
             Vector2 move = Vector2.ClampMagnitude(input.Move, 1);
             Vector3 forward = Vector3.ProjectOnPlane(cameraBasis.forward, Vector3.up).normalized;
             Vector3 direction = forward * move.y + Vector3.Cross(Vector3.up, forward) * move.x;
@@ -73,13 +74,16 @@ namespace Mismo.Gameplay.Player
                 motor.Tick(Vector3.zero,false,false,false,dt);return;
             }
             if(climbing.IsClimbing)climbing.Release();
-            if (input.WasSwapWeaponPressedThisFrame()) loadout.TrySwap();
+            bool cancelAim=runner.IsGroundAiming&&(input.WasParryPressedThisFrame()&&runner.GroundAimSlot!=AbilitySlot.E||UnityEngine.InputSystem.Keyboard.current?.escapeKey.wasPressedThisFrame==true);
+            if(cancelAim)runner.CancelGroundAim();
+            if (input.WasSwapWeaponPressedThisFrame()) {runner.CancelGroundAim();loadout.TrySwap();}
             if (input.WasDashPressedThisFrame()) runner.TryDash(direction.sqrMagnitude > 0 ? direction : motor.Facing);
             if (input.WasAttackPressedThisFrame()) Request(AbilitySlot.Basic, direction);
             if (input.WasLungePressedThisFrame()) Request(AbilitySlot.Q, direction);
-            if (input.WasParryPressedThisFrame()) Request(AbilitySlot.E, direction);
+            if (input.WasParryPressedThisFrame()&&!cancelAim) Request(AbilitySlot.E, direction);
             if (input.WasSpinAttackPressedThisFrame()) Request(AbilitySlot.R, direction);
             runner.SetHeld(input.AttackHeld);
+            if(runner.IsGroundAiming)runner.UpdateGroundAim(WeaponAim.RayFrom(cameraBasis),Held(runner.GroundAimSlot));
             if (runner.Current != null && !runner.Current.Began && runner.Current.Definition.aimFromCamera && !runner.Current.Definition.targetsGround) RefreshAim(runner.Current);
             bool weaponMovement = runner.IsMoving;
             runner.Tick(dt);
@@ -88,8 +92,9 @@ namespace Mismo.Gameplay.Player
             IsSprinting = stamina.Tick(input.SprintHeld && move.sqrMagnitude > .01f && motor.Speed > .05f && motor.IsGrounded && !special && !runner.IsBusy, dt);
             var collisions = motor.Tick(direction * runner.Mobility, IsSprinting, input.WasJumpPressedThisFrame(), input.JumpHeld, dt);
             if ((collisions & CollisionFlags.Sides) != 0) { if (special) belt.Cancel(); if (weaponMovement || runner.IsMoving) runner.BlockMovement(); }
-            if (runner.IsBusy && runner.Current.Definition.aimFromCamera) motor.Face(runner.Current.Direction);
+            if (runner.Current != null && runner.Current.Definition.aimFromCamera) motor.Face(runner.Current.Direction);
         }
+        bool Held(AbilitySlot slot)=>slot==AbilitySlot.Basic?input.AttackHeld:slot==AbilitySlot.Q?input.LungeHeld:slot==AbilitySlot.E?input.ParryHeld:input.SpinAttackHeld;
         private void RefreshAim(AbilityExecution cast)
         {
             Ray ray=WeaponAim.RayFrom(cameraBasis);
@@ -104,6 +109,8 @@ namespace Mismo.Gameplay.Player
         {
             var weapon = loadout.ActiveDefinition; var ability = loadout.GetAbility(slot);
             if (ability == null || ability.IsPassive) return;
+            if(AbilityRunner.SupportsGroundAim(ability))
+            {loadout.Runner.TryBeginGroundAim(slot,WeaponAim.RayFrom(cameraBasis));return;}
             Vector3 direction = move.sqrMagnitude > .001f ? move.normalized : motor.Facing;
             Vector3 point = transform.position;
             Vector3? aimPoint = null;

@@ -65,7 +65,7 @@ namespace Mismo.Gameplay.Enemies
         public float HitProgress=>(Time.time-hitAt)/Mathf.Max(.01f,hitDuration);
         public bool PlayingHit=>hitClip!=null&&health!=null&&!health.IsDead&&HitProgress<1;
         public void CancelHitReaction(){hitAt=float.NegativeInfinity;}
-        void OnHit(Mismo.Gameplay.Combat.DamageInfo damage){hitAt=Time.time;}
+        void OnHit(Mismo.Gameplay.Combat.DamageInfo damage){if(!damage.IsStatusTick)hitAt=Time.time;}
         public EnemyWeaponSlot primary=new EnemyWeaponSlot();
         public EnemyWeaponSlot secondary=new EnemyWeaponSlot{pose=new WeaponAttachmentPose{anchor=WeaponAnchor.LeftHand}};
         [Tooltip("Rutas de renderers relativas al Animator. Permite ocultar armas integradas en el modelo.")]

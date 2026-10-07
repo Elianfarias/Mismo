@@ -12,28 +12,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbaed6838d1a4d369404166107b9bbf5, type: 3}
   m_Name: HunterTrap
   m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
-  masteryUsesRequired: 25
-  masteryModifiers:
-  - id: power
-    displayName: "Potencia"
-    description: "Cada rango mejora un 5% el daño de la habilidad o la magnitud de su efecto."
-    maxLevel: 3
-    effectiveUsesPerLevel: 10
-    damagePerLevel: 0.05
-    cooldownReductionPerLevel: 0
-  - id: recovery
-    displayName: "Recuperación"
-    description: "Cada rango reduce un 5% la recarga de esta habilidad."
-    maxLevel: 3
-    effectiveUsesPerLevel: 10
-    damagePerLevel: 0
-    cooldownReductionPerLevel: 0.05
   displayName: Trampa de cazador
   icon: {fileID: 2800000, guid: 6f0eb6a23328f014999aef99833b2355, type: 3}
   abilityId: HunterTrap
   animationSource: {fileID: 0}
   passive: 0
-  description: "Coloc\xE1 una trampa en el suelo. Al pisarla, un enemigo recibe da\xF1o y queda inmovilizado 1,5 s. M\xE1ximo 2 trampas; duran 30 s."
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: power
+    displayName: Potencia
+    description: "Cada rango mejora un 5% el da\xF1o de la habilidad o la magnitud de su efecto."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0.05
+    cooldownReductionPerLevel: 0
+    behavior: 0
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    weaponVfx: []
+  - id: recovery
+    displayName: "Recuperaci\xF3n"
+    description: Cada rango reduce un 5% la recarga de esta habilidad.
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0.05
+    behavior: 0
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    weaponVfx: []
+  description: "Manten\xE9 para apuntar y solt\xE1 para lanzar la trampa. Al pisarla, un enemigo recibe da\xF1o y queda inmovilizado 1,5 s. M\xE1ximo 2 trampas; duran 30 s desde que aterrizan."
   localizationKey: 
   preparation: 0.1
   active: 0.2
@@ -103,9 +117,12 @@ MonoBehaviour:
   executionSfx: {fileID: 0}
   executionSfxVolume: 1
   comboStepSfx: []
+  weaponVfx: []
   pose: 0
   usesSwordCombo: 0
+  comboSteps: []
   targetsGround: 1
+  groundIndicatorMaterial: {fileID: 2100000, guid: ecaf254d88854099b62a31958dd21574, type: 2}
   aimFromCamera: 0
   range: 5
   actions:
@@ -115,4 +132,7 @@ MonoBehaviour:
     RefIds:
     - rid: 1
       type: {class: TrapAction, ns: Mismo.Gameplay.Player.Equipment, asm: Mismo.Gameplay.Player}
-      data: 
+      data:
+        prefab: {fileID: 7649070372075083839, guid: 18040e62252ae36408041f2a79aae84b, type: 3}
+        arcHeight: 1
+        throwSpeed: 8

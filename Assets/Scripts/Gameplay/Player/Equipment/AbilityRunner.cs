@@ -16,7 +16,7 @@ namespace Mismo.Gameplay.Player.Equipment
         public AbilityExecution Current {get;private set;}
         public PlayerMotor Motor {get;private set;}
         public SwordParry Parry {get;private set;}
-        public bool IsBusy=>Current!=null;
+        public bool IsBusy=>Current!=null||IsGroundAiming;
         public bool IsMoving=>Current!=null&&Current.Began&&!Current.Ended&&System.Array.Exists(Current.Definition.actions,a=>a is MoveCasterAction);
         public float Mobility=>Current==null?1:Current.ChargedCombo&&!Current.Began ? .35f : !Current.Began?Current.Definition.preparationMobility:!Current.Ended?Current.Definition.activeMobility:1;
         public float Normalized=>Current==null?0:Mathf.Clamp01(Current.Elapsed/(Current.Duration+(Current.Chargeable?Current.MaximumCharge:0)));
@@ -78,8 +78,9 @@ namespace Mismo.Gameplay.Player.Equipment
                 return !Current.Began?Current.Definition.cancelPreparation:Current.Ended&&Current.Definition.cancelRecovery;
             }
         }
-        public bool TryUse(AbilitySlot slot,Vector3 direction,Vector3 groundPoint,Vector3? aimPoint=null,bool held=false)
+        public bool TryUse(AbilitySlot slot,Vector3 direction,Vector3 groundPoint,Vector3? aimPoint=null,bool held=false,GroundThrowPath? groundThrow=null)
         {
+            CancelGroundAim();
             var weapon=loadout.ActiveDefinition;var definition=loadout.GetAbility(slot);
             if(definition==null||definition.IsPassive||health!=null&&health.IsDead||loadout.Belt!=null&&loadout.Belt.ControlsMovement)return false;
             bool followup=slot==AbilitySlot.Basic&&CanFollowup(weapon);
@@ -109,6 +110,7 @@ namespace Mismo.Gameplay.Player.Equipment
             Current=new AbilityExecution(this,weapon,definition,direction.sqrMagnitude>.001f?direction.normalized:Motor.Facing,groundPoint,stage,chain!=null?chain.useId:0,chain?.progress)
             {
                 AimPoint=aimPoint,
+                GroundThrow=groundThrow,
                 Held=held,
                 Began=false
             };
@@ -237,6 +239,7 @@ namespace Mismo.Gameplay.Player.Equipment
         }
         void Update()
         {
+            if(IsGroundAiming&&(Presentation.GameplayPause.BlocksInput||health!=null&&health.IsDead))CancelGroundAim();
             if(preparationAudio==null||preparationAudio.clip==null)return;
             if(Current==null||Current.Began||health!=null&&health.IsDead){StopPreparationSound();return;}
             bool paused=Presentation.GameplayPause.IsPaused;
@@ -250,6 +253,7 @@ namespace Mismo.Gameplay.Player.Equipment
         }
         public bool Interrupt()
         {
+            if(IsGroundAiming){CancelGroundAim();return true;}
             if(Current==null||Current.Began||!Current.Definition.interruptible&&!Current.ChargedCombo)return false;
             state.Reward(0,"INTERRUMPIDO");Cancel();return true;
         }
@@ -262,6 +266,7 @@ namespace Mismo.Gameplay.Player.Equipment
         }
         public void Cancel()
         {
+            CancelGroundAim();
             weaponVfx?.Clear();
             StopPreparationSound();
             pending=null;pendingDash=false;
@@ -271,6 +276,6 @@ namespace Mismo.Gameplay.Player.Equipment
             Parry?.Cancel();GetComponent<DefenseWindow>()?.CloseParry();Motor?.ClearControlledMovement();Current=null;
         }
         void OnDisable(){ResetOpportunities();Cancel();}
-        void OnDestroy(){if(loadout!=null)loadout.Changed-=ResetOpportunities;if(preparationAudio!=null)Destroy(preparationAudio);}
+        void OnDestroy(){groundIndicator?.Dispose();if(loadout!=null)loadout.Changed-=ResetOpportunities;if(preparationAudio!=null)Destroy(preparationAudio);}
     }
 }

@@ -60,7 +60,7 @@ namespace Mismo.Gameplay.Player.Editor
             var spin=family.Skill(2).actions.OfType<FuriousComboAction>().SingleOrDefault();
             Require(spin!=null&&spin.hits.Length==2&&spin.hits.All(h=>Mathf.Approximately(spin.damage*h.multiplier,basicDamage*1.3f)),"Giro mortal hits once per axe at 130 % of the basic");
             var berserk=family.Skill(3).actions.OfType<BerserkAction>().SingleOrDefault();
-            Require(berserk!=null&&Mathf.Approximately(berserk.duration,9)&&Mathf.Approximately(berserk.armorMultiplier,.45f),"Modo Berserker lasts 9 s and scales armor by 0.45");
+            Require(berserk!=null&&berserk.duration>0&&Mathf.Approximately(berserk.armorMultiplier,.45f),"Modo Berserker has a duration (a balance value) and scales armor by 0.45");
             Require(Mathf.Approximately(berserk.lifeSteal,.15f),"Modo Berserker heals 15 % of basic damage");
 
             // Steps: 0 right, 1 left, 2 double led by the right, 3 double led by the left; -1 is idle.

@@ -66,8 +66,13 @@ namespace Mismo.Gameplay.Player.Editor
         // Bleed state has no public getters: damage per second and seconds left on the target.
         private static (float damage,float seconds) Bleed(CombatAilment ailment)
         {
-            var type=typeof(CombatAilment);
-            return ((float)type.GetField("poisonDamage",Private).GetValue(ailment),(float)type.GetField("poisonUntil",Private).GetValue(ailment)-Time.time);
+            foreach(var entry in (System.Collections.IList)typeof(CombatAilment).GetField("effects",Private).GetValue(ailment))
+            {
+                var type=entry.GetType();
+                if((StatusEffectType)type.GetField("type").GetValue(entry)==StatusEffectType.Bleed)
+                    return ((float)type.GetField("damage").GetValue(entry),(float)type.GetField("until").GetValue(entry)-Time.time);
+            }
+            return (0,0);
         }
 
         private static IEnumerator Run()
@@ -186,11 +191,11 @@ namespace Mismo.Gameplay.Player.Editor
                 float BleedAfterSwipe(bool bleeding)
                 {
                     mainAilment.enabled=false;mainAilment.enabled=true;
-                    if(bleeding)CombatAilment.Poison(main,player.gameObject,axe.MasteryId,.01f,10);
+                    if(bleeding)CombatAilment.Bleed(main,player.gameObject,axe.MasteryId,.01f,10);
                     main.transform.position=front;Physics.SyncTransforms();Rest();
                     Check(runner.TryUse(AbilitySlot.Q,Vector3.forward,player.transform.position),"Hachazo starts");
                     for(int i=0;i<400&&runner.Current!=null;i++)runner.Tick(.05f);
-                    return mainAilment.Poisoned?Bleed(mainAilment).seconds:-1;
+                    return mainAilment.IsActive(StatusEffectType.Bleed)?Bleed(mainAilment).seconds:-1;
                 }
                 Near(BleedAfterSwipe(true),10,"Without Reabrir the bleed keeps its time");
                 Evolve(swing,"reopen",0);
@@ -202,37 +207,37 @@ namespace Mismo.Gameplay.Player.Editor
 
                 // The bleed rule: the strongest bleed wins and a weaker one never overrides or extends it.
                 var bare=new GameObject("Bleed rule target");targets.Add(bare);
-                CombatAilment.Poison(bare,player.gameObject,axe.MasteryId,5,10);
+                CombatAilment.Bleed(bare,player.gameObject,axe.MasteryId,5,10);
                 var rule=bare.GetComponent<CombatAilment>();
                 var state=Bleed(rule);Near(state.damage,5,"A bleed starts at 5 per second");Near(state.seconds,10,"A bleed starts for 10 s");
-                CombatAilment.Poison(bare,player.gameObject,axe.MasteryId,3,20);
+                CombatAilment.Bleed(bare,player.gameObject,axe.MasteryId,3,20);
                 state=Bleed(rule);Near(state.damage,5,"A weaker bleed does not replace it");Near(state.seconds,10,"A weaker bleed does not extend it");
-                CombatAilment.Poison(bare,player.gameObject,axe.MasteryId,5,15);
+                CombatAilment.Bleed(bare,player.gameObject,axe.MasteryId,5,15);
                 state=Bleed(rule);Near(state.damage,5,"An equal bleed keeps the damage");Near(state.seconds,15,"An equal bleed renews a longer duration");
-                CombatAilment.Poison(bare,player.gameObject,axe.MasteryId,5,2);
+                CombatAilment.Bleed(bare,player.gameObject,axe.MasteryId,5,2);
                 state=Bleed(rule);Near(state.seconds,15,"An equal bleed never shortens it");
-                CombatAilment.Poison(bare,player.gameObject,axe.MasteryId,9,4);
+                CombatAilment.Bleed(bare,player.gameObject,axe.MasteryId,9,4);
                 state=Bleed(rule);Near(state.damage,9,"A stronger bleed replaces it");Near(state.seconds,4,"A stronger bleed brings its own duration");
 
                 // Cuarto corte: active from rank 0; each rank only adds damage to the bleed.
                 Evolve(basic,"fourth_cut",0);
                 var first=NewTarget(out var firstLife,out var firstAilment);
                 for(int i=0;i<3;i++)Use(AbilitySlot.Basic,firstLife);
-                Check(!firstAilment.Poisoned,"Three basics in a row do not bleed");
+                Check(!firstAilment.IsActive(StatusEffectType.Bleed),"Three basics in a row do not bleed");
                 Use(AbilitySlot.Basic,firstLife);
-                Check(firstAilment.Poisoned,"The fourth basic in a row makes the target bleed");
+                Check(firstAilment.IsActive(StatusEffectType.Bleed),"The fourth basic in a row makes the target bleed");
                 state=Bleed(firstAilment);Near(state.damage,3*Multiplier(basic),"Cuarto corte bleeds 3 per second at rank 0");Near(state.seconds,3,"Cuarto corte bleeds 3 s");
                 var swapped=NewTarget(out var swappedLife,out var swappedAilment);
                 for(int i=0;i<3;i++)Use(AbilitySlot.Basic,swappedLife);
                 var other=NewTarget(out var otherLife,out _);
                 Use(AbilitySlot.Basic,otherLife);
                 Bring(swapped);Use(AbilitySlot.Basic,swappedLife);
-                Check(!swappedAilment.Poisoned,"Changing target restarts the count");
+                Check(!swappedAilment.IsActive(StatusEffectType.Bleed),"Changing target restarts the count");
                 var slow=NewTarget(out var slowLife,out var slowAilment);
                 for(int i=0;i<3;i++)Use(AbilitySlot.Basic,slowLife);
                 float until=Time.time+3.3f;while(Time.time<until)yield return null;
                 Use(AbilitySlot.Basic,slowLife);
-                Check(!slowAilment.Poisoned,"Three seconds without hitting restart the count");
+                Check(!slowAilment.IsActive(StatusEffectType.Bleed),"Three seconds without hitting restart the count");
                 Evolve(basic,"fourth_cut",3);
                 var ranked=NewTarget(out var rankedLife,out var rankedAilment);
                 for(int i=0;i<4;i++)Use(AbilitySlot.Basic,rankedLife);
@@ -248,7 +253,7 @@ namespace Mismo.Gameplay.Player.Editor
                     for(int i=0;i<400&&runner.Current!=null;i++)runner.Tick(.05f);
                     Use(AbilitySlot.Basic,lifeOut);return ailment;
                 }
-                var marked=Prime(out _);Check(marked.Poisoned,"The marked basic applies the bleed");
+                var marked=Prime(out _);Check(marked.IsActive(StatusEffectType.Bleed),"The marked basic applies the bleed");
                 state=Bleed(marked);Near(state.damage,3*Multiplier(cut),"Tajo sangrante bleeds 3 per second");Near(state.seconds,5,"Tajo sangrante bleeds 5 s");
                 Evolve(cut,"rusty_edge",0);
                 state=Bleed(Prime(out _));Near(state.damage,3*Multiplier(cut)*1.5f,"Filo oxidado rank 0 adds 50 %");
@@ -268,10 +273,10 @@ namespace Mismo.Gameplay.Player.Editor
                 Evolve(rend,"deep_rend",3);
                 deep=NewTarget(out deepLife,out deepAilment,50);Use(AbilitySlot.E,deepLife);
                 Near(deepAilment.IncomingDamageMultiplier,Armored(.45f),"Desgarro profundo rank 3 removes 45 %");
-                Check(!deepAilment.Poisoned,"Desgarro profundo does not bleed");
+                Check(!deepAilment.IsActive(StatusEffectType.Bleed),"Desgarro profundo does not bleed");
                 Evolve(rend,"raw_flesh",0);
                 var flesh=NewTarget(out var fleshLife,out var fleshAilment,50);Use(AbilitySlot.E,fleshLife);
-                Check(fleshAilment.Poisoned,"Carne viva makes the target bleed");
+                Check(fleshAilment.IsActive(StatusEffectType.Bleed),"Carne viva makes the target bleed");
                 state=Bleed(fleshAilment);Near(state.damage,3*Multiplier(rend),"Carne viva bleeds 3 per second at rank 0");Near(state.seconds,3,"Carne viva bleeds 3 s");
                 Near(fleshAilment.IncomingDamageMultiplier,Armored(.3f),"Carne viva keeps the 30 % armor loss");
                 Evolve(rend,"raw_flesh",3);
@@ -322,7 +327,7 @@ namespace Mismo.Gameplay.Player.Editor
                 // A bleeding dummy that only has `lifeShare` of its life left.
                 float Bleeding(float lifeShare=1)
                 {
-                    var go=NewTarget(out var lifeBleeding,out _);CombatAilment.Poison(go,player.gameObject,axe.MasteryId,.01f,30);
+                    var go=NewTarget(out var lifeBleeding,out _);CombatAilment.Bleed(go,player.gameObject,axe.MasteryId,.01f,30);
                     if(lifeShare<1)lifeBleeding.ApplyDamage(new DamageInfo(lifeBleeding.Maximum*(1-lifeShare),null,go.transform.position,Vector3.forward));
                     return Use(AbilitySlot.Basic,lifeBleeding);
                 }
@@ -340,7 +345,7 @@ namespace Mismo.Gameplay.Player.Editor
                 ClearModifier(executioner);
                 float Focus(bool bleeding,bool torn=false)
                 {
-                    var go=NewTarget(out var lifeFocus,out _);if(bleeding)CombatAilment.Poison(go,player.gameObject,axe.MasteryId,.01f,30);
+                    var go=NewTarget(out var lifeFocus,out _);if(bleeding)CombatAilment.Bleed(go,player.gameObject,axe.MasteryId,.01f,30);
                     if(torn)CombatAilment.WeakenArmor(go,.7f,30);
                     Rest();combat.Spend(combat.Focus);combat.Reward(40,"TEST");float focusBefore=combat.Focus;
                     Check(runner.TryUse(AbilitySlot.Basic,Vector3.forward,player.transform.position),"A basic starts");

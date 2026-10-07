@@ -22,9 +22,10 @@ MonoBehaviour:
     damagePerLevel: 0.05
     cooldownReductionPerLevel: 0
   displayName: "Tercer impacto"
-  description: "Cada tercer básico que conecta hace un 80 % de daño adicional. Los disparos fallados no avanzan el contador."
+  description: "Cada tercer básico que conecta hace un 80 % de daño adicional. Los disparos fallados no avanzan el contador. El progreso vence al pasar demasiado tiempo sin acertar."
   abilityId: ThirdArrow
   passive: 1
+  thirdArrowResetSeconds: 5
   preparation: 0.1
   active: 0.2
   recovery: 0.2

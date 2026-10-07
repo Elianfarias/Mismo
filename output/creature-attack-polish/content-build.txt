@@ -1,0 +1,1 @@
+PASS: all seven variants and four combat clips load from the Windows content build.

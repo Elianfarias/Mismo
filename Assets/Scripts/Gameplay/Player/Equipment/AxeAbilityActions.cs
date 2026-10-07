@@ -37,7 +37,7 @@ namespace Mismo.Gameplay.Player.Equipment
                 if(evolution?.behavior==AbilityModifierBehavior.DeepRend)multiplier=Mathf.Clamp01(1-evolution.Amount(c.ModifierRank));
                 CombatAilment.WeakenArmor(target.gameObject,multiplier,armorDuration);
                 if(evolution?.behavior==AbilityModifierBehavior.RawFlesh)
-                    CombatAilment.Poison(target.gameObject,c.Owner,c.WeaponFamilyId,evolution.BleedDamage(c.ModifierRank)*c.DamageMultiplier,evolution.BleedSeconds(c.ModifierRank),c.Definition.Id,c.AttackId);
+                    CombatAilment.Bleed(target.gameObject,c.Owner,c.WeaponFamilyId,evolution.BleedDamage(c.ModifierRank)*c.DamageMultiplier,evolution.BleedSeconds(c.ModifierRank),c.Definition.Id,c.AttackId);
             }
         }
     }

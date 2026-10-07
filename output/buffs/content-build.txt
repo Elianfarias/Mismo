@@ -1,0 +1,1 @@
+PASS Windows runtime compilation and bundle reload: four meshes, four icons, arc and shader material.

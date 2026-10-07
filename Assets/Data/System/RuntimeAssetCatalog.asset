@@ -56,6 +56,12 @@ MonoBehaviour:
   - key: BlendedSkybox
     assets:
     - {fileID: 4800000, guid: e9073833d88f8cc42bb6e99d72457d6b, type: 3}
+  - key: Combat/Buffs
+    assets:
+    - {fileID: 11400000, guid: aca6c6c55d073f44795428f0e0a7331f, type: 2}
+  - key: Combat/StatusEffects
+    assets:
+    - {fileID: 11400000, guid: b1c14bfcba51e904290b4c556f408513, type: 2}
   - key: CombatParticles
     assets:
     - {fileID: 4800000, guid: 5ba77cf36709446d9f7fa7f3bc2d26b9, type: 3}

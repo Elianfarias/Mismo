@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mismo.Gameplay.Combat;
+using Mismo.Gameplay.Player.Presentation;
 using UnityEngine;
 
 namespace Mismo.Gameplay.Player.Equipment
@@ -18,6 +19,7 @@ namespace Mismo.Gameplay.Player.Equipment
         int hits, rhythm, sameTargetHits, twoTimes;
         UnityEngine.Object lastTarget;
         float rhythmUntil, empoweredUntil, twoTimesUntil, bucklerReady, bleedPrimedUntil;
+        float thirdArrowUntil;
         // Tajo sangrante's bleed, copied from its action when it primes the next basic.
         float primedBleedDamage=3,primedBleedSeconds=5;
         // Cuarto corte: consecutive basics that landed on the same target (BasicHit runs once per swing).
@@ -34,6 +36,7 @@ namespace Mismo.Gameplay.Player.Equipment
         public float BucklerAnimationProgress=>Mathf.Clamp01((Time.time-bucklerThrownAt)/.5f);
         public float Barrier {get;private set;}
         float barrierUntil;
+        float barrierDuration;
         AbilityExecution empoweredCast,twoTimesCast,bleedCast,berserkCast,chainCast;
         // Remate's basic: its damage multiplier and how long it waits for the swing to land.
         float chainBoost=1,chainBoostUntil;
@@ -44,6 +47,7 @@ namespace Mismo.Gameplay.Player.Equipment
             loadout=GetComponent<EquipmentLoadout>();health=GetComponent<Health>();stamina=GetComponent<Movement.Stamina>();
             if(loadout!=null)loadout.Changed+=ResetEffects;
             if(health!=null)health.Died+=OnDeath;
+            ActorBuffFeedback.For(gameObject);
         }
         void OnDestroy(){if(loadout!=null)loadout.Changed-=ResetEffects;if(health!=null)health.Died-=OnDeath;}
         void OnDeath(DamageInfo damage)=>ResetEffects();
@@ -51,7 +55,7 @@ namespace Mismo.Gameplay.Player.Equipment
         {
             StopAllCoroutines();
             hits=rhythm=sameTargetHits=twoTimes=0;lastTarget=null;ClearStreak();
-            rhythmUntil=empoweredUntil=twoTimesUntil=bleedPrimedUntil=chainBoostUntil=0;Barrier=0;basics.Clear();basicOrder.Clear();
+            rhythmUntil=empoweredUntil=twoTimesUntil=thirdArrowUntil=bleedPrimedUntil=chainBoostUntil=0;Barrier=0;basics.Clear();basicOrder.Clear();
             bucklerAbsentUntil=offhandAbsentUntil=berserkUntil=0;
             empoweredCast=twoTimesCast=bleedCast=berserkCast=chainCast=null;doubleEdgeStep=false;
             if(stamina!=null)stamina.CostMultiplier=1;
@@ -156,8 +160,36 @@ namespace Mismo.Gameplay.Player.Equipment
             if(!doubleEdgeStep||target is DamageReceiver receiver&&receiver.LastResult.HealthDamage<=0)return;
             Credit(target,Passive(WeaponPassive.DoubleEdge),attack);
         }
+        float ThirdArrowWindow=>Mathf.Max(.1f,Passive(WeaponPassive.ThirdArrow)?.thirdArrowResetSeconds??5);
+        void ExpireThirdArrow(){if(hits>0&&Time.time>=thirdArrowUntil)hits=0;}
+        // Presentation reads the same counters and clocks as damage; a miss never advances them.
+        public void CollectBuffViews(List<BuffView> result)
+        {
+            if(health!=null&&health.IsDead)return;
+            ExpireThirdArrow();
+            if(Has(WeaponPassive.ThirdArrow))
+            {
+                int progress=hits%3;
+                result.Add(new BuffView(BuffKind.Damage,"TERCER IMPACTO",progress==2?"LISTO":"ACERTÁ 2 GOLPES",progress==2,progress==2,
+                    progress>0?thirdArrowUntil-Time.time:-1,ThirdArrowWindow,Passive(WeaponPassive.ThirdArrow),progress,2));
+            }
+            if(Time.time<empoweredUntil)
+                result.Add(new BuffView(BuffKind.Damage,"PASO LATERAL","PRÓXIMO GOLPE",true,true,empoweredUntil-Time.time,4,empoweredCast?.Definition));
+            if(Time.time<twoTimesUntil&&twoTimes>0)
+                result.Add(new BuffView(BuffKind.Damage,"DOS TIEMPOS",twoTimes==1?"REMATE LISTO":"PRIMER GOLPE: LENTITUD",twoTimes==1,twoTimes==1,
+                    twoTimesUntil-Time.time,5,twoTimesCast?.Definition,2-twoTimes,1));
+            if(Has(WeaponPassive.Rhythm)&&Time.time<rhythmUntil&&rhythm>0)
+                result.Add(new BuffView(BuffKind.Speed,"RITMO","VELOCIDAD DE ATAQUE",true,true,rhythmUntil-Time.time,2,Passive(WeaponPassive.Rhythm),rhythm,5));
+            if(Has(WeaponPassive.Finisher)&&sameTargetHits>0&&lastTarget is Component target&&target!=null&&target.GetComponentInParent<Health>()?.IsDead!=true)
+                result.Add(new BuffView(BuffKind.Damage,"REMATADOR","MISMO ENEMIGO",sameTargetHits>=3,false,ability:Passive(WeaponPassive.Finisher),progress:sameTargetHits,goal:3));
+            if(Barrier>0&&Time.time<barrierUntil)
+                result.Add(new BuffView(BuffKind.Shield,"BARRERA","BROQUEL",true,true,barrierUntil-Time.time,barrierDuration,Passive(WeaponPassive.Buckler)));
+            if(Has(WeaponPassive.Coverage)&&loadout.Runner?.Current?.Definition.usesSwordCombo==true)
+                result.Add(new BuffView(BuffKind.Defense,"COBERTURA","SOLO FRONTAL",true,true,ability:Passive(WeaponPassive.Coverage)));
+        }
         public float BasicMultiplier(long attack,Vector3 target,Component receiver=null)
         {
+            ExpireThirdArrow();
             float value=1;
             if(Has(WeaponPassive.SwordTip)&&Vector3.ProjectOnPlane(target-transform.position,Vector3.up).magnitude>=1.25f)value*=1+.25f*Power(Passive(WeaponPassive.SwordTip));
             if(Has(WeaponPassive.ThirdArrow)&&(hits+1)%3==0)value*=1+.8f*Power(Passive(WeaponPassive.ThirdArrow));
@@ -165,7 +197,7 @@ namespace Mismo.Gameplay.Player.Equipment
             if(Time.time<twoTimesUntil&&twoTimes==1)value*=1+.75f*Power(twoTimesCast?.Definition);
             if(Has(WeaponPassive.Finisher)&&sameTargetHits>=3&&lastTarget==receiver)value*=1+.5f*Power(Passive(WeaponPassive.Finisher));
             var executioner=Passive(WeaponPassive.Verdugo);
-            if(executioner!=null&&receiver!=null&&receiver.GetComponent<CombatAilment>()?.Poisoned==true)
+            if(executioner!=null&&receiver!=null&&receiver.GetComponent<CombatAilment>()?.IsActive(StatusEffectType.Bleed)==true)
             {
                 float bonus=executioner.passiveValue*Power(executioner);
                 // Ejecución: a bleeding target that is low on life takes the stronger bonus.
@@ -183,6 +215,7 @@ namespace Mismo.Gameplay.Player.Equipment
         {
             if(target is DamageReceiver receiver&&receiver.LastResult.HealthDamage<=0)return;
             if(!basics.Add(attack))return;
+            ExpireThirdArrow();
             basicOrder.Enqueue(attack);if(basicOrder.Count>128)basics.Remove(basicOrder.Dequeue());
             if((hits+1)%3==0)Credit(target,Passive(WeaponPassive.ThirdArrow),attack);
             if(Vector3.ProjectOnPlane(target.transform.position-transform.position,Vector3.up).magnitude>=1.25f)Credit(target,Passive(WeaponPassive.SwordTip),attack);
@@ -190,10 +223,10 @@ namespace Mismo.Gameplay.Player.Equipment
             Credit(target,Passive(WeaponPassive.Rhythm),attack);
             if(Time.time<empoweredUntil&&empoweredCast!=null)Credit(target,empoweredCast.Definition,empoweredCast.AttackId,empoweredCast.WeaponFamilyId);
             // Verdugo scaled this hit only if the target was bleeding before it landed.
-            if(target.GetComponent<CombatAilment>()?.Poisoned==true)Credit(target,Passive(WeaponPassive.Verdugo),attack);
+            if(target.GetComponent<CombatAilment>()?.IsActive(StatusEffectType.Bleed)==true)Credit(target,Passive(WeaponPassive.Verdugo),attack);
             if(Berserking&&berserkCast!=null)Credit(target,berserkCast.Definition,berserkCast.AttackId,berserkCast.WeaponFamilyId);
             if(Time.time<chainBoostUntil&&chainCast!=null)Credit(target,chainCast.Definition,chainCast.AttackId,chainCast.WeaponFamilyId);
-            hits++;empoweredUntil=0;chainBoostUntil=0;
+            hits=(hits+1)%3;thirdArrowUntil=Time.time+ThirdArrowWindow;empoweredUntil=0;chainBoostUntil=0;
             if(Time.time<twoTimesUntil&&twoTimes>0)
             {
                 if(twoTimesCast!=null)Credit(target,twoTimesCast.Definition,twoTimesCast.AttackId,twoTimesCast.WeaponFamilyId);
@@ -206,7 +239,7 @@ namespace Mismo.Gameplay.Player.Equipment
                 // The cast's multiplier already carries weapon level and the ability's trained Potencia.
                 float rusty=bleedCast?.Modifier?.behavior==AbilityModifierBehavior.RustyEdge?1+bleedCast.Modifier.Amount(bleedCast.ModifierRank):1;
                 float scale=bleedCast!=null?bleedCast.DamageMultiplier:1;
-                CombatAilment.Poison(target.gameObject,gameObject,bleedCast?.WeaponFamilyId??loadout?.ActiveDefinition?.MasteryId,primedBleedDamage*scale*rusty,primedBleedSeconds,bleed?.Id,bleedCast?.AttackId??0);
+                CombatAilment.Bleed(target.gameObject,gameObject,bleedCast?.WeaponFamilyId??loadout?.ActiveDefinition?.MasteryId,primedBleedDamage*scale*rusty,primedBleedSeconds,bleed?.Id,bleedCast?.AttackId??0);
                 if(bleedCast!=null)Credit(target,bleed,bleedCast.AttackId,bleedCast.WeaponFamilyId);
                 bleedPrimedUntil=0;
             }
@@ -215,7 +248,7 @@ namespace Mismo.Gameplay.Player.Equipment
             if(cruel!=null)
             {
                 var ailment=target.GetComponent<CombatAilment>();
-                float focus=ailment?.Poisoned==true?cruel.passiveValue*Power(cruel):0;
+                float focus=ailment?.IsActive(StatusEffectType.Bleed)==true?cruel.passiveValue*Power(cruel):0;
                 // Sangre fría: a target whose armor is torn also feeds the Focus.
                 int coldRank=0;
                 var cold=ailment?.ArmorWeakened==true?Evolution(cruel,AbilityModifierBehavior.ColdBlood,out coldRank):null;
@@ -246,7 +279,7 @@ namespace Mismo.Gameplay.Player.Equipment
             if(bleeds)
             {
                 float damage=modifier.BleedDamage(rank)*inventory.DamageMultiplier(weapon)*Power(basic);
-                CombatAilment.Poison(target.gameObject,gameObject,weapon.MasteryId,damage,modifier.BleedSeconds(rank),basic.Id,attack);
+                CombatAilment.Bleed(target.gameObject,gameObject,weapon.MasteryId,damage,modifier.BleedSeconds(rank),basic.Id,attack);
                 return;
             }
             // Ráfaga: `count` extra strikes, each worth Amount(rank) of the swing.
@@ -285,6 +318,7 @@ namespace Mismo.Gameplay.Player.Equipment
             if(health==null||health.IsDead||!Has(WeaponPassive.Buckler))return;
             bucklerAbsentUntil=0;
             Barrier=Mathf.Max(Barrier,amount*Power(Passive(WeaponPassive.Buckler)));barrierUntil=Time.time+duration;
+            barrierDuration=duration;
             GetComponent<CombatState>()?.Reward(0,"BROQUEL · BARRERA");
         }
         public float Absorb(float damage,Vector3 direction,GameObject source=null,long attackId=0)

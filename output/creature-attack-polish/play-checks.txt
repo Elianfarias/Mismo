@@ -1,0 +1,51 @@
+PASS Temporary navigation surface
+PASS Boar Attack enters preparation
+PASS Boar Attack actual playback shows anticipation
+PASS No preparation damage
+PASS Boar Attack finishes execution
+PASS No damage before contact window
+PASS Exactly one contact with configured damage
+PASS Recovery exits within 0.14 seconds including frame rounding
+PASS Recovery applies no extra damage
+PASS Starts a new attack for cancellation
+PASS Posture break cancels prepared attack
+PASS Death cancels attack
+PASS Cancelled attack cannot damage later
+PASS Boar Charge enters preparation
+PASS Boar Charge actual playback shows anticipation
+PASS No preparation damage
+PASS Boar Charge finishes execution
+PASS No damage before contact window
+PASS Exactly one contact with configured damage
+PASS Recovery exits within 0.14 seconds including frame rounding
+PASS Recovery applies no extra damage
+PASS Starts a new attack for cancellation
+PASS Posture break cancels prepared attack
+PASS Death cancels attack
+PASS Cancelled attack cannot damage later
+PASS Spider Attack_Bite enters preparation
+PASS Spider Attack_Bite actual playback shows anticipation
+PASS No preparation damage
+PASS Spider Attack_Bite finishes execution
+PASS No damage before contact window
+PASS Exactly one contact with configured damage
+PASS Recovery exits within 0.14 seconds including frame rounding
+PASS Recovery applies no extra damage
+PASS Starts a new attack for cancellation
+PASS Posture break cancels prepared attack
+PASS Death cancels attack
+PASS Cancelled attack cannot damage later
+PASS Spider Jump enters preparation
+PASS Spider Jump actual playback shows anticipation
+PASS No preparation damage
+PASS Spider Jump finishes execution
+PASS No damage before contact window
+PASS Exactly one contact with configured damage
+PASS Actual pounce playback lifts the body before landing
+PASS Recovery exits within 0.14 seconds including frame rounding
+PASS Recovery applies no extra damage
+PASS Starts a new attack for cancellation
+PASS Posture break cancels prepared attack
+PASS Death cancels attack
+PASS Cancelled attack cannot damage later
+PASS COMPLETE

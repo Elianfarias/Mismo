@@ -182,6 +182,7 @@ namespace Mismo.Gameplay.Player.Presentation
             var climbing=GetComponent<TreeClimbing>();
             if(climbing!=null&&climbing.IsClimbing)Label(new Rect(left,height-190,528,28),"TREPAR · W/S subir/bajar · Soltá ESPACIO para soltar",15,Gold,TextAnchor.MiddleCenter);
             var equipment=GetComponent<Equipment.EquipmentLoadout>();
+            var buffs=GetComponent<ActorBuffFeedback>();
             // Both action rows are read every frame so their height can be tuned live from InventoryUIIcons.
             float skillsYOffset=icons!=null?icons.hudSkillsYOffset:0;
             float consumablesYOffset=icons!=null?icons.hudConsumablesYOffset:0;
@@ -224,7 +225,16 @@ namespace Mismo.Gameplay.Player.Presentation
                     int recast=equipment.Runner.NextRecastStage(ability);bool chained=recast>0;
                     Ability(skillX,skillY,ability.IsPassive?"PASIVA":keys[i],ability.DisplayName,ability.IsPassive?"EQUIPADA":Status(remaining,active),cooldownDuration>0?remaining/cooldownDuration:0,chained||hasStamina&&(!showFocus||focusProgress>=1),QuietFantasyUI.AbilityIcon(ability),showFocus&&!chained?focusProgress:-1,chained||hasStamina);
                     if(chained&&!active)Recast(skillX,skillY,(recast+1)+"/"+ability.RecastCount,equipment.Runner.RecastWindow(ability));
+                    if(!health.IsDead)BuffHud.DrawSkill(new Rect(skillX,skillY,76,76),ability,buffs?.Views);
                 }
+            }
+            if(!health.IsDead)
+            {
+                var life=vitalsPosition+(icons!=null?icons.hudHealthOffset:Vector2.zero);
+                var energy=vitalsPosition+(icons!=null?icons.hudStaminaOffset:new Vector2(0,15));
+                var vitals=Rect.MinMaxRect(Mathf.Min(life.x,energy.x),Mathf.Min(life.y,energy.y),
+                    Mathf.Max(life.x+vitalsWidth,energy.x+StaminaBarWidth(vitalsWidth)),Mathf.Max(life.y+28,energy.y+21));
+                BuffHud.Draw(buffs?.Views,vitals,new Vector2(width,height));
             }
             if(!health.IsDead&&!GameplayPause.BlocksInput&&!UIEditMode)
                 FantasyUI.Crosshair(new Vector2(width*Equipment.WeaponAim.Viewport.x,height*(1-Equipment.WeaponAim.Viewport.y)));
@@ -531,4 +541,3 @@ namespace Mismo.Gameplay.Player.Presentation
         private void OnDisable(){if(Active==this){Active=null;UIEditMode=false;}}
     }
 }
-

@@ -29,7 +29,7 @@ namespace Mismo.Gameplay.Enemies
         }
         void OnResolved(DamageInfo damage, HitResult result)
         {
-            if (result.Outcome != HitOutcome.Hit || result.HealthDamage <= 0 || health.IsDead) return;
+            if (damage.IsStatusTick || result.Outcome != HitOutcome.Hit || result.HealthDamage <= 0 || health.IsDead) return;
             localDirection = transform.InverseTransformDirection(Vector3.ProjectOnPlane(damage.Direction, Vector3.up)).normalized;
             if (localDirection.sqrMagnitude < .001f) localDirection = Vector3.back;
             if (combat.Broken) return;

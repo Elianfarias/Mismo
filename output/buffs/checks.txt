@@ -1,0 +1,25 @@
+PASS Four styles saved in the presentation profile
+PASS URP symbol shader compiles
+PASS All symbols, matching HUD icons and ankle arcs resolve
+PASS Subtle default budget: two symbols, <=50% opacity, faint single ankle arc
+PASS Runtime catalog resolves the shared profile
+PASS Runtime catalog remains preloaded
+PASS HUD fits viewport: column=False, count=1, anchor=(400.00, 782.00)
+PASS HUD fits viewport: column=False, count=1, anchor=(-40.00, -100.00)
+PASS HUD fits viewport: column=False, count=1, anchor=(1550.00, 860.00)
+PASS HUD fits viewport: column=False, count=4, anchor=(400.00, 782.00)
+PASS HUD fits viewport: column=False, count=4, anchor=(-40.00, -100.00)
+PASS HUD fits viewport: column=False, count=4, anchor=(1550.00, 860.00)
+PASS HUD fits viewport: column=False, count=8, anchor=(400.00, 782.00)
+PASS HUD fits viewport: column=False, count=8, anchor=(-40.00, -100.00)
+PASS HUD fits viewport: column=False, count=8, anchor=(1550.00, 860.00)
+PASS HUD fits viewport: column=True, count=1, anchor=(400.00, 782.00)
+PASS HUD fits viewport: column=True, count=1, anchor=(-40.00, -100.00)
+PASS HUD fits viewport: column=True, count=1, anchor=(1550.00, 860.00)
+PASS HUD fits viewport: column=True, count=4, anchor=(400.00, 782.00)
+PASS HUD fits viewport: column=True, count=4, anchor=(-40.00, -100.00)
+PASS HUD fits viewport: column=True, count=4, anchor=(1550.00, 860.00)
+PASS HUD fits viewport: column=True, count=8, anchor=(400.00, 782.00)
+PASS HUD fits viewport: column=True, count=8, anchor=(-40.00, -100.00)
+PASS HUD fits viewport: column=True, count=8, anchor=(1550.00, 860.00)
+Project-wide organization issues recorded separately.

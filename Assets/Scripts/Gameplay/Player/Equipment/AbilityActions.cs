@@ -61,7 +61,7 @@ namespace Mismo.Gameplay.Player.Equipment
                 var info=new DamageInfo(damage*multiplier*c.DamageMultiplier, c.Owner, point, (target.transform.position-c.Owner.transform.position).normalized, c.AttackId, postureDamage, weaponFamilyId:c.WeaponFamilyId,focusGainOnHit:c.Definition.focusGainOnHit,abilityId:c.Definition.Id,abilityUseId:c.AttackId);
                 bool hit=receiver.ReceiveDamage(info);
                 // Reabrir: a target that was already bleeding keeps bleeding for longer.
-                if(hit&&evolution?.behavior==AbilityModifierBehavior.Reopen)CombatAilment.ExtendPoison(target.gameObject,evolution.Amount(c.ModifierRank));
+                if(hit&&evolution?.behavior==AbilityModifierBehavior.Reopen)CombatAilment.ExtendBleed(target.gameObject,evolution.Amount(c.ModifierRank));
                 if(hit&&effects!=null)
                 {
                     effects.BasicHit(c.AttackId,target);
