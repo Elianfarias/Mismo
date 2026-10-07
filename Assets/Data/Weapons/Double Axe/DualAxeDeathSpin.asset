@@ -17,6 +17,38 @@ MonoBehaviour:
   abilityId: DualAxeDeathSpin
   animationSource: {fileID: 0}
   passive: 0
+  passiveValue: 0
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: whirlwind
+    displayName: Torbellino
+    description: "Al terminar el giro, tiene un 15 % de probabilidad de girar una vez m\xE1s sin costo; cada rango sube un poco la probabilidad."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 12
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0.15
+    amountPerRank: 0.008333
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 1
+    maxRepeats: 1
+    distance: 6
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
   description: "Extiende ambas hachas y gira 360\xB0. Cada hacha que golpea a un enemigo le hace un 130 % del da\xF1o del b\xE1sico."
   localizationKey: ability.axe.dualaxedeathspin
   preparation: 0.26

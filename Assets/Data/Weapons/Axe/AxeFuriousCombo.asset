@@ -17,13 +17,85 @@ MonoBehaviour:
   abilityId: AxeFuriousCombo
   animationSource: {fileID: 0}
   passive: 0
-  description: "Avanza mientras golpea tres veces con el hacha, haciendo un 100 %, 120 % y 150 % del da\xF1o en cada golpe. Si los tres golpes impactan al mismo enemigo, lo aturde brevemente. consume 40 de focus"
+  passiveValue: 0
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: escalation
+    displayName: Escalada
+    description: "Cada golpe que acierta suma un 10 % de da\xF1o al siguiente golpe de la cadena; cada rango sube ese porcentaje."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 9
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0.1
+    amountPerRank: 0.016667
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 1
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
+  - id: shatter
+    displayName: Quebranto
+    description: "El tercer golpe rompe la postura 0,3 s m\xE1s; cada rango suma un poco m\xE1s de tiempo."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 10
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0.3
+    amountPerRank: 0.05
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 1
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
+  description: "Golpea con el hacha en el lugar y pod\xE9s volver a pulsarla hasta dos veces: ten\xE9s 4 s despu\xE9s de cada golpe para dar el siguiente. Cada golpe hace un 135 % del da\xF1o y el tercero rompe la postura de los enemigos que alcanza durante 1 s. El enfriamiento empieza con el tercer golpe o al vencer la ventana."
   localizationKey: ability.axe.axefuriouscombo
   preparation: 0.46
   active: 1.94
   recovery: 0.78
   cooldown: 7.1
   staminaCost: 20
+  recastStages:
+  - preparation: 0.46
+    active: 0.4415
+    recovery: 0
+  - preparation: 0
+    active: 0.7943
+    recovery: 0
+  - preparation: 0
+    active: 0.7042
+    recovery: 0.78
+  recastWindow: 4
   chargeable: 0
   maximumCharge: 0.9
   chargeDamageMultiplier:
@@ -80,7 +152,7 @@ MonoBehaviour:
   unstoppable: 1
   cancelPreparation: 0
   cancelRecovery: 0
-  focusCost: 40
+  focusCost: 0
   focusGainOnHit: 0
   preparationSfx: {fileID: 0}
   preparationSfxVolume: 1
@@ -88,36 +160,33 @@ MonoBehaviour:
   executionSfx: {fileID: 0}
   executionSfxVolume: 1
   comboStepSfx: []
+  weaponVfx: []
   pose: 1
   usesSwordCombo: 0
   comboSteps: []
+  comboOrder: 0
   targetsGround: 0
   aimFromCamera: 0
   range: 22
   actions:
-  - rid: 1
   - rid: 2
   references:
     version: 2
     RefIds:
-    - rid: 1
-      type: {class: MoveCasterAction, ns: Mismo.Gameplay.Player.Equipment, asm: Mismo.Gameplay.Player}
-      data:
-        distance: 2.87
-        crossEnemies: 0
-        stopsMovementOnly: 1
     - rid: 2
-      type: {class: FuriousComboAction, ns: Mismo.Gameplay.Player.Equipment, asm: Mismo.Gameplay.Player}
+      type: {class: RecastStrikeAction, ns: Mismo.Gameplay.Player.Equipment, asm: Mismo.Gameplay.Player}
       data:
-        damage: 15
+        damage: 14
         postureDamage: 2
         radius: 0.7
         forward: 1
-        stunSeconds: 3
-        hits:
-        - at: 0.105
-          multiplier: 1
-        - at: 0.559
-          multiplier: 1.2
-        - at: 0.923
-          multiplier: 1.5
+        strikes:
+        - at: 0.4614
+          multiplier: 1.35
+          breakPostureSeconds: 0
+        - at: 0.8095
+          multiplier: 1.35
+          breakPostureSeconds: 0
+        - at: 0.7879
+          multiplier: 1.35
+          breakPostureSeconds: 1

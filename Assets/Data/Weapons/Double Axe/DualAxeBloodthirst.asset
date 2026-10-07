@@ -17,6 +17,67 @@ MonoBehaviour:
   abilityId: DualAxeBloodthirst
   animationSource: {fileID: 0}
   passive: 9
+  passiveValue: 0.2
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: power
+    displayName: Potencia
+    description: "Cada rango suma un 25 % de la restauraci\xF3n base: del 20 % pasa a 25 %, 30 % y 35 % en rango 3."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0.25
+    cooldownReductionPerLevel: 0
+    behavior: 0
+    retired: 1
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0
+    amountPerRank: 0
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 1
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
+  - id: insatiable
+    displayName: "Sed insaciable"
+    description: "Con la vida por debajo del 50 %, Sed de sangre tambi\xE9n te cura el 5 % de tu vida m\xE1xima; cada rango cura un poco m\xE1s."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 22
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0.05
+    amountPerRank: 0.002778
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 0
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
   description: "Derrotar a un enemigo o dejarlo en apertura restaura un 20 % de la stamina m\xE1xima y un 20 % del Focus m\xE1ximo."
   localizationKey: ability.axe.dualaxebloodthirst
   preparation: 0.1

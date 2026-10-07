@@ -17,13 +17,47 @@ MonoBehaviour:
   abilityId: DualAxeThrow
   animationSource: {fileID: 0}
   passive: 0
-  description: Lanza una de tus hachas hasta 6 m. Vuelve a tu mano al instante al impactar o al terminar su recorrido.
+  passiveValue: 0
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: wandering_axe
+    displayName: Hacha errante
+    description: "Al impactar, el hacha rebota a otros 2 enemigos cercanos como m\xE1ximo, y cada rebote pega un 30 % menos que el anterior; cada rango reduce esa p\xE9rdida."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 14
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0.3
+    amountPerRank: -0.016667
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 1
+    maxRepeats: 3
+    distance: 10
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
+  description: Lanza una de tus hachas hasta 15 m. Vuelve a tu mano al instante al impactar o al terminar su recorrido.
   localizationKey: ability.axe.dualaxethrow
   preparation: 0.4
   active: 0.2
   recovery: 0.3
-  cooldown: 6
-  staminaCost: 10
+  cooldown: 8.67
+  staminaCost: 20
+  recastStages: []
+  recastWindow: 4
   chargeable: 0
   maximumCharge: 0.9
   chargeDamageMultiplier:
@@ -88,13 +122,14 @@ MonoBehaviour:
   executionSfx: {fileID: 8300000, guid: 7d39d0a3edc97a54ab5f4c555d8bc153, type: 3}
   executionSfxVolume: 1
   comboStepSfx: []
+  weaponVfx: []
   pose: 0
   usesSwordCombo: 0
   comboSteps: []
   comboOrder: 0
   targetsGround: 0
   aimFromCamera: 1
-  range: 20
+  range: 15
   actions:
   - rid: 1
   references:

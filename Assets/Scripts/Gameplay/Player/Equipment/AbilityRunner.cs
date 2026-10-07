@@ -19,7 +19,7 @@ namespace Mismo.Gameplay.Player.Equipment
         public bool IsBusy=>Current!=null;
         public bool IsMoving=>Current!=null&&Current.Began&&!Current.Ended&&System.Array.Exists(Current.Definition.actions,a=>a is MoveCasterAction);
         public float Mobility=>Current==null?1:Current.ChargedCombo&&!Current.Began ? .35f : !Current.Began?Current.Definition.preparationMobility:!Current.Ended?Current.Definition.activeMobility:1;
-        public float Normalized=>Current==null?0:Mathf.Clamp01(Current.Elapsed/(Current.Definition.Duration+(Current.Chargeable?Current.MaximumCharge:0)));
+        public float Normalized=>Current==null?0:Mathf.Clamp01(Current.Elapsed/(Current.Duration+(Current.Chargeable?Current.MaximumCharge:0)));
         public event System.Action<AbilityDefinition> Started;
         // Read-only presentation snapshot. Gameplay remains the owner of all clocks.
         public bool TryGetAnimationFrame(out Presentation.CombatAnimationFrame frame)
@@ -42,13 +42,16 @@ namespace Mismo.Gameplay.Player.Equipment
                     }
                 frame=new Presentation.CombatAnimationFrame(definition,Presentation.CombatAnimationPhase.Combo,combo.CurrentStepNormalized,combo.CurrentStepIndex,cast.AttackId);
             }
+            // Each recast stage plays the combo clip of its index across the whole press, like a sword combo step.
+            else if(cast.RecastStage>=0)
+                frame=new Presentation.CombatAnimationFrame(definition,Presentation.CombatAnimationPhase.Combo,cast.Elapsed/cast.Duration,cast.RecastStage,cast.AttackId);
             else
             {
-                float start=cast.ReleasedAt>=0?cast.ReleasedAt:Mathf.Max(0,definition.preparation);
+                float start=cast.ReleasedAt>=0?cast.ReleasedAt:cast.Preparation;
                 var phase=!cast.Began?Presentation.CombatAnimationPhase.Preparation:!cast.Ended?Presentation.CombatAnimationPhase.Active:Presentation.CombatAnimationPhase.Recovery;
-                float progress=!cast.Began?cast.Elapsed/Mathf.Max(.001f,definition.preparation)
-                    :!cast.Ended?(cast.Elapsed-start)/Mathf.Max(.01f,definition.active)
-                    :(cast.Elapsed-start-Mathf.Max(.01f,definition.active))/Mathf.Max(.001f,definition.recovery);
+                float progress=!cast.Began?cast.Elapsed/Mathf.Max(.001f,cast.Preparation)
+                    :!cast.Ended?(cast.Elapsed-start)/cast.Active
+                    :(cast.Elapsed-start-cast.Active)/Mathf.Max(.001f,cast.Recovery);
                 frame=new Presentation.CombatAnimationFrame(definition,phase,progress,-1,cast.AttackId);
             }
             return true;
@@ -80,25 +83,30 @@ namespace Mismo.Gameplay.Player.Equipment
             var weapon=loadout.ActiveDefinition;var definition=loadout.GetAbility(slot);
             if(definition==null||definition.IsPassive||health!=null&&health.IsDead||loadout.Belt!=null&&loadout.Belt.ControlsMovement)return false;
             bool followup=slot==AbilitySlot.Basic&&CanFollowup(weapon);
+            // An open recast chain already paid its costs, and its cooldown waits for the chain to close.
+            recasts.TryGetValue(definition,out var chain);
             if(Remaining(definition)>0&&!followup&&!(Current!=null&&definition.usesSwordCombo&&Current.Definition==definition))return false;
-            if(stamina!=null&&stamina.Current<stamina.Cost(definition.staminaCost)||state.Focus<definition.focusCost)return false;
+            if(chain==null&&(stamina!=null&&stamina.Current<stamina.Cost(definition.staminaCost)||state.Focus<definition.focusCost))return false;
             if(Current!=null)
             {
                 if(definition.usesSwordCombo&&Current.Definition==definition)
                 {if(!Current.Began)return false;if(combo!=null&&combo.RequestAttack())return true;}
                 if(!followup&&(!CanCancel||!CanBranchInto(slot)))
                 {
-                    pending=slot;pendingDirection=direction;pendingPoint=groundPoint;pendingAim=aimPoint;pendingDash=false;pendingUntil=Time.time+.14f;return false;
+                    // A press during the previous stage of the chain waits for that stage to end, in any slot.
+                    float wait=chain!=null&&Current.Definition==definition?(Current.Duration-Current.Elapsed)/Current.AttackSpeed:0;
+                    pending=slot;pendingDirection=direction;pendingPoint=groundPoint;pendingAim=aimPoint;pendingDash=false;pendingUntil=Time.time+Mathf.Max(0,wait)+.14f;return false;
                 }
                 Cancel();
             }
             if(definition.usesSwordCombo&&combo==null)return false;
             // Combos pay at the start of each actual step, including the first.
-            if(!definition.usesSwordCombo)stamina?.TrySpend(definition.staminaCost);
+            if(!definition.usesSwordCombo&&chain==null)stamina?.TrySpend(definition.staminaCost);
+            int stage=definition.RecastCount>0?(chain!=null?chain.next:0):-1;
             // A sword combo enters its active phase immediately. Keeping Began false would make
             // PlayerController refresh the camera aim every frame while the animated weapon moves,
             // which can rotate the character unpredictably at close range.
-            Current=new AbilityExecution(this,weapon,definition,direction.sqrMagnitude>.001f?direction.normalized:Motor.Facing,groundPoint)
+            Current=new AbilityExecution(this,weapon,definition,direction.sqrMagnitude>.001f?direction.normalized:Motor.Facing,groundPoint,stage,chain!=null?chain.useId:0,chain?.progress)
             {
                 AimPoint=aimPoint,
                 Held=held,
@@ -109,14 +117,16 @@ namespace Mismo.Gameplay.Player.Equipment
             {
                 if(!StartCombo(Current)){Current=null;return false;}
             }
-            state.Spend(definition.focusCost);
+            if(chain==null)state.Spend(definition.focusCost);
             if(Current.Began)ConsumeOpening(Current);
             weaponVfx.Begin(Current);
             if(Current.Began)PlayExecutionSound(definition,combo.CurrentStepIndex);
-            else StartPreparationSound(definition);
+            else StartPreparationSound(Current);
             var inventory=GetComponent<Inventory.PlayerInventory>();
-            float cooldown=inventory!=null?inventory.AbilityCooldown(weapon,definition,slot==AbilitySlot.Basic):definition.cooldown/(slot==AbilitySlot.Basic?Current.AttackSpeed:1);
-            cooldownDurations[definition]=cooldown;readyAt[definition]=Time.time+cooldown;loadout.MarkCombat();Started?.Invoke(definition);return true;
+            float cooldown=chain!=null?chain.cooldown:inventory!=null?inventory.AbilityCooldown(weapon,definition,slot==AbilitySlot.Basic):definition.cooldown/(slot==AbilitySlot.Basic?Current.AttackSpeed:1);
+            if(stage>=0)AdvanceRecast(definition,chain,cooldown);
+            else{cooldownDurations[definition]=cooldown;readyAt[definition]=Time.time+cooldown;}
+            loadout.MarkCombat();Started?.Invoke(definition);return true;
         }
         public bool TryDash(Vector3 direction)
         {
@@ -135,6 +145,8 @@ namespace Mismo.Gameplay.Player.Equipment
             if(pendingDash&&CanCancel){Vector3 direction=pendingDirection;pendingDash=false;TryDash(direction);}
             else if(pending.HasValue&&(Current==null||CanCancel&&CanBranchInto(pending.Value)||pending==AbilitySlot.Basic&&combo!=null&&combo.CanQueue))
             {var slot=pending.Value;pending=null;TryUse(slot,pendingDirection,pendingPoint,pendingAim);}
+            // Last: a stage started this frame keeps its chain's window full.
+            TickRecasts(dt);
         }
         // A looping basic chain never ends while the player keeps clicking, so R may also break it.
         bool CanBranchInto(AbilitySlot slot)=>slot==AbilitySlot.Q||slot==AbilitySlot.E||
@@ -161,7 +173,7 @@ namespace Mismo.Gameplay.Player.Equipment
                 if(!combo.IsActive&&!combo.IsRecovering){weaponVfx.Complete();Current=null;}
                 return;
             }
-            float start=Mathf.Max(0,d.preparation);
+            float start=c.Preparation;
             if(d.chargeable)
             {
                 if(!c.Began)
@@ -173,12 +185,16 @@ namespace Mismo.Gameplay.Player.Equipment
                 }
                 start=c.ReleasedAt;
             }
-            float end=start+Mathf.Max(.01f,d.active);
-            if(!c.Began&&c.Elapsed>=start){c.Began=true;weaponVfx.Release();StopPreparationSound();PlayExecutionSound(d);foreach(var action in d.actions)action?.Begin(c);}
+            float end=start+c.Active;
+            if(!c.Began&&c.Elapsed>=start){c.Began=true;weaponVfx.Release();StopPreparationSound();PlayExecutionSound(d,c.RecastStage);foreach(var action in d.actions)action?.Begin(c);}
             float activeDt=Mathf.Max(0,Mathf.Min(c.Elapsed,end)-Mathf.Max(c.Elapsed-dt,start));
             if(c.Began&&!c.Ended&&activeDt>0)foreach(var action in d.actions)action?.Tick(c,activeDt);
+            // An evolution asked for a chained basic during the tick; it runs here so Current never changes while actions iterate.
+            if(c.Chain){ChainBasic(c);return;}
+            // Torbellino: the active phase may start over instead of ending.
+            if(c.Began&&!c.Ended&&c.Elapsed>=end&&RepeatActive(c,start))return;
             if(c.Began&&!c.Ended&&c.Elapsed>=end){EndActions(c);weaponVfx.EndActive();}
-            if(c.Elapsed>=end+d.recovery){weaponVfx.Complete();Current=null;}
+            if(c.Elapsed>=end+c.Recovery){weaponVfx.Complete();Current=null;}
         }
         static void PlayExecutionSound(AbilityDefinition definition, int comboStep = -1)
         {
@@ -196,11 +212,12 @@ namespace Mismo.Gameplay.Player.Equipment
             if(definition.executionSfx!=null&&definition.executionSfxVolume>0)
                 AudioEvents.RaisePlayAbilitySFX(definition.executionSfx,definition.executionSfxVolume);
         }
-        void StartPreparationSound(AbilityDefinition definition)
+        void StartPreparationSound(AbilityExecution cast)
         {
             StopPreparationSound();
+            var definition=cast.Definition;
             if(definition.preparationSfx==null||definition.preparationSfxVolume<=0||
-                (!definition.chargeable&&definition.preparation<=0))return;
+                (!definition.chargeable&&cast.Preparation<=0))return;
             if(preparationAudio==null)
             {
                 preparationAudio=gameObject.AddComponent<AudioSource>();

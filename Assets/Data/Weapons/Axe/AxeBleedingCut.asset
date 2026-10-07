@@ -17,7 +17,39 @@ MonoBehaviour:
   abilityId: AxeBleedingCut
   animationSource: {fileID: 0}
   passive: 0
-  description: "Marca tu pr\xF3ximo ataque b\xE1sico durante 4s. Al impactar a un enemico aplica sangrado de 1 de da\xF1o por segundo durante 5s. Reaplicar renueva la duraci\xF3n. consume 30 focus"
+  passiveValue: 0
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: rusty_edge
+    displayName: Filo oxidado
+    description: "El sangrado de Tajo sangrante hace un 50 % m\xE1s de da\xF1o; cada rango suma un poco m\xE1s."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 8
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0.5
+    amountPerRank: 0.083333
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 1
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
+  description: "Marca tu pr\xF3ximo ataque b\xE1sico durante 4s. Al impactar a un enemigo aplica sangrado de 3 de da\xF1o por segundo durante 5s. Un sangrado m\xE1s fuerte reemplaza al actual y uno m\xE1s d\xE9bil no lo pisa. consume 30 focus"
   localizationKey: ability.axe.axebleedingcut
   preparation: 0.25
   active: 0.2
@@ -101,4 +133,7 @@ MonoBehaviour:
     RefIds:
     - rid: 1
       type: {class: PrimeBleedAction, ns: Mismo.Gameplay.Player.Equipment, asm: Mismo.Gameplay.Player}
-      data: 
+      data:
+        damagePerSecond: 3
+        bleedSeconds: 5
+        markSeconds: 4

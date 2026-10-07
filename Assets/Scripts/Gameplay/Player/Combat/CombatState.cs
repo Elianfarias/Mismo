@@ -47,6 +47,13 @@ namespace Mismo.Gameplay.Combat
             if(health!=null&&health.IsDead)return;
             brokenRemaining=Mathf.Max(brokenRemaining,duration);PostureBroken?.Invoke(duration);
         }
+        // A skill that breaks posture outright: empties the bar like a natural break, even during break recovery.
+        public void BreakPosture(float duration)
+        {
+            if(health!=null&&health.IsDead)return;
+            if(UsesPosture){Posture=0;sinceHit=0;}
+            Stagger(duration);
+        }
         public float DamagePosture(float amount)
         {
             if(!UsesPosture||Broken||RecoveringFromBreak||amount<=0||health!=null&&health.IsDead)return 0;

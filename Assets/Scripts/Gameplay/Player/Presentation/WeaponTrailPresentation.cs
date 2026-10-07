@@ -23,7 +23,8 @@ namespace Mismo.Gameplay.Player.Presentation
             if(GameplayPause.IsPaused)return;
             if(main==null){material=RuntimeParticleMaterial.Create("Melee ribbon",Color.white);main=new WeaponTrailRibbon(transform,material);second=new WeaponTrailRibbon(transform,material);}
             var cast=loadout.Runner!=null?loadout.Runner.Current:null;
-            long id=cast!=null?cast.AttackId:0;int index=combo!=null?combo.StepSerial:-1;
+            // UseId spans every press of a recast chain, so a chained stage keeps the previous stage's ribbon.
+            long id=cast!=null?cast.UseId:0;int index=combo!=null?combo.StepSerial:-1;
             if(previous!=profile||previousSecond!=offProfile||cast!=null&&(execution!=id||segment!=index)){main.Clear();second.Clear();}
             previous=profile;previousSecond=offProfile;if(cast!=null){execution=id;segment=index;}
             bool emit=false,mainStrikes=true,secondStrikes=true;

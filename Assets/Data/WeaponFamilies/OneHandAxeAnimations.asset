@@ -16,7 +16,7 @@ MonoBehaviour:
   actionMask: {fileID: 0}
   actions:
   - ability: {fileID: 11400000, guid: fbd691e815e943629523ca0591b2ce8a, type: 2}
-    clip: {fileID: 7400000, guid: c250bbf1c5864694aae864b70487c373, type: 2}
+    clip: {fileID: 7400000, guid: 9479939406284434385d91075ed2a2d4, type: 2}
     maskMode: 0
     customMask: {fileID: 0}
     useAnimationMovement: 0
@@ -90,8 +90,11 @@ MonoBehaviour:
     customMask: {fileID: 0}
     useAnimationMovement: 0
     animationMovementScale: 1
-    comboClips: []
+    comboClips:
+    - {fileID: 7400000, guid: c1c744dd9d5768b47bcf568c81a0d92e, type: 2}
+    - {fileID: 7400000, guid: 6f4fcc69f6908d240a610b1bf31347a8, type: 2}
+    - {fileID: 7400000, guid: 0ccae1ffa9093dc4b908434ea282ff39, type: 2}
     activeStartsAt: 0.1966
     recoveryStartsAt: 0.6667
-    blendSeconds: 0.08
+    blendSeconds: 0.2
     torsoUprightDegrees: 0

@@ -17,7 +17,39 @@ MonoBehaviour:
   abilityId: DualAxeLeap
   animationSource: {fileID: 0}
   passive: 0
-  description: "Salta 3 m hacia adelante y golpea con ambas hachas al aterrizar, en un \xE1rea chica. Hace un 100 % de da\xF1o adicional respecto del b\xE1sico."
+  passiveValue: 0
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: landing_strike
+    displayName: Remate
+    description: "Al aterrizar y dar da\xF1o, peg\xE1s al instante un b\xE1sico sin gastar estamina; cada rango sube un poco el da\xF1o de ese b\xE1sico."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 11
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 1
+    amountPerRank: 0.055556
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 1
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
+  description: "Salta 9 m hacia adelante y golpea con ambas hachas al aterrizar, en un \xE1rea chica. Hace un 100 % de da\xF1o adicional respecto del b\xE1sico."
   localizationKey: ability.axe.dualaxeleap
   preparation: 0.5
   active: 0.5

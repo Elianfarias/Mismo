@@ -74,6 +74,7 @@ namespace Mismo.Gameplay.Combat
         private int currentStep = -1;
         private float phaseElapsed;
         private bool queuedNext;
+        private bool freeStep;
         private Mismo.Gameplay.Player.Movement.Stamina stamina;
         private float staminaCost;
 
@@ -107,7 +108,7 @@ namespace Mismo.Gameplay.Combat
         /// Recibe una pulsación de ataque. En la ventana configurada la conserva para enlazar
         /// la siguiente etapa; fuera de ella no altera el estado actual.
         /// </summary>
-        public bool RequestAttack(Mismo.Gameplay.Player.Equipment.AbilityDefinition definition = null,int openingStep=0,bool chainNext=false)
+        public bool RequestAttack(Mismo.Gameplay.Player.Equipment.AbilityDefinition definition = null,int openingStep=0,bool chainNext=false,bool freeFirstStep=false)
         {
             if (phase == Phase.Idle)
             {
@@ -118,7 +119,11 @@ namespace Mismo.Gameplay.Combat
                 steps = definition.comboSteps;
                 order = definition.comboOrder;
                 // A requested opening step (counter/finisher) wins; otherwise the combo order picks the first step.
-                if(!BeginStep(openingStep>0?Mathf.Clamp(openingStep,0,steps.Length-1):Next(-1)))return false;
+                // Only the first step is free (a chained basic); later steps of the combo pay as usual.
+                freeStep=freeFirstStep;
+                bool started=BeginStep(openingStep>0?Mathf.Clamp(openingStep,0,steps.Length-1):Next(-1));
+                freeStep=false;
+                if(!started)return false;
                 queuedNext=chainNext&&HasNext;
                 return true;
             }
@@ -194,10 +199,10 @@ namespace Mismo.Gameplay.Combat
 
         private bool BeginStep(int index)
         {
-            if(!CanPay)return false;
+            if(!freeStep&&!CanPay)return false;
             if (hitbox == null || steps == null || index < 0 || index >= steps.Length || steps[index] == null ||
                 !hitbox.BeginAttack(index, steps[index])) return false;
-            if(stamina!=null&&!stamina.TrySpend(staminaCost)){hitbox.CancelAttack();return false;}
+            if(!freeStep&&stamina!=null&&!stamina.TrySpend(staminaCost)){hitbox.CancelAttack();return false;}
             phase = Phase.Active;
             currentStep = index;
             phaseElapsed = 0f;

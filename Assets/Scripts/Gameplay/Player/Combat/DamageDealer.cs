@@ -31,6 +31,7 @@ namespace Mismo.Gameplay.Combat
             if(attackId==0){attackId=AttackIdentity.Next();secondAttackId=AttackIdentity.Next();}
             long id=secondStrike?secondAttackId:attackId;
             float multiplier=basic&&effects!=null?effects.BasicMultiplier(id,hitPoint,receiver as Component):1;
+            if(secondStrike&&basic&&effects!=null)multiplier*=effects.SecondStrikeMultiplier();
             bool hit=receiver.ReceiveDamage(new DamageInfo(amount*multiplier, gameObject, hitPoint, direction,id,amount*multiplier*.65f*postureMultiplier,weaponFamilyId:family,focusGainOnHit:secondStrike?0:focusGain,abilityId:abilityId,abilityUseId:abilityUseId,breaksGuard:breaksGuard));
             if(hit&&basic&&effects!=null&&receiver is Component component)
             {

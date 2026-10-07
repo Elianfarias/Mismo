@@ -17,6 +17,67 @@ MonoBehaviour:
   abilityId: AxeArmorRend
   animationSource: {fileID: 0}
   passive: 0
+  passiveValue: 0
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: deep_rend
+    displayName: Desgarro profundo
+    description: "La armadura del objetivo baja un 39 % en vez de un 30 %; cada rango la baja un poco m\xE1s. Dura lo mismo."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 6
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0.39
+    amountPerRank: 0.02
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 1
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
+  - id: raw_flesh
+    displayName: Carne viva
+    description: "Adem\xE1s de romper la armadura, el golpe hace sangrar al objetivo 3 s; cada rango sube un poco el da\xF1o del sangrado."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 7
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0
+    amountPerRank: 0
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 0
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0.166667
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
   description: "Golpe que inflige +25% de da\xF1o adicional y reduce un 30 % la armadura del objetivo durante 4s No acumulable. consume 20 de focus"
   localizationKey: ability.axe.axearmorrend
   preparation: 0.3
@@ -102,7 +163,7 @@ MonoBehaviour:
     - rid: 1
       type: {class: ArmorRendStrikeAction, ns: Mismo.Gameplay.Player.Equipment, asm: Mismo.Gameplay.Player}
       data:
-        damage: 12.5
+        damage: 17.5
         postureDamage: 5
         radius: 0.6
         forward: 0.8

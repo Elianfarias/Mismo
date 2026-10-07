@@ -28,3 +28,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 283e2b64f80946e48385511d516b78d7, type: 2}
   masteryLevelsPerUnlock: 1
   animations: {fileID: 11400000, guid: 9b258c32814c113488ab41f4a7af5e61, type: 2}
+  basicDamageBonus: 0.15

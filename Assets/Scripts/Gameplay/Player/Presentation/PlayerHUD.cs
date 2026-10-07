@@ -220,7 +220,10 @@ namespace Mismo.Gameplay.Player.Presentation
                     bool showFocus=!ability.IsPassive&&ability.focusCost>0;
                     bool hasStamina=ability.IsPassive||stamina==null||stamina.Current>=stamina.Cost(ability.staminaCost);
                     float cooldownDuration=equipment.Runner.CooldownDuration(ability);
-                    Ability(skillX,skillY,ability.IsPassive?"PASIVA":keys[i],ability.DisplayName,ability.IsPassive?"EQUIPADA":Status(remaining,active),cooldownDuration>0?remaining/cooldownDuration:0,hasStamina&&(!showFocus||focusProgress>=1),QuietFantasyUI.AbilityIcon(ability),showFocus?focusProgress:-1,hasStamina);
+                    // An open recast chain already paid Focus and stamina: the next press is always available.
+                    int recast=equipment.Runner.NextRecastStage(ability);bool chained=recast>0;
+                    Ability(skillX,skillY,ability.IsPassive?"PASIVA":keys[i],ability.DisplayName,ability.IsPassive?"EQUIPADA":Status(remaining,active),cooldownDuration>0?remaining/cooldownDuration:0,chained||hasStamina&&(!showFocus||focusProgress>=1),QuietFantasyUI.AbilityIcon(ability),showFocus&&!chained?focusProgress:-1,chained||hasStamina);
+                    if(chained&&!active)Recast(skillX,skillY,(recast+1)+"/"+ability.RecastCount,equipment.Runner.RecastWindow(ability));
                 }
             }
             if(!health.IsDead&&!GameplayPause.BlocksInput&&!UIEditMode)
@@ -455,6 +458,13 @@ namespace Mismo.Gameplay.Player.Presentation
             // Focus is communicated by the perimeter; cooldown and stamina remain distinct.
             if(cooldown>0||!hasStamina)Label(new Rect(x,y+24,76,28),cooldown>0?status:"!",17,QuietFantasyUI.Ink,TextAnchor.MiddleCenter);
             Label(new Rect(x,y+80,76,24),key,17,QuietFantasyUI.Ink,TextAnchor.MiddleCenter);
+        }
+        // Open recast chain: which press comes next and how much of its window is left.
+        private void Recast(float x,float y,string stage,float window)
+        {
+            QuietFantasyUI.Border(new Rect(x,y,76,76),QuietFantasyUI.Amber);
+            Label(new Rect(x,y+24,76,28),stage,17,QuietFantasyUI.Ink,TextAnchor.MiddleCenter);
+            Fill(new Rect(x+6,y+66,64*Mathf.Clamp01(window),4),QuietFantasyUI.Amber);
         }
         public static void HudFrame(Rect rect,InventoryUIIcons theme=null)
         {

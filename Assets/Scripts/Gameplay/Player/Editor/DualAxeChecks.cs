@@ -4,6 +4,7 @@ using System.Reflection;
 using Mismo.Gameplay.Combat;
 using Mismo.Gameplay.Player.Equipment;
 using Mismo.Gameplay.Player.Equipment.Inventory;
+using Mismo.Gameplay.Player.Presentation;
 using UnityEditor;
 using UnityEngine;
 
@@ -53,9 +54,9 @@ namespace Mismo.Gameplay.Player.Editor
             float basicDamage=basic.comboSteps[0].Damage;
             Require(basicDamage>0&&basic.comboSteps.All(s=>Mathf.Approximately(s.Damage,basicDamage)),"Every basic swing deals the same damage per axe");
             var leap=family.Skill(0).actions.OfType<FuriousComboAction>().SingleOrDefault();
-            Require(family.Skill(0).actions.OfType<MoveCasterAction>().Any(m=>Mathf.Approximately(m.distance,3)),"Hachazo doble leaps 3 m");
+            Require(family.Skill(0).actions.OfType<MoveCasterAction>().Any(m=>Mathf.Approximately(m.distance,9)),"Hachazo doble leaps 9 m");
             Require(leap!=null&&leap.hits.Length==1&&leap.hits[0].at<1&&Mathf.Approximately(leap.damage*leap.hits[0].multiplier,basicDamage*2),"Hachazo doble lands one hit at +100 % of the basic");
-            Require(family.Skill(1).actions.OfType<AxeThrowAction>().Any()&&Mathf.Approximately(family.Skill(1).range,6),"Lanzamiento de hacha throws up to 6 m");
+            Require(family.Skill(1).actions.OfType<AxeThrowAction>().Any()&&family.Skill(1).range>=1,"Lanzamiento de hacha throws an axe (its range is a balance value)");
             var spin=family.Skill(2).actions.OfType<FuriousComboAction>().SingleOrDefault();
             Require(spin!=null&&spin.hits.Length==2&&spin.hits.All(h=>Mathf.Approximately(spin.damage*h.multiplier,basicDamage*1.3f)),"Giro mortal hits once per axe at 130 % of the basic");
             var berserk=family.Skill(3).actions.OfType<BerserkAction>().SingleOrDefault();
@@ -76,7 +77,82 @@ namespace Mismo.Gameplay.Player.Editor
                 Require(animations.actions.Any(b=>b.ability==ability&&b.clip!=null),ability.Id+" has an animation clip");
             var basicBinding=animations.Find(basic);
             Require(basicBinding!=null&&basicBinding.comboClips!=null&&basicBinding.comboClips.Length==4&&basicBinding.comboClips.All(c=>c!=null&&c.humanMotion),"Basic has four Humanoid combo clips");
+
+            // Evolutions: the Inspector is the balance sheet, so these catch a wiped or reverted asset.
+            // Every evolution works from rank 0 and each rank only improves its numbers: value = base + perRank × rank.
+            void Modifiers(AbilityDefinition ability,params string[] expected)
+            {
+                var offered=ability.masteryModifiers.Where(m=>m!=null&&!m.retired).ToArray();
+                Require(offered.Select(m=>m.id).SequenceEqual(expected)&&offered.All(m=>m.maxLevel==3&&m.effectiveUsesPerLevel==10),ability.Id+" offers exactly "+string.Join(", ",expected));
+            }
+            // Retired modifiers keep their id so a save that trained them stays valid.
+            void Retired(AbilityDefinition ability,params string[] ids)=>
+                Require(ids.All(id=>ability.FindModifier(id)?.retired==true),ability.Id+" keeps "+string.Join(", ",ids)+" retired");
+            bool Close(float a,float b)=>Mathf.Abs(a-b)<2e-4f;
+            void Evolution(AbilityDefinition ability,string id,AbilityModifierBehavior behavior,float rank0,float rank3)
+            {
+                var m=ability.FindModifier(id);
+                Require(m!=null&&!m.retired&&m.behavior==behavior&&Close(m.Amount(0),rank0)&&Close(m.Amount(3),rank3),ability.Id+" "+id+" evolves "+behavior+" from "+rank0+" at rank 0 to "+rank3+" at rank 3");
+            }
+            Modifiers(basic,"burst");Evolution(basic,"burst",AbilityModifierBehavior.Burst,.4f,.4667f);
+            var burst=basic.FindModifier("burst");
+            Require(burst.hitsRequired==5&&Mathf.Approximately(burst.streakResetSeconds,3)&&burst.count==2&&Close(burst.interval,.12f),"Ráfaga needs 5 basics in a row, reset after 3 s, and adds 2 extra strikes");
+            Modifiers(family.Skill(0),"landing_strike");Evolution(family.Skill(0),"landing_strike",AbilityModifierBehavior.LandingStrike,1,1.1667f);
+            Modifiers(family.Skill(1),"wandering_axe");Evolution(family.Skill(1),"wandering_axe",AbilityModifierBehavior.WanderingAxe,.3f,.25f);
+            var wandering=family.Skill(1).FindModifier("wandering_axe");
+            // The distance is a balance value the Inspector changes freely: only its sanity is checked.
+            Require(wandering.count==2&&wandering.distance>=1,"Hacha errante rebounds to at most 2 enemies, each hitting 30 % softer at rank 0");
+            Modifiers(family.Skill(2),"whirlwind");Evolution(family.Skill(2),"whirlwind",AbilityModifierBehavior.Whirlwind,.15f,.175f);
+            Require(family.Skill(2).FindModifier("whirlwind").maxRepeats==1,"Torbellino repeats the spin once");
+            Modifiers(family.Skill(3),"slaughter","rising_fury");
+            Evolution(family.Skill(3),"slaughter",AbilityModifierBehavior.Slaughter,.05f,.0583f);Evolution(family.Skill(3),"rising_fury",AbilityModifierBehavior.RisingFury,.015f,.0175f);
+            Modifiers(family.Skill(4),"cross_cut");Retired(family.Skill(4),"power");Evolution(family.Skill(4),"cross_cut",AbilityModifierBehavior.CrossCut,.2f,.2333f);
+            Modifiers(family.Skill(5),"insatiable");Retired(family.Skill(5),"power");Evolution(family.Skill(5),"insatiable",AbilityModifierBehavior.Insatiable,.05f,.0583f);
+            Require(Close(family.Skill(5).FindModifier("insatiable").threshold,.5f),"Sed insaciable acts below 50 % of the life");
+            Require(family.Skill(4).UsesPassiveValue&&Mathf.Approximately(family.Skill(4).passiveValue,.5f),"Doble filo is authored at 50 %");
+            Require(family.Skill(5).UsesPassiveValue&&Mathf.Approximately(family.Skill(5).passiveValue,.2f),"Sed de sangre is authored at 20 %");
+
+            // The Inspector drawer must resolve every field it shows: a typo in a name would hide that field silently.
+            var unresolved=new System.Collections.Generic.List<string>();
+            foreach(var ability in family.repertoire.Append(basic))
+            {
+                var serialized=new SerializedObject(ability);
+                if(ability.UsesPassiveValue&&serialized.FindProperty("passiveValue")==null)unresolved.Add(ability.Id+".passiveValue");
+                var list=serialized.FindProperty("masteryModifiers");
+                for(int i=0;i<list.arraySize;i++)
+                {
+                    var element=list.GetArrayElementAtIndex(i);
+                    foreach(var name in AbilityModifierDefinitionDrawer.FieldNames(element))
+                        if(element.FindPropertyRelative(name)==null)unresolved.Add(ability.Id+"["+i+"]."+name);
+                }
+            }
+            Require(unresolved.Count==0,"The modifier drawer resolves every field it shows"+(unresolved.Count>0?": "+string.Join(", ",unresolved):""));
+
+            // Torbellino replays the active window of the spin clip: its start and end poses should match.
+            SpinSeam(animations.Find(family.Skill(2)).clip,animations.Find(family.Skill(2)));
             Debug.Log("DUAL_AXE_PASS");
+        }
+
+        // Compares the clip at both ends of the replayed window: the muscles and the root orientation.
+        static void SpinSeam(AnimationClip clip,AbilityAnimationBinding binding)
+        {
+            float a=binding.activeStartsAt*clip.length,b=binding.recoveryStartsAt*clip.length;
+            float worst=0;string worstName=null;float[] q1=new float[4],q2=new float[4];
+            foreach(var curveBinding in AnimationUtility.GetCurveBindings(clip))
+            {
+                var curve=AnimationUtility.GetEditorCurve(clip,curveBinding);
+                float v1=curve.Evaluate(a),v2=curve.Evaluate(b);
+                string name=curveBinding.propertyName;
+                if(name.StartsWith("RootQ."))
+                {
+                    int axis="xyzw".IndexOf(name[name.Length-1]);if(axis>=0){q1[axis]=v1;q2[axis]=v2;}continue;
+                }
+                if(name.StartsWith("RootT.")||name.StartsWith("MotionT.")||name.StartsWith("MotionQ."))continue;
+                float diff=Mathf.Abs(v1-v2);if(diff>worst){worst=diff;worstName=name;}
+            }
+            float angle=Quaternion.Angle(new Quaternion(q1[0],q1[1],q1[2],q1[3]),new Quaternion(q2[0],q2[1],q2[2],q2[3]));
+            Debug.Log("DUAL_AXE_SPIN_SEAM muscles worst="+worst.ToString("0.000")+" ("+worstName+") rootAngle="+angle.ToString("0.0")+" deg over "+(b-a).ToString("0.000")+" s");
+            Require(worst<.35f&&angle<25,"The spin clip's active window starts and ends on a similar pose, so a repeat does not jump");
         }
     }
 }

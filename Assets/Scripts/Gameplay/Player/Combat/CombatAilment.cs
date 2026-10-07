@@ -24,9 +24,20 @@ namespace Mismo.Gameplay.Combat
             if(target==null)return;
             var effect=target.GetComponent<CombatAilment>()??target.AddComponent<CombatAilment>();
             bool fresh=Time.time>=effect.poisonUntil;
-            effect.source=source;effect.family=family;effect.poisonDamage=damage;effect.poisonUntil=Time.time+duration;
+            // One bleed per target and the strongest wins: a weaker one neither replaces nor extends it.
+            bool equal=!fresh&&Mathf.Approximately(damage,effect.poisonDamage);
+            if(!fresh&&!equal&&damage<effect.poisonDamage)return;
+            float until=equal?Mathf.Max(Time.time+duration,effect.poisonUntil):Time.time+duration;
+            effect.source=source;effect.family=family;effect.poisonDamage=damage;effect.poisonUntil=until;
             effect.abilityId=abilityId;effect.abilityUseId=abilityUseId;
             if(fresh)effect.nextPoison=Time.time+1;
+        }
+        // Alarga el sangrado en curso sin cambiar su daño; no hace nada si el objetivo no sangra.
+        public static bool ExtendPoison(GameObject target,float seconds)
+        {
+            var effect=target!=null?target.GetComponent<CombatAilment>():null;
+            if(effect==null||!effect.Poisoned||seconds<=0)return false;
+            effect.poisonUntil+=seconds;return true;
         }
         // No acumulable: la reaplicación reemplaza el multiplicador y renueva la duración, no los suma.
         public static void WeakenArmor(GameObject target,float multiplier,float duration)

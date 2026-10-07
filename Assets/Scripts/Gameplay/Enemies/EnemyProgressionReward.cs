@@ -38,7 +38,7 @@ namespace Mismo.Gameplay.Enemies
             participant=player;
             // Defenses can train the skill used, but never manufacture weapon damage EXP.
             var cast=player.GetComponent<AbilityRunner>()?.Current;
-            if(cast!=null&&cast.Began&&!cast.Ended)RecordSkillUse(player,cast.WeaponFamilyId,cast.Definition.Id,cast.AttackId);
+            if(cast!=null&&cast.Began&&!cast.Ended)RecordSkillUse(player,cast.WeaponFamilyId,cast.Definition.Id,cast.UseId);
         }
         public void RecordSkillUse(PlayerInventory player,string family,string abilityId,long useId)
         {

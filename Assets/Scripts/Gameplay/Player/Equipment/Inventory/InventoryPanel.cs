@@ -71,8 +71,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                 }
                 else if(!typing&&k.iKey.wasPressedThisFrame){if(IsOpen&&page==Page.Inventory)Close();else OpenPage(Page.Inventory);}
                 else if(!typing&&k.bKey.wasPressedThisFrame){if(OpenPage(Page.Menu))radialHeld=true;}
-                else if(!typing&&k.pKey.wasPressedThisFrame)OpenPage(Page.Character);
-                else if(!typing&&k.kKey.wasPressedThisFrame)OpenPage(Page.Skills);
+                else if(!typing&&k.pKey.wasPressedThisFrame){if(IsOpen&&page==Page.Character)Close();else OpenPage(Page.Character);}
+                else if(!typing&&k.kKey.wasPressedThisFrame){if(IsOpen&&page==Page.Skills)Close();else OpenPage(Page.Skills);}
                 else if(!typing&&inventory.Quests!=null&&inventory.Quests.journalKey!=Key.None&&k[inventory.Quests.journalKey].wasPressedThisFrame){if(IsOpen&&page==Page.Quests)Close();else OpenQuests();}
             }
             if(IsOpen&&page==Page.Menu)

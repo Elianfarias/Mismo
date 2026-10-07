@@ -35,6 +35,14 @@ La elección se aplica al clip o a los clips de combo de esa acción; no modific
 
 Cada binding permite un clip de acción completo o una lista de clips de combo. `Active Starts At` y `Recovery Starts At` indican dónde empiezan esas fases dentro del clip. La animación sigue el tiempo del combate, no determina cuándo hace daño. La lista de clips de combo no tiene un límite de tres: debe coincidir con las etapas que realmente configure el sistema de combate.
 
+### Habilidades con reactivación
+
+Una habilidad con **Etapas por pulsación** (por ejemplo, Combo furioso del hacha) emite frames `Combo` cuyo índice es la etapa: cada pulsación reproduce el clip de combo de ese índice de punta a punta durante su duración. Si el binding no tiene ese clip, se usa el camino de compatibilidad.
+
+Cuando una etapa empieza justo al terminar la anterior, `PlayerAnimationDriver` corta sin mezcla, porque las etapas son tramos consecutivos de un mismo clip. Después de una pausa, entra con el `Blend Seconds` del binding. Al terminar cualquier acción, el fundido de salida usa ese mismo `Blend Seconds`, con un mínimo de 0,06 s.
+
+Los tramos de Combo furioso se generan con **Mismo > Animaciones > Dividir y asignar Combo furioso (Hacha)** a partir de `Combat_Axe_Triple_Attack.anim`, que no se modifica. Cada tramo se remapea con el ritmo de la habilidad original, así cada golpe se ve igual que antes. Si se cambian los tiempos de las etapas, usar **Regenerar cortes del Combo furioso (Hacha)**: conserva los GUID. `OneHandAxeChecks.RunBatch` verifica los datos y que los tramos coincidan con el original.
+
 Las animaciones actuales de espada se migraron a la familia. El movimiento común sigue en el controlador existente. Un override antiguo del perfil de pose tiene precedencia sobre el override de locomoción de familia para preservar configuraciones previas; **los clips de acción nuevos se editan en la familia**.
 
 ## Uso en Unity

@@ -274,7 +274,7 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
                         U.Text(new Rect(7,y+40,359,78),modifier.description,16,U.Muted);
                         U.Text(new Rect(7,y+121,359,28),L.Format("Rango {0}/{1} · {2}/{3} usos",training?.level??0,modifier.maxLevel,training?.effectiveUses??0,modifier.effectiveUsesPerLevel),16,U.Amber);y+=157;
                         if(modifier.behavior!=AbilityModifierBehavior.None)
-                        {U.Text(new Rect(7,y,359,40),"La nueva mecánica se activa al elegirla. Los rangos mejoran su ventana o carga.",15,U.Muted);y+=45;}
+                        {U.Text(new Rect(7,y,359,40),"La nueva mecánica se activa al elegirla. Cada rango la mejora.",15,U.Muted);y+=45;}
                     }
                     GUI.enabled=was&&loadout.CanChangeEquipment&&!string.IsNullOrEmpty(progress?.selectedModifierId);
                     if(U.Button(new Rect(7,y,359,35),"Sin modificador"))inventory.TryClearModifier(weapon,selectedAbilityIndex);

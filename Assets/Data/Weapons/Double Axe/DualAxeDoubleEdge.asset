@@ -17,6 +17,67 @@ MonoBehaviour:
   abilityId: DualAxeDoubleEdge
   animationSource: {fileID: 0}
   passive: 10
+  passiveValue: 0.5
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: power
+    displayName: Potencia
+    description: "Cada rango suma un 25 % de la probabilidad base: del 50 % pasa a 62,5 %, 75 % y 87,5 % en rango 3."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0.25
+    cooldownReductionPerLevel: 0
+    behavior: 0
+    retired: 1
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0
+    amountPerRank: 0
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 1
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
+  - id: cross_cut
+    displayName: "Corte cruzado"
+    description: "Cuando sale el golpe doble, el segundo corte pega un 20 % m\xE1s fuerte; cada rango suma un poco m\xE1s."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 21
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0.2
+    amountPerRank: 0.011111
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 0
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
   description: "Cada b\xE1sico tiene un 50 % de probabilidad de ser un golpe doble: una hacha barre y la otra la sigue por el mismo recorrido."
   localizationKey: ability.axe.dualaxedoubleedge
   preparation: 0.1

@@ -17,13 +17,47 @@ MonoBehaviour:
   abilityId: AxeBasic
   animationSource: {fileID: 0}
   passive: 0
-  description: "Ataque b\xE1sico del hacha."
+  passiveValue: 0
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: fourth_cut
+    displayName: Cuarto corte
+    description: "Cada cuarto golpe b\xE1sico seguido al mismo enemigo lo hace sangrar durante 3 s; cada rango sube un poco el da\xF1o del sangrado. Si cambi\xE1s de objetivo o pasan 3 s sin golpear, la cuenta se reinicia."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 5
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0
+    amountPerRank: 0
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 0
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0.166667
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
+  description: "Ataque b\xE1sico del hacha: golpes m\xE1s pesados, con un 15 % de da\xF1o adicional."
   localizationKey: ability.axe.axebasic
   preparation: 0.5
   active: 0.5
   recovery: 0.2
   cooldown: 0.98
   staminaCost: 10
+  recastStages: []
+  recastWindow: 4
   chargeable: 0
   maximumCharge: 0.9
   chargeDamageMultiplier:
@@ -88,9 +122,11 @@ MonoBehaviour:
   executionSfx: {fileID: 8300000, guid: 3e000a21a3e669445a9d3001ff083c1f, type: 3}
   executionSfxVolume: 1
   comboStepSfx: []
+  weaponVfx: []
   pose: 1
   usesSwordCombo: 0
   comboSteps: []
+  comboOrder: 0
   targetsGround: 0
   aimFromCamera: 1
   range: 38.1

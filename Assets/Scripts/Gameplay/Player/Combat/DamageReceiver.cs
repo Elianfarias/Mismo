@@ -101,6 +101,7 @@ namespace Mismo.Gameplay.Combat
             float posture=state.DamagePosture(damage.PostureDamage*(back?rules.backPosture:1)*(opening?rules.openingPosture:1));
             // Notify the attacker only when this hit defeated the target or opened it.
             if(health.IsDead||!opening&&state.Opening)damage.Source?.GetComponentInParent<Mismo.Gameplay.Player.Equipment.WeaponSkillEffects>()?.TargetDefeatedOrOpened(this,damage.AttackId);
+            if(health.IsDead)damage.Source?.GetComponentInParent<Mismo.Gameplay.Player.Equipment.WeaponSkillEffects>()?.TargetDefeated();
             if(healthDamage>0 && damage.FocusGainOnHit>0)attacker?.Reward(damage.FocusGainOnHit,"IMPACTO");
             if(attacker!=null&&(back||opening))attacker.Reward(back?rules.backFocus:rules.openingFocus,back?"ESPALDA":"APERTURA");
             GetComponent<Mismo.Gameplay.Player.Equipment.AbilityRunner>()?.Interrupt();
@@ -119,7 +120,7 @@ namespace Mismo.Gameplay.Combat
             var player=GetComponent<Mismo.Gameplay.Player.Equipment.Inventory.PlayerInventory>();
             var cast=GetComponent<Mismo.Gameplay.Player.Equipment.AbilityRunner>()?.Current;
             if(player!=null&&cast!=null&&cast.Began&&!cast.Ended)
-                damage.Source?.GetComponentInParent<ICombatContribution>()?.RecordSkillUse(player,cast.WeaponFamilyId,cast.Definition.Id,cast.AttackId);
+                damage.Source?.GetComponentInParent<ICombatContribution>()?.RecordSkillUse(player,cast.WeaponFamilyId,cast.Definition.Id,cast.UseId);
         }
     }
 }

@@ -17,6 +17,67 @@ MonoBehaviour:
   abilityId: AxeCruelEdge
   animationSource: {fileID: 0}
   passive: 7
+  passiveValue: 3
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: power
+    displayName: Potencia
+    description: "Cada rango suma un 25 % del Focus base: de 3 a 3,75, 4,5 y 5,25 en rango 3."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0.25
+    cooldownReductionPerLevel: 0
+    behavior: 0
+    retired: 1
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0
+    amountPerRank: 0
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 1
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
+  - id: cold_blood
+    displayName: "Sangre fr\xEDa"
+    description: "Los b\xE1sicos contra objetivos con la armadura reducida tambi\xE9n dan 3 Focus; cada rango da un poco m\xE1s."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 19
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 3
+    amountPerRank: 0.166667
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 0
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
   description: "Cada b\xE1sico que impacta a un objetivo sangrando genera 3 Focus adicional."
   localizationKey: ability.axe.axecrueledge
   preparation: 0.1

@@ -17,13 +17,76 @@ MonoBehaviour:
   abilityId: DualAxeBerserk
   animationSource: {fileID: 0}
   passive: 0
+  passiveValue: 0
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: slaughter
+    displayName: Matanza
+    description: "Cada enemigo derrotado durante el modo te cura el 5 % de tu vida m\xE1xima; cada rango cura un poco m\xE1s."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 15
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0.05
+    amountPerRank: 0.002778
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 1
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
+  - id: rising_fury
+    displayName: Furia creciente
+    description: Mientras dura el modo, tu velocidad de ataque sube un 1,5 % por segundo, sumada al 22 % base; cada rango sube un poco ese ritmo.
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 16
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0.015
+    amountPerRank: 0.000833
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 1
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
   description: "Durante 9 s obten\xE9s un 11 % m\xE1s de da\xF1o de ataque y un 22 % m\xE1s de velocidad de ataque. Cada b\xE1sico acertado da 1 Focus adicional y te cura el 15 % del da\xF1o que hace, y gast\xE1s un 66 % menos de stamina, pero tu armadura se reduce un 55 %."
   localizationKey: ability.axe.dualaxeberserk
   preparation: 0.62
   active: 0.26
   recovery: 0.2
-  cooldown: 16.01
+  cooldown: 20
   staminaCost: 0
+  recastStages: []
+  recastWindow: 4
   chargeable: 0
   maximumCharge: 0.9
   chargeDamageMultiplier:
@@ -88,6 +151,7 @@ MonoBehaviour:
   executionSfx: {fileID: 8300000, guid: 18ca010d0f9c10947ac77dd2edef6d22, type: 3}
   executionSfxVolume: 1
   comboStepSfx: []
+  weaponVfx: []
   pose: 0
   usesSwordCombo: 0
   comboSteps: []
@@ -103,7 +167,7 @@ MonoBehaviour:
     - rid: 1
       type: {class: BerserkAction, ns: Mismo.Gameplay.Player.Equipment, asm: Mismo.Gameplay.Player}
       data:
-        duration: 9
+        duration: 12.21
         damageBonus: 0.11
         attackSpeedBonus: 0.22
         focusPerBasic: 1

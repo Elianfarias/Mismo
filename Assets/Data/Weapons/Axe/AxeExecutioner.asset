@@ -17,6 +17,67 @@ MonoBehaviour:
   abilityId: AxeExecutioner
   animationSource: {fileID: 0}
   passive: 8
+  passiveValue: 0.2
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: power
+    displayName: Potencia
+    description: "Cada rango suma un 25 % del bonus base: el da\xF1o extra pasa de 20 % a 25 %, 30 % y 35 % en rango 3."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0.25
+    cooldownReductionPerLevel: 0
+    behavior: 0
+    retired: 1
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0
+    amountPerRank: 0
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 1
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
+  - id: execution
+    displayName: "Ejecuci\xF3n"
+    description: "Contra objetivos que sangran y tienen menos del 30 % de vida, el bono de Verdugo sube a +40 %; cada rango ampl\xEDa un poco ese umbral de vida."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 20
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0.3
+    amountPerRank: 0.016667
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 0
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
   description: "B\xE1sicos contra objetivos con sangrado activo hacen un 20 % de da\xF1o adicional."
   localizationKey: ability.axe.axeexecutioner
   preparation: 0.1
