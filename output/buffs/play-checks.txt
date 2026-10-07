@@ -1,0 +1,69 @@
+PASS Isolated weapon loadout created without user saves
+PASS Third impact starts at 0/2 with no buff
+PASS First confirmed hit advances one mark
+PASS Duplicate contact cannot advance readiness
+PASS Second hit readies the real +80% third impact
+PASS Misses within the reset window do not consume the next-hit state
+PASS A dodged contact cannot consume or advance the buff
+PASS Third successful hit deals 18 instead of 10 and consumes readiness
+PASS ThirdArrow asset defines a five-second reset window
+PASS A miss does not refresh the expiry clock
+PASS Five seconds without a hit empties partial progress
+PASS Damage expires a ready third hit even before a HUD refresh
+PASS Ready indicator also empties on expiry
+PASS Next hit after timeout starts a new chain
+PASS Empowered basic publishes a timed next-hit buff
+PASS A confirmed hit consumes empowerment immediately
+PASS Expired empowerment disappears without requiring another hit
+PASS Two Times does not advertise extra damage on its slow-only first hit
+PASS Two Times second hit is presented as ready
+PASS Two Times disappears after both charges
+PASS Actual weapon swap succeeds
+PASS Swap clears prior weapon readiness
+PASS Rhythm publishes five stacks and the real 20% attack speed bonus
+PASS Broquel barrier publishes light cyan shield
+PASS Barrier still absorbs exactly 25 damage
+PASS Depleted barrier vanishes immediately
+PASS Expired barrier disappears even when no damage is incoming
+PASS Coverage is blue and explicitly frontal
+PASS Coverage still protects only the front
+PASS Recovery and expiry remove defense and speed indicators
+PASS Finisher HUD preserves target-specific scope without advertising global damage
+PASS Finisher bonus applies only to the tracked receiver
+PASS Fourth same-target hit consumes Finisher progress
+PASS One kind uses four symbols even with duplicate sources
+PASS Two kinds share four slots as 2+2
+PASS Three kinds use exactly three symbols
+PASS Four kinds use one symbol each and a single faint arc
+PASS Removing a fourth kind respects the three-symbol budget immediately, including fades
+PASS Pause freezes both animation and buff clocks
+PASS Cosmetic roots have no colliders or dynamic lights
+PASS Removing one source and destroying another preserves independent effects
+PASS Swap while party feedback is active succeeds
+PASS Weapon swap preserves all four externally supplied buffs
+PASS Real third-hit readiness coexists with timed party feedback
+PASS Actual Game View with PlayerHUD and buff indicators captured
+PASS Actual mage materials stay unchanged
+PASS Disabling the actor clears effects
+PASS External timed effect expires automatically; passive progress may remain
+PASS Death immediately clears permanent and timed feedback
+PASS No cosmetic roots leak after owner destruction
+PASS Real enemy exposes its hit animation listeners: Imp(Clone)
+PASS Ordinary hit still starts animation: Imp(Clone)
+PASS Real poison update still deals its tick damage: Imp(Clone)
+PASS Poison cannot restart any hit animation listener: Imp(Clone)
+PASS Poison does not select the equipped hit clip: Imp(Clone)
+PASS Lethal poison still uses normal death: Imp(Clone)
+PASS Real enemy exposes its hit animation listeners: Goblin(Clone)
+PASS Ordinary hit still starts animation: Goblin(Clone)
+PASS Real poison update still deals its tick damage: Goblin(Clone)
+PASS Poison cannot restart any hit animation listener: Goblin(Clone)
+PASS Poison does not select the equipped hit clip: Goblin(Clone)
+PASS Lethal poison still uses normal death: Goblin(Clone)
+PASS Real enemy exposes its hit animation listeners: FirstBoss(Clone)
+PASS Ordinary hit still starts animation: FirstBoss(Clone)
+PASS Real poison update still deals its tick damage: FirstBoss(Clone)
+PASS Poison cannot restart any hit animation listener: FirstBoss(Clone)
+PASS Poison does not select the equipped hit clip: FirstBoss(Clone)
+PASS Lethal poison still uses normal death: FirstBoss(Clone)
+PASS All gameplay and lifecycle checks passed

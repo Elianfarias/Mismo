@@ -1,0 +1,14 @@
+PASS Actual TrapAction spawns the authored model, initially unarmed
+PASS Arms after 0.4 seconds and ignores the caster's collider
+PASS Goblin steps on the trap: exactly one 12-damage hit
+PASS Trap damage retains the skill, cast and weapon identity
+PASS Both jaws close and the target is immobilized
+PASS Pause preserves the closed trap and immobilization
+PASS After 1.5 seconds the closed trap disappears and movement recovers
+PASS Third placement retires only the caster's oldest waiting trap
+PASS Another caster's trap is independent of the placement limit
+PASS Expiry cleans the instance without triggering damage
+PASS Dodging consumes the trap without damage or immobilization
+PASS The model sits on the supporting ground normal
+PASS Destroyed owner releases its remaining traps
+PASS All gameplay and lifecycle checks passed

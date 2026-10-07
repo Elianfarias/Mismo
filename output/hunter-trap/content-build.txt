@@ -1,0 +1,1 @@
+PASS Built ability reloads its trap, runtime scripts, 4 meshes, material, palette and jaw references

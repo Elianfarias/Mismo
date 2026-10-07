@@ -1,0 +1,1 @@
+PASS: Windows scripts compile without UNITY_EDITOR

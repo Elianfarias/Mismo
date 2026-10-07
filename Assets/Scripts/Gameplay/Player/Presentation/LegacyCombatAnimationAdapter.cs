@@ -24,7 +24,7 @@ namespace Mismo.Gameplay.Player.Presentation
             else if(lunge!=null && lunge.IsActive){motion=CharacterMotion.Lunge;time=lunge.ActiveNormalized;}
             else if(combo!=null && combo.IsActive)
             {motion=(CharacterMotion)((int)CharacterMotion.Attack1+Mathf.Clamp(combo.CurrentStepIndex,0,2));time=combo.CurrentStepNormalized;}
-            if(runner==null || !runner.IsBusy || runner.Current.Definition.usesSwordCombo)return;
+            if(runner==null || runner.Current==null || runner.Current.Definition.usesSwordCombo)return;
             switch(runner.Current.Definition.pose)
             {
                 case AbilityPose.Lunge:motion=CharacterMotion.Lunge;break;

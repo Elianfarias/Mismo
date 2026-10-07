@@ -284,7 +284,7 @@ namespace Mismo.Gameplay.Enemies
             if (!initialized || health.IsDead) return;
             if (target == null && damage.Source != null) SetTarget(damage.Source.transform);
             if (State == DragonBossState.Sleeping) Enter(DragonBossState.Roaring, DragonMotion.Scream, settings.Duration(DragonMotion.Scream));
-            else if (clock >= hurtCooldown && State == DragonBossState.Hunting)
+            else if (!damage.IsStatusTick && clock >= hurtCooldown && State == DragonBossState.Hunting)
             { hurtCooldown = clock + 3; Enter(DragonBossState.Staggered, DragonMotion.getHit, settings.Duration(DragonMotion.getHit)); }
         }
         void Stagger(float seconds)

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 028a5908e7eb899478a63c5d80f434d1, type: 3}
+  m_Name: BuffPresentation
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Presentation.BuffPresentation
+  styles:
+  - kind: 0
+    color: {r: 0.58, g: 0.94, b: 1, a: 1}
+    symbol: {fileID: 4300000, guid: 25f588610666e6544bcea816f740258f, type: 2}
+    icon: {fileID: 2800000, guid: 74da2f0785ea68e449a936f54b835355, type: 3}
+    size: 0.56
+  - kind: 1
+    color: {r: 1, g: 0.24, b: 0.29, a: 1}
+    symbol: {fileID: 4300000, guid: 1b988c2d760e8074dae38b98a30db315, type: 2}
+    icon: {fileID: 2800000, guid: f4fed369d52ea8b40a8babe5017d975a, type: 3}
+    size: 0.27
+  - kind: 2
+    color: {r: 0.25, g: 0.49, b: 1, a: 1}
+    symbol: {fileID: 4300000, guid: 4f19d17ef2553bd458a5c654c961882a, type: 2}
+    icon: {fileID: 2800000, guid: 3492076944493304b90ad786d06739d2, type: 3}
+    size: 0.27
+  - kind: 3
+    color: {r: 0.74, g: 0.38, b: 1, a: 1}
+    symbol: {fileID: 4300000, guid: 468f7be46d3292d40834b1908481daa8, type: 2}
+    icon: {fileID: 2800000, guid: 386502cbc9215a449b81ab43968f4ad0, type: 3}
+    size: 0.27
+  material: {fileID: 2100000, guid: 17bf69b722894654abb52aa7c569a6f2, type: 2}
+  footArc: {fileID: 4300000, guid: f4220635240de7c4e919ef222b630af9, type: 2}
+  symbolOpacity: 0.48
+  footOpacity: 0.085
+  orbitDegreesPerSecond: 24
+  fadeSeconds: 0.2

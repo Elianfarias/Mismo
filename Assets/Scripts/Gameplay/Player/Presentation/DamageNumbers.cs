@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Mismo.Gameplay.Combat;
 
 namespace Mismo.Gameplay.Player.Presentation
 {
@@ -20,7 +21,13 @@ namespace Mismo.Gameplay.Player.Presentation
         const float Lifetime = 1.05f;
         public static int ActiveCount => instance != null ? instance.entries.Count : 0;
         static bool Hidden => GameplayPause.BlocksInput || Equipment.Inventory.InventoryPanel.AnyOpen || WorldMapPanel.BlocksGameplay;
-        public static void Show(Vector3 position, float amount, bool player, float strength = 0)
+        public static Color ColorFor(bool player, float strength = 0, StatusEffectType statusEffect = StatusEffectType.None)
+        {
+            if (statusEffect != StatusEffectType.None)
+                return StatusEffectPresentation.Current?.ColorFor(statusEffect) ?? StatusEffectPresentation.DefaultColor(statusEffect);
+            return player ? new Color(1,.34f,.36f) : Color.Lerp(new Color(.97f,.97f,.92f),new Color(1,.57f,.3f),Mathf.Clamp01(strength));
+        }
+        public static void Show(Vector3 position, float amount, bool player, float strength = 0, StatusEffectType statusEffect = StatusEffectType.None)
         {
             if (amount <= 0 || float.IsNaN(amount) || float.IsInfinity(amount)) return;
             if (instance == null) instance = new GameObject("Damage numbers").AddComponent<DamageNumbers>();
@@ -30,7 +37,7 @@ namespace Mismo.Gameplay.Player.Presentation
             instance.entries.Add(new Entry {
                 position = position, text = amount.ToString("0.#"), strength = strength,
                 side = (index % 2 == 0 ? -1 : 1), lane = index % 3,
-                color = player ? new Color(1,.34f,.36f) : Color.Lerp(new Color(.97f,.97f,.92f),new Color(1,.57f,.3f),strength)
+                color = ColorFor(player,strength,statusEffect)
             });
         }
         void Update()

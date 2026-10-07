@@ -1,0 +1,69 @@
+PASS Boar Attack readable windup / brief recovery
+PASS Serialized clip reference resolves
+PASS Preparation joins execution continuously
+PASS Execution joins recovery continuously
+PASS Boar Charge readable windup / brief recovery
+PASS Serialized clip reference resolves
+PASS Preparation joins execution continuously
+PASS Execution joins recovery continuously
+PASS Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Dark_Fur.prefab shares updated settings
+PASS Boar_Dark_Fur Attack all animated bones resolve
+PASS Boar_Dark_Fur Attack visible anticipation displacement
+PASS Boar_Dark_Fur Attack returns to rest without pose drift
+PASS Boar_Dark_Fur Charge all animated bones resolve
+PASS Boar_Dark_Fur Charge visible anticipation displacement
+PASS Boar_Dark_Fur Charge returns to rest without pose drift
+PASS Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Forest_Moss.prefab shares updated settings
+PASS Boar_Forest_Moss Attack all animated bones resolve
+PASS Boar_Forest_Moss Attack visible anticipation displacement
+PASS Boar_Forest_Moss Attack returns to rest without pose drift
+PASS Boar_Forest_Moss Charge all animated bones resolve
+PASS Boar_Forest_Moss Charge visible anticipation displacement
+PASS Boar_Forest_Moss Charge returns to rest without pose drift
+PASS Assets/Art/Prefabs/Enemies/ForestCreatures/Boar_Standard.prefab shares updated settings
+PASS Boar_Standard Attack all animated bones resolve
+PASS Boar_Standard Attack visible anticipation displacement
+PASS Boar_Standard Attack returns to rest without pose drift
+PASS Boar_Standard Charge all animated bones resolve
+PASS Boar_Standard Charge visible anticipation displacement
+PASS Boar_Standard Charge returns to rest without pose drift
+PASS Spider Attack_Bite readable windup / brief recovery
+PASS Serialized clip reference resolves
+PASS Preparation joins execution continuously
+PASS Execution joins recovery continuously
+PASS Spider Jump readable windup / brief recovery
+PASS Serialized clip reference resolves
+PASS Preparation joins execution continuously
+PASS Execution joins recovery continuously
+PASS Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Albino.prefab shares updated settings
+PASS Spider_Albino Attack_Bite all animated bones resolve
+PASS Spider_Albino Attack_Bite visible anticipation displacement
+PASS Spider_Albino Attack_Bite returns to rest without pose drift
+PASS Spider_Albino Jump all animated bones resolve
+PASS Spider_Albino Jump visible anticipation displacement
+PASS Spider_Albino pounce visibly airborne
+PASS Spider_Albino Jump returns to rest without pose drift
+PASS Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Dark_Cave.prefab shares updated settings
+PASS Spider_Dark_Cave Attack_Bite all animated bones resolve
+PASS Spider_Dark_Cave Attack_Bite visible anticipation displacement
+PASS Spider_Dark_Cave Attack_Bite returns to rest without pose drift
+PASS Spider_Dark_Cave Jump all animated bones resolve
+PASS Spider_Dark_Cave Jump visible anticipation displacement
+PASS Spider_Dark_Cave pounce visibly airborne
+PASS Spider_Dark_Cave Jump returns to rest without pose drift
+PASS Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Forest_Moss.prefab shares updated settings
+PASS Spider_Forest_Moss Attack_Bite all animated bones resolve
+PASS Spider_Forest_Moss Attack_Bite visible anticipation displacement
+PASS Spider_Forest_Moss Attack_Bite returns to rest without pose drift
+PASS Spider_Forest_Moss Jump all animated bones resolve
+PASS Spider_Forest_Moss Jump visible anticipation displacement
+PASS Spider_Forest_Moss pounce visibly airborne
+PASS Spider_Forest_Moss Jump returns to rest without pose drift
+PASS Assets/Art/Prefabs/Enemies/ForestCreatures/Spider_Standard.prefab shares updated settings
+PASS Spider_Standard Attack_Bite all animated bones resolve
+PASS Spider_Standard Attack_Bite visible anticipation displacement
+PASS Spider_Standard Attack_Bite returns to rest without pose drift
+PASS Spider_Standard Jump all animated bones resolve
+PASS Spider_Standard Jump visible anticipation displacement
+PASS Spider_Standard pounce visibly airborne
+PASS Spider_Standard Jump returns to rest without pose drift

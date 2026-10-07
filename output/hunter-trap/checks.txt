@@ -1,0 +1,10 @@
+PASS Existing ability references the new trap prefab
+PASS Gameplay and articulated visual scripts survive prefab serialization
+PASS The visual cannot block walking, projectiles or target selection
+PASS Four non-empty meshes: base/chain, two jaws and pressure plate
+PASS Total mesh budget below 40,000 triangles
+PASS All moving pieces have serialized references
+PASS Jaw reaches both hinge ends: Front jaw
+PASS Jaw reaches both hinge ends: Back jaw
+PASS Steel material, palette and URP shader resolve
+PROJECT ORGANIZATION: existing external asset paths; see organization.txt

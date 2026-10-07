@@ -309,7 +309,7 @@ public static partial class ProgressionImprovementsChecks
         area.Pulse();area.Pulse();inventory.FlushCombatProgress();
         Check(inventory.Mastery(sword).SkillProgress(skill.Id).effectiveUses==beforeAreaUses+1,"Real area pulses after swapping credit the original skill once");
         CombatAilment.Poison(areaTarget,actor,sword.MasteryId,2,5,skill.Id,execution.AttackId);
-        var poison=areaTarget.GetComponent<CombatAilment>();Set(poison,"nextPoison",-1f);Call(poison,"Update");inventory.FlushCombatProgress();
+        var poison=areaTarget.GetComponent<CombatAilment>();typeof(CombatAilment).GetMethod("Tick",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(poison,new object[]{Time.time+1.01f});inventory.FlushCombatProgress();
         Check(inventory.Mastery(sword).SkillProgress(skill.Id).effectiveUses==beforeAreaUses+1,"Poison preserves cast identity and cannot duplicate area/direct-hit training");
         ClearCombat(loadout);
         var recoveryBefore=inventory.Mastery(sword).SkillProgress(skill.Id).Modifier("recovery");
