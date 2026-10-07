@@ -18,9 +18,11 @@ namespace Mismo.Gameplay.Combat
         }
         readonly List<DamageOverTime> effects = new List<DamageOverTime>();
         float slowUntil, slow = 1;
+        float armorDebuffUntil, armorDebuffMultiplier = 1, baseArmor;
         Health health;
         StatusEffectVisual visual;
         public float SpeedMultiplier => Time.time < slowUntil ? slow : 1;
+        public bool ArmorWeakened => Time.time < armorDebuffUntil;
         public bool IsActive(StatusEffectType type) => effects.Exists(e => e.type == type && Time.time <= e.until && e.source != null);
 
         void Awake() => health = GetComponent<Health>();
@@ -50,16 +52,53 @@ namespace Mismo.Gameplay.Combat
             var owner = target.GetComponent<CombatAilment>() ?? target.AddComponent<CombatAilment>();
             if (!owner.enabled) return;
             var entry = owner.effects.Find(e => e.type == type);
+            // One bleed per target and the strongest wins: a weaker one neither replaces nor extends it,
+            // an equal one renews it, and a stronger one brings its own duration.
+            bool replaces = false;
+            if (type == StatusEffectType.Bleed && entry != null && Time.time <= entry.until && entry.source != null)
+            {
+                bool equal = Mathf.Approximately(damage, entry.damage);
+                if (!equal && damage < entry.damage) return;
+                replaces = !equal;
+            }
             if (entry == null) { entry = new DamageOverTime { type = type, nextTick = Time.time + 1 }; owner.effects.Add(entry); }
             else if (Time.time > entry.until) entry.nextTick = Time.time + 1;
             // Reapplying refreshes one timer, preserving its next tick; different states coexist.
-            entry.until = Mathf.Max(entry.until, Time.time + duration);
+            entry.until = replaces ? Time.time + duration : Mathf.Max(entry.until, Time.time + duration);
             entry.source = source; entry.family = family; entry.damage = damage;
             entry.abilityId = abilityId; entry.abilityUseId = abilityUseId;
             if (type == StatusEffectType.Poison)
             {
                 owner.visual = target.GetComponent<StatusEffectVisual>() ?? target.AddComponent<StatusEffectVisual>();
                 owner.visual.PlayPoison();
+            }
+        }
+        // Alarga el sangrado en curso sin cambiar su daño; no hace nada si el objetivo no sangra.
+        public static bool ExtendBleed(GameObject target, float seconds)
+        {
+            var owner = target != null ? target.GetComponent<CombatAilment>() : null;
+            var entry = owner?.effects.Find(e => e.type == StatusEffectType.Bleed);
+            if (entry == null || entry.source == null || Time.time > entry.until || seconds <= 0) return false;
+            entry.until += seconds; return true;
+        }
+        // No acumulable: la reaplicación reemplaza el multiplicador y renueva la duración, no los suma.
+        public static void WeakenArmor(GameObject target, float multiplier, float duration)
+        {
+            if (target == null) return;
+            var effect = target.GetComponent<CombatAilment>() ?? target.AddComponent<CombatAilment>();
+            effect.armorDebuffMultiplier = multiplier;
+            effect.armorDebuffUntil = Time.time + duration;
+        }
+        /// <summary>Armadura base del actor (jugadores usan PlayerInventory.Armor en su lugar); configurada una vez al spawnear.</summary>
+        public void ConfigureArmor(float value) => baseArmor = value;
+        public float IncomingDamageMultiplier
+        {
+            get
+            {
+                if (baseArmor <= 0) return 1;
+                float effective = baseArmor * (ArmorWeakened ? armorDebuffMultiplier : 1);
+                float scale = Mathf.Max(.01f, CombatRules.Current.armorScale);
+                return scale / (scale + effective);
             }
         }
         void Update() => Tick(Time.time);
@@ -93,7 +132,7 @@ namespace Mismo.Gameplay.Combat
         }
         public void ClearAll()
         {
-            effects.Clear(); slowUntil = 0; slow = 1; visual?.Stop();
+            effects.Clear(); slowUntil = 0; slow = 1; armorDebuffUntil = 0; visual?.Stop();
         }
         void OnDisable() { if (health != null) health.Died -= Died; ClearAll(); }
     }

@@ -23,20 +23,22 @@ namespace Mismo.Gameplay.Player.Presentation
             if(GameplayPause.IsPaused)return;
             if(main==null){material=RuntimeParticleMaterial.Create("Melee ribbon",Color.white);main=new WeaponTrailRibbon(transform,material);second=new WeaponTrailRibbon(transform,material);}
             var cast=loadout.Runner!=null?loadout.Runner.Current:null;
-            long id=cast!=null?cast.AttackId:0;int index=combo!=null?combo.CurrentStepIndex:-1;
+            // UseId spans every press of a recast chain, so a chained stage keeps the previous stage's ribbon.
+            long id=cast!=null?cast.UseId:0;int index=combo!=null?combo.StepSerial:-1;
             if(previous!=profile||previousSecond!=offProfile||cast!=null&&(execution!=id||segment!=index)){main.Clear();second.Clear();}
             previous=profile;previousSecond=offProfile;if(cast!=null){execution=id;segment=index;}
-            bool emit=false;
+            bool emit=false,mainStrikes=true,secondStrikes=true;
             if(cast!=null&&cast.Definition.usesSwordCombo&&combo!=null&&combo.IsActive&&combo.CurrentStep!=null)
-            {float p=combo.CurrentStepNormalized;emit=p>=combo.CurrentStep.ImpactStart&&p<combo.CurrentStep.ImpactEnd;}
+            {
+                float p=combo.CurrentStepNormalized;emit=p>=combo.CurrentStep.ImpactStart&&p<combo.CurrentStep.ImpactEnd;
+                mainStrikes=combo.CurrentStep.Striker!=ComboStriker.OffHand;secondStrikes=combo.CurrentStep.Striker!=ComboStriker.MainHand;
+            }
             else if(cast!=null)emit=cast.Began&&!cast.Ended;
             // Lunge owns its turquoise wake. Parry uses the normal blade trail and its animation.
             if(cast!=null&&cast.Definition.Id=="SwordLunge")emit=false;
-            if(mainEnabled)main.SampleBlade(presentation.ActiveVisual,profile,Time.time,emit);else main.Clear();
-
-
+            if(mainEnabled)main.SampleBlade(presentation.ActiveVisual,profile,Time.time,emit&&mainStrikes);else main.Clear();
             if(secondEnabled)
-                second.SampleBlade(presentation.ActiveSecondVisual,offProfile,Time.time,emit,legacy);
+                second.SampleBlade(presentation.ActiveSecondVisual,offProfile,Time.time,emit&&secondStrikes,legacy);
             else second.Clear();
         }
         void OnDisable(){main?.Clear();second?.Clear();}

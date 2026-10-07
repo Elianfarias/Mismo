@@ -9,8 +9,9 @@ namespace Mismo.Gameplay.Player.Equipment
         string dodgeFamily,openingFamily;
         AbilityExecution openingSource;
 
+        // Equipment changes, death and disabling also end open recast chains and start their cooldown.
         void ResetOpportunities()
-        {dodgeFollowupUntil=openingUntil=0;dodgeFamily=openingFamily=null;openingSource=null;}
+        {dodgeFollowupUntil=openingUntil=0;dodgeFamily=openingFamily=null;openingSource=null;CloseRecasts();}
 
         bool CanFollowup(WeaponDefinition weapon)=>weapon!=null&&weapon.MasteryId==openingFamily&&Time.time<openingUntil&&
             (Current==null||Current==openingSource);
@@ -24,9 +25,9 @@ namespace Mismo.Gameplay.Player.Equipment
                 cast.WeaponFamilyId==dodgeFamily&&Time.time<dodgeFollowupUntil;
         }
 
-        bool StartCombo(AbilityExecution cast)
+        bool StartCombo(AbilityExecution cast,bool free=false)
         {
-            if(combo==null||!combo.RequestAttack(cast.Definition,cast.OpeningStep,cast.DodgeChain))return false;
+            if(combo==null||!combo.RequestAttack(cast.Definition,cast.OpeningStep,cast.DodgeChain,free))return false;
             cast.Began=true;return true;
         }
 
@@ -57,7 +58,7 @@ namespace Mismo.Gameplay.Player.Equipment
         public void OnMonsterAbilityHit(string family,string abilityId,long useId)
         {
             var cast=Current;
-            if(cast==null||!cast.Began||cast.Ended||cast.AttackId!=useId||cast.WeaponFamilyId!=family||cast.Definition.Id!=abilityId||
+            if(cast==null||!cast.Began||cast.Ended||cast.UseId!=useId||cast.WeaponFamilyId!=family||cast.Definition.Id!=abilityId||
                 cast.Modifier?.behavior!=AbilityModifierBehavior.LungeFinisher)return;
             OpenFollowup(cast,"REMATE · M1");
         }

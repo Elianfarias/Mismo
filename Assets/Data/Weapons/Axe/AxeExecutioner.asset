@@ -1,0 +1,161 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbaed6838d1a4d369404166107b9bbf5, type: 3}
+  m_Name: AxeExecutioner
+  m_EditorClassIdentifier: Mismo.Gameplay.Player::Mismo.Gameplay.Player.Equipment.AbilityDefinition
+  displayName: Verdugo
+  icon: {fileID: 2800000, guid: 35dcd976902b46a094024535f7287171, type: 3}
+  abilityId: AxeExecutioner
+  animationSource: {fileID: 0}
+  passive: 8
+  passiveValue: 0.2
+  masteryUsesRequired: 25
+  masteryModifiers:
+  - id: power
+    displayName: Potencia
+    description: "Cada rango suma un 25 % del bonus base: el da\xF1o extra pasa de 20 % a 25 %, 30 % y 35 % en rango 3."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0.25
+    cooldownReductionPerLevel: 0
+    behavior: 0
+    retired: 1
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0
+    amountPerRank: 0
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 1
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
+  - id: execution
+    displayName: "Ejecuci\xF3n"
+    description: "Contra objetivos que sangran y tienen menos del 30 % de vida, el bono de Verdugo sube a +40 %; cada rango ampl\xEDa un poco ese umbral de vida."
+    maxLevel: 3
+    effectiveUsesPerLevel: 10
+    damagePerLevel: 0
+    cooldownReductionPerLevel: 0
+    behavior: 20
+    retired: 0
+    chargeSeconds: 0.85
+    chargedPostureMultiplier: 3
+    followupWindow: 1.4
+    windowPerRank: 0.15
+    amount: 0.3
+    amountPerRank: 0.016667
+    hitsRequired: 4
+    streakResetSeconds: 3
+    bleedDamagePerSecond: 3
+    bleedSeconds: 3
+    bleedSecondsPerRank: 0
+    maxRepeats: 3
+    distance: 6
+    bleedDamagePerRank: 0
+    count: 2
+    interval: 0.12
+    bonus: 0.4
+    threshold: 0.5
+    width: 2
+    weaponVfx: []
+  description: "B\xE1sicos contra objetivos con sangrado activo hacen un 20 % de da\xF1o adicional."
+  localizationKey: ability.axe.axeexecutioner
+  preparation: 0.1
+  active: 0.2
+  recovery: 0.2
+  cooldown: 0
+  staminaCost: 0
+  chargeable: 0
+  maximumCharge: 0.9
+  chargeDamageMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0.70000005
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1.7
+      inSlope: 0.70000005
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  chargePostureMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 2
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  preparationMobility: 1
+  activeMobility: 1
+  interruptible: 0
+  unstoppable: 0
+  cancelPreparation: 0
+  cancelRecovery: 0
+  focusCost: 0
+  focusGainOnHit: 0
+  preparationSfx: {fileID: 0}
+  preparationSfxVolume: 1
+  loopPreparationSfx: 0
+  executionSfx: {fileID: 0}
+  executionSfxVolume: 1
+  comboStepSfx: []
+  pose: 0
+  usesSwordCombo: 0
+  comboSteps: []
+  targetsGround: 0
+  aimFromCamera: 0
+  range: 8
+  actions: []
+  references:
+    version: 2
+    RefIds: []

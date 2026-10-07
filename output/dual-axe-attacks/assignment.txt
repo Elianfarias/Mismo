@@ -1,0 +1,5 @@
+PASS básico de Dos hachas con cuatro etapas (derecha, izquierda, doble derecha, doble izquierda).
+Combat_DualAxe_Basic_Right
+Combat_DualAxe_Basic_Left
+Combat_DualAxe_Double_Right
+Combat_DualAxe_Double_Left

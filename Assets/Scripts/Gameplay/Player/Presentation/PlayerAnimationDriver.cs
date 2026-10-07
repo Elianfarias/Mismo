@@ -44,6 +44,11 @@ namespace Mismo.Gameplay.Player.Presentation
         private float targetTorsoCorrection;
         private float landedAt = -10f;
         private float lastGroundedAt = -10f;
+        // Fade-out after an action uses that action's blend; the shown recast stage detects back-to-back stages.
+        private float releaseBlend = .06f;
+        private Equipment.AbilityDefinition shownAbility;
+        private int shownStage = -1;
+        private float shownProgress, shownAt = -10f;
         private const float GroundGrace = .12f;
         public CharacterMotion Motion { get; private set; }
         public Animator Animator => animator;
@@ -153,24 +158,28 @@ namespace Mismo.Gameplay.Player.Presentation
             else if (!moving && Time.time-landedAt<.18f) Motion=CharacterMotion.Land;
             else if (moving) Motion=running ? CharacterMotion.Run : CharacterMotion.Walk;
             else Motion=CharacterMotion.Idle;
-            ActionClip=null;float clipTime=0,blend=.06f;AvatarMask resolvedMask=actionMask;
+            ActionClip=null;float clipTime=0,blend=Mathf.Max(.06f,releaseBlend);AvatarMask resolvedMask=actionMask;bool unstoppable=false;
             long actionExecutionId=0;int actionSegment=0;
             if((health==null || !health.IsDead) && animationSet!=null && abilityRunner!=null && abilityRunner.TryGetAnimationFrame(out var actionFrame))
             {
                 var binding=animationSet.Find(actionFrame.Ability);
                 if(binding!=null && binding.TrySample(actionFrame,out var actionClip,out clipTime))
                 {
-                    ActionClip=actionClip;blend=binding.blendSeconds;resolvedMask=binding.ResolveMask(actionMask);targetTorsoCorrection=binding.torsoUprightDegrees;
+                    ActionClip=actionClip;blend=releaseBlend=binding.blendSeconds;resolvedMask=binding.ResolveMask(actionMask);targetTorsoCorrection=binding.torsoUprightDegrees;unstoppable=actionFrame.Ability!=null&&actionFrame.Ability.unstoppable;
                     applyActionMovement=binding.UsesAnimationMovement(actionMask);actionMovementScale=binding.animationMovementScale;
                     actionExecutionId=actionFrame.ExecutionId;actionSegment=actionFrame.ComboIndex;
+                    // Consecutive recast stages are contiguous slices of one clip: a crossfade would only hold the previous pose.
+                    var ability=actionFrame.Ability;
+                    if(ability!=null&&ability.RecastCount>0&&ability==shownAbility&&actionFrame.ComboIndex==shownStage+1&&shownProgress>.85f&&Time.time-shownAt<.1f)blend=0;
+                    shownAbility=ability;shownStage=actionFrame.ComboIndex;shownProgress=actionFrame.Progress;shownAt=Time.time;
                 }
             }
             if(ActionClip==null && (health==null || !health.IsDead))
             {var motion=Motion;legacy.Resolve(abilityRunner,ref motion,ref actionTime);Motion=motion;}
-            if (hitClip != null && health != null && !health.IsDead && Time.time - hitAt < HitDuration)
+            if (hitClip != null && !unstoppable && health != null && !health.IsDead && Time.time - hitAt < HitDuration)
             {
                 ActionClip = hitClip; clipTime = Mathf.Clamp01((Time.time - hitAt) / HitDuration);
-                blend = .045f; resolvedMask = hitMask;
+                blend = releaseBlend = .045f; resolvedMask = hitMask;
                 targetTorsoCorrection=0;
                 applyActionMovement=false;
             }

@@ -45,7 +45,7 @@ namespace Mismo.Gameplay.Player.Presentation
             if (inventory != null)
                 modifierEffects = inventory.AbilityVisualModifier(cast.Weapon, cast.Definition)?.weaponVfx;
             if (cast.Began) Release();
-            else if (cast.Chargeable || cast.Definition.preparation > 0) Play(WeaponVfxPhase.Preparation);
+            else if (cast.Chargeable || cast.Preparation > 0) Play(WeaponVfxPhase.Preparation);
         }
 
         public void Release()

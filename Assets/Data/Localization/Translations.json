@@ -1119,6 +1119,146 @@
       "key": "inventory.visual.chest",
       "es": "Cofre",
       "en": "Chest"
+    },
+    {
+      "key": "ability.axe.axebasic.name",
+      "es": "HACHAZO",
+      "en": "AXE SWING"
+    },
+    {
+      "key": "ability.axe.axebasic.description",
+      "es": "Ataque básico del hacha: golpes más pesados, con un 15 % de daño adicional.",
+      "en": "Basic axe attack: heavier strikes that deal 15% additional damage."
+    },
+    {
+      "key": "ability.axe.axebleedingcut.name",
+      "es": "Tajo sangrante",
+      "en": "Bleeding Cut"
+    },
+    {
+      "key": "ability.axe.axebleedingcut.description",
+      "es": "Marca tu próximo básico impactado en los próximos 4 s; ese golpe aplica sangrado de 3 de daño por segundo durante 5 s. Un sangrado más fuerte reemplaza al actual y uno más débil no lo pisa.",
+      "en": "Marks your next landed basic within 4s; that hit applies bleed for 3 damage per second over 5s. A stronger bleed replaces the current one and a weaker one never overrides it."
+    },
+    {
+      "key": "ability.axe.axearmorrend.name",
+      "es": "Desgarre",
+      "en": "Rend"
+    },
+    {
+      "key": "ability.axe.axearmorrend.description",
+      "es": "Golpe que reduce un 20 % la armadura del objetivo durante 4 s. No acumulable.",
+      "en": "A strike that reduces the target's armor by 20% for 4s. Does not stack."
+    },
+    {
+      "key": "ability.axe.axeforwardswing.name",
+      "es": "Hachazo",
+      "en": "Axe Strike"
+    },
+    {
+      "key": "ability.axe.axeforwardswing.description",
+      "es": "Golpe hacia adelante sin desplazamiento. Hace un 40 % de daño adicional respecto del básico.",
+      "en": "A forward strike with no movement. Deals 40% more damage than your basic attack."
+    },
+    {
+      "key": "ability.axe.axefuriouscombo.name",
+      "es": "Combo furioso",
+      "en": "Furious Combo"
+    },
+    {
+      "key": "ability.axe.axefuriouscombo.description",
+      "es": "Golpea con el hacha en el lugar y podés volver a pulsarla hasta dos veces: tenés 4 s después de cada golpe para dar el siguiente. Cada golpe hace un 135 % del daño y el tercero rompe la postura de los enemigos que alcanza durante 1 s. El enfriamiento empieza con el tercer golpe o al vencer la ventana.",
+      "en": "Strike with the axe in place; you can press it again up to twice, with 4 s after each strike to land the next. Each strike deals 135% damage and the third breaks the posture of every enemy it hits for 1 s. The cooldown starts with the third strike or when the window expires."
+    },
+    {
+      "key": "ability.axe.axecrueledge.name",
+      "es": "Filo cruel",
+      "en": "Cruel Edge"
+    },
+    {
+      "key": "ability.axe.axecrueledge.description",
+      "es": "Cada básico que impacta a un objetivo sangrando genera 1 Focus adicional.",
+      "en": "Each basic that hits a bleeding target grants 1 additional Focus."
+    },
+    {
+      "key": "ability.axe.axeexecutioner.name",
+      "es": "Verdugo",
+      "en": "Executioner"
+    },
+    {
+      "key": "ability.axe.axeexecutioner.description",
+      "es": "Básicos contra objetivos con sangrado activo hacen un 20 % de daño adicional.",
+      "en": "Basic attacks against bleeding targets deal 20% more damage."
+    },
+    {
+      "key": "ability.axe.dualaxebasic.name",
+      "es": "Ataque básico",
+      "en": "Basic Attack"
+    },
+    {
+      "key": "ability.axe.dualaxebasic.description",
+      "es": "Ataque básico con dos hachas.",
+      "en": "Basic attack with two axes."
+    },
+    {
+      "key": "ability.axe.dualaxeleap.name",
+      "es": "Hachazo doble",
+      "en": "Double Chop"
+    },
+    {
+      "key": "ability.axe.dualaxeleap.description",
+      "es": "Salta 9 m hacia adelante y golpea con ambas hachas al aterrizar, en un área chica. Hace un 100 % de daño adicional respecto del básico.",
+      "en": "Leap 9 m forward and strike with both axes on landing, hitting a small area. Deals 100% more damage than your basic attack."
+    },
+    {
+      "key": "ability.axe.dualaxethrow.name",
+      "es": "Lanzamiento de hacha",
+      "en": "Axe Throw"
+    },
+    {
+      "key": "ability.axe.dualaxethrow.description",
+      "es": "Lanza una de tus hachas hasta 15 m. Vuelve a tu mano al instante al impactar o al terminar su recorrido.",
+      "en": "Throw one of your axes up to 20 m. It returns to your hand instantly on impact or when its flight ends."
+    },
+    {
+      "key": "ability.axe.dualaxedeathspin.name",
+      "es": "Giro mortal",
+      "en": "Deadly Spin"
+    },
+    {
+      "key": "ability.axe.dualaxedeathspin.description",
+      "es": "Extiende ambas hachas y gira 360°. Cada hacha que golpea a un enemigo le hace un 130 % del daño del básico.",
+      "en": "Extend both axes and spin 360°. Each axe that hits an enemy deals 130% of your basic attack damage."
+    },
+    {
+      "key": "ability.axe.dualaxeberserk.name",
+      "es": "Modo Berserker",
+      "en": "Berserker Mode"
+    },
+    {
+      "key": "ability.axe.dualaxeberserk.description",
+      "es": "Durante 9 s obtenés un 11 % más de daño de ataque y un 22 % más de velocidad de ataque. Cada básico acertado da 1 Focus adicional y te cura el 15 % del daño que hace, y gastás un 66 % menos de stamina, pero tu armadura se reduce un 55 %.",
+      "en": "For 9 s you gain 11% attack damage and 22% attack speed. Each basic attack that lands grants 1 additional Focus and heals you for 15% of the damage it deals, and you spend 66% less stamina, but your armor is reduced by 55%."
+    },
+    {
+      "key": "ability.axe.dualaxebloodthirst.name",
+      "es": "Sed de sangre",
+      "en": "Bloodthirst"
+    },
+    {
+      "key": "ability.axe.dualaxebloodthirst.description",
+      "es": "Derrotar a un enemigo o dejarlo en apertura restaura un 20 % de la stamina máxima y un 20 % del Focus máximo.",
+      "en": "Defeating an enemy or leaving it open restores 20% of your maximum stamina and 20% of your maximum Focus."
+    },
+    {
+      "key": "ability.axe.dualaxedoubleedge.name",
+      "es": "Doble filo",
+      "en": "Double Edge"
+    },
+    {
+      "key": "ability.axe.dualaxedoubleedge.description",
+      "es": "Cada básico tiene un 50 % de probabilidad de ser un golpe doble: una hacha barre y la otra la sigue por el mismo recorrido.",
+      "en": "Each basic attack has a 50% chance to become a double strike: one axe sweeps and the other follows the same path."
     }
   ]
 }

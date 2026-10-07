@@ -23,8 +23,10 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
         public ProgressionData Progression => profile?.progression.Copy();
         public int Level => profile?.progression.level ?? 1;
         public float Armor {get;private set;}
-        public float IncomingDamageMultiplier => Armor>=0 ? Rules.armorScale/(Mathf.Max(.01f,Rules.armorScale)+Armor)
-            : 1+(-Armor)/Mathf.Max(.01f,Rules.armorScale);
+        // Temporary reductions only scale positive armor; shrinking a negative value would become a bonus.
+        public float EffectiveArmor => Armor>0 ? Armor*(GetComponent<WeaponSkillEffects>()?.ArmorMultiplier??1) : Armor;
+        public float IncomingDamageMultiplier => EffectiveArmor>=0 ? Rules.armorScale/(Mathf.Max(.01f,Rules.armorScale)+EffectiveArmor)
+            : 1+(-EffectiveArmor)/Mathf.Max(.01f,Rules.armorScale);
         public bool IsReady => profile != null;
         public int Count => profile != null ? profile.weapons.Count : 0;
         public string Notice { get; private set; }
@@ -200,7 +202,8 @@ namespace Mismo.Gameplay.Player.Equipment.Inventory
             if(!IsReady)return 1;
             var mastery=Mastery(weapon);
             return Mathf.Max(.1f,1+profile.progression.attackPoints*Rules.attackPerPoint+
-                HandDamageBonus(weapon)+(mastery?.damagePoints??0)*Rules.masteryDamagePerPoint+WeaponConsumableBonus(weapon))*(weapon!=null&&weapon.dualSwordFamily!=null&&!weapon.dualWield?1.15f:weapon?.styleDamageMultiplier??1);
+                HandDamageBonus(weapon)+(mastery?.damagePoints??0)*Rules.masteryDamagePerPoint+WeaponConsumableBonus(weapon))*(weapon!=null&&weapon.dualSwordFamily!=null&&!weapon.dualWield?1.15f:weapon?.styleDamageMultiplier??1)*
+                (1+(GetComponent<WeaponSkillEffects>()?.DamageBonus??0));
         }
         public float AttackSpeed(WeaponDefinition weapon)
         {

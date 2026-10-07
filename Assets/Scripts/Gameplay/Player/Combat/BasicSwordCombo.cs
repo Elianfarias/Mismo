@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
+using ComboOrder = Mismo.Gameplay.Player.Equipment.ComboOrder;
 
 namespace Mismo.Gameplay.Combat
 {
     public enum ComboHitShape { Box, Sphere, Blade }
+    public enum ComboStriker { Both, MainHand, OffHand, EachHand }
 
     /// <summary>Parámetros de una etapa de la cadena básica de espada.</summary>
     [Serializable]
@@ -42,6 +44,10 @@ namespace Mismo.Gameplay.Combat
         [SerializeField, InspectorName("Grosor de contacto de la hoja"), Min(.005f)] private float bladeRadius = .035f;
         public float BladeRadius => Mathf.Max(.005f,bladeRadius);
         public float Radius => Mathf.Max(.01f,radius);
+        [SerializeField, InspectorName("Arma que golpea")]
+        [Tooltip("Ambas: las dos armas comparten un impacto por objetivo. Principal / Secundaria: solo esa arma detecta impactos (forma Hoja). Cada una: cada arma golpea por separado; el impacto de la segunda no cuenta como otro básico.")]
+        private ComboStriker striker;
+        public ComboStriker Striker => striker;
 
     }
 
@@ -62,15 +68,20 @@ namespace Mismo.Gameplay.Combat
 
         [SerializeField] private AttackHitbox hitbox;
         private ComboStep[] steps = Array.Empty<ComboStep>();
+        private ComboOrder order;
 
         private Phase phase;
         private int currentStep = -1;
         private float phaseElapsed;
         private bool queuedNext;
+        private bool freeStep;
         private Mismo.Gameplay.Player.Movement.Stamina stamina;
         private float staminaCost;
 
-        public bool CanBranch => (phase == Phase.Active && currentStep < StepCount-1 && CurrentStepNormalized >= CurrentStep.BranchProgress) || phase == Phase.Transition;
+        public bool CanBranch => (phase == Phase.Active && HasNext && CurrentStepNormalized >= CurrentStep.BranchProgress) || phase == Phase.Transition;
+        public bool Loops => order == ComboOrder.AlternateHands;
+        // Increments on every step start, so consumers notice a repeated index (0 → 0).
+        public int StepSerial { get; private set; }
         public bool IsActive => phase == Phase.Active || phase == Phase.Transition;
         public bool IsRecovering => phase == Phase.Recovery;
         public bool CanQueue => phase == Phase.Active && CurrentStep != null &&
@@ -81,7 +92,6 @@ namespace Mismo.Gameplay.Combat
         public float CurrentStepNormalized => CurrentStep != null ? (phase == Phase.Active ? Mathf.Clamp01(phaseElapsed / CurrentStep.Duration) : 1f) : 0f;
         public event Action<int, string> AttackStarted;
         public event Action<int, string> AttackFinished;
-        public event Action<int, string> AttackQueued;
 
         public ComboStep CurrentStep => currentStep >= 0 && steps != null && currentStep < steps.Length ? steps[currentStep] : null;
 
@@ -98,7 +108,7 @@ namespace Mismo.Gameplay.Combat
         /// Recibe una pulsación de ataque. En la ventana configurada la conserva para enlazar
         /// la siguiente etapa; fuera de ella no altera el estado actual.
         /// </summary>
-        public bool RequestAttack(Mismo.Gameplay.Player.Equipment.AbilityDefinition definition = null,int openingStep=0,bool chainNext=false)
+        public bool RequestAttack(Mismo.Gameplay.Player.Equipment.AbilityDefinition definition = null,int openingStep=0,bool chainNext=false,bool freeFirstStep=false)
         {
             if (phase == Phase.Idle)
             {
@@ -107,14 +117,33 @@ namespace Mismo.Gameplay.Combat
                 stamina=GetComponentInParent<Mismo.Gameplay.Player.Movement.Stamina>();
                 staminaCost=Mathf.Max(0,definition.staminaCost);
                 steps = definition.comboSteps;
-                if(!BeginStep(Mathf.Clamp(openingStep,0,steps.Length-1)))return false;
-                queuedNext=chainNext&&currentStep+1<StepCount;
+                order = definition.comboOrder;
+                // A requested opening step (counter/finisher) wins; otherwise the combo order picks the first step.
+                // Only the first step is free (a chained basic); later steps of the combo pay as usual.
+                freeStep=freeFirstStep;
+                bool started=BeginStep(openingStep>0?Mathf.Clamp(openingStep,0,steps.Length-1):Next(-1));
+                freeStep=false;
+                if(!started)return false;
+                queuedNext=chainNext&&HasNext;
                 return true;
             }
-            if (!CanQueue || queuedNext || currentStep + 1 >= StepCount || stamina!=null&&stamina.Current<staminaCost) return false;
+            if (!CanQueue || queuedNext || !HasNext || !CanPay) return false;
             queuedNext = true;
-            AttackQueued?.Invoke(currentStep + 1, steps[currentStep + 1].Id);
             return true;
+        }
+
+        /// <summary>
+        /// Paso que sigue a <paramref name="previous"/> (-1 = reposo). Alternar manos: 0 derecha, 1 izquierda,
+        /// 2 doble que abre la derecha, 3 doble que abre la izquierda. El doble abre con la mano que golpeó última.
+        /// </summary>
+        public static int NextStep(ComboOrder order, int previous, int stepCount, bool doubleStrike, bool offhandAbsent)
+        {
+            if (order == ComboOrder.Sequential) return previous + 1 < stepCount ? previous + 1 : -1;
+            if (stepCount <= 0) return -1;
+            if (offhandAbsent || stepCount < 2) return 0;
+            bool lastRight = previous == 0 || previous == 3, lastLeft = previous == 1 || previous == 2;
+            if (doubleStrike && stepCount >= 4) return lastLeft ? 3 : 2;
+            return lastRight ? 1 : 0;
         }
 
         /// <summary>Avanza la etapa actual; se puede llamar desde Update o desde un coordinador.</summary>
@@ -131,7 +160,7 @@ namespace Mismo.Gameplay.Combat
                     break;
                 case Phase.Transition:
                     if (phaseElapsed < CurrentStep.TransitionDuration) return;
-                    if(!BeginStep(currentStep + 1))Recover();
+                    if(!BeginStep(Next(currentStep)))Recover();
                     break;
                 case Phase.Recovery:
                     if (phaseElapsed < CurrentStep.RecoveryDuration) return;
@@ -157,17 +186,28 @@ namespace Mismo.Gameplay.Combat
         private void OnDisable() => Cancel();
 
         private int StepCount => steps != null ? steps.Length : 0;
+        private bool HasNext => Loops ? StepCount > 0 : currentStep + 1 < StepCount;
+        private bool CanPay => stamina == null || stamina.Current >= stamina.Cost(staminaCost);
+
+        // The Doble filo roll happens when the step starts, so a thrown off-hand axe is seen as it is now.
+        private int Next(int previous)
+        {
+            var effects = Loops ? GetComponentInParent<Mismo.Gameplay.Player.Equipment.WeaponSkillEffects>() : null;
+            bool offhandAbsent = effects != null && effects.OffhandAbsent;
+            return NextStep(order, previous, StepCount, effects != null && !offhandAbsent && effects.RollDoubleEdge(), offhandAbsent);
+        }
 
         private bool BeginStep(int index)
         {
-            if(stamina!=null&&stamina.Current<staminaCost)return false;
+            if(!freeStep&&!CanPay)return false;
             if (hitbox == null || steps == null || index < 0 || index >= steps.Length || steps[index] == null ||
                 !hitbox.BeginAttack(index, steps[index])) return false;
-            if(stamina!=null&&!stamina.TrySpend(staminaCost)){hitbox.CancelAttack();return false;}
+            if(!freeStep&&stamina!=null&&!stamina.TrySpend(staminaCost)){hitbox.CancelAttack();return false;}
             phase = Phase.Active;
             currentStep = index;
             phaseElapsed = 0f;
             queuedNext = false;
+            StepSerial++;
             AttackStarted?.Invoke(index, steps[index].Id);
             return true;
         }
@@ -181,11 +221,11 @@ namespace Mismo.Gameplay.Combat
             }
             hitbox?.CompleteAttack();
             AttackFinished?.Invoke(currentStep, CurrentStep.Id);
-            if (queuedNext && currentStep + 1 < StepCount)
+            if (queuedNext && HasNext)
             {
                 phase = Phase.Transition;
                 phaseElapsed = 0f;
-                if (CurrentStep.TransitionDuration <= 0f && !BeginStep(currentStep + 1))Recover();
+                if (CurrentStep.TransitionDuration <= 0f && !BeginStep(Next(currentStep)))Recover();
                 return;
             }
             Recover();
