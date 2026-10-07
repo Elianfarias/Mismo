@@ -1,9 +1,12 @@
-"""Original deterministic goblin Foley and creature vocals. Requires only numpy.
+"""Edit CC0 recorded goblin voices with subtle original Foley. Requires numpy.
 
 Run from any directory with Python. Replaces only the seven named WAVs, preserves
 existing GUIDs, and writes a listening reel / measurements outside Assets.
+Source: artisticdude, https://opengameart.org/content/goblins-sound-pack (CC0).
+Original 24-bit recordings are preserved in the adjacent Source asset folder.
 """
 from pathlib import Path
+import base64
 import json
 import uuid
 import wave
@@ -54,24 +57,32 @@ def metal(duration, base):
     return result * (1 - np.exp(-t / .0015))
 
 
-def grunt(duration, pitch, intensity=1, vowel=0):
-    """Irregular glottal pulses, three broad formants, breath and a short rasp."""
-    t = time(duration)
-    jitter = np.interp(t, np.linspace(0, duration, 35), RNG.normal(0, 1, 35))
-    f0 = pitch * (1.14 - .32 * t / duration + .035 * jitter + .018 * np.sin(2 * np.pi * 31 * t))
-    phase = 2 * np.pi * np.cumsum(f0) / RATE
-    voice = np.zeros(len(t))
-    formants = [(610 + 100 * vowel, 210, 1), (1320 - 110 * vowel, 330, .62), (2480, 460, .27)]
-    for harmonic in range(1, 38):
-        frequency = f0 * harmonic
-        weight = sum(gain * np.exp(-.5 * ((frequency - center) / width) ** 2)
-                     for center, width, gain in formants)
-        voice += np.sin(harmonic * phase + .08 * harmonic) * weight / harmonic ** .65
-    voice *= .72 + .20 * np.sin(phase / 2 + 1) + .08 * np.sin(2 * np.pi * 47 * t)
-    voice += .25 * filtered_noise(t, 650, 4500)
-    env = envelope(t, .012, duration / 3.7)
-    env *= np.minimum((duration - t) / .045, 1)
-    return intensity * np.tanh(voice * 1.5) * env
+def recorded_voice(index, speed=.944):
+    """Retain the performed phrasing; varispeed lowers pitch about one semitone."""
+    with wave.open(str(DEST / 'Source' / f'goblin-{index}.wav'), 'rb') as stream:
+        if stream.getsampwidth() != 3:
+            raise ValueError('Expected the original 24-bit PCM recording')
+        raw = np.frombuffer(stream.readframes(stream.getnframes()), np.uint8).reshape(-1, 3).astype(np.int32)
+        pcm = raw[:, 0] | raw[:, 1] << 8 | raw[:, 2] << 16
+        pcm = np.where(pcm & 0x800000, pcm - 0x1000000, pcm) / 8388608
+        pcm = pcm.reshape(-1, stream.getnchannels()).mean(axis=1)
+        source_rate = stream.getframerate()
+    pcm -= np.mean(pcm)
+    # Trim only silence, with a small margin to retain consonants and breaths.
+    voiced = np.flatnonzero(np.abs(pcm) > np.max(np.abs(pcm)) * .006)
+    if not len(voiced): raise ValueError('Source recording is silent')
+    margin = round(source_rate * .008)
+    pcm = pcm[max(0, voiced[0] - margin):min(len(pcm), voiced[-1] + margin + 1)]
+    positions = np.arange(0, len(pcm) - 1, source_rate * speed / RATE)
+    pcm = np.interp(positions, np.arange(len(pcm)), pcm)
+    # Gentle cleanup and chest resonance. No oscillator or generated voice layer.
+    padded = np.pad(pcm, (2048, 2048))
+    frequencies = np.fft.rfftfreq(len(padded), 1 / RATE)
+    eq = (1 - np.exp(-(frequencies / 95) ** 4)) * np.exp(-(frequencies / 9000) ** 6)
+    eq *= 1 + .15 * np.exp(-.5 * ((frequencies - 430) / 250) ** 2)
+    pcm = np.fft.irfft(np.fft.rfft(padded) * eq, n=len(padded))[2048:-2048]
+    pcm /= max(np.max(np.abs(pcm)), .001)
+    return .85 * pcm + .15 * np.tanh(pcm * 1.7) / np.tanh(1.7)
 
 
 def whoosh(duration, weight=1):
@@ -129,36 +140,35 @@ def meta(path, folder=False):
 
 
 def main():
+    global RNG
+    RNG = np.random.default_rng(640617)
     clips = {}
     s = np.zeros(round(.40 * RATE))
-    add(s, leather(.24), gain=.17)
-    add(s, metal(.20, 940), .045, .025)
-    add(s, grunt(.29, 185, vowel=.2), .075, .25)
-    clips["Goblin_Slash_Prepare"] = finish(s, .42)
+    add(s, leather(.24), gain=.016)
+    add(s, recorded_voice(1), .025, .82)
+    clips["Goblin_Slash_Prepare"] = finish(s, .48)
 
     s = np.zeros(round(.34 * RATE))
-    add(s, whoosh(.31), gain=.67)
-    add(s, grunt(.22, 207, vowel=.7), .015, .29)
-    add(s, metal(.18, 1210), .055, .023)
+    add(s, whoosh(.31), gain=.085)
+    add(s, recorded_voice(2), .005, .92)
+    add(s, metal(.18, 1210), .055, .008)
     clips["Goblin_Slash_Execute"] = finish(s, .68)
 
     s = np.zeros(round(.46 * RATE))
-    add(s, leather(.24), gain=.18)
-    add(s, grunt(.40, 151, vowel=-.6), .025, .60)
-    add(s, stamp(.17, 120), .075, .10)
-    clips["Goblin_Charge_Prepare"] = finish(s, .56)
+    add(s, leather(.24), gain=.014)
+    add(s, recorded_voice(5), .025, .94)
+    add(s, stamp(.17, 120), .075, .025)
+    clips["Goblin_Charge_Prepare"] = finish(s, .46)
 
-    s = np.zeros(round(.43 * RATE))
-    add(s, whoosh(.39), gain=.38)
-    add(s, grunt(.32, 190, vowel=-.2), .005, .50)
-    add(s, stamp(.16, 132), .045, .17)
-    add(s, leather(.13), .07, .08)
-    add(s, stamp(.15, 118), .235, .13)
-    clips["Goblin_Charge_Execute"] = finish(s, .72)
+    # The preparation carries the voice; execution is a brief physical rush.
+    s = np.zeros(round(.28 * RATE))
+    add(s, whoosh(.25), gain=.40)
+    add(s, stamp(.12, 132), .005, .07)
+    add(s, leather(.15), .015, .022)
+    clips["Goblin_Charge_Execute"] = finish(s, .48)
 
-    for index, (duration, pitch, vowel) in enumerate([(.27, 214, .8), (.31, 172, -.5), (.25, 239, .2)], 1):
-        s = grunt(duration, pitch, vowel=vowel)
-        add(s, leather(.08), gain=.055)
+    for index, source_index in enumerate([6, 10, 13], 1):
+        s = recorded_voice(source_index)
         clips[f"Goblin_Hit_{index:02}"] = finish(s, .61)
 
     DEST.mkdir(parents=True, exist_ok=True)
@@ -192,8 +202,42 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     write_wav(OUT / "Goblin_Audio_Preview.wav", np.concatenate(reel))
     (OUT / "audio-analysis.json").write_text(json.dumps(dict(sample_rate=RATE, channels=1, bits=16,
+        voice_source="Goblins Sound Pack / artisticdude / CC0-1.0", version="recorded-voices-charge-rush",
         clips=report, preview=schedule), indent=2), encoding="utf-8")
+    write_preview_page()
     print(json.dumps(report, indent=2))
+
+
+def write_preview_page():
+    labels = [
+        ("Goblin_Slash_Prepare", "Golpe · preparación"),
+        ("Goblin_Slash_Execute", "Golpe · ejecución"),
+        ("Goblin_Charge_Prepare", "Carga · preparación"),
+        ("Goblin_Charge_Execute", "Carga · ejecución · impulso sin voz"),
+        ("Goblin_Hit_01", "Hit · toma 1"),
+        ("Goblin_Hit_02", "Hit · toma 2"),
+        ("Goblin_Hit_03", "Hit · toma 3"),
+    ]
+    def player(path):
+        encoded = base64.b64encode(path.read_bytes()).decode('ascii')
+        return f'<audio controls preload="none" src="data:audio/wav;base64,{encoded}"></audio>'
+    cards = ''.join(f'<article id="{name}"><h2>{label}</h2>{player(DEST / (name + ".wav"))}</article>' for name, label in labels)
+    html = '''<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Goblin · Voces grabadas</title><style>
+*{box-sizing:border-box}body{margin:0;background:#171c17;color:#eef2e9;font:16px system-ui,sans-serif}
+main{max-width:920px;margin:auto;padding:44px 24px}small,a{color:#b9d991}h1{font-size:38px;margin:14px 0}
+p{color:#bcc8b7;line-height:1.5}h2{font-size:18px}section,article{background:#252e23;border:1px solid #3b4a35;border-radius:12px;padding:22px}
+section{margin:28px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}audio{width:100%;margin-top:10px}
+footer{font-size:13px;line-height:1.6;color:#a4b49b;margin-top:30px}
+article:target{border-color:#b9d991}
+</style><main><small>MISMO · NUEVA VERSIÓN</small><h1>Goblin: voces grabadas</h1>
+<p>Voces grabadas para el combate. La ejecución de la carga usa un impulso corto de aire y movimiento, sin vocalización.</p>
+<section><h2>Escuchar todo</h2><p>Primero los siete sonidos separados. Al final, las dos habilidades con su preparación de 0,5 segundos y una reacción de hit posterior.</p>'''
+    html += player(OUT / 'Goblin_Audio_Preview.wav') + '</section><div class="grid">' + cards + '</div>'
+    html += '''<footer>Voz: <a href="https://opengameart.org/content/goblins-sound-pack">Goblins Sound Pack, artisticdude</a> · CC0.
+Edición y capas de movimiento para Mismo. Inspiración de dirección: Goblin Vocalizations; esta alternativa no contiene audio de ese pack comercial.
+</footer></main><script>document.querySelectorAll('audio').forEach(a=>a.addEventListener('play',()=>document.querySelectorAll('audio').forEach(b=>{if(b!==a)b.pause()})))</script></html>'''
+    (OUT / 'escuchar.html').write_text(html, encoding='utf-8')
 
 
 if __name__ == "__main__":

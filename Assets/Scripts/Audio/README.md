@@ -65,10 +65,15 @@ Una recompensa ya reclamada no vuelve a sonar.
 
 ## Sonidos del goblin
 
-Los siete efectos originales están en `Assets/Art/Audio/Enemies/Goblin`:
+Los siete efectos están en `Assets/Art/Audio/Enemies/Goblin`:
 preparación y ejecución de Golpe/Carga, y tres gruñidos cortos de hit. Son WAV
-mono PCM de 16 bits a 48 kHz, sintetizados localmente sin muestras externas.
+mono PCM de 16 bits a 48 kHz. La voz parte de grabaciones CC0 de artisticdude
+(Goblins Sound Pack), editadas con un pequeño descenso de tono y capas suaves
+de movimiento. Los originales se conservan en la subcarpeta `Source`;
+procedencia, licencia y correspondencias en `Assets/Documentation/Audio/GoblinVoices.txt`.
 El gruñido de hit acompaña al impacto del arma del perfil de feedback existente.
+La ejecución de Carga usa un impulso de aire y movimiento de 0,28 s, sin voz;
+su vocalización queda en la preparación.
 
 `Assets/Data/Enemies/BaseGoblin.asset` referencia los clips directamente; el
 goblin normal y el élite comparten esta configuración. En el taller de enemigos,
@@ -83,7 +88,8 @@ clips de hit asignados mantienen su comportamiento anterior.
 
 Para regenerar las siete tomas y la muestra de escucha, ejecutar
 `python Assets/Scripts/Audio/Editor/GenerateGoblinSounds.py` (requiere NumPy).
-Conserva los GUID existentes. La muestra queda en
+Conserva los GUID existentes. También genera `output/goblin-audio/escuchar.html`.
+La muestra queda en
 `output/goblin-audio/Goblin_Audio_Preview.wav`: cuatro sonidos de habilidades,
 tres hits y dos secuencias con la preparación de 0,5 s del juego.
 
