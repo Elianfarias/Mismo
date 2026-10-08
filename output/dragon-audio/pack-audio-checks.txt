@@ -1,0 +1,11 @@
+PASS Dragon_Attack: mono 48k, non-clipping, checksum matches
+PASS Dragon_Hurt: mono 48k, non-clipping, checksum matches
+PASS Dragon_Death: mono 48k, non-clipping, checksum matches
+PASS Dragon_Roar: mono 48k, non-clipping, checksum matches
+PASS Dragon_Wing: mono 48k, non-clipping, checksum matches
+PASS Dragon_Ground: mono 48k, non-clipping, checksum matches
+PASS Dragon_Fire_Prepare: mono 48k, non-clipping, checksum matches
+PASS Dragon_Fire_Start: mono 48k, non-clipping, checksum matches
+PASS Dragon_Fire_Loop: mono 48k, non-clipping, checksum matches
+PASS loop join sample delta 0.0198974609375
+PASS gameplay settings/prefab unchanged pending validated copy-back

@@ -1,0 +1,52 @@
+PASS Selected audio profile is serialized
+PASS Assigned cue: Bite
+PASS Assigned cue: Tail
+PASS Assigned cue: Inhale
+PASS Assigned cue: Roar
+PASS Assigned cue: Jump
+PASS Assigned cue: Charge
+PASS Assigned cue: Land
+PASS Assigned cue: Wing
+PASS Assigned cue: Footstep
+PASS Assigned cue: Hurt
+PASS Assigned cue: Death
+PASS Assigned cue: Emerge
+PASS Nine selected clips, all roles covered
+PASS Decodes mono 48 kHz with headroom: Dragon_Attack
+PASS Decodes mono 48 kHz with headroom: Dragon_Fire_Prepare
+PASS Decodes mono 48 kHz with headroom: Dragon_Roar
+PASS Decodes mono 48 kHz with headroom: Dragon_Wing
+PASS Decodes mono 48 kHz with headroom: Dragon_Ground
+PASS Decodes mono 48 kHz with headroom: Dragon_Hurt
+PASS Decodes mono 48 kHz with headroom: Dragon_Death
+PASS Decodes mono 48 kHz with headroom: Dragon_Fire_Start
+PASS Decodes mono 48 kHz with headroom: Dragon_Fire_Loop
+PASS Four spatial sources share SFX mixer without autoplay or Doppler
+PASS Prefab includes all nine selected sounds
+PASS No rejected concepts, source files or procedural placeholders in boss dependencies
+WARN Existing project organization findings; see organization.txt.
+PASS Windows boss content bundle builds
+PASS Windows boss content bundle reloads
+PASS Selected audio profile is serialized
+PASS Assigned cue: Bite
+PASS Assigned cue: Tail
+PASS Assigned cue: Inhale
+PASS Assigned cue: Roar
+PASS Assigned cue: Jump
+PASS Assigned cue: Charge
+PASS Assigned cue: Land
+PASS Assigned cue: Wing
+PASS Assigned cue: Footstep
+PASS Assigned cue: Hurt
+PASS Assigned cue: Death
+PASS Assigned cue: Emerge
+PASS Nine selected clips, all roles covered
+PASS Decodes mono 48 kHz with headroom: Dragon_Attack
+PASS Decodes mono 48 kHz with headroom: Dragon_Fire_Prepare
+PASS Decodes mono 48 kHz with headroom: Dragon_Roar
+PASS Decodes mono 48 kHz with headroom: Dragon_Wing
+PASS Decodes mono 48 kHz with headroom: Dragon_Ground
+PASS Decodes mono 48 kHz with headroom: Dragon_Hurt
+PASS Decodes mono 48 kHz with headroom: Dragon_Death
+PASS Decodes mono 48 kHz with headroom: Dragon_Fire_Start
+PASS Decodes mono 48 kHz with headroom: Dragon_Fire_Loop

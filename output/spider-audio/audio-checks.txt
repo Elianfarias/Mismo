@@ -1,0 +1,13 @@
+PASS: 12 mono 48 kHz PCM16 WAVs; no clipping, no empty samples, click-free edit edges.
+PASS: Preparations fit current bite/jump windups.
+PASS: 12 embedded players reproduce the exact generated WAVs.
+PASS: 3 originals preserved with verified SHA256; author, project and license credits included.
+PASS: Unity metadata present, GUIDs unique within new spider assets.
+PASS: Profile B (Hissing) assigned to bite preparation/execution, jump preparation/execution, and hurt on all four spider variants.
+PASS: Approved audio, metadata, and prefabs preserved byte-for-byte; only audio references and volumes changed in Spider settings.
+PASS: Unity 6000.6.0f1 imported and decoded selected clips; 156 integration and Play Mode assertions passed.
+PASS: Combat triggers preparation/execution once, suppresses interrupted execution and status-tick hurt, and limits simultaneous hurt sounds.
+PASS: Windows content bundle builds and reloads all four spider prefabs with the five B clips; no audition reels or profile A included.
+WARN: ProjectOrganizationChecks reports the same pre-existing issues as the imp validation; no additions or removals. See organization.txt.
+Validation ran in an isolated copy of Assets, Packages and ProjectSettings while the user's Unity editor remained open. This verifies a content bundle, not a full player build.
+Detailed results: integration-checks.txt, play-checks.txt, organization.txt.

@@ -1,0 +1,80 @@
+PASS Bite and jump active; web remains disabled
+PASS One selected hurt sound
+PASS Selected B clip: Bite_Prepare
+PASS Decodes mono 48 kHz without clipping: Bite_Prepare
+PASS Selected B clip: Bite_Execute
+PASS Decodes mono 48 kHz without clipping: Bite_Execute
+PASS Selected B clip: Jump_Prepare
+PASS Decodes mono 48 kHz without clipping: Jump_Prepare
+PASS Selected B clip: Jump_Execute
+PASS Decodes mono 48 kHz without clipping: Jump_Execute
+PASS Selected B clip: Hit
+PASS Decodes mono 48 kHz without clipping: Hit
+PASS Preparations fit existing windups
+PASS Spider_Standard shares configured settings
+PASS Spider_Standard includes exactly five B clips
+PASS Spider_Forest_Moss shares configured settings
+PASS Spider_Forest_Moss includes exactly five B clips
+PASS Spider_Dark_Cave shares configured settings
+PASS Spider_Dark_Cave includes exactly five B clips
+PASS Spider_Albino shares configured settings
+PASS Spider_Albino includes exactly five B clips
+WARN Global organization issues; see organization.txt.
+PASS Windows spider content bundle builds
+PASS Windows spider content bundle reloads
+PASS Bite and jump active; web remains disabled
+PASS One selected hurt sound
+PASS Selected B clip: Bite_Prepare
+PASS Decodes mono 48 kHz without clipping: Bite_Prepare
+PASS Selected B clip: Bite_Execute
+PASS Decodes mono 48 kHz without clipping: Bite_Execute
+PASS Selected B clip: Jump_Prepare
+PASS Decodes mono 48 kHz without clipping: Jump_Prepare
+PASS Selected B clip: Jump_Execute
+PASS Decodes mono 48 kHz without clipping: Jump_Execute
+PASS Selected B clip: Hit
+PASS Decodes mono 48 kHz without clipping: Hit
+PASS Preparations fit existing windups
+PASS Spider_Standard retains and decodes all five B clips in the build
+PASS Bite and jump active; web remains disabled
+PASS One selected hurt sound
+PASS Selected B clip: Bite_Prepare
+PASS Decodes mono 48 kHz without clipping: Bite_Prepare
+PASS Selected B clip: Bite_Execute
+PASS Decodes mono 48 kHz without clipping: Bite_Execute
+PASS Selected B clip: Jump_Prepare
+PASS Decodes mono 48 kHz without clipping: Jump_Prepare
+PASS Selected B clip: Jump_Execute
+PASS Decodes mono 48 kHz without clipping: Jump_Execute
+PASS Selected B clip: Hit
+PASS Decodes mono 48 kHz without clipping: Hit
+PASS Preparations fit existing windups
+PASS Spider_Forest_Moss retains and decodes all five B clips in the build
+PASS Bite and jump active; web remains disabled
+PASS One selected hurt sound
+PASS Selected B clip: Bite_Prepare
+PASS Decodes mono 48 kHz without clipping: Bite_Prepare
+PASS Selected B clip: Bite_Execute
+PASS Decodes mono 48 kHz without clipping: Bite_Execute
+PASS Selected B clip: Jump_Prepare
+PASS Decodes mono 48 kHz without clipping: Jump_Prepare
+PASS Selected B clip: Jump_Execute
+PASS Decodes mono 48 kHz without clipping: Jump_Execute
+PASS Selected B clip: Hit
+PASS Decodes mono 48 kHz without clipping: Hit
+PASS Preparations fit existing windups
+PASS Spider_Dark_Cave retains and decodes all five B clips in the build
+PASS Bite and jump active; web remains disabled
+PASS One selected hurt sound
+PASS Selected B clip: Bite_Prepare
+PASS Decodes mono 48 kHz without clipping: Bite_Prepare
+PASS Selected B clip: Bite_Execute
+PASS Decodes mono 48 kHz without clipping: Bite_Execute
+PASS Selected B clip: Jump_Prepare
+PASS Decodes mono 48 kHz without clipping: Jump_Prepare
+PASS Selected B clip: Jump_Execute
+PASS Decodes mono 48 kHz without clipping: Jump_Execute
+PASS Selected B clip: Hit
+PASS Decodes mono 48 kHz without clipping: Hit
+PASS Preparations fit existing windups
+PASS Spider_Albino retains and decodes all five B clips in the build

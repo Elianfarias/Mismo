@@ -1,0 +1,31 @@
+Actual Imp prefab / Play Mode
+PASS Temporary navigation surface
+PASS Imp initialized on navigation
+PASS Melee enters its own telegraph
+PASS Preparation sound once at telegraph start
+PASS No launch sound before the end of preparation
+PASS No premature projectile
+PASS Execution sound once at the transition to attack
+PASS No duplicate voice during active/recovery frames
+PASS Confirmed Imp hit plays approved B voice
+PASS Burn tick does not add a hurt voice
+PASS Imp initialized on navigation
+PASS Fireball enters its own telegraph
+PASS Preparation sound once at telegraph start
+PASS No launch sound before the end of preparation
+PASS No premature projectile
+PASS Execution sound once at the transition to attack
+PASS No explosion at launch
+PASS Real fireball collides and deals damage
+PASS One explosion on collision
+PASS Explosion audio originates at the actual contact, away from world origin
+PASS Explosion uses 3D SFX routing and authored volume
+PASS Repeated projectile step does not repeat explosion
+PASS Range expiry does not fake an impact explosion
+PASS No duplicate voice during active/recovery frames
+PASS Confirmed Imp hit plays approved B voice
+PASS Burn tick does not add a hurt voice
+PASS Cancellation fixture entered fire preparation
+PASS Posture cancellation prevents launch audio and projectile
+PASS Null and muted impact sounds create no sources
+PASS IMP_AUDIO_PLAY_COMPLETE

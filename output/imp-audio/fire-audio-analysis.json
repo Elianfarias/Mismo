@@ -1,0 +1,35 @@
+{
+  "rate": 48000,
+  "channels": 1,
+  "bits": 16,
+  "generator": "Original procedural fire plus approved B voice for preparation and launch",
+  "approved_voice_sha256": {
+    "Imp_Balanced_Attack.wav": "9da7083980ea383ee6f5c4c4503c1a86ab3638c8379e3fa949344a49b8bdf2d5",
+    "Imp_Balanced_Audition.wav": "0226a36fe9c6c4f65db408e06dd96788305139f0ca37f8c14df8f020cd3d25db",
+    "Imp_Balanced_Hit.wav": "881690efe86f7c75accbec26ef2970be6464c6385e14a5e1da638bcd68b9ef7f",
+    "Imp_Balanced_Prepare.wav": "d15b3e1a8151709ac002540504a3ac628c49fc342f78c68993ce0960fa12f0ab"
+  },
+  "clips": [
+    {
+      "file": "Assets/Art/Audio/Enemies/Imp/Fire/Imp_Fire_Prepare.wav",
+      "seconds": 1.18,
+      "peak_dbfs": -5.85,
+      "rms_dbfs": -24.37,
+      "sha256": "cfb628c930df4116dd31583dc8f6161509b2ac9cf42b263aec098683122d49b4"
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Imp/Fire/Imp_Fire_Launch.wav",
+      "seconds": 0.64,
+      "peak_dbfs": -4.15,
+      "rms_dbfs": -15.73,
+      "sha256": "783e37de44ed140d803f308d337406cf94adb018ca41ff07b32d2c8edd85ad50"
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Imp/Fire/Imp_Fire_Impact.wav",
+      "seconds": 1.25,
+      "peak_dbfs": -3.88,
+      "rms_dbfs": -20.71,
+      "sha256": "440b5258632f7f9fe22a6994eb4f53925c3bd7824e7f83e7c4c077c7ac6d618c"
+    }
+  ]
+}
