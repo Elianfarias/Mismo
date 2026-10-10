@@ -72,12 +72,17 @@ mono PCM de 16 bits a 48 kHz. La voz parte de grabaciones CC0 de artisticdude
 de movimiento. Los originales se conservan en la subcarpeta `Source`;
 procedencia, licencia y correspondencias en `Assets/Documentation/Audio/GoblinVoices.txt`.
 El gruñido de hit acompaña al impacto del arma del perfil de feedback existente.
-La ejecución de Carga usa un impulso de aire y movimiento de 0,28 s, sin voz;
-su vocalización queda en la preparación.
+Golpe y Carga usan el esfuerzo B aprobado, la voz `goblin-2` aislada de 0,262 s,
+sin capas de movimiento. Ambos WAV conservan exactamente los bytes de la
+muestra `output/goblin-audio/effort-options/Goblin_Esfuerzo_B.wav`.
+Las preparaciones, voces de daño y volúmenes de cada ataque se conservan.
 
 `Assets/Data/Enemies/BaseGoblin.asset` referencia los clips directamente; el
-goblin normal y el élite comparten esta configuración. En el taller de enemigos,
-abrir cada ataque y ajustar `Preparation Sfx`, `Execution Sfx` y sus volúmenes.
+goblin normal y el élite comparten esta configuración. En **Mismo > Enemigos >
+Taller de armas y animaciones**, seleccionar el goblin, abrir cada ataque y
+ajustar `Preparation Sfx`, `Execution Sfx` y sus volúmenes. También se pueden
+editar directamente en el Inspector de BaseGoblin, dentro de `Slash` (Golpe)
+y `Charge` (Carga).
 En el Inspector de BaseGoblin, `Hit Sfx` y `Hit Sfx Volume` controlan la reacción
 al daño. Todos usan el canal Efectos existente.
 

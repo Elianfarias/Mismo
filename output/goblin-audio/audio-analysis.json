@@ -3,7 +3,7 @@
   "channels": 1,
   "bits": 16,
   "voice_source": "Goblins Sound Pack / artisticdude / CC0-1.0",
-  "version": "recorded-voices-charge-rush",
+  "version": "approved-effort-B",
   "clips": [
     {
       "name": "Goblin_Slash_Prepare",
@@ -13,9 +13,9 @@
     },
     {
       "name": "Goblin_Slash_Execute",
-      "seconds": 0.34,
-      "peak_dbfs": -3.35,
-      "rms_dbfs": -16.76
+      "seconds": 0.262,
+      "peak_dbfs": -5.68,
+      "rms_dbfs": -17.48
     },
     {
       "name": "Goblin_Charge_Prepare",
@@ -25,9 +25,9 @@
     },
     {
       "name": "Goblin_Charge_Execute",
-      "seconds": 0.28,
-      "peak_dbfs": -6.38,
-      "rms_dbfs": -22.19
+      "seconds": 0.262,
+      "peak_dbfs": -5.68,
+      "rms_dbfs": -17.48
     },
     {
       "name": "Goblin_Hit_01",
@@ -58,31 +58,31 @@
       "name": "Goblin_Slash_Execute"
     },
     {
-      "at": 1.84,
+      "at": 1.762,
       "name": "Goblin_Charge_Prepare"
     },
     {
-      "at": 2.85,
+      "at": 2.772,
       "name": "Goblin_Charge_Execute"
     },
     {
-      "at": 3.68,
+      "at": 3.583,
       "name": "Goblin_Hit_01"
     },
     {
-      "at": 4.486,
+      "at": 4.389,
       "name": "Goblin_Hit_02"
     },
     {
-      "at": 5.227,
+      "at": 5.13,
       "name": "Goblin_Hit_03"
     },
     {
-      "at": 5.99,
+      "at": 5.893,
       "name": "Sequence_Slash"
     },
     {
-      "at": 7.64,
+      "at": 7.543,
       "name": "Sequence_Charge"
     }
   ]

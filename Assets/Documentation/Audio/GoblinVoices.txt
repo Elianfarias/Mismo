@@ -16,19 +16,20 @@ The selected originals and archive hashes are in GoblinVoices-source.json.
 
 Derived clips and source recordings:
 Goblin_Slash_Prepare.wav  <- goblin-1.wav
-Goblin_Slash_Execute.wav  <- goblin-2.wav
+Goblin_Slash_Execute.wav  <- goblin-2.wav (approved effort B)
 Goblin_Charge_Prepare.wav <- goblin-5.wav
-Goblin_Charge_Execute.wav <- original procedural rush / cloth / push-off, no voice
+Goblin_Charge_Execute.wav <- goblin-2.wav (same approved effort B)
 Goblin_Hit_01.wav         <- goblin-6.wav
 Goblin_Hit_02.wav         <- goblin-10.wav
 Goblin_Hit_03.wav         <- goblin-13.wav
 
 Edits: silence trimming, mono conversion, approximately one semitone of
 downward varispeed, gentle EQ/saturation, edge fades, headroom matching,
-48 kHz / 16-bit PCM export. The attack clips contain quiet original
-procedural Foley layers; the hurt voices use recorded vocals only.
-Charge execution is a 0.28-second non-vocal rush. The former goblin-9.wav
-source remains archived but is no longer used by the generator.
+48 kHz / 16-bit PCM export. Preparations contain quiet original procedural
+Foley layers; hurt voices use recorded vocals only. Both attack executions
+use the approved B effort, about 0.262 seconds, peak 0.52, without movement
+or impact layers. Their WAV bytes match output/goblin-audio/effort-options/
+Goblin_Esfuerzo_B.wav. The goblin-9.wav source remains archived and unused.
 
 Rebuild: python Assets/Scripts/Audio/Editor/GenerateGoblinSounds.py
 Requires NumPy. Preserves the seven existing Unity GUIDs and references.

@@ -49,14 +49,6 @@ def leather(duration, strength=1):
     return strength * n * rub * envelope(t, .009, duration / 4)
 
 
-def metal(duration, base):
-    t = time(duration)
-    result = np.zeros(len(t))
-    for ratio, amp, decay in [(1, 1, .09), (1.47, .5, .065), (2.09, .35, .04), (2.63, .16, .02)]:
-        result += amp * np.sin(2 * np.pi * base * ratio * t + .15) * np.exp(-t / decay)
-    return result * (1 - np.exp(-t / .0015))
-
-
 def recorded_voice(index, speed=.944):
     """Retain the performed phrasing; varispeed lowers pitch about one semitone."""
     with wave.open(str(DEST / 'Source' / f'goblin-{index}.wav'), 'rb') as stream:
@@ -83,16 +75,6 @@ def recorded_voice(index, speed=.944):
     pcm = np.fft.irfft(np.fft.rfft(padded) * eq, n=len(padded))[2048:-2048]
     pcm /= max(np.max(np.abs(pcm)), .001)
     return .85 * pcm + .15 * np.tanh(pcm * 1.7) / np.tanh(1.7)
-
-
-def whoosh(duration, weight=1):
-    t = time(duration)
-    x = t / duration
-    airy = filtered_noise(t, 850, 9000)
-    body = filtered_noise(t, 95, 1500)
-    arc = (1 - np.exp(-t / .009)) * np.exp(-t / (duration / 3))
-    blade = np.sin(2 * np.pi * (900 * t - 850 / (2 * duration) * t * t))
-    return weight * arc * (.43 * airy * (1 - x) + .70 * body + .025 * blade)
 
 
 def stamp(duration, pitch=115):
@@ -148,11 +130,13 @@ def main():
     add(s, recorded_voice(1), .025, .82)
     clips["Goblin_Slash_Prepare"] = finish(s, .48)
 
-    s = np.zeros(round(.34 * RATE))
-    add(s, whoosh(.31), gain=.085)
-    add(s, recorded_voice(2), .005, .92)
-    add(s, metal(.18, 1210), .055, .008)
-    clips["Goblin_Slash_Execute"] = finish(s, .68)
+    # Exact recipe of the approved B preview: the familiar voice on its own.
+    effort = finish(recorded_voice(2), .52)
+    clips["Goblin_Slash_Execute"] = effort
+
+    # Preserve the charge preparation's seeded Foley: the removed slash
+    # whoosh previously consumed two 0.31-second noise buffers here.
+    RNG.normal(size=2 * round(.31 * RATE))
 
     s = np.zeros(round(.46 * RATE))
     add(s, leather(.24), gain=.014)
@@ -160,12 +144,7 @@ def main():
     add(s, stamp(.17, 120), .075, .025)
     clips["Goblin_Charge_Prepare"] = finish(s, .46)
 
-    # The preparation carries the voice; execution is a brief physical rush.
-    s = np.zeros(round(.28 * RATE))
-    add(s, whoosh(.25), gain=.40)
-    add(s, stamp(.12, 132), .005, .07)
-    add(s, leather(.15), .015, .022)
-    clips["Goblin_Charge_Execute"] = finish(s, .48)
+    clips["Goblin_Charge_Execute"] = effort.copy()
 
     for index, source_index in enumerate([6, 10, 13], 1):
         s = recorded_voice(source_index)
@@ -192,17 +171,17 @@ def main():
     for name, signal in clips.items():
         schedule.append(dict(at=round(sum(len(x) for x in reel) / RATE, 3), name=name))
         reel.extend([signal, np.zeros(round(.55 * RATE))])
-    for action in ["Slash", "Charge"]:
+    for action, preparation_volume, execution_volume in [("Slash", .6, .78), ("Charge", .65, .8)]:
         sequence = np.zeros(round(1.65 * RATE))
-        add(sequence, clips[f"Goblin_{action}_Prepare"], gain=.6)
-        add(sequence, clips[f"Goblin_{action}_Execute"], .5, .78)
+        add(sequence, clips[f"Goblin_{action}_Prepare"], gain=preparation_volume)
+        add(sequence, clips[f"Goblin_{action}_Execute"], .5, execution_volume)
         add(sequence, clips["Goblin_Hit_01"], 1.06, .58)
         schedule.append(dict(at=round(sum(len(x) for x in reel) / RATE, 3), name=f"Sequence_{action}"))
         reel.append(sequence)
     OUT.mkdir(parents=True, exist_ok=True)
     write_wav(OUT / "Goblin_Audio_Preview.wav", np.concatenate(reel))
     (OUT / "audio-analysis.json").write_text(json.dumps(dict(sample_rate=RATE, channels=1, bits=16,
-        voice_source="Goblins Sound Pack / artisticdude / CC0-1.0", version="recorded-voices-charge-rush",
+        voice_source="Goblins Sound Pack / artisticdude / CC0-1.0", version="approved-effort-B",
         clips=report, preview=schedule), indent=2), encoding="utf-8")
     write_preview_page()
     print(json.dumps(report, indent=2))
@@ -211,9 +190,9 @@ def main():
 def write_preview_page():
     labels = [
         ("Goblin_Slash_Prepare", "Golpe · preparación"),
-        ("Goblin_Slash_Execute", "Golpe · ejecución"),
+        ("Goblin_Slash_Execute", "Golpe · esfuerzo B"),
         ("Goblin_Charge_Prepare", "Carga · preparación"),
-        ("Goblin_Charge_Execute", "Carga · ejecución · impulso sin voz"),
+        ("Goblin_Charge_Execute", "Carga · esfuerzo B"),
         ("Goblin_Hit_01", "Hit · toma 1"),
         ("Goblin_Hit_02", "Hit · toma 2"),
         ("Goblin_Hit_03", "Hit · toma 3"),
@@ -231,7 +210,7 @@ section{margin:28px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,m
 footer{font-size:13px;line-height:1.6;color:#a4b49b;margin-top:30px}
 article:target{border-color:#b9d991}
 </style><main><small>MISMO · NUEVA VERSIÓN</small><h1>Goblin: voces grabadas</h1>
-<p>Voces grabadas para el combate. La ejecución de la carga usa un impulso corto de aire y movimiento, sin vocalización.</p>
+<p>Golpe y Carga usan el esfuerzo B aprobado: la voz goblin-2 aislada, sin capas de movimiento. Se conservan las preparaciones y las reacciones al daño.</p>
 <section><h2>Escuchar todo</h2><p>Primero los siete sonidos separados. Al final, las dos habilidades con su preparación de 0,5 segundos y una reacción de hit posterior.</p>'''
     html += player(OUT / 'Goblin_Audio_Preview.wav') + '</section><div class="grid">' + cards + '</div>'
     html += '''<footer>Voz: <a href="https://opengameart.org/content/goblins-sound-pack">Goblins Sound Pack, artisticdude</a> · CC0.
