@@ -1,0 +1,106 @@
+{
+  "selected": "Free Monster Sounds + Dragon Fire Breath and Roar",
+  "previous_rejection_superseded": true,
+  "retrieved": "2026-10-08",
+  "archive_sha256": "547749058654b53e5cd07c032d93ac2ce0b924a1d011b55b32f45a2d985b1ca9",
+  "sources": [
+    {
+      "title": "Free Monster Sounds",
+      "author": "Creature Sounds / Coucassi",
+      "page": "https://coucassi.itch.io/free-monster-sounds",
+      "license_on_page": "CC-BY-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "included_terms": "TERM OF USE\r\n\r\nFree for commercial & non-commercial use (a free copy of your project would be nice though).\r\nYou may edit these sound effects for your own use, but please do not post them anywhere without my permission.\r\nCredits to Coucassi.\r\n"
+    },
+    {
+      "title": "Dragon Fire Breath and Roar",
+      "author": "Daniel Simon",
+      "page": "https://soundbible.com/2127-Dragon-Fire-Breath-and-Roar.html",
+      "license": "CC-BY-3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/"
+    }
+  ],
+  "clips": [
+    {
+      "name": "Dragon_Attack",
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Selected/Dragon_Attack.wav",
+      "duration": 2.664,
+      "source": "Dragon_Attack.wav",
+      "changes": "Trim leading/trailing silence, short edge fades, gain, mono 48 kHz PCM16.",
+      "peak": 0.72,
+      "sha256": "e42d8f232a91e4ed2c4588d7b0d512af7b1beedf91957aeea03c3f73572de545"
+    },
+    {
+      "name": "Dragon_Hurt",
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Selected/Dragon_Hurt.wav",
+      "duration": 2.7378,
+      "source": "Dragon_Damage.wav",
+      "changes": "Trim leading/trailing silence, short edge fades, gain, mono 48 kHz PCM16.",
+      "peak": 0.72,
+      "sha256": "b83f542b398d3a4555aacdef642f1130be9965c220738bfcd31bfea6e879f5af"
+    },
+    {
+      "name": "Dragon_Death",
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Selected/Dragon_Death.wav",
+      "duration": 3.6892,
+      "source": "Dragon_Death.wav",
+      "changes": "Trim leading/trailing silence, short edge fades, gain, mono 48 kHz PCM16.",
+      "peak": 0.72,
+      "sha256": "2c23b021bf787a4eb0ba8bf7df55071add3ad2d7e466f4f40dbcca298a5e02b9"
+    },
+    {
+      "name": "Dragon_Roar",
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Selected/Dragon_Roar.wav",
+      "duration": 3.4359,
+      "source": "Dragon_Emerge.wav",
+      "changes": "Trim leading/trailing silence, short edge fades, gain, mono 48 kHz PCM16.",
+      "peak": 0.72,
+      "sha256": "82d108748d405a3049c2d6633f36b5188f5b7e4080a87b86b1a1d25dde6c7197"
+    },
+    {
+      "name": "Dragon_Wing",
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Selected/Dragon_Wing.wav",
+      "duration": 2.7877,
+      "source": "Dragon_Step.wav",
+      "changes": "Trim leading/trailing silence, short edge fades, gain, mono 48 kHz PCM16.",
+      "peak": 0.72,
+      "sha256": "6deb91215b3365a1b6b6d6176ad76bae1b5821c0cad57a11f44ecb717627dde2"
+    },
+    {
+      "name": "Dragon_Ground",
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Selected/Dragon_Ground.wav",
+      "duration": 1.1016,
+      "source": "Behemoth_Step.wav",
+      "changes": "Trim leading/trailing silence, short edge fades, gain, mono 48 kHz PCM16.",
+      "peak": 0.72,
+      "sha256": "f67b7cefdf0041158c2190c6c80523d7c37bc28e09f4956908fe0dbb5ef0dd32"
+    },
+    {
+      "name": "Dragon_Fire_Prepare",
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Selected/Dragon_Fire_Prepare.wav",
+      "duration": 1.5,
+      "source": "Dragon_Fire_Breath_And_Roar_DanielSimon.wav",
+      "changes": "Original opening 0-1.5 s; mono, edge fade and gain.",
+      "peak": 0.78,
+      "sha256": "8700022e5e2a969e6dee09df27c4d9694d75f1a29b01682b1a54e42338bcbbf9"
+    },
+    {
+      "name": "Dragon_Fire_Start",
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Selected/Dragon_Fire_Start.wav",
+      "duration": 3.8746,
+      "source": "Dragon_Fire_Breath_And_Roar_DanielSimon.wav",
+      "changes": "Original remainder from 1.5 s; mono, edge fade and gain.",
+      "peak": 0.78,
+      "sha256": "c1b4c264e2b309577cf2cc2a31d464dbd1f8b42b7f777a2b9767712aa3b1fcb0"
+    },
+    {
+      "name": "Dragon_Fire_Loop",
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Selected/Dragon_Fire_Loop.wav",
+      "source": "Dragon_Fire_Breath_And_Roar_DanielSimon.wav",
+      "duration": 1.57,
+      "changes": "Original 2.7-4.35 s, 80 ms loop crossfade; mono and gain.",
+      "peak": 0.7,
+      "sha256": "964e7f78aa2c78416a0c7342c4226ce9bdea9764e63f5d1a23d39f5e4f9bfa7f"
+    }
+  ]
+}

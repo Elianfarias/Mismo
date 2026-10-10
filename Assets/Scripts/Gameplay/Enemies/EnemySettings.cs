@@ -51,5 +51,9 @@ namespace Mismo.Gameplay.Enemies
         [Min(.1f)] public float sightHeight=.9f,allowedHeightDifference=1.2f;
         [Min(0)] public float preferredRange=1.7f;
         public GoblinAttack[] attacks=Array.Empty<GoblinAttack>();
+        [Header("Reacción sonora al recibir daño")]
+        [Tooltip("Variantes de voz del enemigo. Complementan el impacto del arma; no se reproducen por veneno, sangrado o quemadura.")]
+        public AudioClip[] hitSfx = Array.Empty<AudioClip>();
+        [Range(0f, 1f)] public float hitSfxVolume = .65f;
     }
 }

@@ -1,0 +1,32 @@
+[
+  {
+    "file": "Boar_Vocal.ogg",
+    "download": "https://opengameart.org/sites/default/files/boar_0.ogg",
+    "bytes": 9540,
+    "sha256": "14b874678ef92e52168e1b96da4aee08e3c7e259d06337dd098e1eacaa25b370"
+  },
+  {
+    "file": "Pig_Grunt_CC0.mp3",
+    "download": "https://cdn.freesound.org/previews/536/536746_1415754-hq.mp3",
+    "bytes": 21912,
+    "sha256": "3d13ee49765e6d359f360b6e699b3466836e16ec8ff5cff71478c7126a008a89"
+  },
+  {
+    "file": "Pig_Idle2.mp3",
+    "download": "https://opengameart.org/sites/default/files/pig_idle2.mp3",
+    "bytes": 17762,
+    "sha256": "9844a9d25b671354287b12d7da18b2f0fca80f1d9535ee6892442a5f7974516f"
+  },
+  {
+    "file": "Pig_Hit1.mp3",
+    "download": "https://opengameart.org/sites/default/files/pig_hit1.mp3",
+    "bytes": 26121,
+    "sha256": "946d396a0cdfdd57448363d7d3053f9ae9270b6cac723743cefe4ad1e712f671"
+  },
+  {
+    "file": "Pig_Hit2.mp3",
+    "download": "https://opengameart.org/sites/default/files/pig_hit2.mp3",
+    "bytes": 28211,
+    "sha256": "bf6eea8b67053fbe2a0a62ed75fff5e59d91c931eb881d5e4a90c806e5f55ca8"
+  }
+]

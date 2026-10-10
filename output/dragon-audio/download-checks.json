@@ -1,0 +1,65 @@
+[
+  {
+    "file": "Assets/Art/Audio/Enemies/SoulEater/Source/Dragon_Roar_icyjim_HQ.mp3",
+    "download": "https://cdn.freesound.org/previews/435/435207_5626564-hq.mp3",
+    "sha256": "8a241717a7d44a0b5f48c08a7ac1108c2897d56c43b8a038bcaf3e7716e0eb54",
+    "bytes": 131075
+  },
+  {
+    "file": "Assets/Art/Audio/Enemies/SoulEater/Source/Falling_Rock.wav",
+    "download": "https://opengameart.org/sites/default/files/Falling%20Rock.wav",
+    "sha256": "99106501d15c9ebec1e57ce1a092531ec201157c74354c488366737a055be96f",
+    "bytes": 844376
+  },
+  {
+    "file": "Assets/Art/Audio/Enemies/SoulEater/Source/Fire_Loop_qubodup.flac",
+    "download": "https://opengameart.org/sites/default/files/qubodupFireLoop.flac",
+    "sha256": "5fe7df0a709039b6b05fe431a57c5afe5d826a5cb46c4d255149047dee2f0717",
+    "bytes": 1178351
+  },
+  {
+    "file": "Assets/Art/Source/Audio/SoulEater/wings_flap_large.zip",
+    "download": "https://opengameart.org/sites/default/files/wings_flap_large.zip",
+    "sha256": "f0907c3639f1cc828ac54c9527e8e458d0ca173626d050a8eb8df54a9e36c1b5",
+    "bytes": 97610,
+    "extracted": [
+      {
+        "file": "Assets/Art/Audio/Enemies/SoulEater/Source/wings_flap_large.flac",
+        "member": "wings_flap_large.flac",
+        "sha256": "57dc196fdfbbddb75033d09222560901bc9d33f72224745e95e585c4cd994e4f"
+      }
+    ]
+  },
+  {
+    "file": "Assets/Art/Source/Audio/SoulEater/bear.zip",
+    "download": "https://opengameart.org/sites/default/files/bear.zip",
+    "sha256": "7fbcc09b292019926e00a460831267fc55ae658e3265bb3c1d4e806920699723",
+    "bytes": 115221,
+    "extracted": [
+      {
+        "file": "Assets/Art/Audio/Enemies/SoulEater/Source/bear_01.flac",
+        "member": "flac/bear_01.flac",
+        "sha256": "892069341b0d6392112811f3be0f24e834d5089060d860cbbb778a8eb2c3d146"
+      },
+      {
+        "file": "Assets/Art/Audio/Enemies/SoulEater/Source/bear_02.flac",
+        "member": "flac/bear_02.flac",
+        "sha256": "fd0bbf205b1e18e4ce612c39417019b8f06aadf7dc7886ec84ea1d765792eeca"
+      }
+    ]
+  },
+  {
+    "file": "Assets/Art/Audio/Enemies/SoulEater/Source/Dragon_Roar_JoelAudio_HQ.mp3",
+    "page": "https://freesound.org/people/JoelAudio/sounds/85568/",
+    "download": "https://cdn.freesound.org/previews/85/85568_1206321-hq.mp3",
+    "sha256": "1599bee81b306ebdb9624c487f53817d0ade96026e04614edbc31a3f3e0ee880",
+    "bytes": 51970
+  },
+  {
+    "file": "Assets/Art/Audio/Enemies/SoulEater/Source/Dino_Hiss_999999990_HQ.mp3",
+    "page": "https://freesound.org/people/999999990/sounds/320345/",
+    "download": "https://cdn.freesound.org/previews/320/320345_5286377-hq.mp3",
+    "sha256": "a064c92bd5cca56b6eaa9f10e07bf309bc234b7801873005ee45d36c206efea0",
+    "bytes": 130147
+  }
+]

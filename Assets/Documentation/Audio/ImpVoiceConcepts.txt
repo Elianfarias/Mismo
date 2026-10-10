@@ -1,0 +1,70 @@
+IMP VOICE CONCEPTS — MISMO
+
+Voice recordings: Voices Sound Effects Library, Little Robot Sound Factory.
+Source: https://opengameart.org/content/voices-sound-effects-library
+Author: https://www.littlerobotsoundfactory.com
+License: Creative Commons Attribution 3.0 Unported (CC BY 3.0)
+https://creativecommons.org/licenses/by/3.0/
+Retrieved: 2026-10-07
+
+The original 24-bit / 48 kHz mono recordings are preserved, unmodified, in:
+Assets/Art/Audio/Enemies/Imp/Source
+Their archive and individual SHA256 hashes are in ImpVoiceConcepts-source.json.
+
+Derivatives: Assets/Art/Audio/Enemies/Imp/Concept
+Changes: crops at silence boundaries, small pitch/varispeed shifts, EQ,
+parallel saturation, level matching, edge fades and 16-bit PCM export.
+Three timbre profiles are reproducible. Profile B (Balanced) was selected for
+attack and hit; the listening page now focuses on that profile.
+The preparation was rejected in all three original profiles and replaced by
+a different recorded gesture, cropped to 0.44 s before varispeed, with an
+80 ms tail fade and 0.78 gain. Attack and hit rendering is unchanged.
+
+Approved game uses:
+Prepare <- SmallCreature3_17.wav (0.005–0.445 s), approved replacement
+Attack  <- SmallCreature3_09.wav (0.015–0.535 s)
+Hit     <- SmallCreature3_10.wav (0.015–0.555 s)
+These role labels are Mismo's proposals, not descriptions supplied by the actor.
+SmallCreature3_15.wav is preserved as an unused source from the rejected take.
+
+These are sound-editing auditions, not newly recorded or AI-generated acting.
+AAA Game Character Hellspawn by Epic Stock Media informed the requested
+direction only. No audio from the commercial pack or its demo was used.
+The three approved Balanced WAVs are referenced directly by Imp settings:
+preparation and execution of the melee action, and the confirmed-hit voice.
+Their files and GUIDs are preserved. The other timbre auditions remain unused.
+
+FIRE AUDIO INTEGRATION
+
+Assets/Art/Audio/Enemies/Imp/Fire contains three original procedural effects:
+Imp_Fire_Prepare.wav: 1.18 s rising flame/crackle with the approved preparation.
+Imp_Fire_Launch.wav: 0.64 s fire burst/whoosh with the approved attack voice.
+Imp_Fire_Impact.wav: 1.25 s spreading flame and crackling embers, without a voice.
+The first two are derivatives of the credited voice recordings above.
+Fire textures are deterministic filtered noise and granular crackles generated
+for Mismo; no third-party fire audio is used. The revised impact replaces the
+rejected pressure pulse/pop with rounded ignition and sustained turbulent fire.
+
+The fireball action references these as preparation, execution and projectile
+impact respectively. Its existing 1.2 s windup, projectile speed, VFX, ground
+pool, damage and cooldowns are unchanged. The impact plays at the collision
+position through the existing spatial SFX mixer route.
+
+Rebuild: python Assets/Scripts/Audio/Editor/GenerateImpVoiceConcepts.py
+Dependency: NumPy.
+Then run: python Assets/Scripts/Audio/Editor/GenerateImpFireSounds.py
+This preserves the approved B WAVs and refreshes the integrated listening page.
+Unity setup menu: Mismo > Audio > Integrar voz B y fuego del Imp
+Unity validation: ImpAudioIntegration.RunBatch (dedicated batch process).
+Preview: output/imp-audio/escuchar.html
+Measurements: output/imp-audio/audio-analysis.json
+Fire measurements: output/imp-audio/fire-audio-analysis.json
+Integration/build checks: output/imp-audio/integration-checks.txt
+Play Mode checks: output/imp-audio/play-checks.txt
+
+Keep this credit and indicate modifications when distributing these clips:
+"Imp voice recordings: Voices Sound Effects Library by Little Robot Sound
+Factory (https://www.littlerobotsoundfactory.com), CC BY 3.0
+(https://creativecommons.org/licenses/by/3.0/).
+Source: https://opengameart.org/content/voices-sound-effects-library
+Edited for Mismo: trimming, pitch/speed changes, EQ, saturation and level."

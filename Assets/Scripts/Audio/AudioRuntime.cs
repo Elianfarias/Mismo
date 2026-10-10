@@ -13,6 +13,7 @@ public sealed class AudioRuntime : MonoBehaviour
     {
         if (clip == null || volume <= 0f) return;
         var go = new GameObject("World SFX");
+        go.transform.position = position;
         var source = go.AddComponent<AudioSource>();
         source.playOnAwake = false;
         source.spatialBlend = 1f;

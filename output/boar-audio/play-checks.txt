@@ -1,0 +1,59 @@
+PASS Temporary navigation surface
+PASS Existing audio service and SFX mixer available
+PASS Boar_Standard initializes on navigation
+PASS Boar_Standard selects Attack
+PASS B preparation once at telegraph start
+PASS Execution stays silent during preparation
+PASS B execution once at attack start
+PASS No duplicate sound in active/recovery frames
+PASS Status tick has no hurt sound
+PASS Confirmed damage plays B hurt sound
+PASS Simultaneous hits do not stack hurt sounds
+PASS Boar_Standard initializes on navigation
+PASS Boar_Standard selects Charge
+PASS B preparation once at telegraph start
+PASS Execution stays silent during preparation
+PASS B execution once at attack start
+PASS No duplicate sound in active/recovery frames
+PASS Status tick has no hurt sound
+PASS Confirmed damage plays B hurt sound
+PASS Simultaneous hits do not stack hurt sounds
+PASS Boar_Forest_Moss initializes on navigation
+PASS Boar_Forest_Moss selects Attack
+PASS B preparation once at telegraph start
+PASS Execution stays silent during preparation
+PASS B execution once at attack start
+PASS No duplicate sound in active/recovery frames
+PASS Status tick has no hurt sound
+PASS Confirmed damage plays B hurt sound
+PASS Simultaneous hits do not stack hurt sounds
+PASS Boar_Forest_Moss initializes on navigation
+PASS Boar_Forest_Moss selects Charge
+PASS B preparation once at telegraph start
+PASS Execution stays silent during preparation
+PASS B execution once at attack start
+PASS No duplicate sound in active/recovery frames
+PASS Status tick has no hurt sound
+PASS Confirmed damage plays B hurt sound
+PASS Simultaneous hits do not stack hurt sounds
+PASS Boar_Dark_Fur initializes on navigation
+PASS Boar_Dark_Fur selects Attack
+PASS B preparation once at telegraph start
+PASS Execution stays silent during preparation
+PASS B execution once at attack start
+PASS No duplicate sound in active/recovery frames
+PASS Status tick has no hurt sound
+PASS Confirmed damage plays B hurt sound
+PASS Simultaneous hits do not stack hurt sounds
+PASS Boar_Dark_Fur initializes on navigation
+PASS Boar_Dark_Fur selects Charge
+PASS B preparation once at telegraph start
+PASS Execution stays silent during preparation
+PASS B execution once at attack start
+PASS No duplicate sound in active/recovery frames
+PASS Status tick has no hurt sound
+PASS Confirmed damage plays B hurt sound
+PASS Simultaneous hits do not stack hurt sounds
+PASS Interrupt fixture entered charge preparation
+PASS Interrupted charge does not play execution
+PASS BOAR_AUDIO_PLAY_COMPLETE

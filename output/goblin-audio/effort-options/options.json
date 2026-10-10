@@ -1,0 +1,22 @@
+[
+  {
+    "option": "A",
+    "source": "goblin-5.wav",
+    "already_used_in": "Goblin_Charge_Prepare",
+    "seconds": 0.3,
+    "peak": 0.52,
+    "status": "preview only; not integrated"
+  },
+  {
+    "option": "B",
+    "source": "goblin-2.wav",
+    "already_used_in": "Goblin_Slash_Execute",
+    "seconds": 0.262,
+    "peak": 0.52,
+    "status": "approved and integrated in slash and charge execution",
+    "integrated_paths": [
+      "Assets/Art/Audio/Enemies/Goblin/Goblin_Slash_Execute.wav",
+      "Assets/Art/Audio/Enemies/Goblin/Goblin_Charge_Execute.wav"
+    ]
+  }
+]

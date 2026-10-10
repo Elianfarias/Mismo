@@ -1,0 +1,51 @@
+{
+  "title": "Voices Sound Effects Library",
+  "author": "Little Robot Sound Factory",
+  "author_url": "https://www.littlerobotsoundfactory.com",
+  "license": "CC-BY-3.0",
+  "license_url": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://opengameart.org/content/voices-sound-effects-library",
+  "download": "https://opengameart.org/sites/default/files/Voices_Sound_Effect_Library.zip",
+  "retrieved": "2026-10-07",
+  "archive_sha256": "ec5767d8a44a0149cd4aca7bf48c48cca0c323746f5cccdab71427d02b503ca4",
+  "originals": [
+    {
+      "file": "SmallCreature3_15.wav",
+      "archive_member": "Wav/Small Creature/SmallCreature3_15.wav",
+      "sha256": "1c3827cea631f53322a91400d8d39b1530a1f5dc1d514b28be6094443d10e320",
+      "crop_seconds": [
+        0.015,
+        0.815
+      ],
+      "usage": "Unused; first preparation take rejected by the user."
+    },
+    {
+      "file": "SmallCreature3_09.wav",
+      "archive_member": "Wav/Small Creature/SmallCreature3_09.wav",
+      "sha256": "151d6b687fc7427bf79689ac8bb69f14cad93eed005b07b43c698ca735326e3d",
+      "crop_seconds": [
+        0.015,
+        0.535
+      ]
+    },
+    {
+      "file": "SmallCreature3_10.wav",
+      "archive_member": "Wav/Small Creature/SmallCreature3_10.wav",
+      "sha256": "71d78578c93d0d2086098eb7e42f56531055fa45829093b5e2c786f85665c50e",
+      "crop_seconds": [
+        0.015,
+        0.555
+      ]
+    },
+    {
+      "file": "SmallCreature3_17.wav",
+      "archive_member": "Wav/Small Creature/SmallCreature3_17.wav",
+      "sha256": "82bb85e55c8d822ca2c0f81ffb4a841c0078a3a547bc227c3a8108d91a0e7a5e",
+      "crop_seconds": [
+        0.005,
+        0.445
+      ],
+      "usage": "Replacement preparation audition; 80 ms tail fade and 0.78 output gain."
+    }
+  ]
+}

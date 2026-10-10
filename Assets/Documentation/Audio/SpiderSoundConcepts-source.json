@@ -1,0 +1,32 @@
+{
+  "retrieved": "2026-10-07",
+  "license": "CC-BY-3.0",
+  "license_url": "https://creativecommons.org/licenses/by/3.0/",
+  "project_credit": "https://opengameart.org/content/a-lonely-nightmare-cancelled-game",
+  "sources": [
+    {
+      "file": "Spider_Chattering.wav",
+      "title": "Spider Chattering",
+      "author": "spookymodem",
+      "page": "https://opengameart.org/content/spider-chattering",
+      "download": "https://opengameart.org/sites/default/files/Spider%20Chattering.wav",
+      "sha256": "9f147735ab8b120df1cbe0ea3bc6f8701c5b1e14c05c1c016010768c6c7a82a7"
+    },
+    {
+      "file": "Minimare_Hiss.wav",
+      "title": "A Lonely Nightmare - Minimare (Monster) SFX",
+      "author": "WakianTech",
+      "page": "https://opengameart.org/content/a-lonely-nightmare-minimare-monster-sfx",
+      "download": "https://opengameart.org/sites/default/files/Minimare_Hiss.wav",
+      "sha256": "76789c0e0803c78338949edf59ab182f0d15d667cdff8d1dc3329d4a767c0b44"
+    },
+    {
+      "file": "Minimare_Hurt.wav",
+      "title": "A Lonely Nightmare - Minimare (Monster) SFX",
+      "author": "WakianTech",
+      "page": "https://opengameart.org/content/a-lonely-nightmare-minimare-monster-sfx",
+      "download": "https://opengameart.org/sites/default/files/Minimare_Hurt.wav",
+      "sha256": "ea40ded7bb21d8edd071be412b496bbd0578a8f0618e2d4a6f947dbfb5e596b7"
+    }
+  ]
+}

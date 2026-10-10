@@ -74,6 +74,7 @@ namespace Mismo.Gameplay.Enemies
                     if(Action==SoulEaterAction.Dive)battlefield.Circle(impactPoint,settings.impactRadius,true);
                     else battlefield.Strip(passStart,passEnd,settings.aerialStripHalfWidth,true);
                     Enter(SoulEaterState.AerialAim,settings.aerialAimTime,true);
+                    if(Action==SoulEaterAction.AerialBreath)effects?.Cue(SoulEaterCue.Inhale);
                 }
             }
             else if(State==SoulEaterState.AerialAim && elapsed>=duration)

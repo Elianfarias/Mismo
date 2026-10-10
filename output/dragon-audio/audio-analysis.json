@@ -1,0 +1,326 @@
+{
+  "rate": 48000,
+  "channels": 1,
+  "bits": 16,
+  "clips": [
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Roar_A.wav",
+      "seconds": 2.55,
+      "loop": false,
+      "sha256": "0ea5e083a750b121dcc939c114ebcd9806103786f1561e1d85ec18cf1a1162c8",
+      "peak_dbfs": -3.9,
+      "rms_dbfs": -18.79
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_RoarShort_A.wav",
+      "seconds": 1.6,
+      "loop": false,
+      "sha256": "dcf77ccd4e2135f3450f6ee4c147107a24d537f0ba42a7e744e67d6efef8cf95",
+      "peak_dbfs": -6.02,
+      "rms_dbfs": -18.79
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Hit_A.wav",
+      "seconds": 0.58,
+      "loop": false,
+      "sha256": "6301e4f3fb84ff11836ac10277109819731b6bf8f58938dae67b6cd76faabd0f",
+      "peak_dbfs": -6.49,
+      "rms_dbfs": -18.79
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Death_A.wav",
+      "seconds": 3.65,
+      "loop": false,
+      "sha256": "960133f0858ab7a55d6e8434fe338c7d61a97f590bb8bedd40d8e54b7f9743c4",
+      "peak_dbfs": -3.62,
+      "rms_dbfs": -18.79
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Roar_B.wav",
+      "seconds": 2.55,
+      "loop": false,
+      "sha256": "c16573cca9a0e89f22868e8e059e509cc186bc7b1b9a12766ca4c70aa96ee32e",
+      "peak_dbfs": -3.61,
+      "rms_dbfs": -20.47
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_RoarShort_B.wav",
+      "seconds": 1.6,
+      "loop": false,
+      "sha256": "53113797bbc47d8bd36fb011126afc0d6a83414fd108275f206618fcd0c633e0",
+      "peak_dbfs": -3.78,
+      "rms_dbfs": -18.79
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Hit_B.wav",
+      "seconds": 0.58,
+      "loop": false,
+      "sha256": "d59efc7b18f72d5ede0f0b16413fdb94f63b454298d58fa0d17f470826df8de2",
+      "peak_dbfs": -3.61,
+      "rms_dbfs": -19.06
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Death_B.wav",
+      "seconds": 3.65,
+      "loop": false,
+      "sha256": "4a2e5c1f898e58432a4b371577f7a6ef13043470c948a38c425e1534268edeca",
+      "peak_dbfs": -3.61,
+      "rms_dbfs": -19.79
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Bite_Prepare.wav",
+      "seconds": 0.76,
+      "loop": false,
+      "sha256": "e25856eb749c6e2c94889c778dbb959ae52d8aaa5d65a09c126ad78ed4a8ff8d",
+      "peak_dbfs": -8.12,
+      "rms_dbfs": -21.21
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Bite.wav",
+      "seconds": 0.43,
+      "loop": false,
+      "sha256": "aef724831952edc34b0e50db6f373fb04b5d0578713b0f6e009b8368d014ff72",
+      "peak_dbfs": -5.36,
+      "rms_dbfs": -18.79
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Tail_Prepare.wav",
+      "seconds": 0.88,
+      "loop": false,
+      "sha256": "c8f00a1e6e7e036dc3bd9671dc56ae700d6eafa0e3a86c70eb386992e0a645a4",
+      "peak_dbfs": -7.84,
+      "rms_dbfs": -21.21
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Tail.wav",
+      "seconds": 0.68,
+      "loop": false,
+      "sha256": "2dc27af216aa31bbbf83256a3fb2e5c39eb0e703c3588dabaad4d4204da388b7",
+      "peak_dbfs": -3.61,
+      "rms_dbfs": -19.11
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Inhale.wav",
+      "seconds": 1.38,
+      "loop": false,
+      "sha256": "feb14d939597626a7e287e6a0fe24e0a45a947b5a5d90a27fe7b6654b658c017",
+      "peak_dbfs": -4.19,
+      "rms_dbfs": -21.21
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_FlameStart.wav",
+      "seconds": 0.62,
+      "loop": false,
+      "sha256": "8f7442b2bd4feaf61cb0cdc1d17bf441a4ac027cd50dc6e8b15cbc830950ceb7",
+      "peak_dbfs": -5.66,
+      "rms_dbfs": -18.79
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_FlameLoop.wav",
+      "seconds": 2.4,
+      "loop": true,
+      "sha256": "e8ca07f34c5cedf0e71bc8bea0272645e098eb8dad57da17939c869147e6c2dd",
+      "peak_dbfs": -6.84,
+      "rms_dbfs": -18.79
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_FlameEnd.wav",
+      "seconds": 0.88,
+      "loop": false,
+      "sha256": "9fbcdb74a9e1db81ddd145a30266c1bd8103b8f9917bc74efd17dab1e7b6c870",
+      "peak_dbfs": -3.61,
+      "rms_dbfs": -21.98
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_GroundFireLoop.wav",
+      "seconds": 2.8,
+      "loop": true,
+      "sha256": "fce784e4a75050864752fc29301cabe6e227ee0a03cc94345042c762185a9962",
+      "peak_dbfs": -9.8,
+      "rms_dbfs": -22.5
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_WingFlap.wav",
+      "seconds": 0.85,
+      "loop": false,
+      "sha256": "af044fd28ff723f12f9263e500c778b019ebe606da9427f4110bdfe6b6798888",
+      "peak_dbfs": -6.0,
+      "rms_dbfs": -21.21
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_WingLoop.wav",
+      "seconds": 2.1,
+      "loop": true,
+      "sha256": "8241e5c136d8e4aa22594d8a6a01e77318e17e2c4f597fe3dcbf3ac23f75c2da",
+      "peak_dbfs": -3.84,
+      "rms_dbfs": -21.21
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Jump.wav",
+      "seconds": 0.98,
+      "loop": false,
+      "sha256": "7d7c41fe567308716cb3a24818adb1e5e45240ceb4dfb820ed39301dd9226709",
+      "peak_dbfs": -3.61,
+      "rms_dbfs": -19.95
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Dive.wav",
+      "seconds": 0.62,
+      "loop": false,
+      "sha256": "91d35f5736ec4c8fb8af8f432a35693b2fb522744479315589721a7b78b67ce9",
+      "peak_dbfs": -3.83,
+      "rms_dbfs": -18.79
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Footstep_01.wav",
+      "seconds": 0.64,
+      "loop": false,
+      "sha256": "a9429f5b71696ddaa5be5bde79268755857d1f1d1d9366510dd1fffca398ca07",
+      "peak_dbfs": -4.24,
+      "rms_dbfs": -22.5
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Footstep_02.wav",
+      "seconds": 0.64,
+      "loop": false,
+      "sha256": "ef075daef6700296bc9ad20b76006c9288a47b646724a62522a04c70ee145dc3",
+      "peak_dbfs": -7.82,
+      "rms_dbfs": -22.5
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Land.wav",
+      "seconds": 1.4,
+      "loop": false,
+      "sha256": "731c2e32ecb39d69b2bed43c6cc1b8ce9e58a52d5e1c8ab79b6ec90adcddc053",
+      "peak_dbfs": -3.61,
+      "rms_dbfs": -20.53
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_DiveImpact.wav",
+      "seconds": 2.05,
+      "loop": false,
+      "sha256": "8900415045347ff491c408cd5a5b6d8b2340c71195b1eb363fbe55d22dda5ef2",
+      "peak_dbfs": -3.77,
+      "rms_dbfs": -18.79
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Charge_Prepare.wav",
+      "seconds": 0.7,
+      "loop": false,
+      "sha256": "ab184d66ef0e3add91db37987afc5083bc739204fdb1695764ccfba835de2caa",
+      "peak_dbfs": -10.03,
+      "rms_dbfs": -21.21
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Charge.wav",
+      "seconds": 1.32,
+      "loop": false,
+      "sha256": "b6a21ee0000012e3a83c4a97c8e124575a9fa2188f47761b8996cfecb508b7ff",
+      "peak_dbfs": -3.61,
+      "rms_dbfs": -20.0
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_ChargeLoop.wav",
+      "seconds": 1.4,
+      "loop": true,
+      "sha256": "cd01ea397d0d747a3c55907c75a1bb2a8300d9b4bc1d180827b4dd701a0f9b8e",
+      "peak_dbfs": -3.61,
+      "rms_dbfs": -19.95
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/SoulEater/Concept/Dragon_Brake.wav",
+      "seconds": 1.18,
+      "loop": false,
+      "sha256": "1853a4f0dccf26b86bbb149b58f2bd21bc9aa650191a53e0fe367567ac03597a",
+      "peak_dbfs": -3.61,
+      "rms_dbfs": -21.55
+    },
+    {
+      "file": "output/dragon-audio/Dragon_Voice_A_Preview.wav",
+      "seconds": 10.3,
+      "loop": false,
+      "sha256": "add9b827273a05cff569da696546f66f467c4624c3e0d31538c7537d34aa9ea2",
+      "peak_dbfs": -3.62,
+      "rms_dbfs": -19.68
+    },
+    {
+      "file": "output/dragon-audio/Dragon_Voice_B_Preview.wav",
+      "seconds": 10.3,
+      "loop": false,
+      "sha256": "75b77d5f742c575a45c30bb63f46e447ff2b03611b594a0703014f733aff5fe7",
+      "peak_dbfs": -3.61,
+      "rms_dbfs": -20.61
+    },
+    {
+      "file": "output/dragon-audio/Dragon_Fire_Preview.wav",
+      "seconds": 8.15,
+      "loop": false,
+      "sha256": "e407ab062d0d349162cf2297ffe5e1c98cc467a68b2dd38126055e4303a56e9c",
+      "peak_dbfs": -3.86,
+      "rms_dbfs": -22.23
+    },
+    {
+      "file": "output/dragon-audio/Dragon_Flight_Preview.wav",
+      "seconds": 6.8,
+      "loop": false,
+      "sha256": "2d09c067632c8b504d5e6fe29122c709b57f68c0f88e2a4ff5b55a44ee2020fc",
+      "peak_dbfs": -3.61,
+      "rms_dbfs": -20.9
+    },
+    {
+      "file": "output/dragon-audio/Dragon_Ground_Preview.wav",
+      "seconds": 4.1,
+      "loop": false,
+      "sha256": "4e6de090bdb643824d376655ffdb503116d28c82b9a4c96400ebce08cb6b3916",
+      "peak_dbfs": -3.61,
+      "rms_dbfs": -23.21
+    },
+    {
+      "file": "output/dragon-audio/Dragon_Melee_Preview.wav",
+      "seconds": 4.3,
+      "loop": false,
+      "sha256": "350e7a5206abfc23e497d4b9b474c5f9ab512844ff734c690c96dfbd2ecbc042",
+      "peak_dbfs": -3.61,
+      "rms_dbfs": -22.11
+    },
+    {
+      "file": "output/dragon-audio/Dragon_Charge_Preview.wav",
+      "seconds": 4.0,
+      "loop": false,
+      "sha256": "12aab716b535c86489bd892c6cc1a485acfcb5215e76ce624927b3c9bfc0c218",
+      "peak_dbfs": -3.61,
+      "rms_dbfs": -21.75
+    }
+  ],
+  "labels": {
+    "Roar_A": "A \u00b7 Rugido grave",
+    "RoarShort_A": "A \u00b7 Rugido corto",
+    "Hit_A": "A \u00b7 Hit recibido",
+    "Death_A": "A \u00b7 Muerte",
+    "Roar_B": "B \u00b7 Rugido \u00e1spero",
+    "RoarShort_B": "B \u00b7 Rugido corto",
+    "Hit_B": "B \u00b7 Hit recibido",
+    "Death_B": "B \u00b7 Muerte",
+    "Inhale": "Preparaci\u00f3n \u00b7 inhalaci\u00f3n",
+    "FlameStart": "Encendido del aliento",
+    "FlameLoop": "Aliento sostenido \u00b7 loop",
+    "FlameEnd": "Final del aliento",
+    "GroundFireLoop": "Fuego sobre el suelo \u00b7 loop",
+    "WingFlap": "Un aleteo",
+    "WingLoop": "Aleteo continuo \u00b7 loop",
+    "Jump": "Despegue / salto",
+    "Dive": "Descenso en picado",
+    "Footstep_01": "Pisada pesada \u00b7 1",
+    "Footstep_02": "Pisada pesada \u00b7 2",
+    "Land": "Aterrizaje",
+    "DiveImpact": "Impacto de la ca\u00edda",
+    "Bite_Prepare": "Preparaci\u00f3n \u00b7 mordida",
+    "Bite": "Mordida",
+    "Tail_Prepare": "Preparaci\u00f3n \u00b7 coletazo",
+    "Tail": "Coletazo",
+    "Charge_Prepare": "Preparaci\u00f3n \u00b7 carga",
+    "Charge": "Arranque de la carga",
+    "ChargeLoop": "Carrera \u00b7 loop",
+    "Brake": "Frenada y arrastre"
+  }
+}

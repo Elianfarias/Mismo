@@ -1,0 +1,183 @@
+{
+  "sample_rate": 48000,
+  "channels": 1,
+  "bits": 16,
+  "version": "imp-voice-auditions-2-short-prepare",
+  "selected_profile": "Balanced",
+  "profiles": [
+    {
+      "key": "Body",
+      "title": "A \u00b7 Con cuerpo",
+      "semitones": -1.0,
+      "bite": 0.12,
+      "body": 0.3,
+      "presence": 0.18,
+      "description": "Tono algo m\u00e1s bajo y m\u00e1s peso en la voz."
+    },
+    {
+      "key": "Balanced",
+      "title": "B \u00b7 Equilibrada",
+      "semitones": 0.6,
+      "bite": 0.2,
+      "body": 0.14,
+      "presence": 0.32,
+      "description": "Tono intermedio, con m\u00e1s presencia y aspereza."
+    },
+    {
+      "key": "Sharp",
+      "title": "C \u00b7 M\u00e1s aguda",
+      "semitones": 2.2,
+      "bite": 0.15,
+      "body": 0.04,
+      "presence": 0.38,
+      "description": "Voz m\u00e1s alta y ligera, con el mismo fraseo."
+    }
+  ],
+  "clips": [
+    {
+      "file": "Assets/Art/Audio/Enemies/Imp/Concept/Imp_Body_Prepare.wav",
+      "seconds": 0.466,
+      "peak_dbfs": -6.34,
+      "rms_dbfs": -22.31,
+      "sha256": "f77128d202ca13145ad02de056f330bb7d36e0d8dd89fed4a41f009598bbd3ca",
+      "profile": "Body",
+      "source": "SmallCreature3_17.wav",
+      "crop": [
+        0.005,
+        0.445
+      ]
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Imp/Concept/Imp_Body_Attack.wav",
+      "seconds": 0.551,
+      "peak_dbfs": -8.73,
+      "rms_dbfs": -20.0,
+      "sha256": "3eef20837870549dd93b991be4021ae929ca878063a1d087f800308b157c2a66",
+      "profile": "Body",
+      "source": "SmallCreature3_09.wav",
+      "crop": [
+        0.015,
+        0.535
+      ]
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Imp/Concept/Imp_Body_Hit.wav",
+      "seconds": 0.572,
+      "peak_dbfs": -6.12,
+      "rms_dbfs": -20.0,
+      "sha256": "04c73883808d3cbc3574eefc95429085fef75933c88af82346cae2f13a60e0ec",
+      "profile": "Body",
+      "source": "SmallCreature3_10.wav",
+      "crop": [
+        0.015,
+        0.555
+      ]
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Imp/Concept/Imp_Body_Audition.wav",
+      "seconds": 2.999,
+      "peak_dbfs": -6.12,
+      "rms_dbfs": -23.32,
+      "sha256": "45b6791bc7a62bd1d12d988d88dc187115a10b64d8be4da3cd4db9082febac92"
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Imp/Concept/Imp_Balanced_Prepare.wav",
+      "seconds": 0.425,
+      "peak_dbfs": -7.28,
+      "rms_dbfs": -22.34,
+      "sha256": "d15b3e1a8151709ac002540504a3ac628c49fc342f78c68993ce0960fa12f0ab",
+      "profile": "Balanced",
+      "source": "SmallCreature3_17.wav",
+      "crop": [
+        0.005,
+        0.445
+      ]
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Imp/Concept/Imp_Balanced_Attack.wav",
+      "seconds": 0.502,
+      "peak_dbfs": -9.13,
+      "rms_dbfs": -20.0,
+      "sha256": "9da7083980ea383ee6f5c4c4503c1a86ab3638c8379e3fa949344a49b8bdf2d5",
+      "profile": "Balanced",
+      "source": "SmallCreature3_09.wav",
+      "crop": [
+        0.015,
+        0.535
+      ]
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Imp/Concept/Imp_Balanced_Hit.wav",
+      "seconds": 0.522,
+      "peak_dbfs": -6.32,
+      "rms_dbfs": -20.0,
+      "sha256": "881690efe86f7c75accbec26ef2970be6464c6385e14a5e1da638bcd68b9ef7f",
+      "profile": "Balanced",
+      "source": "SmallCreature3_10.wav",
+      "crop": [
+        0.015,
+        0.555
+      ]
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Imp/Concept/Imp_Balanced_Audition.wav",
+      "seconds": 2.859,
+      "peak_dbfs": -6.32,
+      "rms_dbfs": -23.52,
+      "sha256": "0226a36fe9c6c4f65db408e06dd96788305139f0ca37f8c14df8f020cd3d25db"
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Imp/Concept/Imp_Sharp_Prepare.wav",
+      "seconds": 0.387,
+      "peak_dbfs": -7.31,
+      "rms_dbfs": -22.36,
+      "sha256": "cd0b77d29b2a82b52e827cb305e7267e225c3953cd2e1b14c4ebfc1eb1ce9fb2",
+      "profile": "Sharp",
+      "source": "SmallCreature3_17.wav",
+      "crop": [
+        0.005,
+        0.445
+      ]
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Imp/Concept/Imp_Sharp_Attack.wav",
+      "seconds": 0.458,
+      "peak_dbfs": -8.85,
+      "rms_dbfs": -20.0,
+      "sha256": "fbabe7d655d23d56ba7b8363c076c17c63b4e7ed388ec667c4f3032d62ee982e",
+      "profile": "Sharp",
+      "source": "SmallCreature3_09.wav",
+      "crop": [
+        0.015,
+        0.535
+      ]
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Imp/Concept/Imp_Sharp_Hit.wav",
+      "seconds": 0.476,
+      "peak_dbfs": -5.92,
+      "rms_dbfs": -20.0,
+      "sha256": "69b4b0b641333ca3aeeecb6ee1198df2e37544b5b1c25037899dedde141297f9",
+      "profile": "Sharp",
+      "source": "SmallCreature3_10.wav",
+      "crop": [
+        0.015,
+        0.555
+      ]
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Imp/Concept/Imp_Sharp_Audition.wav",
+      "seconds": 2.731,
+      "peak_dbfs": -5.92,
+      "rms_dbfs": -23.72,
+      "sha256": "4e282fda3220f11b6c235b463b0ae389b61d64534a89742c4a19a7f42f9b593e"
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Imp/Concept/Imp_Voice_Comparison.wav",
+      "seconds": 11.889,
+      "peak_dbfs": -5.92,
+      "rms_dbfs": -24.92,
+      "sha256": "b211e14298acb9da8710dbe3d7a6134a4824209f49a48b89b1ea244b905500ef"
+    }
+  ]
+}

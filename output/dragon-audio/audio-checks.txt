@@ -1,0 +1,8 @@
+PASS: 29 new individual sounds and seven audition sequences; mono 48 kHz PCM16, finite samples, no empty sound or clipping.
+PASS: One-shot boundaries are zero; four loops have matched quantized seams. Sustained fire loops have no fade-to-silence splice; wings and running retain their rhythmic gaps.
+PASS: Bite, tail, inhale, charge and short/phase roar proposals fit the corresponding current windups or state durations.
+PASS: 36 embedded audio players exactly match generated WAVs; four loop players repeat until paused.
+PASS: Source downloads and extracted lossless archive members match recorded SHA256; all authors, licenses and preview provenance documented.
+PASS: Metadata exists and audio GUIDs are unique within the Soul Eater folder.
+PASS: The eight original live clips, their metadata, current Soul Eater settings and boss prefab are byte-identical to the baseline.
+Listening proposal only: no runtime integration, Unity import verification or content build performed. New wing/impact/hurt/loop event hooks still need integration after selection.

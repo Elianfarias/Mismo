@@ -1,0 +1,95 @@
+{
+  "clips": [
+    {
+      "file": "Assets/Art/Audio/Enemies/Spider/Concept/Spider_Dry_Bite_Prepare.wav",
+      "seconds": 0.34,
+      "sha256": "aecc7f1e202e3df924da9d26649fdae096fe5842c693e06a85f27abf2eb78485",
+      "peak_dbfs": -4.01
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Spider/Concept/Spider_Dry_Bite_Execute.wav",
+      "seconds": 0.3,
+      "sha256": "dc0b79b17075f06b490076ec83c4f1db1a88d9e26fe2a51dab06999e2ca5fd0d",
+      "peak_dbfs": -4.01
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Spider/Concept/Spider_Dry_Jump_Prepare.wav",
+      "seconds": 0.5,
+      "sha256": "2e46af8ab68f1aec288fbf7b34daa4b413c89b903843c9a63c999c186948b4d5",
+      "peak_dbfs": -4.01
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Spider/Concept/Spider_Dry_Jump_Execute.wav",
+      "seconds": 0.43,
+      "sha256": "803ba1c0bc256c89dc21733d5b3e12f3bfad9a27cbd7be54abeccb1aee8ca45a",
+      "peak_dbfs": -4.01
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Spider/Concept/Spider_Dry_Hit.wav",
+      "seconds": 0.31,
+      "sha256": "96375dc53f9a4be6abab658efb948ba871262f3374a9ab2a492b3f62b57a0a61",
+      "peak_dbfs": -4.01
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Spider/Concept/Spider_Dry_Audition.wav",
+      "seconds": 4.1,
+      "sha256": "38f7ff2f306f7cb069afe3dc8b265b6eb39ffde78bb169b946c796db08f8890a",
+      "peak_dbfs": -4.01
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Spider/Concept/Spider_Hissing_Bite_Prepare.wav",
+      "seconds": 0.34,
+      "sha256": "567bd3e99654bde9cbbe29bb2b2f907cbc75f33ac6a86ff04ead3547c74c27f7",
+      "peak_dbfs": -4.54
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Spider/Concept/Spider_Hissing_Bite_Execute.wav",
+      "seconds": 0.3,
+      "sha256": "0e6ff2eb92a118c4d06c6b3ed7ed98dbb7e2e300541bd1d32350f06b85efa4b4",
+      "peak_dbfs": -4.01
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Spider/Concept/Spider_Hissing_Jump_Prepare.wav",
+      "seconds": 0.5,
+      "sha256": "0fc5d16b1aea8ca04318a24071b72b11806f0312b9181001b8a8bedf16c1761e",
+      "peak_dbfs": -4.99
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Spider/Concept/Spider_Hissing_Jump_Execute.wav",
+      "seconds": 0.43,
+      "sha256": "aef735519ce35c9e45c456504a8815a7d06524a9096a862d9a73bb3cf814defb",
+      "peak_dbfs": -4.01
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Spider/Concept/Spider_Hissing_Hit.wav",
+      "seconds": 0.31,
+      "sha256": "dc2bb9dbd447a5e386463d331ecc20f380fecdd62c4c8df17580c38a023d3d0a",
+      "peak_dbfs": -4.01
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Spider/Concept/Spider_Hissing_Audition.wav",
+      "seconds": 4.1,
+      "sha256": "fc894151f0e34a0928df2f93a0f2ed21f55e1f97fb6797afaee42bc58a855e93",
+      "peak_dbfs": -4.01
+    }
+  ],
+  "rate": 48000,
+  "channels": 1,
+  "bits": 16,
+  "profiles": {
+    "Dry": {
+      "label": "A \u00b7 Chasquidos",
+      "description": "Patas y mand\u00edbulas, textura seca y siseo discreto.",
+      "speed": 1.04,
+      "hiss": 0.14,
+      "hurt": 0.12
+    },
+    "Hissing": {
+      "label": "B \u00b7 Siseo \u00b7 elegida",
+      "description": "M\u00e1s respiraci\u00f3n \u00e1spera y una reacci\u00f3n m\u00e1s aguda. Seleccionada para la ara\u00f1a.",
+      "speed": 1.1,
+      "hiss": 0.7,
+      "hurt": 0.4
+    }
+  }
+}

@@ -1,0 +1,52 @@
+Mismo - Boar sound concepts
+Created: 2026-10-08
+
+Two listening profiles; B with the revised animal hit is integrated:
+A / Woodland: short dry grunts, a warning snort and a brief hurt squeal.
+B / Bristled: more body and rasp, with a stronger snort at charge launch.
+B is the preferred profile. Its revised Hit uses only the real pig recording
+Pig_Grunt_CC0.mp3 (0.965-1.255 s, 1.18x speed, filters and fades), lasting
+0.29 s. The previous toy squeal and performed voice are absent from this hit.
+The other four B combat sounds and all A sounds are unchanged.
+Original Pig_Hit2.mp3 is retained for provenance but no longer used.
+Each contains Attack_Prepare, Attack_Execute, Charge_Prepare, Charge_Execute
+and Hit. Audition files combine these gestures using the existing 0.55 s
+melee windup and 0.72 s charge windup. Execution belongs at attack launch.
+
+Credits and licenses:
+- Boar by fvcalderan, CC0 1.0.
+  https://opengameart.org/content/boar-0
+  Performed with the author's voice and EQ. Original OGG retained.
+- Pig.ogg by egomassive, based on a real pig recording by felix.blume,
+  CC0 1.0. Public HQ MP3 preview used; this is not the original OGG.
+  https://freesound.org/people/egomassive/sounds/536746/
+  Original: A pig grunting, grumbling and falling asleep (France, Limousin)
+  https://freesound.org/people/felix.blume/sounds/158746/
+  https://creativecommons.org/publicdomain/zero/1.0/
+- Pig SFX Pack (pig_idle2, pig_hit1, pig_hit2) by Vinrax, CC BY 3.0.
+  https://opengameart.org/content/pig-sfx-pack
+  https://opengameart.org/users/vinrax
+  https://creativecommons.org/licenses/by/3.0/
+  Recorded with a rubber pig toy and speed processed by its author.
+  Original MP3 files retained. Credit Vinrax and the linked source when
+  shipping these recordings or the derived mixes.
+
+Modifications for Mismo: cuts, pitch and speed changes, filtering, fades,
+level matching, and layering. Derived mixes distributed under CC BY 3.0;
+the original CC0 sources remain CC0. No endorsement by the authors implied.
+The source manifest contains exact download URLs and SHA256 checksums.
+
+Regenerate with NumPy and SoundFile installed:
+python Assets/Scripts/Audio/Editor/GenerateBoarSoundConcepts.py
+Local dependency fallback: .validation/audio-python (SoundFile only).
+WAV output: mono, 48 kHz, PCM16. Upsampling does not restore source bandwidth.
+Preview: output/boar-audio/escuchar.html
+Integration: Assets/Data/Enemies/ForestCreatures/Boar.asset references all five
+approved B clips, shared by Boar_Standard, Boar_Forest_Moss and Boar_Dark_Fur.
+Preparation and execution volumes are 0.8; hurt volume is 0.75. Existing
+animation timings, damage, travel and cooldowns are preserved.
+The approved WAVs and their GUIDs are unchanged by the integration.
+BoarAudioIntegration.RunBatch validates current imported settings (without
+repairing them), the three prefab dependency sets, a Windows content bundle,
+and combat events in Play Mode. Reports: output/boar-audio. A content bundle
+check is not a full player build.

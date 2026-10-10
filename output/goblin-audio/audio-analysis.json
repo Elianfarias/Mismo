@@ -1,0 +1,89 @@
+{
+  "sample_rate": 48000,
+  "channels": 1,
+  "bits": 16,
+  "voice_source": "Goblins Sound Pack / artisticdude / CC0-1.0",
+  "version": "approved-effort-B",
+  "clips": [
+    {
+      "name": "Goblin_Slash_Prepare",
+      "seconds": 0.4,
+      "peak_dbfs": -6.38,
+      "rms_dbfs": -21.11
+    },
+    {
+      "name": "Goblin_Slash_Execute",
+      "seconds": 0.262,
+      "peak_dbfs": -5.68,
+      "rms_dbfs": -17.48
+    },
+    {
+      "name": "Goblin_Charge_Prepare",
+      "seconds": 0.46,
+      "peak_dbfs": -6.74,
+      "rms_dbfs": -17.95
+    },
+    {
+      "name": "Goblin_Charge_Execute",
+      "seconds": 0.262,
+      "peak_dbfs": -5.68,
+      "rms_dbfs": -17.48
+    },
+    {
+      "name": "Goblin_Hit_01",
+      "seconds": 0.256,
+      "peak_dbfs": -4.29,
+      "rms_dbfs": -16.7
+    },
+    {
+      "name": "Goblin_Hit_02",
+      "seconds": 0.191,
+      "peak_dbfs": -4.29,
+      "rms_dbfs": -16.26
+    },
+    {
+      "name": "Goblin_Hit_03",
+      "seconds": 0.213,
+      "peak_dbfs": -4.29,
+      "rms_dbfs": -17.03
+    }
+  ],
+  "preview": [
+    {
+      "at": 0.0,
+      "name": "Goblin_Slash_Prepare"
+    },
+    {
+      "at": 0.95,
+      "name": "Goblin_Slash_Execute"
+    },
+    {
+      "at": 1.762,
+      "name": "Goblin_Charge_Prepare"
+    },
+    {
+      "at": 2.772,
+      "name": "Goblin_Charge_Execute"
+    },
+    {
+      "at": 3.583,
+      "name": "Goblin_Hit_01"
+    },
+    {
+      "at": 4.389,
+      "name": "Goblin_Hit_02"
+    },
+    {
+      "at": 5.13,
+      "name": "Goblin_Hit_03"
+    },
+    {
+      "at": 5.893,
+      "name": "Sequence_Slash"
+    },
+    {
+      "at": 7.543,
+      "name": "Sequence_Charge"
+    }
+  ]
+}

@@ -143,6 +143,7 @@ MonoBehaviour:
   displayName: Imp
   isBoss: 0
   posture: 70
+  armor: 10
   sightHeight: 0.9
   allowedHeightDifference: 1.2
   preferredRange: 6.5
@@ -183,10 +184,10 @@ MonoBehaviour:
     projectileSpeed: 12
     projectileRange: 30
     projectileRadius: 0.6
-    preparationSfx: {fileID: 0}
-    preparationSfxVolume: 1
-    executionSfx: {fileID: 0}
-    executionSfxVolume: 1
+    preparationSfx: {fileID: 8300000, guid: 80424093fd65515db9861e133ae44067, type: 3}
+    preparationSfxVolume: 0.8
+    executionSfx: {fileID: 8300000, guid: 0fb8a51662fa5005883edd07e6cb7bac, type: 3}
+    executionSfxVolume: 0.8
     projectileImpactVfx: {fileID: 0}
     projectileImpactVfxLifetime: 3
     projectileImpactSfx: {fileID: 0}
@@ -236,14 +237,14 @@ MonoBehaviour:
     projectileSpeed: 15
     projectileRange: 20
     projectileRadius: 0.5
-    preparationSfx: {fileID: 0}
-    preparationSfxVolume: 1
-    executionSfx: {fileID: 0}
-    executionSfxVolume: 1
+    preparationSfx: {fileID: 8300000, guid: cce43701c7e059f587817a976d63d0d6, type: 3}
+    preparationSfxVolume: 0.78
+    executionSfx: {fileID: 8300000, guid: d91c6a001f345e0b9210f8102140d6ca, type: 3}
+    executionSfxVolume: 0.68
     projectileImpactVfx: {fileID: 1715845624619909031, guid: c9b1245b224136949bb19ed43c6297de, type: 3}
     projectileImpactVfxLifetime: 1
-    projectileImpactSfx: {fileID: 0}
-    projectileImpactSfxVolume: 1
+    projectileImpactSfx: {fileID: 8300000, guid: 7b9bb2d9b8bd5566aaa95a4edd80284f, type: 3}
+    projectileImpactSfxVolume: 0.65
     spawnGroundPool: 1
     groundPoolPrefab: {fileID: 1582275357731197809, guid: 5334360cd0cfad84bbf6855beaf10de4, type: 3}
     groundPoolLifetime: 4
@@ -253,3 +254,6 @@ MonoBehaviour:
     groundPoolDamagePerTick: 10
     groundPoolDamageTickInterval: 0.5
     groundPoolDamageRadius: 1.25
+  hitSfx:
+  - {fileID: 8300000, guid: 07ad3ecf19305a11a05c3b494b91de1b, type: 3}
+  hitSfxVolume: 0.75

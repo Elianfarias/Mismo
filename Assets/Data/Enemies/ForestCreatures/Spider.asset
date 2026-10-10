@@ -183,10 +183,10 @@ MonoBehaviour:
     projectileSpeed: 12
     projectileRange: 30
     projectileRadius: 0.6
-    preparationSfx: {fileID: 0}
-    preparationSfxVolume: 1
-    executionSfx: {fileID: 0}
-    executionSfxVolume: 1
+    preparationSfx: {fileID: 8300000, guid: 77876c92f7be5e7a8ca69a037cf3bc7a, type: 3}
+    preparationSfxVolume: 0.8
+    executionSfx: {fileID: 8300000, guid: fe723065fb5a524eb1ef16cc2fddaeda, type: 3}
+    executionSfxVolume: 0.8
     projectileImpactVfx: {fileID: 0}
     projectileImpactVfxLifetime: 3
     projectileImpactSfx: {fileID: 0}
@@ -236,10 +236,10 @@ MonoBehaviour:
     projectileSpeed: 12
     projectileRange: 30
     projectileRadius: 0.6
-    preparationSfx: {fileID: 0}
-    preparationSfxVolume: 1
-    executionSfx: {fileID: 0}
-    executionSfxVolume: 1
+    preparationSfx: {fileID: 8300000, guid: a6d7c612bdbc50a9971e35d044fc4a5e, type: 3}
+    preparationSfxVolume: 0.8
+    executionSfx: {fileID: 8300000, guid: 20ad57d40aaa5767bdd6109d6dfa73ee, type: 3}
+    executionSfxVolume: 0.8
     projectileImpactVfx: {fileID: 0}
     projectileImpactVfxLifetime: 3
     projectileImpactSfx: {fileID: 0}
@@ -306,3 +306,6 @@ MonoBehaviour:
     groundPoolDamagePerTick: 0
     groundPoolDamageTickInterval: 0.5
     groundPoolDamageRadius: 1.25
+  hitSfx:
+  - {fileID: 8300000, guid: f200f236d7825978879986eb7888a378, type: 3}
+  hitSfxVolume: 0.75

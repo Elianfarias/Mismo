@@ -70,12 +70,12 @@ namespace Mismo.Gameplay.Enemies
         }
         void OnEnable()
         {
-            health.Died += Die; combat.PostureBroken += PostureBroken; PlayerMusic.RegisterBoss(this);
+            health.Died += Die; health.Damaged += HurtSound; combat.PostureBroken += PostureBroken; PlayerMusic.RegisterBoss(this);
             if (initialized) ResetEncounter();
         }
         void OnDisable()
         {
-            health.Died -= Die; combat.PostureBroken -= PostureBroken; PlayerMusic.UnregisterBoss(this);
+            health.Died -= Die; health.Damaged -= HurtSound; combat.PostureBroken -= PostureBroken; PlayerMusic.UnregisterBoss(this);
             StopNavigation(); battlefield?.Clear(); effects?.StopAll(); animation?.Dispose(); animation = null;
         }
         void Start()
@@ -105,7 +105,7 @@ namespace Mismo.Gameplay.Enemies
         {
             if (!initialized || player == null || State == SoulEaterState.Dead || PhaseOneComplete) return;
             targetHealth = player.GetComponentInParent<Health>(); target = targetHealth != null ? targetHealth.transform : player;
-            if (State == SoulEaterState.Dormant) Enter(SoulEaterState.Hunting, DecisionPause);
+            if (State == SoulEaterState.Dormant) { Enter(SoulEaterState.Hunting, DecisionPause); effects?.Cue(SoulEaterCue.Emerge); }
         }
         public bool IsFightingPlayer(Transform player) => initialized && isActiveAndEnabled && target != null &&
             State != SoulEaterState.Dormant && State != SoulEaterState.Returning && State != SoulEaterState.Dead && !PhaseOneComplete &&
@@ -141,7 +141,12 @@ namespace Mismo.Gameplay.Enemies
                 case SoulEaterState.Hunting: Hunt(dt); break;
                 case SoulEaterState.Windup:
                     if (Action == SoulEaterAction.Bite && Progress < settings.biteAimLock) { Face(target.position, dt); aim = (TargetPoint-MouthPosition).normalized; }
-                    if (elapsed >= duration) { Enter(SoulEaterState.Active, settings.Active(Action), true); CapturePreviousPose(); }
+                    if (elapsed >= duration)
+                    {
+                        Enter(SoulEaterState.Active, settings.Active(Action), true); CapturePreviousPose();
+                        if(effects!=null&&effects.AudioProfile!=null&&Action!=SoulEaterAction.Breath)
+                            effects.Cue(Action==SoulEaterAction.Tail?SoulEaterCue.Tail:SoulEaterCue.Bite);
+                    }
                     break;
                 case SoulEaterState.Active:
                     if (elapsed >= duration) Enter(SoulEaterState.Recovery, settings.Recovery(Action), true);
@@ -260,7 +265,8 @@ namespace Mismo.Gameplay.Enemies
             aim = Action==SoulEaterAction.Breath?GroundBreathDirection():(TargetPoint-MouthPosition).normalized;
             breathReleased=false;nextFire=clock;
             Enter(SoulEaterState.Windup, settings.Windup(action), true);
-            effects?.Cue(action == SoulEaterAction.Breath ? SoulEaterCue.Inhale : action == SoulEaterAction.Tail ? SoulEaterCue.Tail : SoulEaterCue.Bite);
+            if(action==SoulEaterAction.Breath||effects==null||effects.AudioProfile==null)
+                effects?.Cue(action == SoulEaterAction.Breath ? SoulEaterCue.Inhale : action == SoulEaterAction.Tail ? SoulEaterCue.Tail : SoulEaterCue.Bite);
             return true;
         }
         void Enter(SoulEaterState next, float seconds = 0, bool keepAction = false)
@@ -269,6 +275,7 @@ namespace Mismo.Gameplay.Enemies
             {pursuitCharge=false;nextPursuitCharge=clock+settings.pursuitChargeCooldown;}
             routeMoving=false;movingUntil=0;
             StopNavigation(); effects?.StopBreath(); effects?.EyeIntensity(1);
+            if(next==SoulEaterState.Staggered||next==SoulEaterState.Returning)effects?.CancelVoice();
             if(next!=SoulEaterState.Hunting && next!=SoulEaterState.Returning)localPath?.Clear();
             if(next==SoulEaterState.ChargeWindup||next==SoulEaterState.Braking){chargeDustArmed=false;chargeDustDone=false;}
             State = next; elapsed = 0; duration = seconds;
@@ -302,6 +309,9 @@ namespace Mismo.Gameplay.Enemies
             AerialPose(ref clip,ref p);
             rig.transform.localPosition = visualPosition;
             animation.Sample(clip, p, dt, immediate);
+            bool wingMotion=State==SoulEaterState.AerialAim||State==SoulEaterState.AerialBreath||State==SoulEaterState.Ascending&&Progress>=.25f;
+            bool footsteps=State==SoulEaterState.Charging||State==SoulEaterState.Returning||State==SoulEaterState.Hunting&&(routeMoving||clock<movingUntil);
+            effects?.AnimateMovement(clip,p,wingMotion,footsteps);
         }
         float Loop(AnimationClip c) => c != null ? Mathf.Repeat(locomotionTime / Mathf.Max(.1f, c.length), 1) : 0;
         void CapturePreviousPose()
@@ -383,11 +393,15 @@ namespace Mismo.Gameplay.Enemies
             if (State != SoulEaterState.Active || Action != SoulEaterAction.Bite || damage.AttackId != attackId) return;
             Enter(SoulEaterState.Staggered, combat.Broken ? Mathf.Max(2, settings.parryRecovery) : settings.parryRecovery);
         }
+        void HurtSound(DamageInfo damage)
+        {
+            if(initialized&&!health.IsDead&&damage.StatusEffect==StatusEffectType.None)effects?.Cue(SoulEaterCue.Hurt);
+        }
         void Die(DamageInfo _)
         {
             if (!initialized || State == SoulEaterState.Dead) return;
             battlefield?.Clear();rig.transform.localRotation=visualRest;LandSafely(); Enter(SoulEaterState.Dead, settings.die != null ? settings.die.length : 2); DisableNavigation();
-            body.enabled = false; if(groundBody!=null)groundBody.enabled=false; if (headCollider != null) headCollider.enabled = false; effects?.StopAll(); Defeated?.Invoke();
+            body.enabled = false; if(groundBody!=null)groundBody.enabled=false; if (headCollider != null) headCollider.enabled = false; effects?.StopAll(); effects?.Cue(SoulEaterCue.Death); Defeated?.Invoke();
         }
         static Vector3 Planar(Vector3 v) => Vector3.ProjectOnPlane(v, Vector3.up);
         void Face(Vector3 p, float dt, float multiplier = 1)
