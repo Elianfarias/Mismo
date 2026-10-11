@@ -1127,8 +1127,8 @@
     },
     {
       "key": "ability.axe.axebasic.description",
-      "es": "Ataque básico del hacha: golpes más pesados, con un 15 % de daño adicional.",
-      "en": "Basic axe attack: heavier strikes that deal 15% additional damage."
+      "es": "Ataque básico del hacha: golpes más pesados, con un 15 % de daño adicional. Genera 5 de Focus por golpe.",
+      "en": "Basic axe attack: heavier strikes that deal 15% additional damage. Generates 5 Focus per hit."
     },
     {
       "key": "ability.axe.axebleedingcut.name",
@@ -1167,8 +1167,8 @@
     },
     {
       "key": "ability.axe.axefuriouscombo.description",
-      "es": "Golpea con el hacha en el lugar y podés volver a pulsarla hasta dos veces: tenés 4 s después de cada golpe para dar el siguiente. Cada golpe hace un 135 % del daño y el tercero rompe la postura de los enemigos que alcanza durante 1 s. El enfriamiento empieza con el tercer golpe o al vencer la ventana.",
-      "en": "Strike with the axe in place; you can press it again up to twice, with 4 s after each strike to land the next. Each strike deals 135% damage and the third breaks the posture of every enemy it hits for 1 s. The cooldown starts with the third strike or when the window expires."
+      "es": "Golpea con el hacha en el lugar y podés volver a pulsarla hasta dos veces: tenés 4 s después de cada golpe para dar el siguiente. Cada golpe hace un 135 % del daño y el tercero rompe la postura de los enemigos que alcanza durante 1 s. El enfriamiento empieza con el tercer golpe o al vencer la ventana. Genera 4 de Focus por golpe que acierta.",
+      "en": "Strike with the axe in place; you can press it again up to twice, with 4 s after each strike to land the next. Each strike deals 135% damage and the third breaks the posture of every enemy it hits for 1 s. The cooldown starts with the third strike or when the window expires. Generates 4 Focus per hit that lands."
     },
     {
       "key": "ability.axe.axecrueledge.name",
@@ -1197,8 +1197,8 @@
     },
     {
       "key": "ability.axe.dualaxebasic.description",
-      "es": "Ataque básico con dos hachas.",
-      "en": "Basic attack with two axes."
+      "es": "Ataque básico con dos hachas. Genera 3 de Focus por golpe.",
+      "en": "Basic attack with two axes. Generates 3 Focus per hit."
     },
     {
       "key": "ability.axe.dualaxeleap.name",
@@ -1207,8 +1207,8 @@
     },
     {
       "key": "ability.axe.dualaxeleap.description",
-      "es": "Salta 9 m hacia adelante y golpea con ambas hachas al aterrizar, en un área chica. Hace un 100 % de daño adicional respecto del básico.",
-      "en": "Leap 9 m forward and strike with both axes on landing, hitting a small area. Deals 100% more damage than your basic attack."
+      "es": "Salta 9 m hacia adelante y golpea con ambas hachas al aterrizar, en un área chica. Hace un 100 % de daño adicional respecto del básico. Genera 8 de Focus al impactar.",
+      "en": "Leap 9 m forward and strike with both axes on landing, hitting a small area. Deals 100% more damage than your basic attack. Generates 8 Focus on hit."
     },
     {
       "key": "ability.axe.dualaxethrow.name",
@@ -1217,8 +1217,8 @@
     },
     {
       "key": "ability.axe.dualaxethrow.description",
-      "es": "Lanza una de tus hachas hasta 15 m. Vuelve a tu mano al instante al impactar o al terminar su recorrido.",
-      "en": "Throw one of your axes up to 20 m. It returns to your hand instantly on impact or when its flight ends."
+      "es": "Lanza una de tus hachas hasta 15 m. Vuelve a tu mano al instante al impactar o al terminar su recorrido. Genera 6 de Focus al impactar.",
+      "en": "Throw one of your axes up to 15 m. It returns to your hand instantly on impact or when its flight ends. Generates 6 Focus on hit."
     },
     {
       "key": "ability.axe.dualaxedeathspin.name",
@@ -1227,8 +1227,8 @@
     },
     {
       "key": "ability.axe.dualaxedeathspin.description",
-      "es": "Extiende ambas hachas y gira 360°. Cada hacha que golpea a un enemigo le hace un 130 % del daño del básico.",
-      "en": "Extend both axes and spin 360°. Each axe that hits an enemy deals 130% of your basic attack damage."
+      "es": "Extiende ambas hachas y gira 360°. Cada hacha que golpea a un enemigo le hace un 130 % del daño del básico. Consume 25 de Focus.",
+      "en": "Extend both axes and spin 360°. Each axe that hits an enemy deals 130% of your basic attack damage. Costs 25 Focus."
     },
     {
       "key": "ability.axe.dualaxeberserk.name",
@@ -1237,8 +1237,8 @@
     },
     {
       "key": "ability.axe.dualaxeberserk.description",
-      "es": "Durante 9 s obtenés un 11 % más de daño de ataque y un 22 % más de velocidad de ataque. Cada básico acertado da 1 Focus adicional y te cura el 15 % del daño que hace, y gastás un 66 % menos de stamina, pero tu armadura se reduce un 55 %.",
-      "en": "For 9 s you gain 11% attack damage and 22% attack speed. Each basic attack that lands grants 1 additional Focus and heals you for 15% of the damage it deals, and you spend 66% less stamina, but your armor is reduced by 55%."
+      "es": "Durante 9 s obtenés un 11 % más de daño de ataque y un 22 % más de velocidad de ataque. Cada básico acertado da 1 Focus adicional y te cura el 15 % del daño que hace, y gastás un 66 % menos de stamina, pero tu armadura se reduce un 55 %. Consume 40 de Focus.",
+      "en": "For 9 s you gain 11% attack damage and 22% attack speed. Each basic attack that lands grants 1 additional Focus and heals you for 15% of the damage it deals, and you spend 66% less stamina, but your armor is reduced by 55%. Costs 40 Focus."
     },
     {
       "key": "ability.axe.dualaxebloodthirst.name",

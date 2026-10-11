@@ -18,6 +18,7 @@ MonoBehaviour:
   animationSource: {fileID: 0}
   passive: 0
   passiveValue: 0
+  thirdArrowResetSeconds: 5
   masteryUsesRequired: 25
   masteryModifiers:
   - id: slaughter
@@ -78,7 +79,7 @@ MonoBehaviour:
     threshold: 0.5
     width: 2
     weaponVfx: []
-  description: "Durante 9 s obten\xE9s un 11 % m\xE1s de da\xF1o de ataque y un 22 % m\xE1s de velocidad de ataque. Cada b\xE1sico acertado da 1 Focus adicional y te cura el 15 % del da\xF1o que hace, y gast\xE1s un 66 % menos de stamina, pero tu armadura se reduce un 55 %."
+  description: "Durante 9 s obten\xE9s un 11 % m\xE1s de da\xF1o de ataque y un 22 % m\xE1s de velocidad de ataque. Cada b\xE1sico acertado da 1 Focus adicional y te cura el 15 % del da\xF1o que hace, y gast\xE1s un 66 % menos de stamina, pero tu armadura se reduce un 55 %. Consume 40 de Focus."
   localizationKey: ability.axe.dualaxeberserk
   preparation: 0.62
   active: 0.26
@@ -143,12 +144,12 @@ MonoBehaviour:
   unstoppable: 0
   cancelPreparation: 0
   cancelRecovery: 0
-  focusCost: 0
+  focusCost: 40
   focusGainOnHit: 0
   preparationSfx: {fileID: 0}
   preparationSfxVolume: 1
   loopPreparationSfx: 0
-  executionSfx: {fileID: 8300000, guid: 18ca010d0f9c10947ac77dd2edef6d22, type: 3}
+  executionSfx: {fileID: 8300000, guid: 4fedafcc3a2272144b4b6d2e9fc93166, type: 3}
   executionSfxVolume: 1
   comboStepSfx: []
   weaponVfx: []
@@ -157,6 +158,7 @@ MonoBehaviour:
   comboSteps: []
   comboOrder: 0
   targetsGround: 0
+  groundIndicatorMaterial: {fileID: 0}
   aimFromCamera: 0
   range: 22
   actions:
@@ -174,3 +176,9 @@ MonoBehaviour:
         staminaCostMultiplier: 0.34
         armorMultiplier: 0.45
         lifeSteal: 0.15
+        heartbeatSfx: {fileID: 8300000, guid: 80cfdafd0c643ed45814f3984b830ad4, type: 3}
+        heartbeatVolume: 0.8
+        embersSfx: {fileID: 8300000, guid: 4d19c6350fbc1c84db0008f894fd3fcd, type: 3}
+        embersVolume: 0.8
+        endSfx: {fileID: 8300000, guid: c8b12abf23c643c449449499a7144f9a, type: 3}
+        endVolume: 0.8

@@ -124,7 +124,7 @@ namespace Mismo.Gameplay.Player.Equipment
             if (backVisual != null)
             {
                 var secondary = loadout.SecondaryDefinition;
-                if (secondary.poseProfile != null) ApplyHolsteredProfile(backVisual, secondary.poseProfile.holstered);
+                if (secondary.poseProfile != null) ApplyHolsteredProfile(backVisual, secondary.poseProfile.Holstered(secondary.dualWield));
                 else
                 {
                     // Use the driven visual root, not the physics root. PlayerLocomotionLean

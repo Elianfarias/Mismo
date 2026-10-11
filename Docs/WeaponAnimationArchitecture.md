@@ -41,7 +41,13 @@ Una habilidad con **Etapas por pulsación** (por ejemplo, Combo furioso del hach
 
 Cuando una etapa empieza justo al terminar la anterior, `PlayerAnimationDriver` corta sin mezcla, porque las etapas son tramos consecutivos de un mismo clip. Después de una pausa, entra con el `Blend Seconds` del binding. Al terminar cualquier acción, el fundido de salida usa ese mismo `Blend Seconds`, con un mínimo de 0,06 s.
 
-Los tramos de Combo furioso se generan con **Mismo > Animaciones > Dividir y asignar Combo furioso (Hacha)** a partir de `Combat_Axe_Triple_Attack.anim`, que no se modifica. Cada tramo se remapea con el ritmo de la habilidad original, así cada golpe se ve igual que antes. Si se cambian los tiempos de las etapas, usar **Regenerar cortes del Combo furioso (Hacha)**: conserva los GUID. `OneHandAxeChecks.RunBatch` verifica los datos y que los tramos coincidan con el original.
+Los tramos de Combo furioso se generan con **Mismo > Animaciones > Dividir y asignar Combo furioso (Hacha)** a partir de `Combat_Axe_Triple_Attack.anim`, que no se modifica. Cada tramo se remapea con el ritmo de la habilidad original (0,9015 / 0,7943 / 1,4842 s, `SliceSeconds`), así cada golpe se ve igual que antes. Ese ritmo no depende de los tiempos del Inspector: cada pulsación estira su tramo sobre lo que dure. **Regenerar cortes del Combo furioso (Hacha)** los reescribe conservando los GUID, y ya no pisa el `blendSeconds` del binding.
+
+El remate (`Combat_Axe_Triple_Attack_Finisher`) no es un corte exacto. En el original el cuerpo giraba unos 100° y el hacha caía a 66° hacia la izquierda.
+- **Qué hace la corrección:** `CorrectFinisher` muestrea el tramo sobre `WarriorSkin` con el hacha de `AxePose`, busca el contacto (el punto más bajo de la cabeza) y gira la raíz (`RootQ` y `RootT`) sobre el eje vertical hasta que la cabeza caiga al frente.
+- **Cuándo aplica:** el giro entra suave desde la pose final del segundo golpe, se mantiene durante el impacto y sale antes de idle. Los músculos no cambian.
+- **Cómo regenerarlo:** **Corregir remate del Combo furioso (Hacha)** reescribe solo ese tramo.
+- **Qué se verifica:** `OneHandAxeAttackAuthoring.MeasureBatch` reporta, sin escribir nada, la cabeza, la altura y el giro de cada tramo. `OneHandAxeChecks.RunBatch` verifica los datos, que los tramos coincidan con el original y, con `CheckFinisher`, que el remate pegue a ±10° del frente y gire el cuerpo como máximo 75°.
 
 Las animaciones actuales de espada se migraron a la familia. El movimiento común sigue en el controlador existente. Un override antiguo del perfil de pose tiene precedencia sobre el override de locomoción de familia para preservar configuraciones previas; **los clips de acción nuevos se editan en la familia**.
 

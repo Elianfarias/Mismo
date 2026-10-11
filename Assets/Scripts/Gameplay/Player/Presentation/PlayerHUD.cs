@@ -172,6 +172,13 @@ namespace Mismo.Gameplay.Player.Presentation
             if(health==null)return;
             Matrix4x4 old=GUI.matrix;float scale=Scale;GUI.matrix=Matrix4x4.Scale(Vector3.one*scale);
             float width=Screen.width/scale,height=Screen.height/scale;
+            // Modo Berserker: red screen edge, behind every other HUD element.
+            var fury=GetComponent<BerserkVisual>();var furyStyle=BuffPresentation.Current;
+            if(!health.IsDead&&fury!=null&&fury.ScreenEdge>0&&furyStyle!=null&&furyStyle.furyVignette!=null)
+            {
+                var tint=furyStyle.furyColor;tint.a=fury.ScreenEdge;
+                GUI.DrawTexture(new Rect(0,0,width,height),furyStyle.furyVignette,ScaleMode.StretchToFill,true,0,tint,0,0);
+            }
             // Read layout values every frame so they can be tuned live from InventoryUIIcons.
             var vitalsPosition=icons!=null?icons.hudVitalsPosition:new Vector2(16,18);
             float vitalsWidth=icons!=null?Mathf.Max(1,icons.hudVitalsWidth):380;
@@ -183,6 +190,7 @@ namespace Mismo.Gameplay.Player.Presentation
             if(climbing!=null&&climbing.IsClimbing)Label(new Rect(left,height-190,528,28),"TREPAR · W/S subir/bajar · Soltá ESPACIO para soltar",15,Gold,TextAnchor.MiddleCenter);
             var equipment=GetComponent<Equipment.EquipmentLoadout>();
             var buffs=GetComponent<ActorBuffFeedback>();
+            var skillEffects=GetComponent<Equipment.WeaponSkillEffects>();
             // Both action rows are read every frame so their height can be tuned live from InventoryUIIcons.
             float skillsYOffset=icons!=null?icons.hudSkillsYOffset:0;
             float consumablesYOffset=icons!=null?icons.hudConsumablesYOffset:0;
@@ -223,8 +231,16 @@ namespace Mismo.Gameplay.Player.Presentation
                     float cooldownDuration=equipment.Runner.CooldownDuration(ability);
                     // An open recast chain already paid Focus and stamina: the next press is always available.
                     int recast=equipment.Runner.NextRecastStage(ability);bool chained=recast>0;
-                    Ability(skillX,skillY,ability.IsPassive?"PASIVA":keys[i],ability.DisplayName,ability.IsPassive?"EQUIPADA":Status(remaining,active),cooldownDuration>0?remaining/cooldownDuration:0,chained||hasStamina&&(!showFocus||focusProgress>=1),QuietFantasyUI.AbilityIcon(ability),showFocus&&!chained?focusProgress:-1,chained||hasStamina);
+                    // A timed mode (Berserker) shows its own seconds on the icon instead of the cooldown number.
+                    float modeLeft=0,modeTotal=0;
+                    bool mode=skillEffects!=null&&skillEffects.BerserkTimer(ability,out modeLeft,out modeTotal);
+                    // Tajo sangrante: its mark waits for the basic; the seconds go here, the red frame and amber bar come from its buff view.
+                    float markLeft=0,markTotal=0;
+                    bool marked=skillEffects!=null&&skillEffects.BleedMarkTimer(ability,out markLeft,out markTotal);
+                    Ability(skillX,skillY,ability.IsPassive?"PASIVA":keys[i],ability.DisplayName,ability.IsPassive?"EQUIPADA":mode||marked?"":Status(remaining,active),cooldownDuration>0?remaining/cooldownDuration:0,chained||hasStamina&&(!showFocus||focusProgress>=1),QuietFantasyUI.AbilityIcon(ability),showFocus&&!chained?focusProgress:-1,chained||hasStamina);
                     if(chained&&!active)Recast(skillX,skillY,(recast+1)+"/"+ability.RecastCount,equipment.Runner.RecastWindow(ability));
+                    if(mode)ModeTimer(skillX,skillY,modeLeft,modeTotal);
+                    if(marked&&!active)Label(new Rect(skillX,skillY+24,76,28),Mathf.CeilToInt(markLeft).ToString(),17,QuietFantasyUI.Ink,TextAnchor.MiddleCenter);
                     if(!health.IsDead)BuffHud.DrawSkill(new Rect(skillX,skillY,76,76),ability,buffs?.Views);
                 }
             }
@@ -468,6 +484,14 @@ namespace Mismo.Gameplay.Player.Presentation
             // Focus is communicated by the perimeter; cooldown and stamina remain distinct.
             if(cooldown>0||!hasStamina)Label(new Rect(x,y+24,76,28),cooldown>0?status:"!",17,QuietFantasyUI.Ink,TextAnchor.MiddleCenter);
             Label(new Rect(x,y+80,76,24),key,17,QuietFantasyUI.Ink,TextAnchor.MiddleCenter);
+        }
+        // Timed mode: the seconds left in the icon's center and a bar that empties, in the damage-buff color.
+        private void ModeTimer(float x,float y,float remaining,float duration)
+        {
+            var color=BuffPresentation.Current?.For(BuffKind.Damage)?.color??QuietFantasyUI.Amber;
+            Label(new Rect(x,y+20,76,36),Mathf.CeilToInt(remaining).ToString(),30,color,TextAnchor.MiddleCenter);
+            Fill(new Rect(x+6,y+66,64,4),new Color(.06f,.08f,.12f,.85f));
+            Fill(new Rect(x+6,y+66,64*Mathf.Clamp01(duration>0?remaining/duration:0),4),color);
         }
         // Open recast chain: which press comes next and how much of its window is left.
         private void Recast(float x,float y,string stage,float window)

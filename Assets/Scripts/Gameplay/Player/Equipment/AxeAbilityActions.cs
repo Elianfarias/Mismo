@@ -157,6 +157,14 @@ namespace Mismo.Gameplay.Player.Equipment
         public float damage=14,postureDamage=-1,speed=20,radius=.25f;
         [Tooltip("Vueltas por segundo del hacha en vuelo. 0 = sin giro.")]
         public float spinsPerSecond=3;
+        [Tooltip("Rotación del modelo respecto de la dirección de vuelo (Euler). El modelo del hacha tiene el filo en su eje +X: (0, -90, 0) lo lleva hacia adelante. Cambiarla si otra pieza tiene el modelo orientado distinto.")]
+        public Vector3 visualRotation=new Vector3(0,-90,0);
+        [Tooltip("Loop del hacha girando, pegado al hacha en vuelo y en cada rebote. Suena en 3D: baja a medida que se aleja.")]
+        public AudioClip flightSfx;
+        [Range(0,1)] public float flightVolume=.7f;
+        [Tooltip("Corte cuando el hacha alcanza a un enemigo, también en cada rebote de Hacha errante (más bajo cuanto menos daño lleva). El regreso a la mano no suena.")]
+        public AudioClip impactSfx;
+        [Range(0,1)] public float impactVolume=.8f;
         public override void Begin(AbilityExecution c)
         {
             var effects=c.Owner.GetComponent<WeaponSkillEffects>();
@@ -166,11 +174,16 @@ namespace Mismo.Gameplay.Player.Equipment
             projectile.AbilityId=c.Definition.Id;projectile.AbilityUseId=c.AttackId;
             // Weapon prefabs carry colliders; the projectile would hit its own visual.
             foreach(var collider in projectile.GetComponentsInChildren<Collider>())collider.enabled=false;
+            // The model is the projectile's only child: turn it so the blade leads the flight; the spin below keeps it end over end.
+            if(projectile.transform.childCount>0)projectile.transform.GetChild(0).localRotation=Quaternion.Euler(visualRotation);
             if(spinsPerSecond>0)projectile.gameObject.AddComponent<SpinningVisual>().turnsPerSecond=spinsPerSecond;
+            FlightAudio(projectile.gameObject);
             effects?.ThrowOffhand(c.Definition.range/Mathf.Max(.1f,speed)+.5f);
             projectile.OnImpact=(target,point)=>
             {
                 effects?.ReturnOffhand();
+                // Only an enemy gets the cut: running out of range just brings the axe back, silently.
+                if(target!=null)Impact(1);
                 // Hacha errante: the axe that connected jumps on to up to `count` other enemies, each rebound hitting
                 // softer than the last; the rank only trims that loss.
                 var evolution=c.Modifier;
@@ -195,34 +208,59 @@ namespace Mismo.Gameplay.Player.Equipment
             Vector3 target=next.transform.position+Vector3.up;
             float kept=carried*(1-Mathf.Clamp01(evolution.Amount(c.ModifierRank)));
             float amount=damage*kept*c.DamageMultiplier;
-            ReboundFlight.Launch(c.Weapon.SecondaryVisualPrefab,point,target,speed,spinsPerSecond,()=>
+            var flight=ReboundFlight.Launch(c.Weapon.SecondaryVisualPrefab,point,target,speed,spinsPerSecond,visualRotation,()=>
             {
                 if(next==null)return;
                 var direction=(target-point).normalized;
                 ((IDamageReceiver)next).ReceiveDamage(new DamageInfo(amount,c.Owner,target,direction,AttackIdentity.Next(),postureDamage,weaponFamilyId:c.WeaponFamilyId,abilityId:c.Definition.Id,abilityUseId:c.AttackId));
+                Impact(Mathf.Lerp(.6f,1,kept));
                 if(remaining>1)Rebound(c,evolution,next,target,remaining-1,hit,kept);
             });
+            FlightAudio(flight.gameObject);
         }
+        // The whirl rides on the axe and dies with it on arrival.
+        void FlightAudio(GameObject axe)
+        {
+            if(flightSfx==null)return;
+            var source=axe.AddComponent<AudioSource>();
+            source.clip=flightSfx;source.loop=true;source.volume=flightVolume;source.playOnAwake=false;
+            source.spatialBlend=1;source.rolloffMode=AudioRolloffMode.Logarithmic;source.minDistance=3;source.maxDistance=30;source.dopplerLevel=.5f;
+            source.outputAudioMixerGroup=AudioRuntime.SfxGroup;
+            source.Play();
+        }
+        void Impact(float share){if(impactSfx!=null)AudioEvents.RaisePlayAbilitySFX(impactSfx,impactVolume*share);}
     }
 
     // Visual of an axe flying between two points; runs a callback on arrival. It carries no colliders and no gameplay.
     public sealed class ReboundFlight : MonoBehaviour
     {
         Vector3 from,to;float duration,age,turns;System.Action arrive;
-        public static void Launch(GameObject prefab,Vector3 from,Vector3 to,float speed,float turnsPerSecond,System.Action arrive)
+        // The root faces the destination and never spins; the pivot spins end over end and carries the model, turned so the blade leads.
+        Transform pivot;
+        public Transform Model=>pivot!=null&&pivot.childCount>0?pivot.GetChild(0):null;
+        public Vector3 Direction=>(to-from).normalized;
+        public static ReboundFlight Launch(GameObject prefab,Vector3 from,Vector3 to,float speed,float turnsPerSecond,Vector3 visualRotation,System.Action arrive)
         {
-            var go=prefab!=null?Instantiate(prefab):new GameObject("Axe rebound");
-            foreach(var collider in go.GetComponentsInChildren<Collider>())collider.enabled=false;
+            var go=new GameObject("Axe rebound");
+            var direction=to-from;
+            go.transform.SetPositionAndRotation(from,direction.sqrMagnitude>1e-6f?Quaternion.LookRotation(direction):Quaternion.identity);
             var flight=go.AddComponent<ReboundFlight>();
+            flight.pivot=new GameObject("Spin").transform;flight.pivot.SetParent(go.transform,false);
+            if(prefab!=null)
+            {
+                var model=Instantiate(prefab,flight.pivot,false);
+                model.transform.localRotation=Quaternion.Euler(visualRotation);
+                foreach(var collider in model.GetComponentsInChildren<Collider>())collider.enabled=false;
+            }
             flight.from=from;flight.to=to;flight.turns=turnsPerSecond;flight.arrive=arrive;
             flight.duration=Mathf.Max(.05f,Vector3.Distance(from,to)/Mathf.Max(.1f,speed));
-            go.transform.position=from;
+            return flight;
         }
         void Update()
         {
             age+=Time.deltaTime;
             transform.position=Vector3.Lerp(from,to,Mathf.Clamp01(age/duration));
-            transform.Rotate(Vector3.right,360*turns*Time.deltaTime,Space.Self);
+            pivot.Rotate(Vector3.right,360*turns*Time.deltaTime,Space.Self);
             if(age>=duration){var done=arrive;arrive=null;Destroy(gameObject);done?.Invoke();}
         }
     }
@@ -250,6 +288,16 @@ namespace Mismo.Gameplay.Player.Equipment
         public float armorMultiplier=.45f;
         [Tooltip("Fracción del daño de los básicos que cura mientras dura (0.15 = 15 %). Habilidades y sangrado no curan.")]
         [Range(0,1)] public float lifeSteal=.15f;
+        [Header("Sonidos del modo (la entrada es el sonido de ejecución de la habilidad)")]
+        [Tooltip("Un latido; suena con cada pulso rojo del cuerpo y se acelera con la furia.")]
+        public AudioClip heartbeatSfx;
+        [Range(0,1)] public float heartbeatVolume=.8f;
+        [Tooltip("Crepitar en loop; su volumen crece con la furia. El clip ya viene balanceado con el latido, así que con el mismo volumen suenan como en la muestra.")]
+        public AudioClip embersSfx;
+        [Range(0,1)] public float embersVolume=.8f;
+        [Tooltip("Suena cuando el modo se agota (no al morir ni al cambiar de arma).")]
+        public AudioClip endSfx;
+        [Range(0,1)] public float endVolume=.8f;
         public override void Begin(AbilityExecution c)=>c.Owner.GetComponent<WeaponSkillEffects>()?.Berserk(this,c);
     }
 }

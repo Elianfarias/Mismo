@@ -18,6 +18,7 @@ MonoBehaviour:
   animationSource: {fileID: 0}
   passive: 0
   passiveValue: 0
+  thirdArrowResetSeconds: 5
   masteryUsesRequired: 25
   masteryModifiers:
   - id: power
@@ -51,7 +52,7 @@ MonoBehaviour:
     weaponVfx: []
   - id: recovery
     displayName: "Recuperaci\xF3n"
-    description: "Cada rango reduce un 5% la recarga de esta habilidad."
+    description: Cada rango reduce un 5% la recarga de esta habilidad.
     maxLevel: 3
     effectiveUsesPerLevel: 10
     damagePerLevel: 0
@@ -79,7 +80,7 @@ MonoBehaviour:
     width: 2
     weaponVfx: []
   - id: reopen
-    displayName: "Reabrir"
+    displayName: Reabrir
     description: "Si el objetivo ya sangra, el golpe alarga su sangrado 3 s; cada rango suma un poco m\xE1s de tiempo."
     maxLevel: 3
     effectiveUsesPerLevel: 10
@@ -108,7 +109,7 @@ MonoBehaviour:
     width: 2
     weaponVfx: []
   - id: sweep
-    displayName: "Barrido"
+    displayName: Barrido
     description: "El golpe cubre un \xE1rea el doble de ancha; lo que queda a los costados recibe un 60 % del da\xF1o, y cada rango sube ese porcentaje."
     maxLevel: 3
     effectiveUsesPerLevel: 10
@@ -143,6 +144,8 @@ MonoBehaviour:
   recovery: 0.2
   cooldown: 7.25
   staminaCost: 10
+  recastStages: []
+  recastWindow: 4
   chargeable: 0
   maximumCharge: 0.9
   chargeDamageMultiplier:
@@ -204,13 +207,16 @@ MonoBehaviour:
   preparationSfx: {fileID: 0}
   preparationSfxVolume: 1
   loopPreparationSfx: 0
-  executionSfx: {fileID: 8300000, guid: 7d39d0a3edc97a54ab5f4c555d8bc153, type: 3}
+  executionSfx: {fileID: 8300000, guid: 0f45a05c62352d249a563f6aab604d8d, type: 3}
   executionSfxVolume: 1
   comboStepSfx: []
+  weaponVfx: []
   pose: 1
   usesSwordCombo: 0
   comboSteps: []
+  comboOrder: 0
   targetsGround: 0
+  groundIndicatorMaterial: {fileID: 0}
   aimFromCamera: 0
   range: 51.9
   actions:

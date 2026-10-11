@@ -9,6 +9,9 @@ namespace Mismo.Gameplay.Player.Equipment
     {
         readonly Dictionary<AbilityDefinition,float> readyAt=new Dictionary<AbilityDefinition,float>();
         AudioSource preparationAudio;
+        ComboStepSound followUp; float followUpLeft; int followUpSerial;
+        // A double strike's second sound is waiting for its moment in the current combo step.
+        public bool FollowUpPending=>followUp!=null;
         bool preparationAudioPaused;
         Presentation.WeaponAbilityVfx weaponVfx;
         BasicSwordCombo combo;Health health;Stamina stamina;CombatState state;EquipmentLoadout loadout;
@@ -170,9 +173,15 @@ namespace Mismo.Gameplay.Player.Equipment
                 }
                 int previousStep=combo.StepSerial;
                 combo.Tick(dt);
+                // Counted in step time (dt already carries the attack speed); a step that changed or ended drops it.
+                if(followUp!=null)
+                {
+                    if(combo.StepSerial!=followUpSerial||!combo.IsActive&&!combo.IsRecovering)followUp=null;
+                    else if((followUpLeft-=dt)<=0){AudioEvents.RaisePlayAbilitySFX(followUp.followUpClip,followUp.volume);followUp=null;}
+                }
                 if(combo.IsActive&&combo.StepSerial!=previousStep){c.RefreshAttackSpeed();PlayExecutionSound(d,combo.CurrentStepIndex);}
                 if(!combo.IsActive)weaponVfx.EndActive();
-                if(!combo.IsActive&&!combo.IsRecovering){weaponVfx.Complete();Current=null;}
+                if(!combo.IsActive&&!combo.IsRecovering){weaponVfx.Complete();Current=null;followUp=null;}
                 return;
             }
             float start=c.Preparation;
@@ -198,13 +207,17 @@ namespace Mismo.Gameplay.Player.Equipment
             if(c.Began&&!c.Ended&&c.Elapsed>=end){EndActions(c);weaponVfx.EndActive();}
             if(c.Elapsed>=end+c.Recovery){weaponVfx.Complete();Current=null;}
         }
-        static void PlayExecutionSound(AbilityDefinition definition, int comboStep = -1)
+        void PlayExecutionSound(AbilityDefinition definition, int comboStep = -1)
         {
+            followUp=null;
             var steps = definition.comboStepSfx;
             if(comboStep>=0&&steps!=null&&comboStep<steps.Length&&steps[comboStep]!=null)
             {
                 var sound=steps[comboStep];
                 if(sound.volume<=0)return;
+                // A double strike's second weapon sounds later in the same combo step.
+                if(sound.followUpClip!=null&&definition.usesSwordCombo&&combo!=null)
+                {followUp=sound;followUpLeft=sound.followUpDelay;followUpSerial=combo.StepSerial;}
                 if(sound.clip!=null)
                 {
                     AudioEvents.RaisePlayAbilitySFX(sound.clip,sound.volume);
@@ -269,7 +282,7 @@ namespace Mismo.Gameplay.Player.Equipment
             CancelGroundAim();
             weaponVfx?.Clear();
             StopPreparationSound();
-            pending=null;pendingDash=false;
+            pending=null;pendingDash=false;followUp=null;
             if(Current==null)return;
             if(Current.Definition.usesSwordCombo)combo?.Cancel();
             if(Current.Began&&!Current.Ended)EndActions(Current,true);

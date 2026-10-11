@@ -59,6 +59,11 @@ namespace Mismo.Gameplay.Player.Equipment
         public string[] hiddenRendererPaths = new string[0];
         public WeaponAttachmentPose equipped = new WeaponAttachmentPose();
         public WeaponAttachmentPose holstered = new WeaponAttachmentPose { anchor = WeaponAnchor.Character, offset = new Vector3(0,1.2f,-.25f) };
+        [Tooltip("Usar otra pose guardada cuando el arma va en pareja (Dos hachas): la segunda arma usa el secondaryHolstered de la otra mano.")]
+        public bool useDualHolstered;
+        [Tooltip("Pose guardada de esta arma cuando va en pareja (Dos hachas).")]
+        public WeaponAttachmentPose dualHolstered = new WeaponAttachmentPose { anchor = WeaponAnchor.Character, offset = new Vector3(0,1.2f,-.25f) };
+        public WeaponAttachmentPose Holstered(bool paired) => paired && useDualHolstered ? dualHolstered : holstered;
         [Tooltip("Opcional. Mismo contrato de parámetros Motion, ActionTime y PlaybackRate del controlador base.")]
         public AnimatorOverrideController animations;
         [Header("Estela del arma (VFX)")]

@@ -18,6 +18,7 @@ MonoBehaviour:
   animationSource: {fileID: 0}
   passive: 0
   passiveValue: 0
+  thirdArrowResetSeconds: 5
   masteryUsesRequired: 25
   masteryModifiers:
   - id: fourth_cut
@@ -49,7 +50,7 @@ MonoBehaviour:
     threshold: 0.5
     width: 2
     weaponVfx: []
-  description: "Ataque b\xE1sico del hacha: golpes m\xE1s pesados, con un 15 % de da\xF1o adicional."
+  description: "Ataque b\xE1sico del hacha: golpes m\xE1s pesados, con un 15 % de da\xF1o adicional. Genera 5 de Focus por golpe."
   localizationKey: ability.axe.axebasic
   preparation: 0.5
   active: 0.5
@@ -111,7 +112,7 @@ MonoBehaviour:
   preparationMobility: 1
   activeMobility: 1
   interruptible: 0
-  unstoppable: 0
+  unstoppable: 1
   cancelPreparation: 0
   cancelRecovery: 0
   focusCost: 0
@@ -119,7 +120,7 @@ MonoBehaviour:
   preparationSfx: {fileID: 0}
   preparationSfxVolume: 1
   loopPreparationSfx: 0
-  executionSfx: {fileID: 8300000, guid: 3e000a21a3e669445a9d3001ff083c1f, type: 3}
+  executionSfx: {fileID: 8300000, guid: 6de6665fd2e38844d8785b276ee35682, type: 3}
   executionSfxVolume: 1
   comboStepSfx: []
   weaponVfx: []
@@ -128,6 +129,7 @@ MonoBehaviour:
   comboSteps: []
   comboOrder: 0
   targetsGround: 0
+  groundIndicatorMaterial: {fileID: 0}
   aimFromCamera: 1
   range: 38.1
   actions:

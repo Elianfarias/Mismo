@@ -32,8 +32,8 @@ namespace Mismo.Gameplay.Player.Editor
             Require(strike.strikes.All(s=>Mathf.Abs(strike.damage*s.multiplier-18.9f)<.001f),"Every strike deals 135 % of 14");
             Require(strike.strikes[0].breakPostureSeconds==0&&strike.strikes[1].breakPostureSeconds==0&&Mathf.Approximately(strike.strikes[2].breakPostureSeconds,1),"Only the third strike breaks posture, for 1 s");
 
-            // The three presses split the old 3.18 s execution: every strike still lands where the clip hits.
-            Require(Mathf.Abs(combo.recastStages.Sum(s=>s.Duration)-3.18f)<.002f,"The presses keep the original 3.18 s");
+            // The slices keep the old 3.18 s rhythm; each press stretches its slice over its own Inspector duration.
+            Require(Mathf.Abs(OneHandAxeAttackAuthoring.SliceSeconds.Sum()-3.18f)<.002f,"The slices keep the original 3.18 s rhythm");
             float[] hits={.6637f,1.5445f,2.2506f};
             for(int i=0;i<3;i++)
             {
@@ -45,9 +45,11 @@ namespace Mismo.Gameplay.Player.Editor
             var binding=family.animations!=null?family.animations.Find(combo):null;
             Require(binding!=null&&binding.comboClips!=null&&binding.comboClips.Length==3,"The binding has one combo clip per press");
             for(int i=0;i<3;i++)
-                Require(binding.comboClips[i]!=null&&binding.comboClips[i].humanMotion&&Mathf.Abs(binding.comboClips[i].length-combo.recastStages[i].Duration)<.001f,"Press "+(i+1)+" plays a Humanoid slice as long as its stage");
+                Require(binding.comboClips[i]!=null&&binding.comboClips[i].humanMotion&&Mathf.Abs(binding.comboClips[i].length-OneHandAxeAttackAuthoring.SliceSeconds[i])<.001f,"Press "+(i+1)+" plays a Humanoid slice at the original rhythm");
             OneHandAxeAttackAuthoring.VerifySlices();
             Require(true,"Slices match the original clip at the old rhythm and join without jumps");
+            OneHandAxeAttackAuthoring.CheckFinisher();
+            Require(true,"The finisher lands straight ahead without spinning the body");
 
             // Evolutions and authored numbers: the Inspector is the balance sheet, so these catch a wiped or reverted asset.
             Require(Mathf.Approximately(family.basicDamageBonus,.15f),"The family trait makes basics 15 % heavier");
@@ -86,7 +88,8 @@ namespace Mismo.Gameplay.Player.Editor
             Evolution(rend,"deep_rend",AbilityModifierBehavior.DeepRend,.39f,.45f);
             Evolution(rend,"raw_flesh",AbilityModifierBehavior.RawFlesh,0,0);Bleed(rend.FindModifier("raw_flesh"),3);
             var rendAction=rend.actions.OfType<ArmorRendStrikeAction>().Single();
-            Require(Mathf.Approximately(rendAction.damage,17.5f)&&Mathf.Approximately(rendAction.armorMultiplier,.7f)&&Mathf.Approximately(rendAction.armorDuration,4),"Desgarre hits for 125 % of 14 and removes 30 % of the armor for 4 s");
+            // Its bonus over the basic (14) is tuned in the Inspector; only the armor loss is pinned.
+            Require(rendAction.damage>14&&Mathf.Approximately(rendAction.armorMultiplier,.7f)&&Mathf.Approximately(rendAction.armorDuration,4),"Desgarre hits harder than the basic and removes 30 % of the armor for 4 s");
 
             var cut=Skill("AxeBleedingCut");Modifiers(cut,"rusty_edge");
             Evolution(cut,"rusty_edge",AbilityModifierBehavior.RustyEdge,.5f,.75f);

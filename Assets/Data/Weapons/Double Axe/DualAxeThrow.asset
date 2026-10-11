@@ -18,6 +18,7 @@ MonoBehaviour:
   animationSource: {fileID: 0}
   passive: 0
   passiveValue: 0
+  thirdArrowResetSeconds: 5
   masteryUsesRequired: 25
   masteryModifiers:
   - id: wandering_axe
@@ -49,7 +50,7 @@ MonoBehaviour:
     threshold: 0.5
     width: 2
     weaponVfx: []
-  description: Lanza una de tus hachas hasta 15 m. Vuelve a tu mano al instante al impactar o al terminar su recorrido.
+  description: Lanza una de tus hachas hasta 15 m. Vuelve a tu mano al instante al impactar o al terminar su recorrido. Genera 6 de Focus al impactar.
   localizationKey: ability.axe.dualaxethrow
   preparation: 0.4
   active: 0.2
@@ -115,11 +116,11 @@ MonoBehaviour:
   cancelPreparation: 0
   cancelRecovery: 0
   focusCost: 0
-  focusGainOnHit: 0
+  focusGainOnHit: 6
   preparationSfx: {fileID: 0}
   preparationSfxVolume: 1
   loopPreparationSfx: 0
-  executionSfx: {fileID: 8300000, guid: 7d39d0a3edc97a54ab5f4c555d8bc153, type: 3}
+  executionSfx: {fileID: 8300000, guid: 4f2c447957719b04a85ad9dff84c6654, type: 3}
   executionSfxVolume: 1
   comboStepSfx: []
   weaponVfx: []
@@ -128,6 +129,7 @@ MonoBehaviour:
   comboSteps: []
   comboOrder: 0
   targetsGround: 0
+  groundIndicatorMaterial: {fileID: 0}
   aimFromCamera: 1
   range: 15
   actions:
@@ -143,3 +145,8 @@ MonoBehaviour:
         speed: 20
         radius: 0.25
         spinsPerSecond: 4
+        visualRotation: {x: 0, y: -90, z: 0}
+        flightSfx: {fileID: 8300000, guid: 903e827ee635d544eaa3ad197abd3d15, type: 3}
+        flightVolume: 0.7
+        impactSfx: {fileID: 8300000, guid: 7a13b86838678a7468ce3d973838b154, type: 3}
+        impactVolume: 0.8

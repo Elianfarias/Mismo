@@ -18,6 +18,7 @@ MonoBehaviour:
   animationSource: {fileID: 0}
   passive: 0
   passiveValue: 0
+  thirdArrowResetSeconds: 5
   masteryUsesRequired: 25
   masteryModifiers:
   - id: whirlwind
@@ -49,13 +50,15 @@ MonoBehaviour:
     threshold: 0.5
     width: 2
     weaponVfx: []
-  description: "Extiende ambas hachas y gira 360\xB0. Cada hacha que golpea a un enemigo le hace un 130 % del da\xF1o del b\xE1sico."
+  description: "Extiende ambas hachas y gira 360\xB0. Cada hacha que golpea a un enemigo le hace un 130 % del da\xF1o del b\xE1sico. Consume 25 de Focus."
   localizationKey: ability.axe.dualaxedeathspin
   preparation: 0.26
   active: 0.6
   recovery: 0.4
   cooldown: 8
   staminaCost: 20
+  recastStages: []
+  recastWindow: 4
   chargeable: 0
   maximumCharge: 0.9
   chargeDamageMultiplier:
@@ -112,19 +115,21 @@ MonoBehaviour:
   unstoppable: 1
   cancelPreparation: 0
   cancelRecovery: 0
-  focusCost: 0
+  focusCost: 25
   focusGainOnHit: 0
   preparationSfx: {fileID: 0}
   preparationSfxVolume: 1
   loopPreparationSfx: 0
-  executionSfx: {fileID: 8300000, guid: 7d39d0a3edc97a54ab5f4c555d8bc153, type: 3}
+  executionSfx: {fileID: 8300000, guid: e14513c97d0f9c44c952efdd64696772, type: 3}
   executionSfxVolume: 1
   comboStepSfx: []
+  weaponVfx: []
   pose: 3
   usesSwordCombo: 0
   comboSteps: []
   comboOrder: 0
   targetsGround: 0
+  groundIndicatorMaterial: {fileID: 0}
   aimFromCamera: 0
   range: 22
   actions:
