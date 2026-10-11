@@ -8,6 +8,28 @@ namespace Mismo.Gameplay.Enemies
 {
     public abstract partial class EnemyController
     {
+        private int nextHitSound;
+        private float lastHitSoundAt = float.NegativeInfinity;
+
+        private void PlayReceivedHitSound(DamageInfo damage)
+        {
+            if (damage.IsStatusTick || damage.Amount <= 0f || settings == null ||
+                settings.hitSfx == null || settings.hitSfx.Length == 0 ||
+                settings.hitSfxVolume <= 0f || Time.time - lastHitSoundAt < .08f)
+                return;
+
+            // Cycle authored takes without consuming the random sequence used by enemy AI.
+            for (int i = 0; i < settings.hitSfx.Length; i++)
+            {
+                var clip = settings.hitSfx[nextHitSound++ % settings.hitSfx.Length];
+                nextHitSound %= settings.hitSfx.Length;
+                if (clip == null) continue;
+                AudioEvents.RaisePlayAbilitySFX(clip, settings.hitSfxVolume);
+                lastHitSoundAt = Time.time;
+                return;
+            }
+        }
+
         private void PlayPreparationSound(
             GoblinAttack action)
         {
@@ -270,6 +292,8 @@ namespace Mismo.Gameplay.Enemies
         private void OnDamaged(
             DamageInfo damage)
         {
+            PlayReceivedHitSound(damage);
+
             if (
                 health.IsDead ||
                 settings == null

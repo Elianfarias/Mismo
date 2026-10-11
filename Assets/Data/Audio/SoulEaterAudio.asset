@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d468e058e725448c87e496c907a73df2, type: 3}
+  m_Name: SoulEaterAudio
+  m_EditorClassIdentifier: Mismo.Gameplay.Enemies::Mismo.Gameplay.Enemies.SoulEaterAudioProfile
+  sounds:
+  - cue: 0
+    clip: {fileID: 8300000, guid: 8eca3470c8f346519f61c0088f18d947, type: 3}
+    volume: 0.7
+  - cue: 1
+    clip: {fileID: 8300000, guid: 8eca3470c8f346519f61c0088f18d947, type: 3}
+    volume: 0.65
+  - cue: 2
+    clip: {fileID: 8300000, guid: b9f3794d8afe48b9ae1f4217fe4a4611, type: 3}
+    volume: 0.65
+  - cue: 3
+    clip: {fileID: 8300000, guid: 34fc749fe43a48a88bb61dd86efb6829, type: 3}
+    volume: 0.8
+  - cue: 4
+    clip: {fileID: 8300000, guid: 5c9125f329734e3e823f5580cd1875e1, type: 3}
+    volume: 0.65
+  - cue: 5
+    clip: {fileID: 8300000, guid: 8eca3470c8f346519f61c0088f18d947, type: 3}
+    volume: 0.7
+  - cue: 6
+    clip: {fileID: 8300000, guid: 101f1233bc6a423e9d757e35bb862427, type: 3}
+    volume: 0.85
+  - cue: 7
+    clip: {fileID: 8300000, guid: 5c9125f329734e3e823f5580cd1875e1, type: 3}
+    volume: 0.55
+  - cue: 8
+    clip: {fileID: 8300000, guid: 101f1233bc6a423e9d757e35bb862427, type: 3}
+    volume: 0.4
+  - cue: 9
+    clip: {fileID: 8300000, guid: ad53fb821bab4ad4a5135af11c2cefcf, type: 3}
+    volume: 0.5
+  - cue: 10
+    clip: {fileID: 8300000, guid: e9d671bd8f1347c2992a29a72da17720, type: 3}
+    volume: 0.8
+  - cue: 11
+    clip: {fileID: 8300000, guid: 34fc749fe43a48a88bb61dd86efb6829, type: 3}
+    volume: 0.75
+  fireStart: {fileID: 8300000, guid: bc48169565974a2482ec420c9d71901e, type: 3}
+  fireLoop: {fileID: 8300000, guid: aa849af3d57e476cb026252e083dd6dd, type: 3}
+  fireVolume: 0.65
+  fireFadeOut: 0.08
+  hurtCooldown: 0.65
+  wingBeatPhase: 0.25
+  firstFootstepPhase: 0.2
+  secondFootstepPhase: 0.7

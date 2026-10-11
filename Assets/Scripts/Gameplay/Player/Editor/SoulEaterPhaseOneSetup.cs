@@ -48,8 +48,10 @@ namespace Mismo.Gameplay.Player.Editor
                 var ground=Material("ArenaStone",Shader.Find("Universal Render Pipeline/Lit"),new Color(.105f,.14f,.13f));
                 var border=Material("ArenaBorder",Shader.Find("Universal Render Pipeline/Lit"),new Color(.22f,.28f,.23f));
                 var dust=Material("GroundDust",Shader.Find("Universal Render Pipeline/Particles/Unlit"),new Color(.35f,.42f,.27f,.3f));
-                var clips=new AudioClip[7];for(int i=0;i<7;i++)clips[i]=Sound((SoulEaterCue)i);
-                var fire=Sound(null);
+                var audioProfile=AssetDatabase.LoadAssetAtPath<SoulEaterAudioProfile>("Assets/Data/Audio/SoulEaterAudio.asset");
+                var clips=audioProfile!=null?Array.Empty<AudioClip>():new AudioClip[7];
+                if(audioProfile==null)for(int i=0;i<7;i++)clips[i]=Sound((SoulEaterCue)i);
+                var fire=audioProfile!=null?audioProfile.fireStart:Sound(null);
                 GameObject root=new GameObject("SoulEater_PhaseOne");
                 GameObject prefab;
                 try
@@ -80,6 +82,7 @@ namespace Mismo.Gameplay.Player.Editor
                     particles.GetComponent<ParticleSystemRenderer>().sharedMaterial=dust;
                     var voice=Audio(root,"Voice");var loop=Audio(root,"BreathLoop");loop.clip=fire;loop.loop=true;loop.volume=.42f;
                     var effects=root.AddComponent<SoulEaterEffects>();effects.Configure(vfx,light,rig.surface,particles,voice,loop,clips);
+                    if(audioProfile!=null){loop.loop=false;effects.ConfigureAudio(audioProfile,Audio(root,"Foley"),Audio(root,"Hurt"));}
                     var nav=root.AddComponent<NavMeshAgent>();nav.enabled=false;nav.radius=2.8f;nav.height=5.6f;nav.acceleration=10;nav.angularSpeed=65;
                     root.AddComponent<SoulEaterPhaseOneController>().Configure(settings,rig,Bone("UpperMouth"),Bone("JawTip"),new[]{Bone("Tail01"),Bone("Tail02"),Bone("Tail03"),Bone("TailEnd")},headCollider,effects);
                     root.AddComponent<EnemyNameplate>();

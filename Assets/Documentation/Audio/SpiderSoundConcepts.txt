@@ -1,0 +1,48 @@
+SPIDER SOUND CONCEPTS — MISMO
+
+Profile B (Hissing) is selected and assigned to Spider settings.
+Profile A (Dry), emphasizing chattering, remains as an unused audition.
+Each has bite preparation/execution, jump preparation/execution and received hit.
+The existing active actions have windups of 0.48 s (bite) and 0.60 s (jump).
+The web-spitting action is disabled and has not been changed.
+
+Sources, preserved unchanged under Assets/Art/Audio/Enemies/Spider/Source:
+
+Spider Chattering by spookymodem
+https://opengameart.org/content/spider-chattering
+Licensed CC BY 3.0 on OpenGameArt.
+
+Minimare_Hiss.wav and Minimare_Hurt.wav by WakianTech
+A Lonely Nightmare - Minimare (Monster) SFX
+https://opengameart.org/content/a-lonely-nightmare-minimare-monster-sfx
+Project credit: A Lonely Nightmare (Cancelled Game)
+https://opengameart.org/content/a-lonely-nightmare-cancelled-game
+Licensed CC BY 3.0.
+
+License: https://creativecommons.org/licenses/by/3.0/
+Original download URLs and SHA256 hashes: SpiderSoundConcepts-source.json.
+Keep these author, source, project and license credits with distributed derivatives.
+
+Changes for Mismo: stereo-to-mono mix, resampling to 48 kHz, selected short crops,
+varispeed/pitch changes, frequency filtering, layering, fades, level matching,
+and PCM16 export. The jump includes an original filtered-noise air gesture.
+No audio from the commercial Spider Vocalizations demo was downloaded or used.
+
+Generator: Assets/Scripts/Audio/Editor/GenerateSpiderSoundConcepts.py (NumPy).
+Outputs: Assets/Art/Audio/Enemies/Spider/Concept.
+Listening page: output/spider-audio/escuchar.html.
+The A/B reels follow bite preparation, bite, jump preparation, jump and hit.
+
+GAME INTEGRATION
+
+Assets/Data/Enemies/ForestCreatures/Spider.asset references the five Hissing
+clips directly. Their WAV bytes and metadata are preserved. Preparation and
+execution use volume 0.8; received hit uses 0.75, through the existing SFX route.
+The Standard, Forest Moss, Dark Cave and Albino prefabs share these settings.
+Attack timings, damage, animations and the disabled web action are preserved.
+
+Unity setup menu: Mismo > Audio > Integrar sonidos B de la araña.
+SpiderAudioIntegration.RunBatch checks the four actual prefabs, a Windows
+content bundle and attack/hurt/cancellation events in a temporary Play scene.
+Reports: output/spider-audio/integration-checks.txt and play-checks.txt.
+Content-bundle validation does not replace a full player build.

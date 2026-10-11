@@ -1,0 +1,34 @@
+Approved B goblin effort audio validation
+PASS Unity imports exactly seven replacement clips
+PASS Imported mono PCM and timing: Goblin_Charge_Execute
+PASS Decoded audio has signal and headroom: Goblin_Charge_Execute
+PASS Imported mono PCM and timing: Goblin_Charge_Prepare
+PASS Decoded audio has signal and headroom: Goblin_Charge_Prepare
+PASS Imported mono PCM and timing: Goblin_Hit_01
+PASS Decoded audio has signal and headroom: Goblin_Hit_01
+PASS Imported mono PCM and timing: Goblin_Hit_02
+PASS Decoded audio has signal and headroom: Goblin_Hit_02
+PASS Imported mono PCM and timing: Goblin_Hit_03
+PASS Decoded audio has signal and headroom: Goblin_Hit_03
+PASS Imported mono PCM and timing: Goblin_Slash_Execute
+PASS Decoded audio has signal and headroom: Goblin_Slash_Execute
+PASS Imported mono PCM and timing: Goblin_Slash_Prepare
+PASS Decoded audio has signal and headroom: Goblin_Slash_Prepare
+PASS Windows audio content bundle builds
+PASS Built Windows audio content reloads
+PASS Built content contains every replacement
+PASS Imported mono PCM and timing: Goblin_Charge_Execute
+PASS Decoded audio has signal and headroom: Goblin_Charge_Execute
+PASS Imported mono PCM and timing: Goblin_Charge_Prepare
+PASS Decoded audio has signal and headroom: Goblin_Charge_Prepare
+PASS Imported mono PCM and timing: Goblin_Hit_01
+PASS Decoded audio has signal and headroom: Goblin_Hit_01
+PASS Imported mono PCM and timing: Goblin_Hit_02
+PASS Decoded audio has signal and headroom: Goblin_Hit_02
+PASS Imported mono PCM and timing: Goblin_Hit_03
+PASS Decoded audio has signal and headroom: Goblin_Hit_03
+PASS Imported mono PCM and timing: Goblin_Slash_Execute
+PASS Decoded audio has signal and headroom: Goblin_Slash_Execute
+PASS Imported mono PCM and timing: Goblin_Slash_Prepare
+PASS Decoded audio has signal and headroom: Goblin_Slash_Prepare
+PASS isolated Unity import and content build; main editor and scenes were not used.

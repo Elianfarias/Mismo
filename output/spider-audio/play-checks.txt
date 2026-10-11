@@ -1,0 +1,77 @@
+PASS Temporary navigation surface
+PASS Existing audio service and SFX mixer available
+PASS Spider_Standard initializes on navigation
+PASS Spider_Standard selects Attack_Bite
+PASS B preparation once at telegraph start
+PASS Execution stays silent during preparation
+PASS B execution once at attack start
+PASS No duplicate sound in active/recovery frames
+PASS Status tick has no hurt sound
+PASS Confirmed damage plays B hurt sound
+PASS Simultaneous hits do not stack hurt sounds
+PASS Spider_Standard initializes on navigation
+PASS Spider_Standard selects Jump
+PASS B preparation once at telegraph start
+PASS Execution stays silent during preparation
+PASS B execution once at attack start
+PASS No duplicate sound in active/recovery frames
+PASS Status tick has no hurt sound
+PASS Confirmed damage plays B hurt sound
+PASS Simultaneous hits do not stack hurt sounds
+PASS Spider_Forest_Moss initializes on navigation
+PASS Spider_Forest_Moss selects Attack_Bite
+PASS B preparation once at telegraph start
+PASS Execution stays silent during preparation
+PASS B execution once at attack start
+PASS No duplicate sound in active/recovery frames
+PASS Status tick has no hurt sound
+PASS Confirmed damage plays B hurt sound
+PASS Simultaneous hits do not stack hurt sounds
+PASS Spider_Forest_Moss initializes on navigation
+PASS Spider_Forest_Moss selects Jump
+PASS B preparation once at telegraph start
+PASS Execution stays silent during preparation
+PASS B execution once at attack start
+PASS No duplicate sound in active/recovery frames
+PASS Status tick has no hurt sound
+PASS Confirmed damage plays B hurt sound
+PASS Simultaneous hits do not stack hurt sounds
+PASS Spider_Dark_Cave initializes on navigation
+PASS Spider_Dark_Cave selects Attack_Bite
+PASS B preparation once at telegraph start
+PASS Execution stays silent during preparation
+PASS B execution once at attack start
+PASS No duplicate sound in active/recovery frames
+PASS Status tick has no hurt sound
+PASS Confirmed damage plays B hurt sound
+PASS Simultaneous hits do not stack hurt sounds
+PASS Spider_Dark_Cave initializes on navigation
+PASS Spider_Dark_Cave selects Jump
+PASS B preparation once at telegraph start
+PASS Execution stays silent during preparation
+PASS B execution once at attack start
+PASS No duplicate sound in active/recovery frames
+PASS Status tick has no hurt sound
+PASS Confirmed damage plays B hurt sound
+PASS Simultaneous hits do not stack hurt sounds
+PASS Spider_Albino initializes on navigation
+PASS Spider_Albino selects Attack_Bite
+PASS B preparation once at telegraph start
+PASS Execution stays silent during preparation
+PASS B execution once at attack start
+PASS No duplicate sound in active/recovery frames
+PASS Status tick has no hurt sound
+PASS Confirmed damage plays B hurt sound
+PASS Simultaneous hits do not stack hurt sounds
+PASS Spider_Albino initializes on navigation
+PASS Spider_Albino selects Jump
+PASS B preparation once at telegraph start
+PASS Execution stays silent during preparation
+PASS B execution once at attack start
+PASS No duplicate sound in active/recovery frames
+PASS Status tick has no hurt sound
+PASS Confirmed damage plays B hurt sound
+PASS Simultaneous hits do not stack hurt sounds
+PASS Interrupt fixture entered jump preparation
+PASS Interrupted jump does not play execution
+PASS SPIDER_AUDIO_PLAY_COMPLETE

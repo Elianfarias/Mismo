@@ -1,0 +1,7 @@
+PASS: 4 source recordings match documented original SHA256 hashes.
+PASS: 16 generated WAVs, mono 48 kHz PCM16, non-silent, no sample clipping, zero-valued edges.
+PASS: Unity metadata present and GUIDs unique within this concept set.
+PASS: 7 self-contained HTML audio players match the six integrated clips and fire sequence.
+PASS: All six previous attack/hit WAVs and all existing metadata hashes unchanged.
+PASS: Approved B preparation, attack, hit, audition and actual Imp prefab remain byte-identical.
+Unity import, content build and runtime checks are reported separately in integration-checks.txt and play-checks.txt.

@@ -1,0 +1,68 @@
+PASS Melee and charge remain active
+PASS One selected hurt sound
+PASS Selected B clip: Attack_Prepare
+PASS Decodes mono 48 kHz without clipping: Attack_Prepare
+PASS Selected B clip: Attack_Execute
+PASS Decodes mono 48 kHz without clipping: Attack_Execute
+PASS Selected B clip: Charge_Prepare
+PASS Decodes mono 48 kHz without clipping: Charge_Prepare
+PASS Selected B clip: Charge_Execute
+PASS Decodes mono 48 kHz without clipping: Charge_Execute
+PASS Selected B clip: Hit
+PASS Decodes mono 48 kHz without clipping: Hit
+PASS Approved 0.29-second animal hit revision
+PASS Preparations fit existing windups
+PASS Boar_Standard shares configured settings
+PASS Boar_Standard includes exactly five B clips
+PASS Boar_Forest_Moss shares configured settings
+PASS Boar_Forest_Moss includes exactly five B clips
+PASS Boar_Dark_Fur shares configured settings
+PASS Boar_Dark_Fur includes exactly five B clips
+WARN Global organization issues; see organization.txt.
+PASS Windows boar content bundle builds
+PASS Windows boar content bundle reloads
+PASS Melee and charge remain active
+PASS One selected hurt sound
+PASS Selected B clip: Attack_Prepare
+PASS Decodes mono 48 kHz without clipping: Attack_Prepare
+PASS Selected B clip: Attack_Execute
+PASS Decodes mono 48 kHz without clipping: Attack_Execute
+PASS Selected B clip: Charge_Prepare
+PASS Decodes mono 48 kHz without clipping: Charge_Prepare
+PASS Selected B clip: Charge_Execute
+PASS Decodes mono 48 kHz without clipping: Charge_Execute
+PASS Selected B clip: Hit
+PASS Decodes mono 48 kHz without clipping: Hit
+PASS Approved 0.29-second animal hit revision
+PASS Preparations fit existing windups
+PASS Boar_Standard retains and decodes all five B clips in the build
+PASS Melee and charge remain active
+PASS One selected hurt sound
+PASS Selected B clip: Attack_Prepare
+PASS Decodes mono 48 kHz without clipping: Attack_Prepare
+PASS Selected B clip: Attack_Execute
+PASS Decodes mono 48 kHz without clipping: Attack_Execute
+PASS Selected B clip: Charge_Prepare
+PASS Decodes mono 48 kHz without clipping: Charge_Prepare
+PASS Selected B clip: Charge_Execute
+PASS Decodes mono 48 kHz without clipping: Charge_Execute
+PASS Selected B clip: Hit
+PASS Decodes mono 48 kHz without clipping: Hit
+PASS Approved 0.29-second animal hit revision
+PASS Preparations fit existing windups
+PASS Boar_Forest_Moss retains and decodes all five B clips in the build
+PASS Melee and charge remain active
+PASS One selected hurt sound
+PASS Selected B clip: Attack_Prepare
+PASS Decodes mono 48 kHz without clipping: Attack_Prepare
+PASS Selected B clip: Attack_Execute
+PASS Decodes mono 48 kHz without clipping: Attack_Execute
+PASS Selected B clip: Charge_Prepare
+PASS Decodes mono 48 kHz without clipping: Charge_Prepare
+PASS Selected B clip: Charge_Execute
+PASS Decodes mono 48 kHz without clipping: Charge_Execute
+PASS Selected B clip: Hit
+PASS Decodes mono 48 kHz without clipping: Hit
+PASS Approved 0.29-second animal hit revision
+PASS Preparations fit existing windups
+PASS Boar_Dark_Fur retains and decodes all five B clips in the build

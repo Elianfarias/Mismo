@@ -1,0 +1,10 @@
+PASS: Profile B (Bristled) integrated in Boar_Standard, Boar_Forest_Moss and Boar_Dark_Fur.
+PASS: Attack preparation/execution and charge preparation/execution volume 0.8; approved 0.29 s real-pig hurt at volume 0.75.
+PASS: Approved audio, metadata and all three prefabs preserved byte-for-byte; only audio references and volumes changed in Boar settings.
+PASS: All 12 mono 48 kHz PCM16 preview files match the embedded players; no clipping or empty audio.
+PASS: Unity 6000.6.0f1 import and Play Mode checks passed (126 assertions).
+PASS: Preparation and execution fire once in their combat phases; interrupted charge does not execute; status ticks stay silent and simultaneous hits do not stack hurt sounds.
+PASS: Windows content bundle builds and reloads all three prefabs with all five B clips, including the revised animal hit; no A alternatives or audition reels included.
+WARN: ProjectOrganizationChecks reports the same existing findings as the spider validation, with no additions or removals. See organization.txt.
+Validation ran in an isolated copy of Assets, Packages and ProjectSettings. Validated Boar settings are byte-identical to the actual project. This was a content build, not a full player build.
+Detailed results: integration-checks.txt, play-checks.txt, organization.txt.

@@ -33,6 +33,10 @@ MonoBehaviour:
   staggerResistance: 0.75
   parryStaggerDuration: 1.25
   slash:
+    preparationSfx: {fileID: 8300000, guid: 59279861147b524ea456379df7426194, type: 3}
+    preparationSfxVolume: 0.6
+    executionSfx: {fileID: 8300000, guid: dd8f1dc192225887839b09ac0c07486a, type: 3}
+    executionSfxVolume: 0.78
     label: Golpe
     resistComboInterrupt: 0
     range: 2
@@ -70,6 +74,10 @@ MonoBehaviour:
     projectileRange: 30
     projectileRadius: 0.6
   charge:
+    preparationSfx: {fileID: 8300000, guid: 89fb70ea3ca25756adf6a8343158636c, type: 3}
+    preparationSfxVolume: 0.65
+    executionSfx: {fileID: 8300000, guid: 10c5404b96275e4eb9065644508c8743, type: 3}
+    executionSfxVolume: 0.8
     label: Carga
     resistComboInterrupt: 0
     range: 7
@@ -113,3 +121,8 @@ MonoBehaviour:
   allowedHeightDifference: 1.2
   preferredRange: 1.7
   attacks: []
+  hitSfx:
+  - {fileID: 8300000, guid: 36d66a31a2af5bd2a189bc5a644cb3a0, type: 3}
+  - {fileID: 8300000, guid: f8672d1144875e5984898960e004a90a, type: 3}
+  - {fileID: 8300000, guid: 25607c70ae5a5cc08620fa8df8b44afb, type: 3}
+  hitSfxVolume: 0.58

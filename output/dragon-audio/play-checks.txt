@@ -1,0 +1,29 @@
+PASS Temporary navigation for real boss prefab
+PASS Runtime SFX mixer available
+PASS Encounter starts with one pack roar
+PASS Starts Bite
+PASS No premature attack sound during Bite windup
+PASS One selected attack sound at Bite release
+PASS Starts Tail
+PASS No premature attack sound during Tail windup
+PASS One selected attack sound at Tail release
+PASS Approved fire opening at warning
+PASS Original fire remainder starts only at flame release
+PASS Extended breath uses flame-only continuation
+PASS Pause freezes fire and suppresses new cues
+PASS Fire resumes after pause
+PASS Stagger interrupts breath
+PASS Interrupted fire fades out and stops
+PASS Status damage does not spam vocal pain
+PASS Direct damage emits one cooldown-limited hurt
+PASS Actual walking animation emits ground footsteps
+PASS Phase two enabled through real controller
+PASS Aerial flame starts
+PASS Takeoff uses pack wing sound
+PASS Flight animation emits wing beats
+PASS Aerial flame uses approved fire
+PASS Aerial landing uses pack ground impact
+PASS Ground impact and dust do not double-trigger
+PASS Death stops combat sounds and plays the pack death once
+PASS Reset/disable cleanup stops every channel
+PASS DRAGON_AUDIO_PLAY_COMPLETE

@@ -1,0 +1,38 @@
+GOBLIN VOICES — MISMO
+
+Source: Goblins Sound Pack
+Author: artisticdude
+Publication: 2011-01-04
+Source page: https://opengameart.org/content/goblins-sound-pack
+Download: https://opengameart.org/sites/default/files/goblins_0.zip
+Retrieved: 2026-10-07
+License shown on the source page: CC0 1.0 Universal
+License URL: https://creativecommons.org/publicdomain/zero/1.0/
+Legal code: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+Original recordings, unmodified (stereo, 24-bit, 44.1 kHz):
+Assets/Art/Audio/Enemies/Goblin/Source
+The selected originals and archive hashes are in GoblinVoices-source.json.
+
+Derived clips and source recordings:
+Goblin_Slash_Prepare.wav  <- goblin-1.wav
+Goblin_Slash_Execute.wav  <- goblin-2.wav (approved effort B)
+Goblin_Charge_Prepare.wav <- goblin-5.wav
+Goblin_Charge_Execute.wav <- goblin-2.wav (same approved effort B)
+Goblin_Hit_01.wav         <- goblin-6.wav
+Goblin_Hit_02.wav         <- goblin-10.wav
+Goblin_Hit_03.wav         <- goblin-13.wav
+
+Edits: silence trimming, mono conversion, approximately one semitone of
+downward varispeed, gentle EQ/saturation, edge fades, headroom matching,
+48 kHz / 16-bit PCM export. Preparations contain quiet original procedural
+Foley layers; hurt voices use recorded vocals only. Both attack executions
+use the approved B effort, about 0.262 seconds, peak 0.52, without movement
+or impact layers. Their WAV bytes match output/goblin-audio/effort-options/
+Goblin_Esfuerzo_B.wav. The goblin-9.wav source remains archived and unused.
+
+Rebuild: python Assets/Scripts/Audio/Editor/GenerateGoblinSounds.py
+Requires NumPy. Preserves the seven existing Unity GUIDs and references.
+
+Goblin Vocalizations by Magic Sound Effects was a direction reference only.
+No audio from its commercial pack or public demo was copied or incorporated.

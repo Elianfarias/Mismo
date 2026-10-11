@@ -1,0 +1,110 @@
+{
+  "clips": [
+    {
+      "file": "Assets/Art/Audio/Enemies/Boar/Concept/Boar_Woodland_Attack_Prepare.wav",
+      "seconds": 0.4,
+      "sha256": "b5bdb6d78ba438362e8989d3870069d16ccdeb9b7a22ef6bba6162e4d655e9a7",
+      "peak_dbfs": -4.01,
+      "rms_dbfs": -24.34
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Boar/Concept/Boar_Woodland_Attack_Execute.wav",
+      "seconds": 0.32,
+      "sha256": "2c3d28659fd91e4ea961116bd16868066a5dc8f2295975891ed0fc08d534145a",
+      "peak_dbfs": -4.01,
+      "rms_dbfs": -22.74
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Boar/Concept/Boar_Woodland_Charge_Prepare.wav",
+      "seconds": 0.62,
+      "sha256": "ccec37e142a58bcbf19f8d613d6aba1527c647e729cb10f5fdd9f7223b3a1607",
+      "peak_dbfs": -4.01,
+      "rms_dbfs": -23.83
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Boar/Concept/Boar_Woodland_Charge_Execute.wav",
+      "seconds": 0.48,
+      "sha256": "ebbbc87050f8fb3be25b33f6727f4d851097c49c29ad72c5f9e1ecc0b40792e5",
+      "peak_dbfs": -4.01,
+      "rms_dbfs": -19.59
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Boar/Concept/Boar_Woodland_Hit.wav",
+      "seconds": 0.44,
+      "sha256": "1fe694f365a1135396decca3d834f9de73c2a03d9d20f1639dd6b19b7ff3d70b",
+      "peak_dbfs": -4.01,
+      "rms_dbfs": -19.84
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Boar/Concept/Boar_Woodland_Audition.wav",
+      "seconds": 4.4,
+      "sha256": "4669f8f45c3bac5db9834e45c506a843f65f4c60da395b201de2b3d5b23323c7",
+      "peak_dbfs": -4.01,
+      "rms_dbfs": -24.51
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Boar/Concept/Boar_Bristled_Attack_Prepare.wav",
+      "seconds": 0.4,
+      "sha256": "2213013b5db38cc48bf7d21d48ca455d11125c39ae247ed0638dd6df58c00451",
+      "peak_dbfs": -4.01,
+      "rms_dbfs": -23.28
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Boar/Concept/Boar_Bristled_Attack_Execute.wav",
+      "seconds": 0.32,
+      "sha256": "03055aafafe09e8ae6bf59b8a0859d7197009d67de41ce33ac94caf3f9c430fa",
+      "peak_dbfs": -4.01,
+      "rms_dbfs": -20.14
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Boar/Concept/Boar_Bristled_Charge_Prepare.wav",
+      "seconds": 0.62,
+      "sha256": "5d52792abd7ab5878da85f71ca159f11f2d694e4e5b1089fd1b1e493984a43fc",
+      "peak_dbfs": -4.27,
+      "rms_dbfs": -22.73
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Boar/Concept/Boar_Bristled_Charge_Execute.wav",
+      "seconds": 0.48,
+      "sha256": "4b7670e47b377c13e458b422fe1712ccdbe5fb3d7ca60e916114b2b7269514f4",
+      "peak_dbfs": -4.05,
+      "rms_dbfs": -19.33
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Boar/Concept/Boar_Bristled_Hit.wav",
+      "seconds": 0.29,
+      "sha256": "c6b31c61010d60d32da8c8a65dd9437946f44e20738ab891d6d17d885475ce12",
+      "peak_dbfs": -4.01,
+      "rms_dbfs": -23.26
+    },
+    {
+      "file": "Assets/Art/Audio/Enemies/Boar/Concept/Boar_Bristled_Audition.wav",
+      "seconds": 4.4,
+      "sha256": "4a03b2e20b1394f01c73d7d1965e58c9ea235f632b86d11648960d8b1fee16d6",
+      "peak_dbfs": -4.01,
+      "rms_dbfs": -24.6
+    }
+  ],
+  "rate": 48000,
+  "channels": 1,
+  "bits": 16,
+  "profiles": {
+    "Woodland": {
+      "label": "A \u00b7 Gru\u00f1ido seco",
+      "description": "Gru\u00f1idos cortos, resoplido de aviso y un chillido breve al recibir da\u00f1o.",
+      "speed": 1.0,
+      "voice": 0.3,
+      "breath": 0.18,
+      "hit": "Pig_Hit1.mp3"
+    },
+    "Bristled": {
+      "label": "B \u00b7 Resoplido furioso \u00b7 elegida",
+      "description": "M\u00e1s cuerpo y aspereza. Hit revisado: un gru\u00f1ido nasal corto a partir de un cerdo real.",
+      "speed": 0.9,
+      "voice": 0.85,
+      "breath": 0.44,
+      "hit": "Pig_Grunt_CC0.mp3"
+    }
+  },
+  "settings_sha256": "8c9f9be1c6fd78631abe336940671132c556b21be020d91d448e1fdcffddc6a4"
+}

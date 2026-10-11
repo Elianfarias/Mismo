@@ -166,6 +166,8 @@ namespace Mismo.Gameplay.Enemies
 
         protected void OnEnable()
         {
+            nextHitSound = 0;
+            lastHitSoundAt = float.NegativeInfinity;
             combat.PostureBroken += Stagger;
             health.Damaged += OnDamaged;
             health.Died += OnDied;

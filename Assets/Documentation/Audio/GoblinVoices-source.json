@@ -1,0 +1,39 @@
+{
+  "title": "Goblins Sound Pack",
+  "author": "artisticdude",
+  "license": "CC0-1.0",
+  "page": "https://opengameart.org/content/goblins-sound-pack",
+  "download": "https://opengameart.org/sites/default/files/goblins_0.zip",
+  "retrieved": "2026-10-07",
+  "archive_sha256": "480e0ff1df5eda83a32f2781b4b5bd65606e8f43e0ca52175c1a9e08e2bc7d40",
+  "originals": [
+    {
+      "file": "goblin-1.wav",
+      "sha256": "0c58f275b8fdbb7387b69190dde2b96c83a22c5b34e3eb92bf11bcfbd1b594c2"
+    },
+    {
+      "file": "goblin-2.wav",
+      "sha256": "ba8632a3ef48ef38c64d5fc6cade3b85285176186f2e55fb06288cc4024ac238"
+    },
+    {
+      "file": "goblin-5.wav",
+      "sha256": "185a73b2744c1e9caf5f91893ffbf5c3ae98627ecbc95d25ff3a1676c06b5196"
+    },
+    {
+      "file": "goblin-6.wav",
+      "sha256": "f4e399b61c4afeedea8ab4f7bd1b0941bf471ae41ebd9b267ffcb04cb7d4b5e3"
+    },
+    {
+      "file": "goblin-9.wav",
+      "sha256": "2c3be216495e6154acd5990cc0da86471e6ab35544d9fc9747d18a139d36ab59"
+    },
+    {
+      "file": "goblin-10.wav",
+      "sha256": "f4ef13d19f943a1e65380a4b65e0b5283664665b404bd37f5ea499f2a0670b9e"
+    },
+    {
+      "file": "goblin-13.wav",
+      "sha256": "6b8ac800adb6a376d6e4b53b8f10b338bfabc3f0297779c203705d3f8aac8610"
+    }
+  ]
+}

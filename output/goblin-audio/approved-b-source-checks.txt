@@ -1,0 +1,4 @@
+PASS Goblin_Slash_Execute: exact byte match with approved B, SHA-256 766ec08841ccb29e4ff472ba31d46cd66ed0915442b8c7c6aaa2fa4a1c096c3d
+PASS Goblin_Charge_Execute: exact byte match with approved B, SHA-256 766ec08841ccb29e4ff472ba31d46cd66ed0915442b8c7c6aaa2fa4a1c096c3d
+PASS all preparation, hurt and source WAVs and all meta GUIDs remain unchanged
+PASS BaseGoblin assignments, attack timing, damage and volumes unchanged; Goblin and GoblinElite both use approved B

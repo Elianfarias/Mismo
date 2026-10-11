@@ -1,0 +1,32 @@
+PASS Both Imp actions load
+PASS Approved B preparation and melee attack assigned
+PASS Approved B hurt voice assigned
+PASS Three fire stages assigned
+PASS Both preparation clips fit their existing telegraph durations
+PASS Fireball visual, explosion and burning ground retained
+PASS Six distinct runtime audio clips
+PASS Readable mono 48 kHz PCM without clipping: Imp_Balanced_Hit
+PASS Readable mono 48 kHz PCM without clipping: Imp_Balanced_Prepare
+PASS Readable mono 48 kHz PCM without clipping: Imp_Balanced_Attack
+PASS Readable mono 48 kHz PCM without clipping: Imp_Fire_Prepare
+PASS Readable mono 48 kHz PCM without clipping: Imp_Fire_Launch
+PASS Readable mono 48 kHz PCM without clipping: Imp_Fire_Impact
+PASS Actual Imp prefab uses the configured settings
+PASS Explosion is a dependency of the actual Imp prefab
+WARN Existing global organization issues; see organization.txt.
+PASS Windows Imp content bundle builds
+PASS Windows Imp content bundle reloads
+PASS Both Imp actions load
+PASS Approved B preparation and melee attack assigned
+PASS Approved B hurt voice assigned
+PASS Three fire stages assigned
+PASS Both preparation clips fit their existing telegraph durations
+PASS Fireball visual, explosion and burning ground retained
+PASS Six distinct runtime audio clips
+PASS Readable mono 48 kHz PCM without clipping: Imp_Balanced_Hit
+PASS Readable mono 48 kHz PCM without clipping: Imp_Balanced_Prepare
+PASS Readable mono 48 kHz PCM without clipping: Imp_Balanced_Attack
+PASS Readable mono 48 kHz PCM without clipping: Imp_Fire_Prepare
+PASS Readable mono 48 kHz PCM without clipping: Imp_Fire_Launch
+PASS Readable mono 48 kHz PCM without clipping: Imp_Fire_Impact
+PASS Built Imp prefab retains and decodes all six audio dependencies

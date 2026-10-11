@@ -1,0 +1,8 @@
+PASS Main project matches the validated code, selected clips, prefab and audio profile.
+PASS Original audio, GUIDs and gameplay settings preserved.
+PASS Existing prefab changes confined to audio components and added audio child references.
+PASS ProjectOrganizationChecks findings unchanged from the previous boar integration.
+PASS Play Mode combat checks completed (ground and aerial attacks, pause, interruption, hurt, movement and death).
+PASS Windows boss content AssetBundle built, reloaded and all nine audio clips decoded.
+NOTE Validation used an isolated Unity project with the same changed assets and code; this was a content build, not a full player build.
+NOTE Unity Editor SearchDatabase emitted its existing startup indexing exception; combat checks completed successfully.

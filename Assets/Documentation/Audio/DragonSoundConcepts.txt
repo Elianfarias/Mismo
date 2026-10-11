@@ -1,0 +1,66 @@
+Soul Eater / Dragon - replacement audio proposal
+Created: 2026-10-08
+
+29 individual sounds and seven audition sequences.
+Voice A: deeper, animal layered growl. Voice B: raspier, hissing dragon.
+Each voice has a 2.55 s phase roar, 1.60 s short roar, hurt and death.
+Common effects: bite preparation/execution, tail preparation/execution,
+inhalation, breath start/loop/end, ground fire, one wingbeat/wingbeat loop,
+takeoff, dive wind, two footsteps, landing, dive impact, charge preparation,
+charge start/running loop, and braking.
+
+Status: listening proposal; no live clips, runtime scripts, prefabs, scenes,
+or settings are changed. Old SoulEater_*.wav retain their original content
+and GUIDs. New clips are in Assets/Art/Audio/Enemies/SoulEater/Concept.
+Preview: output/dragon-audio/escuchar.html.
+
+Known integration work after selection:
+- SoulEaterEffects currently has seven indexed cues plus one flame loop.
+- Bite and Tail cues currently fire at windup; split preparation and execution
+  instead of firing an impact early. Preserve the controller's timing/damage.
+- Distinguish DustImpact Charge, Landing and Dive; they currently share Land.
+- Add loop lifecycle for wings, running and ground fire; stop or pause on
+  state transitions, interruption, pause, disable and death.
+- Use the short roar for the 1.65 s special roar and long roar for the 2.6 s
+  phase transition. Inhale is 1.38 s within the 1.5 s breath windup.
+- Breath start and tail should follow actual emission. Airborne and grounded
+  breath can share the steady loop, which must end on interruption.
+- Add voice hurt/death through confirmed combat results, with hurt cooldown.
+- Existing SFX mixer and spatial audio must apply; avoid another hit stop or
+  camera shaker. Wire arrival presentation audio as well as combat audio.
+- Verify these additions in Unity before calling the sound set integrated.
+
+Credits:
+DRAGON_ROAR.wav by JoelAudio - CC0 1.0.
+https://freesound.org/people/JoelAudio/sounds/85568/
+Dino Hiss Dragon Roar by 999999990 - CC0 1.0.
+https://freesound.org/people/999999990/sounds/320345/
+Both retained downloads are public HQ MP3 previews, not original WAVs.
+Bear Growls by AntumDeluge, from U.S. Fish & Wildlife Service - CC0 1.0.
+https://opengameart.org/content/bear-growls
+Large Wings Flap by AntumDeluge, based on fast simple chop 5 by dave.des - CC0.
+https://opengameart.org/content/large-wings-flap
+https://freesound.org/s/127197/
+Original archives with README credits retained under Art/Source/Audio/SoulEater.
+Fire Loop by qubodup - CC BY 3.0. Based on the author's source sound and made
+for Lips of Suna. Original FLAC retained.
+https://opengameart.org/content/fire-loop
+https://freesound.org/people/qubodup/sounds/176724/
+Falling Rock by spookymodem - CC BY 3.0. Original WAV retained.
+https://opengameart.org/content/falling-rock
+https://creativecommons.org/licenses/by/3.0/
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Edits for Mismo: trimming, pitch/speed, equalization, envelopes, layering,
+short delay tails, loop crossfades, and procedural air/low-frequency layers.
+Derived mixes under CC BY 3.0. Original CC0 recordings remain CC0. Include
+credits to qubodup and spookymodem with distribution. No endorsement implied.
+The unused icyjim Dragon Roar CC0 candidate is retained with provenance in
+the source manifest; no generated mix uses it.
+
+Generator: Assets/Scripts/Audio/Editor/GenerateDragonSoundConcepts.py
+Requires NumPy and SoundFile. Local SoundFile fallback: .validation/audio-python.
+Export: mono 48 kHz PCM16; source resampling does not restore lost bandwidth.
+Loops use a continuous seam, not a fade-to-silence gap. Auditions apply short
+entry/exit ramps to loop layers. Audio-analysis.json records file hashes,
+durations and levels. No in-game timing or content build verified yet.

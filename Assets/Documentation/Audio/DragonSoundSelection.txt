@@ -1,0 +1,22 @@
+SOUL EATER - SELECTED AUDIO
+
+Free Monster Sounds by Creature Sounds / Coucassi
+https://coucassi.itch.io/free-monster-sounds
+Page license: CC BY 4.0 - https://creativecommons.org/licenses/by/4.0/
+Changes: silence trimming, gain, short edge fades and format conversion.
+Dragon voices and wing movement; Behemoth step used for ground impacts/footsteps.
+
+Included Terms Of Use (preserved verbatim):
+TERM OF USE
+
+Free for commercial & non-commercial use (a free copy of your project would be nice though).
+You may edit these sound effects for your own use, but please do not post them anywhere without my permission.
+Credits to Coucassi.
+
+
+Dragon Fire Breath and Roar by Daniel Simon / SoundBible.com
+https://soundbible.com/2127-Dragon-Fire-Breath-and-Roar.html
+CC BY 3.0 - https://creativecommons.org/licenses/by/3.0/
+Changes: split at 1.5 s for preparation and release; loop splice for extended fire, gain and format conversion.
+
+Selection updated 2026-10-08: Free Monster Sounds was subsequently approved for in-game trial. It supersedes the earlier rejection of that pack. The custom dragon concepts remain unused.
