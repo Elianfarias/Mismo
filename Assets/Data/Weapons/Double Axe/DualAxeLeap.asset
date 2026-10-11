@@ -18,6 +18,7 @@ MonoBehaviour:
   animationSource: {fileID: 0}
   passive: 0
   passiveValue: 0
+  thirdArrowResetSeconds: 5
   masteryUsesRequired: 25
   masteryModifiers:
   - id: landing_strike
@@ -49,13 +50,15 @@ MonoBehaviour:
     threshold: 0.5
     width: 2
     weaponVfx: []
-  description: "Salta 9 m hacia adelante y golpea con ambas hachas al aterrizar, en un \xE1rea chica. Hace un 100 % de da\xF1o adicional respecto del b\xE1sico."
+  description: "Salta 9 m hacia adelante y golpea con ambas hachas al aterrizar, en un \xE1rea chica. Hace un 100 % de da\xF1o adicional respecto del b\xE1sico. Genera 8 de Focus al impactar."
   localizationKey: ability.axe.dualaxeleap
   preparation: 0.5
   active: 0.5
   recovery: 0.4
   cooldown: 8
   staminaCost: 15
+  recastStages: []
+  recastWindow: 4
   chargeable: 0
   maximumCharge: 0.9
   chargeDamageMultiplier:
@@ -113,18 +116,20 @@ MonoBehaviour:
   cancelPreparation: 0
   cancelRecovery: 0
   focusCost: 0
-  focusGainOnHit: 0
+  focusGainOnHit: 8
   preparationSfx: {fileID: 0}
   preparationSfxVolume: 1
   loopPreparationSfx: 0
-  executionSfx: {fileID: 8300000, guid: 7d39d0a3edc97a54ab5f4c555d8bc153, type: 3}
+  executionSfx: {fileID: 8300000, guid: 14d14be9f2ee4714f905166a3bfc57cf, type: 3}
   executionSfxVolume: 1
   comboStepSfx: []
+  weaponVfx: []
   pose: 1
   usesSwordCombo: 0
   comboSteps: []
   comboOrder: 0
   targetsGround: 0
+  groundIndicatorMaterial: {fileID: 0}
   aimFromCamera: 1
   range: 22
   actions:

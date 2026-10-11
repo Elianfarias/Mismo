@@ -5,6 +5,7 @@
     "Unity.Localization",
     "Unity.Localization.Editor",
     "Mismo.Gameplay.Player",
+    "Mismo.Audio",
     "Mismo.Gameplay.Enemies",
     "Unity.InputSystem",
     "Mismo.Core",

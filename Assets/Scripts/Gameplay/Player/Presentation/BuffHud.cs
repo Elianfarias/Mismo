@@ -27,10 +27,12 @@ namespace Mismo.Gameplay.Player.Presentation
                 if(view.ability!=ability)continue;
                 Color color=Tint(view.kind);
                 if(view.ready)FantasyUI.Frame(new Rect(rect.x+2,rect.y+2,rect.width-4,rect.height-4),color);
+                bool timer=view.ready&&view.iconTimer&&view.remaining>=0&&view.duration>0;
+                if(timer)PlayerHUD.Fill(new Rect(rect.x+6,rect.y+66,64*Mathf.Clamp01(view.remaining/view.duration),4),QuietFantasyUI.Amber);
                 if(view.goal>0)
                 {
                     float span=view.goal*10+(view.goal-1)*4,start=rect.center.x-span*.5f;
-                    for(int i=0;i<view.goal;i++)PlayerHUD.Fill(new Rect(start+i*14,rect.yMax-13,10,4),i<view.progress?color:new Color(.22f,.25f,.27f));
+                    for(int i=0;i<view.goal;i++)PlayerHUD.Fill(new Rect(start+i*14,rect.yMax-(timer?17:13),10,4),i<view.progress?color:new Color(.22f,.25f,.27f));
                 }
                 GUI.Label(rect,new GUIContent("",view.label+" · "+view.detail),GUIStyle.none);
             }
@@ -53,14 +55,14 @@ namespace Mismo.Gameplay.Player.Presentation
         public static void Draw(IReadOnlyList<BuffView> views,Rect vitals,Vector2 viewport)
         {
             if(views==null)return;
-            int total=0;foreach(var view in views)if(view.ready)total++;
+            int total=0;foreach(var view in views)if(view.ready&&!view.mode)total++;
             if(total==0)return;
             Styles();int shown=Mathf.Min(8,total),index=0;
             Rect area=Layout(vitals,viewport,shown);
             int columns=Mathf.Max(1,Mathf.RoundToInt((area.width+Gap)/(CardWidth+Gap)));
             foreach(var view in views)
             {
-                if(!view.ready)continue;if(index>=shown)break;
+                if(!view.ready||view.mode)continue;if(index>=shown)break;
                 var rect=new Rect(area.x+index%columns*(CardWidth+Gap),area.y+index/columns*(CardHeight+Gap),CardWidth,CardHeight);
                 Color color=Tint(view.kind);FantasyUI.Panel(rect,.86f);
                 var icon=BuffPresentation.Current?.For(view.kind)?.icon;

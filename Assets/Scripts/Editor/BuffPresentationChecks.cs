@@ -33,6 +33,9 @@ public static class BuffPresentationChecks
         Check(profile!=null&&profile.styles.Length==4,"Four styles saved in the presentation profile");
         Check(profile.material!=null&&!ShaderUtil.ShaderHasError(profile.material.shader),"URP symbol shader compiles");
         Check(profile.styles.All(s=>s.symbol!=null&&s.symbol.vertexCount>0&&s.icon!=null)&&profile.footArc!=null,"All symbols, matching HUD icons and ankle arcs resolve");
+        Check(profile.bleedMarkSymbol!=null&&profile.bleedMarkSymbol.vertexCount>0&&profile.bladeGlowMaterial?.shader?.name=="Mismo/Sword Blade Glow","Tajo sangrante's drop symbol and blade glow resolve");
+        Check(profile.furyRing!=null&&profile.furyRing.vertexCount>0&&profile.furyVignette!=null
+            &&profile.furyEmbers!=null&&profile.furyEmbers.GetComponentsInChildren<ParticleSystem>().Length==1,"The Berserker's axe embers, ground ring and screen edge resolve");
         Check(profile.symbolOpacity<=.5f&&profile.footOpacity<=.1f,"Subtle opacity and faint single ankle arc");
         Check(ProjectAssets.Load<BuffPresentation>(BuffPresentation.CatalogKey)==profile,"Runtime catalog resolves the shared profile");
         Check(PlayerSettings.GetPreloadedAssets().Contains(AssetDatabase.LoadAssetAtPath<RuntimeAssetCatalog>(ProjectAssets.CatalogPath)),"Runtime catalog remains preloaded");
@@ -202,6 +205,7 @@ public static class BuffPresentationChecks
         Assert(loadout.TrySwap(),"Swap while party feedback is active succeeds");feedback.Refresh();
         Assert(feedback.Views.Count(v=>v.ready)==4,"Weapon swap preserves all four externally supplied buffs");
         Hit();Hit();Assert(feedback.Views.Any(v=>v.label=="TERCER IMPACTO"&&v.ready),"Real third-hit readiness coexists with timed party feedback");
+        Assert(feedback.Views.Any(v=>v.label=="TERCER IMPACTO"&&v.ready&&v.iconTimer&&v.remaining>0&&v.duration>0),"Tercer impacto shows its seconds on the ability icon");
         var gameViewType=typeof(EditorWindow).Assembly.GetType("UnityEditor.GameView");
         if(gameViewType!=null)
         {
@@ -284,7 +288,8 @@ public static class BuffPresentationChecks
         try
         {
             var profile=bundle.LoadAsset<BuffPresentation>(BuffPresentationSetup.ProfilePath);
-            if(profile==null||profile.styles.Length!=4||profile.styles.Any(s=>s.symbol==null||s.icon==null)||profile.material?.shader==null||profile.footArc==null)throw new Exception("Missing built dependencies");
+            if(profile==null||profile.styles.Length!=4||profile.styles.Any(s=>s.symbol==null||s.icon==null)||profile.material?.shader==null||profile.footArc==null||profile.bleedMarkSymbol==null||profile.bladeGlowMaterial?.shader==null
+                ||profile.furyEmbers==null||profile.furyRing==null||profile.furyVignette==null)throw new Exception("Missing built dependencies");
             File.WriteAllText(Output+"/content-build.txt","PASS Windows runtime compilation and bundle reload: four meshes, four icons, arc and shader material.\n");
         }
         finally{if(bundle!=null)bundle.Unload(true);}

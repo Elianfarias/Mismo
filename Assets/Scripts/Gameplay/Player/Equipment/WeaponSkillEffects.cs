@@ -21,10 +21,14 @@ namespace Mismo.Gameplay.Player.Equipment
         float rhythmUntil, empoweredUntil, twoTimesUntil, bucklerReady, bleedPrimedUntil;
         float thirdArrowUntil;
         // Tajo sangrante's bleed, copied from its action when it primes the next basic.
-        float primedBleedDamage=3,primedBleedSeconds=5;
+        float primedBleedDamage=3,primedBleedSeconds=5,primedMarkSeconds=4;
         // Cuarto corte: consecutive basics that landed on the same target (BasicHit runs once per swing).
         Component streakTarget;int streak;float streakAt;
         float bucklerThrownAt=-100,bucklerAbsentUntil,offhandAbsentUntil;
+        float berserkDuration;
+        BerserkAction berserkMode;
+        // The running mode's settings (its sounds); null outside the mode.
+        public BerserkAction ActiveBerserk=>Berserking?berserkMode:null;
         float berserkUntil,berserkStart,berserkDamage,berserkSpeed,berserkFocus,berserkStamina=1,berserkArmor=1,berserkLifeSteal;
         public bool BucklerAbsent=>Has(WeaponPassive.Buckler)&&Time.time<bucklerAbsentUntil;
         // The off-hand piece is out of the hand (thrown buckler or thrown axe).
@@ -48,6 +52,8 @@ namespace Mismo.Gameplay.Player.Equipment
             if(loadout!=null)loadout.Changed+=ResetEffects;
             if(health!=null)health.Died+=OnDeath;
             ActorBuffFeedback.For(gameObject);
+            if(GetComponent<BleedMarkVisual>()==null)gameObject.AddComponent<BleedMarkVisual>();
+            if(GetComponent<BerserkVisual>()==null)gameObject.AddComponent<BerserkVisual>();
         }
         void OnDestroy(){if(loadout!=null)loadout.Changed-=ResetEffects;if(health!=null)health.Died-=OnDeath;}
         void OnDeath(DamageInfo damage)=>ResetEffects();
@@ -91,14 +97,34 @@ namespace Mismo.Gameplay.Player.Equipment
         public void Empower(AbilityExecution cast=null){empoweredUntil=Time.time+4;empoweredCast=cast;}
         public void TwoTimes(AbilityExecution cast=null){twoTimes=2;twoTimesUntil=Time.time+5;twoTimesCast=cast;}
         public void PrimeBleed(AbilityExecution cast=null,float damagePerSecond=3,float bleedSeconds=5,float markSeconds=4)
-        {bleedPrimedUntil=Time.time+markSeconds;bleedCast=cast;primedBleedDamage=damagePerSecond;primedBleedSeconds=bleedSeconds;}
+        {bleedPrimedUntil=Time.time+markSeconds;bleedCast=cast;primedBleedDamage=damagePerSecond;primedBleedSeconds=bleedSeconds;primedMarkSeconds=markSeconds;}
+        // HUD: Tajo sangrante is waiting for its basic; seconds left of the mark out of its total.
+        public bool BleedMarkTimer(AbilityDefinition ability,out float remaining,out float duration)
+        {
+            return BleedMarkTimer(out remaining,out duration)&&ability!=null&&bleedCast?.Definition==ability;
+        }
+        public bool BleedMarkTimer(out float remaining,out float duration)
+        {
+            remaining=Mathf.Max(0,bleedPrimedUntil-Time.time);duration=primedMarkSeconds;
+            return remaining>0&&bleedCast!=null;
+        }
         public void ThrowOffhand(float seconds)=>offhandAbsentUntil=Time.time+Mathf.Max(0,seconds);
         public void ReturnOffhand()=>offhandAbsentUntil=0;
+        // HUD: the Berserker is running for this ability; how many seconds are left out of its total.
+        public bool BerserkTimer(AbilityDefinition ability,out float remaining,out float duration)
+        {
+            return BerserkTimer(out remaining,out duration)&&ability!=null&&berserkCast?.Definition==ability;
+        }
+        public bool BerserkTimer(out float remaining,out float duration)
+        {
+            remaining=Mathf.Max(0,berserkUntil-Time.time);duration=berserkDuration;
+            return Berserking&&berserkCast!=null;
+        }
         public void Berserk(BerserkAction mode,AbilityExecution cast=null)
         {
             // Trained modifiers strengthen every bonus; the armor penalty stays as authored.
-            float power=Power(cast?.Definition);berserkCast=cast;
-            berserkStart=Time.time;berserkUntil=Time.time+mode.duration;
+            float power=Power(cast?.Definition);berserkCast=cast;berserkMode=mode;
+            berserkStart=Time.time;berserkUntil=Time.time+mode.duration;berserkDuration=mode.duration;
             berserkDamage=mode.damageBonus*power;berserkSpeed=mode.attackSpeedBonus*power;berserkFocus=mode.focusPerBasic*power;
             berserkStamina=mode.staminaCostMultiplier<1?Mathf.Max(0,1-(1-mode.staminaCostMultiplier)*power):mode.staminaCostMultiplier;
             berserkArmor=mode.armorMultiplier;berserkLifeSteal=Mathf.Min(1,mode.lifeSteal*power);
@@ -171,8 +197,11 @@ namespace Mismo.Gameplay.Player.Equipment
             {
                 int progress=hits%3;
                 result.Add(new BuffView(BuffKind.Damage,"TERCER IMPACTO",progress==2?"LISTO":"ACERTÁ 2 GOLPES",progress==2,progress==2,
-                    progress>0?thirdArrowUntil-Time.time:-1,ThirdArrowWindow,Passive(WeaponPassive.ThirdArrow),progress,2));
+                    progress>0?thirdArrowUntil-Time.time:-1,ThirdArrowWindow,Passive(WeaponPassive.ThirdArrow),progress,2,iconTimer:true));
             }
+            // Its own aura (BleedMarkVisual) replaces the shared orbit's swords.
+            if(BleedMarkTimer(out float markLeft,out float markTotal))
+                result.Add(new BuffView(BuffKind.Damage,"TAJO SANGRANTE","LISTO",true,false,markLeft,markTotal,bleedCast.Definition,iconTimer:true));
             if(Time.time<empoweredUntil)
                 result.Add(new BuffView(BuffKind.Damage,"PASO LATERAL","PRÓXIMO GOLPE",true,true,empoweredUntil-Time.time,4,empoweredCast?.Definition));
             if(Time.time<twoTimesUntil&&twoTimes>0)
@@ -182,6 +211,8 @@ namespace Mismo.Gameplay.Player.Equipment
                 result.Add(new BuffView(BuffKind.Speed,"RITMO","VELOCIDAD DE ATAQUE",true,true,rhythmUntil-Time.time,2,Passive(WeaponPassive.Rhythm),rhythm,5));
             if(Has(WeaponPassive.Finisher)&&sameTargetHits>0&&lastTarget is Component target&&target!=null&&target.GetComponentInParent<Health>()?.IsDead!=true)
                 result.Add(new BuffView(BuffKind.Damage,"REMATADOR","MISMO ENEMIGO",sameTargetHits>=3,false,ability:Passive(WeaponPassive.Finisher),progress:sameTargetHits,goal:3));
+            if(Berserking&&berserkCast!=null)
+                result.Add(new BuffView(BuffKind.Damage,"MODO BERSERKER","DAÑO Y VELOCIDAD",true,false,berserkUntil-Time.time,berserkDuration,berserkCast.Definition,mode:true));
             if(Barrier>0&&Time.time<barrierUntil)
                 result.Add(new BuffView(BuffKind.Shield,"BARRERA","BROQUEL",true,true,barrierUntil-Time.time,barrierDuration,Passive(WeaponPassive.Buckler)));
             if(Has(WeaponPassive.Coverage)&&loadout.Runner?.Current?.Definition.usesSwordCombo==true)

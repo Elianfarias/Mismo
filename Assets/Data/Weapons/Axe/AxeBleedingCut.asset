@@ -18,6 +18,7 @@ MonoBehaviour:
   animationSource: {fileID: 0}
   passive: 0
   passiveValue: 0
+  thirdArrowResetSeconds: 5
   masteryUsesRequired: 25
   masteryModifiers:
   - id: rusty_edge
@@ -56,6 +57,8 @@ MonoBehaviour:
   recovery: 0.25
   cooldown: 7
   staminaCost: 2.5
+  recastStages: []
+  recastWindow: 4
   chargeable: 0
   maximumCharge: 0.9
   chargeDamageMultiplier:
@@ -117,13 +120,16 @@ MonoBehaviour:
   preparationSfx: {fileID: 0}
   preparationSfxVolume: 1
   loopPreparationSfx: 0
-  executionSfx: {fileID: 8300000, guid: 18ca010d0f9c10947ac77dd2edef6d22, type: 3}
+  executionSfx: {fileID: 8300000, guid: 268300d8194215242bf996b90f694bbc, type: 3}
   executionSfxVolume: 0.412
   comboStepSfx: []
+  weaponVfx: []
   pose: 4
   usesSwordCombo: 0
   comboSteps: []
+  comboOrder: 0
   targetsGround: 0
+  groundIndicatorMaterial: {fileID: 0}
   aimFromCamera: 0
   range: 22
   actions:

@@ -86,7 +86,7 @@ namespace Mismo.Gameplay.Player.Editor
         {
             for(int i=0;i<previewBones.Length;i++){previewBones[i].localPosition=bonePositions[i];previewBones[i].localRotation=boneRotations[i];previewBones[i].localScale=boneScales[i];}
             if(clip!=null&&animator!=null)clip.SampleAnimation(animator.gameObject,at);
-            ApplyPreviewPose(visual,holstered?profile.holstered:profile.equipped);
+            ApplyPreviewPose(visual,holstered?profile.Holstered(previewPair):profile.equipped);
             if(secondVisual!=null)ApplyPreviewPose(secondVisual,holstered?Offhand.secondaryHolstered:Offhand.secondaryEquipped);
         }
         void RefreshTrailPreview()

@@ -18,6 +18,7 @@ MonoBehaviour:
   animationSource: {fileID: 0}
   passive: 0
   passiveValue: 0
+  thirdArrowResetSeconds: 5
   masteryUsesRequired: 25
   masteryModifiers:
   - id: deep_rend
@@ -78,13 +79,15 @@ MonoBehaviour:
     threshold: 0.5
     width: 2
     weaponVfx: []
-  description: "Golpe que inflige +25% de da\xF1o adicional y reduce un 30 % la armadura del objetivo durante 4s No acumulable. consume 20 de focus"
+  description: "Golpe que inflige +30% de da\xF1o adicional y reduce un 30 % la armadura del objetivo durante 4s No acumulable. consume 20 de focus"
   localizationKey: ability.axe.axearmorrend
   preparation: 0.3
   active: 0.3
   recovery: 0.3
   cooldown: 8
   staminaCost: 15
+  recastStages: []
+  recastWindow: 4
   chargeable: 0
   maximumCharge: 0.9
   chargeDamageMultiplier:
@@ -146,13 +149,16 @@ MonoBehaviour:
   preparationSfx: {fileID: 0}
   preparationSfxVolume: 1
   loopPreparationSfx: 0
-  executionSfx: {fileID: 8300000, guid: afed6f8522aa1774b9f6adc6a3ac0dfe, type: 3}
+  executionSfx: {fileID: 8300000, guid: c35c7e3f7e3787742bbc6ea58be4f634, type: 3}
   executionSfxVolume: 1
   comboStepSfx: []
+  weaponVfx: []
   pose: 1
   usesSwordCombo: 0
   comboSteps: []
+  comboOrder: 0
   targetsGround: 0
+  groundIndicatorMaterial: {fileID: 0}
   aimFromCamera: 0
   range: 40.6
   actions:
@@ -163,7 +169,7 @@ MonoBehaviour:
     - rid: 1
       type: {class: ArmorRendStrikeAction, ns: Mismo.Gameplay.Player.Equipment, asm: Mismo.Gameplay.Player}
       data:
-        damage: 17.5
+        damage: 18.2
         postureDamage: 5
         radius: 0.6
         forward: 0.8

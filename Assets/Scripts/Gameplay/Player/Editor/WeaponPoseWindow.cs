@@ -38,7 +38,7 @@ namespace Mismo.Gameplay.Player.Editor
         private UnityEditor.Editor animationEditor;
         private WeaponAttachmentPose Pose => editSecond && previewPair
             ? (holstered ? Offhand.secondaryHolstered : Offhand.secondaryEquipped)
-            : (holstered ? profile.holstered : profile.equipped);
+            : (holstered ? profile.Holstered(previewPair) : profile.equipped);
         private Object PoseOwner => editSecond && previewPair ? (Object)Offhand : profile;
         private GameObject SelectedVisual => editSecond && previewPair ? secondVisual : visual;
 
@@ -172,7 +172,7 @@ namespace Mismo.Gameplay.Player.Editor
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.PropertyField(poseData.FindProperty(editSecond && previewPair
                 ? (holstered ? "secondaryHolstered" : "secondaryEquipped")
-                : (holstered ? "holstered" : "equipped")), true);
+                : (holstered ? (previewPair && profile.useDualHolstered ? "dualHolstered" : "holstered") : "equipped")), true);
             if (EditorGUI.EndChangeCheck()) { poseData.ApplyModifiedProperties(); Refresh(); }
             UnityEditor.Editor.CreateCachedEditor(profile,null,ref profileEditor);
             DrawTrailGUI();
@@ -250,7 +250,7 @@ namespace Mismo.Gameplay.Player.Editor
             if(clip!=null && animator!=null)clip.SampleAnimation(animator.gameObject,time);
             for(int i=0;i<previewRenderers.Length;i++)if(previewRenderers[i]!=null)previewRenderers[i].enabled=previewVisibility[i];
             profile.HideEmbeddedVisuals(animator);
-            ApplyPreviewPose(visual, holstered ? profile.holstered : profile.equipped);
+            ApplyPreviewPose(visual, holstered ? profile.Holstered(previewPair) : profile.equipped);
             if (secondVisual != null) ApplyPreviewPose(secondVisual, holstered ? Offhand.secondaryHolstered : Offhand.secondaryEquipped);
             RefreshTrailPreview();
             SceneView.RepaintAll(); Repaint();

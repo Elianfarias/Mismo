@@ -18,6 +18,7 @@ MonoBehaviour:
   animationSource: {fileID: 0}
   passive: 0
   passiveValue: 0
+  thirdArrowResetSeconds: 5
   masteryUsesRequired: 25
   masteryModifiers:
   - id: escalation
@@ -78,7 +79,7 @@ MonoBehaviour:
     threshold: 0.5
     width: 2
     weaponVfx: []
-  description: "Golpea con el hacha en el lugar y pod\xE9s volver a pulsarla hasta dos veces: ten\xE9s 4 s despu\xE9s de cada golpe para dar el siguiente. Cada golpe hace un 135 % del da\xF1o y el tercero rompe la postura de los enemigos que alcanza durante 1 s. El enfriamiento empieza con el tercer golpe o al vencer la ventana."
+  description: "Golpea con el hacha en el lugar y pod\xE9s volver a pulsarla hasta dos veces: ten\xE9s 4 s despu\xE9s de cada golpe para dar el siguiente. Cada golpe hace un 135 % del da\xF1o y el tercero rompe la postura de los enemigos que alcanza durante 1 s. El enfriamiento empieza con el tercer golpe o al vencer la ventana. Genera 4 de Focus por golpe que acierta."
   localizationKey: ability.axe.axefuriouscombo
   preparation: 0.46
   active: 1.94
@@ -87,13 +88,13 @@ MonoBehaviour:
   staminaCost: 20
   recastStages:
   - preparation: 0.46
-    active: 0.4415
+    active: 0.3815
     recovery: 0
   - preparation: 0
-    active: 0.7943
+    active: 0.5943
     recovery: 0
   - preparation: 0
-    active: 0.7042
+    active: 0.5042
     recovery: 0.78
   recastWindow: 4
   chargeable: 0
@@ -153,21 +154,34 @@ MonoBehaviour:
   cancelPreparation: 0
   cancelRecovery: 0
   focusCost: 0
-  focusGainOnHit: 0
+  focusGainOnHit: 4
   preparationSfx: {fileID: 0}
   preparationSfxVolume: 1
   loopPreparationSfx: 0
   executionSfx: {fileID: 0}
   executionSfxVolume: 1
-  comboStepSfx: []
+  comboStepSfx:
+  - clip: {fileID: 8300000, guid: e3f4acbf66ce88f4abbcee562be85915, type: 3}
+    volume: 1
+    followUpClip: {fileID: 0}
+    followUpDelay: 0.41
+  - clip: {fileID: 8300000, guid: eceb593c9ed153646b4e4498d33c1f70, type: 3}
+    volume: 1
+    followUpClip: {fileID: 0}
+    followUpDelay: 0.41
+  - clip: {fileID: 8300000, guid: 67f4a32d5d44d264f901fdc3625cfb0b, type: 3}
+    volume: 1
+    followUpClip: {fileID: 0}
+    followUpDelay: 0.41
   weaponVfx: []
   pose: 1
   usesSwordCombo: 0
   comboSteps: []
   comboOrder: 0
   targetsGround: 0
+  groundIndicatorMaterial: {fileID: 0}
   aimFromCamera: 0
-  range: 22
+  range: 100
   actions:
   - rid: 2
   references:

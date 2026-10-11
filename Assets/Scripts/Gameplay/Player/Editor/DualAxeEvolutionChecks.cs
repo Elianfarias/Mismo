@@ -5,6 +5,7 @@ using System.Reflection;
 using Mismo.Gameplay.Combat;
 using Mismo.Gameplay.Player.Equipment;
 using Mismo.Gameplay.Player.Equipment.Inventory;
+using Mismo.Gameplay.Player.Presentation;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -170,6 +171,35 @@ namespace Mismo.Gameplay.Player.Editor
                 Evolve(doubleEdge,"cross_cut",3);Near(effects.SecondStrikeMultiplier(),1.2333f,"Corte cruzado rank 3 adds 23.3 %",.001f);
                 ClearModifier(doubleEdge);
 
+                // Sound: a double strike is two basics, the lead axe's first and the other one's 0.41 s later in step time.
+                {
+                    var dualCombo=player.GetComponentInChildren<BasicSwordCombo>(true);var basicSounds=equipment.GetAbility(AbilitySlot.Basic).comboStepSfx;
+                    var heard=new List<(AudioClip clip,float at)>();float clock=0;
+                    void Hear(AudioClip clip,float volume)=>heard.Add((clip,clock));
+                    AudioEvents.OnPlayAbilitySFX+=Hear;
+                    try
+                    {
+                        int doubled=-1;
+                        for(int attempt=0;attempt<40&&doubled<0;attempt++)
+                        {
+                            Idle();Rest();heard.Clear();clock=0;
+                            runner.TryUse(AbilitySlot.Basic,Vector3.forward,player.transform.position);
+                            if(runner.Current!=null&&dualCombo!=null&&dualCombo.CurrentStepIndex>=2)doubled=dualCombo.CurrentStepIndex;
+                        }
+                        Check(doubled>=2,"A basic rolls a double strike with Doble filo");
+                        if(doubled>=2)
+                        {
+                            Check(runner.FollowUpPending,"The double strike waits for its second axe");
+                            for(int i=0;i<30&&runner.FollowUpPending;i++){clock+=.05f;runner.Tick(.05f/Mathf.Max(.01f,runner.Current?.AttackSpeed??1));}
+                            var step=basicSounds[doubled];
+                            Check(heard.Count==2&&heard[0].clip==step.clip&&heard[1].clip==step.followUpClip&&step.clip!=step.followUpClip,"The double strike sounds both basics, the lead axe first");
+                            if(heard.Count==2)Near(heard[1].at-heard[0].at,step.followUpDelay,"The second axe sounds when it cuts",.06f);
+                        }
+                        Idle();Check(!runner.FollowUpPending,"Cancelling the swing drops its second sound");
+                    }
+                    finally{AudioEvents.OnPlayAbilitySFX-=Hear;}
+                }
+
                 // Sed de sangre: defeating or opening an enemy restores stamina and Focus; Sed insaciable also heals a wounded player.
                 var thirst=Skill("DualAxeBloodthirst");Slot(AbilitySlot.E,thirst.Id);
                 void Drain(){stamina.TrySpend(stamina.Current);combat.Spend(combat.Focus);}
@@ -295,6 +325,8 @@ namespace Mismo.Gameplay.Player.Editor
 
                 // Hacha errante: the thrown axe jumps to at most 2 other enemies, each hit softer than the last; the rank trims the loss.
                 var throwing=Skill("DualAxeThrow");Slot(AbilitySlot.Q,throwing.Id);
+                var throwAction=(AxeThrowAction)Array.Find(throwing.actions,a=>a is AxeThrowAction);var throwVisual=throwAction.visualRotation;
+                Check(Quaternion.Angle(Quaternion.Euler(throwVisual),Quaternion.Euler(0,-90,0))<1f,"The throw turns the axe model so its blade (+X) faces forward");
                 // Each enemy stands a bit short of the asset's reach from the previous one.
                 float spacing=Mathf.Max(1,throwing.FindModifier("wandering_axe").distance*.8f);
                 IEnumerable Bounce(int rank,float loss)
@@ -307,9 +339,35 @@ namespace Mismo.Gameplay.Player.Editor
                     for(int i=0;i<bodies.Count;i++)bodies[i].transform.position=front+Vector3.forward*3.4f+Vector3.right*(spacing*(i+1));
                     Physics.SyncTransforms();
                     Rest();
+                    int cuts=0;void Cut(AudioClip clip,float volume){if(clip!=null&&clip==throwAction.impactSfx)cuts++;}
+                    AudioEvents.OnPlayAbilitySFX+=Cut;
                     Check(runner.TryUse(AbilitySlot.Q,Vector3.forward,player.transform.position,front+Vector3.forward*3.4f),"The throw starts");
                     for(int i=0;i<200&&runner.Current!=null;i++)runner.Tick(.05f);
-                    foreach(var _ in Wait(1.6f))yield return null;
+                    // The blade must lead the flight: the model's +X (its edge) points where the axe goes, its flat side is perpendicular.
+                    var thrown=Object.FindFirstObjectByType<ProjectileInstance>();
+                    Check(thrown!=null&&thrown.transform.childCount>0,"The thrown axe has its model");
+                    var whirl=thrown.GetComponent<AudioSource>();
+                    Check(throwAction.flightSfx!=null&&whirl!=null&&whirl.loop&&whirl.clip==throwAction.flightSfx&&whirl.spatialBlend>.99f,"The thrown axe whirls in 3D as it flies");
+                    var thrownModel=thrown.transform.GetChild(0);
+                    Check(Vector3.Dot(thrownModel.right,thrown.transform.forward)>.95f,"The thrown axe flies with the blade forward");
+                    Check(Mathf.Abs(Vector3.Dot(thrownModel.forward,thrown.transform.forward))<.1f,"The flat of the thrown blade is not facing forward");
+                    // The rebound flight is sampled once while it is in the air.
+                    bool sampled=false;
+                    for(float until=Time.time+1.6f;Time.time<until;)
+                    {
+                        var flight=sampled?null:Object.FindFirstObjectByType<ReboundFlight>();
+                        if(flight!=null&&flight.Model!=null)
+                        {
+                            sampled=true;
+                            Check(Vector3.Dot(flight.transform.forward,flight.Direction)>.99f,"A rebound flies facing its destination");
+                            Check(Quaternion.Angle(flight.Model.localRotation,Quaternion.Euler(throwVisual))<1f,"A rebound turns the model like the throw so the blade leads");
+                            Check(flight.GetComponent<AudioSource>()?.clip==throwAction.flightSfx,"A rebound whirls like the throw");
+                        }
+                        yield return null;
+                    }
+                    Check(sampled,"A rebound flight was seen in the air");
+                    AudioEvents.OnPlayAbilitySFX-=Cut;
+                    Check(throwAction.impactSfx!=null&&cuts==3,"The throw and both rebounds sound their cut ("+cuts+")");
                     Check(aimLife.Current<aimLife.Maximum,"The thrown axe hits its target");
                     float throwDamage=14*Multiplier(throwing);
                     Near(others[0].Maximum-others[0].Current,throwDamage*(1-loss),"The first rebound hits "+loss*100+" % softer at rank "+rank,.05f);
@@ -360,6 +418,105 @@ namespace Mismo.Gameplay.Player.Editor
                 }
                 Evolve(berserk,"rising_fury",0);foreach(var _ in Fury(0,.015f))yield return null;
                 Evolve(berserk,"rising_fury",3);foreach(var _ in Fury(3,.0175f))yield return null;
+
+                // HUD timer: the mode reports its seconds left and shows up as a buff tied to its ability.
+                var berserkAction=(BerserkAction)Array.Find(berserk.actions,a=>a is BerserkAction);
+                effects.ResetEffects();
+                Check(!effects.BerserkTimer(berserk,out _,out _),"No Berserker timer before the mode starts");
+                Activate();
+                Check(effects.BerserkTimer(berserk,out float modeLeft,out float modeTotal),"The Berserker timer runs for its ability");
+                Near(modeTotal,berserkAction.duration,"The timer's total is the mode's duration");
+                Near(modeLeft,berserkAction.duration,"The timer starts full",.5f);
+                Check(!effects.BerserkTimer(Skill("DualAxeDeathSpin"),out _,out _),"Other abilities show no Berserker timer");
+                var buffViews=new List<BuffView>();effects.CollectBuffViews(buffViews);
+                Check(buffViews.Exists(v=>v.label=="MODO BERSERKER"&&v.ability==berserk&&v.mode&&v.ready&&!v.worldVisible&&v.kind==BuffKind.Damage),"The Berserker appears as a damage buff tied to its ability, without a world symbol");
+                foreach(var _ in Wait(1f))yield return null;
+                effects.BerserkTimer(berserk,out float later,out _);
+                Check(later<modeLeft-.5f,"The timer counts down");
+                // Visual: embers, red body pulse, both axe heads lit, rings on the ground and the red screen edge, all growing with the fury.
+                var furyVisual=player.GetComponent<BerserkVisual>();
+                Check(furyVisual!=null,"The player carries the Berserker visual");
+                if(furyVisual!=null)
+                {
+                    var style=BuffPresentation.Current;
+                    for(int i=0;i<4;i++)furyVisual.Tick(.05f);
+                    Check(furyVisual.GlowRenderers>=2,"Both axe heads glow during the mode");
+                    Check(furyVisual.EmberEmitters==2&&furyVisual.EmberRate>0,"Both axes shed embers during the mode");
+                    Check(furyVisual.ScreenEdge>0&&furyVisual.ScreenEdge<=style.screenEdgeMax+1e-4f,"The red screen edge shows, capped by the Inspector");
+                    Check(furyVisual.Fury>0&&furyVisual.Fury<.5f,"One second in, the fury has only begun");
+                    Near(BerserkVisual.FuryAt(modeTotal,modeTotal),0,"The fury starts at zero");
+                    Near(BerserkVisual.FuryAt(0,modeTotal),1,"The fury is full at the end of the mode");
+                    Check(BerserkVisual.EmberRateAt(style,1)>BerserkVisual.EmberRateAt(style,0)&&BerserkVisual.RingIntervalAt(style,1)<BerserkVisual.RingIntervalAt(style,0),"Embers and rings grow faster with the fury");
+                    int rings=0;for(int i=0;i<30;i++){furyVisual.Tick(.05f);rings=Mathf.Max(rings,furyVisual.ActiveRings);}
+                    Check(rings>0,"Rings pulse on the ground");
+                    // Sound: the heartbeat follows the red pulse and the embers loop grows with the fury.
+                    for(int i=0;i<40;i++)furyVisual.Tick(.05f);
+                    Check(furyVisual.HeartbeatsPlayed>0,"The heartbeat sounds with the red pulse");
+                    Check(furyVisual.EmbersVolume>0,"The embers crackle during the mode");
+                }
+                int endsBefore=furyVisual!=null?furyVisual.EndsPlayed:0;
+                effects.ResetEffects();buffViews.Clear();effects.CollectBuffViews(buffViews);
+                Check(!buffViews.Exists(v=>v.label=="MODO BERSERKER")&&!effects.BerserkTimer(berserk,out _,out _),"The timer and the buff disappear when the mode ends");
+                if(furyVisual!=null)
+                {
+                    for(int i=0;i<10;i++)furyVisual.Tick(.05f);
+                    Check(furyVisual.EmberEmitters==0&&furyVisual.GlowRenderers==0&&furyVisual.ScreenEdge==0&&furyVisual.EmberRate==0,"The Berserker visual fades out when the mode ends");
+                    Check(furyVisual.EmbersVolume==0&&furyVisual.EndsPlayed==endsBefore,"A mode cut short stops the embers without its end sound");
+                }
+
+                // Focus balance: Giro mortal and Modo Berserker cost it, the basic, Hachazo doble and Lanzamiento generate it on hit.
+                {
+                    var spinCost=Skill("DualAxeDeathSpin");var leapGain=Skill("DualAxeLeap");var throwGain=Skill("DualAxeThrow");
+                    Check(spinCost.focusCost>0&&berserk.focusCost>0,"Giro mortal and Modo Berserker cost Focus");
+                    Check(basic.focusGainOnHit>0&&leapGain.focusGainOnHit>0&&throwGain.focusGainOnHit>0,"The basic, Hachazo doble and Lanzamiento generate Focus on hit");
+                    Check(basic.focusCost==0&&leapGain.focusCost==0&&throwGain.focusCost==0,"The Focus generators cost none");
+                    Slot(AbilitySlot.E,spinCost.Id);
+                    Rest();combat.Spend(combat.Focus);
+                    Check(!runner.TryUse(AbilitySlot.E,Vector3.forward,player.transform.position),"Giro mortal does not start without its Focus");
+                    combat.Reward(spinCost.focusCost-1,"TEST");
+                    Check(!runner.TryUse(AbilitySlot.E,Vector3.forward,player.transform.position),"Giro mortal does not start one point short");
+                    combat.Reward(1,"TEST");
+                    Check(runner.TryUse(AbilitySlot.E,Vector3.forward,player.transform.position),"Giro mortal starts with exactly its Focus");
+                    Near(combat.Focus,0,"Giro mortal spends its Focus");
+                    Idle();
+                    Slot(AbilitySlot.Q,leapGain.Id);
+                    var focusTarget=NewTarget(out var focusLife);
+                    Rest();combat.Spend(combat.Focus);
+                    Check(runner.TryUse(AbilitySlot.Q,Vector3.forward,player.transform.position),"Hachazo doble starts without Focus");
+                    for(float limit=Time.time+10;runner.Current!=null&&Time.time<limit;){runner.Tick(Time.deltaTime);yield return null;}
+                    Check(focusLife.Current<focusLife.Maximum,"Hachazo doble lands on the dummy");
+                    Check(combat.Focus>=leapGain.focusGainOnHit-.01f,"Hachazo doble gives its Focus when it lands (got "+combat.Focus+")");
+                    Slot(AbilitySlot.Q,berserk.Id);
+                    Rest();combat.Spend(combat.Focus);
+                    Check(!runner.TryUse(AbilitySlot.Q,Vector3.forward,player.transform.position),"Modo Berserker does not start without its Focus");
+                    combat.Reward(berserk.focusCost,"TEST");
+                    Check(runner.TryUse(AbilitySlot.Q,Vector3.forward,player.transform.position),"Modo Berserker starts with its Focus");
+                    Idle();effects.ResetEffects();
+                }
+
+                // Aiming: an object between the camera and the character must not pull the aim behind them, and a point at their
+                // back never turns an ability around (the basic of the single axe faced the camera when something got in the way).
+                {
+                    Vector3 camPos=player.transform.position+new Vector3(0,2,-6);
+                    var ray=new Ray(camPos,(player.transform.position+Vector3.up*4f+Vector3.forward*10-camPos).normalized);
+                    var between=GameObject.CreatePrimitive(PrimitiveType.Cube);between.transform.position=camPos+ray.direction*2;
+                    var wall=GameObject.CreatePrimitive(PrimitiveType.Cube);wall.transform.position=camPos+ray.direction*20;wall.transform.localScale=new Vector3(8,8,1);
+                    Physics.SyncTransforms();
+                    Vector3 aimed=WeaponAim.AimPoint(ray,40,player.transform);
+                    Check(Vector3.Distance(camPos,aimed)>15f,"The aim ignores what lies between the camera and the character");
+                    Object.Destroy(between);
+                    var basis=new GameObject("Aim basis").transform;basis.position=camPos;basis.rotation=Quaternion.LookRotation(Vector3.forward);
+                    Vector3 chest=player.transform.position+Vector3.up;
+                    Vector3 ahead=WeaponAim.Direction(chest,chest+Vector3.forward*3+Vector3.right*.5f,basis);
+                    Check(Vector3.Dot(ahead,(Vector3.forward*3+Vector3.right*.5f).normalized)>.999f,"A point in front keeps its exact direction");
+                    Vector3 behind=WeaponAim.Direction(chest,chest+Vector3.back*1.5f+Vector3.up*.3f,basis);
+                    Check(behind.z>.9f&&behind.y>0,"A point behind the character keeps the camera's heading and the vertical aim");
+                    Vector3 beside=WeaponAim.Direction(chest,chest+Vector3.right*2,basis);
+                    Check(beside.z>.9f,"A point at the character's side is not followed sideways either");
+                    Vector3 onTop=WeaponAim.Direction(chest,chest,basis);
+                    Check(onTop.z>.9f,"A point on top of the muzzle falls back to the camera's heading");
+                    Object.Destroy(wall);Object.Destroy(basis.gameObject);
+                }
 
                 // K toggles the skills page: the first press opens it, the second closes it.
                 Idle();foreach(var _ in Wait(.6f))yield return null;

@@ -54,6 +54,135 @@ public static class BuffPresentationSetup
         else if(!entry.assets.Contains(profile))throw new InvalidOperationException("Combat/Buffs already points to another profile");
         AssetDatabase.SaveAssets();
     }
+    // Tajo sangrante's mark: drop symbol and axe-head glow. Only fills fields that are still empty.
+    [MenuItem("Mismo/Combate/Buffs/Crear marca de sangrado")]
+    public static void InstallBleedMark()
+    {
+        foreach(string folder in new[]{Meshes,Materials})ProjectAssetOrganizer.EnsureFolder(folder);
+        var profile=AssetDatabase.LoadAssetAtPath<BuffPresentation>(ProfilePath);
+        if(profile==null)throw new InvalidOperationException("Buff presentation missing: "+ProfilePath);
+        string meshPath=Meshes+"/BleedDrop.asset";
+        var drop=AssetDatabase.LoadAssetAtPath<Mesh>(meshPath);
+        if(drop==null){drop=Drop();AssetDatabase.CreateAsset(drop,meshPath);}
+        string glowPath=Materials+"/BleedMarkBladeGlow.mat";
+        var glow=AssetDatabase.LoadAssetAtPath<Material>(glowPath);
+        if(glow==null)
+        {
+            var shader=AssetDatabase.LoadAssetAtPath<Shader>("Assets/Art/Shaders/SwordBladeGlow.shader");
+            if(shader==null)throw new InvalidOperationException("Blade glow shader missing");
+            glow=new Material(shader);glow.SetColor("_Color",new Color(.77f,.12f,.18f,.55f));AssetDatabase.CreateAsset(glow,glowPath);
+        }
+        if(profile.bleedMarkSymbol==null)profile.bleedMarkSymbol=drop;
+        if(profile.bladeGlowMaterial==null)profile.bladeGlowMaterial=glow;
+        EditorUtility.SetDirty(profile);AssetDatabase.SaveAssets();
+    }
+    // Modo Berserker: axe embers, ground ring and screen edge. Only creates what is missing and fills empty fields.
+    [MenuItem("Mismo/Combate/Buffs/Crear efectos del Berserker")]
+    public static void InstallBerserk()
+    {
+        const string Prefabs="Assets/Art/Prefabs/Combat/Buffs";
+        foreach(string folder in new[]{Meshes,Materials,Icons,Prefabs})ProjectAssetOrganizer.EnsureFolder(folder);
+        var profile=AssetDatabase.LoadAssetAtPath<BuffPresentation>(ProfilePath);
+        if(profile==null)throw new InvalidOperationException("Buff presentation missing: "+ProfilePath);
+        var emberMaterial=MaterialAt(Materials+"/BerserkEmbers.mat","Assets/Art/Shaders/CombatParticles.shader",Color.white);
+        string prefabPath=Prefabs+"/BerserkEmbers.prefab";
+        // One emitter the size of an axe head; an older body-and-crown version is rebuilt in place, keeping its GUID.
+        var existing=AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+        if(existing==null||existing.GetComponentsInChildren<ParticleSystem>().Length!=1)
+        {
+            var scene=UnityEditor.SceneManagement.EditorSceneManager.NewPreviewScene();
+            var root=new GameObject("BerserkEmbers");UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(root,scene);
+            try
+            {
+                Embers(root,"Embers",emberMaterial,Vector3.zero,new Vector3(.16f,.22f,.16f),20,120,new Vector2(.4f,.8f),new Vector2(.5f,1),new Vector2(.025f,.05f));
+                PrefabUtility.SaveAsPrefabAsset(root,prefabPath);
+            }
+            finally{UnityEditor.SceneManagement.EditorSceneManager.ClosePreviewScene(scene);}
+        }
+        string ringPath=Meshes+"/FuryRing.asset";
+        var ring=AssetDatabase.LoadAssetAtPath<Mesh>(ringPath);
+        if(ring==null){ring=Ring();AssetDatabase.CreateAsset(ring,ringPath);}
+        string vignettePath=Icons+"/FuryVignette.png";
+        if(!File.Exists(vignettePath))
+        {
+            const int size=128;var pixels=new Color[size*size];
+            for(int y=0;y<size;y++)for(int x=0;x<size;x++)
+            {
+                float d=new Vector2((x+.5f)/size*2-1,(y+.5f)/size*2-1).magnitude;
+                pixels[y*size+x]=new Color(1,1,1,Mathf.SmoothStep(0,1,Mathf.InverseLerp(.55f,1.25f,d)));
+            }
+            var texture=new Texture2D(size,size,TextureFormat.RGBA32,false);texture.SetPixels(pixels);texture.Apply();
+            File.WriteAllBytes(vignettePath,texture.EncodeToPNG());Object.DestroyImmediate(texture);
+            AssetDatabase.ImportAsset(vignettePath);
+            var importer=(TextureImporter)AssetImporter.GetAtPath(vignettePath);
+            importer.alphaIsTransparency=true;importer.mipmapEnabled=false;importer.filterMode=FilterMode.Bilinear;
+            importer.wrapMode=TextureWrapMode.Clamp;importer.textureCompression=TextureImporterCompression.Uncompressed;importer.SaveAndReimport();
+        }
+        if(profile.furyEmbers==null)profile.furyEmbers=AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+        if(profile.furyRing==null)profile.furyRing=ring;
+        if(profile.furyVignette==null)profile.furyVignette=AssetDatabase.LoadAssetAtPath<Texture2D>(vignettePath);
+        EditorUtility.SetDirty(profile);AssetDatabase.SaveAssets();
+    }
+    static Material MaterialAt(string path,string shaderPath,Color tint)
+    {
+        var material=AssetDatabase.LoadAssetAtPath<Material>(path);
+        if(material!=null)return material;
+        var shader=AssetDatabase.LoadAssetAtPath<Shader>(shaderPath);
+        if(shader==null)throw new InvalidOperationException("Missing shader "+shaderPath);
+        material=new Material(shader);material.SetColor("_Color",tint);AssetDatabase.CreateAsset(material,path);return material;
+    }
+    // Voxel embers that rise in world space, yellow to orange to red; BerserkVisual drives their rate and speed.
+    static void Embers(GameObject parent,string name,Material material,Vector3 position,Vector3 box,float rate,int max,Vector2 lifetime,Vector2 rise,Vector2 size)
+    {
+        var child=new GameObject(name);child.transform.SetParent(parent.transform,false);child.transform.localPosition=position;
+        var system=child.AddComponent<ParticleSystem>();system.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
+        var main=system.main;
+        main.loop=true;main.playOnAwake=false;main.duration=2;main.maxParticles=max;
+        main.startLifetime=new ParticleSystem.MinMaxCurve(lifetime.x,lifetime.y);
+        main.startSpeed=0;main.startSize=new ParticleSystem.MinMaxCurve(size.x,size.y);main.startColor=Color.white;
+        main.simulationSpace=ParticleSystemSimulationSpace.World;main.scalingMode=ParticleSystemScalingMode.Hierarchy;
+        main.startRotation=new ParticleSystem.MinMaxCurve(0,Mathf.PI*2);
+        var emission=system.emission;emission.rateOverTime=rate;
+        var shape=system.shape;shape.shapeType=ParticleSystemShapeType.Box;shape.scale=box;
+        var velocity=system.velocityOverLifetime;velocity.enabled=true;velocity.space=ParticleSystemSimulationSpace.World;
+        velocity.x=new ParticleSystem.MinMaxCurve(-.08f,.08f);velocity.y=new ParticleSystem.MinMaxCurve(rise.x,rise.y);velocity.z=new ParticleSystem.MinMaxCurve(-.08f,.08f);
+        var noise=system.noise;noise.enabled=true;noise.strength=.15f;noise.frequency=1.2f;noise.scrollSpeed=.4f;
+        var color=system.colorOverLifetime;color.enabled=true;
+        var gradient=new Gradient();
+        gradient.SetKeys(new[]{new GradientColorKey(new Color(1,.82f,.23f),0),new GradientColorKey(new Color(1,.48f,.1f),.35f),new GradientColorKey(new Color(1,.23f,.18f),.65f),new GradientColorKey(new Color(.54f,.06f,.06f),1)},
+            new[]{new GradientAlphaKey(0,0),new GradientAlphaKey(1,.1f),new GradientAlphaKey(1,.6f),new GradientAlphaKey(0,1)});
+        color.color=gradient;
+        var sizeOverLifetime=system.sizeOverLifetime;sizeOverLifetime.enabled=true;
+        sizeOverLifetime.size=new ParticleSystem.MinMaxCurve(1,new AnimationCurve(new Keyframe(0,1),new Keyframe(1,.4f)));
+        var renderer=system.GetComponent<ParticleSystemRenderer>();renderer.sharedMaterial=material;
+        renderer.shadowCastingMode=UnityEngine.Rendering.ShadowCastingMode.Off;renderer.receiveShadows=false;
+        renderer.lightProbeUsage=UnityEngine.Rendering.LightProbeUsage.Off;renderer.reflectionProbeUsage=UnityEngine.Rendering.ReflectionProbeUsage.Off;
+        var cube=GameObject.CreatePrimitive(PrimitiveType.Cube);
+        renderer.renderMode=ParticleSystemRenderMode.Mesh;renderer.mesh=cube.GetComponent<MeshFilter>().sharedMesh;
+        Object.DestroyImmediate(cube);
+    }
+    // Flat full ring of radius 1 on the ground plane (XZ); BerserkVisual scales it.
+    static Mesh Ring()
+    {
+        var s=new Shape();
+        for(int segment=0;segment<64;segment++)
+        {
+            float a=segment*360f/64*Mathf.Deg2Rad,b=(segment+1)*360f/64*Mathf.Deg2Rad;
+            var p=new Vector2(Mathf.Sin(a),Mathf.Cos(a));var q=new Vector2(Mathf.Sin(b),Mathf.Cos(b));
+            s.Polygon(new[]{p,p*.94f,q*.94f,q});
+        }
+        var mesh=s.Build("Berserker ground ring");var points=mesh.vertices;
+        for(int i=0;i<points.Length;i++)points[i]=new Vector3(points[i].x,0,points[i].y);
+        mesh.vertices=points;mesh.RecalculateNormals();mesh.RecalculateBounds();return mesh;
+    }
+    static Mesh Drop()
+    {
+        // Tip on top, round bulb below; the fan from the tip stays inside the outline.
+        var points=new List<Vector2>{new Vector2(0,.42f)};
+        for(float angle=30;angle>=-210;angle-=15)points.Add(new Vector2(0,-.12f)+new Vector2(Mathf.Cos(angle*Mathf.Deg2Rad),Mathf.Sin(angle*Mathf.Deg2Rad))*.26f);
+        var s=new Shape();s.Polygon(points.ToArray());
+        return s.Build("Bleed mark drop symbol");
+    }
     sealed class Shape
     {
         readonly List<Vector3> vertices=new List<Vector3>();readonly List<int> triangles=new List<int>();readonly List<Color> colors=new List<Color>();

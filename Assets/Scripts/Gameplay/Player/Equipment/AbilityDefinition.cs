@@ -206,6 +206,10 @@ namespace Mismo.Gameplay.Player.Equipment
     {
         public AudioClip clip;
         [Range(0f, 1f)] public float volume = 1f;
+        [Tooltip("Golpe doble: el sonido de la segunda arma del mismo paso. Vacío = un solo sonido.")]
+        public AudioClip followUpClip;
+        [Tooltip("Segundos desde el inicio del paso hasta el segundo sonido, a velocidad de ataque normal; se acelera con el ataque igual que la animación.")]
+        [Min(0)] public float followUpDelay = .41f;
     }
 
     // These objects contain configuration only. Per-cast state belongs to AbilityExecution.

@@ -5,6 +5,7 @@ using System.Reflection;
 using Mismo.Gameplay.Combat;
 using Mismo.Gameplay.Player.Equipment;
 using Mismo.Gameplay.Player.Equipment.Inventory;
+using Mismo.Gameplay.Player.Presentation;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -164,6 +165,15 @@ namespace Mismo.Gameplay.Player.Editor
                 Near(Use(AbilitySlot.Basic,life),14*1.15f*Multiplier(basic),"The basic hits for 14 +15 %");
                 var swing=Skill("AxeForwardSwing");Slot(AbilitySlot.Q,swing.Id);
                 Near(Use(AbilitySlot.Q,life),20*Multiplier(swing),"Hachazo does not get the basic's +15 %");
+                // Focus balance: Hachazo, Desgarre and Tajo sangrante spend it; the basic and Combo furioso generate it.
+                Check(swing.focusCost>0&&Skill("AxeArmorRend").focusCost>0&&Skill("AxeBleedingCut").focusCost>0,"Hachazo, Desgarre and Tajo sangrante cost Focus");
+                Check(basic.focusGainOnHit>0&&Skill("AxeFuriousCombo").focusGainOnHit>0&&Skill("AxeFuriousCombo").focusCost==0,"The basic and Combo furioso generate Focus and cost none");
+                Rest();combat.Spend(combat.Focus);combat.Reward(swing.focusCost-1,"TEST");
+                Check(!runner.TryUse(AbilitySlot.Q,Vector3.forward,player.transform.position),"Hachazo does not start one point short of its Focus");
+                combat.Reward(1,"TEST");
+                Check(runner.TryUse(AbilitySlot.Q,Vector3.forward,player.transform.position),"Hachazo starts with exactly its Focus");
+                Near(combat.Focus,0,"Hachazo spends its Focus");
+                for(int i=0;i<400&&runner.Current!=null;i++)runner.Tick(.05f);
 
                 // Hachazo: Reabrir lengthens a bleed that is already running; Barrido widens the swing.
                 var main=NewTarget(out var mainLife,out var mainAilment);
@@ -253,6 +263,32 @@ namespace Mismo.Gameplay.Player.Editor
                     for(int i=0;i<400&&runner.Current!=null;i++)runner.Tick(.05f);
                     Use(AbilitySlot.Basic,lifeOut);return ailment;
                 }
+                // The mark shows a timer from the cast until the basic delivers it (the HUD draws it like a recast window).
+                var fx=player.GetComponent<WeaponSkillEffects>();
+                var markTarget=NewTarget(out var markLife,out _);
+                Check(!fx.BleedMarkTimer(cut,out _,out _),"Tajo sangrante shows no timer before it is cast");
+                Rest();Check(runner.TryUse(AbilitySlot.E,Vector3.forward,player.transform.position),"Tajo sangrante is cast");
+                for(int i=0;i<400&&runner.Current!=null;i++)runner.Tick(.05f);
+                Check(fx.BleedMarkTimer(cut,out float markLeft,out float markTotal),"Tajo sangrante shows its timer while the mark waits");
+                Near(markTotal,((PrimeBleedAction)Array.Find(cut.actions,a=>a is PrimeBleedAction)).markSeconds,"The timer's total is the mark's duration");
+                Near(markLeft,markTotal,"The timer starts full");
+                Check(!fx.BleedMarkTimer(Skill("AxeForwardSwing"),out _,out _),"Other abilities show no mark timer");
+                // Same card and red frame as Tercer impacto, with the amber bar on the icon; its own aura instead of the swords.
+                var views=new List<BuffView>();fx.CollectBuffViews(views);
+                var card=views.Find(v=>v.label=="TAJO SANGRANTE");
+                Check(card.ready&&card.iconTimer&&!card.worldVisible&&card.ability==cut&&card.kind==BuffKind.Damage,"Tajo sangrante publishes its card, red frame and icon timer");
+                Near(card.remaining,markLeft,"The card counts the mark's seconds");
+                var aura=player.GetComponent<BleedMarkVisual>();
+                Check(aura!=null,"The player carries the bleed mark aura");
+                if(aura!=null)for(int i=0;i<6;i++)aura.Tick(.05f);
+                Check(aura!=null&&aura.VisibleDrops==3,"Three drops orbit while the mark waits");
+                Check(aura!=null&&aura.GlowRenderers>0,"The axe head glows while the mark waits");
+                Use(AbilitySlot.Basic,markLife);
+                Check(!fx.BleedMarkTimer(cut,out _,out _),"The timer disappears when the basic delivers the mark");
+                views.Clear();fx.CollectBuffViews(views);
+                Check(!views.Exists(v=>v.label=="TAJO SANGRANTE"),"The card disappears with the mark");
+                if(aura!=null)for(int i=0;i<10;i++)aura.Tick(.05f);
+                Check(aura!=null&&aura.VisibleDrops==0&&aura.GlowRenderers==0,"The aura fades out once the basic delivers the mark");
                 var marked=Prime(out _);Check(marked.IsActive(StatusEffectType.Bleed),"The marked basic applies the bleed");
                 state=Bleed(marked);Near(state.damage,3*Multiplier(cut),"Tajo sangrante bleeds 3 per second");Near(state.seconds,5,"Tajo sangrante bleeds 5 s");
                 Evolve(cut,"rusty_edge",0);
@@ -261,11 +297,12 @@ namespace Mismo.Gameplay.Player.Editor
                 state=Bleed(Prime(out _));Near(state.damage,3*Multiplier(cut)*1.75f,"Filo oxidado rank 3 adds 75 %");
                 ClearModifier(cut);
 
-                // Desgarre: 125 % of the basic, armor loss, and its two evolutions.
+                // Desgarre: its damage, armor loss, and its two evolutions.
                 var rend=Skill("AxeArmorRend");Slot(AbilitySlot.E,rend.Id);float scale=CombatRules.Current.armorScale;
                 float Armored(float lost)=>scale/(scale+50*(1-lost));
                 var plain=NewTarget(out var plainLife,out var plainAilment,50);float incoming=plainAilment.IncomingDamageMultiplier;
-                Near(Use(AbilitySlot.E,plainLife),17.5f*Multiplier(rend)*incoming,"Desgarre hits for 125 % of the basic");
+                float rendDamage=((ArmorRendStrikeAction)Array.Find(rend.actions,a=>a is ArmorRendStrikeAction)).damage;
+                Near(Use(AbilitySlot.E,plainLife),rendDamage*Multiplier(rend)*incoming,"Desgarre hits for its Inspector damage");
                 Near(plainAilment.IncomingDamageMultiplier,Armored(.3f),"Desgarre removes 30 % of the armor");
                 Evolve(rend,"deep_rend",0);
                 var deep=NewTarget(out var deepLife,out var deepAilment,50);Use(AbilitySlot.E,deepLife);
@@ -302,6 +339,13 @@ namespace Mismo.Gameplay.Player.Editor
                 var victim=NewTarget(out var victimLife,out _);float unit=14*Multiplier(combo);
                 var hits=Chain(victimLife,victim.transform);
                 for(int i=0;i<3;i++)Near(hits[i],unit*1.35f,"Combo furioso strike "+(i+1)+" deals 135 % of 14");
+                Rest();combat.Spend(combat.Focus);
+                for(int stage=0;stage<3;stage++)
+                {
+                    Check(runner.TryUse(AbilitySlot.Q,Vector3.forward,player.transform.position),"Press "+(stage+1)+" starts without Focus");
+                    for(int i=0;i<400&&runner.Current!=null;i++)runner.Tick(.05f);
+                }
+                Check(combat.Focus>=3*combo.focusGainOnHit-.01f,"Combo furioso gives its Focus on every strike that lands (got "+combat.Focus+")");
                 Evolve(combo,"escalation",0);
                 hits=Chain(victimLife,victim.transform);
                 Near(hits[0],unit*1.35f,"Escalada rank 0: the first strike is plain");Near(hits[1],unit*1.45f,"Escalada rank 0: +10 % after one landed strike");Near(hits[2],unit*1.55f,"Escalada rank 0: +20 % after two");

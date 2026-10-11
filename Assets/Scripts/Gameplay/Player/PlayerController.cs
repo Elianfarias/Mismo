@@ -99,11 +99,8 @@ namespace Mismo.Gameplay.Player
         {
             Ray ray=WeaponAim.RayFrom(cameraBasis);
             float distance=cast.Definition.range+Vector3.Distance(cameraBasis.position,transform.position);
-            Vector3 point=ray.GetPoint(distance);
-            var hits=Physics.RaycastAll(ray,distance,~0,QueryTriggerInteraction.Ignore);
-            System.Array.Sort(hits,(a,b)=>a.distance.CompareTo(b.distance));
-            foreach(var hit in hits) { if(hit.transform.root==transform.root)continue;point=hit.point;break; }
-            cast.AimPoint=point;cast.Direction=(point-WeaponAim.Muzzle(gameObject)).normalized;
+            Vector3 point=WeaponAim.AimPoint(ray,distance,transform);
+            cast.AimPoint=point;cast.Direction=WeaponAim.Direction(WeaponAim.Muzzle(gameObject),point,cameraBasis);
         }
         private void Request(AbilitySlot slot, Vector3 move)
         {
@@ -118,12 +115,9 @@ namespace Mismo.Gameplay.Player
             {
                 Ray aimRay = WeaponAim.RayFrom(cameraBasis);
                 float aimDistance = ability.range + Vector3.Distance(cameraBasis.position, transform.position);
-                Vector3 aim = aimRay.GetPoint(aimDistance);
-                var hits = Physics.RaycastAll(aimRay, aimDistance, ~0, QueryTriggerInteraction.Ignore);
-                System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
-                foreach (var hit in hits) { if (hit.transform.root == transform.root) continue; aim = hit.point; break; }
+                Vector3 aim = WeaponAim.AimPoint(aimRay, aimDistance, transform);
                 Vector3 origin = WeaponAim.Muzzle(gameObject);
-                direction = (aim - origin).normalized;
+                direction = WeaponAim.Direction(origin, aim, cameraBasis);
                 aimPoint = aim;
                 if (ability.targetsGround)
                 {
